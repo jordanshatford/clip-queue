@@ -1,18 +1,20 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <p>Logged in: {{ userStore.user.isLoggedIn }}</p>
+    <p>Current Login: {{ userStore.user.username }}</p>
+    <button v-if="!userStore.user.isLoggedIn" @click="() => userStore.login()">LOGIN</button>
+    <button v-else @click="() => userStore.logout()">LOGOUT</button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
+import { userStore } from "@/stores/user";
 
-export default defineComponent({
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-})
+export default {
+  setup() {
+    return {
+      userStore,
+    };
+  },
+};
 </script>
