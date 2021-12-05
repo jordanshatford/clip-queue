@@ -1,25 +1,36 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import Home from "../views/Home.vue";
+import TwitchAuth from "@/services/twitch-auth";
+import { userStore } from "@/stores/user";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: Home,
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+];
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
-})
+  history: createWebHistory(),
+  routes,
+});
 
-export default router
+router.beforeEach((to, _, next) => {
+  if (to.hash && to.hash != "" && !userStore.user.isLoggedIn) {
+    const authInfo = TwitchAuth.login(to.hash);
+    if (authInfo !== null) {
+      userStore.loginWithTwitchAuth(
+        authInfo.access_token,
+        authInfo.id_token,
+        authInfo.decodedIdToken?.preferred_username
+      );
+    }
+
+    next({ path: "/", hash: "" });
+    return;
+  }
+  next();
+});
+
+export default router;
