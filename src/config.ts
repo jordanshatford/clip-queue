@@ -11,6 +11,12 @@ const config = {
       baseURL: "https://id.twitch.tv/oauth2",
       scopes: ["openid", "chat:read"],
     },
+    API: {
+      baseURL: "https://api.twitch.tv/helix/",
+      headers: {
+        "Client-ID": env.clientId,
+      },
+    },
     Chat: {
       options: {
         skipMembership: true,
@@ -21,6 +27,9 @@ const config = {
         secure: true,
       },
     },
+    Clips: {
+      hostnames: ['clips.twitch.tv']
+    }
   },
 };
 

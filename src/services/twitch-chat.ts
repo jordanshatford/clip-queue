@@ -1,5 +1,7 @@
 import { Client, Userstate } from "tmi.js";
 import config from "@/config";
+import ClipFinder from "@/services/clip-finder";
+import { getUrlFromMessage } from "@/utils/url";
 
 const { options, connection } = config.Twitch.Chat;
 
@@ -42,6 +44,18 @@ export default class TwitchChat {
 
   private static onMessage(channel: string, userstate: Userstate, message: string, self: boolean) {
     console.debug("Message recieved: ", { channel, userstate, message, self });
+    if (self) {
+      return;
+    }
+
+    const url = getUrlFromMessage(message);
+    if (url) {
+      ClipFinder.getTwitchClip(url).then((clip) => {
+        if (clip) {
+          console.debug("Clip found: ", clip)
+        }
+      })
+    }
   }
 
   private static onMessageDeleted(channel: string, username: string, deletedMessage: string) {
