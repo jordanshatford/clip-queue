@@ -26,7 +26,6 @@ router.beforeEach((to, _, next) => {
         authInfo.decodedIdToken?.preferred_username
       );
     }
-
     next({ path: "/", hash: "" });
     return;
   }

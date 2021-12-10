@@ -8,3 +8,11 @@ export interface Clip {
   url?: string;
   thumbnailUrl?: string;
 }
+
+export interface ClipQueue {
+  currentClip: Clip | undefined;
+  queue: Clip[];
+  allClips: Clip[];
+  acceptingClips: boolean;
+  queueClipLimit: number;
+}

@@ -1,24 +1,21 @@
 import config from "@/config";
 import { Clip } from "@/interfaces/clips";
 import TwitchAPI from "@/services/twitch-api";
+import { getIdFromUrl } from "@/utils/url";
 
 const { hostnames } = config.Twitch.Clips;
 
 export default class ClipFinder {
   public static async getTwitchClip(url: string): Promise<Clip | undefined> {
     if (!this.isTwitchClip(url)) {
-      return
+      return;
     }
 
-    const uri = new URL(url);
-    const idStart = uri.pathname.lastIndexOf('/');
-    const id = uri.pathname.slice(idStart).split('?')[0].slice(1);
-
+    const id = getIdFromUrl(url);
     const clipInfo = await TwitchAPI.getClip(id);
 
     if (clipInfo) {
-      const game = await TwitchAPI.getGame(clipInfo.game_id)
-
+      const game = await TwitchAPI.getGame(clipInfo.game_id);
       return {
         id,
         title: clipInfo.title,

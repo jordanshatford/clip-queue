@@ -28,8 +28,8 @@ const config = {
       },
     },
     Clips: {
-      hostnames: ['clips.twitch.tv']
-    }
+      hostnames: ["clips.twitch.tv"],
+    },
   },
 };
 

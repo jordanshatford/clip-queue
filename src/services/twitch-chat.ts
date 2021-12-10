@@ -2,6 +2,7 @@ import { Client, Userstate } from "tmi.js";
 import config from "@/config";
 import ClipFinder from "@/services/clip-finder";
 import { getUrlFromMessage } from "@/utils/url";
+import { clipQueue } from "@/stores/queue";
 
 const { options, connection } = config.Twitch.Chat;
 
@@ -43,30 +44,47 @@ export default class TwitchChat {
   }
 
   private static onMessage(channel: string, userstate: Userstate, message: string, self: boolean) {
-    console.debug("Message recieved: ", { channel, userstate, message, self });
     if (self) {
       return;
     }
-
     const url = getUrlFromMessage(message);
     if (url) {
       ClipFinder.getTwitchClip(url).then((clip) => {
         if (clip) {
-          console.debug("Clip found: ", clip)
+          console.debug("Adding clip to queue: ", clip);
+          const submitter = userstate.username;
+          clipQueue.addClip({
+            ...clip,
+            submitter,
+          });
         }
-      })
+      });
     }
   }
 
   private static onMessageDeleted(channel: string, username: string, deletedMessage: string) {
-    console.debug("Message deleted: ", { channel, username, deletedMessage });
+    const url = getUrlFromMessage(deletedMessage);
+    if (url) {
+      ClipFinder.getTwitchClip(url).then((clip) => {
+        if (clip) {
+          console.debug("Removing clip from queue: ", clip);
+          const submitter = username;
+          clipQueue.removeClip({
+            ...clip,
+            submitter,
+          });
+        }
+      });
+    }
   }
 
   private static onTimeout(channel: string, username: string) {
-    console.debug("Timeout: ", { channel, username });
+    console.debug("Removing all clips submitter by: ", username);
+    clipQueue.removeUserClips(username);
   }
 
   private static onBan(channel: string, username: string) {
-    console.debug("Ban: ", { channel, username });
+    console.debug("Removing all clips submitter by: ", username);
+    clipQueue.removeUserClips(username);
   }
 }
