@@ -6,6 +6,8 @@ const env = {
 const config = {
   App: {
     title: "Clip Queue",
+    creator: "Jordan Shatford",
+    github: "https://github.com/jordanshatford/clip-queue",
   },
   Twitch: {
     Auth: {

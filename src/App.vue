@@ -7,15 +7,18 @@
       </main>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script lang="ts">
 import Nav from "@/components/Nav.vue";
+import Footer from "./components/Footer.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   components: {
     Nav,
+    Footer,
   },
 });
 </script>
