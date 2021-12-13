@@ -1,7 +1,7 @@
 <template>
   <button
     @click="() => theme.toggle()"
-    class="border-none focus:outline-none p-2 hover:text-indigo-800 dark:hover:text-indigo-600 text-gray-500 dark:text-gray-200 dark:bg-gray-800"
+    class="border-none focus:outline-none p-2 hover:text-purple-500 dark:hover:text-purple-500 text-gray-500 dark:text-gray-200 dark:bg-gray-800"
   >
     <svg
       v-if="theme.state.theme === 'dark'"

@@ -5,7 +5,7 @@
       <span class="inline-flex justify-center mt-4 space-x-5 sm:ml-auto sm:mt-0 sm:justify-start">
         <a
           :href="github"
-          class="text-2xl hover:text-indigo-800 dark:hover:text-indigo-600 text-gray-500 dark:text-gray-200"
+          class="text-2xl hover:text-purple-500 dark:hover:text-purple-500 text-gray-500 dark:text-gray-200"
           target="_blank"
         >
           <svg

@@ -6,7 +6,7 @@
           <button @click="() => (showMobileMenu = !showMobileMenu)" class="border-none focus:outline-none p-2">
             <svg
               v-if="showMobileMenu"
-              class="feather feather-x hover:text-red-600 dark:text-gray-200"
+              class="feather feather-x dark:text-gray-200 hover:text-red-500 dark:hover:text-red-500"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -22,7 +22,7 @@
             </svg>
             <svg
               v-else
-              class="feather feather-menu dark:text-gray-200"
+              class="feather feather-menu dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-500"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -48,7 +48,8 @@
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <ThemeChangeButton />
+          <ThemeChangeButton class="mr-2" />
+          <AuthButton :isLoggedIn="userStore.user.isLoggedIn" :login="userStore.login" :logout="userStore.logout" />
         </div>
       </div>
     </div>
@@ -70,6 +71,8 @@
 import { defineComponent, ref } from "vue";
 import NavItem from "@/components/NavItem.vue";
 import ThemeChangeButton from "@/components/ThemeChangeButton.vue";
+import { userStore } from "@/stores/user";
+import AuthButton from "@/components/AuthButton.vue";
 import { routes } from "@/router";
 import config from "@/config";
 
@@ -79,6 +82,7 @@ export default defineComponent({
   components: {
     NavItem,
     ThemeChangeButton,
+    AuthButton,
   },
   setup() {
     let showMobileMenu = ref(false);
@@ -86,6 +90,7 @@ export default defineComponent({
       routes,
       title,
       showMobileMenu,
+      userStore,
     };
   },
 });
