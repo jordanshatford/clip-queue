@@ -3,7 +3,7 @@ import Home from "../views/Home.vue";
 import TwitchAuth from "@/services/twitch-auth";
 import { userStore } from "@/stores/user";
 
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Home",
