@@ -4,6 +4,9 @@ const env = {
 };
 
 const config = {
+  App: {
+    title: "Clip Queue",
+  },
   Twitch: {
     Auth: {
       clientId: env.clientId,

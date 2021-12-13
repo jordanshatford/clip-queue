@@ -1,20 +1,24 @@
 <template>
-  <div class="home">
+  <div>
     <p>Logged in: {{ userStore.user.isLoggedIn }}</p>
     <p>Current Login: {{ userStore.user.username }}</p>
-    <button v-if="!userStore.user.isLoggedIn" @click="() => userStore.login()">LOGIN</button>
-    <button v-else @click="() => userStore.logout()">LOGOUT</button>
+    <AuthButton :isLoggedIn="userStore.user.isLoggedIn" :login="userStore.login" :logout="userStore.logout" />
   </div>
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import { userStore } from "@/stores/user";
+import AuthButton from "@/components/AuthButton.vue";
 
-export default {
+export default defineComponent({
+  components: {
+    AuthButton,
+  },
   setup() {
     return {
       userStore,
     };
   },
-};
+});
 </script>
