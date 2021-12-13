@@ -14,11 +14,15 @@
 import Nav from "@/components/Nav.vue";
 import Footer from "./components/Footer.vue";
 import { defineComponent } from "vue";
+import { theme } from "@/stores/theme";
 
 export default defineComponent({
   components: {
     Nav,
     Footer,
+  },
+  setup() {
+    theme.getDefault();
   },
 });
 </script>

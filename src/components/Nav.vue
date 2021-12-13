@@ -3,10 +3,7 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-          <button
-            @click="() => (showMobileMenu = !showMobileMenu)"
-            class="{className} border-none focus:outline-none p-2"
-          >
+          <button @click="() => (showMobileMenu = !showMobileMenu)" class="border-none focus:outline-none p-2">
             <svg
               v-if="showMobileMenu"
               class="feather feather-x hover:text-red-600 dark:text-gray-200"
@@ -51,7 +48,7 @@
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <!-- TODO: theme change button here -->
+          <ThemeChangeButton />
         </div>
       </div>
     </div>
@@ -72,6 +69,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import NavItem from "@/components/NavItem.vue";
+import ThemeChangeButton from "@/components/ThemeChangeButton.vue";
 import { routes } from "@/router";
 import config from "@/config";
 
@@ -80,6 +78,7 @@ const title = config.App.title;
 export default defineComponent({
   components: {
     NavItem,
+    ThemeChangeButton,
   },
   setup() {
     let showMobileMenu = ref(false);
