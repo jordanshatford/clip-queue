@@ -11,8 +11,8 @@
 </template>
 
 <script lang="ts">
-import Nav from "@/components/Nav.vue";
-import Footer from "./components/Footer.vue";
+import Nav from "@/layout/Nav.vue";
+import Footer from "./layout/Footer.vue";
 import { defineComponent } from "vue";
 import { theme } from "@/stores/theme";
 

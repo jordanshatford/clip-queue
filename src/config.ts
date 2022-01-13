@@ -8,6 +8,11 @@ const config = {
     title: "Clip Queue",
     creator: "Jordan Shatford",
     github: "https://github.com/jordanshatford/clip-queue",
+    year: new Date().getFullYear(),
+    Theme: {
+      localStorageKey: "theme",
+      defaultValue: "dark",
+    },
   },
   Twitch: {
     Auth: {
