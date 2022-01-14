@@ -7,6 +7,7 @@
             <x-icon v-if="showMobileMenu" />
             <menu-icon v-else />
           </button>
+          <theme-change-button />
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
           <div class="text-purple-500 font-extrabold text-lg flex-shrink-0 flex items-center">{{ title }}</div>
@@ -17,7 +18,7 @@
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <theme-change-button class="mr-2" />
+          <theme-change-button class="hidden md:block mr-2" />
           <auth-button :isLoggedIn="userStore.user.isLoggedIn" :login="userStore.login" :logout="userStore.logout" />
         </div>
       </div>

@@ -6,12 +6,13 @@ const state = reactive<ClipQueue>({
   queue: [],
   allClips: [],
   acceptingClips: false,
-  queueClipLimit: -1,
+  limitedQueue: false,
+  queueClipLimit: 0,
 });
 
 function addClip(clip: Clip): void {
   const duplicateClip = state.allClips.some((c) => c.id === clip.id);
-  const queueFull = state.queue.length === state.queueClipLimit;
+  const queueFull = state.limitedQueue && state.queue.length === state.queueClipLimit;
   if (duplicateClip || queueFull) {
     return;
   }
@@ -49,6 +50,7 @@ function reset(): void {
   state.queue = [];
   state.allClips = [];
   state.acceptingClips = false;
+  state.limitedQueue = false;
   state.queueClipLimit = 0;
 }
 
@@ -58,6 +60,7 @@ function clear(): void {
 }
 
 function setQueueLimit(limit: number): void {
+  state.limitedQueue = true;
   state.queueClipLimit = limit;
 }
 
