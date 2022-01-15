@@ -6,6 +6,13 @@ const env = {
 const config = {
   App: {
     title: "Clip Queue",
+    description:
+      "Allow chatters in your Twitch stream to submit unique clips (via links) in your chat for simple viewing.",
+    features: [
+      "Integrates with Twitch chat after simple login.",
+      "Prevents duplication by only allowing a clip to be submitted once.",
+      "Handles deleted messages, and timed out/banned users by removing clips.",
+    ],
     creator: "Jordan Shatford",
     github: "https://github.com/jordanshatford/clip-queue",
     year: new Date().getFullYear(),

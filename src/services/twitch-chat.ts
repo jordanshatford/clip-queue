@@ -36,7 +36,7 @@ export default class TwitchChat {
     client.on("message", this.onMessage);
     client.on("messagedeleted", this.onMessageDeleted);
     client.on("timeout", this.onTimeout);
-    client.on("ban", this.onBan);
+    client.on("ban", this.onTimeout);
   }
 
   public static async disconnect(): Promise<void> {
@@ -79,11 +79,6 @@ export default class TwitchChat {
   }
 
   private static onTimeout(channel: string, username: string) {
-    console.debug("Removing all clips submitter by: ", username);
-    clipQueue.removeUserClips(username);
-  }
-
-  private static onBan(channel: string, username: string) {
     console.debug("Removing all clips submitter by: ", username);
     clipQueue.removeUserClips(username);
   }

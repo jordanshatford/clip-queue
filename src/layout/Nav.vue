@@ -12,7 +12,7 @@
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
           <div class="text-purple-500 font-extrabold text-lg flex-shrink-0 flex items-center">{{ title }}</div>
           <div class="hidden sm:block sm:ml-6">
-            <div class="flex space-x-4">
+            <div v-if="userStore.user.isLoggedIn" class="flex space-x-4">
               <nav-item v-for="route in routes" :route="route" :key="route.name" />
             </div>
           </div>
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div v-if="showMobileMenu">
-      <div class="px-2 pt-2 pb-3 space-y-1">
+      <div v-if="userStore.user.isLoggedIn" class="px-2 pt-2 pb-3 space-y-1">
         <nav-item
           v-for="route in routes"
           @click="() => (showMobileMenu = false)"

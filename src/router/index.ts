@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Home from "../views/Home.vue";
 import TwitchAuth from "@/services/twitch-auth";
 import { userStore } from "@/stores/user";
+import Home from "@/views/Home.vue";
+import Landing from "@/views/Landing.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: Home,
   },
@@ -13,7 +14,14 @@ export const routes: Array<RouteRecordRaw> = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: [
+    {
+      path: "/",
+      name: "Landing",
+      component: Landing,
+    },
+    ...routes,
+  ],
 });
 
 router.beforeEach((to, _, next) => {

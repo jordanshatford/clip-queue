@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "date-fns": "^2.28.0",
     "tmi.js": "^1.8.5",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0"

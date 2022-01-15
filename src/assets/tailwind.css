@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .router-link-exact-active {
+    @apply text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-900 !important;
+  }
+}
