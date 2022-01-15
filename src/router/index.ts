@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import TwitchAuth from "@/services/twitch-auth";
 import { userStore } from "@/stores/user";
-import Home from "@/views/Home.vue";
+import Queue from "@/views/Queue.vue";
 import Landing from "@/views/Landing.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
-    path: "/home",
-    name: "Home",
-    component: Home,
+    path: "/queue",
+    name: "Queue",
+    component: Queue,
   },
 ];
 
@@ -24,8 +24,8 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, _, next) => {
-  if (to.hash && to.hash != "" && !userStore.user.isLoggedIn) {
+router.beforeEach((to, from, next) => {
+  if (to.hash && to.hash !== "" && !userStore.user.isLoggedIn) {
     const authInfo = TwitchAuth.login(to.hash);
     if (authInfo !== null) {
       userStore.loginWithTwitchAuth(
@@ -34,7 +34,10 @@ router.beforeEach((to, _, next) => {
         authInfo.decodedIdToken?.preferred_username
       );
     }
-    next({ path: "/", hash: "" });
+    next({ path: "/queue", hash: "" });
+    return;
+  } else if (!userStore.user.isLoggedIn && (from.path !== "/" || to.path !== "/")) {
+    next({ path: "/" });
     return;
   }
   next();

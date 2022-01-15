@@ -10,7 +10,12 @@
           <theme-change-button />
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-          <div class="text-purple-500 font-extrabold text-lg flex-shrink-0 flex items-center">{{ title }}</div>
+          <router-link
+            exact-active-class=""
+            to="/"
+            class="text-purple-500 font-extrabold text-lg flex-shrink-0 flex items-center"
+            >{{ title }}</router-link
+          >
           <div class="hidden sm:block sm:ml-6">
             <div v-if="userStore.user.isLoggedIn" class="flex space-x-4">
               <nav-item v-for="route in routes" :route="route" :key="route.name" />
