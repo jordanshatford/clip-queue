@@ -10,7 +10,7 @@ export interface Clip {
 }
 
 export interface ClipQueue {
-  currentClip: Clip | undefined;
+  currentClip: Clip;
   queue: Clip[];
   allClips: Clip[];
   acceptingClips: boolean;

@@ -2,7 +2,7 @@ import { Clip, ClipQueue } from "@/interfaces/clips";
 import { reactive } from "vue";
 
 const state = reactive<ClipQueue>({
-  currentClip: undefined,
+  currentClip: {} as Clip,
   queue: [],
   allClips: [],
   acceptingClips: false,
@@ -18,6 +18,9 @@ function addClip(clip: Clip): void {
   }
   state.allClips = [...state.allClips, clip];
   state.queue = [...state.queue, clip];
+  if (!state.currentClip) {
+    next();
+  }
 }
 
 function removeClip(clip: Clip): void {
@@ -28,7 +31,7 @@ function removeClip(clip: Clip): void {
   state.allClips = state.allClips.filter((c) => !(c.id === clip.id && c.submitter === clip.submitter));
   state.queue = state.queue.filter((c) => !(c.id === clip.id && c.submitter === clip.submitter));
   if (state.currentClip?.id === clip.id && state.currentClip?.submitter === clip.submitter) {
-    state.currentClip = undefined;
+    state.currentClip = {} as Clip;
   }
 }
 
@@ -36,7 +39,7 @@ function removeUserClips(submitter: string): void {
   state.allClips = state.allClips.filter((c) => c.submitter !== submitter);
   state.queue = state.allClips.filter((c) => c.submitter !== submitter);
   if (state.currentClip?.submitter === submitter) {
-    state.currentClip = undefined;
+    state.currentClip = {} as Clip;
   }
 }
 
@@ -46,7 +49,7 @@ function next(): void {
 }
 
 function reset(): void {
-  state.currentClip = undefined;
+  state.currentClip = {} as Clip;
   state.queue = [];
   state.allClips = [];
   state.acceptingClips = false;

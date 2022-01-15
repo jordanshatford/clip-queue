@@ -1,5 +1,5 @@
 <template>
-  <Button @click="() => (isLoggedIn ? logout() : login())">
+  <Button @click="() => (isLoggedIn ? logoutHandler() : login())">
     {{ isLoggedIn ? "Logout" : "Login" }}
   </Button>
 </template>
@@ -7,6 +7,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Button from "@/components/Button.vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   components: {
@@ -27,8 +28,14 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const router = useRouter();
+    async function logoutHandler(): Promise<void> {
+      await router.push({ path: "/" });
+      props.logout();
+    }
     return {
       props,
+      logoutHandler,
     };
   },
 });

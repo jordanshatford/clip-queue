@@ -1,20 +1,20 @@
 <template>
   <div>
     <iframe
-      :src="`https://clips.twitch.tv/embed?clip=${clip.id}&autoplay=${autoplay}&parent=${hostname}`"
+      :src="`https://clips.twitch.tv/embed?clip=${clip?.id}&autoplay=${autoplay}&parent=${hostname}`"
       :allowFullScreen="allowFullscreen"
-      :title="clip.title ?? ''"
+      :title="clip?.title ?? ''"
       width="1280"
       height="720"
     ></iframe>
   </div>
   <div>
     <h2 class="font-bold text-2xl mt-2 mb-1">
-      {{ clip.title }}
-      <span v-if="clip.url">
+      {{ clip?.title ?? "" }}
+      <span v-if="clip?.url">
         <sup>
           <a
-            :href="clip.url"
+            :href="clip?.url"
             target="_blank"
             rel="noreferrer"
             className="text-gray-700 no-underline hover:text-gray-200"
@@ -24,15 +24,22 @@
         </sup>
       </span>
     </h2>
-    <p class="text-gray-500 text-sm font-normal">
-      <span className="font-bold">{{ clip.channel }}</span>
-      playing
-      <span className="font-bold">{{ clip.game }}</span>
-      - clipped
-      <span className="font-bold">{{ timeSinceClip }}</span>
-      ago - Submitted by
-      <span className="font-bold">{{ clip.submitter }}</span>
-    </p>
+    <div class="text-gray-500 text-sm font-normal">
+      <span v-if="clip?.channel && clip?.game">
+        <span className="font-bold">{{ clip?.channel }}</span>
+        playing
+        <span className="font-bold">{{ clip?.game }}</span>
+      </span>
+      <span v-if="clip?.timestamp">
+        - clipped
+        <span className="font-bold">{{ formatDistanceToNow(parseISO(props.clip.timestamp as string)) }}</span>
+        ago
+      </span>
+      <span v-if="clip?.submitter">
+        - Submitted by
+        <span className="font-bold">{{ clip?.submitter }}</span>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -58,14 +65,11 @@ export default defineComponent({
   },
   setup(props) {
     const hostname = window.location.hostname;
-    let timeSinceClip;
-    if (props.clip?.timestamp) {
-      timeSinceClip = formatDistanceToNow(parseISO(props.clip.timestamp));
-    }
     return {
       props,
       hostname,
-      timeSinceClip,
+      formatDistanceToNow,
+      parseISO,
     };
   },
 });
