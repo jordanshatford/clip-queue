@@ -2,6 +2,7 @@ import { Clip, ClipQueue } from "@/interfaces/clips";
 import { reactive } from "vue";
 
 const state = reactive<ClipQueue>({
+  previousClip: {} as Clip,
   currentClip: {} as Clip,
   queue: [],
   allClips: [],
@@ -33,6 +34,9 @@ function removeClip(clip: Clip): void {
   if (state.currentClip?.id === clip.id && state.currentClip?.submitter === clip.submitter) {
     state.currentClip = {} as Clip;
   }
+  if (state.previousClip?.id === clip.id && state.previousClip?.submitter === clip.submitter) {
+    state.previousClip = {} as Clip;
+  }
 }
 
 function removeUserClips(submitter: string): void {
@@ -41,6 +45,14 @@ function removeUserClips(submitter: string): void {
   if (state.currentClip?.submitter === submitter) {
     state.currentClip = {} as Clip;
   }
+  if (state.previousClip?.submitter === submitter) {
+    state.previousClip = {} as Clip;
+  }
+}
+
+function previous(): void {
+  state.currentClip = state.previousClip;
+  state.previousClip = {} as Clip;
 }
 
 function next(): void {
@@ -49,6 +61,7 @@ function next(): void {
 }
 
 function reset(): void {
+  state.previousClip = {} as Clip;
   state.currentClip = {} as Clip;
   state.queue = [];
   state.allClips = [];
@@ -73,6 +86,7 @@ export const clipQueue = {
   removeClip,
   removeUserClips,
   setQueueLimit,
+  previous,
   next,
   reset,
   clear,

@@ -10,6 +10,7 @@ export interface Clip {
 }
 
 export interface ClipQueue {
+  previousClip: Clip;
   currentClip: Clip;
   queue: Clip[];
   allClips: Clip[];
