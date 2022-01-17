@@ -57,7 +57,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { baseURL, paramsString } = config.Twitch.Clips.embeded;
+    const { baseURL, paramsString } = config.Twitch.Clips.Embeded;
     return {
       baseURL,
       paramsString,

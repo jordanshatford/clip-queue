@@ -3,8 +3,10 @@ import config from "@/config";
 import ClipFinder from "@/services/clip-finder";
 import { getUrlFromMessage } from "@/utils/url";
 import { clipQueue } from "@/stores/queue";
+import { commands } from "@/utils/commands";
 
 const { options, connection } = config.Twitch.Chat;
+const { commandPrefix } = config.App.Queue;
 
 let client: Client;
 
@@ -47,6 +49,22 @@ export default class TwitchChat {
     if (self) {
       return;
     }
+
+    // Check if message is a command and perform command if proper permission to do so
+    if (message.startsWith(commandPrefix)) {
+      const isMod = userstate.mod;
+      const isBroadcaster = userstate.badges?.["broadcaster"] === "1";
+      if (!isMod && !isBroadcaster) {
+        return;
+      }
+      const commandName = message.substring(1).split(" ")[0];
+      const command = commands[commandName];
+      if (!command) {
+        return;
+      }
+      command();
+    }
+
     const url = getUrlFromMessage(message);
     if (url) {
       ClipFinder.getTwitchClip(url).then((clip) => {

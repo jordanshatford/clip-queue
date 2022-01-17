@@ -12,6 +12,7 @@ const config = {
       "Integrates with Twitch chat after simple login.",
       "Prevents duplication by only allowing a clip to be submitted once.",
       "Handles deleted messages, and timed out/banned users by removing clips.",
+      "Allows mods to open/close queue, and go to next/previous clip.",
     ],
     creator: "Jordan Shatford",
     github: "https://github.com/jordanshatford/clip-queue",
@@ -19,6 +20,9 @@ const config = {
     Theme: {
       localStorageKey: "theme",
       defaultValue: "dark",
+    },
+    Queue: {
+      commandPrefix: "!",
     },
   },
   Twitch: {
@@ -46,7 +50,7 @@ const config = {
     },
     Clips: {
       hostnames: ["clips.twitch.tv"],
-      embeded: {
+      Embeded: {
         baseURL: "https://clips.twitch.tv/embed",
         paramsString: `autoplay=${true}&parent=${window.location.hostname}`,
       },

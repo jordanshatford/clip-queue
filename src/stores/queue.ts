@@ -19,7 +19,7 @@ function addClip(clip: Clip): void {
   }
   state.allClips = [...state.allClips, clip];
   state.queue = [...state.queue, clip];
-  if (!state.currentClip) {
+  if (!state.currentClip?.id) {
     next();
   }
 }
@@ -48,6 +48,14 @@ function removeUserClips(submitter: string): void {
   if (state.previousClip?.submitter === submitter) {
     state.previousClip = {} as Clip;
   }
+}
+
+function open(): void {
+  state.acceptingClips = true;
+}
+
+function close(): void {
+  state.acceptingClips = false;
 }
 
 function previous(): void {
@@ -86,6 +94,8 @@ export const clipQueue = {
   removeClip,
   removeUserClips,
   setQueueLimit,
+  open,
+  close,
   previous,
   next,
   reset,
