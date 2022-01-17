@@ -19,10 +19,9 @@
 import { defineComponent } from "vue";
 import config from "@/config";
 
-const { title, description, features } = config.App;
-
 export default defineComponent({
   setup() {
+    const { title, description, features } = config.App;
     return {
       title,
       description,

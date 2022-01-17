@@ -20,13 +20,12 @@ import { defineComponent } from "vue";
 import config from "@/config";
 import GithubIcon from "@/components/icons/Github.vue";
 
-const { creator, github, year } = config.App;
-
 export default defineComponent({
   components: {
     GithubIcon,
   },
   setup() {
+    const { creator, github, year } = config.App;
     return {
       creator,
       github,

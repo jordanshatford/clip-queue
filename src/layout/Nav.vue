@@ -53,8 +53,6 @@ import config from "@/config";
 import XIcon from "@/components/icons/X.vue";
 import MenuIcon from "@/components/icons/Menu.vue";
 
-const { title } = config.App;
-
 export default defineComponent({
   components: {
     NavItem,
@@ -64,6 +62,7 @@ export default defineComponent({
     MenuIcon,
   },
   setup() {
+    const { title } = config.App;
     let showMobileMenu = ref(false);
     return {
       routes,

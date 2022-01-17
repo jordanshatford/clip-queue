@@ -1,9 +1,9 @@
 <template>
   <div>
     <iframe
-      :src="`https://clips.twitch.tv/embed?clip=${clip?.id}&autoplay=${autoplay}&parent=${hostname}`"
-      :allowFullScreen="allowFullscreen"
+      :src="`${baseURL}?clip=${clip?.id}&${paramsString}`"
       :title="clip?.title ?? ''"
+      allowfullscreen
       width="1280"
       height="720"
     ></iframe>
@@ -47,6 +47,7 @@
 import { defineComponent, PropType } from "vue";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import { Clip } from "@/interfaces/clips";
+import config from "@/config";
 
 export default defineComponent({
   props: {
@@ -54,20 +55,13 @@ export default defineComponent({
       type: Object as PropType<Clip>,
       required: true,
     },
-    autoplay: {
-      type: Boolean,
-      default: false,
-    },
-    allowFullscreen: {
-      type: Boolean,
-      default: true,
-    },
   },
   setup(props) {
-    const hostname = window.location.hostname;
+    const { baseURL, paramsString } = config.Twitch.Clips.embeded;
     return {
+      baseURL,
+      paramsString,
       props,
-      hostname,
       formatDistanceToNow,
       parseISO,
     };
