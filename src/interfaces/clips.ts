@@ -14,6 +14,9 @@ export interface ClipQueue {
   currentClip: Clip;
   queue: Clip[];
   allClips: Clip[];
+}
+
+export interface ClipQueueSettings {
   acceptingClips: boolean;
   limitedQueue: boolean;
   queueClipLimit: number;

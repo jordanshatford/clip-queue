@@ -1,20 +1,23 @@
-import { Clip, ClipQueue } from "@/interfaces/clips";
+import { Clip, ClipQueue, ClipQueueSettings } from "@/interfaces/clips";
 import { reactive } from "vue";
+
+const settings = reactive<ClipQueueSettings>({
+  acceptingClips: false,
+  limitedQueue: false,
+  queueClipLimit: 0,
+});
 
 const state = reactive<ClipQueue>({
   previousClip: {} as Clip,
   currentClip: {} as Clip,
   queue: [],
   allClips: [],
-  acceptingClips: false,
-  limitedQueue: false,
-  queueClipLimit: 0,
 });
 
 function addClip(clip: Clip): void {
   const duplicateClip = state.allClips.some((c) => c.id === clip.id);
-  const queueFull = state.limitedQueue && state.queue.length === state.queueClipLimit;
-  if (duplicateClip || queueFull) {
+  const queueFull = settings.limitedQueue && state.queue.length === settings.queueClipLimit;
+  if (duplicateClip || queueFull || !settings.acceptingClips) {
     return;
   }
   state.allClips = [...state.allClips, clip];
@@ -51,11 +54,11 @@ function removeUserClips(submitter: string): void {
 }
 
 function open(): void {
-  state.acceptingClips = true;
+  settings.acceptingClips = true;
 }
 
 function close(): void {
-  state.acceptingClips = false;
+  settings.acceptingClips = false;
 }
 
 function previous(): void {
@@ -68,28 +71,19 @@ function next(): void {
   state.queue = state.queue.filter((c) => c.id !== state.queue[0].id);
 }
 
-function reset(): void {
-  state.previousClip = {} as Clip;
-  state.currentClip = {} as Clip;
-  state.queue = [];
-  state.allClips = [];
-  state.acceptingClips = false;
-  state.limitedQueue = false;
-  state.queueClipLimit = 0;
-}
-
 function clear(): void {
   state.queue = [];
   state.allClips = [];
 }
 
 function setQueueLimit(limit: number): void {
-  state.limitedQueue = true;
-  state.queueClipLimit = limit;
+  settings.limitedQueue = true;
+  settings.queueClipLimit = limit;
 }
 
 export const clipQueue = {
   state,
+  settings,
   addClip,
   removeClip,
   removeUserClips,
@@ -98,6 +92,5 @@ export const clipQueue = {
   close,
   previous,
   next,
-  reset,
   clear,
 };
