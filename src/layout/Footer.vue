@@ -5,10 +5,10 @@
       <span class="inline-flex justify-center mt-4 space-x-5 sm:ml-auto sm:mt-0 sm:justify-start">
         <a
           :href="github"
-          class="text-2xl hover:text-purple-500 dark:hover:text-purple-500 text-gray-500 dark:text-gray-200"
+          class="text-3xl hover:text-purple-500 dark:hover:text-purple-500 text-gray-500 dark:text-gray-200"
           target="_blank"
         >
-          <github-icon />
+          <v-icon :icon="['fab', 'github']" />
         </a>
       </span>
     </div>
@@ -18,12 +18,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import config from "@/config";
-import GithubIcon from "@/components/icons/Github.vue";
 
 export default defineComponent({
-  components: {
-    GithubIcon,
-  },
   setup() {
     const { creator, github, year } = config.App;
     return {

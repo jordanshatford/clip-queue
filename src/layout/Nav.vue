@@ -4,8 +4,16 @@
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <button @click="() => (showMobileMenu = !showMobileMenu)" class="border-none focus:outline-none p-2">
-            <x-icon v-if="showMobileMenu" />
-            <menu-icon v-else />
+            <v-icon
+              v-if="showMobileMenu"
+              icon="times"
+              class="text-2xl dark:text-gray-200 hover:text-red-500 dark:hover:text-red-500"
+            />
+            <v-icon
+              v-else
+              icon="bars"
+              class="text-2xl dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-500"
+            />
           </button>
           <theme-change-button />
         </div>
@@ -50,16 +58,12 @@ import { userStore } from "@/stores/user";
 import AuthButton from "@/components/AuthButton.vue";
 import { routes } from "@/router";
 import config from "@/config";
-import XIcon from "@/components/icons/X.vue";
-import MenuIcon from "@/components/icons/Menu.vue";
 
 export default defineComponent({
   components: {
     NavItem,
     ThemeChangeButton,
     AuthButton,
-    XIcon,
-    MenuIcon,
   },
   setup() {
     const { title } = config.App;
