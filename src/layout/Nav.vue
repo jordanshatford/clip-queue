@@ -57,7 +57,7 @@ import ThemeChangeButton from "@/components/ThemeChangeButton.vue";
 import { userStore } from "@/stores/user";
 import AuthButton from "@/components/AuthButton.vue";
 import { routes } from "@/router";
-import config from "@/config";
+import config from "@/utils/config";
 
 export default defineComponent({
   components: {

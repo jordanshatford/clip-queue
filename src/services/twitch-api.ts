@@ -1,5 +1,5 @@
 import axios from "axios";
-import config from "@/config";
+import config from "@/utils/config";
 import { TwitchClip, TwitchGame } from "@/interfaces/twitch";
 import { userStore } from "@/stores/user";
 

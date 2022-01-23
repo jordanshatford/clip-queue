@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import config from "@/config";
+import config from "@/utils/config";
 
 const { localStorageKey, defaultValue } = config.App.Theme;
 

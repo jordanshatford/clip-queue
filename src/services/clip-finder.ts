@@ -1,4 +1,4 @@
-import config from "@/config";
+import config from "@/utils/config";
 import { Clip } from "@/interfaces/clips";
 import TwitchAPI from "@/services/twitch-api";
 import { getIdFromUrl } from "@/utils/url";

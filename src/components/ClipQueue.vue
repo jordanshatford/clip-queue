@@ -1,10 +1,9 @@
 <template>
-  <div class="mx-0">
-    <progress-bar class="mt-2" :value="percentComplete" />
+  <div class="mx-0 mt-2">
+    <progress-bar v-if="percentComplete" :value="percentComplete" />
     <div class="w-full mb-2 mt-1 border-t border-gray-300 dark:border-gray-700"></div>
-    <v-button class="float-right" @click="$emit(isOpen ? 'close' : 'open')">
-      {{ isOpen ? "Close" : "Open" }} Queue
-    </v-button>
+    <v-button v-if="isOpen" variant="danger" class="float-right" @click="$emit('close')">Close Queue</v-button>
+    <v-button v-else class="float-right" @click="$emit('open')">Open Queue</v-button>
     <h3 class="text-gray-600 dark:text-gray-400 text-lg">{{ title }}</h3>
     <span class="mt-3 text-sm text-gray-400 dark:text-gray-600">
       {{ queue.length }} {{ queue.length === 1 ? "clip" : "clips" }}

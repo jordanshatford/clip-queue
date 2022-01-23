@@ -1,5 +1,5 @@
 import { Client, Userstate } from "tmi.js";
-import config from "@/config";
+import config from "@/utils/config";
 import ClipFinder from "@/services/clip-finder";
 import { getUrlFromMessage } from "@/utils/url";
 import { clipQueue } from "@/stores/queue";

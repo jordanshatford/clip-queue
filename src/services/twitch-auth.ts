@@ -1,5 +1,5 @@
 import axios from "axios";
-import config from "@/config";
+import config from "@/utils/config";
 import { AuthInfo, IDToken } from "@/interfaces/twitch";
 import { parseJWT } from "@/utils/jwt";
 

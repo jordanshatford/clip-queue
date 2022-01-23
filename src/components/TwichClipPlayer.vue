@@ -55,7 +55,7 @@
 import { defineComponent, PropType } from "vue";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import { Clip } from "@/interfaces/clips";
-import config from "@/config";
+import config from "@/utils/config";
 
 export default defineComponent({
   props: {
