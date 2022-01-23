@@ -2,6 +2,7 @@ import { commands } from "@/utils/commands";
 import { clipQueue } from "@/stores/queue";
 
 describe("commands.ts", () => {
+  /* eslint-disable @typescript-eslint/no-explicit-any*/
   it.each([
     ["unknown", undefined],
     ["", undefined],
