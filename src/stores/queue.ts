@@ -2,7 +2,7 @@ import { Clip, ClipQueue, ClipQueueSettings } from "@/interfaces/clips";
 import { reactive } from "vue";
 
 const settings = reactive<ClipQueueSettings>({
-  acceptingClips: false,
+  acceptingClips: true,
   limitedQueue: false,
   queueClipLimit: 0,
 });
@@ -22,9 +22,18 @@ function addClip(clip: Clip): void {
   }
   state.allClips = [...state.allClips, clip];
   state.queue = [...state.queue, clip];
-  if (!state.currentClip?.id) {
-    next();
+}
+
+function playNow(clip: Clip): void {
+  const clipExists = state.allClips.some((c) => c.id === clip.id);
+  if (!clipExists) {
+    return;
   }
+  state.queue = [
+    state.currentClip,
+    ...state.queue.filter((c) => !(c.id === clip.id && c.submitter === clip.submitter)),
+  ];
+  state.currentClip = clip;
 }
 
 function removeClip(clip: Clip): void {
@@ -62,11 +71,13 @@ function close(): void {
 }
 
 function previous(): void {
+  state.queue = [state.currentClip, ...state.queue];
   state.currentClip = state.previousClip;
   state.previousClip = {} as Clip;
 }
 
 function next(): void {
+  state.previousClip = state.currentClip;
   state.currentClip = state.queue[0];
   state.queue = state.queue.filter((c) => c.id !== state.queue[0].id);
 }
@@ -85,6 +96,7 @@ export const clipQueue = {
   state,
   settings,
   addClip,
+  playNow,
   removeClip,
   removeUserClips,
   setQueueLimit,
