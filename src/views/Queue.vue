@@ -9,15 +9,17 @@
       @next="clipQueue.next()"
     />
     <div v-else class="text-center text-gray-700 dark:text-gray-300">
-      <p>Queue is open, start submitting clips now and they will be queued!</p>
-      <Button variant="brand" v-if="clipQueue.state.queue.length > 0" @click="startViewing" class="my-5"
-        >Start Viewing!</Button
-      >
+      <p class="text-5xl font-extrabold text-purple-500 p-5">Queue open!</p>
+      <p class="dark:text-gray-300">Start sending clips now for them to be added to the queue!</p>
+      <v-button variant="brand" v-if="clipQueue.state.queue.length > 0" @click="clipQueue.next()" class="my-5"
+        >Start Viewing!
+      </v-button>
     </div>
     <clip-queue
       v-if="clipQueue.state.queue.length > 0"
       title="Queued Clips"
       :queue="clipQueue.state.queue"
+      :percent-complete="queueProgress"
       @remove="clipQueue.removeClip"
       @play="clipQueue.playNow"
     />
@@ -29,22 +31,22 @@ import { defineComponent } from "vue";
 import TwitchClipPlayer from "@/components/TwichClipPlayer.vue";
 import { clipQueue } from "@/stores/queue";
 import ClipQueue from "@/components/ClipQueue.vue";
-import Button from "@/components/Button.vue";
 
 export default defineComponent({
   components: {
     TwitchClipPlayer,
     ClipQueue,
-    Button,
+  },
+  computed: {
+    queueProgress() {
+      const allClips = clipQueue.state.allClips.length;
+      const clipsLeft = clipQueue.state.queue.length;
+      return 100 - Math.round((clipsLeft / allClips) * 100);
+    },
   },
   setup() {
-    function startViewing() {
-      clipQueue.settings.acceptingClips = false;
-      clipQueue.next();
-    }
     return {
       clipQueue,
-      startViewing,
     };
   },
 });

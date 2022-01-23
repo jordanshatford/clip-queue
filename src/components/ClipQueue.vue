@@ -1,6 +1,7 @@
 <template>
   <div class="mx-0">
-    <div class="w-full my-2 border-t border-gray-300 dark:border-gray-700"></div>
+    <progress-bar class="mt-2" :value="percentComplete" />
+    <div class="w-full mb-2 mt-1 border-t border-gray-300 dark:border-gray-700"></div>
     <h3 class="text-gray-600 dark:text-gray-400 text-lg">{{ title }}</h3>
     <span class="mt-3 text-sm text-gray-400 dark:text-gray-600"
       >{{ queue.length }} {{ queue.length === 1 ? "clip" : "clips" }}</span
@@ -21,10 +22,12 @@
 import { defineComponent, PropType } from "vue";
 import ClipQueueItem from "@/components/ClipQueueItem.vue";
 import { Clip } from "@/interfaces/clips";
+import ProgressBar from "@/components/ProgressBar.vue";
 
 export default defineComponent({
   components: {
     ClipQueueItem,
+    ProgressBar,
   },
   props: {
     title: {
@@ -34,6 +37,10 @@ export default defineComponent({
     queue: {
       type: Array as PropType<Clip[]>,
       required: true,
+    },
+    percentComplete: {
+      type: Number,
+      default: 0,
     },
   },
   emits: ["play", "remove"],
