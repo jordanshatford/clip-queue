@@ -3,7 +3,7 @@
     <twitch-clip-player
       v-if="clipQueue.state.currentClip?.id"
       :clip="clipQueue.state.currentClip"
-      :previous-disabled="clipQueue.state.previousClip?.id === undefined"
+      :previous-disabled="clipQueue.state.previousClips.isEmpty()"
       :next-disabled="clipQueue.state.queue.length === 0"
       @previous="clipQueue.previous()"
       @next="clipQueue.next()"

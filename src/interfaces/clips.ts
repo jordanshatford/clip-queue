@@ -1,3 +1,5 @@
+import { Stack } from "@/utils/stack";
+
 export interface Clip {
   id?: string;
   title?: string;
@@ -11,7 +13,7 @@ export interface Clip {
 
 export interface ClipQueue {
   acceptingClips: boolean;
-  previousClip: Clip;
+  previousClips: Stack<Clip>;
   currentClip: Clip;
   queue: Clip[];
   allClips: Clip[];

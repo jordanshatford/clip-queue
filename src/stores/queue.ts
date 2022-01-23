@@ -1,9 +1,10 @@
 import { Clip, ClipQueue } from "@/interfaces/clips";
 import { reactive } from "vue";
+import { Stack } from "@/utils/stack";
 
 const state = reactive<ClipQueue>({
   acceptingClips: true,
-  previousClip: {} as Clip,
+  previousClips: new Stack<Clip>(),
   currentClip: {} as Clip,
   queue: [],
   allClips: [],
@@ -40,9 +41,10 @@ function removeClip(clip: Clip): void {
   if (state.currentClip?.id === clip.id && state.currentClip?.submitter === clip.submitter) {
     state.currentClip = {} as Clip;
   }
-  if (state.previousClip?.id === clip.id && state.previousClip?.submitter === clip.submitter) {
-    state.previousClip = {} as Clip;
-  }
+  const previousClipsFiltered = state.previousClips
+    .toArray()
+    .filter((c) => !(c.id === clip.id && c.submitter === clip.submitter));
+  state.previousClips = new Stack<Clip>(...previousClipsFiltered);
 }
 
 function removeUserClips(submitter: string): void {
@@ -51,9 +53,8 @@ function removeUserClips(submitter: string): void {
   if (state.currentClip?.submitter === submitter) {
     state.currentClip = {} as Clip;
   }
-  if (state.previousClip?.submitter === submitter) {
-    state.previousClip = {} as Clip;
-  }
+  const previousClipsFiltered = state.previousClips.toArray().filter((c) => c.submitter !== submitter);
+  state.previousClips = new Stack<Clip>(...previousClipsFiltered);
 }
 
 function open(): void {
@@ -66,12 +67,14 @@ function close(): void {
 
 function previous(): void {
   state.queue = [state.currentClip, ...state.queue];
-  state.currentClip = state.previousClip;
-  state.previousClip = {} as Clip;
+  state.currentClip = state.previousClips.pop();
 }
 
 function next(): void {
-  state.previousClip = state.currentClip;
+  // We dont want to push to previous if this is the first clip ever queued
+  if (clipQueue.state.currentClip?.id) {
+    state.previousClips.push(state.currentClip);
+  }
   state.currentClip = state.queue[0];
   state.queue = state.queue.filter((c) => c.id !== state.queue[0].id);
 }
