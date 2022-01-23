@@ -1,5 +1,5 @@
 <template>
-  <Button @click="() => (isLoggedIn ? logoutHandler() : login())">
+  <Button variant="brand" @click="() => (isLoggedIn ? logoutHandler() : login())">
     {{ isLoggedIn ? "Logout" : "Login" }}
   </Button>
 </template>
