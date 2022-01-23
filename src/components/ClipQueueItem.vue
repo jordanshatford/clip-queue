@@ -4,12 +4,12 @@
       class="flex items-end justify-end h-56 w-full bg-cover"
       :style="'background-image: url(' + clip.thumbnailUrl + ')'"
     >
-      <Button class="pb-1 mr-3 -mb-2" @click="$emit('play')">
+      <v-button class="pb-1 mr-3 -mb-2" @click="$emit('play')">
         <v-icon icon="play" class="w-5 h-5" />
-      </Button>
-      <Button variant="danger" class="pb-1 mr-3 -mb-2" @click="$emit('remove')">
+      </v-button>
+      <v-button variant="danger" class="pb-1 mr-3 -mb-2" @click="$emit('remove')">
         <v-icon icon="trash" class="w-5 h-5" />
-      </Button>
+      </v-button>
     </div>
     <div class="px-5 py-3 text-gray-500">
       <span class="text-gray-700 dark:text-gray-400 mt-2">{{ clip.title }}</span>
@@ -24,12 +24,8 @@
 <script lang="ts">
 import { Clip } from "@/interfaces/clips";
 import { defineComponent, PropType } from "vue";
-import Button from "@/components/Button.vue";
 
 export default defineComponent({
-  components: {
-    Button,
-  },
   props: {
     clip: {
       type: Object as PropType<Clip>,

@@ -1,18 +1,14 @@
 <template>
-  <Button variant="brand" @click="() => (isLoggedIn ? logoutHandler() : login())">
+  <v-button variant="brand" @click="() => (isLoggedIn ? logoutHandler() : login())">
     {{ isLoggedIn ? "Logout" : "Login" }}
-  </Button>
+  </v-button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Button from "@/components/Button.vue";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
-  components: {
-    Button,
-  },
   props: {
     isLoggedIn: {
       type: Boolean,

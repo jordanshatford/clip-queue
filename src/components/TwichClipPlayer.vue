@@ -24,12 +24,12 @@
         </sup>
       </span>
       <div class="text-base float-right">
-        <Button :disabled="previousDisabled" class="mr-2" @click="$emit('previous')">
+        <v-button :disabled="previousDisabled" class="mr-2" @click="$emit('previous')">
           <v-icon icon="backward" />
-        </Button>
-        <Button :disabled="nextDisabled" @click="$emit('next')">
+        </v-button>
+        <v-button :disabled="nextDisabled" @click="$emit('next')">
           <v-icon icon="forward" />
-        </Button>
+        </v-button>
       </div>
     </h2>
     <div class="text-gray-500 text-sm font-normal">
@@ -56,12 +56,8 @@ import { defineComponent, PropType } from "vue";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import { Clip } from "@/interfaces/clips";
 import config from "@/config";
-import Button from "@/components/Button.vue";
 
 export default defineComponent({
-  components: {
-    Button,
-  },
   props: {
     clip: {
       type: Object as PropType<Clip>,
