@@ -12,11 +12,15 @@
 Clip Queue is a Vue application created to allow users to easily integrate with their [Twitch](https://www.twitch.tv/) chat and accept clips pasted in chat. These clips are pasted in a queue and allows them to watch clip by clip through the webpage.
 
 ## Features
-  - Simple login to connect to your Twitch chat and get started
-  - Clip duplication prevented when multiple viewers are pasting the same clip link
-  - Handles when a user was timed-out, banned, or had their message deleted by removing the clips they had pasted
+  - Easily connect your chat with Twitch login
+  - Clip duplication prevention
+  - Clip removal when user is timed-out, banned, or has message deleted
   - Allows channel moderators to open/close the queue and move to the next/previous clip
+  - Queue progress indicator
   - Dark and light UI themes
+
+## Screenshot
+![readme-image](./src/assets/example.png)
 
 ## More Information
 More information can be found in the respective doc in the docs folder.

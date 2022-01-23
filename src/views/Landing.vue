@@ -6,12 +6,14 @@
     <p class="dark:text-gray-300">
       {{ description }}
     </p>
-    <p class="text-2xl font-extrabold text-purple-500 p-5">Features:</p>
-    <ol class="list-decimal md:mx-32 mx-6 text-left">
+    <p class="text-2xl font-extrabold text-purple-500 pt-5 pb-1">Features:</p>
+    <ol class="text-center">
       <li v-for="(feature, index) in features" :key="index" class="dark:text-gray-300">
         {{ feature }}
       </li>
     </ol>
+    <p class="text-2xl font-extrabold text-purple-500 pt-5 pb-1">Screenshot:</p>
+    <img src="@/assets/example.png" />
   </div>
 </template>
 

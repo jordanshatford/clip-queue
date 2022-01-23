@@ -9,10 +9,12 @@ const config = {
     description:
       "Allow chatters in your Twitch stream to submit unique clips (via links) in your chat for simple viewing.",
     features: [
-      "Integrates with Twitch chat after simple login.",
-      "Prevents duplication by only allowing a clip to be submitted once.",
-      "Handles deleted messages, and timed out/banned users by removing clips.",
-      "Allows mods to open/close queue, and go to next/previous clip.",
+      "Easily connect your chat with Twitch login",
+      "Clip duplication prevention",
+      "Clip removal when user is timed-out, banned, or has message deleted",
+      "Allows channel moderators to open/close the queue and move to the next/previous clip",
+      "Queue progress indicator",
+      "Dark and light UI themes",
     ],
     creator: "Jordan Shatford",
     github: "https://github.com/jordanshatford/clip-queue",
