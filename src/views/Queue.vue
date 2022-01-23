@@ -32,7 +32,7 @@
 import { defineComponent } from "vue";
 import TwitchClipPlayer from "@/components/TwitchClipPlayer.vue";
 import { clipQueue } from "@/stores/queue";
-import ClipQueue from "@/components/ClipQueue.vue";
+import ClipQueue from "@/components/queue/ClipQueue.vue";
 
 export default defineComponent({
   components: {

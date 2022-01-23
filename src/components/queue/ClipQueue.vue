@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import ClipQueueItem from "@/components/ClipQueueItem.vue";
+import ClipQueueItem from "@/components/queue/ClipQueueItem.vue";
 import { Clip } from "@/interfaces/clips";
 
 export default defineComponent({

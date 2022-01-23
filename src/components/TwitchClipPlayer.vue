@@ -38,9 +38,9 @@
         playing
         <span className="font-bold">{{ clip.game }}</span>
       </span>
-      <span v-if="clip.timestamp">
+      <span v-if="timeAgo">
         - clipped
-        <span className="font-bold">{{ formatDistanceToNow(parseISO(clip.timestamp)) }}</span>
+        <span className="font-bold">{{ timeAgo }}</span>
         ago
       </span>
       <span v-if="clip.submitter">
@@ -70,6 +70,14 @@ export default defineComponent({
     nextDisabled: {
       type: Boolean,
       default: false,
+    },
+  },
+  computed: {
+    timeAgo() {
+      if (this.clip.timestamp) {
+        return formatDistanceToNow(parseISO(this.clip.timestamp));
+      }
+      return "";
     },
   },
   emits: ["previous", "next"],

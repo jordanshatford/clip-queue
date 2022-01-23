@@ -26,14 +26,14 @@ export default defineComponent({
   },
   computed: {
     classNames() {
-      let classes = "bg-blue-500 border-blue-700 hover:bg-blue-400 hover:border-blue-500";
+      let classes = "bg-blue-500";
       switch (this.variant) {
         case "brand": {
-          classes = "bg-purple-500 border-purple-700 hover:bg-purple-400 hover:border-purple-500";
+          classes = "bg-purple-500";
           break;
         }
         case "danger": {
-          classes = "bg-red-500 border-red-700 hover:bg-red-400 hover:border-red-500";
+          classes = "bg-red-500";
           break;
         }
       }
