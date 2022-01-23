@@ -26,8 +26,8 @@ export default defineComponent({
   setup(props) {
     const router = useRouter();
     async function logoutHandler(): Promise<void> {
-      await router.push({ path: "/" });
       props.logout();
+      await router.push({ path: "/" });
     }
     return {
       props,

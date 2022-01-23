@@ -37,6 +37,10 @@ router.beforeEach((to, from, next) => {
     next({ path: "/queue", hash: "" });
     return;
   } else if (!userStore.user.isLoggedIn && (from.path !== "/" || to.path !== "/")) {
+    if (to.path === "/") {
+      next();
+      return;
+    }
     next({ path: "/" });
     return;
   }

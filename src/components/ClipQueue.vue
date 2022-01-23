@@ -1,6 +1,6 @@
 <template>
   <div class="mx-0 mt-2">
-    <progress-bar v-if="percentComplete" :value="percentComplete" />
+    <v-progress-bar v-if="percentComplete" variant="brand" :value="percentComplete" />
     <div class="w-full mb-2 mt-1 border-t border-gray-300 dark:border-gray-700"></div>
     <v-button :variant="isOpen ? 'danger' : 'primary'" class="float-right" @click="$emit(isOpen ? 'close' : 'open')">
       {{ isOpen ? "Close" : "Open" }} Queue
@@ -25,12 +25,10 @@
 import { defineComponent, PropType } from "vue";
 import ClipQueueItem from "@/components/ClipQueueItem.vue";
 import { Clip } from "@/interfaces/clips";
-import ProgressBar from "@/components/ProgressBar.vue";
 
 export default defineComponent({
   components: {
     ClipQueueItem,
-    ProgressBar,
   },
   props: {
     title: {

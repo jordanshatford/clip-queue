@@ -3,7 +3,7 @@ module.exports = {
   transform: {
     "^.+\\.vue$": "vue-jest",
   },
-  collectCoverageFrom: ["src/**/*.{js,ts,vue}", "!src/assets/**/*", "!src/router/**/*"],
+  collectCoverageFrom: ["src/**/*.{js,ts,vue}", "!src/assets/**/*", "!src/router/**/*", "!src/main.ts"],
   coverageDirectory: "<rootDir>/tests/coverage",
   coverageThreshold: {
     global: {
