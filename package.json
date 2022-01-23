@@ -5,6 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test": "vue-cli-service test:unit",
+    "test:coverage": "vue-cli-service test:unit --coverage",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -21,6 +23,7 @@
     "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.19",
     "@types/tmi.js": "^1.8.1",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
@@ -28,10 +31,12 @@
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
+    "@vue/test-utils": "^2.0.0-0",
     "autoprefixer": "^9.8.8",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
@@ -39,6 +44,7 @@
     "postcss": "^7.0.39",
     "prettier": "^2.2.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
-    "typescript": "~4.1.5"
+    "typescript": "~4.1.5",
+    "vue-jest": "^5.0.0-0"
   }
 }
