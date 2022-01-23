@@ -14,12 +14,12 @@ export class Stack<T> {
     return this._items;
   }
 
-  public pop(): T {
+  public pop(): T | undefined {
     const value = this._items.pop();
     if (value) {
       return value;
     }
-    return {} as T;
+    return undefined;
   }
 
   public peek(): T {

@@ -67,7 +67,12 @@ function close(): void {
 
 function previous(): void {
   state.queue = [state.currentClip, ...state.queue];
-  state.currentClip = state.previousClips.pop();
+  const previousClip = state.previousClips.pop();
+  if (previousClip) {
+    state.currentClip = previousClip;
+  } else {
+    state.currentClip = {} as Clip;
+  }
 }
 
 function next(): void {

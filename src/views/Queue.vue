@@ -1,7 +1,7 @@
 <template>
   <div>
     <twitch-clip-player
-      v-if="clipQueue.state.currentClip?.id"
+      v-if="clipQueue.state.currentClip && clipQueue.state.currentClip.id"
       :clip="clipQueue.state.currentClip"
       :previous-disabled="clipQueue.state.previousClips.isEmpty()"
       :next-disabled="clipQueue.state.queue.length === 0"
@@ -30,7 +30,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import TwitchClipPlayer from "@/components/TwichClipPlayer.vue";
+import TwitchClipPlayer from "@/components/TwitchClipPlayer.vue";
 import { clipQueue } from "@/stores/queue";
 import ClipQueue from "@/components/ClipQueue.vue";
 
@@ -43,7 +43,8 @@ export default defineComponent({
     queueProgress() {
       const allClips = clipQueue.state.allClips.length;
       const clipsLeft = clipQueue.state.queue.length;
-      return 100 - Math.round((clipsLeft / allClips) * 100);
+      const progress = 100 - Math.round((clipsLeft / allClips) * 100);
+      return isNaN(progress) ? 0 : progress;
     },
   },
   setup() {

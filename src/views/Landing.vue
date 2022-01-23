@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import config from "@/utils/config";
+import config from "@/assets/config";
 
 export default defineComponent({
   setup() {
