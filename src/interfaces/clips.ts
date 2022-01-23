@@ -10,14 +10,9 @@ export interface Clip {
 }
 
 export interface ClipQueue {
+  acceptingClips: boolean;
   previousClip: Clip;
   currentClip: Clip;
   queue: Clip[];
   allClips: Clip[];
-}
-
-export interface ClipQueueSettings {
-  acceptingClips: boolean;
-  limitedQueue: boolean;
-  queueClipLimit: number;
 }

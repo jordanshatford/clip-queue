@@ -11,18 +11,17 @@
     <div v-else class="text-center text-gray-700 dark:text-gray-300">
       <p class="text-5xl font-extrabold text-purple-500 p-5">Queue open!</p>
       <p class="dark:text-gray-300">Start sending clips now for them to be added to the queue!</p>
-      <v-button variant="brand" v-if="clipQueue.state.queue.length > 0" @click="clipQueue.next()" class="my-5"
-        >Start Viewing!
+      <v-button v-if="clipQueue.state.queue.length > 0" variant="brand" @click="clipQueue.next()" class="my-5">
+        Start Viewing!
       </v-button>
     </div>
     <clip-queue
-      v-if="clipQueue.state.queue.length > 0"
       title="Queued Clips"
       :queue="clipQueue.state.queue"
-      :is-open="clipQueue.settings.acceptingClips"
+      :is-open="clipQueue.state.acceptingClips"
       :percent-complete="queueProgress"
-      @open="clipQueue.settings.acceptingClips = true"
-      @close="clipQueue.settings.acceptingClips = false"
+      @open="clipQueue.open()"
+      @close="clipQueue.close()"
       @remove="clipQueue.removeClip"
       @play="clipQueue.playNow"
     />
