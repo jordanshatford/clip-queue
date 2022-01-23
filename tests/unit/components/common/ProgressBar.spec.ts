@@ -2,7 +2,11 @@ import { shallowMount } from "@vue/test-utils";
 import ProgressBar from "@/components/common/ProgressBar.vue";
 
 describe("ProgressBar.vue", () => {
-  const wrapper = shallowMount(ProgressBar);
+  const wrapper = shallowMount(ProgressBar, {
+    props: {
+      value: 50,
+    },
+  });
 
   it("mounts successfully", () => {
     expect(wrapper.exists()).toEqual(true);

@@ -20,12 +20,12 @@ describe("theme.ts", () => {
   it("can toggle the theme", () => {
     theme.getDefault();
     expect(theme.state.theme).toEqual("dark");
-    expect(document?.querySelector("html")?.classList.contains("dark")).toBeTruthy()
+    expect(document?.querySelector("html")?.classList.contains("dark")).toBeTruthy();
     theme.toggle();
     expect(theme.state.theme).toEqual("light");
-    expect(document?.querySelector("html")?.classList.contains("dark")).toBeFalsy()
+    expect(document?.querySelector("html")?.classList.contains("dark")).toBeFalsy();
     theme.toggle();
     expect(theme.state.theme).toEqual("dark");
-    expect(document?.querySelector("html")?.classList.contains("dark")).toBeTruthy()
-  })
+    expect(document?.querySelector("html")?.classList.contains("dark")).toBeTruthy();
+  });
 });
