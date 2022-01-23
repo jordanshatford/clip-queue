@@ -5,12 +5,12 @@
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <button @click="() => (showMobileMenu = !showMobileMenu)" class="border-none focus:outline-none p-2">
             <v-icon
-              v-if="showMobileMenu"
+              v-if="showMobileMenu && userStore.user.isLoggedIn"
               icon="times"
               class="text-2xl dark:text-gray-200 hover:text-red-500 dark:hover:text-red-500"
             />
             <v-icon
-              v-else
+              v-if="!showMobileMenu && userStore.user.isLoggedIn"
               icon="bars"
               class="text-2xl dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-500"
             />
