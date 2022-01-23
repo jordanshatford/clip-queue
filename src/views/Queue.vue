@@ -19,7 +19,10 @@
       v-if="clipQueue.state.queue.length > 0"
       title="Queued Clips"
       :queue="clipQueue.state.queue"
+      :is-open="clipQueue.settings.acceptingClips"
       :percent-complete="queueProgress"
+      @open="clipQueue.settings.acceptingClips = true"
+      @close="clipQueue.settings.acceptingClips = false"
       @remove="clipQueue.removeClip"
       @play="clipQueue.playNow"
     />
