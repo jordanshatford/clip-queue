@@ -25,3 +25,4 @@ Clip Queue is a Vue application created to allow users to easily integrate with 
 ## More Information
 More information can be found in the respective doc in the docs folder.
   - [DEVELOPMENT](./docs/DEVELOPMENT.md)
+  - [DEPLOYMENT](./docs/DEPLOYMENT.md)
