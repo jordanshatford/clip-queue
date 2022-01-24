@@ -2,7 +2,7 @@ import { shallowMount } from "@vue/test-utils";
 import AuthButton from "@/components/AuthButton.vue";
 import Button from "@/components/common/Button.vue";
 
-jest.mock('vue-router', () => ({
+jest.mock("vue-router", () => ({
   useRouter: () => ({
     push: jest.fn(),
   }),

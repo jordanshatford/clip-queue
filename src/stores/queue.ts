@@ -10,6 +10,14 @@ const state = reactive<ClipQueue>({
   allClips: [],
 });
 
+function reset(): void {
+  state.acceptingClips = true;
+  state.previousClips = new Stack<Clip>();
+  state.currentClip = {} as Clip;
+  state.queue = [];
+  state.allClips = [];
+}
+
 function addClip(clip: Clip): void {
   const duplicateClip = state.allClips.some((c) => c.id === clip.id);
   if (duplicateClip || !state.acceptingClips) {
@@ -24,10 +32,15 @@ function playNow(clip: Clip): void {
   if (!clipExists) {
     return;
   }
-  state.queue = [
-    state.currentClip,
-    ...state.queue.filter((c) => !(c.id === clip.id && c.submitter === clip.submitter)),
-  ];
+
+  if (state.currentClip.id) {
+    state.queue = [
+      state.currentClip,
+      ...state.queue.filter((c) => !(c.id === clip.id && c.submitter === clip.submitter)),
+    ];
+  } else {
+    state.queue = [...state.queue.filter((c) => !(c.id === clip.id && c.submitter === clip.submitter))];
+  }
   state.currentClip = clip;
 }
 
@@ -49,7 +62,7 @@ function removeClip(clip: Clip): void {
 
 function removeUserClips(submitter: string): void {
   state.allClips = state.allClips.filter((c) => c.submitter !== submitter);
-  state.queue = state.allClips.filter((c) => c.submitter !== submitter);
+  state.queue = state.queue.filter((c) => c.submitter !== submitter);
   if (state.currentClip?.submitter === submitter) {
     state.currentClip = {} as Clip;
   }
@@ -84,13 +97,9 @@ function next(): void {
   state.queue = state.queue.filter((c) => c.id !== state.queue[0].id);
 }
 
-function clear(): void {
-  state.queue = [];
-  state.allClips = [];
-}
-
 export const clipQueue = {
   state,
+  reset,
   addClip,
   playNow,
   removeClip,
@@ -99,5 +108,4 @@ export const clipQueue = {
   close,
   previous,
   next,
-  clear,
 };
