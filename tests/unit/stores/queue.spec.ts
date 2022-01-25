@@ -75,7 +75,7 @@ describe("queue.ts", () => {
     expect(clipQueue.state.queue).toContainEqual(clip);
     expect(clipQueue.state.queue).toContainEqual(clip2);
     expect(clipQueue.state.currentClip).toEqual({});
-  })
+  });
 
   it("can remove clips when they are in the queue", () => {
     clipQueue.addClip(clip);
@@ -91,7 +91,7 @@ describe("queue.ts", () => {
     clipQueue.removeClip({ id: "test2", submitter: "testusername" });
     expect(clipQueue.state.queue).toContainEqual(clip2);
     expect(clipQueue.state.queue.length).toEqual(queueLength - 1);
-  })
+  });
 
   it("removes the current clip if it matches the clip to remove", () => {
     clipQueue.addClip(clip);
@@ -101,7 +101,7 @@ describe("queue.ts", () => {
     expect(clipQueue.state.queue).not.toContainEqual(clip2);
     expect(clipQueue.state.queue.length).toEqual(1);
     expect(clipQueue.state.currentClip).toEqual({});
-  })
+  });
 
   it("removes previous clips if it matches the clip to remove", () => {
     clipQueue.addClip(clip2);
@@ -110,7 +110,7 @@ describe("queue.ts", () => {
     clipQueue.next();
     clipQueue.removeClip(clip2);
     expect(clipQueue.state.previousClips.toArray()).not.toContainEqual(clip2);
-  })
+  });
 
   it("removes user clips from the queue", () => {
     clipQueue.addClip(clip2);
@@ -118,14 +118,14 @@ describe("queue.ts", () => {
     clipQueue.addClip({ ...clip2, id: "other2" });
     clipQueue.removeUserClips("jordan2");
     expect(clipQueue.state.queue.length).toEqual(0);
-  })
+  });
 
   it("removes the current clip if it matches the users to remove", () => {
     clipQueue.addClip(clip);
     clipQueue.playNow(clip);
     clipQueue.removeUserClips("jordan");
     expect(clipQueue.state.currentClip).toEqual({});
-  })
+  });
 
   it("removes previous clips if it matches the user to remove", () => {
     clipQueue.addClip(clip2);
@@ -137,14 +137,14 @@ describe("queue.ts", () => {
     clipQueue.next();
     clipQueue.removeUserClips("jordan2");
     expect(clipQueue.state.previousClips.toArray()).not.toContainEqual(clip2);
-  })
+  });
 
   it("opens and closes the queue properly", () => {
     clipQueue.open();
     expect(clipQueue.state.acceptingClips).toEqual(true);
     clipQueue.close();
     expect(clipQueue.state.acceptingClips).toEqual(false);
-  })
+  });
 
   it("can go back to playing the previous clip", () => {
     clipQueue.addClip(clip);
@@ -153,11 +153,11 @@ describe("queue.ts", () => {
     expect(clipQueue.state.currentClip).toEqual(clip);
     clipQueue.next();
     expect(clipQueue.state.currentClip).toEqual(clip2);
-    clipQueue.previous()
+    clipQueue.previous();
     expect(clipQueue.state.currentClip).toEqual(clip);
-    clipQueue.previous()
+    clipQueue.previous();
     expect(clipQueue.state.currentClip).toEqual({});
-  })
+  });
 
   it("can start playing the next clip", () => {
     clipQueue.addClip(clip);
@@ -167,11 +167,11 @@ describe("queue.ts", () => {
     clipQueue.next();
     expect(clipQueue.state.currentClip).toEqual(clip2);
     expect(clipQueue.state.previousClips.size()).toEqual(1);
-  })
+  });
 
   it("does not add the current clip to previous when it is not defined", () => {
     clipQueue.addClip(clip);
     clipQueue.next();
     expect(clipQueue.state.previousClips.size()).toEqual(0);
-  })
+  });
 });

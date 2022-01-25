@@ -29,7 +29,11 @@ export default class ClipFinder {
   }
 
   private static isTwitchClip(url: string): boolean {
-    const uri = new URL(url);
-    return hostnames.includes(uri.hostname);
+    try {
+      const uri = new URL(url);
+      return hostnames.includes(uri.hostname);
+    } catch {
+      return false;
+    }
   }
 }
