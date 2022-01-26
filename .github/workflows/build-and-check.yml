@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
-        node: [12, 14]
+        node: [14]
     steps:
       - name: Setup node version ${{ matrix.node }}
         uses: actions/setup-node@v2
