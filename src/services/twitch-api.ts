@@ -9,14 +9,13 @@ const memoizedGames: Record<string, TwitchGame> = {};
 const memoizedClips: Record<string, TwitchClip> = {};
 
 export default class TwitchAPI {
-  private static axiosClient = axios.create({ baseURL, headers });
-
   public static async getClip(id: string): Promise<TwitchClip> {
     if (id in memoizedClips) {
       return memoizedClips[id];
     } else {
-      const { data } = await this.axiosClient.get<{ data: TwitchClip[] }>(`clips?id=${id}`, {
+      const { data } = await axios.get<{ data: TwitchClip[] }>(`${baseURL}/clips?id=${id}`, {
         headers: {
+          ...headers,
           Authorization: `Bearer ${userStore.user.accessToken}`,
         },
       });
@@ -30,8 +29,9 @@ export default class TwitchAPI {
     if (id in memoizedGames) {
       return memoizedGames[id];
     } else {
-      const { data } = await this.axiosClient.get<{ data: TwitchGame[] }>(`games?id=${id}`, {
+      const { data } = await axios.get<{ data: TwitchGame[] }>(`${baseURL}/games?id=${id}`, {
         headers: {
+          ...headers,
           Authorization: `Bearer ${userStore.user.accessToken}`,
         },
       });

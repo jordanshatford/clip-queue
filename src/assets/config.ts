@@ -35,7 +35,7 @@ const config = {
       scopes: ["openid", "chat:read"],
     },
     API: {
-      baseURL: "https://api.twitch.tv/helix/",
+      baseURL: "https://api.twitch.tv/helix",
       headers: {
         "Client-ID": env.clientId,
       },
