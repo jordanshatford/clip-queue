@@ -12,12 +12,12 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
-        node: [14]
+        node-version: [14.x, 16.x]
     steps:
-      - name: Setup node version ${{ matrix.node }}
+      - name: Setup node version ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: ${{ matrix.node-version }}
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Install dependencies
