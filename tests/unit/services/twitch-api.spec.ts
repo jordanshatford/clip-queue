@@ -16,7 +16,7 @@ describe("twitch-api.ts", () => {
     url: "https://clips.twitch.tv/CoyAuspiciousLarkDeIlluminati-2bABUuW_9EbnIv6j",
   } as TwitchClip;
 
-  const testGame = { id: "gameid", name: "Test Game" } as TwitchGame
+  const testGame = { id: "gameid", name: "Test Game" } as TwitchGame;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -58,5 +58,5 @@ describe("twitch-api.ts", () => {
     expect(gameInfo.id).toEqual(testGame.id);
     expect(gameInfo.name).toEqual(testGame.name);
     expect(axios.get).toHaveBeenCalledTimes(0);
-  })
+  });
 });
