@@ -2,20 +2,20 @@ import { shallowMount } from "@vue/test-utils";
 import AuthButton from "@/components/AuthButton.vue";
 import Button from "@/components/common/Button.vue";
 
-jest.mock("vue-router", () => ({
-  useRouter: () => ({
-    push: jest.fn(),
-  }),
-}));
-
 describe("AuthButton.vue", () => {
   const mockLogin = jest.fn();
   const mockLogout = jest.fn();
+  const mockRouter = {
+    push: jest.fn(),
+  };
 
   const wrapper = shallowMount(AuthButton, {
     global: {
       components: {
         "v-button": Button,
+      },
+      mocks: {
+        $router: mockRouter,
       },
     },
     props: {
@@ -43,5 +43,6 @@ describe("AuthButton.vue", () => {
     const vButton = wrapper.findComponent({ name: "v-button" });
     vButton.trigger("click");
     expect(mockLogout).toHaveBeenCalledTimes(1);
+    expect(mockRouter.push).toHaveBeenCalledTimes(1);
   });
 });

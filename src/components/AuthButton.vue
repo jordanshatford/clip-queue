@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useRouter } from "vue-router";
 
 export default defineComponent({
   props: {
@@ -23,15 +22,15 @@ export default defineComponent({
       required: true,
     },
   },
+  methods: {
+    async logoutHandler(): Promise<void> {
+      this.logout();
+      await this.$router.push({ path: "/" });
+    },
+  },
   setup(props) {
-    const router = useRouter();
-    async function logoutHandler(): Promise<void> {
-      props.logout();
-      await router.push({ path: "/" });
-    }
     return {
       props,
-      logoutHandler,
     };
   },
 });
