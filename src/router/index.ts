@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import TwitchAuth from "@/services/twitch-auth";
 import { userStore } from "@/stores/user";
 import Queue from "@/views/Queue.vue";
+import Reddit from "@/views/Reddit.vue";
 import Landing from "@/views/Landing.vue";
 
 export const routes: Array<RouteRecordRaw> = [
@@ -9,6 +10,11 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/queue",
     name: "Queue",
     component: Queue,
+  },
+  {
+    path: "/reddit",
+    name: "From Reddit",
+    component: Reddit,
   },
 ];
 

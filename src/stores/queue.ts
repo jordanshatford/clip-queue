@@ -18,9 +18,9 @@ function reset(): void {
   state.allClips = [];
 }
 
-function addClip(clip: Clip): void {
+function addClip(clip: Clip, force = true): void {
   const duplicateClip = state.allClips.some((c) => c.id === clip.id);
-  if (duplicateClip || !state.acceptingClips) {
+  if (duplicateClip || (!state.acceptingClips && !force)) {
     return;
   }
   state.allClips = [...state.allClips, clip];

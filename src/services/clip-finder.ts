@@ -1,11 +1,32 @@
 import config from "@/assets/config";
 import { Clip } from "@/interfaces/clips";
 import TwitchAPI from "@/services/twitch-api";
+import Reddit from "@/services/reddit";
 import { getIdFromUrl } from "@/utils/url";
 
 const { hostnames } = config.Twitch.Clips;
 
 export default class ClipFinder {
+  public static async getClipsFromSubreddit(
+    subreddit: string,
+    callback?: (clip: Clip, done: boolean) => void
+  ): Promise<Clip[] | undefined> {
+    const subredditPosts = await Reddit.getSubredditPosts(subreddit);
+    let clips: Clip[] = [];
+    for (const post of subredditPosts) {
+      if (post?.data?.stickied) {
+        continue;
+      }
+      const clip = await this.getTwitchClip(post?.data?.url);
+      if (clip) {
+        callback?.({ ...clip, submitter: post.data.author }, false);
+        clips = [...clips, { ...clip, submitter: post.data.author }];
+      }
+    }
+    callback?.({}, true);
+    return clips;
+  }
+
   public static async getTwitchClip(url: string): Promise<Clip | undefined> {
     if (!this.isTwitchClip(url)) {
       return;
@@ -18,12 +39,12 @@ export default class ClipFinder {
       const game = await TwitchAPI.getGame(clipInfo.game_id);
       return {
         id,
-        title: clipInfo.title,
-        channel: clipInfo.broadcaster_name,
-        game: game.name,
-        timestamp: clipInfo.created_at,
-        url: clipInfo.url,
-        thumbnailUrl: clipInfo.thumbnail_url,
+        title: clipInfo?.title,
+        channel: clipInfo?.broadcaster_name,
+        game: game?.name,
+        timestamp: clipInfo?.created_at,
+        url: clipInfo?.url,
+        thumbnailUrl: clipInfo?.thumbnail_url,
       };
     }
   }

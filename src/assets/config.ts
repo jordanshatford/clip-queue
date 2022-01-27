@@ -14,6 +14,7 @@ const config = {
       "Clip removal when user is timed-out, banned, or has message deleted",
       "Allows channel moderators to open/close the queue and move to the next/previous clip",
       "Queue progress indicator",
+      "Get clips from subreddit posts automatically",
       "Dark and light UI themes",
     ],
     creator: "Jordan Shatford",
@@ -57,6 +58,11 @@ const config = {
         paramsString: `autoplay=${true}&parent=${window.location.hostname}`,
       },
     },
+  },
+  Reddit: {
+    baseURL: "https://api.reddit.com",
+    maxPostsToCheck: 50,
+    availableSubreddits: ["LivestreamFail", "TwitchClips", "RPClipsGTA"],
   },
 };
 

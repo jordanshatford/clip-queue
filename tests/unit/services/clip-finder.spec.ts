@@ -1,6 +1,7 @@
 import { Clip } from "@/interfaces/clips";
 import ClipFinder from "@/services/clip-finder";
 import { TwitchClip, TwitchGame } from "@/interfaces/twitch";
+import { SubredditPost } from "@/interfaces/reddit";
 
 jest.mock("@/services/twitch-api", () => {
   const mockFunction = jest.fn((id: string) => {
@@ -20,6 +21,31 @@ jest.mock("@/services/twitch-api", () => {
   return {
     getClip: mockFunction,
     getGame: mockFunction2,
+  };
+});
+
+jest.mock("@/services/reddit", () => {
+  const mockFunction = jest.fn((subreddit: string) => {
+    const testPost: SubredditPost[] = [
+      {
+        data: {
+          author: `${subreddit}0`,
+          url: "https://clips.twitch.tv/0",
+          stickied: false,
+        },
+      },
+      {
+        data: {
+          author: `${subreddit}1`,
+          url: "https://clips.twitch.tv/1",
+          stickied: true,
+        },
+      },
+    ];
+    return testPost;
+  });
+  return {
+    getSubredditPosts: mockFunction,
   };
 });
 
@@ -49,5 +75,17 @@ describe("clip-finder.ts", () => {
       url: clipLink,
       thumbnailUrl: "",
     });
+  });
+
+  it("returns clips from a subreddit", async () => {
+    let i = 0;
+    const result = await ClipFinder.getClipsFromSubreddit("testReddit", (clip, done) => {
+      if (!done) {
+        expect(clip.id).toEqual(`${i}`);
+        expect(clip.submitter).toEqual(`testReddit${i}`);
+        i++;
+      }
+    });
+    expect(result).toHaveLength(i);
   });
 });

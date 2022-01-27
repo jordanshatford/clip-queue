@@ -18,6 +18,7 @@ Clip Queue is a Vue application created to allow users to easily integrate with 
   - Clip removal when user is timed-out, banned, or has message deleted
   - Allows channel moderators to open/close the queue and move to the next/previous clip
   - Queue progress indicator
+  - Get clips from subreddit posts automatically
   - Dark and light UI themes
 
 ## Screenshot
