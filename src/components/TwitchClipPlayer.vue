@@ -1,52 +1,54 @@
 <template>
-  <div class="w-full h-auto bg-black player player-container">
-    <iframe
-      v-if="clip.id"
-      :src="`${baseURL}?clip=${clip.id}&${paramsString}`"
-      :title="clip.title"
-      class="w-full h-auto bg-black player"
-      allowfullscreen
-    ></iframe>
-  </div>
-  <div>
-    <h2 class="font-bold text-2xl mt-2 mb-1 text-gray-700 dark:text-gray-400">
-      {{ clip.title }}
-      <span v-if="clip.url">
-        <sup>
-          <a
-            :href="clip.url"
-            target="_blank"
-            rel="noreferrer"
-            className="text-gray-500 dark:text-gray-700 no-underline hover:text-gray-400 dark:hover:text-gray-200"
-          >
-            &#x1F5D7;
-          </a>
-        </sup>
-      </span>
-      <div class="text-base float-right">
-        <v-button :disabled="previousDisabled" class="mr-2" @click="$emit('previous')">
-          <v-icon icon="backward" />
-        </v-button>
-        <v-button :disabled="nextDisabled" @click="$emit('next')">
-          <v-icon icon="forward" />
-        </v-button>
+  <div class="player player-container">
+    <div class="w-full h-auto bg-black player player-container">
+      <iframe
+        v-if="clip.id"
+        :src="`${baseURL}?clip=${clip.id}&${paramsString}`"
+        :title="clip.title"
+        class="w-full h-auto bg-black player"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div>
+      <h2 class="font-bold text-2xl mt-2 mb-1 text-gray-700 dark:text-gray-400">
+        {{ clip.title }}
+        <span v-if="clip.url">
+          <sup>
+            <a
+              :href="clip.url"
+              target="_blank"
+              rel="noreferrer"
+              className="text-gray-500 dark:text-gray-700 no-underline hover:text-gray-400 dark:hover:text-gray-200"
+            >
+              &#x1F5D7;
+            </a>
+          </sup>
+        </span>
+        <div class="text-base float-right">
+          <v-button :disabled="previousDisabled" class="mr-2" @click="$emit('previous')">
+            <v-icon icon="backward" />
+          </v-button>
+          <v-button :disabled="nextDisabled" @click="$emit('next')">
+            <v-icon icon="forward" />
+          </v-button>
+        </div>
+      </h2>
+      <div class="text-gray-500 text-sm font-normal">
+        <span v-if="clip.channel && clip.game">
+          <span className="font-bold">{{ clip.channel }}</span>
+          playing
+          <span className="font-bold">{{ clip.game }}</span>
+        </span>
+        <span v-if="timeAgo">
+          - clipped
+          <span className="font-bold">{{ timeAgo }}</span>
+          ago
+        </span>
+        <span v-if="clip.submitter">
+          - Submitted by
+          <span className="font-bold">{{ clip.submitter }}</span>
+        </span>
       </div>
-    </h2>
-    <div class="text-gray-500 text-sm font-normal">
-      <span v-if="clip.channel && clip.game">
-        <span className="font-bold">{{ clip.channel }}</span>
-        playing
-        <span className="font-bold">{{ clip.game }}</span>
-      </span>
-      <span v-if="timeAgo">
-        - clipped
-        <span className="font-bold">{{ timeAgo }}</span>
-        ago
-      </span>
-      <span v-if="clip.submitter">
-        - Submitted by
-        <span className="font-bold">{{ clip.submitter }}</span>
-      </span>
     </div>
   </div>
 </template>
@@ -101,6 +103,6 @@ export default defineComponent({
 
 .player {
   aspect-ratio: 16 / 9;
-  max-height: calc(100vh - 8rem);
+  max-height: calc(100vh - 11rem);
 }
 </style>
