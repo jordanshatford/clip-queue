@@ -15,6 +15,7 @@ import Nav from "@/layout/Nav.vue";
 import Footer from "./layout/Footer.vue";
 import { defineComponent } from "vue";
 import { theme } from "@/stores/theme";
+import { cache } from "@/stores/cache";
 
 export default defineComponent({
   components: {
@@ -23,6 +24,7 @@ export default defineComponent({
   },
   setup() {
     theme.getDefault();
+    cache.init();
   },
 });
 </script>

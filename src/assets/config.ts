@@ -20,6 +20,10 @@ const config = {
     creator: "Jordan Shatford",
     github: "https://github.com/jordanshatford/clip-queue",
     year: new Date().getFullYear(),
+    Cache: {
+      gamesKey: "cached-games",
+      clipsKey: "cached-clips",
+    },
     Theme: {
       localStorageKey: "theme",
       defaultValue: "dark",
