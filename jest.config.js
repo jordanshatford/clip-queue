@@ -19,4 +19,5 @@ module.exports = {
       statements: 80,
     },
   },
+  setupFilesAfterEnv: ["<rootDir>/tests/unit/jest.setup.js"],
 };
