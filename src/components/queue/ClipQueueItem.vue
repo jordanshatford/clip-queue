@@ -1,5 +1,5 @@
 <template>
-  <div class="dark:bg-gray-800 w-full max-w-sm mx-auto rounded-lg shadow-md overflow-hidden">
+  <div class="bg-gray-100 dark:bg-gray-800 w-full max-w-sm mx-auto rounded-lg shadow-md overflow-hidden">
     <div
       class="flex items-end justify-end h-56 w-full bg-cover"
       :style="'background-image: url(' + clip.thumbnailUrl + ')'"

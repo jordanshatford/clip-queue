@@ -6,7 +6,7 @@
       <div
         v-for="(subreddit, index) in availableSubreddits"
         :key="index"
-        class="dark:bg-gray-800 w-full max-w-sm mx-auto rounded-lg shadow-md"
+        class="bg-gray-100 dark:bg-gray-800 w-full max-w-sm mx-auto rounded-lg shadow-md"
       >
         <div class="flex items-center justify-between">
           <span class="ml-5 text-gray-600 dark:text-gray-400 text-2xl">{{ subreddit }}</span>
