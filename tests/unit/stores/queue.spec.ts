@@ -38,7 +38,7 @@ describe("queue.ts", () => {
     const queueLength = clipQueue.queue.upcoming.size();
     clipQueue.addClip(clip);
     expect(clipQueue.queue.upcoming.size()).toEqual(queueLength + 1);
-    expect(clipQueue.queue.upcoming.has(clip)).toEqual(true);
+    expect(clipQueue.queue.upcoming.includes(clip)).toEqual(true);
   });
 
   it("skips duplicate clips when adding to the queue", () => {

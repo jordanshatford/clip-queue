@@ -17,7 +17,7 @@ function reset(): void {
 }
 
 function addClip(clip: Clip, force = false): void {
-  const duplicateClip = queue?.current?.id === clip.id || queue.history.has(clip) || queue.upcoming.has(clip);
+  const duplicateClip = queue?.current?.id === clip.id || queue.history.includes(clip) || queue.upcoming.includes(clip);
   if (duplicateClip || (!queue.open && !force)) {
     return;
   }
@@ -25,8 +25,7 @@ function addClip(clip: Clip, force = false): void {
 }
 
 function playNow(clip: Clip): void {
-  const clipExists = queue.upcoming.has(clip);
-  if (!clipExists) {
+  if (!queue.upcoming.includes(clip)) {
     return;
   }
   if (queue?.current?.id) {
@@ -37,10 +36,6 @@ function playNow(clip: Clip): void {
 }
 
 function removeClip(clip: Clip): void {
-  const clipUpcoming = queue.upcoming.has(clip);
-  if (!clipUpcoming) {
-    return;
-  }
   queue.upcoming.remove(clip);
 }
 
@@ -60,16 +55,14 @@ function previous(): void {
   if (queue?.current?.id) {
     queue.upcoming.unshift(queue.current);
   }
-  const previousClip = queue.history.pop();
-  queue.current = previousClip;
+  queue.current = queue.history.pop();
 }
 
 function next(): void {
   if (queue?.current?.id) {
     queue.history.add(queue.current);
   }
-  const nextClip = queue.upcoming.shift();
-  queue.current = nextClip;
+  queue.current = queue.upcoming.shift();
 }
 
 export const clipQueue = {

@@ -14,16 +14,23 @@ describe("Queue.vue", () => {
   it("returns the current progress of the queue", () => {
     expect(wrapper.vm.queueProgress).toEqual(0);
     clipQueue.reset();
+    wrapper.vm.clipQueue.queue.current = {} as Clip;
     wrapper.vm.clipQueue.queue.history = new ClipList({} as Clip);
     wrapper.vm.clipQueue.queue.upcoming = new ClipList({} as Clip);
     expect(wrapper.vm.clipQueue.queue.history.size()).toEqual(1);
     expect(wrapper.vm.clipQueue.queue.upcoming.size()).toEqual(1);
     expect(wrapper.vm.queueProgress).toEqual(50);
     clipQueue.reset();
+    wrapper.vm.clipQueue.queue.current = {} as Clip;
     wrapper.vm.clipQueue.queue.history = new ClipList({} as Clip);
     wrapper.vm.clipQueue.queue.upcoming = new ClipList({} as Clip, { id: "2" } as Clip);
     expect(wrapper.vm.clipQueue.queue.history.size()).toEqual(1);
     expect(wrapper.vm.clipQueue.queue.upcoming.size()).toEqual(2);
     expect(wrapper.vm.queueProgress).toEqual(33);
+    clipQueue.reset();
+    wrapper.vm.clipQueue.queue.current = { id: "test" } as Clip;
+    wrapper.vm.clipQueue.queue.history = new ClipList({} as Clip);
+    wrapper.vm.clipQueue.queue.upcoming = new ClipList({} as Clip, { id: "2" } as Clip);
+    expect(wrapper.vm.queueProgress).toEqual(50);
   });
 });

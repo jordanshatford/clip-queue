@@ -41,7 +41,7 @@ export default defineComponent({
   },
   computed: {
     queueProgress() {
-      const currentClip = clipQueue?.queue.current?.id ? 1 : 0;
+      const currentClip = clipQueue.queue?.current?.id ? 1 : 0;
       const allClips = clipQueue.queue.history.size() + clipQueue.queue.upcoming.size() + currentClip;
       const clipsLeft = clipQueue.queue.upcoming.size();
       const progress = 100 - Math.round((clipsLeft / allClips) * 100);

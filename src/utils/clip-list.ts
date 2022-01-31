@@ -27,7 +27,7 @@ export class ClipList {
     this._clips = this._clips.filter((c) => !(c.submitter === submitter));
   }
 
-  public has(clip: Clip): boolean {
+  public includes(clip: Clip): boolean {
     return this._clips.some((c) => c.id === clip.id);
   }
 
