@@ -15,7 +15,7 @@ import Nav from "@/layout/Nav.vue";
 import Footer from "./layout/Footer.vue";
 import { defineComponent } from "vue";
 import { theme } from "@/stores/theme";
-import { cache } from "@/stores/cache";
+import { cache } from "@/utils/cache";
 
 export default defineComponent({
   components: {

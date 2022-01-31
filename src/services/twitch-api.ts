@@ -2,7 +2,7 @@ import axios from "axios";
 import config from "@/assets/config";
 import { TwitchClip, TwitchGame } from "@/interfaces/twitch";
 import { userStore } from "@/stores/user";
-import { cache } from "@/stores/cache";
+import { cache } from "@/utils/cache";
 
 const { baseURL, headers } = config.Twitch.API;
 
