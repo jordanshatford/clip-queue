@@ -1,4 +1,4 @@
-import { Stack } from "@/utils/stack";
+import { ClipList } from "@/utils/clip-list";
 
 export interface Clip {
   id?: string;
@@ -12,9 +12,8 @@ export interface Clip {
 }
 
 export interface ClipQueue {
-  acceptingClips: boolean;
-  previousClips: Stack<Clip>;
-  currentClip: Clip;
-  queue: Clip[];
-  allClips: Clip[];
+  open: boolean;
+  history: ClipList;
+  current: Clip | undefined;
+  upcoming: ClipList;
 }

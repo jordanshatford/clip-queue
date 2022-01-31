@@ -1,104 +1,79 @@
 import { Clip, ClipQueue } from "@/interfaces/clips";
 import { reactive } from "vue";
-import { Stack } from "@/utils/stack";
+import { ClipList } from "@/utils/clip-list";
 
-const state = reactive<ClipQueue>({
-  acceptingClips: true,
-  previousClips: new Stack<Clip>(),
-  currentClip: {} as Clip,
-  queue: [],
-  allClips: [],
+const queue = reactive<ClipQueue>({
+  open: true,
+  history: new ClipList(),
+  current: undefined,
+  upcoming: new ClipList(),
 });
 
 function reset(): void {
-  state.acceptingClips = true;
-  state.previousClips = new Stack<Clip>();
-  state.currentClip = {} as Clip;
-  state.queue = [];
-  state.allClips = [];
+  queue.open = true;
+  queue.history = new ClipList();
+  queue.current = undefined;
+  queue.upcoming = new ClipList();
 }
 
-function addClip(clip: Clip, force = true): void {
-  const duplicateClip = state.allClips.some((c) => c.id === clip.id);
-  if (duplicateClip || (!state.acceptingClips && !force)) {
+function addClip(clip: Clip, force = false): void {
+  const duplicateClip = queue?.current?.id === clip.id || queue.history.has(clip) || queue.upcoming.has(clip);
+  if (duplicateClip || (!queue.open && !force)) {
     return;
   }
-  state.allClips = [...state.allClips, clip];
-  state.queue = [...state.queue, clip];
+  queue.upcoming.add(clip);
 }
 
 function playNow(clip: Clip): void {
-  const clipExists = state.allClips.some((c) => c.id === clip.id);
+  const clipExists = queue.upcoming.has(clip);
   if (!clipExists) {
     return;
   }
-
-  if (state.currentClip.id) {
-    state.queue = [
-      state.currentClip,
-      ...state.queue.filter((c) => !(c.id === clip.id && c.submitter === clip.submitter)),
-    ];
-  } else {
-    state.queue = [...state.queue.filter((c) => !(c.id === clip.id && c.submitter === clip.submitter))];
+  if (queue?.current?.id) {
+    queue.history.add(queue.current);
   }
-  state.currentClip = clip;
+  queue.upcoming.remove(clip);
+  queue.current = clip;
 }
 
 function removeClip(clip: Clip): void {
-  const clipExists = state.allClips.some((c) => c.id === clip.id);
-  if (!clipExists) {
+  const clipUpcoming = queue.upcoming.has(clip);
+  if (!clipUpcoming) {
     return;
   }
-  state.allClips = state.allClips.filter((c) => !(c.id === clip.id && c.submitter === clip.submitter));
-  state.queue = state.queue.filter((c) => !(c.id === clip.id && c.submitter === clip.submitter));
-  if (state.currentClip?.id === clip.id && state.currentClip?.submitter === clip.submitter) {
-    state.currentClip = {} as Clip;
-  }
-  const previousClipsFiltered = state.previousClips
-    .toArray()
-    .filter((c) => !(c.id === clip.id && c.submitter === clip.submitter));
-  state.previousClips = new Stack<Clip>(...previousClipsFiltered);
+  queue.upcoming.remove(clip);
 }
 
 function removeUserClips(submitter: string): void {
-  state.allClips = state.allClips.filter((c) => c.submitter !== submitter);
-  state.queue = state.queue.filter((c) => c.submitter !== submitter);
-  if (state.currentClip?.submitter === submitter) {
-    state.currentClip = {} as Clip;
-  }
-  const previousClipsFiltered = state.previousClips.toArray().filter((c) => c.submitter !== submitter);
-  state.previousClips = new Stack<Clip>(...previousClipsFiltered);
+  queue.upcoming.removeBySubmitter(submitter);
 }
 
 function open(): void {
-  state.acceptingClips = true;
+  queue.open = true;
 }
 
 function close(): void {
-  state.acceptingClips = false;
+  queue.open = false;
 }
 
 function previous(): void {
-  state.queue = [state.currentClip, ...state.queue];
-  const previousClip = state.previousClips.pop();
-  if (previousClip) {
-    state.currentClip = previousClip;
-  } else {
-    state.currentClip = {} as Clip;
+  if (queue?.current?.id) {
+    queue.upcoming.unshift(queue.current);
   }
+  const previousClip = queue.history.pop();
+  queue.current = previousClip;
 }
 
 function next(): void {
-  // We dont want to push to previous if this is the first clip ever queued
-  if (clipQueue.state.currentClip?.id) {
-    state.previousClips.push(state.currentClip);
+  if (queue?.current?.id) {
+    queue.history.add(queue.current);
   }
-  state.currentClip = state.queue[0];
-  state.queue = state.queue.filter((c) => c.id !== state.queue[0].id);
+  const nextClip = queue.upcoming.shift();
+  queue.current = nextClip;
 }
 
 export const clipQueue = {
-  state,
+  queue,
   reset,
   addClip,
   playNow,
