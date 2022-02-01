@@ -10,6 +10,7 @@ The frontend also utilizes other technologies like:
   - [TypeScript](https://www.typescriptlang.org/)
 
 ## Developing
+### Without Docker
 To setup the frontend for local development you must first ensure that you have the following dependencies installed:
   - [NodeJS](https://nodejs.org/en/) (version v14.18.1 or above)
   - [NPM](https://www.npmjs.com/) (version 6.14.15 or above) `this will be installed with NodeJS`
@@ -31,6 +32,15 @@ This can be done by filling out and copying the `.env.sample` file to a `.env` f
 Once the project dependencies are installed and environment variables specified you can start a development server using:
 ```bash
 npm run serve
+```
+
+### With Docker
+To setup the frontend for local development you can also use [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/).
+
+You can run the application using the following command:
+
+```bash
+docker-compose up --build
 ```
 
 ## Building

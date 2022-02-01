@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  web:
+    build:
+      context: .
+    restart: always
+    environment:
+      VUE_APP_TWITCH_CLIENT_ID: ${VUE_APP_TWITCH_CLIENT_ID}
+      VUE_APP_TWITCH_REDIRECT_URI: ${VUE_APP_TWITCH_REDIRECT_URI}
+    ports:
+      - 8080:8080
