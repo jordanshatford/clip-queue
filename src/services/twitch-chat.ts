@@ -7,7 +7,7 @@ import { userStore } from "@/stores/user";
 import { commands } from "@/utils/commands";
 
 const { options, connection } = config.Twitch.Chat;
-const { commandPrefix, openMessage, closeMessage } = config.App.Queue;
+const { commandPrefix, sendChatMessages, openMessage, closeMessage } = config.App.Queue;
 
 let client: Client;
 
@@ -49,7 +49,7 @@ export default class TwitchChat {
   }
 
   public static async sendMessage(message: string): Promise<void> {
-    if (userStore?.user?.username) {
+    if (userStore?.user?.username && sendChatMessages) {
       await client?.say(userStore.user.username, message);
     }
   }

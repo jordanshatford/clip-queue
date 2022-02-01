@@ -30,8 +30,9 @@ const config = {
     },
     Queue: {
       commandPrefix: "!",
-      openMessage: "The clip queue is open, start pasting links in the chat for them to be added.",
-      closeMessage: "The clip queue is closed and any links in chat will be ignored.",
+      sendChatMessages: true,
+      openMessage: "[clip-queue] OPEN",
+      closeMessage: "[clip-queue] CLOSED",
     },
   },
   Twitch: {
