@@ -4,9 +4,12 @@ services:
   web:
     build:
       context: .
+    image: clip-queue-web:latest
     restart: always
     environment:
       VUE_APP_TWITCH_CLIENT_ID: ${VUE_APP_TWITCH_CLIENT_ID}
       VUE_APP_TWITCH_REDIRECT_URI: ${VUE_APP_TWITCH_REDIRECT_URI}
     ports:
       - 8080:8080
+    volumes:
+      - .:/app
