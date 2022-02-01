@@ -30,6 +30,8 @@ const config = {
     },
     Queue: {
       commandPrefix: "!",
+      openMessage: "The clip queue is open, start pasting links in the chat for them to be added.",
+      closeMessage: "The clip queue is closed and any links in chat will be ignored.",
     },
   },
   Twitch: {
@@ -37,7 +39,7 @@ const config = {
       clientId: env.clientId,
       redirectUri: env.redirectUri,
       baseURL: "https://id.twitch.tv/oauth2",
-      scopes: ["openid", "chat:read"],
+      scopes: ["openid", "chat:read", "chat:edit"],
     },
     API: {
       baseURL: "https://api.twitch.tv/helix",

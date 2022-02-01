@@ -3,10 +3,11 @@ import config from "@/assets/config";
 import ClipFinder from "@/services/clip-finder";
 import { getUrlFromMessage } from "@/utils/url";
 import { clips } from "@/stores/clips";
+import { userStore } from "@/stores/user";
 import { commands } from "@/utils/commands";
 
 const { options, connection } = config.Twitch.Chat;
-const { commandPrefix } = config.App.Queue;
+const { commandPrefix, openMessage, closeMessage } = config.App.Queue;
 
 let client: Client;
 
@@ -27,6 +28,7 @@ export default class TwitchChat {
       .connect()
       .then(() => {
         console.debug("Connected.");
+        this.sendMessage(openMessage);
       })
       .catch((e) => {
         console.error("Failed to connect to twitch chat.", e);
@@ -34,6 +36,7 @@ export default class TwitchChat {
 
     client.on("disconnected", () => {
       console.debug("Disconnected from twitch chat.");
+      this.sendMessage(closeMessage);
     });
     client.on("message", this.onMessage);
     client.on("messagedeleted", this.onMessageDeleted);
@@ -43,6 +46,12 @@ export default class TwitchChat {
 
   public static async disconnect(): Promise<void> {
     await client?.disconnect();
+  }
+
+  public static async sendMessage(message: string): Promise<void> {
+    if (userStore?.user?.username) {
+      await client?.say(userStore.user.username, message);
+    }
   }
 
   private static onMessage(channel: string, userstate: Userstate, message: string, self: boolean) {
