@@ -7,36 +7,27 @@
   </button>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script setup lang="ts">
+import { computed, withDefaults, defineProps } from "vue";
 
-export default defineComponent({
-  props: {
-    variant: {
-      type: String as PropType<"primary" | "danger" | "brand">,
-      default: "primary",
-    },
-  },
-  computed: {
-    classNames() {
-      let classes = "bg-blue-500 border-blue-700 hover:bg-blue-400 hover:border-blue-500";
-      switch (this.variant) {
-        case "brand": {
-          classes = "bg-purple-500 border-purple-700 hover:bg-purple-400 hover:border-purple-500";
-          break;
-        }
-        case "danger": {
-          classes = "bg-red-500 border-red-700 hover:bg-red-400 hover:border-red-500";
-          break;
-        }
-      }
-      return classes;
-    },
-  },
-  setup(props) {
-    return {
-      props,
-    };
-  },
+interface Props {
+  variant?: "primary" | "danger" | "brand";
+}
+
+const props = withDefaults(defineProps<Props>(), { variant: "primary" });
+
+const classNames = computed(() => {
+  let classes = "bg-blue-500 border-blue-700 hover:bg-blue-400 hover:border-blue-500";
+  switch (props.variant) {
+    case "brand": {
+      classes = "bg-purple-500 border-purple-700 hover:bg-purple-400 hover:border-purple-500";
+      break;
+    }
+    case "danger": {
+      classes = "bg-red-500 border-red-700 hover:bg-red-400 hover:border-red-500";
+      break;
+    }
+  }
+  return classes;
 });
 </script>

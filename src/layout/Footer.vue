@@ -15,18 +15,8 @@
   </footer>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import config from "@/assets/config";
 
-export default defineComponent({
-  setup() {
-    const { creator, github, year } = config.App;
-    return {
-      creator,
-      github,
-      year,
-    };
-  },
-});
+const { creator, github, year } = config.App;
 </script>

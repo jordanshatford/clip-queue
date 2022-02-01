@@ -15,7 +15,7 @@
         Start Viewing!
       </v-button>
     </div>
-    <clip-queue
+    <clip-queue-vue
       title="Queued Clips"
       :clips="clipQueue.queue.upcoming.toArray()"
       :is-open="clipQueue.queue.open"
@@ -28,30 +28,17 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import TwitchClipPlayer from "@/components/TwitchClipPlayer.vue";
 import { clipQueue } from "@/stores/queue";
-import ClipQueue from "@/components/queue/ClipQueue.vue";
+import ClipQueueVue from "@/components/queue/ClipQueue.vue";
 
-export default defineComponent({
-  components: {
-    TwitchClipPlayer,
-    ClipQueue,
-  },
-  computed: {
-    queueProgress() {
-      const currentClip = clipQueue.queue?.current?.id ? 1 : 0;
-      const allClips = clipQueue.queue.history.size() + clipQueue.queue.upcoming.size() + currentClip;
-      const clipsLeft = clipQueue.queue.upcoming.size();
-      const progress = 100 - Math.round((clipsLeft / allClips) * 100);
-      return isNaN(progress) ? 0 : progress;
-    },
-  },
-  setup() {
-    return {
-      clipQueue,
-    };
-  },
+const queueProgress = computed(() => {
+  const currentClip = clipQueue.queue?.current?.id ? 1 : 0;
+  const allClips = clipQueue.queue.history.size() + clipQueue.queue.upcoming.size() + currentClip;
+  const clipsLeft = clipQueue.queue.upcoming.size();
+  const progress = 100 - Math.round((clipsLeft / allClips) * 100);
+  return isNaN(progress) ? 0 : progress;
 });
 </script>

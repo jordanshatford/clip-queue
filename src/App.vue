@@ -10,21 +10,12 @@
   <Footer />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import Nav from "@/layout/Nav.vue";
 import Footer from "./layout/Footer.vue";
-import { defineComponent } from "vue";
 import { theme } from "@/stores/theme";
 import { cache } from "@/utils/cache";
 
-export default defineComponent({
-  components: {
-    Nav,
-    Footer,
-  },
-  setup() {
-    theme.getDefault();
-    cache.init();
-  },
-});
+theme.getDefault();
+cache.init();
 </script>

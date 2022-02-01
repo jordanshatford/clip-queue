@@ -50,8 +50,8 @@
   </nav>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 import NavItem from "@/layout/NavItem.vue";
 import ThemeChangeButton from "@/components/ThemeChangeButton.vue";
 import { userStore } from "@/stores/user";
@@ -59,21 +59,6 @@ import AuthButton from "@/components/AuthButton.vue";
 import { routes } from "@/router";
 import config from "@/assets/config";
 
-export default defineComponent({
-  components: {
-    NavItem,
-    ThemeChangeButton,
-    AuthButton,
-  },
-  setup() {
-    const { title } = config.App;
-    let showMobileMenu = ref(false);
-    return {
-      routes,
-      title,
-      showMobileMenu,
-      userStore,
-    };
-  },
-});
+const { title } = config.App;
+let showMobileMenu = ref(false);
 </script>

@@ -10,40 +10,28 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script setup lang="ts">
+import { computed, withDefaults, defineProps } from "vue";
 
-export default defineComponent({
-  props: {
-    value: {
-      type: Number,
-      required: true,
-    },
-    variant: {
-      type: String as PropType<"primary" | "danger" | "brand">,
-      default: "primary",
-    },
-  },
-  computed: {
-    classNames() {
-      let classes = "bg-blue-500";
-      switch (this.variant) {
-        case "brand": {
-          classes = "bg-purple-500";
-          break;
-        }
-        case "danger": {
-          classes = "bg-red-500";
-          break;
-        }
-      }
-      return classes;
-    },
-  },
-  setup(props) {
-    return {
-      props,
-    };
-  },
+interface Props {
+  value: number;
+  variant?: "primary" | "danger" | "brand";
+}
+
+const props = withDefaults(defineProps<Props>(), { variant: "primary" });
+
+const classNames = computed(() => {
+  let classes = "bg-blue-500";
+  switch (props.variant) {
+    case "brand": {
+      classes = "bg-purple-500";
+      break;
+    }
+    case "danger": {
+      classes = "bg-red-500";
+      break;
+    }
+  }
+  return classes;
 });
 </script>

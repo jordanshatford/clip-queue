@@ -4,34 +4,21 @@
   </v-button>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { withDefaults, defineProps } from "vue";
+import { useRouter } from "vue-router";
 
-export default defineComponent({
-  props: {
-    isLoggedIn: {
-      type: Boolean,
-      default: false,
-    },
-    login: {
-      type: Function,
-      required: true,
-    },
-    logout: {
-      type: Function,
-      required: true,
-    },
-  },
-  methods: {
-    async logoutHandler(): Promise<void> {
-      this.logout();
-      await this.$router.push({ path: "/" });
-    },
-  },
-  setup(props) {
-    return {
-      props,
-    };
-  },
-});
+interface Props {
+  isLoggedIn?: boolean;
+  login: () => void;
+  logout: () => void;
+}
+
+const router = useRouter();
+const props = withDefaults(defineProps<Props>(), { isLoggedIn: false });
+
+async function logoutHandler() {
+  props.logout();
+  await router.push({ path: "/" });
+}
 </script>

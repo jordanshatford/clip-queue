@@ -27,33 +27,22 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import config from "@/assets/config";
 import ClipFinder from "@/services/clip-finder";
 import { clipQueue } from "@/stores/queue";
 import { loading } from "@/stores/loading";
 
-export default defineComponent({
-  methods: {
-    queueClipsForSubreddit(subreddit: string) {
-      loading.setLoading(subreddit, true);
-      ClipFinder.getClipsFromSubreddit(subreddit, (clip, done) => {
-        if (!done) {
-          clipQueue.addClip(clip, true);
-        } else {
-          loading.setLoading(subreddit, false);
-        }
-      });
-    },
-  },
-  setup() {
-    const { maxPostsToCheck, availableSubreddits } = config.Reddit;
-    return {
-      maxPostsToCheck,
-      availableSubreddits,
-      loading,
-    };
-  },
-});
+const { maxPostsToCheck, availableSubreddits } = config.Reddit;
+
+function queueClipsForSubreddit(subreddit: string) {
+  loading.setLoading(subreddit, true);
+  ClipFinder.getClipsFromSubreddit(subreddit, (clip, done) => {
+    if (!done) {
+      clipQueue.addClip(clip, true);
+    } else {
+      loading.setLoading(subreddit, false);
+    }
+  });
+}
 </script>

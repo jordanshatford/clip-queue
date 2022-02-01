@@ -25,10 +25,10 @@
           </sup>
         </span>
         <div class="text-base float-right">
-          <v-button :disabled="previousDisabled" class="mr-2" @click="$emit('previous')">
+          <v-button :disabled="previousDisabled" class="mr-2" @click="emit('previous')">
             <v-icon icon="backward" />
           </v-button>
-          <v-button :disabled="nextDisabled" @click="$emit('next')">
+          <v-button :disabled="nextDisabled" @click="emit('next')">
             <v-icon icon="forward" />
           </v-button>
         </div>
@@ -53,46 +53,29 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script setup lang="ts">
+import { computed, withDefaults, defineProps, defineEmits } from "vue";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import { Clip } from "@/interfaces/clips";
 import config from "@/assets/config";
 
-export default defineComponent({
-  props: {
-    clip: {
-      type: Object as PropType<Clip>,
-      required: true,
-    },
-    previousDisabled: {
-      type: Boolean,
-      default: false,
-    },
-    nextDisabled: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  computed: {
-    timeAgo() {
-      if (this.clip.timestamp) {
-        return formatDistanceToNow(parseISO(this.clip.timestamp));
-      }
-      return "";
-    },
-  },
-  emits: ["previous", "next"],
-  setup(props) {
-    const { baseURL, paramsString } = config.Twitch.Clips.Embeded;
-    return {
-      baseURL,
-      paramsString,
-      props,
-      formatDistanceToNow,
-      parseISO,
-    };
-  },
+interface Props {
+  clip: Clip;
+  previousDisabled?: boolean;
+  nextDisabled?: boolean;
+}
+
+const { baseURL, paramsString } = config.Twitch.Clips.Embeded;
+
+const props = withDefaults(defineProps<Props>(), { previousDisabled: false, nextDisabled: false });
+
+const emit = defineEmits(["previous", "next"]);
+
+const timeAgo = computed(() => {
+  if (props.clip?.timestamp) {
+    return formatDistanceToNow(parseISO(props.clip.timestamp));
+  }
+  return "";
 });
 </script>
 
