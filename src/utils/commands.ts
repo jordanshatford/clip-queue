@@ -1,8 +1,8 @@
-import { clipQueue } from "@/stores/queue";
+import { clips } from "@/stores/clips";
 
 export const commands: Record<string, () => void> = {
-  queueprev: () => clipQueue.previous(),
-  queuenext: () => clipQueue.next(),
-  queueopen: () => clipQueue.open(),
-  queueclose: () => clipQueue.close(),
+  queueprev: () => clips.previous(),
+  queuenext: () => clips.next(),
+  queueopen: () => clips.open(),
+  queueclose: () => clips.close(),
 };

@@ -65,7 +65,7 @@ function next(): void {
   queue.current = queue.upcoming.shift();
 }
 
-export const clipQueue = {
+export const clips = {
   queue,
   reset,
   addClip,

@@ -1,7 +1,7 @@
 import { shallowMount } from "@vue/test-utils";
 import Reddit from "@/views/Reddit.vue";
 import { Clip } from "@/interfaces/clips";
-import { clipQueue } from "@/stores/queue";
+import { clips } from "@/stores/clips";
 
 jest.mock("@/services/clip-finder", () => {
   const mockFunction = jest.fn((subreddit: string, callback?: (clip: Clip, done: boolean) => void) => {
@@ -39,7 +39,7 @@ describe("Reddit.vue", () => {
   });
 
   it("queues clips for a subreddit", () => {
-    const spy = jest.spyOn(clipQueue, "addClip");
+    const spy = jest.spyOn(clips, "addClip");
     wrapper.vm.queueClipsForSubreddit("test");
     expect(spy).toHaveBeenCalledTimes(10);
   });

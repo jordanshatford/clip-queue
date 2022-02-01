@@ -1,7 +1,7 @@
 import { Clip } from "@/interfaces/clips";
-import { clipQueue } from "@/stores/queue";
+import { clips } from "@/stores/clips";
 
-describe("queue.ts", () => {
+describe("clips.ts", () => {
   const clip = {
     id: "test",
     submitter: "jordan",
@@ -25,109 +25,109 @@ describe("queue.ts", () => {
   } as Clip;
 
   beforeEach(() => {
-    clipQueue.reset();
-    expect(clipQueue.queue.open).toEqual(true);
-    expect(clipQueue.queue.current).toEqual(undefined);
-    expect(clipQueue.queue.upcoming.size()).toEqual(0);
-    expect(clipQueue.queue.upcoming.toArray()).toEqual([]);
-    expect(clipQueue.queue.history.size()).toEqual(0);
-    expect(clipQueue.queue.history.toArray()).toEqual([]);
+    clips.reset();
+    expect(clips.queue.open).toEqual(true);
+    expect(clips.queue.current).toEqual(undefined);
+    expect(clips.queue.upcoming.size()).toEqual(0);
+    expect(clips.queue.upcoming.toArray()).toEqual([]);
+    expect(clips.queue.history.size()).toEqual(0);
+    expect(clips.queue.history.toArray()).toEqual([]);
   });
 
   it("adds a clip to the queue", () => {
-    const queueLength = clipQueue.queue.upcoming.size();
-    clipQueue.addClip(clip);
-    expect(clipQueue.queue.upcoming.size()).toEqual(queueLength + 1);
-    expect(clipQueue.queue.upcoming.includes(clip)).toEqual(true);
+    const queueLength = clips.queue.upcoming.size();
+    clips.addClip(clip);
+    expect(clips.queue.upcoming.size()).toEqual(queueLength + 1);
+    expect(clips.queue.upcoming.includes(clip)).toEqual(true);
   });
 
   it("skips duplicate clips when adding to the queue", () => {
-    const queueLength = clipQueue.queue.upcoming.size();
-    clipQueue.addClip(clip);
-    expect(clipQueue.queue.upcoming.size()).toEqual(queueLength + 1);
-    expect(clipQueue.queue.upcoming.toArray()).toContainEqual(clip);
-    clipQueue.addClip(clip);
-    expect(clipQueue.queue.upcoming.size()).toEqual(queueLength + 1);
+    const queueLength = clips.queue.upcoming.size();
+    clips.addClip(clip);
+    expect(clips.queue.upcoming.size()).toEqual(queueLength + 1);
+    expect(clips.queue.upcoming.toArray()).toContainEqual(clip);
+    clips.addClip(clip);
+    expect(clips.queue.upcoming.size()).toEqual(queueLength + 1);
   });
 
   it("can start to play a specific clip at any time", () => {
-    const queueLength = clipQueue.queue.upcoming.size();
-    clipQueue.addClip(clip);
-    clipQueue.addClip(clip2);
-    expect(clipQueue.queue.upcoming.size()).toEqual(queueLength + 2);
-    clipQueue.playNow(clip);
-    expect(clipQueue.queue.upcoming.size()).toEqual(queueLength + 1);
-    expect(clipQueue.queue.current).toEqual(clip);
-    expect(clipQueue.queue.upcoming.toArray()).toContainEqual(clip2);
-    expect(clipQueue.queue.upcoming.toArray()).not.toContainEqual(clip);
-    clipQueue.playNow(clip2);
-    expect(clipQueue.queue.upcoming.size()).toEqual(queueLength);
-    expect(clipQueue.queue.current).toEqual(clip2);
-    expect(clipQueue.queue.upcoming.toArray()).not.toContainEqual(clip2);
+    const queueLength = clips.queue.upcoming.size();
+    clips.addClip(clip);
+    clips.addClip(clip2);
+    expect(clips.queue.upcoming.size()).toEqual(queueLength + 2);
+    clips.playNow(clip);
+    expect(clips.queue.upcoming.size()).toEqual(queueLength + 1);
+    expect(clips.queue.current).toEqual(clip);
+    expect(clips.queue.upcoming.toArray()).toContainEqual(clip2);
+    expect(clips.queue.upcoming.toArray()).not.toContainEqual(clip);
+    clips.playNow(clip2);
+    expect(clips.queue.upcoming.size()).toEqual(queueLength);
+    expect(clips.queue.current).toEqual(clip2);
+    expect(clips.queue.upcoming.toArray()).not.toContainEqual(clip2);
   });
 
   it("will do nothing if it trys to play a current clip that doesnt exist", () => {
-    clipQueue.addClip(clip);
-    clipQueue.addClip(clip2);
-    clipQueue.playNow({ id: "not-valid" });
-    expect(clipQueue.queue.upcoming.toArray()).toContainEqual(clip);
-    expect(clipQueue.queue.upcoming.toArray()).toContainEqual(clip2);
-    expect(clipQueue.queue.current).toEqual(undefined);
+    clips.addClip(clip);
+    clips.addClip(clip2);
+    clips.playNow({ id: "not-valid" });
+    expect(clips.queue.upcoming.toArray()).toContainEqual(clip);
+    expect(clips.queue.upcoming.toArray()).toContainEqual(clip2);
+    expect(clips.queue.current).toEqual(undefined);
   });
 
   it("can remove clips when they are in the queue", () => {
-    clipQueue.addClip(clip);
-    clipQueue.addClip(clip2);
-    const queueLength = clipQueue.queue.upcoming.size();
+    clips.addClip(clip);
+    clips.addClip(clip2);
+    const queueLength = clips.queue.upcoming.size();
     expect(queueLength).toEqual(2);
-    clipQueue.removeClip(clip);
-    expect(clipQueue.queue.upcoming.toArray()).not.toContainEqual(clip);
-    expect(clipQueue.queue.upcoming.size()).toEqual(queueLength - 1);
-    clipQueue.removeClip({ id: "not-valid" });
-    expect(clipQueue.queue.upcoming.size()).toEqual(queueLength - 1);
+    clips.removeClip(clip);
+    expect(clips.queue.upcoming.toArray()).not.toContainEqual(clip);
+    expect(clips.queue.upcoming.size()).toEqual(queueLength - 1);
+    clips.removeClip({ id: "not-valid" });
+    expect(clips.queue.upcoming.size()).toEqual(queueLength - 1);
   });
 
   it("removes user clips from the queue", () => {
-    clipQueue.addClip(clip2);
-    clipQueue.addClip({ ...clip2, id: "other" });
-    clipQueue.addClip({ ...clip2, id: "other2" });
-    clipQueue.removeUserClips("jordan2");
-    expect(clipQueue.queue.upcoming.size()).toEqual(0);
+    clips.addClip(clip2);
+    clips.addClip({ ...clip2, id: "other" });
+    clips.addClip({ ...clip2, id: "other2" });
+    clips.removeUserClips("jordan2");
+    expect(clips.queue.upcoming.size()).toEqual(0);
   });
 
   it("opens and closes the queue properly", () => {
-    clipQueue.open();
-    expect(clipQueue.queue.open).toEqual(true);
-    clipQueue.close();
-    expect(clipQueue.queue.open).toEqual(false);
+    clips.open();
+    expect(clips.queue.open).toEqual(true);
+    clips.close();
+    expect(clips.queue.open).toEqual(false);
   });
 
   it("can go back to playing the previous clip", () => {
-    clipQueue.addClip(clip);
-    clipQueue.addClip(clip2);
-    clipQueue.next();
-    expect(clipQueue.queue.current).toEqual(clip);
-    clipQueue.next();
-    expect(clipQueue.queue.current).toEqual(clip2);
-    clipQueue.previous();
-    expect(clipQueue.queue.current).toEqual(clip);
-    clipQueue.previous();
-    expect(clipQueue.queue.current).toEqual(undefined);
+    clips.addClip(clip);
+    clips.addClip(clip2);
+    clips.next();
+    expect(clips.queue.current).toEqual(clip);
+    clips.next();
+    expect(clips.queue.current).toEqual(clip2);
+    clips.previous();
+    expect(clips.queue.current).toEqual(clip);
+    clips.previous();
+    expect(clips.queue.current).toEqual(undefined);
   });
 
   it("can start playing the next clip", () => {
-    clipQueue.addClip(clip);
-    clipQueue.addClip(clip2);
-    clipQueue.next();
-    expect(clipQueue.queue.current).toEqual(clip);
-    clipQueue.next();
-    expect(clipQueue.queue.current).toEqual(clip2);
-    expect(clipQueue.queue.history.size()).toEqual(1);
+    clips.addClip(clip);
+    clips.addClip(clip2);
+    clips.next();
+    expect(clips.queue.current).toEqual(clip);
+    clips.next();
+    expect(clips.queue.current).toEqual(clip2);
+    expect(clips.queue.history.size()).toEqual(1);
   });
 
   it("does not add the current clip to previous when it is not defined", () => {
-    clipQueue.addClip(clip);
-    clipQueue.next();
-    expect(clipQueue.queue.history.size()).toEqual(0);
+    clips.addClip(clip);
+    clips.next();
+    expect(clips.queue.history.size()).toEqual(0);
   });
 });

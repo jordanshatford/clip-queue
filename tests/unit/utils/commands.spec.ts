@@ -1,5 +1,5 @@
 import { commands } from "@/utils/commands";
-import { clipQueue } from "@/stores/queue";
+import { clips } from "@/stores/clips";
 
 describe("commands.ts", () => {
   /* eslint-disable @typescript-eslint/no-explicit-any*/
@@ -15,13 +15,13 @@ describe("commands.ts", () => {
     (commandName: string, expectedFunctionCall: any) => {
       const command = commands[commandName];
       if (!command) {
-        expect(jest.spyOn(clipQueue, "previous")).toHaveBeenCalledTimes(0);
-        expect(jest.spyOn(clipQueue, "next")).toHaveBeenCalledTimes(0);
-        expect(jest.spyOn(clipQueue, "open")).toHaveBeenCalledTimes(0);
-        expect(jest.spyOn(clipQueue, "close")).toHaveBeenCalledTimes(0);
+        expect(jest.spyOn(clips, "previous")).toHaveBeenCalledTimes(0);
+        expect(jest.spyOn(clips, "next")).toHaveBeenCalledTimes(0);
+        expect(jest.spyOn(clips, "open")).toHaveBeenCalledTimes(0);
+        expect(jest.spyOn(clips, "close")).toHaveBeenCalledTimes(0);
       } else {
         const randomNumber = Math.floor(Math.random() * 25);
-        const spy = jest.spyOn(clipQueue, expectedFunctionCall);
+        const spy = jest.spyOn(clips, expectedFunctionCall);
         for (let i = 1; i <= randomNumber; i++) {
           command();
         }

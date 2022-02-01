@@ -2,7 +2,7 @@ import { Client, Userstate } from "tmi.js";
 import config from "@/assets/config";
 import ClipFinder from "@/services/clip-finder";
 import { getUrlFromMessage } from "@/utils/url";
-import { clipQueue } from "@/stores/queue";
+import { clips } from "@/stores/clips";
 import { commands } from "@/utils/commands";
 
 const { options, connection } = config.Twitch.Chat;
@@ -71,7 +71,7 @@ export default class TwitchChat {
         if (clip) {
           console.debug("Adding clip to queue: ", clip);
           const submitter = userstate.username;
-          clipQueue.addClip({
+          clips.addClip({
             ...clip,
             submitter,
           });
@@ -87,7 +87,7 @@ export default class TwitchChat {
         if (clip) {
           console.debug("Removing clip from queue: ", clip);
           const submitter = username;
-          clipQueue.removeClip({
+          clips.removeClip({
             ...clip,
             submitter,
           });
@@ -98,6 +98,6 @@ export default class TwitchChat {
 
   private static onTimeout(channel: string, username: string) {
     console.debug("Removing all clips submitter by: ", username);
-    clipQueue.removeUserClips(username);
+    clips.removeUserClips(username);
   }
 }

@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import config from "@/assets/config";
 import ClipFinder from "@/services/clip-finder";
-import { clipQueue } from "@/stores/queue";
+import { clips } from "@/stores/clips";
 import { loading } from "@/stores/loading";
 
 const { maxPostsToCheck, availableSubreddits } = config.Reddit;
@@ -39,7 +39,7 @@ function queueClipsForSubreddit(subreddit: string) {
   loading.setLoading(subreddit, true);
   ClipFinder.getClipsFromSubreddit(subreddit, (clip, done) => {
     if (!done) {
-      clipQueue.addClip(clip, true);
+      clips.addClip(clip, true);
     } else {
       loading.setLoading(subreddit, false);
     }
