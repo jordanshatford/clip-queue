@@ -9,8 +9,8 @@ describe("ThemeChangeButton.vue", () => {
   });
 
   it("toggles the theme when clicked", () => {
-    const theme = wrapper.vm.theme.state.theme;
+    const theme = wrapper.vm.theme.current.value;
     wrapper.vm.theme.toggle();
-    expect(wrapper.vm.theme.state.theme).not.toEqual(theme);
+    expect(wrapper.vm.theme.current.value).not.toEqual(theme);
   });
 });

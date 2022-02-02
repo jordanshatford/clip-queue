@@ -1,35 +1,33 @@
-import { reactive } from "vue";
+import { ref } from "vue";
 import config from "@/assets/config";
 
 const { localStorageKey, defaultValue } = config.App.Theme;
 
-const state = reactive({
-  theme: defaultValue,
-});
+const current = ref(defaultValue);
 
 function getDefault(): void {
   const theme = localStorage?.getItem(localStorageKey);
   if (theme) {
-    state.theme = theme;
+    current.value = theme;
   } else {
-    state.theme = defaultValue;
+    current.value = defaultValue;
   }
 
-  localStorage?.setItem(localStorageKey, state.theme);
+  localStorage?.setItem(localStorageKey, current.value);
 
-  if (state.theme === "dark") {
+  if (current.value === "dark") {
     document?.querySelector("html")?.classList.add("dark");
   }
 }
 
 function toggle(): void {
-  state.theme = state.theme === "dark" ? "light" : "dark";
+  current.value = current.value === "dark" ? "light" : "dark";
   document.querySelector("html")?.classList.toggle("dark");
-  localStorage?.setItem(localStorageKey, state.theme);
+  localStorage?.setItem(localStorageKey, current.value);
 }
 
 export const theme = {
-  state,
+  current,
   getDefault,
   toggle,
 };
