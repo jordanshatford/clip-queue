@@ -65,7 +65,7 @@ interface Props {
   nextDisabled?: boolean;
 }
 
-const { baseURL, paramsString } = config.Twitch.Clips.Embeded;
+const { baseURL, paramsString } = config.Twitch.Clips.Embedded;
 
 const props = withDefaults(defineProps<Props>(), { previousDisabled: false, nextDisabled: false });
 

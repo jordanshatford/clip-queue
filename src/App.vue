@@ -15,7 +15,9 @@ import Nav from "@/layout/Nav.vue";
 import Footer from "./layout/Footer.vue";
 import { theme } from "@/stores/theme";
 import { cache } from "@/utils/cache";
+import { settings } from "@/stores/settings";
 
 theme.getDefault();
 cache.init();
+settings.init();
 </script>

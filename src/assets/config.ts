@@ -15,6 +15,7 @@ const config = {
       "Allows channel moderators to open/close the queue and move to the next/previous clip",
       "Queue progress indicator",
       "Get clips from subreddit posts automatically",
+      "Customize settings as you wish",
       "Dark and light UI themes",
     ],
     creator: "Jordan Shatford",
@@ -28,11 +29,14 @@ const config = {
       localStorageKey: "theme",
       defaultValue: "dark",
     },
-    Queue: {
-      commandPrefix: "!",
-      sendChatMessages: true,
-      openMessage: "[clip-queue] OPEN",
-      closeMessage: "[clip-queue] CLOSED",
+    Settings: {
+      localStorageKey: "settings",
+      defaultValue: {
+        chatCommandPrefix: "!",
+        sendMessagesInChat: false,
+        queueOpenMessage: "CLIP QUEUE OPEN: send twitch clip links in chat to have them added to the queue.",
+        queueCloseMessage: "CLIP QUEUE CLOSED: twitch links in chat will be ignored.",
+      },
     },
   },
   Twitch: {
@@ -60,7 +64,7 @@ const config = {
     },
     Clips: {
       hostnames: ["clips.twitch.tv"],
-      Embeded: {
+      Embedded: {
         baseURL: "https://clips.twitch.tv/embed",
         paramsString: `autoplay=${true}&parent=${window.location.hostname}`,
       },

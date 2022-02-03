@@ -10,6 +10,10 @@ import {
   faSun,
   faPlus,
   faSpinner,
+  faCheckCircle,
+  faInfoCircle,
+  faTimesCircle,
+  faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
 import { faMoon } from "@fortawesome/free-regular-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -19,6 +23,10 @@ library.add(faSun);
 library.add(faBars);
 library.add(faPlus);
 library.add(faSpinner);
+library.add(faCheckCircle);
+library.add(faInfoCircle);
+library.add(faTimesCircle);
+library.add(faExclamationTriangle);
 library.add(faTimes);
 library.add(faForward);
 library.add(faBackward);

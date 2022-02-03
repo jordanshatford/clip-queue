@@ -4,6 +4,7 @@ import { userStore } from "@/stores/user";
 import Queue from "@/views/Queue.vue";
 import Reddit from "@/views/Reddit.vue";
 import Landing from "@/views/Landing.vue";
+import Settings from "@/views/Settings.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -15,6 +16,11 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/reddit",
     name: "From Reddit",
     component: Reddit,
+  },
+  {
+    path: "/settings",
+    name: "Settings",
+    component: Settings,
   },
 ];
 

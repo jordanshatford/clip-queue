@@ -5,9 +5,9 @@ import { getUrlFromMessage } from "@/utils/url";
 import { clips } from "@/stores/clips";
 import { userStore } from "@/stores/user";
 import { commands } from "@/utils/commands";
+import { settings } from "@/stores/settings";
 
 const { options, connection } = config.Twitch.Chat;
-const { commandPrefix, sendChatMessages, openMessage, closeMessage } = config.App.Queue;
 
 let client: Client;
 
@@ -28,7 +28,6 @@ export default class TwitchChat {
       .connect()
       .then(() => {
         console.debug("Connected.");
-        this.sendMessage(openMessage);
       })
       .catch((e) => {
         console.error("Failed to connect to twitch chat.", e);
@@ -36,7 +35,6 @@ export default class TwitchChat {
 
     client.on("disconnected", () => {
       console.debug("Disconnected from twitch chat.");
-      this.sendMessage(closeMessage);
     });
     client.on("message", this.onMessage);
     client.on("messagedeleted", this.onMessageDeleted);
@@ -49,7 +47,7 @@ export default class TwitchChat {
   }
 
   public static async sendMessage(message: string): Promise<void> {
-    if (userStore?.user?.username && sendChatMessages) {
+    if (userStore?.user?.username && settings.current.sendMessagesInChat) {
       await client?.say(userStore.user.username, message);
     }
   }
@@ -60,13 +58,13 @@ export default class TwitchChat {
     }
 
     // Check if message is a command and perform command if proper permission to do so
-    if (message.startsWith(commandPrefix)) {
+    if (message.startsWith(settings.current.chatCommandPrefix)) {
       const isMod = userstate.mod;
       const isBroadcaster = userstate.badges?.["broadcaster"] === "1";
       if (!isMod && !isBroadcaster) {
         return;
       }
-      const commandName = message.substring(1).split(" ")[0];
+      const commandName = message.substring(settings.current.chatCommandPrefix.length).split(" ")[0];
       const command = commands[commandName];
       if (!command) {
         return;

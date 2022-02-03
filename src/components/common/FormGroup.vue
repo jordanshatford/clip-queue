@@ -1,0 +1,18 @@
+<template>
+  <div class="py-2">
+    <label class="float-left form-label inline-block pl-1 mb-2 text-gray-600 dark:text-gray-400">
+      {{ props.label }}
+    </label>
+    <slot />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { defineProps, withDefaults } from "vue";
+
+interface Props {
+  label?: string;
+}
+
+const props = withDefaults(defineProps<Props>(), { label: "" });
+</script>

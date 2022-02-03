@@ -2,9 +2,7 @@ import TwitchChat from "@/services/twitch-chat";
 import { Clip, ClipQueue } from "@/interfaces/clips";
 import { reactive } from "vue";
 import { ClipList } from "@/utils/clip-list";
-import config from "@/assets/config";
-
-const { openMessage, closeMessage } = config.App.Queue;
+import { settings } from "@/stores/settings";
 
 const queue = reactive<ClipQueue>({
   open: true,
@@ -48,12 +46,12 @@ function removeUserClips(submitter: string): void {
 }
 
 function open(): void {
-  TwitchChat.sendMessage(openMessage);
+  TwitchChat.sendMessage(settings.current.queueOpenMessage);
   queue.open = true;
 }
 
 function close(): void {
-  TwitchChat.sendMessage(closeMessage);
+  TwitchChat.sendMessage(settings.current.queueCloseMessage);
   queue.open = false;
 }
 
