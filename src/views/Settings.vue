@@ -11,7 +11,7 @@
         <v-input type="text" required @keydown.space.prevent maxlength="3" v-model="formSettings.chatCommandPrefix" />
       </v-form-group>
       <v-form-group label="Send bot messages in chat?" class="w-full flex justify-between pr-2">
-        <v-switch v-model="formSettings.sendMessagesInChat" />
+        <v-switch id="sendMessagesInChat" v-model="formSettings.sendMessagesInChat" />
       </v-form-group>
       <v-form-group v-if="formSettings.sendMessagesInChat" label="Queue open message:">
         <v-textarea required minlength="3" maxlength="500" v-model="formSettings.queueOpenMessage" />

@@ -4,6 +4,7 @@ import Switch from "@/components/common/Switch.vue";
 describe("Switch.vue", () => {
   const wrapper = shallowMount(Switch, {
     props: {
+      id: "test",
       modelValue: false,
     },
   });
