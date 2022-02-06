@@ -2,7 +2,11 @@
   <div class="mx-0 mt-2">
     <v-progress-bar v-if="percentComplete" variant="brand" :value="percentComplete" />
     <div class="w-full mb-2 mt-1 border-t border-gray-300 dark:border-gray-700"></div>
-    <v-button :variant="isOpen ? 'danger' : 'primary'" class="float-right" @click="emit(isOpen ? 'close' : 'open')">
+    <v-button
+      :variant="isOpen ? 'danger' : 'primary'"
+      class="float-right"
+      @click="isOpen ? emit('close') : emit('open')"
+    >
       {{ isOpen ? "Close" : "Open" }} Queue
     </v-button>
     <h3 class="text-gray-600 dark:text-gray-400 text-lg">{{ title }}</h3>
@@ -35,5 +39,10 @@ interface Props {
 
 withDefaults(defineProps<Props>(), { title: "Queue", isOpen: false, percentComplete: 0 });
 
-const emit = defineEmits(["play", "remove", "open", "close"]);
+const emit = defineEmits<{
+  (e: "play", value: Clip): void;
+  (e: "remove", value: Clip): void;
+  (e: "open"): void;
+  (e: "close"): void;
+}>();
 </script>

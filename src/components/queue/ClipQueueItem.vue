@@ -31,5 +31,8 @@ interface Props {
 
 defineProps<Props>();
 
-const emit = defineEmits(["play", "remove"]);
+const emit = defineEmits<{
+  (e: "play"): void;
+  (e: "remove"): void;
+}>();
 </script>

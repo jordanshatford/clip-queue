@@ -69,7 +69,10 @@ const { baseURL, paramsString } = config.Twitch.Clips.Embedded;
 
 const props = withDefaults(defineProps<Props>(), { previousDisabled: false, nextDisabled: false });
 
-const emit = defineEmits(["previous", "next"]);
+const emit = defineEmits<{
+  (e: "previous"): void;
+  (e: "next"): void;
+}>();
 
 const timeAgo = computed(() => {
   if (props.clip?.timestamp) {

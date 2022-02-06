@@ -16,7 +16,9 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits<{
+  (e: "update:modelValue", value: string): void;
+}>();
 
 function emitUpdate(target: EventTarget | null) {
   emit("update:modelValue", (target as HTMLFormElement).value);
