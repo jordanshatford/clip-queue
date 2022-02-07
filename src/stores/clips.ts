@@ -3,6 +3,7 @@ import { Clip, ClipQueue } from "@/interfaces/clips";
 import { reactive } from "vue";
 import { ClipList } from "@/utils/clip-list";
 import { settings } from "@/stores/settings";
+import { formatTemplateString } from "@/utils/formatter";
 
 const queue = reactive<ClipQueue>({
   open: true,
@@ -47,6 +48,7 @@ function removeUserClips(submitter: string): void {
 }
 
 function open(): void {
+  /* istanbul ignore next */
   if (settings.current.sendQueueOpenMsg) {
     TwitchChat.sendMessage(settings.current.queueOpenMsg);
   }
@@ -54,6 +56,7 @@ function open(): void {
 }
 
 function close(): void {
+  /* istanbul ignore next */
   if (settings.current.sendQueueCloseMsg) {
     TwitchChat.sendMessage(settings.current.queueCloseMsg);
   }
@@ -75,9 +78,17 @@ function next(): void {
   sendCurrentClipInfoMessageIfNeeded();
 }
 
+/* istanbul ignore next */
 function sendCurrentClipInfoMessageIfNeeded() {
   if (queue.current?.id && settings.current.sendMsgsInChat && settings.current.sendCurrentClipMsg) {
-    TwitchChat.sendMessage(settings.current.currentClipMsg.replace("{link}", queue.current.url ?? ""));
+    const valueMappings = {
+      title: queue.current?.title ?? "",
+      url: queue.current?.url ?? "",
+      channel: queue.current?.channel ?? "",
+      game: queue.current?.game ?? "",
+      submitter: queue.current?.submitter ?? "",
+    };
+    TwitchChat.sendMessage(formatTemplateString(settings.current.currentClipMsg, valueMappings));
   }
 }
 

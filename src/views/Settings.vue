@@ -29,9 +29,21 @@
         <v-form-group label="Current clip message" class="w-full flex justify-between pr-2 pb-0">
           <v-switch id="sendCurrentClipMsg" v-model="formSettings.sendCurrentClipMsg" />
         </v-form-group>
-        <v-form-group v-if="formSettings.sendCurrentClipMsg" class="pt-0">
-          <v-textarea disabled minlength="3" maxlength="500" v-model="formSettings.currentClipMsg" />
-        </v-form-group>
+        <div v-if="formSettings.sendCurrentClipMsg">
+          <div class="text-left text-sm pl-1 mb-2 text-gray-400 dark:text-gray-500">
+            <label> The following will be replaced in the message sent to chat: </label>
+            <ul class="list-disc pl-8">
+              <li>{url} : url of the clip</li>
+              <li>{title} : title of the clip</li>
+              <li>{channel} : channel the clip is of</li>
+              <li>{game} : game in the clip</li>
+              <li>{submitter} : chatter who submitted the clip (or reddit poster)</li>
+            </ul>
+          </div>
+          <v-form-group class="pt-0">
+            <v-textarea required minlength="3" maxlength="500" v-model="formSettings.currentClipMsg" />
+          </v-form-group>
+        </div>
       </div>
       <v-form-group>
         <v-button class="mr-2" type="submit" :disabled="formNotChanged">Save</v-button>
@@ -59,7 +71,8 @@ const formNotChanged = computed(() => {
     formSettings.value.queueOpenMsg === settings.current.queueOpenMsg &&
     formSettings.value.sendQueueCloseMsg === settings.current.sendQueueCloseMsg &&
     formSettings.value.queueCloseMsg === settings.current.queueCloseMsg &&
-    formSettings.value.sendCurrentClipMsg === settings.current.sendCurrentClipMsg
+    formSettings.value.sendCurrentClipMsg === settings.current.sendCurrentClipMsg &&
+    formSettings.value.currentClipMsg === settings.current.currentClipMsg
   );
 });
 
