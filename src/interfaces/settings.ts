@@ -1,6 +1,10 @@
 export interface Settings {
-  chatCommandPrefix: string;
-  sendMessagesInChat: boolean;
-  queueOpenMessage: string;
-  queueCloseMessage: string;
+  commandPrefix: string;
+  sendMsgsInChat: boolean;
+  sendQueueOpenMsg: boolean;
+  queueOpenMsg: string;
+  sendQueueCloseMsg: boolean;
+  queueCloseMsg: string;
+  sendCurrentClipMsg: boolean;
+  currentClipMsg: string;
 }

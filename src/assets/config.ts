@@ -32,10 +32,14 @@ const config = {
     Settings: {
       localStorageKey: "settings",
       defaultValue: {
-        chatCommandPrefix: "!",
-        sendMessagesInChat: false,
-        queueOpenMessage: "CLIP QUEUE OPEN: send twitch clip links in chat to have them added to the queue.",
-        queueCloseMessage: "CLIP QUEUE CLOSED: twitch links in chat will be ignored.",
+        commandPrefix: "!",
+        sendMsgsInChat: false,
+        sendQueueOpenMsg: false,
+        queueOpenMsg: "CLIP QUEUE OPEN: send twitch clip links in chat to have them added to the queue.",
+        sendQueueCloseMsg: false,
+        queueCloseMsg: "CLIP QUEUE CLOSED: twitch links in chat will be ignored.",
+        sendCurrentClipMsg: false,
+        currentClipMsg: "The current clip is: {link}",
       },
     },
   },

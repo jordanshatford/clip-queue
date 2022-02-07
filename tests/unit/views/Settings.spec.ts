@@ -17,7 +17,7 @@ describe("Settings.vue", () => {
   });
 
   it("resets the form to the settings when not saved", async () => {
-    wrapper.vm.formSettings.chatCommandPrefix = "~";
+    wrapper.vm.formSettings.commandPrefix = "~";
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.formNotChanged).toEqual(false);
     wrapper.vm.onReset();
@@ -26,13 +26,13 @@ describe("Settings.vue", () => {
   });
 
   it("saves the form to the settings", async () => {
-    wrapper.vm.formSettings.chatCommandPrefix = "~";
+    wrapper.vm.formSettings.commandPrefix = "~";
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.formNotChanged).toEqual(false);
     wrapper.vm.onSubmit();
     expect(wrapper.vm.showSaveMsg).toEqual(true);
     expect(wrapper.vm.formNotChanged).toEqual(true);
-    expect(wrapper.vm.formSettings).toEqual({ ...defaultValue, chatCommandPrefix: "~" });
+    expect(wrapper.vm.formSettings).toEqual({ ...defaultValue, commandPrefix: "~" });
   });
 
   it("hides the save message", () => {

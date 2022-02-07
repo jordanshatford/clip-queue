@@ -1,6 +1,6 @@
 <template>
   <div class="rounded-lg py-2 px-4 text-base" :class="classNames" role="alert">
-    <v-icon :icon="icon" />
+    <v-icon :icon="icon" class="mr-2" />
     <slot />
   </div>
 </template>

@@ -21,18 +21,13 @@ function update(settings: Settings): void {
 }
 
 function updateCurrentValues(settings: Settings): void {
-  if ("chatCommandPrefix" in settings) {
-    current.chatCommandPrefix = settings.chatCommandPrefix;
-  }
-  if ("sendMessagesInChat" in settings) {
-    current.sendMessagesInChat = settings.sendMessagesInChat;
-  }
-  if ("queueOpenMessage" in settings) {
-    current.queueOpenMessage = settings.queueOpenMessage;
-  }
-  if ("queueCloseMessage" in settings) {
-    current.queueCloseMessage = settings.queueCloseMessage;
-  }
+  current.commandPrefix = settings.commandPrefix;
+  current.sendMsgsInChat = settings.sendMsgsInChat;
+  current.sendQueueOpenMsg = settings.sendQueueOpenMsg;
+  current.queueOpenMsg = settings.queueOpenMsg;
+  current.sendQueueCloseMsg = settings.sendQueueCloseMsg;
+  current.queueCloseMsg = settings.queueCloseMsg;
+  current.sendCurrentClipMsg = settings.sendCurrentClipMsg;
 }
 
 export const settings = {

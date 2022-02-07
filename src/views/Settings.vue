@@ -8,22 +8,36 @@
       class="bg-gray-100 dark:bg-gray-800 w-full max-w-lg mx-auto rounded-lg shadow-md p-2"
     >
       <v-form-group label="Chat command prefix:">
-        <v-input type="text" required @keydown.space.prevent maxlength="3" v-model="formSettings.chatCommandPrefix" />
+        <v-input type="text" required @keydown.space.prevent maxlength="3" v-model="formSettings.commandPrefix" />
       </v-form-group>
       <v-form-group label="Send bot messages in chat?" class="w-full flex justify-between pr-2">
-        <v-switch id="sendMessagesInChat" v-model="formSettings.sendMessagesInChat" />
+        <v-switch id="sendMsgsInChat" v-model="formSettings.sendMsgsInChat" />
       </v-form-group>
-      <v-form-group v-if="formSettings.sendMessagesInChat" label="Queue open message:">
-        <v-textarea required minlength="3" maxlength="500" v-model="formSettings.queueOpenMessage" />
-      </v-form-group>
-      <v-form-group v-if="formSettings.sendMessagesInChat" label="Queue close message:">
-        <v-textarea required minlength="3" maxlength="500" v-model="formSettings.queueCloseMessage" />
-      </v-form-group>
+      <div v-if="formSettings.sendMsgsInChat">
+        <v-form-group label="Queue open message" class="w-full flex justify-between pr-2 pb-0">
+          <v-switch id="sendQueueOpenMsg" v-model="formSettings.sendQueueOpenMsg" />
+        </v-form-group>
+        <v-form-group v-if="formSettings.sendQueueOpenMsg" class="pt-0">
+          <v-textarea required minlength="3" maxlength="500" v-model="formSettings.queueOpenMsg" />
+        </v-form-group>
+        <v-form-group label="Queue close message" class="w-full flex justify-between pr-2 pb-0">
+          <v-switch id="sendQueueCloseMsg" v-model="formSettings.sendQueueCloseMsg" />
+        </v-form-group>
+        <v-form-group v-if="formSettings.sendQueueCloseMsg" class="pt-0">
+          <v-textarea required minlength="3" maxlength="500" v-model="formSettings.queueCloseMsg" />
+        </v-form-group>
+        <v-form-group label="Current clip message" class="w-full flex justify-between pr-2 pb-0">
+          <v-switch id="sendCurrentClipMsg" v-model="formSettings.sendCurrentClipMsg" />
+        </v-form-group>
+        <v-form-group v-if="formSettings.sendCurrentClipMsg" class="pt-0">
+          <v-textarea disabled minlength="3" maxlength="500" v-model="formSettings.currentClipMsg" />
+        </v-form-group>
+      </div>
       <v-form-group>
         <v-button class="mr-2" type="submit" :disabled="formNotChanged">Save</v-button>
         <v-button class="mb-2" type="reset" variant="danger" :disabled="formNotChanged">Cancel</v-button>
       </v-form-group>
-      <v-alert v-if="showSaveMsg" variant="success"> Save successful </v-alert>
+      <v-alert v-if="showSaveMsg" variant="success">Save successful</v-alert>
     </form>
   </div>
 </template>
@@ -39,10 +53,13 @@ let formSettings = ref<Settings>(Object.assign({}, settings.current));
 
 const formNotChanged = computed(() => {
   return (
-    formSettings.value.chatCommandPrefix === settings.current.chatCommandPrefix &&
-    formSettings.value.sendMessagesInChat === settings.current.sendMessagesInChat &&
-    formSettings.value.queueOpenMessage === settings.current.queueOpenMessage &&
-    formSettings.value.queueCloseMessage === settings.current.queueCloseMessage
+    formSettings.value.commandPrefix === settings.current.commandPrefix &&
+    formSettings.value.sendMsgsInChat === settings.current.sendMsgsInChat &&
+    formSettings.value.sendQueueOpenMsg === settings.current.sendQueueOpenMsg &&
+    formSettings.value.queueOpenMsg === settings.current.queueOpenMsg &&
+    formSettings.value.sendQueueCloseMsg === settings.current.sendQueueCloseMsg &&
+    formSettings.value.queueCloseMsg === settings.current.queueCloseMsg &&
+    formSettings.value.sendCurrentClipMsg === settings.current.sendCurrentClipMsg
   );
 });
 

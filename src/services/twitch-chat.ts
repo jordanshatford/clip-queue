@@ -47,7 +47,7 @@ export default class TwitchChat {
   }
 
   public static async sendMessage(message: string): Promise<void> {
-    if (userStore?.user?.username && settings.current.sendMessagesInChat) {
+    if (userStore?.user?.username && settings.current.sendMsgsInChat) {
       await client?.say(userStore.user.username, message);
     }
   }
@@ -58,13 +58,13 @@ export default class TwitchChat {
     }
 
     // Check if message is a command and perform command if proper permission to do so
-    if (message.startsWith(settings.current.chatCommandPrefix)) {
+    if (message.startsWith(settings.current.commandPrefix)) {
       const isMod = userstate.mod;
       const isBroadcaster = userstate.badges?.["broadcaster"] === "1";
       if (!isMod && !isBroadcaster) {
         return;
       }
-      const commandName = message.substring(settings.current.chatCommandPrefix.length).split(" ")[0];
+      const commandName = message.substring(settings.current.commandPrefix.length).split(" ")[0];
       const command = commands[commandName];
       if (!command) {
         return;

@@ -12,7 +12,7 @@ export class ClipList {
 
   public add(...clips: Clip[]): Clip[] {
     clips.forEach((clip) => {
-      if (!this._clips.some((c) => c.id === clip.id)) {
+      if (!this.includes(clip)) {
         this._clips.push(clip);
       }
     });

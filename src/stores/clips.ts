@@ -35,6 +35,7 @@ function playNow(clip: Clip): void {
   }
   queue.upcoming.remove(clip);
   queue.current = clip;
+  sendCurrentClipInfoMessageIfNeeded();
 }
 
 function removeClip(clip: Clip): void {
@@ -46,12 +47,16 @@ function removeUserClips(submitter: string): void {
 }
 
 function open(): void {
-  TwitchChat.sendMessage(settings.current.queueOpenMessage);
+  if (settings.current.sendQueueOpenMsg) {
+    TwitchChat.sendMessage(settings.current.queueOpenMsg);
+  }
   queue.open = true;
 }
 
 function close(): void {
-  TwitchChat.sendMessage(settings.current.queueCloseMessage);
+  if (settings.current.sendQueueCloseMsg) {
+    TwitchChat.sendMessage(settings.current.queueCloseMsg);
+  }
   queue.open = false;
 }
 
@@ -67,6 +72,13 @@ function next(): void {
     queue.history.add(queue.current);
   }
   queue.current = queue.upcoming.shift();
+  sendCurrentClipInfoMessageIfNeeded();
+}
+
+function sendCurrentClipInfoMessageIfNeeded() {
+  if (queue.current?.id && settings.current.sendMsgsInChat && settings.current.sendCurrentClipMsg) {
+    TwitchChat.sendMessage(settings.current.currentClipMsg.replace("{link}", queue.current.url ?? ""));
+  }
 }
 
 export const clips = {

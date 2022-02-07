@@ -1,6 +1,6 @@
 <template>
   <div class="py-2">
-    <label class="float-left form-label inline-block pl-1 mb-2 text-gray-600 dark:text-gray-400">
+    <label v-if="label" class="float-left form-label inline-block pl-1 mb-2 text-gray-600 dark:text-gray-400">
       {{ props.label }}
     </label>
     <slot />
