@@ -10,7 +10,7 @@
       ></iframe>
     </div>
     <div>
-      <h2 class="font-bold text-2xl mt-2 mb-1 text-gray-700 dark:text-gray-400">
+      <h2 class="font-bold text-2xl mt-2 mb-1 text-zinc-700 dark:text-zinc-400">
         {{ clip.title }}
         <span v-if="clip.url">
           <sup>
@@ -18,7 +18,7 @@
               :href="clip.url"
               target="_blank"
               rel="noreferrer"
-              className="text-gray-500 dark:text-gray-700 no-underline hover:text-gray-400 dark:hover:text-gray-200"
+              className="text-zinc-500 dark:text-zinc-700 no-underline hover:text-zinc-400 dark:hover:text-zinc-200"
             >
               &#x1F5D7;
             </a>
@@ -33,7 +33,7 @@
           </v-button>
         </div>
       </h2>
-      <div class="text-gray-500 text-sm font-normal">
+      <div class="text-zinc-500 text-sm font-normal">
         <span v-if="clip.channel && clip.game">
           <span className="font-bold">{{ clip.channel }}</span>
           playing
@@ -54,32 +54,35 @@
 </template>
 
 <script setup lang="ts">
-import { computed, withDefaults, defineProps, defineEmits } from "vue";
-import { formatDistanceToNow, parseISO } from "date-fns";
-import { Clip } from "@/interfaces/clips";
-import config from "@/assets/config";
+import { computed, withDefaults, defineProps, defineEmits } from "vue"
+import { formatDistanceToNow, parseISO } from "date-fns"
+import type { Clip } from "@/interfaces/clips"
+import config from "@/assets/config"
 
 interface Props {
-  clip: Clip;
-  previousDisabled?: boolean;
-  nextDisabled?: boolean;
+  clip: Clip
+  previousDisabled?: boolean
+  nextDisabled?: boolean
 }
 
-const { baseURL, paramsString } = config.Twitch.Clips.Embedded;
+const { baseURL, paramsString } = config.Twitch.Clips.Embedded
 
-const props = withDefaults(defineProps<Props>(), { previousDisabled: false, nextDisabled: false });
+const props = withDefaults(defineProps<Props>(), {
+  previousDisabled: false,
+  nextDisabled: false,
+})
 
 const emit = defineEmits<{
-  (e: "previous"): void;
-  (e: "next"): void;
-}>();
+  (e: "previous"): void
+  (e: "next"): void
+}>()
 
 const timeAgo = computed(() => {
   if (props.clip?.timestamp) {
-    return formatDistanceToNow(parseISO(props.clip.timestamp));
+    return formatDistanceToNow(parseISO(props.clip.timestamp))
   }
-  return "";
-});
+  return ""
+})
 </script>
 
 <style>

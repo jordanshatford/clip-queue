@@ -1,6 +1,6 @@
 <template>
   <div class="py-2">
-    <label v-if="label" class="float-left form-label inline-block pl-1 mb-2 text-gray-600 dark:text-gray-400">
+    <label v-if="label" class="float-left form-label inline-block pl-1 mb-2 text-zinc-600 dark:text-zinc-400">
       {{ props.label }}
     </label>
     <slot />
@@ -8,11 +8,11 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, withDefaults } from "vue";
+import { defineProps, withDefaults } from "vue"
 
 interface Props {
-  label?: string;
+  label?: string
 }
 
-const props = withDefaults(defineProps<Props>(), { label: "" });
+const props = withDefaults(defineProps<Props>(), { label: "" })
 </script>

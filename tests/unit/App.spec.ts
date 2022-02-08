@@ -1,10 +1,11 @@
-import { shallowMount } from "@vue/test-utils";
-import App from "@/App.vue";
+import { shallowMount } from "@vue/test-utils"
+import { describe, it, expect } from "vitest"
+import App from "@/App.vue"
 
 describe("App.vue", () => {
-  const wrapper = shallowMount(App);
+  const wrapper = shallowMount(App)
 
   it("mounts successfully", () => {
-    expect(wrapper.exists()).toEqual(true);
-  });
-});
+    expect(wrapper.exists()).toEqual(true)
+  })
+})

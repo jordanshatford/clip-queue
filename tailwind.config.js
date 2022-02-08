@@ -1,16 +1,7 @@
-/* eslint-disable @typescript-eslint/no-var-requires*/
-const colors = require("tailwindcss/colors");
-
+/* eslint-env node */
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   darkMode: "class",
-  theme: {
-    extend: {
-      colors: {
-        gray: colors.gray,
-      },
-    },
-  },
   variants: {
     extend: {
       backgroundColor: ["active", "responsive", "disabled", "dark", "group-hover", "focus-within", "hover", "focus"],
@@ -23,4 +14,4 @@ module.exports = {
     },
   },
   plugins: [],
-};
+}

@@ -1,11 +1,11 @@
 <template>
   <div class="text-center">
-    <p class="text-5xl font-extrabold text-purple-500 p-5">Settings</p>
+    <p class="text-5xl font-extrabold text-violet-500 p-5">Settings</p>
     <form
       @submit.prevent="onSubmit"
       @reset="onReset"
       :key="formKey"
-      class="bg-gray-100 dark:bg-gray-800 w-full max-w-lg mx-auto rounded-lg shadow-md p-2"
+      class="bg-zinc-100 dark:bg-zinc-800 w-full max-w-lg mx-auto rounded-lg shadow-md p-2"
     >
       <v-form-group label="Chat command prefix:">
         <v-input type="text" required @keydown.space.prevent maxlength="3" v-model="formSettings.commandPrefix" />
@@ -30,7 +30,7 @@
           <v-switch id="sendCurrentClipMsg" v-model="formSettings.sendCurrentClipMsg" />
         </v-form-group>
         <div v-if="formSettings.sendCurrentClipMsg">
-          <div class="text-left text-sm pl-1 mb-2 text-gray-400 dark:text-gray-500">
+          <div class="text-left text-sm pl-1 mb-2 text-zinc-400 dark:text-zinc-500">
             <label> The following will be replaced in the message sent to chat: </label>
             <ul class="list-disc pl-8">
               <li>{url} : url of the clip</li>
@@ -55,13 +55,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { settings } from "@/stores/settings";
-import type { Settings } from "@/interfaces/settings";
+import { ref, computed } from "vue"
+import { settings } from "@/stores/settings"
+import type { Settings } from "@/interfaces/settings"
 
-let showSaveMsg = ref(false);
-let formKey = ref(1);
-let formSettings = ref<Settings>(Object.assign({}, settings.current));
+let showSaveMsg = ref(false)
+let formKey = ref(1)
+let formSettings = ref<Settings>(Object.assign({}, settings.current))
 
 const formNotChanged = computed(() => {
   return (
@@ -73,22 +73,22 @@ const formNotChanged = computed(() => {
     formSettings.value.queueCloseMsg === settings.current.queueCloseMsg &&
     formSettings.value.sendCurrentClipMsg === settings.current.sendCurrentClipMsg &&
     formSettings.value.currentClipMsg === settings.current.currentClipMsg
-  );
-});
+  )
+})
 
 function hideMsg() {
-  showSaveMsg.value = false;
+  showSaveMsg.value = false
 }
 
 function onReset() {
-  formSettings.value = Object.assign({}, settings.current);
-  formKey.value += 1;
+  formSettings.value = Object.assign({}, settings.current)
+  formKey.value += 1
 }
 
 function onSubmit() {
-  showSaveMsg.value = true;
-  setTimeout(hideMsg, 2000);
-  settings.update(formSettings.value);
-  onReset();
+  showSaveMsg.value = true
+  setTimeout(hideMsg, 2000)
+  settings.update(formSettings.value)
+  onReset()
 }
 </script>

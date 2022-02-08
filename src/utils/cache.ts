@@ -1,46 +1,46 @@
-import { TwitchClip, TwitchGame } from "@/interfaces/twitch";
-import config from "@/assets/config";
+import type { TwitchClip, TwitchGame } from "@/interfaces/twitch"
+import config from "@/assets/config"
 
-const { gamesKey, clipsKey } = config.App.Cache;
+const { gamesKey, clipsKey } = config.App.Cache
 
-let twitchGameCache: Record<string, TwitchGame> = {};
-let twitchClipCache: Record<string, TwitchClip> = {};
+let twitchGameCache: Record<string, TwitchGame> = {}
+let twitchClipCache: Record<string, TwitchClip> = {}
 
 function init(): void {
-  const games = localStorage.getItem(gamesKey);
+  const games = localStorage.getItem(gamesKey)
   if (games) {
-    twitchGameCache = JSON.parse(games);
+    twitchGameCache = JSON.parse(games)
   }
-  const clips = localStorage.getItem(clipsKey);
+  const clips = localStorage.getItem(clipsKey)
   if (clips) {
-    twitchClipCache = JSON.parse(clips);
+    twitchClipCache = JSON.parse(clips)
   }
 }
 
 function addGame(game: TwitchGame): void {
   if (game?.id) {
-    twitchGameCache[game.id] = game;
-    writeToLocalStorage(gamesKey, twitchGameCache);
+    twitchGameCache[game.id] = game
+    writeToLocalStorage(gamesKey, twitchGameCache)
   }
 }
 
 function getGame(id: string): TwitchGame {
-  return twitchGameCache?.[id] ?? undefined;
+  return twitchGameCache?.[id] ?? undefined
 }
 
 function addClip(clip: TwitchClip): void {
   if (clip?.id) {
-    twitchClipCache[clip.id] = clip;
-    writeToLocalStorage(clipsKey, twitchClipCache);
+    twitchClipCache[clip.id] = clip
+    writeToLocalStorage(clipsKey, twitchClipCache)
   }
 }
 
 function getClip(id: string): TwitchClip {
-  return twitchClipCache?.[id] ?? undefined;
+  return twitchClipCache?.[id] ?? undefined
 }
 
 function writeToLocalStorage(key: string, value: Record<string, TwitchGame | TwitchClip>): void {
-  localStorage?.setItem(key, JSON.stringify(value));
+  localStorage?.setItem(key, JSON.stringify(value))
 }
 
 export const cache = {
@@ -49,4 +49,4 @@ export const cache = {
   getGame,
   addClip,
   getClip,
-};
+}

@@ -1,5 +1,6 @@
-import { commands } from "@/utils/commands";
-import { clips } from "@/stores/clips";
+import { describe, it, expect, vi } from "vitest"
+import { commands } from "@/utils/commands"
+import { clips } from "@/stores/clips"
 
 describe("commands.ts", () => {
   /* eslint-disable @typescript-eslint/no-explicit-any*/
@@ -13,20 +14,20 @@ describe("commands.ts", () => {
   ])(
     "calls the proper clip queue function when a command is issued (%s, %s)",
     (commandName: string, expectedFunctionCall: any) => {
-      const command = commands[commandName];
+      const command = commands[commandName]
       if (!command) {
-        expect(jest.spyOn(clips, "previous")).toHaveBeenCalledTimes(0);
-        expect(jest.spyOn(clips, "next")).toHaveBeenCalledTimes(0);
-        expect(jest.spyOn(clips, "open")).toHaveBeenCalledTimes(0);
-        expect(jest.spyOn(clips, "close")).toHaveBeenCalledTimes(0);
+        expect(vi.spyOn(clips, "previous")).toHaveBeenCalledTimes(0)
+        expect(vi.spyOn(clips, "next")).toHaveBeenCalledTimes(0)
+        expect(vi.spyOn(clips, "open")).toHaveBeenCalledTimes(0)
+        expect(vi.spyOn(clips, "close")).toHaveBeenCalledTimes(0)
       } else {
-        const randomNumber = Math.floor(Math.random() * 25);
-        const spy = jest.spyOn(clips, expectedFunctionCall);
+        const randomNumber = Math.floor(Math.random() * 25)
+        const spy = vi.spyOn(clips, expectedFunctionCall)
         for (let i = 1; i <= randomNumber; i++) {
-          command();
+          command()
         }
-        expect(spy).toHaveBeenCalledTimes(randomNumber);
+        expect(spy).toHaveBeenCalledTimes(randomNumber)
       }
     }
-  );
-});
+  )
+})

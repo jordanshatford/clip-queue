@@ -1,5 +1,6 @@
-import { shallowMount } from "@vue/test-utils";
-import Switch from "@/components/common/Switch.vue";
+import { describe, it, expect } from "vitest"
+import { shallowMount } from "@vue/test-utils"
+import Switch from "@/components/common/Switch.vue"
 
 describe("Switch.vue", () => {
   const wrapper = shallowMount(Switch, {
@@ -7,9 +8,9 @@ describe("Switch.vue", () => {
       id: "test",
       modelValue: false,
     },
-  });
+  })
 
   it("mounts successfully", () => {
-    expect(wrapper.exists()).toEqual(true);
-  });
-});
+    expect(wrapper.exists()).toEqual(true)
+  })
+})

@@ -1,6 +1,7 @@
-import { RouteRecordRaw } from "vue-router";
-import { shallowMount } from "@vue/test-utils";
-import NavItem from "@/layout/NavItem.vue";
+import { describe, it, expect } from "vitest"
+import type { RouteRecordRaw } from "vue-router"
+import { shallowMount } from "@vue/test-utils"
+import NavItem from "@/layout/NavItem.vue"
 
 describe("NavItem.vue", () => {
   const wrapper = shallowMount(NavItem, {
@@ -11,26 +12,26 @@ describe("NavItem.vue", () => {
         path: "/test",
       } as RouteRecordRaw,
     },
-  });
+  })
 
   it("mounts successfully", () => {
-    expect(wrapper.exists()).toEqual(true);
-  });
+    expect(wrapper.exists()).toEqual(true)
+  })
 
   it("has the correct route as a prop", () => {
-    expect(wrapper.vm.route.name).toEqual("Test");
-    expect(wrapper.vm.route.path).toEqual("/test");
-  });
+    expect(wrapper.vm.route.name).toEqual("Test")
+    expect(wrapper.vm.route.path).toEqual("/test")
+  })
 
   it("does not have block visibility when not mobile", async () => {
-    wrapper.setProps({ isMobileMenu: false });
-    await wrapper.vm.$nextTick();
-    expect(wrapper.vm.classNames).toEqual(expect.not.stringContaining("block"));
-  });
+    wrapper.setProps({ isMobileMenu: false })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.classNames).toEqual(expect.not.stringContaining("block"))
+  })
 
   it("does have block visibility when on mobile", async () => {
-    wrapper.setProps({ isMobileMenu: true });
-    await wrapper.vm.$nextTick();
-    expect(wrapper.vm.classNames).toEqual(expect.stringContaining("block"));
-  });
-});
+    wrapper.setProps({ isMobileMenu: true })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.classNames).toEqual(expect.stringContaining("block"))
+  })
+})

@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-white dark:bg-gray-800 shadow dark:shadow-dark fixed top-0 z-40 w-full">
+  <nav class="bg-white dark:bg-zinc-800 shadow dark:shadow-dark fixed top-0 z-40 w-full">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -7,12 +7,12 @@
             <v-icon
               v-if="showMobileMenu && userStore.user.isLoggedIn"
               icon="times"
-              class="text-2xl dark:text-gray-200 hover:text-red-500 dark:hover:text-red-500"
+              class="text-2xl dark:text-zinc-200 hover:text-red-500 dark:hover:text-red-500"
             />
             <v-icon
               v-if="!showMobileMenu && userStore.user.isLoggedIn"
               icon="bars"
-              class="text-2xl dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-500"
+              class="text-2xl dark:text-zinc-200 hover:text-violet-500 dark:hover:text-violet-500"
             />
           </button>
           <theme-change-button />
@@ -21,7 +21,7 @@
           <router-link
             exact-active-class=""
             to="/"
-            class="text-purple-500 font-extrabold text-lg flex-shrink-0 flex items-center"
+            class="text-violet-500 font-extrabold text-lg flex-shrink-0 flex items-center"
             >{{ title }}</router-link
           >
           <div class="hidden sm:block sm:ml-6">
@@ -51,14 +51,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import NavItem from "@/layout/NavItem.vue";
-import ThemeChangeButton from "@/components/ThemeChangeButton.vue";
-import { userStore } from "@/stores/user";
-import AuthButton from "@/components/AuthButton.vue";
-import { routes } from "@/router";
-import config from "@/assets/config";
+import { ref } from "vue"
+import NavItem from "@/layout/NavItem.vue"
+import ThemeChangeButton from "@/components/ThemeChangeButton.vue"
+import { userStore } from "@/stores/user"
+import AuthButton from "@/components/AuthButton.vue"
+import { routes } from "@/router"
+import config from "@/assets/config"
 
-const { title } = config.App;
-let showMobileMenu = ref(false);
+const { title } = config.App
+let showMobileMenu = ref(false)
 </script>

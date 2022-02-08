@@ -1,4 +1,5 @@
-import { getUrlFromMessage, getIdFromUrl } from "@/utils/url";
+import { describe, it, expect } from "vitest"
+import { getUrlFromMessage, getIdFromUrl } from "@/utils/url"
 
 describe("url.ts", () => {
   it.each([
@@ -7,8 +8,8 @@ describe("url.ts", () => {
     ["Some test message with a url https://www.twitch.tv/", "https://www.twitch.tv/"],
     ["Some test message with a url https://www.x.y/ then text after.", "https://www.x.y/"],
   ])("gets a url from a message when possible", (input: string, expected: string | undefined) => {
-    expect(getUrlFromMessage(input)).toEqual(expected);
-  });
+    expect(getUrlFromMessage(input)).toEqual(expected)
+  })
 
   it.each([
     [
@@ -24,6 +25,6 @@ describe("url.ts", () => {
       "FantasticQuaintWrenchPogChamp-seNiJaPPjYls0ID8",
     ],
   ])("gets an id from a clip url", (input: string, expected: string) => {
-    expect(getIdFromUrl(input)).toEqual(expected);
-  });
-});
+    expect(getIdFromUrl(input)).toEqual(expected)
+  })
+})

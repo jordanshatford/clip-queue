@@ -1,42 +1,42 @@
-import config from "@/assets/config";
-import { Clip } from "@/interfaces/clips";
-import TwitchAPI from "@/services/twitch-api";
-import Reddit from "@/services/reddit";
-import { getIdFromUrl } from "@/utils/url";
+import config from "@/assets/config"
+import type { Clip } from "@/interfaces/clips"
+import TwitchAPI from "@/services/twitch-api"
+import Reddit from "@/services/reddit"
+import { getIdFromUrl } from "@/utils/url"
 
-const { hostnames } = config.Twitch.Clips;
+const { hostnames } = config.Twitch.Clips
 
 export default class ClipFinder {
   public static async getClipsFromSubreddit(
     subreddit: string,
     callback?: (clip: Clip, done: boolean) => void
   ): Promise<Clip[] | undefined> {
-    const subredditPosts = await Reddit.getSubredditPosts(subreddit);
-    let clips: Clip[] = [];
+    const subredditPosts = await Reddit.getSubredditPosts(subreddit)
+    let clips: Clip[] = []
     for (const post of subredditPosts) {
       if (post?.data?.stickied) {
-        continue;
+        continue
       }
-      const clip = await this.getTwitchClip(post?.data?.url);
+      const clip = await this.getTwitchClip(post?.data?.url)
       if (clip) {
-        callback?.({ ...clip, submitter: post.data.author }, false);
-        clips = [...clips, { ...clip, submitter: post.data.author }];
+        callback?.({ ...clip, submitter: post.data.author }, false)
+        clips = [...clips, { ...clip, submitter: post.data.author }]
       }
     }
-    callback?.({}, true);
-    return clips;
+    callback?.({}, true)
+    return clips
   }
 
   public static async getTwitchClip(url: string): Promise<Clip | undefined> {
     if (!this.isTwitchClip(url)) {
-      return;
+      return
     }
 
-    const id = getIdFromUrl(url);
-    const clipInfo = await TwitchAPI.getClip(id);
+    const id = getIdFromUrl(url)
+    const clipInfo = await TwitchAPI.getClip(id)
 
     if (clipInfo) {
-      const game = await TwitchAPI.getGame(clipInfo.game_id);
+      const game = await TwitchAPI.getGame(clipInfo.game_id)
       return {
         id,
         title: clipInfo?.title,
@@ -45,16 +45,16 @@ export default class ClipFinder {
         timestamp: clipInfo?.created_at,
         url: clipInfo?.url,
         thumbnailUrl: clipInfo?.thumbnail_url,
-      };
+      }
     }
   }
 
   private static isTwitchClip(url: string): boolean {
     try {
-      const uri = new URL(url);
-      return hostnames.includes(uri.hostname);
+      const uri = new URL(url)
+      return hostnames.includes(uri.hostname)
     } catch {
-      return false;
+      return false
     }
   }
 }

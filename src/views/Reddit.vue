@@ -1,15 +1,15 @@
 <template>
   <div class="text-center">
-    <p class="text-5xl font-extrabold text-purple-500 p-5">From Reddit</p>
-    <p class="dark:text-gray-300">Queue clips found in the top {{ maxPostsToCheck }} posts.</p>
+    <p class="text-5xl font-extrabold text-violet-500 p-5">From Reddit</p>
+    <p class="dark:text-zinc-300">Queue clips found in the top {{ maxPostsToCheck }} posts.</p>
     <div class="grid gap-6 grid-cols-1 mt-3">
       <div
         v-for="(subreddit, index) in availableSubreddits"
         :key="index"
-        class="bg-gray-100 dark:bg-gray-800 w-full max-w-sm mx-auto rounded-lg shadow-md"
+        class="bg-zinc-100 dark:bg-zinc-800 w-full max-w-sm mx-auto rounded-lg shadow-md"
       >
         <div class="flex items-center justify-between">
-          <span class="ml-5 text-gray-600 dark:text-gray-400 text-2xl">r/{{ subreddit }}</span>
+          <span class="ml-5 text-zinc-600 dark:text-zinc-400 text-2xl">r/{{ subreddit }}</span>
           <v-button
             class="m-3 float-right"
             @click="queueClipsForSubreddit(subreddit)"
@@ -28,21 +28,21 @@
 </template>
 
 <script setup lang="ts">
-import config from "@/assets/config";
-import ClipFinder from "@/services/clip-finder";
-import { clips } from "@/stores/clips";
-import { loading } from "@/stores/loading";
+import config from "@/assets/config"
+import ClipFinder from "@/services/clip-finder"
+import { clips } from "@/stores/clips"
+import { loading } from "@/stores/loading"
 
-const { maxPostsToCheck, availableSubreddits } = config.Reddit;
+const { maxPostsToCheck, availableSubreddits } = config.Reddit
 
 function queueClipsForSubreddit(subreddit: string) {
-  loading.setLoading(subreddit, true);
+  loading.setLoading(subreddit, true)
   ClipFinder.getClipsFromSubreddit(subreddit, (clip, done) => {
     if (!done) {
-      clips.addClip(clip, true);
+      clips.addClip(clip, true)
     } else {
-      loading.setLoading(subreddit, false);
+      loading.setLoading(subreddit, false)
     }
-  });
+  })
 }
 </script>

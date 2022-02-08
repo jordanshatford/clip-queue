@@ -1,6 +1,7 @@
-import { shallowMount } from "@vue/test-utils";
-import ClipQueueItem from "@/components/queue/ClipQueueItem.vue";
-import { Clip } from "@/interfaces/clips";
+import { describe, it, expect } from "vitest"
+import { shallowMount } from "@vue/test-utils"
+import ClipQueueItem from "@/components/queue/ClipQueueItem.vue"
+import type { Clip } from "@/interfaces/clips"
 
 describe("ClipQueueItem.vue", () => {
   const wrapper = shallowMount(ClipQueueItem, {
@@ -15,9 +16,9 @@ describe("ClipQueueItem.vue", () => {
         thumbnailUrl: "test",
       } as Clip,
     },
-  });
+  })
 
   it("mounts successfully", () => {
-    expect(wrapper.exists()).toEqual(true);
-  });
-});
+    expect(wrapper.exists()).toEqual(true)
+  })
+})

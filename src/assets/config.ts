@@ -1,7 +1,7 @@
 const env = {
-  clientId: process.env.VUE_APP_TWITCH_CLIENT_ID as string,
-  redirectUri: process.env.VUE_APP_TWITCH_REDIRECT_URI as string,
-};
+  clientId: import.meta.env.VITE_TWITCH_CLIENT_ID as string,
+  redirectUri: import.meta.env.VITE_TWITCH_REDIRECT_URI as string,
+}
 
 const config = {
   App: {
@@ -79,6 +79,6 @@ const config = {
     maxPostsToCheck: 50,
     availableSubreddits: ["LivestreamFail", "TwitchClips", "RPClipsGTA", "NoPixel"],
   },
-};
+}
 
-export default config;
+export default config

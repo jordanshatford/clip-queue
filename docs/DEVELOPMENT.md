@@ -23,11 +23,11 @@ npm install
 Then you must specify a value for the following environment variables:
 ```bash
 # The Twitch client id generated for the application
-VUE_APP_TWITCH_CLIENT_ID=
+VITE_TWITCH_CLIENT_ID=
 # The redirect URI (this will be the URI where the application is hosted)
-VUE_APP_TWITCH_REDIRECT_URI=http://localhost:8080/
+VITE_TWITCH_REDIRECT_URI=http://localhost:3000/
 ```
-This can be done by filling out and copying the `.env.sample` file to a `.env` file.
+This can be done by filling out and copying the `example.env` file to a `.env` file.
 
 Once the project dependencies are installed and environment variables specified you can start a development server using:
 ```bash
