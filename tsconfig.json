@@ -1,7 +1,7 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "tests/unit/components/common/Alert.spec.ts"],
-  "exclude": ["node_modules", "src/**/__tests__/*", "tests/unit/**/*"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

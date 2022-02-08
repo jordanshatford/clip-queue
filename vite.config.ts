@@ -13,10 +13,9 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    setupFiles: ["tests/unit/setup.js"],
     coverage: {
       include: ["src/**/*"],
-      exclude: ["src/assets/**/*", "src/router/**/*", "src/main.ts", "src/services/twitch-chat.ts", "tests/**/*"],
+      exclude: ["src/assets/**/*", "src/router/**/*", "src/main.ts", "src/services/twitch-chat.ts", "src/**/__tests__/*"],
       reporter: ["text", "json", "html"],
     },
   },
