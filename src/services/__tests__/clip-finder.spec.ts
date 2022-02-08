@@ -19,8 +19,10 @@ vi.mock("@/services/twitch-api", () => {
     return { id, name: "Test Game" } as TwitchGame
   })
   return {
-    getClip: mockFunction,
-    getGame: mockFunction2,
+    default: {
+      getClip: mockFunction,
+      getGame: mockFunction2,
+    },
   }
 })
 
@@ -45,11 +47,13 @@ vi.mock("@/services/reddit", () => {
     return testPost
   })
   return {
-    getSubredditPosts: mockFunction,
+    default: {
+      getSubredditPosts: mockFunction,
+    },
   }
 })
 
-describe.skip("clip-finder.ts", () => {
+describe("clip-finder.ts", () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })

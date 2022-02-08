@@ -23,11 +23,13 @@ vi.mock("@/services/clip-finder", () => {
     return clips
   })
   return {
-    getClipsFromSubreddit: mockFunction,
+    default: {
+      getClipsFromSubreddit: mockFunction,
+    },
   }
 })
 
-describe.skip("Reddit.vue", () => {
+describe("Reddit.vue", () => {
   const wrapper = shallowMount(Reddit)
 
   beforeEach(() => {

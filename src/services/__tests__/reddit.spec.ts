@@ -1,39 +1,41 @@
-import type { MockedObject } from "vitest"
-import axios from "axios"
 import type { Subreddit } from "@/interfaces/reddit"
 import Reddit from "@/services/reddit"
 
-vi.mock("axios")
-const mockedAxios = axios as MockedObject<typeof axios>
-
-describe.skip("reddit.ts", () => {
-  const testSubreddit = {
-    children: [
-      {
+vi.mock("axios", () => {
+  return {
+    default: {
+      get: vi.fn().mockResolvedValue({
         data: {
-          author: "test1",
-          url: "/test/1",
-          stickied: false,
+          data: {
+            children: [
+              {
+                data: {
+                  author: "test1",
+                  url: "/test/1",
+                  stickied: false,
+                },
+              },
+              {
+                data: {
+                  author: "test2",
+                  url: "/test/2",
+                  stickied: true,
+                },
+              },
+            ],
+          } as Subreddit,
         },
-      },
-      {
-        data: {
-          author: "test2",
-          url: "/test/2",
-          stickied: true,
-        },
-      },
-    ],
-  } as Subreddit
+      }),
+    },
+  }
+})
 
+describe("reddit.ts", () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })
 
   it("gets subreddit posts from reddit", async () => {
-    mockedAxios.get.mockResolvedValue({
-      data: { data: testSubreddit },
-    })
     const subredditInfo = await Reddit.getSubredditPosts("test")
     expect(subredditInfo).toHaveLength(2)
     expect(subredditInfo[0].data).toEqual({

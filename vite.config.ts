@@ -22,7 +22,7 @@ export default defineConfig({
         "src/services/twitch-chat.ts",
         "src/**/__tests__/*",
       ],
-      reporter: ["lcov"],
+      reporter: ["lcov", "text"],
     },
   },
 })
