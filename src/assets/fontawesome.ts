@@ -14,6 +14,7 @@ import {
   faInfoCircle,
   faTimesCircle,
   faExclamationTriangle,
+  faLink,
 } from "@fortawesome/free-solid-svg-icons"
 import { faMoon } from "@fortawesome/free-regular-svg-icons"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
@@ -33,5 +34,6 @@ library.add(faBackward)
 library.add(faPlay)
 library.add(faTrash)
 library.add(faGithub)
+library.add(faLink)
 
 export default FontAwesomeIcon

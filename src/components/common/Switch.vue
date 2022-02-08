@@ -20,8 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, withDefaults } from "vue"
-
 interface Props {
   id: string
   modelValue: boolean

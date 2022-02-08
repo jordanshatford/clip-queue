@@ -26,7 +26,6 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, defineEmits } from "vue"
 import ClipQueueItem from "@/components/queue/ClipQueueItem.vue"
 import type { Clip } from "@/interfaces/clips"
 

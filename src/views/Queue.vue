@@ -34,7 +34,7 @@ import TwitchClipPlayer from "@/components/TwitchClipPlayer.vue"
 import { clips } from "@/stores/clips"
 import ClipQueue from "@/components/queue/ClipQueue.vue"
 
-const queueProgress = computed(() => {
+const queueProgress = computed<number>(() => {
   const currentClip = clips.queue?.current?.id ? 1 : 0
   const allClips = clips.queue.history.size() + clips.queue.upcoming.size() + currentClip
   const clipsLeft = clips.queue.upcoming.size()

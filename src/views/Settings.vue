@@ -63,7 +63,7 @@ let showSaveMsg = ref(false)
 let formKey = ref(1)
 let formSettings = ref<Settings>(Object.assign({}, settings.current))
 
-const formNotChanged = computed(() => {
+const formNotChanged = computed<boolean>(() => {
   return (
     formSettings.value.commandPrefix === settings.current.commandPrefix &&
     formSettings.value.sendMsgsInChat === settings.current.sendMsgsInChat &&

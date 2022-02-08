@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, withDefaults, defineProps } from "vue"
+import { computed } from "vue"
 
 interface Props {
   value: number
@@ -20,7 +20,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), { variant: "primary" })
 
-const classNames = computed(() => {
+const classNames = computed<string>(() => {
   let classes = "bg-blue-500"
   switch (props.variant) {
     case "brand": {

@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, withDefaults, defineProps } from "vue"
+import { computed } from "vue"
 
 interface Props {
   variant?: "info" | "success" | "warning" | "danger"
@@ -14,7 +14,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), { variant: "info" })
 
-const icon = computed(() => {
+const icon = computed<string>(() => {
   let icon = "info-circle"
   switch (props.variant) {
     case "success": {
@@ -32,7 +32,8 @@ const icon = computed(() => {
   }
   return icon
 })
-const classNames = computed(() => {
+
+const classNames = computed<string>(() => {
   let classes = "bg-blue-100 dark:bg-blue-200 text-blue-700"
   switch (props.variant) {
     case "success": {

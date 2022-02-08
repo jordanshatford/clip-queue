@@ -22,7 +22,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue"
 import type { Clip } from "@/interfaces/clips"
 
 interface Props {

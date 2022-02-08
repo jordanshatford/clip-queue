@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, withDefaults, defineProps } from "vue"
+import { computed } from "vue"
 
 interface Props {
   variant?: "primary" | "danger" | "brand"
@@ -16,7 +16,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), { variant: "primary" })
 
-const classNames = computed(() => {
+const classNames = computed<string>(() => {
   let classes = "bg-blue-500 border-blue-700 hover:bg-blue-400 hover:border-blue-500"
   switch (props.variant) {
     case "brand": {

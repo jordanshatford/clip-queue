@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, withDefaults, defineProps } from "vue"
+import { computed } from "vue"
 import type { RouteRecordRaw } from "vue-router"
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), { isMobileMenu: false })
 
-const classNames = computed(() => {
+const classNames = computed<string>(() => {
   let classNames = "px-3 py-2 rounded-lg text-zinc-400 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
   if (props.isMobileMenu) {
     classNames += " block"

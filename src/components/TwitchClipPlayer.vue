@@ -13,16 +13,14 @@
       <h2 class="font-bold text-2xl mt-2 mb-1 text-zinc-700 dark:text-zinc-400">
         {{ clip.title }}
         <span v-if="clip.url">
-          <sup>
-            <a
-              :href="clip.url"
-              target="_blank"
-              rel="noreferrer"
-              className="text-zinc-500 dark:text-zinc-700 no-underline hover:text-zinc-400 dark:hover:text-zinc-200"
-            >
-              &#x1F5D7;
-            </a>
-          </sup>
+          <a
+            :href="clip.url"
+            target="_blank"
+            rel="noreferrer"
+            className="text-base text-zinc-500 dark:text-zinc-700 no-underline hover:text-zinc-400 dark:hover:text-zinc-200"
+          >
+            <v-icon icon="link" />
+          </a>
         </span>
         <div class="text-base float-right">
           <v-button :disabled="previousDisabled" class="mr-2" @click="emit('previous')">
@@ -54,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, withDefaults, defineProps, defineEmits } from "vue"
+import { computed } from "vue"
 import { formatDistanceToNow, parseISO } from "date-fns"
 import type { Clip } from "@/interfaces/clips"
 import config from "@/assets/config"
@@ -77,7 +75,7 @@ const emit = defineEmits<{
   (e: "next"): void
 }>()
 
-const timeAgo = computed(() => {
+const timeAgo = computed<string>(() => {
   if (props.clip?.timestamp) {
     return formatDistanceToNow(parseISO(props.clip.timestamp))
   }

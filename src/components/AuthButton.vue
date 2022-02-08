@@ -5,7 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps } from "vue"
 import { useRouter } from "vue-router"
 
 interface Props {
