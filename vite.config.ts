@@ -18,7 +18,6 @@ export default defineConfig({
       include: ["src/**/*"],
       exclude: ["src/assets/**/*", "src/router/**/*", "src/main.ts", "src/services/twitch-chat.ts", "tests/**/*"],
       reporter: ["text", "json", "html"],
-      reportsDirectory: "tests/coverage",
     },
   },
 })
