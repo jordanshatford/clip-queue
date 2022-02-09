@@ -10,6 +10,7 @@ describe("clips.ts", () => {
     game: "testgame",
     timestamp: new Date("December 17, 1995 03:24:00").toDateString(),
     url: "https://www.twitch.tv/test",
+    embedUrl: "https://www.twitch.tv/test",
     thumbnailUrl: "test",
   } as Clip
 
@@ -21,6 +22,7 @@ describe("clips.ts", () => {
     game: "testgame2",
     timestamp: new Date("December 17, 1995 03:24:00").toDateString(),
     url: "https://www.twitch.tv/test2",
+    embedUrl: "https://www.twitch.tv/test2",
     thumbnailUrl: "test2",
   } as Clip
 

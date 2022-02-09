@@ -44,6 +44,7 @@ export default class ClipFinder {
         game: game?.name,
         timestamp: clipInfo?.created_at,
         url: clipInfo?.url,
+        embedUrl: clipInfo?.embed_url,
         thumbnailUrl: clipInfo?.thumbnail_url,
       }
     }

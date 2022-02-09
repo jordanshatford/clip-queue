@@ -68,10 +68,6 @@ const config = {
     },
     Clips: {
       hostnames: ["clips.twitch.tv"],
-      Embedded: {
-        baseURL: "https://clips.twitch.tv/embed",
-        paramsString: `autoplay=${true}&parent=${window.location.hostname}`,
-      },
     },
   },
   Reddit: {

@@ -12,6 +12,7 @@ vi.mock("@/services/clip-finder", () => {
       game: "testgame",
       timestamp: new Date("December 17, 1995 03:24:00").toDateString(),
       url: "https://www.twitch.tv/test",
+      embedUrl: "https://www.twitch.tv/test",
       thumbnailUrl: "test",
     } as Clip
     let clips: Clip[] = []

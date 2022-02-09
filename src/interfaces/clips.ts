@@ -8,6 +8,7 @@ export interface Clip {
   timestamp?: string
   submitter?: string
   url?: string
+  embedUrl?: string
   thumbnailUrl?: string
 }
 

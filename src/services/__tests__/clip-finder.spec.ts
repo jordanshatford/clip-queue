@@ -13,6 +13,7 @@ vi.mock("@/services/twitch-api", () => {
       created_at: "",
       thumbnail_url: "",
       url: "https://clips.twitch.tv/CoyAuspiciousLarkDeIlluminati-2bABUuW_9EbnIv6j",
+      embed_url: "https://clips.twitch.tv/CoyAuspiciousLarkDeIlluminati-2bABUuW_9EbnIv6j",
     } as TwitchClip
   })
   const mockFunction2 = vi.fn((id: string) => {
@@ -77,6 +78,7 @@ describe("clip-finder.ts", () => {
       timestamp: "",
       title: "Test title",
       url: clipLink,
+      embedUrl: "https://clips.twitch.tv/CoyAuspiciousLarkDeIlluminati-2bABUuW_9EbnIv6j",
       thumbnailUrl: "",
     })
   })

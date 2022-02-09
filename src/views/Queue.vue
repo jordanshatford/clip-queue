@@ -2,6 +2,7 @@
   <twitch-clip-player
     v-if="clips.queue.current && clips.queue.current.id"
     :clip="clips.queue.current"
+    :autoplay="true"
     :previous-disabled="clips.queue.history.empty()"
     :next-disabled="clips.queue.upcoming.empty()"
     @previous="clips.previous()"

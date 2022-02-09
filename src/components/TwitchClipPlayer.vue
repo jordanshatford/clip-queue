@@ -3,7 +3,7 @@
     <div class="w-full h-auto bg-black player player-container">
       <iframe
         v-if="clip.id"
-        :src="`${baseURL}?clip=${clip.id}&${paramsString}`"
+        :src="`${clip.embedUrl}&autoplay=${autoplay}&parent=${hostname}`"
         :title="clip.title"
         class="w-full h-auto bg-black player"
         allowfullscreen
@@ -55,17 +55,16 @@
 import { computed } from "vue"
 import { formatDistanceToNow, parseISO } from "date-fns"
 import type { Clip } from "@/interfaces/clips"
-import config from "@/assets/config"
 
 interface Props {
   clip: Clip
+  autoplay?: boolean
   previousDisabled?: boolean
   nextDisabled?: boolean
 }
 
-const { baseURL, paramsString } = config.Twitch.Clips.Embedded
-
 const props = withDefaults(defineProps<Props>(), {
+  autoplay: false,
   previousDisabled: false,
   nextDisabled: false,
 })
@@ -81,6 +80,8 @@ const timeAgo = computed<string>(() => {
   }
   return ""
 })
+
+const hostname = window.location.hostname
 </script>
 
 <style>
