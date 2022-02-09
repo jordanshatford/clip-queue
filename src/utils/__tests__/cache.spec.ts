@@ -15,7 +15,7 @@ describe("cache.ts", () => {
     created_at: "",
     thumbnail_url: "",
     url: "https://clips.twitch.tv/CoyAuspiciousLarkDeIlluminati-2bABUuW_9EbnIv6j",
-    embed_url: "https://clips.twitch.tv/CoyAuspiciousLarkDeIlluminati-2bABUuW_9EbnIv6j"
+    embed_url: "https://clips.twitch.tv/CoyAuspiciousLarkDeIlluminati-2bABUuW_9EbnIv6j",
   } as TwitchClip
 
   beforeEach(() => {

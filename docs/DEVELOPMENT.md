@@ -26,6 +26,8 @@ Then you must specify a value for the following environment variables:
 VITE_TWITCH_CLIENT_ID=
 # The redirect URI (this will be the URI where the application is hosted)
 VITE_TWITCH_REDIRECT_URI=http://localhost:3000/
+# The sentry dsn (Optional)
+VITE_SENTRY_DSN=
 ```
 This can be done by filling out and copying the `example.env` file to a `.env` file.
 

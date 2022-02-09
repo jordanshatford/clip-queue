@@ -1,6 +1,8 @@
-const env = {
+export const env = {
   clientId: import.meta.env.VITE_TWITCH_CLIENT_ID as string,
   redirectUri: import.meta.env.VITE_TWITCH_REDIRECT_URI as string,
+  sentryDSN: import.meta.env.VITE_SENTRY_DSN as string,
+  mode: import.meta.env.MODE,
 }
 
 const config = {

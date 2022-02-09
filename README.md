@@ -8,6 +8,7 @@
 [![Eslint](https://img.shields.io/badge/linter-eslint-%234B32C3?style=flat&logo=eslint)](https://eslint.org/)
 [![Hosted On Vercel](https://img.shields.io/badge/hosted%20on-vercel-%23000000.svg?style=flat&logo=vercel)](https://vercel.com/)
 [![Coverage On Codecov.io](https://codecov.io/gh/jordanshatford/clip-queue/branch/main/graph/badge.svg?token=55KCL03QIH)](https://codecov.io/gh/jordanshatford/clip-queue)
+[![Monitored by Sentry](https://img.shields.io/badge/monitored%20by-sentry-%23362D59.svg?style=flat&logo=sentry)](https://sentry.io/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat&logo=license)](https://github.com/navneetsharmaui/sveltekit-blog/blob/main/LICENSE)
 
 Clip Queue is a Vue application created to allow users to easily integrate with their [Twitch](https://www.twitch.tv/) chat and accept clips pasted in chat. These clips are pasted in a queue and allows them to watch clip by clip through the webpage.
