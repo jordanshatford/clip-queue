@@ -13,6 +13,7 @@ export default defineConfig({
   },
   test: {
     globals: true,
+    watch: false,
     coverage: {
       include: ["src/**/*"],
       exclude: [
