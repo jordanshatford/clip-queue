@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils"
-import Nav from "@/layout/Nav.vue"
+import Nav from "@/components/nav/Nav.vue"
 import config from "@/assets/config"
 
 describe("Nav.vue", () => {

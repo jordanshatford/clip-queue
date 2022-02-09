@@ -9,15 +9,15 @@
         allowfullscreen
       ></iframe>
     </div>
-    <div>
-      <h2 class="font-bold text-2xl mt-2 mb-1 text-zinc-700 dark:text-zinc-400">
+    <div class="text-left">
+      <h2 class="cq-text font-bold text-2xl mt-2 mb-1">
         {{ clip.title }}
         <span v-if="clip.url">
           <a
             :href="clip.url"
             target="_blank"
             rel="noreferrer"
-            className="text-base text-zinc-500 dark:text-zinc-700 no-underline hover:text-zinc-400 dark:hover:text-zinc-200"
+            className="cq-text-subtle text-lg no-underline hover:text-zinc-400 dark:hover:text-zinc-200"
           >
             <v-icon icon="link" />
           </a>
@@ -31,20 +31,20 @@
           </v-button>
         </div>
       </h2>
-      <div class="text-zinc-500 text-sm font-normal">
+      <div class="cq-text-subtle">
         <span v-if="clip.channel && clip.game">
-          <span className="font-bold">{{ clip.channel }}</span>
+          <span className="cq-text-subtle-semibold">{{ clip.channel }}</span>
           playing
-          <span className="font-bold">{{ clip.game }}</span>
+          <span className="cq-text-subtle-semibold">{{ clip.game }}</span>
         </span>
         <span v-if="timeAgo">
           - clipped
-          <span className="font-bold">{{ timeAgo }}</span>
+          <span className="cq-text-subtle-semibold">{{ timeAgo }}</span>
           ago
         </span>
         <span v-if="clip.submitter">
           - Submitted by
-          <span className="font-bold">{{ clip.submitter }}</span>
+          <span className="cq-text-subtle-semibold">{{ clip.submitter }}</span>
         </span>
       </div>
     </div>

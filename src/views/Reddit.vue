@@ -1,15 +1,11 @@
 <template>
-  <div class="text-center">
-    <p class="text-5xl font-extrabold text-violet-500 p-5">From Reddit</p>
-    <p class="dark:text-zinc-300">Queue clips found in the top {{ maxPostsToCheck }} posts.</p>
-    <div class="grid gap-6 grid-cols-1 mt-3">
-      <div
-        v-for="(subreddit, index) in availableSubreddits"
-        :key="index"
-        class="bg-zinc-100 dark:bg-zinc-800 w-full max-w-sm mx-auto rounded-lg shadow-md"
-      >
+  <p class="cq-title">From Reddit</p>
+  <p class="cq-text">Queue clips found in the top {{ maxPostsToCheck }} posts.</p>
+  <div class="grid gap-6 grid-cols-1 mt-3">
+    <div v-for="(subreddit, index) in availableSubreddits" :key="index">
+      <div class="cq-card max-w-md">
         <div class="flex items-center justify-between">
-          <span class="ml-5 text-zinc-600 dark:text-zinc-400 text-2xl">r/{{ subreddit }}</span>
+          <p class="cq-text text-2xl pl-3">r/{{ subreddit }}</p>
           <v-button
             class="m-3 float-right"
             @click="queueClipsForSubreddit(subreddit)"
@@ -18,7 +14,7 @@
             <v-icon
               :icon="loading.state[subreddit] ? 'spinner' : 'plus'"
               class="w-4 h-4"
-              :class="loading.state[subreddit] ? 'animate-spin' : ''"
+              :class="{ 'animate-spin': loading.state[subreddit] }"
             />
           </v-button>
         </div>

@@ -1,54 +1,34 @@
 <template>
-  <div class="rounded-lg py-2 px-4 text-base" :class="classNames" role="alert">
-    <v-icon :icon="icon" class="mr-2" />
+  <div
+    role="alert"
+    class="rounded-lg py-2 px-4 text-base"
+    :class="{
+      'cq-alert-info': variant === 'info',
+      'cq-alert-success': variant === 'success',
+      'cq-alert-warning': variant === 'warning',
+      'cq-alert-danger': variant === 'danger',
+    }"
+  >
+    <v-icon
+      :icon="
+        variant === 'info'
+          ? 'info-circle'
+          : variant === 'success'
+          ? 'check-circle'
+          : variant === 'warning'
+          ? 'exclamation-triangle'
+          : 'times-circle'
+      "
+      class="mr-2"
+    />
     <slot />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
-
 interface Props {
   variant?: "info" | "success" | "warning" | "danger"
 }
 
-const props = withDefaults(defineProps<Props>(), { variant: "info" })
-
-const icon = computed<string>(() => {
-  let icon = "info-circle"
-  switch (props.variant) {
-    case "success": {
-      icon = "check-circle"
-      break
-    }
-    case "warning": {
-      icon = "exclamation-triangle"
-      break
-    }
-    case "danger": {
-      icon = "times-circle"
-      break
-    }
-  }
-  return icon
-})
-
-const classNames = computed<string>(() => {
-  let classes = "bg-blue-100 dark:bg-blue-200 text-blue-700"
-  switch (props.variant) {
-    case "success": {
-      classes = "bg-green-100 dark:bg-green-200 text-green-700"
-      break
-    }
-    case "warning": {
-      classes = "bg-yellow-100 dark:bg-yellow-200 text-yellow-700"
-      break
-    }
-    case "danger": {
-      classes = "bg-red-100 dark:bg-red-200 text-red-700"
-      break
-    }
-  }
-  return classes
-})
+withDefaults(defineProps<Props>(), { variant: "info" })
 </script>

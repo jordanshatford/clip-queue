@@ -10,36 +10,32 @@ describe("Button.vue", () => {
 
   it("has a default variant of primary with the correct colors", () => {
     expect(wrapper.vm.variant).toEqual("primary")
-    expect(wrapper.vm.classNames).toEqual(
-      expect.stringContaining("bg-blue-500 border-blue-700 hover:bg-blue-400 hover:border-blue-500")
-    )
+    expect(wrapper.classes()).toContain("cq-btn")
+    expect(wrapper.classes()).toContain("cq-btn-primary")
   })
 
   it("has the correct colors when primary variant is specified", async () => {
     wrapper.setProps({ variant: "primary" })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.variant).toEqual("primary")
-    expect(wrapper.vm.classNames).toEqual(
-      expect.stringContaining("bg-blue-500 border-blue-700 hover:bg-blue-400 hover:border-blue-500")
-    )
+    expect(wrapper.classes()).toContain("cq-btn")
+    expect(wrapper.classes()).toContain("cq-btn-primary")
   })
 
   it("has the correct colors when brand variant is specified", async () => {
     wrapper.setProps({ variant: "brand" })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.variant).toEqual("brand")
-    expect(wrapper.vm.classNames).toEqual(
-      expect.stringContaining("bg-violet-500 border-violet-700 hover:bg-violet-400 hover:border-violet-500")
-    )
+    expect(wrapper.classes()).toContain("cq-btn")
+    expect(wrapper.classes()).toContain("cq-btn-brand")
   })
 
   it("has the correct colors when danger variant is specified", async () => {
     wrapper.setProps({ variant: "danger" })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.variant).toEqual("danger")
-    expect(wrapper.vm.classNames).toEqual(
-      expect.stringContaining("bg-red-500 border-red-700 hover:bg-red-400 hover:border-red-500")
-    )
+    expect(wrapper.classes()).toContain("cq-btn")
+    expect(wrapper.classes()).toContain("cq-btn-danger")
   })
 
   it("emits a click event when clicked", async () => {

@@ -1,20 +1,14 @@
 <template>
-  <div class="text-center">
-    <p class="text-5xl font-extrabold text-violet-500 p-5">
-      {{ title }}
-    </p>
-    <p class="dark:text-zinc-300">
-      {{ description }}
-    </p>
-    <p class="text-2xl font-extrabold text-violet-500 pt-5 pb-1">Features:</p>
-    <ol class="text-center">
-      <li v-for="(feature, index) in features" :key="index" class="dark:text-zinc-300">
-        {{ feature }}
-      </li>
-    </ol>
-    <p class="text-2xl font-extrabold text-violet-500 pt-5 pb-1">Screenshot:</p>
-    <img src="@/assets/example.png" />
-  </div>
+  <p class="cq-title">{{ title }}</p>
+  <p class="cq-text">{{ description }}</p>
+  <p class="cq-heading">Features:</p>
+  <ol>
+    <li v-for="(feature, index) in features" :key="index">
+      <p class="cq-text">{{ feature }}</p>
+    </li>
+  </ol>
+  <p class="cq-heading">Screenshot:</p>
+  <img src="@/assets/example.png" />
 </template>
 
 <script setup lang="ts">

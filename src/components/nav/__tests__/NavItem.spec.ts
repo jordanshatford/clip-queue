@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from "vue-router"
 import { shallowMount } from "@vue/test-utils"
-import NavItem from "@/layout/NavItem.vue"
+import NavItem from "@/components/nav/NavItem.vue"
 
 describe("NavItem.vue", () => {
   const wrapper = shallowMount(NavItem, {

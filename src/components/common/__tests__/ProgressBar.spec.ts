@@ -14,27 +14,35 @@ describe("ProgressBar.vue", () => {
 
   it("has a default variant of primary with the correct colors", () => {
     expect(wrapper.vm.variant).toEqual("primary")
-    expect(wrapper.vm.classNames).toEqual(expect.stringContaining("bg-blue-500"))
+    const progressBar = wrapper.find("#progressBar")
+    expect(progressBar.exists()).toBe(true)
+    expect(progressBar.classes()).toContain("bg-blue-500")
   })
 
   it("has the correct colors when primary variant is specified", async () => {
     wrapper.setProps({ variant: "primary" })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.variant).toEqual("primary")
-    expect(wrapper.vm.classNames).toEqual(expect.stringContaining("bg-blue-500"))
+    const progressBar = wrapper.find("#progressBar")
+    expect(progressBar.exists()).toBe(true)
+    expect(progressBar.classes()).toContain("bg-blue-500")
   })
 
   it("has the correct colors when brand variant is specified", async () => {
     wrapper.setProps({ variant: "brand" })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.variant).toEqual("brand")
-    expect(wrapper.vm.classNames).toEqual(expect.stringContaining("bg-violet-500"))
+    const progressBar = wrapper.find("#progressBar")
+    expect(progressBar.exists()).toBe(true)
+    expect(progressBar.classes()).toContain("bg-violet-500")
   })
 
   it("has the correct colors when danger variant is specified", async () => {
     wrapper.setProps({ variant: "danger" })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.variant).toEqual("danger")
-    expect(wrapper.vm.classNames).toEqual(expect.stringContaining("bg-red-500"))
+    const progressBar = wrapper.find("#progressBar")
+    expect(progressBar.exists()).toBe(true)
+    expect(progressBar.classes()).toContain("bg-red-500")
   })
 })

@@ -1,7 +1,7 @@
 <template>
   <div class="py-2">
-    <label v-if="label" class="float-left form-label inline-block pl-1 mb-2 text-zinc-600 dark:text-zinc-400">
-      {{ props.label }}
+    <label v-if="label" class="cq-text float-left form-label inline-block pl-1 mb-2">
+      {{ label }}
     </label>
     <slot />
   </div>
@@ -12,5 +12,5 @@ interface Props {
   label?: string
 }
 
-const props = withDefaults(defineProps<Props>(), { label: "" })
+withDefaults(defineProps<Props>(), { label: "" })
 </script>
