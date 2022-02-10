@@ -16,13 +16,7 @@ export default defineConfig({
     watch: false,
     coverage: {
       include: ["src/**/*"],
-      exclude: [
-        "src/assets/**/*",
-        "src/router/**/*",
-        "src/main.ts",
-        "src/services/twitch-chat.ts",
-        "src/**/__tests__/*",
-      ],
+      exclude: ["src/assets/**/*", "src/router/**/*", "src/main.ts", "src/**/__tests__/*"],
       reporter: ["lcov", "text"],
     },
   },

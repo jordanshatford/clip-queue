@@ -51,16 +51,6 @@ const config = {
       redirectUri: env.redirectUri,
       scopes: ["openid", "chat:read", "chat:edit"],
     },
-    Chat: {
-      options: {
-        skipMembership: true,
-        skipUpdatingEmotesets: true,
-      },
-      connection: {
-        reconnect: true,
-        secure: true,
-      },
-    },
     Clips: {
       hostnames: ["clips.twitch.tv"],
     },

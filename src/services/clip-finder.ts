@@ -44,7 +44,7 @@ export default class ClipFinder {
     if (clip) {
       clipInfo = clip
     } else {
-      clipInfo = await twitch.getClip(id, clientId, userStore.user.accessToken)
+      clipInfo = await twitch.getClip(id, clientId, userStore?.user?.accessToken ?? "")
       cache.addClip(clipInfo)
     }
 
@@ -55,7 +55,7 @@ export default class ClipFinder {
       if (cacheGame) {
         game = cacheGame
       } else {
-        game = await twitch.getGame(clipInfo.game_id, clientId, userStore.user.accessToken)
+        game = await twitch.getGame(clipInfo.game_id, clientId, userStore?.user?.accessToken ?? "")
         cache.addGame(game)
       }
       return {

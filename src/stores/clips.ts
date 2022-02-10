@@ -1,5 +1,5 @@
-import TwitchChat from "@/services/twitch-chat"
 import type { Clip, ClipQueue } from "@/interfaces/clips"
+import { userStore } from "@/stores/user"
 import { reactive } from "vue"
 import { ClipList } from "@/utils/clip-list"
 import { settings } from "@/stores/settings"
@@ -50,7 +50,7 @@ function removeUserClips(submitter: string): void {
 function open(): void {
   /* istanbul ignore next */
   if (settings.current.sendQueueOpenMsg) {
-    TwitchChat.sendMessage(settings.current.queueOpenMsg)
+    userStore.user?.chat?.sendMessage(settings.current.queueOpenMsg)
   }
   queue.open = true
 }
@@ -58,7 +58,7 @@ function open(): void {
 function close(): void {
   /* istanbul ignore next */
   if (settings.current.sendQueueCloseMsg) {
-    TwitchChat.sendMessage(settings.current.queueCloseMsg)
+    userStore.user?.chat?.sendMessage(settings.current.queueCloseMsg)
   }
   queue.open = false
 }
@@ -88,7 +88,7 @@ function sendCurrentClipInfoMessageIfNeeded() {
       game: queue.current?.game ?? "",
       submitter: queue.current?.submitter ?? "",
     }
-    TwitchChat.sendMessage(formatTemplateString(settings.current.currentClipMsg, valueMappings))
+    userStore.user?.chat?.sendMessage(formatTemplateString(settings.current.currentClipMsg, valueMappings))
   }
 }
 
