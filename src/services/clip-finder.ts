@@ -1,18 +1,22 @@
 import config from "@/assets/config"
 import type { Clip } from "@/interfaces/clips"
-import TwitchAPI from "@/services/twitch-api"
-import Reddit from "@/services/reddit"
+import reddit from "@/services/reddit"
+import twitch from "@/services/twitch"
+import type { TwitchClip, TwitchGame } from "@/services/twitch"
 import { getIdFromUrl } from "@/utils/url"
+import { cache } from "@/utils/cache"
+import { userStore } from "@/stores/user"
 
 const { hostnames } = config.Twitch.Clips
 const { maxPostsToCheck } = config.Reddit
+const { clientId } = config.Twitch.Auth
 
 export default class ClipFinder {
   public static async getClipsFromSubreddit(
     subreddit: string,
     callback?: (clip: Clip, done: boolean) => void
   ): Promise<Clip[] | undefined> {
-    const subredditPosts = await Reddit.getSubredditPosts(subreddit, maxPostsToCheck)
+    const subredditPosts = await reddit.getSubredditPosts(subreddit, maxPostsToCheck)
     let clips: Clip[] = []
     for (const post of subredditPosts) {
       if (post?.data?.stickied) {
@@ -34,10 +38,26 @@ export default class ClipFinder {
     }
 
     const id = getIdFromUrl(url)
-    const clipInfo = await TwitchAPI.getClip(id)
+
+    let clipInfo: TwitchClip
+    const clip = cache.getClip(id)
+    if (clip) {
+      clipInfo = clip
+    } else {
+      clipInfo = await twitch.getClip(id, clientId, userStore.user.accessToken)
+      cache.addClip(clipInfo)
+    }
 
     if (clipInfo) {
-      const game = await TwitchAPI.getGame(clipInfo.game_id)
+      let game: TwitchGame
+      const cacheGame = cache.getGame(clipInfo.game_id)
+
+      if (cacheGame) {
+        game = cacheGame
+      } else {
+        game = await twitch.getGame(clipInfo.game_id, clientId, userStore.user.accessToken)
+        cache.addGame(game)
+      }
       return {
         id,
         title: clipInfo?.title,

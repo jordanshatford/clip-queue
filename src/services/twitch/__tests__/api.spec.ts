@@ -1,6 +1,6 @@
 import axios from "axios"
-import TwitchAPI from "@/services/twitch-api"
-import type { TwitchClip, TwitchGame } from "@/interfaces/twitch"
+import TwitchAPI from "../api"
+import type { TwitchClip, TwitchGame } from "@/services/twitch"
 
 vi.mock("axios", () => {
   return {
@@ -32,30 +32,15 @@ vi.mock("axios", () => {
 
 describe("twitch-api.ts", () => {
   it("gets a twitch clip from twitch api", async () => {
-    const clipInfo = await TwitchAPI.getClip("testid")
+    const clipInfo = await TwitchAPI.getClip("testid", "", "")
     expect(clipInfo.id).toEqual("testid")
     expect(clipInfo.title).toEqual("Test title")
     expect(clipInfo.broadcaster_name).toEqual("testbroadcast")
     expect(axios.get).toHaveBeenCalledTimes(1)
   })
 
-  it("gets a twitch clip from memory if it has already fetched before", async () => {
-    const clipInfoSameClip = await TwitchAPI.getClip("testid")
-    expect(clipInfoSameClip.id).toEqual("testid")
-    expect(clipInfoSameClip.title).toEqual("Test title")
-    expect(clipInfoSameClip.broadcaster_name).toEqual("testbroadcast")
-    expect(axios.get).toHaveBeenCalledTimes(1)
-  })
-
   it("gets a twitch game from twitch api", async () => {
-    const gameInfo = await TwitchAPI.getGame("gameid")
-    expect(gameInfo.id).toEqual("gameid")
-    expect(gameInfo.name).toEqual("Test Game")
-    expect(axios.get).toHaveBeenCalledTimes(2)
-  })
-
-  it("gets a twitch game from memory if it has already fetched before", async () => {
-    const gameInfo = await TwitchAPI.getGame("gameid")
+    const gameInfo = await TwitchAPI.getGame("gameid", "", "")
     expect(gameInfo.id).toEqual("gameid")
     expect(gameInfo.name).toEqual("Test Game")
     expect(axios.get).toHaveBeenCalledTimes(2)

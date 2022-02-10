@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router"
 import type { RouteRecordRaw } from "vue-router"
-import TwitchAuth from "@/services/twitch-auth"
+import twitch from "@/services/twitch"
 import { userStore } from "@/stores/user"
 import Queue from "@/views/Queue.vue"
 import Reddit from "@/views/Reddit.vue"
@@ -39,7 +39,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.hash && to.hash !== "" && !userStore.user.isLoggedIn) {
-    const authInfo = TwitchAuth.login(to.hash)
+    const authInfo = twitch.login(to.hash)
     if (authInfo !== null) {
       userStore.loginWithTwitchAuth(
         authInfo.access_token,

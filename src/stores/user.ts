@@ -1,5 +1,6 @@
 import { reactive } from "vue"
-import TwitchAuth from "@/services/twitch-auth"
+import twitch from "@/services/twitch"
+import config from "@/assets/config"
 import TwitchChat from "@/services/twitch-chat"
 import type { User } from "@/interfaces/users"
 
@@ -11,7 +12,8 @@ const user = reactive<User>({
 })
 
 function login(): void {
-  TwitchAuth.redirectToLogin()
+  const { clientId, redirectUri, scopes } = config.Twitch.Auth
+  twitch.redirect(clientId, redirectUri, scopes)
 }
 
 function loginWithTwitchAuth(aToken: string, idToken: string, preferredUsername: string | null): void {
@@ -34,7 +36,8 @@ async function logout(): Promise<void> {
   user.isLoggedIn = false
 
   if (token) {
-    TwitchAuth.logout(token)
+    const { clientId } = config.Twitch.Auth
+    twitch.logout(clientId, token)
   }
 }
 

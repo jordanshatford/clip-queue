@@ -49,14 +49,7 @@ const config = {
     Auth: {
       clientId: env.clientId,
       redirectUri: env.redirectUri,
-      baseURL: "https://id.twitch.tv/oauth2",
       scopes: ["openid", "chat:read", "chat:edit"],
-    },
-    API: {
-      baseURL: "https://api.twitch.tv/helix",
-      headers: {
-        "Client-ID": env.clientId,
-      },
     },
     Chat: {
       options: {

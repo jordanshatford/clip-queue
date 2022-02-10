@@ -1,4 +1,4 @@
-import type { TwitchClip, TwitchGame } from "@/interfaces/twitch"
+import type { TwitchClip, TwitchGame } from "@/services/twitch"
 import config from "@/assets/config"
 
 const { gamesKey, clipsKey } = config.App.Cache

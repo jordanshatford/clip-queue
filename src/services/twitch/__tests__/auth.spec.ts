@@ -1,4 +1,4 @@
-import TwitchAuth from "@/services/twitch-auth"
+import TwitchAuth from "../auth"
 
 describe("twitch-auth.ts", () => {
   it("can login the user given an auth hash string", () => {

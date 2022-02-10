@@ -1,5 +1,5 @@
 import type { Subreddit } from "@/services/reddit"
-import Reddit from "@/services/reddit"
+import reddit from "@/services/reddit"
 
 vi.mock("axios", () => {
   return {
@@ -36,7 +36,7 @@ describe("reddit.ts", () => {
   })
 
   it("gets subreddit posts from reddit", async () => {
-    const subredditInfo = await Reddit.getSubredditPosts("test")
+    const subredditInfo = await reddit.getSubredditPosts("test")
     expect(subredditInfo).toHaveLength(2)
     expect(subredditInfo[0].data).toEqual({
       author: "test1",
