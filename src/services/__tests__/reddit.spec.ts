@@ -1,4 +1,4 @@
-import type { Subreddit } from "@/interfaces/reddit"
+import type { Subreddit } from "@/services/reddit"
 import Reddit from "@/services/reddit"
 
 vi.mock("axios", () => {

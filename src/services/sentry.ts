@@ -1,4 +1,4 @@
-import type { App } from "vue";
+import type { App } from "vue"
 import * as Sentry from "@sentry/vue"
 import { BrowserTracing } from "@sentry/tracing"
 import { env } from "@/assets/config"
@@ -22,5 +22,5 @@ function init(app: App) {
 }
 
 export default {
-  init
+  init,
 }

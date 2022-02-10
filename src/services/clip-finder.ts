@@ -5,13 +5,14 @@ import Reddit from "@/services/reddit"
 import { getIdFromUrl } from "@/utils/url"
 
 const { hostnames } = config.Twitch.Clips
+const { maxPostsToCheck } = config.Reddit
 
 export default class ClipFinder {
   public static async getClipsFromSubreddit(
     subreddit: string,
     callback?: (clip: Clip, done: boolean) => void
   ): Promise<Clip[] | undefined> {
-    const subredditPosts = await Reddit.getSubredditPosts(subreddit)
+    const subredditPosts = await Reddit.getSubredditPosts(subreddit, maxPostsToCheck)
     let clips: Clip[] = []
     for (const post of subredditPosts) {
       if (post?.data?.stickied) {

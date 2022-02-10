@@ -73,7 +73,6 @@ const config = {
     },
   },
   Reddit: {
-    baseURL: "https://api.reddit.com",
     maxPostsToCheck: 50,
     availableSubreddits: ["LivestreamFail", "TwitchClips", "RPClipsGTA", "NoPixel"],
   },

@@ -1,7 +1,7 @@
 import type { Clip } from "@/interfaces/clips"
 import ClipFinder from "@/services/clip-finder"
 import type { TwitchClip, TwitchGame } from "@/interfaces/twitch"
-import type { SubredditPost } from "@/interfaces/reddit"
+import type { SubredditPost } from "@/services/reddit"
 
 vi.mock("@/services/twitch-api", () => {
   const mockFunction = vi.fn((id: string) => {

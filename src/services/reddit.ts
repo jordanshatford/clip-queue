@@ -1,12 +1,24 @@
 import axios from "axios"
-import config from "@/assets/config"
-import type { Subreddit, SubredditPost } from "@/interfaces/reddit"
 
-const { baseURL, maxPostsToCheck } = config.Reddit
+const BASE_URL = "https://api.reddit.com"
 
-export default class Reddit {
-  public static async getSubredditPosts(subreddit: string, amount = maxPostsToCheck): Promise<SubredditPost[]> {
-    const { data } = await axios.get<{ data: Subreddit }>(`${baseURL}/r/${subreddit}/.json?limit=${amount}&sort=hot`)
-    return data.data.children
+export interface SubredditPost {
+  data: {
+    author: string
+    url: string
+    stickied: boolean
   }
+}
+
+export interface Subreddit {
+  children: SubredditPost[]
+}
+
+export async function getSubredditPosts(subreddit: string, numPosts = 100): Promise<SubredditPost[]> {
+  const { data } = await axios.get<{ data: Subreddit }>(`${BASE_URL}/r/${subreddit}/.json?limit=${numPosts}&sort=hot`)
+  return data.data.children
+}
+
+export default {
+  getSubredditPosts,
 }
