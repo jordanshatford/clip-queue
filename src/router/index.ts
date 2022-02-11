@@ -12,16 +12,25 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/queue",
     name: "Queue",
     component: Queue,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/reddit",
     name: "From Reddit",
     component: Reddit,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/settings",
     name: "Settings",
     component: Settings,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ]
 
@@ -34,6 +43,10 @@ const router = createRouter({
       component: Landing,
     },
     ...routes,
+    {
+      path: "/:pathMatch(.*)*",
+      redirect: "/",
+    },
   ],
 })
 
@@ -49,11 +62,7 @@ router.beforeEach((to, from, next) => {
     }
     next({ path: "/queue", hash: "" })
     return
-  } else if (!userStore.user.isLoggedIn && (from.path !== "/" || to.path !== "/")) {
-    if (to.path === "/") {
-      next()
-      return
-    }
+  } else if (!userStore.user.isLoggedIn && to.meta.requiresAuth) {
     next({ path: "/" })
     return
   }

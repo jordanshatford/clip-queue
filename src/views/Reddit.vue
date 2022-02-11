@@ -33,7 +33,7 @@
         <v-button
           class="m-3 float-right"
           @click="queueClipsForSubreddit(reddit.custom)"
-          :disabled="reddit.isLoading(reddit.custom)"
+          :disabled="reddit.isLoading(reddit.custom) || !reddit.custom"
         >
           <v-icon
             :icon="reddit.isLoading(reddit.custom) ? 'spinner' : 'plus'"
