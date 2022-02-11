@@ -14,11 +14,12 @@
 import Nav from "@/components/nav/Nav.vue"
 import Footer from "./components/Footer.vue"
 import { useTheme } from "@/stores/theme"
+import { useSettings } from "./stores/settings"
 import { cache } from "@/utils/cache"
-import { settings } from "@/stores/settings"
 
 const theme = useTheme()
 theme.getDefault()
-cache.init()
+const settings = useSettings()
 settings.init()
+cache.init()
 </script>

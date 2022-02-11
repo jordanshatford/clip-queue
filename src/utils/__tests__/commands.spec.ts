@@ -1,7 +1,12 @@
+import { setActivePinia, createPinia } from "pinia"
 import { commands } from "@/utils/commands"
 import { clips } from "@/stores/clips"
 
 describe("commands.ts", () => {
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
+
   /* eslint-disable @typescript-eslint/no-explicit-any*/
   it.each([
     ["unknown", undefined],

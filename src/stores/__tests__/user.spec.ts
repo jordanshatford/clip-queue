@@ -1,6 +1,11 @@
+import { setActivePinia, createPinia } from "pinia"
 import { userStore } from "@/stores/user"
 
 describe("user.ts", () => {
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
+
   it("redirects to twitch auth login", () => {
     userStore.login()
   })

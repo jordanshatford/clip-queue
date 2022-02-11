@@ -41,8 +41,10 @@
         </div>
       </div>
       <v-formgroup>
-        <v-button class="mr-2" type="submit" :disabled="formNotChanged">Save</v-button>
-        <v-button class="mb-2" type="reset" variant="danger" :disabled="formNotChanged">Cancel</v-button>
+        <v-button class="mr-2" type="submit" :disabled="!settings.isModified(formSettings)">Save</v-button>
+        <v-button class="mb-2" type="reset" variant="danger" :disabled="!settings.isModified(formSettings)"
+          >Cancel</v-button
+        >
       </v-formgroup>
       <v-alert v-if="showSaveMsg" variant="success">Save successful</v-alert>
     </div>
@@ -50,33 +52,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue"
-import { settings } from "@/stores/settings"
+import { ref } from "vue"
+import { useSettings } from "@/stores/settings"
 import type { Settings } from "@/interfaces/settings"
+
+const settings = useSettings()
 
 let showSaveMsg = ref(false)
 let formKey = ref(1)
-let formSettings = ref<Settings>(Object.assign({}, settings.current))
-
-const formNotChanged = computed<boolean>(() => {
-  return (
-    formSettings.value.commandPrefix === settings.current.commandPrefix &&
-    formSettings.value.sendMsgsInChat === settings.current.sendMsgsInChat &&
-    formSettings.value.sendQueueOpenMsg === settings.current.sendQueueOpenMsg &&
-    formSettings.value.queueOpenMsg === settings.current.queueOpenMsg &&
-    formSettings.value.sendQueueCloseMsg === settings.current.sendQueueCloseMsg &&
-    formSettings.value.queueCloseMsg === settings.current.queueCloseMsg &&
-    formSettings.value.sendCurrentClipMsg === settings.current.sendCurrentClipMsg &&
-    formSettings.value.currentClipMsg === settings.current.currentClipMsg
-  )
-})
+let formSettings = ref<Settings>(Object.assign({}, settings.$state))
 
 function hideMsg() {
   showSaveMsg.value = false
 }
 
 function onReset() {
-  formSettings.value = Object.assign({}, settings.current)
+  formSettings.value = Object.assign({}, settings.$state)
   formKey.value += 1
 }
 

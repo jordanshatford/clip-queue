@@ -1,37 +1,47 @@
-import { reactive } from "vue"
-import config from "@/assets/config"
+import { defineStore } from "pinia"
 import type { Settings } from "@/interfaces/settings"
 
-const { localStorageKey, defaultValue } = config.App.Settings
+const LOCAL_STORAGE_KEY = "settings"
 
-const current = reactive<Settings>(defaultValue)
-
-function init(): void {
-  const localStorageSettings = localStorage.getItem(localStorageKey)
-  if (localStorageSettings) {
-    const savedSettings: Settings = JSON.parse(localStorageSettings)
-    updateCurrentValues(savedSettings)
-  }
-  localStorage.setItem(localStorageKey, JSON.stringify(current))
-}
-
-function update(settings: Settings): void {
-  updateCurrentValues(settings)
-  localStorage.setItem(localStorageKey, JSON.stringify(current))
-}
-
-function updateCurrentValues(settings: Settings): void {
-  current.commandPrefix = settings.commandPrefix
-  current.sendMsgsInChat = settings.sendMsgsInChat
-  current.sendQueueOpenMsg = settings.sendQueueOpenMsg
-  current.queueOpenMsg = settings.queueOpenMsg
-  current.sendQueueCloseMsg = settings.sendQueueCloseMsg
-  current.queueCloseMsg = settings.queueCloseMsg
-  current.sendCurrentClipMsg = settings.sendCurrentClipMsg
-}
-
-export const settings = {
-  current,
-  init,
-  update,
-}
+export const useSettings = defineStore("settings", {
+  state: (): Settings => ({
+    commandPrefix: "!",
+    sendMsgsInChat: false,
+    sendQueueOpenMsg: false,
+    queueOpenMsg: "The queue is open, send twitch clip links in chat to have them added to the queue.",
+    sendQueueCloseMsg: false,
+    queueCloseMsg: "The queue is closed, twitch clip links in chat will be ignored.",
+    sendCurrentClipMsg: false,
+    currentClipMsg: "The current clip is: {url}",
+  }),
+  getters: {
+    isModified: (state) => {
+      return (settings: Settings) => {
+        return !(
+          state.commandPrefix === settings.commandPrefix &&
+          state.sendMsgsInChat === settings.sendMsgsInChat &&
+          state.sendQueueOpenMsg === settings.sendQueueOpenMsg &&
+          state.queueOpenMsg === settings.queueOpenMsg &&
+          state.sendQueueCloseMsg === settings.sendQueueCloseMsg &&
+          state.queueCloseMsg === settings.queueCloseMsg &&
+          state.sendCurrentClipMsg === settings.sendCurrentClipMsg &&
+          state.currentClipMsg === settings.currentClipMsg
+        )
+      }
+    },
+  },
+  actions: {
+    init() {
+      const localStorageSettings = localStorage.getItem(LOCAL_STORAGE_KEY)
+      if (localStorageSettings) {
+        const savedSettings: Settings = JSON.parse(localStorageSettings)
+        this.$patch(savedSettings)
+      }
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.$state))
+    },
+    update(settings: Settings) {
+      this.$patch(settings)
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.$state))
+    },
+  },
+})

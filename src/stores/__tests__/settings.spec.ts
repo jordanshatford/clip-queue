@@ -1,30 +1,53 @@
-import { settings } from "@/stores/settings"
-import config from "@/assets/config"
-
-const { localStorageKey, defaultValue } = config.App.Settings
+import { setActivePinia, createPinia } from "pinia"
+import { useSettings } from "@/stores/settings"
+import type { Settings } from "@/interfaces/settings"
 
 describe("settings.ts", () => {
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
+
   it("inits the settings with default value", () => {
+    const settings = useSettings()
     settings.init()
-    expect(settings.current).toEqual(defaultValue)
+    expect(settings.commandPrefix).toEqual("!")
   })
 
   it("inits the settings with values from local storage", () => {
-    localStorage.setItem(localStorageKey, JSON.stringify({ ...defaultValue, commandPrefix: "~" }))
+    const settings = useSettings()
+    localStorage.setItem("settings", JSON.stringify({ commandPrefix: "~" }))
     settings.init()
-    expect(settings.current.commandPrefix).toEqual("~")
+    expect(settings.commandPrefix).toEqual("~")
   })
 
   it("updates the settings in local storage", () => {
+    const settings = useSettings()
     localStorage.clear()
     settings.init()
-    expect(settings.current).toEqual(defaultValue)
+    expect(settings.commandPrefix).toEqual("!")
     settings.update({
-      ...defaultValue,
       commandPrefix: "~",
       sendMsgsInChat: true,
-    })
-    expect(settings.current.commandPrefix).toEqual("~")
-    expect(settings.current.sendMsgsInChat).toBeTruthy()
+    } as Settings)
+    expect(settings.commandPrefix).toEqual("~")
+    expect(settings.sendMsgsInChat).toBeTruthy()
+  })
+
+  it("returns if the settings are different", () => {
+    const settings = useSettings()
+    console.log(settings.$state)
+    expect(
+      settings.isModified({
+        commandPrefix: "~dsa",
+        sendMsgsInChat: true,
+        sendCurrentClipMsg: true,
+        currentClipMsg: "",
+        sendQueueOpenMsg: true,
+        queueOpenMsg: "",
+        sendQueueCloseMsg: true,
+        queueCloseMsg: "",
+      } as Settings)
+    ).toEqual(true)
+    expect(settings.isModified(settings.$state)).toEqual(false)
   })
 })

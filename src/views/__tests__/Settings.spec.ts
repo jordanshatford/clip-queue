@@ -1,41 +1,34 @@
 import { shallowMount } from "@vue/test-utils"
+import { createTestingPinia } from "@pinia/testing"
 import Settings from "@/views/Settings.vue"
-import config from "@/assets/config"
-
-const { defaultValue } = config.App.Settings
 
 describe("Settings.vue", () => {
-  const wrapper = shallowMount(Settings)
+  const wrapper = shallowMount(Settings, {
+    global: {
+      plugins: [createTestingPinia()],
+    },
+  })
 
   it("mounts successfully", () => {
     expect(wrapper.exists()).toEqual(true)
   })
 
   it("has the same settings values as previous", () => {
-    expect(wrapper.vm.formSettings).toEqual(defaultValue)
-    expect(wrapper.vm.formNotChanged).toEqual(true)
+    expect(wrapper.vm.formSettings.commandPrefix).toEqual("!")
   })
 
   it("resets the form to the settings when not saved", async () => {
     wrapper.vm.formSettings.commandPrefix = "~"
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.formNotChanged).toEqual(false)
     wrapper.vm.onReset()
-    expect(wrapper.vm.formNotChanged).toEqual(true)
-    expect(wrapper.vm.formSettings).toEqual(defaultValue)
+    expect(wrapper.vm.formSettings.commandPrefix).toEqual("!")
   })
 
   it("saves the form to the settings", async () => {
     wrapper.vm.formSettings.commandPrefix = "~"
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.formNotChanged).toEqual(false)
     wrapper.vm.onSubmit()
     expect(wrapper.vm.showSaveMsg).toEqual(true)
-    expect(wrapper.vm.formNotChanged).toEqual(true)
-    expect(wrapper.vm.formSettings).toEqual({
-      ...defaultValue,
-      commandPrefix: "~",
-    })
   })
 
   it("hides the save message", () => {

@@ -2,7 +2,7 @@ import type { Clip, ClipQueue } from "@/interfaces/clips"
 import { userStore } from "@/stores/user"
 import { reactive } from "vue"
 import { ClipList } from "@/utils/clip-list"
-import { settings } from "@/stores/settings"
+import { useSettings } from "@/stores/settings"
 import { formatTemplateString } from "@/utils/formatter"
 
 const queue = reactive<ClipQueue>({
@@ -48,17 +48,19 @@ function removeUserClips(submitter: string): void {
 }
 
 function open(): void {
+  const settings = useSettings()
   /* istanbul ignore next */
-  if (settings.current.sendQueueOpenMsg) {
-    userStore.user?.chat?.sendMessage(settings.current.queueOpenMsg)
+  if (settings.sendQueueOpenMsg) {
+    userStore.user?.chat?.sendMessage(settings.queueOpenMsg)
   }
   queue.open = true
 }
 
 function close(): void {
+  const settings = useSettings()
   /* istanbul ignore next */
-  if (settings.current.sendQueueCloseMsg) {
-    userStore.user?.chat?.sendMessage(settings.current.queueCloseMsg)
+  if (settings.sendQueueCloseMsg) {
+    userStore.user?.chat?.sendMessage(settings.queueCloseMsg)
   }
   queue.open = false
 }
@@ -80,7 +82,8 @@ function next(): void {
 
 /* istanbul ignore next */
 function sendCurrentClipInfoMessageIfNeeded() {
-  if (queue.current?.id && settings.current.sendMsgsInChat && settings.current.sendCurrentClipMsg) {
+  const settings = useSettings()
+  if (queue.current?.id && settings.sendMsgsInChat && settings.sendCurrentClipMsg) {
     const valueMappings = {
       title: queue.current?.title ?? "",
       url: queue.current?.url ?? "",
@@ -88,7 +91,7 @@ function sendCurrentClipInfoMessageIfNeeded() {
       game: queue.current?.game ?? "",
       submitter: queue.current?.submitter ?? "",
     }
-    userStore.user?.chat?.sendMessage(formatTemplateString(settings.current.currentClipMsg, valueMappings))
+    userStore.user?.chat?.sendMessage(formatTemplateString(settings.currentClipMsg, valueMappings))
   }
 }
 

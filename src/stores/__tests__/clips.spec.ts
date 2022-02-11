@@ -1,7 +1,12 @@
+import { setActivePinia, createPinia } from "pinia"
 import type { Clip } from "@/interfaces/clips"
 import { clips } from "@/stores/clips"
 
 describe("clips.ts", () => {
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
+
   const clip = {
     id: "test",
     submitter: "jordan",

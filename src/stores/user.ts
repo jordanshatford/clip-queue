@@ -4,11 +4,13 @@ import config from "@/assets/config"
 import { TwitchChat } from "@/services/twitch"
 import type { User } from "@/interfaces/users"
 import type { Userstate } from "tmi.js"
-import { settings } from "@/stores/settings"
+import { useSettings } from "@/stores/settings"
 import { commands } from "@/utils/commands"
 import { getUrlFromMessage } from "@/utils/url"
 import ClipFinder from "@/services/clip-finder"
 import { clips } from "@/stores/clips"
+
+const { clientId, redirectUri, scopes } = config.Twitch.Auth
 
 const user = reactive<User>({
   isLoggedIn: false,
@@ -19,7 +21,6 @@ const user = reactive<User>({
 })
 
 function login(): void {
-  const { clientId, redirectUri, scopes } = config.Twitch.Auth
   twitch.redirect(clientId, redirectUri, scopes)
 }
 
@@ -49,7 +50,6 @@ async function logout(): Promise<void> {
   user.isLoggedIn = false
 
   if (token) {
-    const { clientId } = config.Twitch.Auth
     twitch.logout(clientId, token)
   }
 }
@@ -59,14 +59,15 @@ function onMessage(channel: string, userstate: Userstate, message: string, self:
     return
   }
 
+  const settings = useSettings()
   // Check if message is a command and perform command if proper permission to do so
-  if (message.startsWith(settings.current.commandPrefix)) {
+  if (message.startsWith(settings.commandPrefix)) {
     const isMod = userstate.mod
     const isBroadcaster = userstate.badges?.["broadcaster"] === "1"
     if (!isMod && !isBroadcaster) {
       return
     }
-    const commandName = message.substring(settings.current.commandPrefix.length).split(" ")[0]
+    const commandName = message.substring(settings.commandPrefix.length).split(" ")[0]
     const command = commands[commandName]
     if (!command) {
       return
