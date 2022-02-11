@@ -1,4 +1,5 @@
 import { shallowMount } from "@vue/test-utils"
+import { createTestingPinia } from "@pinia/testing"
 import Reddit from "@/views/Reddit.vue"
 import type { Clip } from "@/interfaces/clips"
 import { clips } from "@/stores/clips"
@@ -31,7 +32,11 @@ vi.mock("@/services/clip-finder", () => {
 })
 
 describe("Reddit.vue", () => {
-  const wrapper = shallowMount(Reddit)
+  const wrapper = shallowMount(Reddit, {
+    global: {
+      plugins: [createTestingPinia()],
+    },
+  })
 
   beforeEach(() => {
     vi.clearAllMocks()
