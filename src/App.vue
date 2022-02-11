@@ -13,10 +13,11 @@
 <script setup lang="ts">
 import Nav from "@/components/nav/Nav.vue"
 import Footer from "./components/Footer.vue"
-import { theme } from "@/stores/theme"
+import { useTheme } from "@/stores/theme"
 import { cache } from "@/utils/cache"
 import { settings } from "@/stores/settings"
 
+const theme = useTheme()
 theme.getDefault()
 cache.init()
 settings.init()

@@ -1,5 +1,6 @@
 import "@/assets/tailwind.css"
 import { createApp } from "vue"
+import { createPinia } from "pinia"
 import App from "@/App.vue"
 import router from "@/router"
 import sentry from "@/services/sentry"
@@ -14,6 +15,7 @@ import ProgressBar from "@/components/common/ProgressBar.vue"
 
 const app = createApp(App)
 sentry.init(app)
+app.use(createPinia())
 app.component("v-icon", FontAwesomeIcon)
 app.component("v-alert", Alert)
 app.component("v-formgroup", FormGroup)

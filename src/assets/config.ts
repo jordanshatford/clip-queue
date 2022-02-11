@@ -27,10 +27,6 @@ const config = {
       gamesKey: "cached-games",
       clipsKey: "cached-clips",
     },
-    Theme: {
-      localStorageKey: "theme",
-      defaultValue: "dark",
-    },
     Settings: {
       localStorageKey: "settings",
       defaultValue: {

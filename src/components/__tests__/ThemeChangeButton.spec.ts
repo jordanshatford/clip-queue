@@ -1,16 +1,15 @@
 import { shallowMount } from "@vue/test-utils"
 import ThemeChangeButton from "@/components/ThemeChangeButton.vue"
+import { createTestingPinia } from "@pinia/testing"
 
 describe("ThemeChangeButton.vue", () => {
-  const wrapper = shallowMount(ThemeChangeButton)
+  const wrapper = shallowMount(ThemeChangeButton, {
+    global: {
+      plugins: [createTestingPinia()],
+    },
+  })
 
   it("mounts successfully", () => {
     expect(wrapper.exists()).toEqual(true)
-  })
-
-  it("toggles the theme when clicked", () => {
-    const theme = wrapper.vm.theme.current.value
-    wrapper.vm.theme.toggle()
-    expect(wrapper.vm.theme.current.value).not.toEqual(theme)
   })
 })

@@ -1,33 +1,44 @@
-import { ref } from "vue"
-import config from "@/assets/config"
+import { defineStore } from "pinia"
 
-const { localStorageKey, defaultValue } = config.App.Theme
-
-const current = ref(defaultValue)
-
-function getDefault(): void {
-  const theme = localStorage?.getItem(localStorageKey)
-  if (theme) {
-    current.value = theme
-  } else {
-    current.value = defaultValue
-  }
-
-  localStorage?.setItem(localStorageKey, current.value)
-
-  if (current.value === "dark") {
-    document?.querySelector("html")?.classList.add("dark")
-  }
+export enum Theme {
+  DARK = "dark",
+  LIGHT = "light",
 }
 
-function toggle(): void {
-  current.value = current.value === "dark" ? "light" : "dark"
-  document.querySelector("html")?.classList.toggle("dark")
-  localStorage?.setItem(localStorageKey, current.value)
-}
+const LOCAL_STORAGE_KEY = "theme"
 
-export const theme = {
-  current,
-  getDefault,
-  toggle,
-}
+export const useTheme = defineStore("theme", {
+  state: () => ({
+    value: Theme.DARK,
+  }),
+  getters: {
+    isDark: (state) => state.value === Theme.DARK,
+  },
+  actions: {
+    getDefault() {
+      const theme = localStorage?.getItem(LOCAL_STORAGE_KEY)
+      if (theme) {
+        this.value = theme as Theme
+      } else {
+        if (window.matchMedia) {
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            this.value = Theme.DARK
+          } else {
+            this.value = Theme.LIGHT
+          }
+        } else {
+          this.value = Theme.DARK
+        }
+      }
+      localStorage?.setItem(LOCAL_STORAGE_KEY, this.value)
+      if (this.value === Theme.DARK) {
+        document?.querySelector("html")?.classList.add(Theme.DARK)
+      }
+    },
+    toggle() {
+      this.value = this.value === Theme.DARK ? Theme.LIGHT : Theme.DARK
+      document.querySelector("html")?.classList.toggle(Theme.DARK)
+      localStorage?.setItem(LOCAL_STORAGE_KEY, this.value)
+    },
+  },
+})
