@@ -35,7 +35,6 @@ describe("settings.ts", () => {
 
   it("returns if the settings are different", () => {
     const settings = useSettings()
-    console.log(settings.$state)
     expect(
       settings.isModified({
         commandPrefix: "~dsa",

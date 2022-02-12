@@ -6,7 +6,7 @@ import { useSettings } from "@/stores/settings"
 import { commands } from "@/utils/commands"
 import { getUrlFromMessage } from "@/utils/url"
 import ClipFinder from "@/services/clip-finder"
-import { clips } from "@/stores/clips"
+import { useClips } from "@/stores/clips"
 
 const { CLIENT_ID, REDIRECT_URI } = env
 const scopes = ["openid", "chat:read", "chat:edit"]
@@ -61,7 +61,7 @@ export const useUser = defineStore("user", {
         twitch.logout(CLIENT_ID, token)
       }
     },
-    onMessage(_, userstate: Userstate, message: string, self: boolean) {
+    onMessage(c: string, userstate: Userstate, message: string, self: boolean) {
       if (self) return
       const settings = useSettings()
       // Check if message is a command and perform command if proper permission to do so
@@ -82,8 +82,9 @@ export const useUser = defineStore("user", {
         ClipFinder.getTwitchClip(url).then((clip) => {
           if (clip) {
             console.debug("Adding clip to queue: ", clip)
+            const clips = useClips()
             const submitter = userstate.username
-            clips.addClip({
+            clips.add({
               ...clip,
               submitter,
             })
@@ -91,14 +92,15 @@ export const useUser = defineStore("user", {
         })
       }
     },
-    onMessageDeleted(_, username: string, deletedMessage: string) {
+    onMessageDeleted(c: string, username: string, deletedMessage: string) {
       const url = getUrlFromMessage(deletedMessage)
       if (url) {
         ClipFinder.getTwitchClip(url).then((clip) => {
           if (clip) {
             console.debug("Removing clip from queue: ", clip)
+            const clips = useClips()
             const submitter = username
-            clips.removeClip({
+            clips.remove({
               ...clip,
               submitter,
             })
@@ -106,9 +108,10 @@ export const useUser = defineStore("user", {
         })
       }
     },
-    onTimeout(_, username: string) {
+    onTimeout(c: string, username: string) {
       console.debug("Removing all clips submitter by: ", username)
-      clips.removeUserClips(username)
+      const clips = useClips()
+      clips.removeSubmitterClips(username)
     },
   },
 })

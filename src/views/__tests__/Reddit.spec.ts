@@ -2,7 +2,7 @@ import { shallowMount } from "@vue/test-utils"
 import { createTestingPinia } from "@pinia/testing"
 import Reddit from "@/views/Reddit.vue"
 import type { Clip } from "@/interfaces/clips"
-import { clips } from "@/stores/clips"
+import { useClips } from "@/stores/clips"
 
 vi.mock("@/services/clip-finder", () => {
   const mockFunction = vi.fn((subreddit: string, callback?: (clip: Clip, done: boolean) => void) => {
@@ -47,7 +47,8 @@ describe("Reddit.vue", () => {
   })
 
   it("queues clips for a subreddit", () => {
-    const spy = vi.spyOn(clips, "addClip")
+    const clips = useClips()
+    const spy = vi.spyOn(clips, "add")
     wrapper.vm.queueClipsForSubreddit("test")
     expect(spy).toHaveBeenCalledTimes(10)
   })

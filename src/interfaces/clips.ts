@@ -13,7 +13,7 @@ export interface Clip {
 }
 
 export interface ClipQueue {
-  open: boolean
+  isOpen: boolean
   history: ClipList
   current: Clip | undefined
   upcoming: ClipList

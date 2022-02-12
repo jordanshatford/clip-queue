@@ -49,18 +49,19 @@
 <script setup lang="ts">
 import config from "@/assets/config"
 import ClipFinder from "@/services/clip-finder"
-import { clips } from "@/stores/clips"
+import { useClips } from "@/stores/clips"
 import { useReddit } from "@/stores/reddit"
 
 const { maxPostsToCheck, availableSubreddits } = config.Reddit
 
 const reddit = useReddit()
+const clips = useClips()
 
 async function queueClipsForSubreddit(subreddit: string) {
   reddit.setLoading(subreddit, true)
   await ClipFinder.getClipsFromSubreddit(subreddit, (clip, done) => {
     if (!done) {
-      clips.addClip(clip, true)
+      clips.add(clip, true)
     } else {
       reddit.setLoading(subreddit, false)
     }

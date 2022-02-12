@@ -1,6 +1,6 @@
 import { setActivePinia, createPinia } from "pinia"
 import { commands } from "@/utils/commands"
-import { clips } from "@/stores/clips"
+import { useClips } from "@/stores/clips"
 
 describe("commands.ts", () => {
   beforeEach(() => {
@@ -18,6 +18,7 @@ describe("commands.ts", () => {
   ])(
     "calls the proper clip queue function when a command is issued (%s, %s)",
     (commandName: string, expectedFunctionCall: any) => {
+      const clips = useClips()
       const command = commands[commandName]
       if (!command) {
         expect(vi.spyOn(clips, "previous")).toHaveBeenCalledTimes(0)

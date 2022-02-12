@@ -17,9 +17,7 @@ import { useTheme } from "@/stores/theme"
 import { useSettings } from "./stores/settings"
 import { cache } from "@/utils/cache"
 
-const theme = useTheme()
-theme.getDefault()
-const settings = useSettings()
-settings.init()
+useTheme().getDefault()
+useSettings().init()
 cache.init()
 </script>
