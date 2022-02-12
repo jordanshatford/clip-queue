@@ -1,3 +1,4 @@
+import { createPinia, setActivePinia } from "pinia"
 import type { Clip } from "@/interfaces/clips"
 import ClipFinder from "@/services/clip-finder"
 import type { TwitchClip, TwitchGame } from "@/services/twitch"
@@ -23,6 +24,14 @@ vi.mock("@/services/twitch", () => {
     default: {
       getClip: mockFunction,
       getGame: mockFunction2,
+      isClipUrl: vi.fn((u: string) => {
+        return u.includes("twitch")
+      }),
+      getClipIdFromUrl: vi.fn((u: string) => {
+        const uri = new URL(u)
+        const idStart = uri.pathname.lastIndexOf("/")
+        return uri.pathname.slice(idStart).split("?")[0].slice(1)
+      }),
     },
   }
 })
@@ -57,6 +66,7 @@ vi.mock("@/services/reddit", () => {
 describe("clip-finder.ts", () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    setActivePinia(createPinia())
   })
 
   it.each([

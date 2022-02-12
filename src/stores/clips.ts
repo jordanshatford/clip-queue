@@ -1,5 +1,5 @@
 import type { Clip, ClipQueue } from "@/interfaces/clips"
-import { userStore } from "@/stores/user"
+import { useUser } from "@/stores/user"
 import { reactive } from "vue"
 import { ClipList } from "@/utils/clip-list"
 import { useSettings } from "@/stores/settings"
@@ -51,7 +51,8 @@ function open(): void {
   const settings = useSettings()
   /* istanbul ignore next */
   if (settings.sendQueueOpenMsg) {
-    userStore.user?.chat?.sendMessage(settings.queueOpenMsg)
+    const user = useUser()
+    user.chat?.sendMessage(settings.queueOpenMsg)
   }
   queue.open = true
 }
@@ -60,7 +61,8 @@ function close(): void {
   const settings = useSettings()
   /* istanbul ignore next */
   if (settings.sendQueueCloseMsg) {
-    userStore.user?.chat?.sendMessage(settings.queueCloseMsg)
+    const user = useUser()
+    user.chat?.sendMessage(settings.queueCloseMsg)
   }
   queue.open = false
 }
@@ -91,7 +93,8 @@ function sendCurrentClipInfoMessageIfNeeded() {
       game: queue.current?.game ?? "",
       submitter: queue.current?.submitter ?? "",
     }
-    userStore.user?.chat?.sendMessage(formatTemplateString(settings.currentClipMsg, valueMappings))
+    const user = useUser()
+    user.chat?.sendMessage(formatTemplateString(settings.currentClipMsg, valueMappings))
   }
 }
 

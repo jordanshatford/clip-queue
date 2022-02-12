@@ -7,9 +7,3 @@ export function getUrlFromMessage(message: string): string | undefined {
   }
   return undefined
 }
-
-export function getIdFromUrl(url: string): string {
-  const uri = new URL(url)
-  const idStart = uri.pathname.lastIndexOf("/")
-  return uri.pathname.slice(idStart).split("?")[0].slice(1)
-}

@@ -5,12 +5,12 @@
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <button @click="() => (showMobileMenu = !showMobileMenu)" class="border-none focus:outline-none p-2">
             <v-icon
-              v-if="showMobileMenu && userStore.user.isLoggedIn"
+              v-if="showMobileMenu && user.isLoggedIn"
               icon="times"
               class="text-2xl dark:text-zinc-200 hover:text-red-500 dark:hover:text-red-500"
             />
             <v-icon
-              v-if="!showMobileMenu && userStore.user.isLoggedIn"
+              v-if="!showMobileMenu && user.isLoggedIn"
               icon="bars"
               class="text-2xl dark:text-zinc-200 hover:text-violet-500 dark:hover:text-violet-500"
             />
@@ -25,19 +25,19 @@
             >{{ title }}</router-link
           >
           <div class="hidden sm:block sm:ml-6">
-            <div v-if="userStore.user.isLoggedIn" class="flex space-x-4">
+            <div v-if="user.isLoggedIn" class="flex space-x-4">
               <nav-item v-for="route in routes" :route="route" :key="route.name" />
             </div>
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <theme-change-button class="hidden sm:block mr-2" />
-          <auth-button :isLoggedIn="userStore.user.isLoggedIn" :login="userStore.login" :logout="userStore.logout" />
+          <auth-button :isLoggedIn="user.isLoggedIn" :login="user.redirect" :logout="user.logout" />
         </div>
       </div>
     </div>
     <div v-if="showMobileMenu">
-      <div v-if="userStore.user.isLoggedIn" class="px-2 pt-2 pb-3 space-y-1">
+      <div v-if="user.isLoggedIn" class="px-2 pt-2 pb-3 space-y-1">
         <nav-item
           v-for="route in routes"
           @click="() => (showMobileMenu = false)"
@@ -54,11 +54,12 @@
 import { ref } from "vue"
 import NavItem from "@/components/nav/NavItem.vue"
 import ThemeChangeButton from "@/components/ThemeChangeButton.vue"
-import { userStore } from "@/stores/user"
+import { useUser } from "@/stores/user"
 import AuthButton from "@/components/AuthButton.vue"
 import { routes } from "@/router"
 import config from "@/assets/config"
 
 const { title } = config.App
+const user = useUser()
 let showMobileMenu = ref(false)
 </script>

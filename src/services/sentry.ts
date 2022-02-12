@@ -5,11 +5,11 @@ import { env } from "@/assets/config"
 import router from "@/router"
 
 function init(app: App) {
-  if (env.sentryDSN) {
+  if (env.SENTRY_DSN) {
     Sentry.init({
       app,
-      environment: env.mode,
-      dsn: env.sentryDSN,
+      environment: env.MODE,
+      dsn: env.SENTRY_DSN,
       integrations: [
         new BrowserTracing({
           routingInstrumentation: Sentry.vueRouterInstrumentation(router),

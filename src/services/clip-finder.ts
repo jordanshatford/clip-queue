@@ -1,15 +1,13 @@
-import config from "@/assets/config"
+import config, { env } from "@/assets/config"
 import type { Clip } from "@/interfaces/clips"
 import reddit from "@/services/reddit"
 import twitch from "@/services/twitch"
 import type { TwitchClip, TwitchGame } from "@/services/twitch"
-import { getIdFromUrl } from "@/utils/url"
 import { cache } from "@/utils/cache"
-import { userStore } from "@/stores/user"
+import { useUser } from "@/stores/user"
 
-const { hostnames } = config.Twitch.Clips
 const { maxPostsToCheck } = config.Reddit
-const { clientId } = config.Twitch.Auth
+const { CLIENT_ID } = env
 
 export default class ClipFinder {
   public static async getClipsFromSubreddit(
@@ -33,18 +31,19 @@ export default class ClipFinder {
   }
 
   public static async getTwitchClip(url: string): Promise<Clip | undefined> {
-    if (!this.isTwitchClip(url)) {
+    if (!twitch.isClipUrl(url)) {
       return
     }
 
-    const id = getIdFromUrl(url)
+    const id = twitch.getClipIdFromUrl(url)
 
     let clipInfo: TwitchClip
     const clip = cache.getClip(id)
     if (clip) {
       clipInfo = clip
     } else {
-      clipInfo = await twitch.getClip(id, clientId, userStore?.user?.accessToken ?? "")
+      const user = useUser()
+      clipInfo = await twitch.getClip(id, CLIENT_ID, user?.accessToken ?? "")
       cache.addClip(clipInfo)
     }
 
@@ -55,7 +54,8 @@ export default class ClipFinder {
       if (cacheGame) {
         game = cacheGame
       } else {
-        game = await twitch.getGame(clipInfo.game_id, clientId, userStore?.user?.accessToken ?? "")
+        const user = useUser()
+        game = await twitch.getGame(clipInfo.game_id, CLIENT_ID, user?.accessToken ?? "")
         cache.addGame(game)
       }
       return {
@@ -68,15 +68,6 @@ export default class ClipFinder {
         embedUrl: clipInfo?.embed_url,
         thumbnailUrl: clipInfo?.thumbnail_url,
       }
-    }
-  }
-
-  private static isTwitchClip(url: string): boolean {
-    try {
-      const uri = new URL(url)
-      return hostnames.includes(uri.hostname)
-    } catch {
-      return false
     }
   }
 }

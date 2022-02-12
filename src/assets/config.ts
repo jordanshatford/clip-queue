@@ -1,8 +1,8 @@
 export const env = {
-  clientId: import.meta.env.VITE_TWITCH_CLIENT_ID as string,
-  redirectUri: import.meta.env.VITE_TWITCH_REDIRECT_URI as string,
-  sentryDSN: import.meta.env.VITE_SENTRY_DSN as string,
-  mode: import.meta.env.MODE,
+  CLIENT_ID: import.meta.env.VITE_TWITCH_CLIENT_ID as string,
+  REDIRECT_URI: import.meta.env.VITE_TWITCH_REDIRECT_URI as string,
+  SENTRY_DSN: import.meta.env.VITE_SENTRY_DSN as string,
+  MODE: import.meta.env.MODE,
 }
 
 const config = {
@@ -26,16 +26,6 @@ const config = {
     Cache: {
       gamesKey: "cached-games",
       clipsKey: "cached-clips",
-    },
-  },
-  Twitch: {
-    Auth: {
-      clientId: env.clientId,
-      redirectUri: env.redirectUri,
-      scopes: ["openid", "chat:read", "chat:edit"],
-    },
-    Clips: {
-      hostnames: ["clips.twitch.tv"],
     },
   },
   Reddit: {
