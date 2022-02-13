@@ -28,10 +28,6 @@ const config = {
       clipsKey: "cached-clips",
     },
   },
-  Reddit: {
-    maxPostsToCheck: 50,
-    availableSubreddits: ["LivestreamFail", "TwitchClips", "RPClipsGTA", "NoPixel"],
-  },
 }
 
 export default config

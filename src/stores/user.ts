@@ -9,7 +9,7 @@ import ClipFinder from "@/services/clip-finder"
 import { useClips } from "@/stores/clips"
 
 const { CLIENT_ID, REDIRECT_URI } = env
-const scopes = ["openid", "chat:read", "chat:edit"]
+const SCOPES = ["openid", "chat:read", "chat:edit"]
 
 interface User {
   isLoggedIn: boolean
@@ -31,7 +31,7 @@ export const useUser = defineStore("user", {
   },
   actions: {
     redirect(): void {
-      twitch.redirect(CLIENT_ID, REDIRECT_URI, scopes)
+      twitch.redirect(CLIENT_ID, REDIRECT_URI, SCOPES)
     },
     login(authInfo: AuthInfo): void {
       const { access_token, id_token, decodedIdToken } = authInfo

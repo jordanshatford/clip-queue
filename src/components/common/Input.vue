@@ -4,16 +4,16 @@
 
 <script setup lang="ts">
 interface Props {
-  modelValue: string
+  modelValue: string | number
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: string): void
+  (e: "update:modelValue", value: string | number): void
 }>()
 
 function emitUpdate(target: EventTarget | null) {
-  emit("update:modelValue", (target as HTMLFormElement).value)
+  emit("update:modelValue", (target as HTMLFormElement).value as typeof props.modelValue)
 }
 </script>

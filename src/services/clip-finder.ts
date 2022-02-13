@@ -1,12 +1,12 @@
-import config, { env } from "@/assets/config"
+import { env } from "@/assets/config"
 import type { Clip } from "@/interfaces/clips"
 import reddit from "@/services/reddit"
 import twitch from "@/services/twitch"
 import type { TwitchClip, TwitchGame } from "@/services/twitch"
 import { cache } from "@/utils/cache"
 import { useUser } from "@/stores/user"
+import { useReddit } from "@/stores/reddit"
 
-const { maxPostsToCheck } = config.Reddit
 const { CLIENT_ID } = env
 
 export default class ClipFinder {
@@ -14,7 +14,8 @@ export default class ClipFinder {
     subreddit: string,
     callback?: (clip: Clip, done: boolean) => void
   ): Promise<Clip[] | undefined> {
-    const subredditPosts = await reddit.getSubredditPosts(subreddit, maxPostsToCheck)
+    const r = useReddit()
+    const subredditPosts = await reddit.getSubredditPosts(subreddit, r.postsToCheck)
     let clips: Clip[] = []
     for (const post of subredditPosts) {
       if (post?.data?.stickied) {

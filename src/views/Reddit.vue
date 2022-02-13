@@ -1,8 +1,12 @@
 <template>
   <p class="cq-title">From Reddit</p>
-  <p class="cq-text">Queue clips found in the top {{ maxPostsToCheck }} posts.</p>
+  <p class="cq-text flex items-center justify-center">
+    Queue clips found in the top
+    <v-input class="inline py-1 px-1 w-16 mx-1" min="1" max="100" type="number" v-model.trim="reddit.postsToCheck" />
+    posts.
+  </p>
   <div class="grid gap-6 grid-cols-1 mt-3">
-    <div v-for="(subreddit, index) in availableSubreddits" :key="index">
+    <div v-for="(subreddit, index) in DEFAULT_SUBREDDITS" :key="index">
       <div class="cq-card max-w-md">
         <div class="flex items-center justify-between">
           <p class="cq-text text-2xl pl-3">r/{{ subreddit }}</p>
@@ -47,12 +51,9 @@
 </template>
 
 <script setup lang="ts">
-import config from "@/assets/config"
 import ClipFinder from "@/services/clip-finder"
 import { useClips } from "@/stores/clips"
-import { useReddit } from "@/stores/reddit"
-
-const { maxPostsToCheck, availableSubreddits } = config.Reddit
+import { useReddit, DEFAULT_SUBREDDITS } from "@/stores/reddit"
 
 const reddit = useReddit()
 const clips = useClips()

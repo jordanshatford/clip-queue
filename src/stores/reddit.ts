@@ -1,11 +1,12 @@
 import { defineStore } from "pinia"
-import config from "@/assets/config"
 
-const { availableSubreddits } = config.Reddit
-const loadingState = availableSubreddits.reduce((ac, a) => ({ ...ac, [a]: false }), {})
+export const DEFAULT_SUBREDDITS = ["LivestreamFail", "TwitchClips", "RPClipsGTA", "NoPixel"]
+
+const loadingState = DEFAULT_SUBREDDITS.reduce((ac, a) => ({ ...ac, [a]: false }), {})
 
 export const useReddit = defineStore("reddit", {
   state: () => ({
+    postsToCheck: 25,
     custom: "",
     loading: {
       ...loadingState,

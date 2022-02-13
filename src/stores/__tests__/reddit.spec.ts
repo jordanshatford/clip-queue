@@ -1,6 +1,5 @@
 import { setActivePinia, createPinia } from "pinia"
-import { useReddit } from "@/stores/reddit"
-import config from "@/assets/config"
+import { useReddit, DEFAULT_SUBREDDITS } from "@/stores/reddit"
 
 describe("reddit.ts", () => {
   beforeEach(() => {
@@ -9,9 +8,8 @@ describe("reddit.ts", () => {
 
   it("has keys for each available subreddit from the config", () => {
     const reddit = useReddit()
-    const { availableSubreddits } = config.Reddit
     const loadingKeys = Object.keys(reddit.loading)
-    for (const key of availableSubreddits) {
+    for (const key of DEFAULT_SUBREDDITS) {
       expect(loadingKeys).toContain(key)
     }
     expect(loadingKeys).toContain("custom")
@@ -19,8 +17,7 @@ describe("reddit.ts", () => {
 
   it("can set the loading value of state", () => {
     const reddit = useReddit()
-    const { availableSubreddits } = config.Reddit
-    const testName = availableSubreddits[0]
+    const testName = DEFAULT_SUBREDDITS[0]
     reddit.setLoading(testName, true)
     expect(reddit.isLoading(testName)).toEqual(true)
     reddit.setLoading(testName, false)
