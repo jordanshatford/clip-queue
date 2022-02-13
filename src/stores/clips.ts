@@ -1,5 +1,5 @@
-import { ClipList } from "@/utils/clip-list"
 import { defineStore } from "pinia"
+import { ClipList } from "@/utils/clip-list"
 import type { Clip } from "@/interfaces/clips"
 import { useSettings } from "@/stores/settings"
 import { useUser } from "@/stores/user"
@@ -11,6 +11,8 @@ export interface ClipQueue {
   current: Clip | undefined
   upcoming: ClipList
 }
+
+export const LOCAL_STORAGE_KEY = "clips"
 
 export const useClips = defineStore("clips", {
   state: (): ClipQueue => ({
@@ -29,6 +31,16 @@ export const useClips = defineStore("clips", {
     },
   },
   actions: {
+    init() {
+      const localStorageState = localStorage.getItem(LOCAL_STORAGE_KEY)
+      if (localStorageState) {
+        const savedState: ClipQueue = JSON.parse(localStorageState)
+        this.$patch(savedState)
+      }
+    },
+    clear() {
+      this.upcoming = new ClipList()
+    },
     add(clip: Clip, force = false) {
       const duplicateClip = this.current?.id === clip.id || this.history.includes(clip) || this.upcoming.includes(clip)
       if (duplicateClip || (!this.open && !force)) {

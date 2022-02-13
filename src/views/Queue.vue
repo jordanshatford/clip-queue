@@ -24,6 +24,7 @@
     @close="clips.close()"
     @remove="clips.remove"
     @play="clips.play"
+    @clear="clips.clear"
   />
 </template>
 

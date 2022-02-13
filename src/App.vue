@@ -16,7 +16,16 @@ import Footer from "./components/Footer.vue"
 import { useTheme } from "@/stores/theme"
 import { useSettings } from "./stores/settings"
 import { cache } from "@/utils/cache"
+import { useClips, LOCAL_STORAGE_KEY } from "@/stores/clips"
 
+const clips = useClips()
+clips.init()
+clips.$subscribe(
+  (m, state) => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state))
+  },
+  { detached: true }
+)
 useTheme().getDefault()
 useSettings().init()
 cache.init()

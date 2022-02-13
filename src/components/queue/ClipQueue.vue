@@ -3,8 +3,9 @@
     <v-progressbar v-if="percentComplete" variant="brand" :value="percentComplete" />
     <div class="w-full mb-2 mt-1 border-t border-zinc-300 dark:border-zinc-700"></div>
     <div class="float-right">
+      <v-button variant="primary" :disabled="clips.length === 0" class="ml-2" @click="emit('clear')">Clear</v-button>
       <v-button :variant="isOpen ? 'danger' : 'primary'" class="ml-2" @click="isOpen ? emit('close') : emit('open')">
-        {{ isOpen ? "Close" : "Open" }} Queue
+        {{ isOpen ? "Close" : "Open" }}
       </v-button>
     </div>
     <div class="text-left">
@@ -46,5 +47,6 @@ const emit = defineEmits<{
   (e: "remove", value: Clip): void
   (e: "open"): void
   (e: "close"): void
+  (e: "clear"): void
 }>()
 </script>

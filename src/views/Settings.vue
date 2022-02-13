@@ -1,5 +1,18 @@
 <template>
   <p class="cq-title">Settings</p>
+  <div class="cq-card p-2 max-w-lg mb-2">
+    <v-formgroup>
+      <v-button
+        class="w-full"
+        variant="danger"
+        :disabled="clips.history.empty() && clips.upcoming.empty()"
+        @click="clips.$reset()"
+      >
+        Purge Queue
+      </v-button>
+      <label class="cq-text-subtle">Purge all clips previously viewed and upcoming.</label>
+    </v-formgroup>
+  </div>
   <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
     <div class="cq-card p-2 max-w-lg">
       <v-formgroup label="Chat command prefix:">
@@ -25,14 +38,17 @@
           <v-switch id="sendCurrentClipMsg" v-model="formSettings.sendCurrentClipMsg" />
         </v-formgroup>
         <div v-if="formSettings.sendCurrentClipMsg">
-          <div class="text-left text-sm pl-1 mb-2 text-zinc-400 dark:text-zinc-500">
+          <div class="text-left pl-1 mb-2 cq-text-subtle">
             <label> The following will be replaced in the message sent to chat: </label>
             <ul class="list-disc pl-8">
-              <li>{url} : url of the clip</li>
-              <li>{title} : title of the clip</li>
-              <li>{channel} : channel the clip is of</li>
-              <li>{game} : game in the clip</li>
-              <li>{submitter} : chatter who submitted the clip (or reddit poster)</li>
+              <li><span class="cq-text-subtle-semibold">{url}</span>: url of the clip</li>
+              <li><span class="cq-text-subtle-semibold">{title}</span>: title of the clip</li>
+              <li><span class="cq-text-subtle-semibold">{channel}</span>: channel the clip is of</li>
+              <li><span class="cq-text-subtle-semibold">{game}</span>: game in the clip</li>
+              <li>
+                <span class="cq-text-subtle-semibold">{submitter}</span>: chatter who submitted the clip (or reddit
+                poster)
+              </li>
             </ul>
           </div>
           <v-formgroup class="pt-0">
@@ -54,7 +70,9 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useSettings, type Settings } from "@/stores/settings"
+import { useClips } from "@/stores/clips"
 
+const clips = useClips()
 const settings = useSettings()
 
 let showSaveMsg = ref(false)
