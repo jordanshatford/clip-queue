@@ -1,9 +1,16 @@
 import { ClipList } from "@/utils/clip-list"
 import { defineStore } from "pinia"
-import type { Clip, ClipQueue } from "@/interfaces/clips"
+import type { Clip } from "@/interfaces/clips"
 import { useSettings } from "@/stores/settings"
 import { useUser } from "@/stores/user"
 import { formatTemplateString } from "@/utils/formatter"
+
+export interface ClipQueue {
+  isOpen: boolean
+  history: ClipList
+  current: Clip | undefined
+  upcoming: ClipList
+}
 
 export const useClips = defineStore("clips", {
   state: (): ClipQueue => ({

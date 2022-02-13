@@ -1,6 +1,5 @@
 import { setActivePinia, createPinia } from "pinia"
-import { useSettings } from "@/stores/settings"
-import type { Settings } from "@/interfaces/settings"
+import { useSettings, type Settings } from "@/stores/settings"
 
 describe("settings.ts", () => {
   beforeEach(() => {

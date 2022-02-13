@@ -1,5 +1,15 @@
 import { defineStore } from "pinia"
-import type { Settings } from "@/interfaces/settings"
+
+export interface Settings {
+  commandPrefix: string
+  sendMsgsInChat: boolean
+  sendQueueOpenMsg: boolean
+  queueOpenMsg: string
+  sendQueueCloseMsg: boolean
+  queueCloseMsg: string
+  sendCurrentClipMsg: boolean
+  currentClipMsg: string
+}
 
 const LOCAL_STORAGE_KEY = "settings"
 

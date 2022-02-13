@@ -53,8 +53,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { useSettings } from "@/stores/settings"
-import type { Settings } from "@/interfaces/settings"
+import { useSettings, type Settings } from "@/stores/settings"
 
 const settings = useSettings()
 

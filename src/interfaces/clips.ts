@@ -1,5 +1,3 @@
-import type { ClipList } from "@/utils/clip-list"
-
 export interface Clip {
   id?: string
   title?: string
@@ -10,11 +8,4 @@ export interface Clip {
   url?: string
   embedUrl?: string
   thumbnailUrl?: string
-}
-
-export interface ClipQueue {
-  isOpen: boolean
-  history: ClipList
-  current: Clip | undefined
-  upcoming: ClipList
 }
