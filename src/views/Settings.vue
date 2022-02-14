@@ -5,12 +5,12 @@
       <v-button
         class="w-full"
         variant="danger"
-        :disabled="clips.history.empty() && clips.upcoming.empty()"
-        @click="clips.$reset()"
+        :disabled="clips.history.empty()"
+        @click="clips.purge()"
       >
-        Purge Queue
+        Purge History
       </v-button>
-      <label class="cq-text-subtle">Purge all clips previously viewed and upcoming.</label>
+      <label class="cq-text-subtle">Purge all clips previously viewed allowing them to be resubmitted.</label>
     </v-formgroup>
   </div>
   <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">

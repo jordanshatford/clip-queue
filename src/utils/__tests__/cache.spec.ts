@@ -1,8 +1,5 @@
 import { cache } from "@/utils/cache"
-import config from "@/assets/config"
 import type { TwitchClip, TwitchGame } from "@/services/twitch"
-
-const { gamesKey, clipsKey } = config.App.Cache
 
 describe("cache.ts", () => {
   const testGame = { id: "testgame", name: "Test Game" } as TwitchGame
@@ -23,8 +20,8 @@ describe("cache.ts", () => {
   })
 
   it("inits when values are already in localstorage", () => {
-    localStorage.setItem(gamesKey, JSON.stringify({ [testGame.id]: testGame }))
-    localStorage.setItem(clipsKey, JSON.stringify({ [testClip.id]: testClip }))
+    localStorage.setItem("cached-games", JSON.stringify({ [testGame.id]: testGame }))
+    localStorage.setItem("cached-clips", JSON.stringify({ [testClip.id]: testClip }))
     cache.init()
     expect(cache.getClip(testClip.id).title).toEqual("Test title")
     expect(cache.getGame(testGame.id).name).toEqual("Test Game")

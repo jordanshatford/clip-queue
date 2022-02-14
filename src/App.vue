@@ -18,6 +18,8 @@ import { useSettings } from "./stores/settings"
 import { cache } from "@/utils/cache"
 import { useClips, LOCAL_STORAGE_KEY } from "@/stores/clips"
 
+useTheme().getDefault()
+useSettings().init()
 const clips = useClips()
 clips.init()
 clips.$subscribe(
@@ -26,7 +28,5 @@ clips.$subscribe(
   },
   { detached: true }
 )
-useTheme().getDefault()
-useSettings().init()
 cache.init()
 </script>

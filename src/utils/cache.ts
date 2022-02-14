@@ -1,7 +1,7 @@
 import type { TwitchClip, TwitchGame } from "@/services/twitch"
-import config from "@/assets/config"
 
-const { gamesKey, clipsKey } = config.App.Cache
+const gamesKey = "cached-games"
+const clipsKey = "cached-clips"
 
 let twitchGameCache: Record<string, TwitchGame> = {}
 let twitchClipCache: Record<string, TwitchClip> = {}

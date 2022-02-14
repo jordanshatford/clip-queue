@@ -41,6 +41,9 @@ export const useClips = defineStore("clips", {
     clear() {
       this.upcoming = new ClipList()
     },
+    purge() {
+      this.history = new ClipList()
+    },
     add(clip: Clip, force = false) {
       const duplicateClip = this.current?.id === clip.id || this.history.includes(clip) || this.upcoming.includes(clip)
       if (duplicateClip || (!this.open && !force)) {
