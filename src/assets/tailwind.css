@@ -23,7 +23,7 @@
     @apply text-zinc-400 dark:text-zinc-600 font-normal text-sm;
   }
   .cq-text-subtle-semibold {
-    @apply text-zinc-400 dark:text-zinc-600 font-semibold text-base;
+    @apply text-zinc-400 dark:text-zinc-600 font-semibold text-sm;
   }
   .cq-text-input {
     @apply text-zinc-500;
