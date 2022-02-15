@@ -1,20 +1,15 @@
 <template>
   <p class="cq-title">Settings</p>
-  <div class="cq-card p-2 max-w-lg mb-2">
+  <div class="cq-card mx-auto p-2 max-w-lg mb-2">
     <v-formgroup>
-      <v-button
-        class="w-full"
-        variant="danger"
-        :disabled="clips.history.empty()"
-        @click="clips.purge()"
-      >
+      <v-button class="w-full" variant="danger" :disabled="clips.history.empty()" @click="clips.purge()">
         Purge History
       </v-button>
       <label class="cq-text-subtle">Purge all clips previously viewed allowing them to be resubmitted.</label>
     </v-formgroup>
   </div>
   <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
-    <div class="cq-card p-2 max-w-lg">
+    <div class="cq-card mx-auto p-2 max-w-lg">
       <v-formgroup label="Chat command prefix:">
         <v-input type="text" required @keydown.space.prevent maxlength="3" v-model="formSettings.commandPrefix" />
       </v-formgroup>

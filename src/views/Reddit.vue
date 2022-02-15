@@ -7,7 +7,7 @@
   </p>
   <div class="grid gap-6 grid-cols-1 mt-3">
     <div v-for="(subreddit, index) in DEFAULT_SUBREDDITS" :key="index">
-      <div class="cq-card max-w-md">
+      <div class="cq-card mx-auto max-w-md">
         <div class="flex items-center justify-between">
           <p class="cq-text text-2xl pl-3">r/{{ subreddit }}</p>
           <v-button
@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class="cq-card max-w-md">
+    <div class="cq-card mx-auto max-w-md">
       <div class="flex items-center justify-between">
         <p class="cq-text text-2xl pl-3 pr-1">r/</p>
         <v-input

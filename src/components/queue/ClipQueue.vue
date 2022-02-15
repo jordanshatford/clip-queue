@@ -12,14 +12,14 @@
       <p class="cq-text text-lg">{{ title }}</p>
       <span class="mt-3 cq-text-subtle"> {{ clips.length }} {{ clips.length === 1 ? "clip" : "clips" }} </span>
     </div>
-    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-3">
+    <div class="flex justify-items-start overflow-x-auto mt-3">
       <clip-queue-item
         v-for="clip in clips"
         :key="clip.id"
         :clip="clip"
         @play="emit('play', clip)"
         @remove="emit('remove', clip)"
-        class="text-left"
+        class="text-left flex-shrink-0 mr-2"
       />
     </div>
   </div>

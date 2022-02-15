@@ -16,7 +16,7 @@
     </v-button>
   </div>
   <clip-queue
-    title="Queued Clips"
+    title="Upcoming Clips"
     :clips="clips.upcoming.toArray()"
     :is-open="clips.isOpen"
     :percent-complete="clips.queueProgress"

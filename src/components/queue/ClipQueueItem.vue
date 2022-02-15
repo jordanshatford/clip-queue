@@ -1,5 +1,5 @@
 <template>
-  <div class="cq-card max-w-sm overflow-hidden">
+  <div class="cq-card max-w-xs overflow-hidden">
     <div
       class="flex items-end justify-end h-56 w-full bg-cover"
       :style="'background-image: url(' + clip.thumbnailUrl + ')'"

@@ -8,7 +8,7 @@
 
 @layer components {
   .cq-card {
-    @apply bg-zinc-100 dark:bg-zinc-800 w-full mx-auto rounded-lg shadow-md;
+    @apply bg-zinc-100 dark:bg-zinc-800 w-full rounded-lg shadow-md;
   }
   .cq-title {
     @apply text-5xl font-extrabold text-violet-500 p-5;
