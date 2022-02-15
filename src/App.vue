@@ -15,8 +15,8 @@ import Nav from "@/components/nav/Nav.vue"
 import Footer from "./components/Footer.vue"
 import { useTheme } from "@/stores/theme"
 import { useSettings } from "./stores/settings"
-import { cache } from "@/utils/cache"
 import { useClips, LOCAL_STORAGE_KEY } from "@/stores/clips"
+import { useClipFinder, LOCAL_STORAGE_KEY as CLIP_FINDER_KEY } from "@/stores/clip-finder"
 
 useTheme().getDefault()
 useSettings().init()
@@ -28,5 +28,12 @@ clips.$subscribe(
   },
   { detached: true }
 )
-cache.init()
+const clipFinder = useClipFinder()
+clipFinder.init()
+clipFinder.$subscribe(
+  (m, state) => {
+    localStorage.setItem(CLIP_FINDER_KEY, JSON.stringify(state))
+  },
+  { detached: true }
+)
 </script>

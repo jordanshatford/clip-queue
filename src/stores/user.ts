@@ -5,8 +5,8 @@ import type { Userstate } from "tmi.js"
 import { useSettings } from "@/stores/settings"
 import { commands } from "@/utils/commands"
 import { getUrlFromMessage } from "@/utils/url"
-import ClipFinder from "@/services/clip-finder"
 import { useClips } from "@/stores/clips"
+import { useClipFinder } from "./clip-finder"
 
 const { CLIENT_ID, REDIRECT_URI } = env
 const SCOPES = ["openid", "chat:read", "chat:edit"]
@@ -79,7 +79,8 @@ export const useUser = defineStore("user", {
 
       const url = getUrlFromMessage(message)
       if (url) {
-        ClipFinder.getTwitchClip(url).then((clip) => {
+        const clipFinder = useClipFinder()
+        clipFinder.getTwitchClip(url).then((clip) => {
           if (clip) {
             console.debug("Adding clip to queue: ", clip)
             const clips = useClips()
@@ -95,7 +96,8 @@ export const useUser = defineStore("user", {
     onMessageDeleted(c: string, username: string, deletedMessage: string) {
       const url = getUrlFromMessage(deletedMessage)
       if (url) {
-        ClipFinder.getTwitchClip(url).then((clip) => {
+        const clipFinder = useClipFinder()
+        clipFinder.getTwitchClip(url).then((clip) => {
           if (clip) {
             console.debug("Removing clip from queue: ", clip)
             const clips = useClips()
