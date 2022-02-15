@@ -15,16 +15,16 @@ import Nav from "@/components/nav/Nav.vue"
 import Footer from "./components/Footer.vue"
 import { useTheme } from "@/stores/theme"
 import { useSettings } from "./stores/settings"
-import { useClips, LOCAL_STORAGE_KEY } from "@/stores/clips"
+import { useQueue, LOCAL_STORAGE_KEY as QUEUE_KEY } from "@/stores/queue"
 import { useClipFinder, LOCAL_STORAGE_KEY as CLIP_FINDER_KEY } from "@/stores/clip-finder"
 
 useTheme().getDefault()
 useSettings().init()
-const clips = useClips()
-clips.init()
-clips.$subscribe(
+const queue = useQueue()
+queue.init()
+queue.$subscribe(
   (m, state) => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state))
+    localStorage.setItem(QUEUE_KEY, JSON.stringify(state))
   },
   { detached: true }
 )

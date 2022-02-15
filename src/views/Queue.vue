@@ -1,37 +1,37 @@
 <template>
   <twitch-clip-player
-    v-if="clips.current && clips.current.id"
-    :clip="clips.current"
+    v-if="queue.current && queue.current.id"
+    :clip="queue.current"
     :autoplay="true"
-    :previous-disabled="clips.history.empty()"
-    :next-disabled="clips.upcoming.empty()"
-    @previous="clips.previous()"
-    @next="clips.next()"
+    :previous-disabled="queue.history.empty()"
+    :next-disabled="queue.upcoming.empty()"
+    @previous="queue.previous()"
+    @next="queue.next()"
   />
   <div v-else class="text-center">
     <p class="cq-title">Queue Open</p>
     <p class="cq-text">Start sending clips now for them to be added to the queue.</p>
-    <v-button variant="brand" :disabled="clips.upcoming.empty()" @click="clips.next()" class="my-5">
+    <v-button variant="brand" :disabled="queue.upcoming.empty()" @click="queue.next()" class="my-5">
       Start Viewing!
     </v-button>
   </div>
   <clip-queue
     title="Upcoming Clips"
-    :clips="clips.upcoming.toArray()"
-    :is-open="clips.isOpen"
-    :percent-complete="clips.queueProgress"
-    @open="clips.open()"
-    @close="clips.close()"
-    @remove="clips.remove"
-    @play="clips.play"
-    @clear="clips.clear"
+    :clips="queue.upcoming.toArray()"
+    :is-open="queue.isOpen"
+    :percent-complete="queue.progress"
+    @open="queue.open()"
+    @close="queue.close()"
+    @remove="queue.remove"
+    @play="queue.play"
+    @clear="queue.clear"
   />
 </template>
 
 <script setup lang="ts">
 import TwitchClipPlayer from "@/components/TwitchClipPlayer.vue"
-import { useClips } from "@/stores/clips"
+import { useQueue } from "@/stores/queue"
 import ClipQueue from "@/components/queue/ClipQueue.vue"
 
-const clips = useClips()
+const queue = useQueue()
 </script>

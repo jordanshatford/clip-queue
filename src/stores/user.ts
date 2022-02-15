@@ -5,7 +5,7 @@ import type { Userstate } from "tmi.js"
 import { useSettings } from "@/stores/settings"
 import { commands } from "@/utils/commands"
 import { getUrlFromMessage } from "@/utils/url"
-import { useClips } from "@/stores/clips"
+import { useQueue } from "@/stores/queue"
 import { useClipFinder } from "./clip-finder"
 
 const { CLIENT_ID, REDIRECT_URI } = env
@@ -83,9 +83,9 @@ export const useUser = defineStore("user", {
         clipFinder.getTwitchClip(url).then((clip) => {
           if (clip) {
             console.debug("Adding clip to queue: ", clip)
-            const clips = useClips()
+            const queue = useQueue()
             const submitter = userstate.username
-            clips.add({
+            queue.add({
               ...clip,
               submitter,
             })
@@ -100,9 +100,9 @@ export const useUser = defineStore("user", {
         clipFinder.getTwitchClip(url).then((clip) => {
           if (clip) {
             console.debug("Removing clip from queue: ", clip)
-            const clips = useClips()
+            const queue = useQueue()
             const submitter = username
-            clips.remove({
+            queue.remove({
               ...clip,
               submitter,
             })
@@ -112,8 +112,8 @@ export const useUser = defineStore("user", {
     },
     onTimeout(c: string, username: string) {
       console.debug("Removing all clips submitter by: ", username)
-      const clips = useClips()
-      clips.removeSubmitterClips(username)
+      const queue = useQueue()
+      queue.removeSubmitterClips(username)
     },
   },
 })

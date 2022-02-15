@@ -2,7 +2,7 @@
   <p class="cq-title">Settings</p>
   <div class="cq-card mx-auto p-2 max-w-lg mb-2">
     <v-formgroup>
-      <v-button class="w-full" variant="danger" :disabled="clips.history.empty()" @click="clips.purge()">
+      <v-button class="w-full" variant="danger" :disabled="queue.history.empty()" @click="queue.purge()">
         Purge History
       </v-button>
       <label class="cq-text-subtle">Purge all clips previously viewed allowing them to be resubmitted.</label>
@@ -65,9 +65,9 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useSettings, type Settings } from "@/stores/settings"
-import { useClips } from "@/stores/clips"
+import { useQueue } from "@/stores/queue"
 
-const clips = useClips()
+const queue = useQueue()
 const settings = useSettings()
 
 let showSaveMsg = ref(false)

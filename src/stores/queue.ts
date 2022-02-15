@@ -12,9 +12,9 @@ export interface ClipQueue {
   upcoming: ClipList
 }
 
-export const LOCAL_STORAGE_KEY = "clips"
+export const LOCAL_STORAGE_KEY = "queue"
 
-export const useClips = defineStore("clips", {
+export const useQueue = defineStore("queue", {
   state: (): ClipQueue => ({
     isOpen: true,
     history: new ClipList(),
@@ -22,7 +22,7 @@ export const useClips = defineStore("clips", {
     upcoming: new ClipList(),
   }),
   getters: {
-    queueProgress: (state) => {
+    progress: (state) => {
       const currentClipCount = state.current?.id ? 1 : 0
       const allClipsCount = state.history.size() + state.upcoming.size() + currentClipCount
       const clipsLeftCount = state.upcoming.size()
@@ -35,7 +35,7 @@ export const useClips = defineStore("clips", {
       const localStorageState = localStorage.getItem(LOCAL_STORAGE_KEY)
       if (localStorageState) {
         const savedState: ClipQueue = JSON.parse(localStorageState)
-        this.$patch(savedState)
+        this.$patch({ ...savedState, current: undefined })
       }
     },
     clear() {

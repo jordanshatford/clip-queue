@@ -1,20 +1,20 @@
-import { useClips } from "@/stores/clips"
+import { useQueue } from "@/stores/queue"
 
 export const commands: Record<string, () => void> = {
   queueprev: () => {
-    const clips = useClips()
-    clips.previous()
+    const queue = useQueue()
+    queue.previous()
   },
   queuenext: () => {
-    const clips = useClips()
-    clips.next()
+    const queue = useQueue()
+    queue.next()
   },
   queueopen: () => {
-    const clips = useClips()
-    clips.open()
+    const queue = useQueue()
+    queue.open()
   },
   queueclose: () => {
-    const clips = useClips()
-    clips.close()
+    const queue = useQueue()
+    queue.close()
   },
 }

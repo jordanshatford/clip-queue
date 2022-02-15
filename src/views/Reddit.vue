@@ -51,19 +51,19 @@
 </template>
 
 <script setup lang="ts">
-import { useClips } from "@/stores/clips"
+import { useQueue } from "@/stores/queue"
 import { useReddit, DEFAULT_SUBREDDITS } from "@/stores/reddit"
 import { useClipFinder } from "@/stores/clip-finder"
 
 const reddit = useReddit()
-const clips = useClips()
+const queue = useQueue()
 
 async function queueClipsForSubreddit(subreddit: string) {
   reddit.setLoading(subreddit, true)
   const clipFinder = useClipFinder()
   await clipFinder.getClipsFromSubreddit(subreddit, (clip, done) => {
     if (!done) {
-      clips.add(clip, true)
+      queue.add(clip, true)
     } else {
       reddit.setLoading(subreddit, false)
     }
