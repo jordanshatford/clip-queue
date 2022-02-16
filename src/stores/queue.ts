@@ -45,7 +45,7 @@ export const useQueue = defineStore("queue", {
       this.history = new ClipList()
     },
     add(clip: Clip, force = false) {
-      const duplicateClip = this.current?.id === clip.id || this.history.includes(clip) || this.upcoming.includes(clip)
+      const duplicateClip = this.current?.id === clip.id || this.history.includes(clip)
       if (duplicateClip || (!this.open && !force)) {
         return
       }

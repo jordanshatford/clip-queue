@@ -5,6 +5,7 @@ export interface Clip {
   game?: string
   timestamp?: string
   submitter?: string
+  submitters?: string[]
   url?: string
   embedUrl?: string
   thumbnailUrl?: string

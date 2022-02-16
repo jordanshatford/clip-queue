@@ -11,13 +11,13 @@
         <v-icon icon="trash" class="w-4 h-4" />
       </v-button>
     </div>
-    <div class="px-5 py-3">
+    <div class="p-3">
       <span class="cq-text mt-2">{{ clip.title }}</span>
       <h3 class="cq-text-subtle-semibold">
         {{ clip.channel }}<span class="cq-text-subtle"> playing </span>{{ clip.game }}
       </h3>
       <span class="mt-2 cq-text-subtle">
-        Submitted by: <span class="cq-text-subtle-semibold">{{ clip.submitter }}</span>
+        Submitter: <span class="cq-text-subtle-semibold">{{ clip.submitter }}</span>
       </span>
     </div>
   </div>

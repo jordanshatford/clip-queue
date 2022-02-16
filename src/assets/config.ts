@@ -13,6 +13,7 @@ const config = {
     features: [
       "Easily connect your chat with Twitch login",
       "Clip duplication prevention",
+      "Popular clips rise up in the queue",
       "Clip removal when user is timed-out, banned, or has message deleted",
       "Allows channel moderators to open/close the queue and move to the next/previous clip",
       "Queue progress indicator",

@@ -11,6 +11,7 @@ describe("clips.ts", () => {
   const clip = {
     id: "test",
     submitter: "jordan",
+    submitters: ["jordan"],
     title: "Test title",
     channel: "testchannel",
     game: "testgame",
@@ -23,6 +24,7 @@ describe("clips.ts", () => {
   const clip2 = {
     id: "test2",
     submitter: "jordan2",
+    submitters: ["jordan2"],
     title: "Test title 2",
     channel: "testchannel2",
     game: "testgame2",

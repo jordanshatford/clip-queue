@@ -13,18 +13,34 @@ export class ClipList {
   public add(...clips: Clip[]): Clip[] {
     clips.forEach((clip) => {
       if (!this.includes(clip)) {
-        this._clips.push(clip)
+        const submitter = clip.submitter?.toLowerCase()
+        this._clips.push({ ...clip, submitter, submitters: submitter ? [submitter] : [] })
+      } else {
+        const index = this._clips.findIndex((c) => c.id === clip.id)
+        const submitters = this._clips[index]?.submitters ?? []
+        const submitter = clip.submitter?.toLowerCase()
+        if (submitter && !submitters.includes(submitter)) {
+          this._clips[index].submitters = [...submitters, submitter]
+        }
       }
     })
+    this.sort()
     return this._clips
   }
 
   public remove(clip: Clip): void {
-    this._clips = this._clips.filter((c) => !(c.id === clip.id))
+    const index = this._clips.findIndex((c) => c.id === clip.id)
+    if (index > -1) {
+      this.removeSubmitterFromClip(clip?.submitter?.toLowerCase() as string, index)
+      this.sort()
+    }
   }
 
   public removeBySubmitter(submitter: string): void {
-    this._clips = this._clips.filter((c) => !(c.submitter === submitter))
+    for (let i = this._clips.length - 1; i >= 0; i--) {
+      this.removeSubmitterFromClip(submitter.toLowerCase(), i)
+    }
+    this.sort()
   }
 
   public includes(clip: Clip): boolean {
@@ -53,5 +69,30 @@ export class ClipList {
 
   public toArray(): Clip[] {
     return this._clips
+  }
+
+  private removeSubmitterFromClip(submitter: string, index: number): void {
+    const c = this._clips[index]
+    if (c.submitters?.includes(submitter)) {
+      const submittersLength = c.submitters?.length ?? 0
+      if (submittersLength === 1) {
+        // Remove the clip from the list
+        this._clips.splice(index, 1)
+      } else if (submittersLength > 1) {
+        // Remove only the submitter
+        const submitters = c.submitters?.filter((s) => !(s === submitter))
+        this._clips[index].submitters = submitters
+        // Check if submitter needs to be set from list of submitters
+        if (c.submitter === submitter) {
+          this._clips[index].submitter = submitters[0]
+        }
+      }
+    }
+  }
+
+  private sort(): void {
+    this._clips = this._clips.sort((a, b) => {
+      return (b.submitters?.length ?? 0) - (a.submitters?.length ?? 0)
+    })
   }
 }
