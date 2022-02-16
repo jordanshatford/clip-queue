@@ -10,7 +10,10 @@
   </div>
   <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
     <div class="cq-card mx-auto p-2 max-w-lg">
-      <v-formgroup label="Chat command prefix:">
+      <v-formgroup label="Allow chat commands?" class="w-full flex justify-between pr-2 pb-0">
+        <v-switch id="allowCommands" v-model="formSettings.allowCommands" />
+      </v-formgroup>
+      <v-formgroup v-if="formSettings.allowCommands" label="Chat command prefix:">
         <v-input type="text" required @keydown.space.prevent maxlength="8" v-model="formSettings.commandPrefix" />
         <div class="text-left pl-1 my-2 cq-text-subtle">
           <label>The following commands are available to mods: </label>

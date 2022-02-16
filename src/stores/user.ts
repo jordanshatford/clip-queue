@@ -65,12 +65,13 @@ export const useUser = defineStore("user", {
       if (self) return
       const settings = useSettings()
       // Check if message is a command and perform command if proper permission to do so
-      if (message.startsWith(settings.commandPrefix)) {
+      if (settings.allowCommands && message.startsWith(settings.commandPrefix)) {
         if (!twitch.isModerator(userstate)) {
           return
         }
         const [command, ...args] = message.substring(settings.commandPrefix.length).split(" ")
         commands.handleCommand(command, ...args)
+        return
       }
 
       const url = getUrlFromMessage(message)

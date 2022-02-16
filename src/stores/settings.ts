@@ -2,6 +2,7 @@ import { defineStore } from "pinia"
 import { deepEqual } from "@/utils"
 
 export interface Settings {
+  allowCommands: boolean
   commandPrefix: string
   sendMsgsInChat: boolean
   sendQueueOpenMsg: boolean
@@ -16,6 +17,7 @@ const LOCAL_STORAGE_KEY = "settings"
 
 export const useSettings = defineStore("settings", {
   state: (): Settings => ({
+    allowCommands: true,
     commandPrefix: "!cq",
     sendMsgsInChat: false,
     sendQueueOpenMsg: false,
