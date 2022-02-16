@@ -9,7 +9,7 @@ describe("settings.ts", () => {
   it("inits the settings with default value", () => {
     const settings = useSettings()
     settings.init()
-    expect(settings.commandPrefix).toEqual("!")
+    expect(settings.commandPrefix).toEqual("!cq")
   })
 
   it("inits the settings with values from local storage", () => {
@@ -23,7 +23,7 @@ describe("settings.ts", () => {
     const settings = useSettings()
     localStorage.clear()
     settings.init()
-    expect(settings.commandPrefix).toEqual("!")
+    expect(settings.commandPrefix).toEqual("!cq")
     settings.update({
       commandPrefix: "~",
       sendMsgsInChat: true,

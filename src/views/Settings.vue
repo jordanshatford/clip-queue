@@ -11,7 +11,16 @@
   <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
     <div class="cq-card mx-auto p-2 max-w-lg">
       <v-formgroup label="Chat command prefix:">
-        <v-input type="text" required @keydown.space.prevent maxlength="3" v-model="formSettings.commandPrefix" />
+        <v-input type="text" required @keydown.space.prevent maxlength="8" v-model="formSettings.commandPrefix" />
+        <div class="text-left pl-1 my-2 cq-text-subtle">
+          <label>The following commands are available to mods: </label>
+          <ul class="list-disc pl-8">
+            <li v-for="(item, key) in commands.help" :key="key">
+              <span class="cq-text-subtle-semibold">{{ `${settings.commandPrefix}${key}` }}</span
+              >: {{ item }}
+            </li>
+          </ul>
+        </div>
       </v-formgroup>
       <v-formgroup label="Send bot messages in chat?" class="w-full flex justify-between pr-2">
         <v-switch id="sendMsgsInChat" v-model="formSettings.sendMsgsInChat" />
@@ -34,7 +43,7 @@
         </v-formgroup>
         <div v-if="formSettings.sendCurrentClipMsg">
           <div class="text-left pl-1 mb-2 cq-text-subtle">
-            <label> The following will be replaced in the message sent to chat: </label>
+            <label>The following will be replaced in the message sent to chat:</label>
             <ul class="list-disc pl-8">
               <li><span class="cq-text-subtle-semibold">{url}</span>: url of the clip</li>
               <li><span class="cq-text-subtle-semibold">{title}</span>: title of the clip</li>
@@ -66,6 +75,7 @@
 import { ref } from "vue"
 import { useSettings, type Settings } from "@/stores/settings"
 import { useQueue } from "@/stores/queue"
+import commands from "@/utils/commands"
 
 const queue = useQueue()
 const settings = useSettings()

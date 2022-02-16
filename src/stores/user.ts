@@ -3,7 +3,7 @@ import { env } from "@/assets/config"
 import twitch, { TwitchChat, type AuthInfo } from "@/services/twitch"
 import type { Userstate } from "tmi.js"
 import { useSettings } from "@/stores/settings"
-import { commands } from "@/utils/commands"
+import commands from "@/utils/commands"
 import { getUrlFromMessage } from "@/utils"
 import { useQueue } from "@/stores/queue"
 import { useClipFinder } from "@/stores/clip-finder"
@@ -69,12 +69,8 @@ export const useUser = defineStore("user", {
         if (!twitch.isModerator(userstate)) {
           return
         }
-        const commandName = message.substring(settings.commandPrefix.length).split(" ")[0]
-        const command = commands[commandName]
-        if (!command) {
-          return
-        }
-        command()
+        const [command, ...args] = message.substring(settings.commandPrefix.length).split(" ")
+        commands.handleCommand(command, ...args)
       }
 
       const url = getUrlFromMessage(message)

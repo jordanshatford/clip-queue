@@ -16,7 +16,7 @@ const LOCAL_STORAGE_KEY = "settings"
 
 export const useSettings = defineStore("settings", {
   state: (): Settings => ({
-    commandPrefix: "!",
+    commandPrefix: "!cq",
     sendMsgsInChat: false,
     sendQueueOpenMsg: false,
     queueOpenMsg: "The queue is open, send twitch clip links in chat to have them added to the queue.",
@@ -28,6 +28,7 @@ export const useSettings = defineStore("settings", {
   getters: {
     isModified: (state) => {
       return (settings: Settings) => {
+        /* eslint-disable @typescript-eslint/no-explicit-any*/
         return !deepEqual((state as any).$state, settings)
       }
     },

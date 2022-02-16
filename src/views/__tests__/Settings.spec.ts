@@ -14,14 +14,14 @@ describe("Settings.vue", () => {
   })
 
   it("has the same settings values as previous", () => {
-    expect(wrapper.vm.formSettings.commandPrefix).toEqual("!")
+    expect(wrapper.vm.formSettings.commandPrefix).toEqual("!cq")
   })
 
   it("resets the form to the settings when not saved", async () => {
     wrapper.vm.formSettings.commandPrefix = "~"
     await wrapper.vm.$nextTick()
     wrapper.vm.onReset()
-    expect(wrapper.vm.formSettings.commandPrefix).toEqual("!")
+    expect(wrapper.vm.formSettings.commandPrefix).toEqual("!cq")
   })
 
   it("saves the form to the settings", async () => {
