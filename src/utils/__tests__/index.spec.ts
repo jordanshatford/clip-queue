@@ -1,6 +1,15 @@
-import { formatTemplateString } from "@/utils/formatter"
+import { formatTemplateString, getUrlFromMessage } from "@/utils"
 
-describe("formatter.ts", () => {
+describe("index.ts", () => {
+  it.each([
+    ["", undefined],
+    ["https://next.vue-test-utils.vuejs.org/", "https://next.vue-test-utils.vuejs.org/"],
+    ["Some test message with a url https://www.twitch.tv/", "https://www.twitch.tv/"],
+    ["Some test message with a url https://www.x.y/ then text after.", "https://www.x.y/"],
+  ])("gets a url from a message when possible", (input: string, expected: string | undefined) => {
+    expect(getUrlFromMessage(input)).toEqual(expected)
+  })
+
   it("formats a template string with values", () => {
     expect(formatTemplateString("this is a {test} {string}", {})).toEqual("this is a {test} {string}")
     expect(formatTemplateString("this is a {test} {string}", { test: "x" })).toEqual("this is a x {string}")

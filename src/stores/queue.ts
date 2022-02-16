@@ -3,7 +3,7 @@ import { ClipList } from "@/utils/clip-list"
 import type { Clip } from "@/interfaces/clips"
 import { useSettings } from "@/stores/settings"
 import { useUser } from "@/stores/user"
-import { formatTemplateString } from "@/utils/formatter"
+import { formatTemplateString } from "@/utils"
 
 export interface ClipQueue {
   isOpen: boolean
