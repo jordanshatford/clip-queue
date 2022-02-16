@@ -4,6 +4,7 @@ import { deepEqual } from "@/utils"
 export interface Settings {
   allowCommands: boolean
   commandPrefix: string
+  autoRemoveClips: boolean
   sendMsgsInChat: boolean
   sendQueueOpenMsg: boolean
   queueOpenMsg: string
@@ -19,6 +20,7 @@ export const useSettings = defineStore("settings", {
   state: (): Settings => ({
     allowCommands: true,
     commandPrefix: "!cq",
+    autoRemoveClips: true,
     sendMsgsInChat: false,
     sendQueueOpenMsg: false,
     queueOpenMsg: "The queue is open, send twitch clip links in chat to have them added to the queue.",

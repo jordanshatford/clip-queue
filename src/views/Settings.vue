@@ -25,6 +25,17 @@
           </ul>
         </div>
       </v-formgroup>
+      <div>
+        <v-formgroup label="Auto remove clips on moderation?" class="w-full flex justify-between pr-2 pb-0">
+          <v-switch id="autoRemoveClips" v-model="formSettings.autoRemoveClips" />
+        </v-formgroup>
+        <div v-if="formSettings.autoRemoveClips" class="text-left pl-1 cq-text-subtle mb-2">
+          <label>
+            When a user has their chat message deleted, is timed out, or banned, then the clips they submitted will be
+            removed.
+          </label>
+        </div>
+      </div>
       <v-formgroup label="Send bot messages in chat?" class="w-full flex justify-between pr-2">
         <v-switch id="sendMsgsInChat" v-model="formSettings.sendMsgsInChat" />
       </v-formgroup>

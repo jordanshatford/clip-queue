@@ -91,6 +91,10 @@ export const useUser = defineStore("user", {
       }
     },
     onMessageDeleted(c: string, username: string, deletedMessage: string) {
+      const settings = useSettings()
+      if (!settings.autoRemoveClips) {
+        return
+      }
       const url = getUrlFromMessage(deletedMessage)
       if (url) {
         const clipFinder = useClipFinder()
@@ -108,6 +112,10 @@ export const useUser = defineStore("user", {
       }
     },
     onTimeout(c: string, username: string) {
+      const settings = useSettings()
+      if (!settings.autoRemoveClips) {
+        return
+      }
       console.debug("Removing all clips submitter by: ", username)
       const queue = useQueue()
       queue.removeSubmitterClips(username)
