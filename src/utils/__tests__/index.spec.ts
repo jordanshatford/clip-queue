@@ -1,4 +1,4 @@
-import { formatTemplateString, getUrlFromMessage } from "@/utils"
+import { formatTemplateString, getUrlFromMessage, deepEqual } from "@/utils"
 
 describe("index.ts", () => {
   it.each([
@@ -21,5 +21,11 @@ describe("index.ts", () => {
     ).toEqual("this is a x y")
     expect(formatTemplateString("this is a {test} {string}", { x: "y" })).toEqual("this is a {test} {string}")
     expect(formatTemplateString("this is a {test} {test}", { test: "y" })).toEqual("this is a y y")
+  })
+
+  it("checks if two objects are deeply equal to each other", () => {
+    const obj = { test: "1213", test2: "abc" }
+    expect(deepEqual(obj, obj)).toEqual(true)
+    expect(deepEqual(obj, { ...obj, test3: "1" })).toEqual(false)
   })
 })

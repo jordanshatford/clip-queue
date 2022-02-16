@@ -1,4 +1,5 @@
 import { defineStore } from "pinia"
+import { deepEqual } from "@/utils"
 
 export interface Settings {
   commandPrefix: string
@@ -27,16 +28,7 @@ export const useSettings = defineStore("settings", {
   getters: {
     isModified: (state) => {
       return (settings: Settings) => {
-        return !(
-          state.commandPrefix === settings.commandPrefix &&
-          state.sendMsgsInChat === settings.sendMsgsInChat &&
-          state.sendQueueOpenMsg === settings.sendQueueOpenMsg &&
-          state.queueOpenMsg === settings.queueOpenMsg &&
-          state.sendQueueCloseMsg === settings.sendQueueCloseMsg &&
-          state.queueCloseMsg === settings.queueCloseMsg &&
-          state.sendCurrentClipMsg === settings.sendCurrentClipMsg &&
-          state.currentClipMsg === settings.currentClipMsg
-        )
+        return !deepEqual((state as any).$state, settings)
       }
     },
   },
