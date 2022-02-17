@@ -15,8 +15,13 @@ export interface Subreddit {
 }
 
 export async function getSubredditPosts(subreddit: string, numPosts = 100): Promise<SubredditPost[]> {
-  const { data } = await axios.get<{ data: Subreddit }>(`${BASE_URL}/r/${subreddit}/.json?limit=${numPosts}&sort=hot`)
-  return data.data.children
+  try {
+    const { data } = await axios.get<{ data: Subreddit }>(`${BASE_URL}/r/${subreddit}/.json?limit=${numPosts}&sort=hot`)
+    return data.data.children
+  } catch (e) {
+    console.log({ e })
+    return []
+  }
 }
 
 export default {
