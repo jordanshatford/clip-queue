@@ -1,6 +1,5 @@
 <template>
   <div class="mx-0 mt-2">
-    <v-progressbar v-if="percentComplete" variant="brand" :value="percentComplete" />
     <div class="w-full mb-2 mt-1 border-t border-zinc-300 dark:border-zinc-700"></div>
     <div class="float-right">
       <v-button variant="primary" :disabled="clips.length === 0" class="ml-2" @click="emit('clear')">Clear</v-button>
@@ -33,13 +32,11 @@ interface Props {
   title?: string
   clips: Clip[]
   isOpen?: boolean
-  percentComplete?: number
 }
 
 withDefaults(defineProps<Props>(), {
   title: "Queue",
   isOpen: false,
-  percentComplete: 0,
 })
 
 const emit = defineEmits<{

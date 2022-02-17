@@ -16,7 +16,6 @@ const config = {
       "Popular clips rise up in the queue",
       "Clip removal when user is timed-out, banned, or has message deleted",
       "Allows channel moderators to open/close the queue and move to the next/previous clip",
-      "Queue progress indicator",
       "Get clips from subreddit posts automatically",
       "Customize settings as you wish",
       "Dark and light UI themes",

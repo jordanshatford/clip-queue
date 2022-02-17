@@ -19,7 +19,6 @@
     title="Upcoming Clips"
     :clips="queue.upcoming.toArray()"
     :is-open="queue.isOpen"
-    :percent-complete="queue.progress"
     @open="queue.open()"
     @close="queue.close()"
     @remove="queue.remove"

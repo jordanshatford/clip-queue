@@ -21,15 +21,6 @@ export const useQueue = defineStore("queue", {
     current: undefined,
     upcoming: new ClipList(),
   }),
-  getters: {
-    progress: (state) => {
-      const currentClipCount = state.current?.id ? 1 : 0
-      const allClipsCount = state.history.size() + state.upcoming.size() + currentClipCount
-      const clipsLeftCount = state.upcoming.size()
-      const progress = 100 - Math.round((clipsLeftCount / allClipsCount) * 100)
-      return isNaN(progress) ? 0 : progress
-    },
-  },
   actions: {
     init() {
       const localStorageState = localStorage.getItem(LOCAL_STORAGE_KEY)

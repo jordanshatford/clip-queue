@@ -1,7 +1,6 @@
 import { setActivePinia, createPinia } from "pinia"
 import type { Clip } from "@/interfaces/clips"
 import { useQueue } from "@/stores/queue"
-import { ClipList } from "@/utils/clip-list"
 
 describe("clips.ts", () => {
   beforeEach(() => {
@@ -150,29 +149,5 @@ describe("clips.ts", () => {
     queue.add(clip)
     queue.next()
     expect(queue.history.size()).toEqual(0)
-  })
-
-  it("returns the current progress of the queue", () => {
-    const queue = useQueue()
-    expect(queue.progress).toEqual(0)
-    queue.$reset()
-    queue.current = {} as Clip
-    queue.history = new ClipList({} as Clip)
-    queue.upcoming = new ClipList({} as Clip)
-    expect(queue.history.size()).toEqual(1)
-    expect(queue.upcoming.size()).toEqual(1)
-    expect(queue.progress).toEqual(50)
-    queue.$reset()
-    queue.current = {} as Clip
-    queue.history = new ClipList({} as Clip)
-    queue.upcoming = new ClipList({} as Clip, { id: "2" } as Clip)
-    expect(queue.history.size()).toEqual(1)
-    expect(queue.upcoming.size()).toEqual(2)
-    expect(queue.progress).toEqual(33)
-    queue.$reset()
-    queue.current = { id: "test" } as Clip
-    queue.history = new ClipList({} as Clip)
-    queue.upcoming = new ClipList({} as Clip, { id: "2" } as Clip)
-    expect(queue.progress).toEqual(50)
   })
 })
