@@ -4,11 +4,11 @@
       class="flex items-end justify-end h-36 w-full bg-cover"
       :style="'background-image: url(' + clip.thumbnailUrl + ')'"
     >
-      <v-button class="pb-1 mr-2 -mb-2" @click="emit('play')">
-        <v-icon icon="play" class="w-4 h-4" />
+      <v-button class="pb-2 mr-2 -mb-2" @click="emit('play')">
+        <ph-play weight="bold" :size="20" />
       </v-button>
-      <v-button variant="danger" class="pb-1 mr-2 -mb-2" @click="emit('remove')">
-        <v-icon icon="trash" class="w-4 h-4" />
+      <v-button variant="danger" class="pb-2 mr-2 -mb-2" @click="emit('remove')">
+        <ph-trash weight="bold" :size="20" />
       </v-button>
     </div>
     <div class="p-3">
@@ -24,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+import { PhPlay, PhTrash } from "phosphor-vue"
 import type { Clip } from "@/interfaces/clips"
 
 interface Props {

@@ -15,9 +15,11 @@
             @click="queueClipsForSubreddit(subreddit)"
             :disabled="reddit.isLoading(subreddit)"
           >
-            <v-icon
-              :icon="reddit.isLoading(subreddit) ? 'spinner' : 'plus'"
-              class="w-4 h-4"
+            <component
+              :is="reddit.isLoading(subreddit) ? PhCircleNotch : PhPlus"
+              weight="bold"
+              :size="18"
+              class="my-1"
               :class="{ 'animate-spin': reddit.isLoading(subreddit) }"
             />
           </v-button>
@@ -39,9 +41,11 @@
           @click="queueClipsForSubreddit(reddit.custom)"
           :disabled="reddit.isLoading(reddit.custom) || !reddit.custom"
         >
-          <v-icon
-            :icon="reddit.isLoading(reddit.custom) ? 'spinner' : 'plus'"
-            class="w-4 h-4"
+          <component
+            :is="reddit.isLoading(reddit.custom) ? PhCircleNotch : PhPlus"
+            weight="bold"
+            :size="18"
+            class="my-1"
             :class="{ 'animate-spin': reddit.isLoading(reddit.custom) }"
           />
         </v-button>
@@ -51,6 +55,7 @@
 </template>
 
 <script setup lang="ts">
+import { PhPlus, PhCircleNotch } from "phosphor-vue"
 import { useQueue } from "@/stores/queue"
 import { useReddit, DEFAULT_SUBREDDITS } from "@/stores/reddit"
 import { useClipFinder } from "@/stores/clip-finder"

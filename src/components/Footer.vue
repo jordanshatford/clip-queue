@@ -5,7 +5,7 @@
       <span class="inline-flex justify-center mt-4 space-x-5 sm:ml-auto sm:mt-0 sm:justify-start">
         <p class="cq-text">
           <a :href="github" class="text-3xl hover:text-violet-500 dark:hover:text-violet-500" target="_blank">
-            <v-icon :icon="['fab', 'github']" />
+            <ph-github-logo />
           </a>
         </p>
       </span>
@@ -14,6 +14,7 @@
 </template>
 
 <script setup lang="ts">
+import { PhGithubLogo } from "phosphor-vue"
 import config from "@/assets/config"
 
 const { creator, github, year } = config.App

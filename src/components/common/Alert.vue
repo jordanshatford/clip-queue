@@ -1,7 +1,7 @@
 <template>
   <div
     role="alert"
-    class="rounded-lg py-2 px-4 text-base"
+    class="rounded-lg py-2 px-4 text-base flex justify-center"
     :class="{
       'cq-alert-info': variant === 'info',
       'cq-alert-success': variant === 'success',
@@ -9,23 +9,27 @@
       'cq-alert-danger': variant === 'danger',
     }"
   >
-    <v-icon
-      :icon="
+    <component
+      :is="
         variant === 'info'
-          ? 'info-circle'
+          ? PhInfo
           : variant === 'success'
-          ? 'check-circle'
+          ? PhCheckCircle
           : variant === 'warning'
-          ? 'exclamation-triangle'
-          : 'times-circle'
+          ? PhWarning
+          : PhXCircle
       "
-      class="mr-2"
+      weight="fill"
+      :size="20"
+      class="mr-1 mt-0.5"
     />
     <slot />
   </div>
 </template>
 
 <script setup lang="ts">
+import { PhInfo, PhCheckCircle, PhWarning, PhXCircle } from "phosphor-vue"
+
 interface Props {
   variant?: "info" | "success" | "warning" | "danger"
 }

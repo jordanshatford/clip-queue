@@ -4,14 +4,14 @@
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <button @click="() => (showMobileMenu = !showMobileMenu)" class="border-none focus:outline-none p-2">
-            <v-icon
+            <ph-x
               v-if="showMobileMenu && user.isLoggedIn"
-              icon="times"
+              weight="bold"
               class="text-2xl dark:text-zinc-200 hover:text-red-500 dark:hover:text-red-500"
             />
-            <v-icon
+            <ph-list
               v-if="!showMobileMenu && user.isLoggedIn"
-              icon="bars"
+              weight="bold"
               class="text-2xl dark:text-zinc-200 hover:text-violet-500 dark:hover:text-violet-500"
             />
           </button>
@@ -51,6 +51,7 @@
 </template>
 
 <script setup lang="ts">
+import { PhList, PhX } from "phosphor-vue"
 import { ref } from "vue"
 import NavItem from "@/components/nav/NavItem.vue"
 import ThemeChangeButton from "@/components/ThemeChangeButton.vue"

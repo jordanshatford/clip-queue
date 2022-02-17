@@ -4,7 +4,6 @@ import { createPinia } from "pinia"
 import App from "@/App.vue"
 import router from "@/router"
 import sentry from "@/services/sentry"
-import FontAwesomeIcon from "@/assets/fontawesome"
 import Alert from "@/components/common/Alert.vue"
 import FormGroup from "@/components/common/FormGroup.vue"
 import Input from "@/components/common/Input.vue"
@@ -15,7 +14,6 @@ import Button from "@/components/common/Button.vue"
 const app = createApp(App)
 sentry.init(app)
 app.use(createPinia())
-app.component("v-icon", FontAwesomeIcon)
 app.component("v-alert", Alert)
 app.component("v-formgroup", FormGroup)
 app.component("v-input", Input)

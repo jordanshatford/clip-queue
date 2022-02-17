@@ -17,17 +17,17 @@
             :href="clip.url"
             target="_blank"
             rel="noreferrer"
-            className="cq-text-subtle text-lg no-underline hover:text-zinc-400 dark:hover:text-zinc-200"
+            className="cq-text-subtle text-lg no-underline hover:text-zinc-600 dark:hover:text-zinc-200"
           >
-            <v-icon icon="link" />
+            <ph-arrow-square-out weight="bold" :size="24" class="inline-block mb-3" />
           </a>
         </span>
         <div class="text-base float-right">
           <v-button :disabled="previousDisabled" class="mr-2" @click="emit('previous')">
-            <v-icon icon="backward" />
+            <ph-skip-back weight="bold" :size="24" />
           </v-button>
           <v-button :disabled="nextDisabled" @click="emit('next')">
-            <v-icon icon="forward" />
+            <ph-skip-forward weight="bold" :size="24" />
           </v-button>
         </div>
       </h2>
@@ -52,6 +52,7 @@
 </template>
 
 <script setup lang="ts">
+import { PhArrowSquareOut, PhSkipBack, PhSkipForward } from "phosphor-vue"
 import { computed } from "vue"
 import { formatDistanceToNow, parseISO } from "date-fns"
 import type { Clip } from "@/interfaces/clips"
