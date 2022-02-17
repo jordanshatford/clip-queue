@@ -3,18 +3,7 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-          <button @click="() => (showMobileMenu = !showMobileMenu)" class="border-none focus:outline-none p-2">
-            <ph-x
-              v-if="showMobileMenu && user.isLoggedIn"
-              weight="bold"
-              class="text-2xl dark:text-zinc-200 hover:text-red-500 dark:hover:text-red-500"
-            />
-            <ph-list
-              v-if="!showMobileMenu && user.isLoggedIn"
-              weight="bold"
-              class="text-2xl dark:text-zinc-200 hover:text-violet-500 dark:hover:text-violet-500"
-            />
-          </button>
+          <hamburger v-if="user.isLoggedIn" v-model="showMobileMenu" />
           <theme-change-button />
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
@@ -51,12 +40,12 @@
 </template>
 
 <script setup lang="ts">
-import { PhList, PhX } from "phosphor-vue"
 import { ref } from "vue"
 import NavItem from "@/components/nav/NavItem.vue"
 import ThemeChangeButton from "@/components/ThemeChangeButton.vue"
 import { useUser } from "@/stores/user"
 import AuthButton from "@/components/AuthButton.vue"
+import Hamburger from "@/components/Hamburger.vue"
 import { routes } from "@/router"
 import config from "@/assets/config"
 
