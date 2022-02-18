@@ -1,7 +1,7 @@
 import { defineStore } from "pinia"
+import type { Userstate } from "tmi.js"
 import { env } from "@/assets/config"
 import twitch, { TwitchChat, type AuthInfo } from "@/services/twitch"
-import type { Userstate } from "tmi.js"
 import { useSettings } from "@/stores/settings"
 import commands from "@/utils/commands"
 import { getUrlFromMessage } from "@/utils"

@@ -41,13 +41,13 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import NavItem from "@/components/nav/NavItem.vue"
-import ThemeChangeButton from "@/components/ThemeChangeButton.vue"
-import { useUser } from "@/stores/user"
-import AuthButton from "@/components/AuthButton.vue"
-import Hamburger from "@/components/Hamburger.vue"
 import { routes } from "@/router"
 import config from "@/assets/config"
+import { useUser } from "@/stores/user"
+import NavItem from "@/components/nav/NavItem.vue"
+import ThemeChangeButton from "@/components/ThemeChangeButton.vue"
+import AuthButton from "@/components/AuthButton.vue"
+import Hamburger from "@/components/Hamburger.vue"
 
 const { title } = config.App
 const user = useUser()

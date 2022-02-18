@@ -1,11 +1,11 @@
+import { defineStore } from "pinia"
 import { env } from "@/assets/config"
 import type { Clip } from "@/interfaces/clips"
 import type { TwitchClip, TwitchGame } from "@/services/twitch"
-import { defineStore } from "pinia"
 import { useReddit } from "@/stores/reddit"
 import reddit from "@/services/reddit"
 import twitch from "@/services/twitch"
-import { useUser } from "./user"
+import { useUser } from "@/stores/user"
 
 const { CLIENT_ID } = env
 

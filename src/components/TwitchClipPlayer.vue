@@ -52,8 +52,8 @@
 </template>
 
 <script setup lang="ts">
-import { PhArrowSquareOut, PhSkipBack, PhSkipForward } from "phosphor-vue"
 import { computed } from "vue"
+import { PhArrowSquareOut, PhSkipBack, PhSkipForward } from "phosphor-vue"
 import { formatDistanceToNow, parseISO } from "date-fns"
 import type { Clip } from "@/interfaces/clips"
 

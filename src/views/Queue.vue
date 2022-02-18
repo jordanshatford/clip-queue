@@ -29,8 +29,8 @@
 
 <script setup lang="ts">
 import TwitchClipPlayer from "@/components/TwitchClipPlayer.vue"
-import { useQueue } from "@/stores/queue"
 import ClipQueue from "@/components/queue/ClipQueue.vue"
+import { useQueue } from "@/stores/queue"
 
 const queue = useQueue()
 </script>

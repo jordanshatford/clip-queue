@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils"
-import ThemeChangeButton from "@/components/ThemeChangeButton.vue"
 import { createTestingPinia } from "@pinia/testing"
+import ThemeChangeButton from "@/components/ThemeChangeButton.vue"
 
 describe("ThemeChangeButton.vue", () => {
   const wrapper = shallowMount(ThemeChangeButton, {
