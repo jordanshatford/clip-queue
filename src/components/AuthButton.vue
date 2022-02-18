@@ -1,10 +1,12 @@
 <template>
   <v-button variant="brand" @click="() => (isLoggedIn ? logoutHandler() : login())">
+    <span><ph-twitch-logo weight="bold" :size="20" class="inline" /></span>
     {{ isLoggedIn ? "Logout" : "Login" }}
   </v-button>
 </template>
 
 <script setup lang="ts">
+import { PhTwitchLogo } from "phosphor-vue"
 import { useRouter } from "vue-router"
 
 interface Props {
