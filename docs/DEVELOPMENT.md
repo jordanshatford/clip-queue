@@ -33,7 +33,7 @@ This can be done by filling out and copying the `example.env` file to a `.env` f
 
 Once the project dependencies are installed and environment variables specified you can start a development server using:
 ```bash
-pnpm run dev
+pnpm dev
 ```
 
 ### With Docker
@@ -49,12 +49,12 @@ docker-compose up --build
 You can build a production version of the application using:
 
 ```bash
-pnpm run build
+pnpm build
 ```
 
 ## Linting
 You can lint the project using:
 
 ```bash
-pnpm run lint
+pnpm lint
 ```

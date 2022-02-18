@@ -21,7 +21,10 @@
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <theme-change-button class="hidden sm:block mr-2" />
-          <auth-button :isLoggedIn="user.isLoggedIn" :login="user.redirect" :logout="user.logout" />
+          <v-button variant="brand" @click="() => handleAuthButtonClick()">
+            <span><ph-twitch-logo weight="bold" :size="20" class="inline" /></span>
+            {{ user.isLoggedIn ? "Logout" : "Login" }}
+          </v-button>
         </div>
       </div>
     </div>
@@ -41,15 +44,26 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
+import { PhTwitchLogo } from "phosphor-vue"
+import { useRouter } from "vue-router"
 import { routes } from "@/router"
 import config from "@/assets/config"
 import { useUser } from "@/stores/user"
 import NavItem from "@/components/nav/NavItem.vue"
 import ThemeChangeButton from "@/components/ThemeChangeButton.vue"
-import AuthButton from "@/components/AuthButton.vue"
 import Hamburger from "@/components/Hamburger.vue"
 
 const { title } = config.App
 const user = useUser()
+const router = useRouter()
 let showMobileMenu = ref(false)
+
+async function handleAuthButtonClick() {
+  if (user.isLoggedIn) {
+    user.logout()
+    await router.push({ path: "/" })
+  } else {
+    user.redirect()
+  }
+}
 </script>
