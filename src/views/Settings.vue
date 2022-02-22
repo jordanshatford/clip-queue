@@ -83,16 +83,28 @@
       <v-alert v-if="showSaveMsg" variant="success">Save successful</v-alert>
     </div>
   </form>
+  <div class="cq-card mx-auto p-2 max-w-lg mt-2">
+    <v-formgroup>
+      <v-button class="w-full" variant="danger" :disabled="clipFinder.cacheEmpty" @click="clipFinder.$reset()">
+        Purge Cache
+      </v-button>
+      <label class="cq-text-subtle"
+        >Twitch clips submitted are cached for future use, this clears all cached clip information.</label
+      >
+    </v-formgroup>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue"
 import { useSettings, type Settings } from "@/stores/settings"
 import { useQueue } from "@/stores/queue"
+import { useClipFinder } from "@/stores/clip-finder"
 import commands from "@/utils/commands"
 
 const queue = useQueue()
 const settings = useSettings()
+const clipFinder = useClipFinder()
 
 let showSaveMsg = ref(false)
 let formKey = ref(1)

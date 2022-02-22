@@ -17,6 +17,9 @@ export const useClipFinder = defineStore("clip-finder", {
     games: {} as Record<string, TwitchGame>,
   }),
   getters: {
+    cacheEmpty: (state) => {
+      return Object.keys(state.clips).length === 0 || Object.keys(state.games).length === 0
+    },
     getClip: (state) => {
       return async (id: string): Promise<TwitchClip> => {
         const cachedClip = state.clips?.[id]
