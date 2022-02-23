@@ -46,7 +46,7 @@
 import { ref } from "vue"
 import { PhTwitchLogo } from "phosphor-vue"
 import { useRouter } from "vue-router"
-import { routes } from "@/router"
+import { routes, RouteNameConstants } from "@/router"
 import config from "@/assets/config"
 import { useUser } from "@/stores/user"
 import NavItem from "@/components/nav/NavItem.vue"
@@ -61,7 +61,7 @@ let showMobileMenu = ref(false)
 async function handleAuthButtonClick() {
   if (user.isLoggedIn) {
     user.logout()
-    await router.push({ path: "/" })
+    await router.push({ name: RouteNameConstants.LANDING })
   } else {
     user.redirect()
   }

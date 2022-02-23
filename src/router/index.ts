@@ -7,28 +7,38 @@ import Reddit from "@/views/Reddit.vue"
 import Landing from "@/views/Landing.vue"
 import Settings from "@/views/Settings.vue"
 
+export enum RouteNameConstants {
+  LANDING = "landing",
+  QUEUE = "queue",
+  REDDIT = "reddit",
+  SETTINGS = "settings",
+}
+
 export const routes: Array<RouteRecordRaw> = [
   {
     path: "/queue",
-    name: "Queue",
+    name: RouteNameConstants.QUEUE,
     component: Queue,
     meta: {
+      title: "Queue",
       requiresAuth: true,
     },
   },
   {
     path: "/reddit",
-    name: "From Reddit",
+    name: RouteNameConstants.REDDIT,
     component: Reddit,
     meta: {
+      title: "From Reddit",
       requiresAuth: true,
     },
   },
   {
     path: "/settings",
-    name: "Settings",
+    name: RouteNameConstants.SETTINGS,
     component: Settings,
     meta: {
+      title: "Settings",
       requiresAuth: true,
     },
   },
@@ -39,13 +49,13 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "Landing",
+      name: RouteNameConstants.LANDING,
       component: Landing,
     },
     ...routes,
     {
       path: "/:pathMatch(.*)*",
-      redirect: "/",
+      redirect: { name: RouteNameConstants.LANDING },
     },
   ],
 })
@@ -57,10 +67,10 @@ router.beforeEach((to, from, next) => {
     if (authInfo !== null) {
       user.login(authInfo)
     }
-    next({ path: "/queue", hash: "" })
+    next({ name: RouteNameConstants.QUEUE, hash: "" })
     return
   } else if (!user.isLoggedIn && to.meta.requiresAuth) {
-    next({ path: "/" })
+    next({ name: RouteNameConstants.LANDING })
     return
   }
   next()

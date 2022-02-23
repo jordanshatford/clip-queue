@@ -1,6 +1,6 @@
 <template>
   <router-link v-if="route" :to="route.path" :class="classNames">
-    {{ route.name }}
+    {{ route?.meta?.title }}
   </router-link>
 </template>
 
