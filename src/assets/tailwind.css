@@ -55,4 +55,16 @@
   .cq-alert-danger {
     @apply bg-red-100 dark:bg-red-200 text-red-700;
   }
+  .cq-form {
+    @apply cq-card mx-auto p-3 max-w-lg;
+  }
+  .cq-form-group {
+    @apply py-1;
+  }
+  .cq-toggle-form-group {
+    @apply cq-form-group w-full flex justify-between pr-1 pb-0;
+  }
+  .cq-form-group-label {
+    @apply cq-text float-left inline-block pl-1 mb-2;
+  }
 }
