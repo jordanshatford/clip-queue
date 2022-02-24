@@ -13,7 +13,7 @@ function init(app: App) {
       integrations: [
         new BrowserTracing({
           routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-          tracingOrigins: ["localhost", "clipqueue.vercel.app", /^\//],
+          tracingOrigins: ["localhost", env.SENTRY_TRACING_ORIGIN, /^\//],
         }),
       ],
       tracesSampleRate: 0.2,
