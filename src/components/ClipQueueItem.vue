@@ -5,10 +5,10 @@
       :style="'background-image: url(' + clip.thumbnailUrl + ')'"
     >
       <v-button class="pb-2 mr-2 -mb-2" @click="emit('play')">
-        <ph-play weight="bold" :size="20" />
+        <ph-play weight="bold" :size="20"></ph-play>
       </v-button>
       <v-button variant="danger" class="pb-2 mr-2 -mb-2" @click="emit('remove')">
-        <ph-trash weight="bold" :size="20" />
+        <ph-trash weight="bold" :size="20"></ph-trash>
       </v-button>
     </div>
     <div class="p-3">

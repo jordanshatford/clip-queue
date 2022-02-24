@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils"
-import Alert from "@/components/common/Alert.vue"
+import Alert from "@/components/ui/Alert.vue"
 
 describe("Alert.vue", () => {
   const wrapper = shallowMount(Alert)

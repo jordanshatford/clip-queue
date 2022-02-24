@@ -1,5 +1,5 @@
 <template>
-  <twitch-clip-player
+  <clip-player
     v-if="queue.current && queue.current.id"
     :clip="queue.current"
     :autoplay="true"
@@ -7,7 +7,7 @@
     :next-disabled="queue.upcoming.empty()"
     @previous="queue.previous()"
     @next="queue.next()"
-  />
+  ></clip-player>
   <div v-else class="text-center">
     <p class="cq-title">Queue Open</p>
     <p class="cq-text">Start sending clips now for them to be added to the queue.</p>
@@ -24,12 +24,12 @@
     @remove="queue.remove"
     @play="queue.play"
     @clear="queue.clear"
-  />
+  ></clip-queue>
 </template>
 
 <script setup lang="ts">
-import TwitchClipPlayer from "@/components/TwitchClipPlayer.vue"
-import ClipQueue from "@/components/queue/ClipQueue.vue"
+import ClipPlayer from "@/components/ClipPlayer.vue"
+import ClipQueue from "@/components/ClipQueue.vue"
 import { useQueue } from "@/stores/queue"
 
 const queue = useQueue()

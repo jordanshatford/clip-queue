@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils"
-import TextArea from "@/components/common/TextArea.vue"
+import TextArea from "@/components/ui/TextArea.vue"
 
 describe("TextArea.vue", () => {
   const wrapper = shallowMount(TextArea, {

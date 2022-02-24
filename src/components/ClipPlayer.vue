@@ -19,15 +19,15 @@
             rel="noreferrer"
             className="cq-text-subtle text-lg no-underline hover:text-zinc-600 dark:hover:text-zinc-200"
           >
-            <ph-arrow-square-out weight="bold" :size="24" class="inline-block mb-3" />
+            <ph-arrow-square-out weight="bold" :size="24" class="inline-block mb-3"></ph-arrow-square-out>
           </a>
         </span>
         <div class="text-base float-right">
           <v-button :disabled="previousDisabled" class="mr-2" @click="emit('previous')">
-            <ph-skip-back weight="bold" :size="24" />
+            <ph-skip-back weight="bold" :size="24"></ph-skip-back>
           </v-button>
           <v-button :disabled="nextDisabled" @click="emit('next')">
-            <ph-skip-forward weight="bold" :size="24" />
+            <ph-skip-forward weight="bold" :size="24"></ph-skip-forward>
           </v-button>
         </div>
       </h2>

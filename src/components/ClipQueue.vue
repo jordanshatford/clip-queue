@@ -19,13 +19,13 @@
         @play="emit('play', clip)"
         @remove="emit('remove', clip)"
         class="text-left flex-shrink-0 mr-2"
-      />
+      ></clip-queue-item>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import ClipQueueItem from "@/components/queue/ClipQueueItem.vue"
+import ClipQueueItem from "@/components/ClipQueueItem.vue"
 import type { Clip } from "@/interfaces/clips"
 
 interface Props {

@@ -1,18 +1,18 @@
 <template>
   <div class="min-h-screen h-full dark:bg-zinc-900">
     <div class="h-full">
-      <Nav />
+      <app-nav-bar></app-nav-bar>
       <main class="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-5 text-center">
-        <router-view />
+        <router-view></router-view>
       </main>
     </div>
   </div>
-  <Footer />
+  <app-footer></app-footer>
 </template>
 
 <script setup lang="ts">
-import Nav from "@/components/nav/Nav.vue"
-import Footer from "./components/Footer.vue"
+import AppNavBar from "@/components/AppNavBar.vue"
+import AppFooter from "./components/AppFooter.vue"
 import { useTheme } from "@/stores/theme"
 import { useSettings } from "./stores/settings"
 import { useQueue, LOCAL_STORAGE_KEY as QUEUE_KEY } from "@/stores/queue"

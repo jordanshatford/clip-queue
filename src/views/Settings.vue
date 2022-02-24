@@ -82,7 +82,7 @@
       <v-button class="mr-2" type="submit" :disabled="!settings.isModified(formSettings)">Save</v-button>
       <v-button type="reset" variant="danger" :disabled="!settings.isModified(formSettings)">Cancel</v-button>
     </div>
-    <v-alert v-if="showSaveMsg" variant="success">Save successful</v-alert>
+    <v-alert v-if="showSaveMsg" variant="success" class="mt-2">Save successful</v-alert>
   </form>
   <div class="cq-form mt-2">
     <v-button class="w-full" variant="danger" :disabled="clipFinder.cacheEmpty" @click="clipFinder.$reset()">

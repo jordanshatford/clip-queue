@@ -2,7 +2,13 @@
   <p class="cq-title">From Reddit</p>
   <p class="cq-text flex items-center justify-center">
     Queue clips found in the top
-    <v-input class="inline py-1 px-1 w-16 mx-1" min="1" max="100" type="number" v-model.trim="reddit.postsToCheck" />
+    <v-input
+      class="inline py-1 px-1 w-16 mx-1"
+      min="1"
+      max="100"
+      type="number"
+      v-model.trim="reddit.postsToCheck"
+    ></v-input>
     posts.
   </p>
   <div class="grid gap-6 grid-cols-1 mt-3">
@@ -21,7 +27,7 @@
               :size="18"
               class="my-1"
               :class="{ 'animate-spin': reddit.isLoading(subreddit) }"
-            />
+            ></component>
           </v-button>
         </div>
       </div>
@@ -35,7 +41,7 @@
           type="text"
           maxlength="25"
           v-model.trim="reddit.custom"
-        />
+        ></v-input>
         <v-button
           class="m-3 float-right"
           @click="queueClipsForSubreddit(reddit.custom)"
@@ -47,7 +53,7 @@
             :size="18"
             class="my-1"
             :class="{ 'animate-spin': reddit.isLoading(reddit.custom) }"
-          />
+          ></component>
         </v-button>
       </div>
     </div>

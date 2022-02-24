@@ -22,8 +22,8 @@
       weight="fill"
       :size="20"
       class="mr-1 mt-0.5"
-    />
-    <slot />
+    ></component>
+    <slot></slot>
   </div>
 </template>
 

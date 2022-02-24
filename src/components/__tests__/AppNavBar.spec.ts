@@ -1,10 +1,10 @@
 import { shallowMount } from "@vue/test-utils"
 import { createTestingPinia } from "@pinia/testing"
-import Nav from "@/components/nav/Nav.vue"
+import AppNavBar from "@/components/AppNavBar.vue"
 import config from "@/assets/config"
 
-describe("Nav.vue", () => {
-  const wrapper = shallowMount(Nav, {
+describe("AppNavBar.vue", () => {
+  const wrapper = shallowMount(AppNavBar, {
     global: {
       plugins: [createTestingPinia()],
     },

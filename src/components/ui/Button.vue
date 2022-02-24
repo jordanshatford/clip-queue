@@ -7,7 +7,7 @@
       'cq-btn-brand': variant === 'brand',
     }"
   >
-    <slot />
+    <slot></slot>
   </button>
 </template>
 

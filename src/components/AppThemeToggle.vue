@@ -3,8 +3,8 @@
     @click="() => theme.toggle()"
     class="text-2xl border-none focus:outline-none p-2 hover:text-violet-500 dark:hover:text-violet-500 text-zinc-500 dark:text-zinc-200 dark:bg-zinc-800"
   >
-    <ph-sun v-if="theme.isDark" weight="bold" />
-    <ph-moon v-else weight="bold" />
+    <ph-sun v-if="theme.isDark" weight="bold"></ph-sun>
+    <ph-moon v-else weight="bold"></ph-moon>
   </button>
 </template>
 

@@ -1,9 +1,9 @@
 import { shallowMount } from "@vue/test-utils"
-import Footer from "@/components/Footer.vue"
+import AppFooter from "@/components/AppFooter.vue"
 import config from "@/assets/config"
 
-describe("Footer.vue", () => {
-  const wrapper = shallowMount(Footer)
+describe("AppFooter.vue", () => {
+  const wrapper = shallowMount(AppFooter)
 
   it("mounts successfully", () => {
     expect(wrapper.exists()).toEqual(true)

@@ -1,9 +1,9 @@
 import { shallowMount } from "@vue/test-utils"
 import { createTestingPinia } from "@pinia/testing"
-import ThemeChangeButton from "@/components/ThemeChangeButton.vue"
+import AppThemeToggle from "@/components/AppThemeToggle.vue"
 
-describe("ThemeChangeButton.vue", () => {
-  const wrapper = shallowMount(ThemeChangeButton, {
+describe("AppThemeToggle.vue", () => {
+  const wrapper = shallowMount(AppThemeToggle, {
     global: {
       plugins: [createTestingPinia()],
     },

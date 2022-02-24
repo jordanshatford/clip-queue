@@ -1,5 +1,5 @@
 <template>
-  <textarea class="cq-input text-left" :value="modelValue" @input="emitUpdate($event.target)" :rows="rows" />
+  <textarea class="cq-input text-left" :value="modelValue" @input="emitUpdate($event.target)" :rows="rows"></textarea>
 </template>
 
 <script setup lang="ts">

@@ -1,9 +1,9 @@
 import type { RouteRecordRaw } from "vue-router"
 import { shallowMount } from "@vue/test-utils"
-import NavItem from "@/components/nav/NavItem.vue"
+import AppNavBarItem from "@/components/AppNavBarItem.vue"
 
-describe("NavItem.vue", () => {
-  const wrapper = shallowMount(NavItem, {
+describe("AppNavBarItem.vue", () => {
+  const wrapper = shallowMount(AppNavBarItem, {
     props: {
       isMobileMenu: false,
       route: {

@@ -1,8 +1,8 @@
 import { shallowMount } from "@vue/test-utils"
-import TwitchClipPlayer from "@/components/TwitchClipPlayer.vue"
+import ClipPlayer from "@/components/ClipPlayer.vue"
 
-describe("TwitchClipPlayer.vue", () => {
-  const wrapper = shallowMount(TwitchClipPlayer, {
+describe("ClipPlayer.vue", () => {
+  const wrapper = shallowMount(ClipPlayer, {
     props: {
       clip: {
         id: "test",
