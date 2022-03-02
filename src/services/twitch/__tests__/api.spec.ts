@@ -31,16 +31,18 @@ vi.mock("axios", () => {
 })
 
 describe("twitch-api.ts", () => {
-  it("gets a twitch clip from twitch api", async () => {
-    const clipInfo = await TwitchAPI.getClip("testid", "", "")
+  it("gets a twitch clips from twitch api", async () => {
+    const clips = await TwitchAPI.getClips(["testid"], "", "")
+    const clipInfo = clips[0]
     expect(clipInfo.id).toEqual("testid")
     expect(clipInfo.title).toEqual("Test title")
     expect(clipInfo.broadcaster_name).toEqual("testbroadcast")
     expect(axios.get).toHaveBeenCalledTimes(1)
   })
 
-  it("gets a twitch game from twitch api", async () => {
-    const gameInfo = await TwitchAPI.getGame("gameid", "", "")
+  it("gets a twitch games from twitch api", async () => {
+    const games = await TwitchAPI.getGames(["gameid"], "", "")
+    const gameInfo = games[0]
     expect(gameInfo.id).toEqual("gameid")
     expect(gameInfo.name).toEqual("Test Game")
     expect(axios.get).toHaveBeenCalledTimes(2)

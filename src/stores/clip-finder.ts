@@ -20,28 +20,37 @@ export const useClipFinder = defineStore("clip-finder", {
     cacheEmpty: (state) => {
       return Object.keys(state.clips).length === 0 || Object.keys(state.games).length === 0
     },
-    getClip: (state) => {
-      return async (id: string): Promise<TwitchClip> => {
-        const cachedClip = state.clips?.[id]
-        if (cachedClip) {
-          return cachedClip
+    getClips: (state) => {
+      return async (ids: string[]): Promise<Clip[]> => {
+        const unknownClipIds = [...new Set(ids.filter((id) => !(id in state.clips)))]
+        if (unknownClipIds) {
+          const user = useUser()
+          const clips = await twitch.getClips(unknownClipIds, CLIENT_ID, user?.accessToken ?? "")
+          clips.forEach((c) => {
+            state.clips[c.id] = c
+          })
+          const unknownGameIds = [...new Set(clips.map((c) => c.game_id).filter((id) => !(id in state.games)))]
+          const games = await twitch.getGames(unknownGameIds, CLIENT_ID, user?.accessToken ?? "")
+          games.forEach((g) => {
+            state.games[g.id] = g
+          })
         }
-        const user = useUser()
-        const clip = await twitch.getClip(id, CLIENT_ID, user?.accessToken ?? "")
-        state.clips[id] = clip
-        return clip
-      }
-    },
-    getGame: (state) => {
-      return async (id: string): Promise<TwitchGame> => {
-        const cachedGame = state.games?.[id]
-        if (cachedGame) {
-          return cachedGame
-        }
-        const user = useUser()
-        const game = await twitch.getGame(id, CLIENT_ID, user?.accessToken ?? "")
-        state.games[id] = game
-        return game
+        return ids
+          .filter((id) => id in state.clips)
+          .map((id) => {
+            const clip = state.clips?.[id]
+            const game = state.games?.[clip?.game_id]
+            return {
+              id: clip.id,
+              title: clip?.title,
+              channel: clip?.broadcaster_name,
+              game: game?.name,
+              timestamp: clip?.created_at,
+              url: clip?.url,
+              embedUrl: clip?.embed_url,
+              thumbnailUrl: clip?.thumbnail_url,
+            }
+          })
       }
     },
   },
@@ -53,44 +62,32 @@ export const useClipFinder = defineStore("clip-finder", {
         this.$patch(savedState)
       }
     },
-    async getClipsFromSubreddit(
-      subreddit: string,
-      callback?: (clip: Clip, done: boolean) => void
-    ): Promise<Clip[] | undefined> {
+    async getClipsFromSubreddit(subreddit: string): Promise<Clip[]> {
       const r = useReddit()
       const subredditPosts = await reddit.getSubredditPosts(subreddit, r.postsToCheck)
-      let clips: Clip[] = []
-      for (const post of subredditPosts) {
-        if (post.data?.stickied) {
-          continue
+      const filtedSubredditPosts = subredditPosts.filter((p) => {
+        const clipId = twitch.getClipIdFromUrl(p?.data?.url) !== undefined
+        return !p.data?.stickied && clipId
+      })
+      const postInfo = filtedSubredditPosts.map((p) => {
+        return {
+          id: twitch.getClipIdFromUrl(p?.data.url) as string,
+          submitter: p?.data?.author,
         }
-        const clip = await this.getTwitchClip(post?.data?.url)
-        if (clip) {
-          callback?.({ ...clip, submitter: post.data.author }, false)
-          clips = [...clips, { ...clip, submitter: post.data.author }]
-        }
-      }
-      callback?.({}, true)
+      })
+      const clipIds = postInfo.map((i) => i.id)
+      const clips = await this.getClips(clipIds)
+      clips.map((c) => {
+        const submitter = postInfo.findIndex((v) => v.id === c.id)
+        c.submitter = postInfo?.[submitter]?.submitter
+      })
       return clips
     },
     async getTwitchClip(url: string): Promise<Clip | undefined> {
-      if (!twitch.isClipUrl(url)) {
-        return
-      }
       const id = twitch.getClipIdFromUrl(url)
-      const clip = await this.getClip(id)
-      if (clip) {
-        const game = await this.getGame(clip.game_id)
-        return {
-          id,
-          title: clip?.title,
-          channel: clip?.broadcaster_name,
-          game: game?.name,
-          timestamp: clip?.created_at,
-          url: clip?.url,
-          embedUrl: clip?.embed_url,
-          thumbnailUrl: clip?.thumbnail_url,
-        }
+      if (id) {
+        const response = await this.getClips([id])
+        return response[0]
       }
     },
   },

@@ -72,12 +72,9 @@ const queue = useQueue()
 async function queueClipsForSubreddit(subreddit: string) {
   reddit.setLoading(subreddit, true)
   const clipFinder = useClipFinder()
-  await clipFinder.getClipsFromSubreddit(subreddit, (clip, done) => {
-    if (!done) {
-      queue.add(clip, true)
-    } else {
-      reddit.setLoading(subreddit, false)
-    }
+  const clips = await clipFinder.getClipsFromSubreddit(subreddit)
+  clips.forEach((c) => {
+    queue.add(c, true)
   })
   reddit.setLoading(subreddit, false)
 }

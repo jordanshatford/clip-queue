@@ -33,7 +33,8 @@ describe("utils.ts", () => {
       "https://clips.twitch.tv/FantasticQuaintWrenchPogChamp-seNiJaPPjYls0ID8",
       "FantasticQuaintWrenchPogChamp-seNiJaPPjYls0ID8",
     ],
-  ])("gets an id from a clip url", (input: string, expected: string) => {
+    ["", undefined],
+  ])("gets an id from a clip url", (input: string, expected: string | undefined) => {
     expect(getClipIdFromUrl(input)).toEqual(expected)
   })
 })

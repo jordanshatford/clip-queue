@@ -18,32 +18,40 @@ const testClip = {
 } as TwitchClip
 
 vi.mock("@/services/twitch", () => {
-  const mockFunction = vi.fn((id: string) => {
-    return {
-      id,
-      game_id: "testgame",
-      title: "Test title",
-      broadcaster_name: "testbroadcast",
-      created_at: "",
-      thumbnail_url: "",
-      url: "https://clips.twitch.tv/CoyAuspiciousLarkDeIlluminati-2bABUuW_9EbnIv6j",
-      embed_url: "https://clips.twitch.tv/CoyAuspiciousLarkDeIlluminati-2bABUuW_9EbnIv6j",
-    } as TwitchClip
+  const mockFunction = vi.fn((ids: string[]) => {
+    return ids.map((id) => {
+      return {
+        id,
+        game_id: "testgame",
+        title: "Test title",
+        broadcaster_name: "testbroadcast",
+        created_at: "",
+        thumbnail_url: "",
+        url: "https://clips.twitch.tv/CoyAuspiciousLarkDeIlluminati-2bABUuW_9EbnIv6j",
+        embed_url: "https://clips.twitch.tv/CoyAuspiciousLarkDeIlluminati-2bABUuW_9EbnIv6j",
+      } as TwitchClip
+    })
   })
-  const mockFunction2 = vi.fn((id: string) => {
-    return { id, name: "Test Game" } as TwitchGame
+  const mockFunction2 = vi.fn((ids: string[]) => {
+    return ids.map((id) => {
+      return { id, name: "Test Game" } as TwitchGame
+    })
   })
   return {
     default: {
-      getClip: mockFunction,
-      getGame: mockFunction2,
-      isClipUrl: vi.fn((u: string) => {
-        return u.includes("twitch")
-      }),
-      getClipIdFromUrl: vi.fn((u: string) => {
-        const uri = new URL(u)
-        const idStart = uri.pathname.lastIndexOf("/")
-        return uri.pathname.slice(idStart).split("?")[0].slice(1)
+      getClips: mockFunction,
+      getGames: mockFunction2,
+      getClipIdFromUrl: vi.fn((url: string) => {
+        if (!url.includes("twitch")) {
+          return undefined
+        }
+        try {
+          const uri = new URL(url)
+          const idStart = uri.pathname.lastIndexOf("/")
+          return uri.pathname.slice(idStart).split("?")[0].slice(1)
+        } catch {
+          return undefined
+        }
       }),
     },
   }
@@ -121,15 +129,10 @@ describe("clip-finder.ts", () => {
   })
 
   it("returns clips from a subreddit", async () => {
-    let i = 0
     const clipFinder = useClipFinder()
-    const result = await clipFinder.getClipsFromSubreddit("testReddit", (clip, done) => {
-      if (!done) {
-        expect(clip.id).toEqual(`${i}`)
-        expect(clip.submitter).toEqual(`testReddit${i}`)
-        i++
-      }
-    })
-    expect(result).toHaveLength(i)
+    const result = await clipFinder.getClipsFromSubreddit("testReddit")
+    expect(result).toHaveLength(1)
+    expect(result[0].id).toEqual("0")
+    expect(result[0].submitter).toEqual("testReddit0")
   })
 })
