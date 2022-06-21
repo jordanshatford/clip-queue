@@ -1,6 +1,6 @@
 # Clip Queue
 
-[![Powered By Vue](https://img.shields.io/badge/powered%20by-Vue-%23#4FC08D.svg?style=flat&logo=Vue.js)](https://kit.svelte.dev/)
+[![Powered By Vue](https://img.shields.io/badge/powered%20by-Vue-%234FC08D.svg?style=flat&logo=Vue.js)](https://vuejs.org/)
 [![Language: TypeScript](https://img.shields.io/badge/language-typescript-%233178C6.svg?style=flat&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwindcss](https://img.shields.io/badge/css--framework-tailwindcss-%2306B6D4?logo=tailwindcss)](https://tailwindcss.com)
 [![Postcss](https://img.shields.io/badge/style-postcss-%23DD3A0A?style=flat&logo=postcss)](https://postcss.org)
