@@ -16,7 +16,7 @@ jobs:
         os: [macos-latest, windows-latest, ubuntu-latest]
         node-version: [16.x, 18.x]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2.0.1
         with:
           version: 7.5.1
