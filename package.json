@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@sentry/tracing": "^6.19.3",
-    "@sentry/vue": "^6.19.3",
+    "@sentry/vue": "^7.6.0",
     "axios": "^0.26.1",
     "date-fns": "^2.28.0",
     "phosphor-vue": "^4.4.0",
