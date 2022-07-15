@@ -19,15 +19,15 @@
             rel="noreferrer"
             className="cq-text-subtle text-lg no-underline hover:text-zinc-600 dark:hover:text-zinc-200"
           >
-            <ph-arrow-square-out weight="bold" :size="24" class="inline-block mb-3"></ph-arrow-square-out>
+            <external-link-icon class="w-6 inline-block mb-3"></external-link-icon>
           </a>
         </span>
         <div class="text-base float-right">
           <v-button :disabled="previousDisabled" class="mr-2" @click="emit('previous')">
-            <ph-skip-back weight="bold" :size="24"></ph-skip-back>
+            <rewind-icon class="w-8"></rewind-icon>
           </v-button>
           <v-button :disabled="nextDisabled" @click="emit('next')">
-            <ph-skip-forward weight="bold" :size="24"></ph-skip-forward>
+            <fast-forward-icon class="w-8"></fast-forward-icon>
           </v-button>
         </div>
       </h2>
@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { PhArrowSquareOut, PhSkipBack, PhSkipForward } from "phosphor-vue"
+import { ExternalLinkIcon, RewindIcon, FastForwardIcon } from "@heroicons/vue/outline"
 import { formatDistanceToNow, parseISO } from "date-fns"
 import type { Clip } from "@/interfaces/clips"
 

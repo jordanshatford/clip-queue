@@ -56,7 +56,7 @@ import { useUser } from "@/stores/user"
 const { title } = config.App
 const user = useUser()
 const router = useRouter()
-let showMobileMenu = ref(false)
+const showMobileMenu = ref(false)
 
 async function handleAuthButtonClick() {
   if (user.isLoggedIn) {

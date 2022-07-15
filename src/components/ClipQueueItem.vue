@@ -5,10 +5,10 @@
       :style="'background-image: url(' + clip.thumbnailUrl + ')'"
     >
       <v-button class="pb-2 mr-2 -mb-2" @click="emit('play')">
-        <ph-play weight="bold" :size="20"></ph-play>
+        <sort-ascending-icon class="w-6"></sort-ascending-icon>
       </v-button>
       <v-button variant="danger" class="pb-2 mr-2 -mb-2" @click="emit('remove')">
-        <ph-trash weight="bold" :size="20"></ph-trash>
+        <trash-icon class="w-6"></trash-icon>
       </v-button>
     </div>
     <div class="p-3">
@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { PhPlay, PhTrash } from "phosphor-vue"
+import { SortAscendingIcon, TrashIcon } from "@heroicons/vue/outline"
 import type { Clip } from "@/interfaces/clips"
 
 interface Props {
