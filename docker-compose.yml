@@ -12,7 +12,7 @@ services:
       VITE_SENTRY_DSN: ${VITE_SENTRY_DSN}
       VITE_SENTRY_TRACING_ORIGIN: ${VITE_SENTRY_TRACING_ORIGIN}
     ports:
-      - 3000:3000
+      - 5173:5173
       - 24678:24678
     volumes:
       - .:/app
