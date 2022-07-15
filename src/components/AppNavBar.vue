@@ -22,7 +22,7 @@
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <app-theme-toggle class="hidden sm:block mr-2"></app-theme-toggle>
           <v-button variant="brand" @click="() => handleAuthButtonClick()">
-            <span><ph-twitch-logo weight="bold" :size="20" class="inline"></ph-twitch-logo></span>
+            <span><twitch-logo class="inline w-5"></twitch-logo></span>
             {{ user.isLoggedIn ? "Logout" : "Login" }}
           </v-button>
         </div>
@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { PhTwitchLogo } from "phosphor-vue"
+import TwitchLogo from "@/components/TwitchLogo.vue"
 import { useRouter } from "vue-router"
 import AppNavBarItem from "@/components/AppNavBarItem.vue"
 import AppThemeToggle from "@/components/AppThemeToggle.vue"
