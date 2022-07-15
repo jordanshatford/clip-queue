@@ -1,9 +1,10 @@
+import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
 import { createTestingPinia } from "@pinia/testing"
-import Queue from "@/views/Queue.vue"
+import QueuePage from "../QueuePage.vue"
 
 describe("Queue.vue", () => {
-  const wrapper = shallowMount(Queue, {
+  const wrapper = shallowMount(QueuePage, {
     global: {
       plugins: [createTestingPinia()],
     },

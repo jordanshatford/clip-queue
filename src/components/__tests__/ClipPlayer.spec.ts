@@ -1,5 +1,6 @@
+import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
-import ClipPlayer from "@/components/ClipPlayer.vue"
+import ClipPlayer from "../ClipPlayer.vue"
 
 describe("ClipPlayer.vue", () => {
   const wrapper = shallowMount(ClipPlayer, {

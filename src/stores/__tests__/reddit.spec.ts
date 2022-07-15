@@ -1,5 +1,6 @@
+import { describe, it, expect, beforeEach } from "vitest"
 import { setActivePinia, createPinia } from "pinia"
-import { useReddit, DEFAULT_SUBREDDITS } from "@/stores/reddit"
+import { useReddit, DEFAULT_SUBREDDITS } from "../reddit"
 
 describe("reddit.ts", () => {
   beforeEach(() => {

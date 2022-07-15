@@ -1,5 +1,6 @@
-import type { Subreddit } from "@/services/reddit"
-import reddit from "@/services/reddit"
+import { describe, it, expect, vi, beforeEach } from "vitest"
+import type { Subreddit } from "../reddit"
+import reddit from "../reddit"
 
 vi.mock("axios", () => {
   return {

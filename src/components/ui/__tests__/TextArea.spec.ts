@@ -1,5 +1,6 @@
+import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
-import TextArea from "@/components/ui/TextArea.vue"
+import TextArea from "../v-textarea.vue"
 
 describe("TextArea.vue", () => {
   const wrapper = shallowMount(TextArea, {

@@ -1,5 +1,6 @@
-import type { Clip } from "@/interfaces/clips"
-import { ClipList } from "@/utils/clip-list"
+import { describe, it, expect, beforeEach } from "vitest"
+import type { Clip } from "../../interfaces/clips"
+import { ClipList } from "../clip-list"
 
 describe("clip-list.ts", () => {
   let clipList: ClipList

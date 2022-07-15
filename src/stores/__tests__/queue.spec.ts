@@ -1,6 +1,7 @@
+import { describe, it, expect, beforeEach } from "vitest"
 import { setActivePinia, createPinia } from "pinia"
-import type { Clip } from "@/interfaces/clips"
-import { useQueue } from "@/stores/queue"
+import type { Clip } from "../../interfaces/clips"
+import { useQueue } from "../queue"
 
 describe("clips.ts", () => {
   beforeEach(() => {

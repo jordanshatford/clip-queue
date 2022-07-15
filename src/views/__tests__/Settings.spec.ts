@@ -1,9 +1,10 @@
+import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
 import { createTestingPinia } from "@pinia/testing"
-import Settings from "@/views/Settings.vue"
+import SettingsPage from "../SettingsPage.vue"
 
 describe("Settings.vue", () => {
-  const wrapper = shallowMount(Settings, {
+  const wrapper = shallowMount(SettingsPage, {
     global: {
       plugins: [createTestingPinia()],
     },

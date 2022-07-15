@@ -21,13 +21,7 @@
             @click="queueClipsForSubreddit(subreddit)"
             :disabled="reddit.isLoading(subreddit)"
           >
-            <component
-              :is="reddit.isLoading(subreddit) ? PhCircleNotch : PhPlus"
-              weight="bold"
-              :size="18"
-              class="my-1"
-              :class="{ 'animate-spin': reddit.isLoading(subreddit) }"
-            ></component>
+            <component :is="reddit.isLoading(subreddit) ? LoadingIcon : PlusIcon" class="my-1 w-5 h-5"></component>
           </v-button>
         </div>
       </div>
@@ -47,13 +41,7 @@
           @click="queueClipsForSubreddit(reddit.custom)"
           :disabled="reddit.isLoading(reddit.custom) || !reddit.custom"
         >
-          <component
-            :is="reddit.isLoading(reddit.custom) ? PhCircleNotch : PhPlus"
-            weight="bold"
-            :size="18"
-            class="my-1"
-            :class="{ 'animate-spin': reddit.isLoading(reddit.custom) }"
-          ></component>
+          <component :is="reddit.isLoading(reddit.custom) ? LoadingIcon : PlusIcon" class="my-1 w-5 h-5"></component>
         </v-button>
       </div>
     </div>
@@ -61,7 +49,8 @@
 </template>
 
 <script setup lang="ts">
-import { PhPlus, PhCircleNotch } from "phosphor-vue"
+import { PlusIcon } from "@heroicons/vue/outline"
+import LoadingIcon from "@/components/LoadingIcon.vue"
 import { useQueue } from "@/stores/queue"
 import { useReddit, DEFAULT_SUBREDDITS } from "@/stores/reddit"
 import { useClipFinder } from "@/stores/clip-finder"

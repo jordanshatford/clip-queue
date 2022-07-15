@@ -1,5 +1,6 @@
+import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
-import Button from "@/components/ui/Button.vue"
+import Button from "../v-button.vue"
 
 describe("Button.vue", () => {
   const wrapper = shallowMount(Button)

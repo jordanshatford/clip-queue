@@ -1,6 +1,7 @@
+import { describe, it, expect } from "vitest"
 import type { RouteRecordRaw } from "vue-router"
 import { shallowMount } from "@vue/test-utils"
-import AppNavBarItem from "@/components/AppNavBarItem.vue"
+import AppNavBarItem from "../AppNavBarItem.vue"
 
 describe("AppNavBarItem.vue", () => {
   const wrapper = shallowMount(AppNavBarItem, {

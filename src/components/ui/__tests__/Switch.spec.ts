@@ -1,5 +1,6 @@
+import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
-import Switch from "@/components/ui/Switch.vue"
+import Switch from "../v-switch.vue"
 
 describe("Switch.vue", () => {
   const wrapper = shallowMount(Switch, {

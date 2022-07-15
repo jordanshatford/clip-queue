@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest"
 import type { Userstate } from "tmi.js"
 import { isModerator, isClipUrl, getClipIdFromUrl } from "../utils"
 

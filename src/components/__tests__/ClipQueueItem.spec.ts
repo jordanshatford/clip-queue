@@ -1,5 +1,6 @@
+import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
-import ClipQueueItem from "@/components/ClipQueueItem.vue"
+import ClipQueueItem from "../ClipQueueItem.vue"
 
 describe("ClipQueueItem.vue", () => {
   const wrapper = shallowMount(ClipQueueItem, {

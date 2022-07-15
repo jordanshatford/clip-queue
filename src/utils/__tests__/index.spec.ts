@@ -1,4 +1,5 @@
-import { formatTemplateString, getUrlFromMessage, deepEqual } from "@/utils"
+import { describe, it, expect } from "vitest"
+import { formatTemplateString, getUrlFromMessage, deepEqual } from ".."
 
 describe("index.ts", () => {
   it.each([

@@ -1,8 +1,9 @@
+import { describe, it, expect, beforeEach, vi } from "vitest"
 import { createPinia, setActivePinia } from "pinia"
-import type { Clip } from "@/interfaces/clips"
-import type { TwitchClip, TwitchGame } from "@/services/twitch"
-import type { SubredditPost } from "@/services/reddit"
-import { useClipFinder } from "@/stores/clip-finder"
+import type { Clip } from "../../interfaces/clips"
+import type { TwitchClip, TwitchGame } from "../../services/twitch"
+import type { SubredditPost } from "../../services/reddit"
+import { useClipFinder } from "../clip-finder"
 
 const testGame = { id: "testgame", name: "Test Game" } as TwitchGame
 

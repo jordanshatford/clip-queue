@@ -1,6 +1,7 @@
+import { describe, it, expect, beforeEach, vi } from "vitest"
 import { setActivePinia, createPinia } from "pinia"
-import commands from "@/utils/commands"
-import { useQueue } from "@/stores/queue"
+import commands from "../commands"
+import { useQueue } from "../../stores/queue"
 
 describe("commands.ts", () => {
   beforeEach(() => {

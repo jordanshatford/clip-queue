@@ -1,5 +1,6 @@
+import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
-import AppHamburger from "@/components/AppHamburger.vue"
+import AppHamburger from "../AppHamburger.vue"
 
 describe("AppHamburger.vue", () => {
   const wrapper = shallowMount(AppHamburger)

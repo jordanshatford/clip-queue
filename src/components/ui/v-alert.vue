@@ -12,23 +12,21 @@
     <component
       :is="
         variant === 'info'
-          ? PhInfo
+          ? InformationCircleIcon
           : variant === 'success'
-          ? PhCheckCircle
+          ? CheckCircleIcon
           : variant === 'warning'
-          ? PhWarning
-          : PhXCircle
+          ? ExclamationIcon
+          : XCircleIcon
       "
-      weight="fill"
-      :size="20"
-      class="mr-1 mt-0.5"
+      class="mr-1 mt-0.5 w-5"
     ></component>
     <slot></slot>
   </div>
 </template>
 
 <script setup lang="ts">
-import { PhInfo, PhCheckCircle, PhWarning, PhXCircle } from "phosphor-vue"
+import { InformationCircleIcon, CheckCircleIcon, ExclamationIcon, XCircleIcon } from "@heroicons/vue/solid"
 
 interface Props {
   variant?: "info" | "success" | "warning" | "danger"

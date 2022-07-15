@@ -1,6 +1,7 @@
+import { describe, it, expect, beforeEach } from "vitest"
 import { setActivePinia, createPinia } from "pinia"
-import { useUser } from "@/stores/user"
-import type { AuthInfo } from "@/services/twitch"
+import { useUser } from "../user"
+import type { AuthInfo } from "../../services/twitch"
 
 describe("user.ts", () => {
   beforeEach(() => {

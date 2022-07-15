@@ -1,5 +1,6 @@
+import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
-import Alert from "@/components/ui/Alert.vue"
+import Alert from "../v-alert.vue"
 
 describe("Alert.vue", () => {
   const wrapper = shallowMount(Alert)

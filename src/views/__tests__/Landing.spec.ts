@@ -1,9 +1,10 @@
+import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
-import Landing from "@/views/Landing.vue"
-import config from "@/assets/config"
+import LandingPage from "../LandingPage.vue"
+import config from "../../assets/config"
 
 describe("Landing.vue", () => {
-  const wrapper = shallowMount(Landing)
+  const wrapper = shallowMount(LandingPage)
 
   it("mounts successfully", () => {
     expect(wrapper.exists()).toEqual(true)

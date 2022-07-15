@@ -1,6 +1,7 @@
+import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
 import { createTestingPinia } from "@pinia/testing"
-import AppThemeToggle from "@/components/AppThemeToggle.vue"
+import AppThemeToggle from "../AppThemeToggle.vue"
 
 describe("AppThemeToggle.vue", () => {
   const wrapper = shallowMount(AppThemeToggle, {

@@ -1,5 +1,6 @@
+import { describe, it, expect, beforeEach } from "vitest"
 import { setActivePinia, createPinia } from "pinia"
-import { useSettings, type Settings } from "@/stores/settings"
+import { useSettings, type Settings } from "../settings"
 
 describe("settings.ts", () => {
   beforeEach(() => {

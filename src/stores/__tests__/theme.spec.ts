@@ -1,5 +1,6 @@
+import { describe, it, expect, beforeEach } from "vitest"
 import { setActivePinia, createPinia } from "pinia"
-import { useTheme } from "@/stores/theme"
+import { useTheme } from "../theme"
 
 describe("theme.ts", () => {
   beforeEach(() => {

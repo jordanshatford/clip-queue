@@ -1,6 +1,7 @@
+import { describe, it, expect, vi } from "vitest"
 import axios from "axios"
 import TwitchAPI from "../api"
-import type { TwitchClip, TwitchGame } from "@/services/twitch"
+import type { TwitchClip, TwitchGame } from ".."
 
 vi.mock("axios", () => {
   return {

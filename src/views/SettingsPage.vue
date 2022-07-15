@@ -105,9 +105,9 @@ const queue = useQueue()
 const settings = useSettings()
 const clipFinder = useClipFinder()
 
-let showSaveMsg = ref(false)
-let formKey = ref(1)
-let formSettings = ref<Settings>(Object.assign({}, settings.$state))
+const showSaveMsg = ref(false)
+const formKey = ref(1)
+const formSettings = ref<Settings>(Object.assign({}, settings.$state))
 
 function hideMsg() {
   showSaveMsg.value = false
