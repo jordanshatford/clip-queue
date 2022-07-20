@@ -11,17 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2.2.2
-        with:
-          version: 7.5.1
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: 18.x
-          cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
       - name: Run test coverage
-        run: pnpm test:coverage
+        run: npm run test:coverage
       - name: Upload code coverage to codecov.io
         uses: codecov/codecov-action@v3
         with:

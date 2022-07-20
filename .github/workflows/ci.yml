@@ -17,18 +17,14 @@ jobs:
         node-version: [16.x, 18.x]
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2.2.2
-        with:
-          version: 7.5.1
       - uses: actions/setup-node@v3.4.1
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
       - name: Run linting check
-        run: pnpm lint
+        run: npm run lint
       - name: Run type check
-        run: pnpm typecheck
+        run: npm run typecheck
       - name: Run build
-        run: pnpm build
+        run: npm run build
