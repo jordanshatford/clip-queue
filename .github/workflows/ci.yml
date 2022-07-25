@@ -9,7 +9,7 @@ on:
 
 jobs:
   ci:
-    name: Build, Lint, Typecheck
+    name: Build, Lint, Typecheck, Test
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -28,3 +28,5 @@ jobs:
         run: npm run typecheck
       - name: Run build
         run: npm run build
+      - name: Run Tests
+        run: npm run test
