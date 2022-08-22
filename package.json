@@ -29,6 +29,7 @@
     "@types/node": "^18.7.9",
     "@types/tmi.js": "^1.8.1",
     "@vitejs/plugin-vue": "^3.0.3",
+    "@vitest/coverage-c8": "^0.22.1",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
     "@vue/test-utils": "^2.0.2",
