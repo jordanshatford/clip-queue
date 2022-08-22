@@ -16,7 +16,7 @@
     "@sentry/tracing": "^7.10.0",
     "@sentry/vue": "^7.10.0",
     "axios": "^0.27.2",
-    "date-fns": "^2.29.1",
+    "date-fns": "^2.29.2",
     "pinia": "^2.0.18",
     "tmi.js": "npm:@coldino/tmi.js-clientonly-fork@^1.8.1-clientonly",
     "vue": "^3.2.37",
