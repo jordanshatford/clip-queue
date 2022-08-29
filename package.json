@@ -20,7 +20,7 @@
     "pinia": "^2.0.18",
     "tmi.js": "npm:@coldino/tmi.js-clientonly-fork@^1.8.1-clientonly",
     "vue": "^3.2.37",
-    "vue-router": "^4.1.3"
+    "vue-router": "^4.1.5"
   },
   "devDependencies": {
     "@pinia/testing": "^0.0.14",
