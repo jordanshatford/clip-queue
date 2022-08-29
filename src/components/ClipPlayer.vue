@@ -19,15 +19,15 @@
             rel="noreferrer"
             className="cq-text-subtle text-lg no-underline hover:text-zinc-600 dark:hover:text-zinc-200"
           >
-            <external-link-icon class="w-6 inline-block mb-3"></external-link-icon>
+            <arrow-top-right-on-square class="w-6 inline-block mb-3"></arrow-top-right-on-square>
           </a>
         </span>
         <div class="text-base float-right">
           <v-button :disabled="previousDisabled" class="mr-2" @click="emit('previous')">
-            <rewind-icon class="w-8"></rewind-icon>
+            <backward-icon class="w-8"></backward-icon>
           </v-button>
           <v-button :disabled="nextDisabled" @click="emit('next')">
-            <fast-forward-icon class="w-8"></fast-forward-icon>
+            <forward-icon class="w-8"></forward-icon>
           </v-button>
         </div>
       </h2>
@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { ExternalLinkIcon, RewindIcon, FastForwardIcon } from "@heroicons/vue/outline"
+import { ArrowTopRightOnSquareIcon, BackwardIcon, ForwardIcon } from "@heroicons/vue/24/outline"
 import { formatDistanceToNow, parseISO } from "date-fns"
 import type { Clip } from "@/interfaces/clips"
 

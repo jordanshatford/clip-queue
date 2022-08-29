@@ -5,7 +5,7 @@
       :style="'background-image: url(' + clip.thumbnailUrl + ')'"
     >
       <v-button class="pb-2 mr-2 -mb-2" @click="emit('play')">
-        <sort-ascending-icon class="w-6"></sort-ascending-icon>
+        <bars-arrow-up-icon class="w-6"></bars-arrow-up-icon>
       </v-button>
       <v-button variant="danger" class="pb-2 mr-2 -mb-2" @click="emit('remove')">
         <trash-icon class="w-6"></trash-icon>
@@ -24,17 +24,17 @@
 </template>
 
 <script setup lang="ts">
-import { SortAscendingIcon, TrashIcon } from "@heroicons/vue/outline"
-import type { Clip } from "@/interfaces/clips"
+import { BarsArrowUpIcon, TrashIcon } from "@heroicons/vue/24/outline";
+import type { Clip } from "@/interfaces/clips";
 
 interface Props {
-  clip: Clip
+  clip: Clip;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: "play"): void
-  (e: "remove"): void
-}>()
+  (e: "play"): void;
+  (e: "remove"): void;
+}>();
 </script>

@@ -16,7 +16,7 @@
           : variant === 'success'
           ? CheckCircleIcon
           : variant === 'warning'
-          ? ExclamationIcon
+          ? ExclamationTriangleIcon
           : XCircleIcon
       "
       class="mr-1 mt-0.5 w-5"
@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { InformationCircleIcon, CheckCircleIcon, ExclamationIcon, XCircleIcon } from "@heroicons/vue/solid"
+import { InformationCircleIcon, CheckCircleIcon, ExclamationTriangleIcon, XCircleIcon } from "@heroicons/vue/24/solid"
 
 interface Props {
   variant?: "info" | "success" | "warning" | "danger"
