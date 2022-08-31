@@ -26,12 +26,14 @@ describe("AppNavBarItem.vue", () => {
   it("does not have block visibility when not mobile", async () => {
     wrapper.setProps({ isMobileMenu: false })
     await wrapper.vm.$nextTick()
+    // @ts-ignore
     expect(wrapper.vm.classNames).toEqual(expect.not.stringContaining("block"))
   })
 
   it("does have block visibility when on mobile", async () => {
     wrapper.setProps({ isMobileMenu: true })
     await wrapper.vm.$nextTick()
+    // @ts-ignore
     expect(wrapper.vm.classNames).toEqual(expect.stringContaining("block"))
   })
 })

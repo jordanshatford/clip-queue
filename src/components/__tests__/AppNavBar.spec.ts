@@ -16,6 +16,7 @@ describe("AppNavBar.vue", () => {
   })
 
   it("has the proper title from config", () => {
+    // @ts-ignore
     expect(wrapper.vm.title).toEqual(config.App.title)
   })
 })

@@ -24,17 +24,17 @@
 </template>
 
 <script setup lang="ts">
-import { BarsArrowUpIcon, TrashIcon } from "@heroicons/vue/24/outline";
-import type { Clip } from "@/interfaces/clips";
+import { BarsArrowUpIcon, TrashIcon } from "@heroicons/vue/24/outline"
+import type { Clip } from "@/interfaces/clips"
 
 interface Props {
-  clip: Clip;
+  clip: Clip
 }
 
-defineProps<Props>();
+defineProps<Props>()
 
 const emit = defineEmits<{
-  (e: "play"): void;
-  (e: "remove"): void;
-}>();
+  (e: "play"): void
+  (e: "remove"): void
+}>()
 </script>

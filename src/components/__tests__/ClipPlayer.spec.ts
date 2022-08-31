@@ -22,12 +22,14 @@ describe("ClipPlayer.vue", () => {
   })
 
   it("successfully shows the time ago for the clip", async () => {
+    // @ts-ignore
     expect(wrapper.vm.timeAgo).not.toEqual("")
   })
 
   it("returns no time ago when it doesnt have a clip timestamp", async () => {
     wrapper.setProps({ clip: {} })
     await wrapper.vm.$nextTick()
+    // @ts-ignore
     expect(wrapper.vm.timeAgo).toEqual("")
   })
 })

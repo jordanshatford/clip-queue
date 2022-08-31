@@ -19,7 +19,7 @@
             rel="noreferrer"
             className="cq-text-subtle text-lg no-underline hover:text-zinc-600 dark:hover:text-zinc-200"
           >
-            <arrow-top-right-on-square class="w-6 inline-block mb-3"></arrow-top-right-on-square>
+            <arrow-top-right-on-square-icon class="w-6 inline-block mb-3"></arrow-top-right-on-square-icon>
           </a>
         </span>
         <div class="text-base float-right">

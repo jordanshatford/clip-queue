@@ -11,8 +11,11 @@ describe("AppFooter.vue", () => {
   })
 
   it("has the proper creator, year, and github from config", () => {
+    // @ts-ignore
     expect(wrapper.vm.creator).toEqual(config.App.creator)
+    // @ts-ignore
     expect(wrapper.vm.year).toEqual(config.App.year)
+    // @ts-ignore
     expect(wrapper.vm.github).toEqual(config.App.github)
   })
 })
