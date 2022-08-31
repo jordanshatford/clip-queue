@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
+export interface Props {
   id: string
   modelValue: boolean
 }

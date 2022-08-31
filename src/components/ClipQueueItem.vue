@@ -27,7 +27,7 @@
 import { BarsArrowUpIcon, TrashIcon } from "@heroicons/vue/24/outline"
 import type { Clip } from "@/interfaces/clips"
 
-interface Props {
+export interface Props {
   clip: Clip
 }
 

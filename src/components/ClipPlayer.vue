@@ -57,7 +57,7 @@ import { ArrowTopRightOnSquareIcon, BackwardIcon, ForwardIcon } from "@heroicons
 import { formatDistanceToNow, parseISO } from "date-fns"
 import type { Clip } from "@/interfaces/clips"
 
-interface Props {
+export interface Props {
   clip: Clip
   autoplay?: boolean
   previousDisabled?: boolean

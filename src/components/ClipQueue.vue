@@ -28,7 +28,7 @@
 import ClipQueueItem from "@/components/ClipQueueItem.vue"
 import type { Clip } from "@/interfaces/clips"
 
-interface Props {
+export interface Props {
   title?: string
   clips: Clip[]
   isOpen?: boolean

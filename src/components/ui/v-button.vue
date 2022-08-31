@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
+export interface Props {
   variant?: "primary" | "danger" | "brand"
 }
 

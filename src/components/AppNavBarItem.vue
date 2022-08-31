@@ -8,7 +8,7 @@
 import { computed } from "vue"
 import type { RouteRecordRaw } from "vue-router"
 
-interface Props {
+export interface Props {
   isMobileMenu?: boolean
   route: RouteRecordRaw
 }
