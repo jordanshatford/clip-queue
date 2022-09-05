@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.8",
-    "@sentry/tracing": "^7.11.1",
+    "@sentry/tracing": "^7.12.1",
     "@sentry/vue": "^7.11.1",
     "axios": "^0.27.2",
     "date-fns": "^2.29.2",
