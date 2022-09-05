@@ -19,7 +19,7 @@
     "date-fns": "^2.29.2",
     "pinia": "^2.0.21",
     "tmi.js": "npm:@coldino/tmi.js-clientonly-fork@^1.8.1-clientonly",
-    "vue": "^3.2.37",
+    "vue": "^3.2.38",
     "vue-router": "^4.1.5"
   },
   "devDependencies": {
