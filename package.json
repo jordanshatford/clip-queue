@@ -12,7 +12,7 @@
     "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@heroicons/vue": "^2.0.8",
+    "@heroicons/vue": "^2.0.10",
     "@sentry/tracing": "^7.12.1",
     "@sentry/vue": "^7.12.1",
     "axios": "^0.27.2",
