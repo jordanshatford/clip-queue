@@ -1,9 +1,9 @@
 import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
-import Input from "../v-input.vue"
+import BaseTextArea from "../BaseTextArea.vue"
 
-describe("Input.vue", () => {
-  const wrapper = shallowMount(Input, {
+describe("BaseTextArea.vue", () => {
+  const wrapper = shallowMount(BaseTextArea, {
     props: {
       modelValue: "test",
     },

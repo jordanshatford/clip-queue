@@ -4,12 +4,12 @@
       class="flex items-end justify-end h-36 w-full bg-cover"
       :style="'background-image: url(' + clip.thumbnailUrl + ')'"
     >
-      <v-button class="pb-2 mr-2 -mb-2" @click="emit('play')">
+      <BaseButton class="pb-2 mr-2 -mb-2" @click="emit('play')">
         <bars-arrow-up-icon class="w-6"></bars-arrow-up-icon>
-      </v-button>
-      <v-button variant="danger" class="pb-2 mr-2 -mb-2" @click="emit('remove')">
+      </BaseButton>
+      <BaseButton variant="danger" class="pb-2 mr-2 -mb-2" @click="emit('remove')">
         <trash-icon class="w-6"></trash-icon>
-      </v-button>
+      </BaseButton>
     </div>
     <div class="p-3">
       <span class="cq-text mt-2">{{ clip.title }}</span>

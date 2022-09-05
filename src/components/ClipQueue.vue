@@ -2,10 +2,12 @@
   <div class="mx-0 mt-2">
     <div class="w-full mb-2 mt-1 border-t border-zinc-300 dark:border-zinc-700"></div>
     <div class="float-right">
-      <v-button variant="primary" :disabled="clips.length === 0" class="ml-2" @click="emit('clear')">Clear</v-button>
-      <v-button :variant="isOpen ? 'danger' : 'primary'" class="ml-2" @click="isOpen ? emit('close') : emit('open')">
+      <BaseButton variant="primary" :disabled="clips.length === 0" class="ml-2" @click="emit('clear')"
+        >Clear</BaseButton
+      >
+      <BaseButton :variant="isOpen ? 'danger' : 'primary'" class="ml-2" @click="isOpen ? emit('close') : emit('open')">
         {{ isOpen ? "Close" : "Open" }}
-      </v-button>
+      </BaseButton>
     </div>
     <div class="text-left">
       <p class="cq-text text-lg">{{ title }}</p>

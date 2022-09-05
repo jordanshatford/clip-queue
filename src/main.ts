@@ -4,19 +4,20 @@ import { createPinia } from "pinia"
 import App from "@/App.vue"
 import router from "@/router"
 import sentry from "@/services/sentry"
-import Alert from "@/components/ui/v-alert.vue"
-import Input from "@/components/ui/v-input.vue"
-import Switch from "@/components/ui/v-switch.vue"
-import TextArea from "@/components/ui/v-textarea.vue"
-import Button from "@/components/ui/v-button.vue"
+import BaseAlert from "@/components/ui/BaseAlert.vue"
+import BaseInput from "@/components/ui/BaseInput.vue"
+import BaseSwitch from "@/components/ui/BaseSwitch.vue"
+import BaseTextArea from "@/components/ui/BaseTextArea.vue"
+import BaseButton from "@/components/ui/BaseButton.vue"
 
 const app = createApp(App)
 sentry.init(app)
 app.use(createPinia())
-app.component("v-alert", Alert)
-app.component("v-input", Input)
-app.component("v-switch", Switch)
-app.component("v-textarea", TextArea)
-app.component("v-button", Button)
+app
+  .component("BaseAlert", BaseAlert)
+  .component("BaseInput", BaseInput)
+  .component("BaseSwitch", BaseSwitch)
+  .component("BaseTextArea", BaseTextArea)
+  .component("BaseButton", BaseButton)
 app.use(router)
 app.mount("#app")

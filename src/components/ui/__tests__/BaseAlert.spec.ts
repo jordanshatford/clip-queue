@@ -1,9 +1,9 @@
 import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
-import Alert from "../v-alert.vue"
+import BaseAlert from "../BaseAlert.vue"
 
-describe("Alert.vue", () => {
-  const wrapper = shallowMount(Alert)
+describe("BaseAlert.vue", () => {
+  const wrapper = shallowMount(BaseAlert)
 
   it("mounts successfully", () => {
     expect(wrapper.exists()).toEqual(true)

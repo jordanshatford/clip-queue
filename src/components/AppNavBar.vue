@@ -21,10 +21,10 @@
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <app-theme-toggle class="hidden sm:block mr-2"></app-theme-toggle>
-          <v-button variant="brand" @click="() => handleAuthButtonClick()">
+          <BaseButton variant="brand" @click="() => handleAuthButtonClick()">
             <span><twitch-logo class="inline w-5"></twitch-logo></span>
             {{ user.isLoggedIn ? "Logout" : "Login" }}
-          </v-button>
+          </BaseButton>
         </div>
       </div>
     </div>

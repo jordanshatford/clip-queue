@@ -1,19 +1,19 @@
 <template>
   <p class="cq-title">Settings</p>
   <div class="cq-form mb-2">
-    <v-button class="w-full" variant="danger" :disabled="queue.history.empty()" @click="queue.purge()">
+    <BaseButton class="w-full" variant="danger" :disabled="queue.history.empty()" @click="queue.purge()">
       Purge History
-    </v-button>
+    </BaseButton>
     <label class="cq-text-subtle">Purge all clips previously viewed allowing them to be resubmitted.</label>
   </div>
   <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey" class="cq-form">
     <div class="cq-toggle-form-group">
       <label class="cq-form-group-label">Allow chat commands?</label>
-      <v-switch id="allowCommands" v-model="formSettings.allowCommands" />
+      <BaseSwitch id="allowCommands" v-model="formSettings.allowCommands" />
     </div>
     <div v-if="formSettings.allowCommands">
       <label class="cq-form-group-label">Chat command prefix:</label>
-      <v-input type="text" required @keydown.space.prevent maxlength="8" v-model="formSettings.commandPrefix" />
+      <BaseInput type="text" required @keydown.space.prevent maxlength="8" v-model="formSettings.commandPrefix" />
       <div class="cq-text-subtle text-left pl-1 my-2">
         <label>The following commands are available to mods: </label>
         <ul class="list-disc pl-8">
@@ -27,7 +27,7 @@
     <div>
       <div class="cq-toggle-form-group">
         <label class="cq-form-group-label">Auto remove clips on moderation?</label>
-        <v-switch id="autoRemoveClips" v-model="formSettings.autoRemoveClips" />
+        <BaseSwitch id="autoRemoveClips" v-model="formSettings.autoRemoveClips" />
       </div>
       <div v-if="formSettings.autoRemoveClips" class="text-left pl-1 cq-text-subtle mb-2">
         <label>
@@ -38,26 +38,26 @@
     </div>
     <div class="cq-toggle-form-group">
       <label class="cq-form-group-label">Send bot messages in chat?</label>
-      <v-switch id="sendMsgsInChat" v-model="formSettings.sendMsgsInChat" />
+      <BaseSwitch id="sendMsgsInChat" v-model="formSettings.sendMsgsInChat" />
     </div>
     <div v-if="formSettings.sendMsgsInChat">
       <div class="cq-toggle-form-group">
         <label class="cq-form-group-label">Queue open message</label>
-        <v-switch id="sendQueueOpenMsg" v-model="formSettings.sendQueueOpenMsg" />
+        <BaseSwitch id="sendQueueOpenMsg" v-model="formSettings.sendQueueOpenMsg" />
       </div>
       <div v-if="formSettings.sendQueueOpenMsg" class="cq-form-group pt-0">
-        <v-textarea required minlength="3" maxlength="500" v-model="formSettings.queueOpenMsg" />
+        <BaseTextArea required minlength="3" maxlength="500" v-model="formSettings.queueOpenMsg" />
       </div>
       <div class="cq-toggle-form-group">
         <label class="cq-form-group-label">Queue close message</label>
-        <v-switch id="sendQueueCloseMsg" v-model="formSettings.sendQueueCloseMsg" />
+        <BaseSwitch id="sendQueueCloseMsg" v-model="formSettings.sendQueueCloseMsg" />
       </div>
       <div v-if="formSettings.sendQueueCloseMsg" class="cq-form-group pt-0">
-        <v-textarea required minlength="3" maxlength="500" v-model="formSettings.queueCloseMsg" />
+        <BaseTextArea required minlength="3" maxlength="500" v-model="formSettings.queueCloseMsg" />
       </div>
       <div class="cq-toggle-form-group">
         <label class="cq-form-group-label">Current clip message</label>
-        <v-switch id="sendCurrentClipMsg" v-model="formSettings.sendCurrentClipMsg" />
+        <BaseSwitch id="sendCurrentClipMsg" v-model="formSettings.sendCurrentClipMsg" />
       </div>
       <div v-if="formSettings.sendCurrentClipMsg">
         <div class="text-left pl-1 mb-2 cq-text-subtle">
@@ -74,20 +74,20 @@
           </ul>
         </div>
         <div class="cq-form-group pt-0">
-          <v-textarea required minlength="3" maxlength="500" v-model="formSettings.currentClipMsg" />
+          <BaseTextArea required minlength="3" maxlength="500" v-model="formSettings.currentClipMsg" />
         </div>
       </div>
     </div>
     <div class="mt-2">
-      <v-button class="mr-2" type="submit" :disabled="!settings.isModified(formSettings)">Save</v-button>
-      <v-button type="reset" variant="danger" :disabled="!settings.isModified(formSettings)">Cancel</v-button>
+      <BaseButton class="mr-2" type="submit" :disabled="!settings.isModified(formSettings)">Save</BaseButton>
+      <BaseButton type="reset" variant="danger" :disabled="!settings.isModified(formSettings)">Cancel</BaseButton>
     </div>
-    <v-alert v-if="showSaveMsg" variant="success" class="mt-2">Save successful</v-alert>
+    <BaseAlert v-if="showSaveMsg" variant="success" class="mt-2">Save successful</BaseAlert>
   </form>
   <div class="cq-form mt-2">
-    <v-button class="w-full" variant="danger" :disabled="clipFinder.cacheEmpty" @click="clipFinder.$reset()">
+    <BaseButton class="w-full" variant="danger" :disabled="clipFinder.cacheEmpty" @click="clipFinder.$reset()">
       Purge Cache
-    </v-button>
+    </BaseButton>
     <label class="cq-text-subtle">
       Twitch clips submitted are cached for future use, this clears all cached clip information.
     </label>

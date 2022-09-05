@@ -11,9 +11,9 @@
   <div v-else class="text-center">
     <p class="cq-title">Queue Open</p>
     <p class="cq-text">Start sending clips now for them to be added to the queue.</p>
-    <v-button variant="brand" :disabled="queue.upcoming.empty()" @click="queue.next()" class="my-5">
+    <BaseButton variant="brand" :disabled="queue.upcoming.empty()" @click="queue.next()" class="my-5">
       Start Viewing!
-    </v-button>
+    </BaseButton>
   </div>
   <clip-queue
     title="Upcoming Clips"

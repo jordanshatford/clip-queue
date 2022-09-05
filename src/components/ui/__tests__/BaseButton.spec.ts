@@ -1,9 +1,9 @@
 import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
-import Button from "../v-button.vue"
+import BaseButton from "../BaseButton.vue"
 
-describe("Button.vue", () => {
-  const wrapper = shallowMount(Button)
+describe("BaseButton.vue", () => {
+  const wrapper = shallowMount(BaseButton)
 
   it("mounts successfully", () => {
     expect(wrapper.exists()).toEqual(true)

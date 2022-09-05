@@ -1,9 +1,9 @@
 import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
-import Switch from "../v-switch.vue"
+import BaseSwitch from "../BaseSwitch.vue"
 
-describe("Switch.vue", () => {
-  const wrapper = shallowMount(Switch, {
+describe("BaseSwitch.vue", () => {
+  const wrapper = shallowMount(BaseSwitch, {
     props: {
       id: "test",
       modelValue: false,

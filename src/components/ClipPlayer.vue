@@ -23,12 +23,12 @@
           </a>
         </span>
         <div class="text-base float-right">
-          <v-button :disabled="previousDisabled" class="mr-2" @click="emit('previous')">
+          <BaseButton :disabled="previousDisabled" class="mr-2" @click="emit('previous')">
             <backward-icon class="w-8"></backward-icon>
-          </v-button>
-          <v-button :disabled="nextDisabled" @click="emit('next')">
+          </BaseButton>
+          <BaseButton :disabled="nextDisabled" @click="emit('next')">
             <forward-icon class="w-8"></forward-icon>
-          </v-button>
+          </BaseButton>
         </div>
       </h2>
       <div class="cq-text-subtle">
