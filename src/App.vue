@@ -1,13 +1,13 @@
 <template>
   <div class="min-h-screen h-full dark:bg-zinc-900">
     <div class="h-full">
-      <app-nav-bar></app-nav-bar>
+      <AppNavBar />
       <main class="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-5 text-center">
-        <router-view></router-view>
+        <RouterView />
       </main>
     </div>
   </div>
-  <app-footer></app-footer>
+  <AppFooter />
 </template>
 
 <script setup lang="ts">

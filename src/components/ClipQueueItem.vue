@@ -5,10 +5,10 @@
       :style="'background-image: url(' + clip.thumbnailUrl + ')'"
     >
       <BaseButton class="pb-2 mr-2 -mb-2" @click="emit('play')">
-        <bars-arrow-up-icon class="w-6"></bars-arrow-up-icon>
+        <BarsArrowUpIcon class="w-6" />
       </BaseButton>
       <BaseButton variant="danger" class="pb-2 mr-2 -mb-2" @click="emit('remove')">
-        <trash-icon class="w-6"></trash-icon>
+        <TrashIcon class="w-6" />
       </BaseButton>
     </div>
     <div class="p-3">

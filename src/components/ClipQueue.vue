@@ -14,14 +14,14 @@
       <span class="mt-3 cq-text-subtle"> {{ clips.length }} {{ clips.length === 1 ? "clip" : "clips" }} </span>
     </div>
     <div class="flex justify-items-start overflow-x-auto mt-3">
-      <clip-queue-item
+      <ClipQueueItem
         v-for="clip in clips"
         :key="clip.id"
         :clip="clip"
         @play="emit('play', clip)"
         @remove="emit('remove', clip)"
         class="text-left flex-shrink-0 mr-2"
-      ></clip-queue-item>
+      />
     </div>
   </div>
 </template>

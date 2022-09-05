@@ -1,7 +1,7 @@
 <template>
-  <router-link v-if="route" :to="route.path" :class="classNames">
+  <RouterLink v-if="route" :to="route.path" :class="classNames">
     {{ route?.meta?.title }}
-  </router-link>
+  </RouterLink>
 </template>
 
 <script setup lang="ts">

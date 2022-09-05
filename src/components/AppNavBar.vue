@@ -3,26 +3,26 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-          <app-hamburger v-if="user.isLoggedIn" v-model="showMobileMenu"></app-hamburger>
-          <app-theme-toggle></app-theme-toggle>
+          <AppHamburger v-if="user.isLoggedIn" v-model="showMobileMenu" />
+          <AppThemeToggle />
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-          <router-link
+          <RouterLink
             exact-active-class=""
             to="/"
             class="text-violet-500 font-extrabold text-lg flex-shrink-0 flex items-center"
-            >{{ title }}</router-link
+            >{{ title }}</RouterLink
           >
           <div class="hidden sm:block sm:ml-6">
             <div v-if="user.isLoggedIn" class="flex space-x-4">
-              <app-nav-bar-item v-for="route in routes" :route="route" :key="route.name"></app-nav-bar-item>
+              <AppNavBarItem v-for="route in routes" :route="route" :key="route.name" />
             </div>
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <app-theme-toggle class="hidden sm:block mr-2"></app-theme-toggle>
+          <AppThemeToggle class="hidden sm:block mr-2" />
           <BaseButton variant="brand" @click="() => handleAuthButtonClick()">
-            <span><twitch-logo class="inline w-5"></twitch-logo></span>
+            <span><TwitchLogo class="inline w-5" /></span>
             {{ user.isLoggedIn ? "Logout" : "Login" }}
           </BaseButton>
         </div>
@@ -30,13 +30,13 @@
     </div>
     <div v-if="showMobileMenu">
       <div v-if="user.isLoggedIn" class="px-2 pt-2 pb-3 space-y-1">
-        <app-nav-bar-item
+        <AppNavBarItem
           v-for="route in routes"
           @click="() => (showMobileMenu = false)"
           :route="route"
           :key="route.name"
           isMobileMenu
-        ></app-nav-bar-item>
+        />
       </div>
     </div>
   </nav>

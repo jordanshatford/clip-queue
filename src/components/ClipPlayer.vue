@@ -19,15 +19,15 @@
             rel="noreferrer"
             className="cq-text-subtle text-lg no-underline hover:text-zinc-600 dark:hover:text-zinc-200"
           >
-            <arrow-top-right-on-square-icon class="w-6 inline-block mb-3"></arrow-top-right-on-square-icon>
+            <ArrowTopRightOnSquareIcon class="w-6 inline-block mb-3" />
           </a>
         </span>
         <div class="text-base float-right">
           <BaseButton :disabled="previousDisabled" class="mr-2" @click="emit('previous')">
-            <backward-icon class="w-8"></backward-icon>
+            <BackwardIcon class="w-8" />
           </BaseButton>
           <BaseButton :disabled="nextDisabled" @click="emit('next')">
-            <forward-icon class="w-8"></forward-icon>
+            <ForwardIcon class="w-8" />
           </BaseButton>
         </div>
       </h2>

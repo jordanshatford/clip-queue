@@ -1,5 +1,5 @@
 <template>
-  <clip-player
+  <ClipPlayer
     v-if="queue.current && queue.current.id"
     :clip="queue.current"
     :autoplay="true"
@@ -7,7 +7,7 @@
     :next-disabled="queue.upcoming.empty()"
     @previous="queue.previous()"
     @next="queue.next()"
-  ></clip-player>
+  />
   <div v-else class="text-center">
     <p class="cq-title">Queue Open</p>
     <p class="cq-text">Start sending clips now for them to be added to the queue.</p>
@@ -15,7 +15,7 @@
       Start Viewing!
     </BaseButton>
   </div>
-  <clip-queue
+  <ClipQueue
     title="Upcoming Clips"
     :clips="queue.upcoming.toArray()"
     :is-open="queue.isOpen"
@@ -24,7 +24,7 @@
     @remove="queue.remove"
     @play="queue.play"
     @clear="queue.clear"
-  ></clip-queue>
+  />
 </template>
 
 <script setup lang="ts">
