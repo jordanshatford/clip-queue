@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@pinia/testing": "^0.0.14",
-    "@rushstack/eslint-patch": "^1.1.4",
+    "@rushstack/eslint-patch": "^1.2.0",
     "@types/jsdom": "^20.0.0",
     "@types/node": "^18.7.16",
     "@types/tmi.js": "^1.8.1",
