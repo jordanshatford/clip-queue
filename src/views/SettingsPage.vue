@@ -85,6 +85,17 @@
     <BaseAlert v-if="showSaveMsg" variant="success" class="mt-2">Save successful</BaseAlert>
   </form>
   <div class="cq-form mt-2">
+    <BaseButton
+      class="w-full"
+      variant="danger"
+      :disabled="!settings.isModified(DEFAULT_SETTING)"
+      @click="resetSettingsToDefault()"
+    >
+      Reset Settings
+    </BaseButton>
+    <label class="cq-text-subtle"> Reset settings back to their initial values. </label>
+  </div>
+  <div class="cq-form mt-2">
     <BaseButton class="w-full" variant="danger" :disabled="clipFinder.cacheEmpty" @click="clipFinder.$reset()">
       Purge Cache
     </BaseButton>
@@ -96,7 +107,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { useSettings, type Settings } from "@/stores/settings"
+import { useSettings, type Settings, DEFAULT_SETTING } from "@/stores/settings"
 import { useQueue } from "@/stores/queue"
 import { useClipFinder } from "@/stores/clip-finder"
 import commands from "@/utils/commands"
@@ -111,6 +122,11 @@ const formSettings = ref<Settings>(Object.assign({}, settings.$state))
 
 function hideMsg() {
   showSaveMsg.value = false
+}
+
+function resetSettingsToDefault() {
+  settings.update(DEFAULT_SETTING)
+  onReset()
 }
 
 function onReset() {
