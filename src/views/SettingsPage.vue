@@ -1,6 +1,12 @@
 <template>
   <p class="cq-title">Settings</p>
   <div class="cq-form mb-2">
+    <div class="cq-form-group mb-1">
+      <label class="cq-form-group-label">Current in chat of:</label>
+      <BaseInput type="text" disabled v-model="user.username" />
+    </div>
+  </div>
+  <div class="cq-form mb-2">
     <BaseButton class="w-full" variant="danger" :disabled="queue.history.empty()" @click="queue.purge()">
       Purge History
     </BaseButton>
@@ -109,9 +115,11 @@
 import { ref } from "vue"
 import { useSettings, type Settings, DEFAULT_SETTING } from "@/stores/settings"
 import { useQueue } from "@/stores/queue"
+import { useUser } from "@/stores/user"
 import { useClipFinder } from "@/stores/clip-finder"
 import commands from "@/utils/commands"
 
+const user = useUser()
 const queue = useQueue()
 const settings = useSettings()
 const clipFinder = useClipFinder()
