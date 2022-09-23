@@ -7,6 +7,7 @@ import commands from "@/utils/commands"
 import { getUrlFromMessage } from "@/utils"
 import { useQueue } from "@/stores/queue"
 import { useClipFinder } from "@/stores/clip-finder"
+import { ClipSource } from "@/interfaces/clips"
 
 const { CLIENT_ID, REDIRECT_URI } = env
 const SCOPES = ["openid", "chat:read", "chat:edit"]
@@ -85,6 +86,7 @@ export const useUser = defineStore("user", {
             queue.add({
               ...clip,
               submitter,
+              source: ClipSource.TwitchChat,
             })
           }
         })

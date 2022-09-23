@@ -1,3 +1,9 @@
+export enum ClipSource {
+  Unknown = "Unknown",
+  TwitchChat = "Twitch Chat",
+  Reddit = "Reddit",
+}
+
 export interface Clip {
   id?: string
   title?: string
@@ -9,4 +15,5 @@ export interface Clip {
   url?: string
   embedUrl?: string
   thumbnailUrl?: string
+  source?: ClipSource
 }

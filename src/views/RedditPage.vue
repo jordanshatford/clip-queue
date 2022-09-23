@@ -48,6 +48,7 @@ import LoadingIcon from "@/components/LoadingIcon.vue"
 import { useQueue } from "@/stores/queue"
 import { useReddit, DEFAULT_SUBREDDITS } from "@/stores/reddit"
 import { useClipFinder } from "@/stores/clip-finder"
+import { ClipSource } from "@/interfaces/clips"
 
 const reddit = useReddit()
 const queue = useQueue()
@@ -57,7 +58,7 @@ async function queueClipsForSubreddit(subreddit: string) {
   const clipFinder = useClipFinder()
   const clips = await clipFinder.getClipsFromSubreddit(subreddit)
   clips.forEach((c) => {
-    queue.add(c, true)
+    queue.add({ ...c, source: ClipSource.Reddit }, true)
   })
   reddit.setLoading(subreddit, false)
 }

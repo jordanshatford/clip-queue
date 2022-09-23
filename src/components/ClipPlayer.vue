@@ -45,6 +45,10 @@
         <span v-if="clip.submitter">
           - Submitted by
           <span className="cq-text-subtle-semibold">{{ clip.submitter }}</span>
+          <span v-if="clip.source && clip.source !== ClipSource.Unknown">
+            from
+            <span className="cq-text-subtle-semibold">{{ clip.source }}</span>
+          </span>
         </span>
       </div>
     </div>
@@ -55,7 +59,7 @@
 import { computed } from "vue"
 import { ArrowTopRightOnSquareIcon, BackwardIcon, ForwardIcon } from "@heroicons/vue/24/outline"
 import { formatDistanceToNow, parseISO } from "date-fns"
-import type { Clip } from "@/interfaces/clips"
+import { ClipSource, type Clip } from "@/interfaces/clips"
 
 export interface Props {
   clip: Clip

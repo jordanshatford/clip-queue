@@ -16,16 +16,19 @@
       <h3 class="cq-text-subtle-semibold">
         {{ clip.channel }}<span class="cq-text-subtle"> playing </span>{{ clip.game }}
       </h3>
-      <span class="mt-2 cq-text-subtle">
+      <div class="mt-1 cq-text-subtle">
         Submitter: <span class="cq-text-subtle-semibold">{{ clip.submitter }}</span>
-      </span>
+      </div>
+      <div class="mt-1 cq-text-subtle">
+        Source: <span class="cq-text-subtle-semibold">{{ clip.source ?? ClipSource.Unknown }}</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { BarsArrowUpIcon, TrashIcon } from "@heroicons/vue/24/outline"
-import type { Clip } from "@/interfaces/clips"
+import { ClipSource, type Clip } from "@/interfaces/clips"
 
 export interface Props {
   clip: Clip
