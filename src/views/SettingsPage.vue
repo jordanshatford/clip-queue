@@ -88,9 +88,30 @@
     </form>
   </div>
   <div v-else-if="selectedTab === TabOption.Queue">
-    <div class="cq-form mb-2">
-      <label class="cq-text">Nothing here yet!</label>
-    </div>
+    <form @submit.prevent="onSubmitQSettings" @reset="onResetQSettings" :key="formKey" class="cq-form">
+      <div class="cq-toggle-form-group">
+        <label class="cq-form-group-label">Limit Queue Size?</label>
+        <BaseSwitch id="allowCommands" v-model="formQueueSettings.isLimited" />
+      </div>
+      <div>
+        <label class="cq-form-group-label">Limit:</label>
+        <BaseInput
+          type="number"
+          required
+          :min="1"
+          v-model="formQueueSettings.limit"
+          :disabled="!formQueueSettings.isLimited"
+        />
+        <div class="cq-text-subtle text-left pl-1 my-2">
+          <label>Clips will be ignored when queue limit is reached.</label>
+        </div>
+      </div>
+      <div class="mt-3">
+        <BaseButton class="mr-2" type="submit" :disabled="!isQueueSettingsModified">Save</BaseButton>
+        <BaseButton type="reset" variant="danger" :disabled="!isQueueSettingsModified">Cancel</BaseButton>
+      </div>
+      <BaseAlert v-if="showSaveMsg" variant="success" class="mt-2">Save successful</BaseAlert>
+    </form>
   </div>
   <div v-else-if="selectedTab === TabOption.Other">
     <div class="cq-form mb-2">
@@ -122,7 +143,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import { ChatBubbleLeftRightIcon, Cog8ToothIcon, QueueListIcon } from "@heroicons/vue/24/outline"
 import { useSettings, type Settings, DEFAULT_SETTING } from "@/stores/settings"
 import { useQueue } from "@/stores/queue"
@@ -161,6 +182,18 @@ const selectedTab = ref(tabOptions[0].label)
 const showSaveMsg = ref(false)
 const formKey = ref(1)
 const formSettings = ref<Settings>(Object.assign({}, settings.$state))
+const formQueueSettings = ref({ isLimited: queue.upcoming.limit !== null, limit: queue.upcoming.limit })
+
+const isQueueSettingsModified = computed<boolean>(() => {
+  const sameLimitValue = queue.upcoming.limit === formQueueSettings.value.limit
+  const sameBeingLimited =
+    (queue.upcoming.limit !== null && formQueueSettings.value.isLimited) ||
+    (queue.upcoming.limit === null && !formQueueSettings.value.isLimited)
+  if (sameLimitValue && sameBeingLimited) {
+    return false
+  }
+  return true
+})
 
 function hideMsg() {
   showSaveMsg.value = false
@@ -181,5 +214,21 @@ function onSubmit() {
   setTimeout(hideMsg, 2000)
   settings.update(formSettings.value)
   onReset()
+}
+
+function onResetQSettings() {
+  formQueueSettings.value = Object.assign({}, { isLimited: queue.upcoming.limit !== null, limit: queue.upcoming.limit })
+  formKey.value += 1
+}
+
+function onSubmitQSettings() {
+  showSaveMsg.value = true
+  setTimeout(hideMsg, 2000)
+  if (formQueueSettings.value.isLimited) {
+    queue.upcoming.limit = formQueueSettings.value.limit
+  } else {
+    queue.upcoming.limit = null
+  }
+  onResetQSettings()
 }
 </script>

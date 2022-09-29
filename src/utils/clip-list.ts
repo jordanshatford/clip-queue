@@ -10,18 +10,23 @@ export class ClipList {
     }
   }
 
+  public limit: number | null = null
+
   public add(...clips: Clip[]): Clip[] {
     clips.forEach((clip) => {
-      if (!this.includes(clip)) {
-        const submitter = clip.submitter?.toLowerCase()
-        this._clips.push({ ...clip, submitter, submitters: submitter ? [submitter] : [] })
-      } else {
+      if (this.includes(clip)) {
         const index = this._clips.findIndex((c) => c.id === clip.id)
         const submitters = this._clips[index]?.submitters ?? []
         const submitter = clip.submitter?.toLowerCase()
         if (submitter && !submitters.includes(submitter)) {
           this._clips[index].submitters = [...submitters, submitter]
         }
+      } else if (this.limit && this._clips.length >= this.limit) {
+        // No room in queue due to set limit
+        return
+      } else {
+        const submitter = clip.submitter?.toLowerCase()
+        this._clips.push({ ...clip, submitter, submitters: submitter ? [submitter] : [] })
       }
     })
     this.sort()

@@ -30,14 +30,19 @@ export const useQueue = defineStore("queue", {
       }
     },
     clear() {
+      const limit = this.upcoming.limit
       this.upcoming = new ClipList()
+      this.upcoming.limit = limit
     },
     purge() {
       this.history = new ClipList()
     },
     add(clip: Clip, force = false) {
-      const duplicateClip = this.current?.id === clip.id || this.history.includes(clip)
-      if (duplicateClip || (!this.open && !force)) {
+      if (!this.open && !force) {
+        return
+      }
+      const hasBeenWatched = this.current?.id === clip.id || this.history.includes(clip)
+      if (hasBeenWatched) {
         return
       }
       this.upcoming.add(clip)

@@ -151,4 +151,13 @@ describe("clips.ts", () => {
     queue.next()
     expect(queue.history.size()).toEqual(0)
   })
+
+  it("doesnt clear the queue limit when clearing queue", () => {
+    const queue = useQueue()
+    expect(queue.upcoming.limit).toEqual(null)
+    queue.upcoming.limit = 2
+    expect(queue.upcoming.limit).toEqual(2)
+    queue.clear()
+    expect(queue.upcoming.limit).toEqual(2)
+  })
 })

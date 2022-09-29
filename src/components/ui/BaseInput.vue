@@ -4,13 +4,13 @@
 
 <script setup lang="ts">
 export interface Props {
-  modelValue: string | number
+  modelValue: string | number | null
 }
 
 const props = defineProps<Props>()
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: string | number): void
+  (e: "update:modelValue", value: string | number | null): void
 }>()
 
 function emitUpdate(target: EventTarget | null) {
