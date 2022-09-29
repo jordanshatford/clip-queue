@@ -1,13 +1,17 @@
-import { describe, it, expect } from "vitest"
+import { describe, it, expect, beforeEach, vi } from "vitest"
 import { shallowMount } from "@vue/test-utils"
 import { createTestingPinia } from "@pinia/testing"
-import QueuePage from "../QueuePage.vue"
+import RedditPage from "../RedditPage.vue"
 
-describe("Queue.vue", () => {
-  const wrapper = shallowMount(QueuePage, {
+describe("RedditPage.vue", () => {
+  const wrapper = shallowMount(RedditPage, {
     global: {
       plugins: [createTestingPinia()],
     },
+  })
+
+  beforeEach(() => {
+    vi.clearAllMocks()
   })
 
   it("mounts successfully", () => {

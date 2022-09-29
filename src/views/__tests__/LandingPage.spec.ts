@@ -3,7 +3,7 @@ import { shallowMount } from "@vue/test-utils"
 import LandingPage from "../LandingPage.vue"
 import config from "../../assets/config"
 
-describe("Landing.vue", () => {
+describe("LandingPage.vue", () => {
   const wrapper = shallowMount(LandingPage)
 
   it("mounts successfully", () => {

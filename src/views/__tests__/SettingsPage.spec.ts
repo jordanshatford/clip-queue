@@ -3,7 +3,7 @@ import { shallowMount } from "@vue/test-utils"
 import { createTestingPinia } from "@pinia/testing"
 import SettingsPage from "../SettingsPage.vue"
 
-describe("Settings.vue", () => {
+describe("SettingsPage.vue", () => {
   const wrapper = shallowMount(SettingsPage, {
     global: {
       plugins: [createTestingPinia()],
