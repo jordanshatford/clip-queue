@@ -28,14 +28,14 @@ class TwitchChat extends Client {
 
     this.connect()
       .then(() => {
-        console.debug(`Connected to channel ${username}.`)
+        console.info(`Connected to channel ${username}.`)
       })
       .catch((e) => {
         console.error("Failed to connect to twitch chat.", e)
       })
 
     this.on("disconnected", () => {
-      console.debug("Disconnected from twitch chat.")
+      console.info("Disconnected from twitch chat.")
     })
   }
 

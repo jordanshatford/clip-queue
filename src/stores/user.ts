@@ -17,8 +17,10 @@ interface User {
   accessToken: string | null
   idToken: string | null
   username: string | null
-  chat: TwitchChat | null
+  chat?: TwitchChat
 }
+
+export const LOCAL_STORAGE_KEY = "user"
 
 export const useUser = defineStore("user", {
   state: (): User => {
@@ -27,10 +29,24 @@ export const useUser = defineStore("user", {
       accessToken: null,
       idToken: null,
       username: null,
-      chat: null,
+      chat: undefined,
     }
   },
   actions: {
+    async init() {
+      const localStorageState = localStorage.getItem(LOCAL_STORAGE_KEY)
+      if (localStorageState) {
+        const savedState = JSON.parse(localStorageState)
+        this.$patch({ ...savedState })
+      }
+
+      if (this?.accessToken && await twitch.isTokenStillValid(this.accessToken)) {
+        this.isLoggedIn = true
+        this.connectToChat()
+      } else {
+        this.logout()
+      }
+    },
     redirect(): void {
       twitch.redirect(CLIENT_ID, REDIRECT_URI, SCOPES)
     },
@@ -41,13 +57,7 @@ export const useUser = defineStore("user", {
         this.idToken = id_token
         this.username = decodedIdToken?.preferred_username ?? ""
         this.isLoggedIn = true
-        this.chat?.disconnect()
-        this.chat = new TwitchChat(this.username, this.accessToken)
-        // setup watching chat
-        this.chat.on("message", this.onMessage)
-        this.chat.on("messagedeleted", this.onMessageDeleted)
-        this.chat.on("timeout", this.onTimeout)
-        this.chat.on("ban", this.onTimeout)
+        this.connectToChat()
       }
     },
     async logout(): Promise<void> {
@@ -57,9 +67,20 @@ export const useUser = defineStore("user", {
       this.username = null
       this.isLoggedIn = false
       this.chat?.disconnect()
-      this.chat = null
+      this.chat = undefined
       if (token) {
         twitch.logout(CLIENT_ID, token)
+      }
+    },
+    connectToChat() {
+      this.chat?.disconnect()
+      if (this.username && this.accessToken) {
+        this.chat = new TwitchChat(this.username, this.accessToken)
+        // setup watching chat
+        this.chat.on("message", this.onMessage)
+        this.chat.on("messagedeleted", this.onMessageDeleted)
+        this.chat.on("timeout", this.onTimeout)
+        this.chat.on("ban", this.onTimeout)
       }
     },
     onMessage(c: string, userstate: Userstate, message: string, self: boolean) {
@@ -80,7 +101,6 @@ export const useUser = defineStore("user", {
         const clipFinder = useClipFinder()
         clipFinder.getTwitchClip(url).then((clip) => {
           if (clip) {
-            console.debug("Adding clip to queue: ", clip)
             const queue = useQueue()
             const submitter = userstate.username
             queue.add({
@@ -102,7 +122,6 @@ export const useUser = defineStore("user", {
         const clipFinder = useClipFinder()
         clipFinder.getTwitchClip(url).then((clip) => {
           if (clip) {
-            console.debug("Removing clip from queue: ", clip)
             const queue = useQueue()
             const submitter = username
             queue.remove({
@@ -118,7 +137,6 @@ export const useUser = defineStore("user", {
       if (!settings.autoRemoveClips) {
         return
       }
-      console.debug("Removing all clips submitter by: ", username)
       const queue = useQueue()
       queue.removeSubmitterClips(username)
     },

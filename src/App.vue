@@ -14,12 +14,22 @@
 import AppNavBar from "@/components/AppNavBar.vue"
 import AppFooter from "./components/AppFooter.vue"
 import { useTheme } from "@/stores/theme"
-import { useSettings } from "./stores/settings"
+import { useSettings } from "@/stores/settings"
+import { useUser, LOCAL_STORAGE_KEY as USER_KEY } from "@/stores/user"
 import { useQueue, LOCAL_STORAGE_KEY as QUEUE_KEY } from "@/stores/queue"
 import { useClipFinder, LOCAL_STORAGE_KEY as CLIP_FINDER_KEY } from "@/stores/clip-finder"
 
 useTheme().getDefault()
 useSettings().init()
+const user = useUser()
+user.init()
+user.$subscribe(
+  (m, state) => {
+    delete state.chat
+    localStorage.setItem(USER_KEY, JSON.stringify(state))
+  },
+  { detached: true }
+)
 const queue = useQueue()
 queue.init()
 queue.$subscribe(
