@@ -1,5 +1,5 @@
 import axios from "axios"
-import type { IDToken, AuthInfo } from "./types"
+import type { IDToken, TokenInfo, AuthInfo } from "./types"
 
 const BASE_URL = "https://id.twitch.tv/oauth2"
 
@@ -26,6 +26,15 @@ export function redirect(clientId: string, redirectUri: string, scopes: string[]
       `&claims={"id_token":{"preferred_username":null}}`
   )
   window.location.assign(loginUrl)
+}
+
+export async function isTokenStillValid(token: string) {
+  const { status } = await axios.get<TokenInfo>(`${BASE_URL}/validate`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  return status === 200
 }
 
 function processAuthHash(hash: string): AuthInfo {
@@ -59,5 +68,6 @@ function parseJWT(token: string) {
 export default {
   login,
   logout,
+  isTokenStillValid,
   redirect,
 }

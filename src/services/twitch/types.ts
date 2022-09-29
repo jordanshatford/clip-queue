@@ -8,6 +8,14 @@ export interface IDToken {
   preferred_username: string
 }
 
+export interface TokenInfo {
+  client_id: string
+  expires_in: number
+  login: string
+  scopes: string[]
+  user_id: string
+}
+
 export interface AuthInfo {
   access_token: string
   id_token: string
