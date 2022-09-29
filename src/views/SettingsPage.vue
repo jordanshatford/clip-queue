@@ -10,9 +10,9 @@
 import { ref } from "vue"
 import { ChatBubbleLeftRightIcon, Cog8ToothIcon, QueueListIcon } from "@heroicons/vue/24/outline"
 import SettingsTabs from "@/components/SettingsTabs.vue"
-import ChatSettings from "@/components/ChatSettings.vue"
-import QueueSettings from "@/components/QueueSettings.vue"
-import OtherSettings from "@/components/OtherSettings.vue"
+import ChatSettings from "@/components/settings/ChatSettings.vue"
+import QueueSettings from "@/components/settings/QueueSettings.vue"
+import OtherSettings from "@/components/settings/OtherSettings.vue"
 
 enum TabOption {
   Chat = "Chat",
