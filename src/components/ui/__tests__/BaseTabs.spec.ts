@@ -1,9 +1,9 @@
 import { describe, it, expect } from "vitest"
 import { shallowMount } from "@vue/test-utils"
-import SettingsTabs from "../SettingsTabs.vue"
+import BaseTabs from "../BaseTabs.vue"
 
-describe("SettingsTabs.vue", () => {
-  const wrapper = shallowMount(SettingsTabs, {
+describe("BaseTabs.vue", () => {
+  const wrapper = shallowMount(BaseTabs, {
     props: {
       modelValue: "test",
       options: [{ label: "test" }, { label: "test2" }],

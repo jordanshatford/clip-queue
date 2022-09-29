@@ -7,6 +7,7 @@ import sentry from "@/services/sentry"
 import BaseAlert from "@/components/ui/BaseAlert.vue"
 import BaseInput from "@/components/ui/BaseInput.vue"
 import BaseSwitch from "@/components/ui/BaseSwitch.vue"
+import BaseTabs from "./components/ui/BaseTabs.vue"
 import BaseTextArea from "@/components/ui/BaseTextArea.vue"
 import BaseButton from "@/components/ui/BaseButton.vue"
 
@@ -17,6 +18,7 @@ app
   .component("BaseAlert", BaseAlert)
   .component("BaseInput", BaseInput)
   .component("BaseSwitch", BaseSwitch)
+  .component("BaseTabs", BaseTabs)
   .component("BaseTextArea", BaseTextArea)
   .component("BaseButton", BaseButton)
 app.use(router)
