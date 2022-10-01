@@ -40,7 +40,7 @@ export const useUser = defineStore("user", {
         this.$patch({ ...savedState })
       }
 
-      if (this?.accessToken && await twitch.isTokenStillValid(this.accessToken)) {
+      if (this?.accessToken && (await twitch.isTokenStillValid(this.accessToken))) {
         this.isLoggedIn = true
         this.connectToChat()
       } else {
