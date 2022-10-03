@@ -160,4 +160,18 @@ describe("clips.ts", () => {
     queue.clear()
     expect(queue.upcoming.limit).toEqual(2)
   })
+
+  it("blocks clips from unwanted channels", () => {
+    const queue = useQueue()
+    queue.blockedChannels = ["testChannel"]
+    queue.add({ ...clip, channel: "testChannel" })
+    expect(queue.upcoming.size()).toEqual(0)
+  })
+
+  it("does not care about case when checking if the channel is blocked", () => {
+    const queue = useQueue()
+    queue.blockedChannels = ["testChannel"]
+    queue.add({ ...clip, channel: "TeStChAnnel" })
+    expect(queue.upcoming.size()).toEqual(0)
+  })
 })

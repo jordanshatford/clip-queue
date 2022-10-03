@@ -10,6 +10,7 @@ export interface ClipQueue {
   history: ClipList
   current: Clip | undefined
   upcoming: ClipList
+  blockedChannels: string[]
 }
 
 export const LOCAL_STORAGE_KEY = "queue"
@@ -20,6 +21,7 @@ export const useQueue = defineStore("queue", {
     history: new ClipList(),
     current: undefined,
     upcoming: new ClipList(),
+    blockedChannels: [],
   }),
   actions: {
     init() {
@@ -38,9 +40,15 @@ export const useQueue = defineStore("queue", {
       this.history = new ClipList()
     },
     add(clip: Clip, force = false) {
+      // Ignore clip when queue isnt open
       if (!this.open && !force) {
         return
       }
+      // Ignore when the submitter is blocked from adding to the queue
+      if (this.blockedChannels.some((c) => c.toLowerCase() === clip.channel?.toLowerCase())) {
+        return
+      }
+      // Ignore when we have previously watched it
       const hasBeenWatched = this.current?.id === clip.id || this.history.includes(clip)
       if (hasBeenWatched) {
         return
