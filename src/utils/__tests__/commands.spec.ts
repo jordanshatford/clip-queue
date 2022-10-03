@@ -29,6 +29,22 @@ describe("commands.ts", () => {
     }
   )
 
+  it.each([
+    ["blockchannel", ["test"], "blockChannel"],
+    ["unblockchannel", ["test"], "unblockChannel"],
+  ])(
+    "calls the proper clip queue function with params when issued (%s, %s)",
+    (commandName: string, args: string[], expectedFunctionCall: any) => {
+      const queue = useQueue()
+      const randomNumber = Math.floor(Math.random() * 25)
+      const spy = vi.spyOn(queue, expectedFunctionCall)
+      for (let i = 1; i <= randomNumber; i++) {
+        commands.handleCommand(commandName, ...args)
+      }
+      expect(spy).toHaveBeenCalledTimes(randomNumber)
+    }
+  )
+
   /* eslint-disable @typescript-eslint/no-explicit-any*/
   it.each([["unknown"], [""]])("calls nothing when an invalid command is issued (%s, %s)", (commandName: string) => {
     const queue = useQueue()
@@ -37,6 +53,8 @@ describe("commands.ts", () => {
     expect(vi.spyOn(queue, "next")).toHaveBeenCalledTimes(0)
     expect(vi.spyOn(queue, "open")).toHaveBeenCalledTimes(0)
     expect(vi.spyOn(queue, "close")).toHaveBeenCalledTimes(0)
+    expect(vi.spyOn(queue, "blockChannel")).toHaveBeenCalledTimes(0)
+    expect(vi.spyOn(queue, "unblockChannel")).toHaveBeenCalledTimes(0)
   })
 
   it("returns help information for commands", () => {

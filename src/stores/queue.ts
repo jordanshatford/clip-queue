@@ -103,6 +103,16 @@ export const useQueue = defineStore("queue", {
       this.current = this.upcoming.shift()
       this.sendCurrentClipInfoMessageIfNeeded()
     },
+    blockChannel(channel: string) {
+      // Ignore if already in the blocked channels
+      if (this.blockedChannels.some((c) => c.toLowerCase() === channel.toLowerCase())) {
+        return
+      }
+      this.blockedChannels = [...this.blockedChannels, channel]
+    },
+    unblockChannel(channel: string) {
+      this.blockedChannels = this.blockedChannels.filter((c) => c.toLowerCase() !== channel.toLowerCase())
+    },
     sendCurrentClipInfoMessageIfNeeded() {
       const settings = useSettings()
       if (this.current?.id && settings.sendMsgsInChat && settings.sendCurrentClipMsg) {

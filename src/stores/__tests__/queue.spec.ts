@@ -174,4 +174,23 @@ describe("clips.ts", () => {
     queue.add({ ...clip, channel: "TeStChAnnel" })
     expect(queue.upcoming.size()).toEqual(0)
   })
+
+  it("can block a channel from submitting clips", () => {
+    const queue = useQueue()
+    queue.blockedChannels = ["test"]
+    queue.blockChannel("test2")
+    expect(queue.blockedChannels.length).toEqual(2)
+    queue.blockChannel("test2")
+    expect(queue.blockedChannels.length).toEqual(2)
+  })
+
+  it("can unblock a channel from submitting clips", () => {
+    const queue = useQueue()
+    queue.blockedChannels = ["test", "test2"]
+    queue.blockChannel("test2")
+    expect(queue.blockedChannels.length).toEqual(2)
+    queue.unblockChannel("Test2")
+    expect(queue.blockedChannels.length).toEqual(1)
+    expect(queue.blockedChannels).not.toContain("test2")
+  })
 })
