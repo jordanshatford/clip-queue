@@ -10,22 +10,27 @@
               @click.prevent="addTag(currentInput)"
               class="cq-text block py-1 px-5 cursor-pointer hover:bg-violet-500 hover:text-white"
             >
-              Add tag "<span class="font-semibold">{{ currentInput }}</span
+              add {{ itemName }} "<span class="font-semibold">{{ currentInput }}</span
               >"
             </a>
             <p v-else class="cq-text block py-1 px-5">
-              Tag "<span class="font-semibold">{{ currentInput }}</span
-              >" already exists
+              {{ itemName }} "<span class="font-semibold">{{ currentInput }}</span
+              >" already added
             </p>
           </div>
         </div>
       </div>
-      <div v-if="sortedTags.length > 0" class="space-x-2 mt-2">
-        <BaseTag v-for="(tag, index) in sortedTags" :key="index" dismissable @dismiss="removeTag(index)"
+      <div v-if="sortedTags.length > 0" class="space-x-2 space-y-2">
+        <BaseTag
+          v-for="(tag, index) in sortedTags"
+          :class="{ 'mt-2': index === 0 }"
+          :key="index"
+          dismissable
+          @dismiss="removeTag(index)"
           >{{ tag }}
         </BaseTag>
       </div>
-      <div v-else class="cq-text-subtle mt-2">No Tags set</div>
+      <div v-else class="cq-text-subtle mt-2">No {{ itemName }}s set.</div>
     </div>
   </div>
 </template>
@@ -36,9 +41,10 @@ import { computed, ref } from "vue"
 export interface Props {
   modelValue: string[]
   placeholder?: string
+  itemName?: string
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), { itemName: "tag" })
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: string[]): void
