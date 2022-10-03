@@ -3,6 +3,7 @@
     <span class="mx-2 my-1 truncate max-w-xs mx-auto"><slot></slot></span>
     <button
       v-if="dismissable"
+      type="button"
       @click="emit('dismiss')"
       class="w-5 h-5 mr-1 inline-block align-middle hover:text-red-500 dark:hover:text-red-500"
     >
