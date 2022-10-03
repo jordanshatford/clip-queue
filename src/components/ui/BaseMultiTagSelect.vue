@@ -13,8 +13,10 @@
               Add tag "<span class="font-semibold">{{ currentInput }}</span
               >"
             </a>
-            <p v-else class="cq-text block py-1 px-5">Tag "<span class="font-semibold">{{ currentInput }}</span
-              >" already exists</p>
+            <p v-else class="cq-text block py-1 px-5">
+              Tag "<span class="font-semibold">{{ currentInput }}</span
+              >" already exists
+            </p>
           </div>
         </div>
       </div>
@@ -23,9 +25,7 @@
           >{{ tag }}
         </BaseTag>
       </div>
-      <div v-else class="cq-text-subtle mt-2">
-        No Tags set
-      </div>
+      <div v-else class="cq-text-subtle mt-2">No Tags set</div>
     </div>
   </div>
 </template>

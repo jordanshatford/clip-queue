@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="cq-text bg-zinc-200 dark:bg-zinc-700 inline-flex items-center text-sm rounded-lg"
-  >
+  <div class="cq-text bg-zinc-200 dark:bg-zinc-700 inline-flex items-center text-sm rounded-lg">
     <span class="mx-2 my-1 truncate max-w-xs mx-auto"><slot></slot></span>
     <button
       v-if="dismissable"

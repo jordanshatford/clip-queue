@@ -5,8 +5,8 @@ import BaseMultiTagSelect from "../BaseMultiTagSelect.vue"
 describe("BaseMultiTagSelect.vue", () => {
   const wrapper = shallowMount(BaseMultiTagSelect, {
     props: {
-      modelValue: []
-    }
+      modelValue: [],
+    },
   })
 
   it("mounts successfully", () => {
