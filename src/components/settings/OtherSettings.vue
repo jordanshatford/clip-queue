@@ -1,30 +1,28 @@
 <template>
-  <div>
-    <div class="cq-form mb-2">
-      <BaseButton
-        class="w-full"
-        variant="danger"
-        :disabled="!settings.isModified(DEFAULT_SETTING)"
-        @click="resetSettingsToDefault()"
-      >
-        Reset Settings
-      </BaseButton>
-      <label class="cq-text-subtle"> Reset settings back to their initial values. </label>
-    </div>
-    <div class="cq-form mt-2">
-      <BaseButton class="w-full" variant="danger" :disabled="queue.history.empty()" @click="queue.purge()">
-        Purge History
-      </BaseButton>
-      <label class="cq-text-subtle">Purge all clips previously viewed allowing them to be resubmitted.</label>
-    </div>
-    <div class="cq-form mt-2">
-      <BaseButton class="w-full" variant="danger" :disabled="clipFinder.cacheEmpty" @click="clipFinder.$reset()">
-        Purge Cache
-      </BaseButton>
-      <label class="cq-text-subtle">
-        Twitch clips submitted are cached for future use, this clears all cached clip information.
-      </label>
-    </div>
+  <div class="cq-form mb-2">
+    <BaseButton
+      class="w-full"
+      variant="danger"
+      :disabled="!settings.isModified(DEFAULT_SETTING)"
+      @click="resetSettingsToDefault()"
+    >
+      Reset Settings
+    </BaseButton>
+    <label class="cq-text-subtle"> Reset settings back to their initial values. </label>
+  </div>
+  <div class="cq-form mt-2">
+    <BaseButton class="w-full" variant="danger" :disabled="queue.history.empty()" @click="queue.purge()">
+      Purge History
+    </BaseButton>
+    <label class="cq-text-subtle">Purge all clips previously viewed allowing them to be resubmitted.</label>
+  </div>
+  <div class="cq-form mt-2">
+    <BaseButton class="w-full" variant="danger" :disabled="clipFinder.cacheEmpty" @click="clipFinder.$reset()">
+      Purge Cache
+    </BaseButton>
+    <label class="cq-text-subtle">
+      Twitch clips submitted are cached for future use, this clears all cached clip information.
+    </label>
   </div>
 </template>
 
