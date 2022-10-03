@@ -11,6 +11,7 @@ import BaseTabs from "@/components/ui/BaseTabs.vue"
 import BaseTag from "@/components/ui/BaseTag.vue"
 import BaseTextArea from "@/components/ui/BaseTextArea.vue"
 import BaseButton from "@/components/ui/BaseButton.vue"
+import BaseMultiTagSelect from "@/components/ui/BaseMultiTagSelect.vue"
 
 const app = createApp(App)
 sentry.init(app)
@@ -23,5 +24,6 @@ app
   .component("BaseTag", BaseTag)
   .component("BaseTextArea", BaseTextArea)
   .component("BaseButton", BaseButton)
+  .component("BaseMultiTagSelect", BaseMultiTagSelect)
 app.use(router)
 app.mount("#app")
