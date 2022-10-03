@@ -1,5 +1,5 @@
 <template>
-  <div @focusout="clearInput()" @keydown.escape="clearInput()">
+  <div @keydown.escape="clearInput()">
     <div class="relative" @keydown.enter.prevent="addTag(currentInput)">
       <BaseInput v-model="currentInput" :placeholder="placeholder" />
       <div :class="[dropdownOpen ? 'block' : 'hidden']">
