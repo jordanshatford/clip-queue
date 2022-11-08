@@ -24,18 +24,6 @@
           </ul>
         </div>
       </div>
-      <div>
-        <div class="cq-toggle-form-group">
-          <label class="cq-form-group-label">Auto remove clips on moderation?</label>
-          <BaseSwitch id="autoRemoveClips" v-model="formSettings.autoRemoveClips" />
-        </div>
-        <div v-if="formSettings.autoRemoveClips" class="text-left pl-1 cq-text-subtle mb-2">
-          <label>
-            When a user has their chat message deleted, is timed out, or banned, then the clips they submitted will be
-            removed.
-          </label>
-        </div>
-      </div>
       <div class="cq-toggle-form-group">
         <label class="cq-form-group-label">Send bot messages in chat?</label>
         <BaseSwitch id="sendMsgsInChat" v-model="formSettings.sendMsgsInChat" />

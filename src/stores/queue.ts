@@ -10,6 +10,7 @@ export interface ClipQueue {
   history: ClipList
   current: Clip | undefined
   upcoming: ClipList
+  autoRemoveClipsOnModeration: boolean
   blockedChannels: string[]
 }
 
@@ -21,6 +22,7 @@ export const useQueue = defineStore("queue", {
     history: new ClipList(),
     current: undefined,
     upcoming: new ClipList(),
+    autoRemoveClipsOnModeration: true,
     blockedChannels: [],
   }),
   actions: {

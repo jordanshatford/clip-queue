@@ -113,8 +113,8 @@ export const useUser = defineStore("user", {
       }
     },
     onMessageDeleted(c: string, username: string, deletedMessage: string) {
-      const settings = useSettings()
-      if (!settings.autoRemoveClips) {
+      const queue = useQueue()
+      if (!queue.autoRemoveClipsOnModeration) {
         return
       }
       const url = getUrlFromMessage(deletedMessage)
@@ -122,7 +122,6 @@ export const useUser = defineStore("user", {
         const clipFinder = useClipFinder()
         clipFinder.getTwitchClip(url).then((clip) => {
           if (clip) {
-            const queue = useQueue()
             const submitter = username
             queue.remove({
               ...clip,
@@ -133,11 +132,10 @@ export const useUser = defineStore("user", {
       }
     },
     onTimeout(c: string, username: string) {
-      const settings = useSettings()
-      if (!settings.autoRemoveClips) {
+      const queue = useQueue()
+      if (!queue.autoRemoveClipsOnModeration) {
         return
       }
-      const queue = useQueue()
       queue.removeSubmitterClips(username)
     },
   },
