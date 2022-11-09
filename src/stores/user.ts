@@ -23,6 +23,7 @@ interface User {
 export const useUser = defineStore("user", {
   persist: {
     key: "user",
+    paths: ["accessToken", "idToken", "username"],
     afterRestore: async (ctx) => {
       await ctx.store.autoLoginIfPossible()
     },
