@@ -1,35 +1,72 @@
-import { describe, it, expect, beforeEach } from "vitest"
+import { describe, it, expect, beforeEach, vi } from "vitest"
+import { createApp } from "vue"
 import { setActivePinia, createPinia } from "pinia"
-import { useTheme } from "../theme"
+import piniaPluginPersistedState from "pinia-plugin-persistedstate"
+import { useTheme, getInferredDefaultTheme, Theme } from "../theme"
+
+const VALUE_LIGHT = '{"value":"light"}'
+const VALUE_DARK = '{"value":"dark"}'
 
 describe("theme.ts", () => {
+  const app = createApp({})
+
   beforeEach(() => {
-    setActivePinia(createPinia())
+    const pinia = createPinia().use(piniaPluginPersistedState)
+    app.use(pinia)
+    setActivePinia(pinia)
   })
 
-  it("gets the default value from localstorage if possible", () => {
+  it("gets the inferred default theme when no theme was set", () => {
+    // Dark match media returns true
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: vi.fn().mockImplementation((query) => ({
+        matches: true,
+        media: query,
+      })),
+    })
+    expect(getInferredDefaultTheme()).toEqual(Theme.DARK)
+    // Dark match media returns false
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: vi.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+      })),
+    })
+    expect(getInferredDefaultTheme()).toEqual(Theme.LIGHT)
+    // Match media is undefined (default to dark)
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: undefined,
+    })
+    expect(getInferredDefaultTheme()).toEqual(Theme.DARK)
+  })
+
+  it("gets the default value from localstorage if possible (light)", () => {
+    localStorage.setItem("theme", VALUE_LIGHT)
     const theme = useTheme()
-    localStorage.setItem("theme", "light")
-    theme.getDefault()
     expect(theme.value).toEqual("light")
     expect(theme.isDark).toEqual(false)
-    localStorage.setItem("theme", "dark")
-    theme.getDefault()
+    expect(document?.querySelector("html")?.classList.contains("dark")).toEqual(false)
+  })
+
+  it("gets the default value from localstorage if possible (dark)", () => {
+    localStorage.setItem("theme", VALUE_DARK)
+    const theme = useTheme()
     expect(theme.value).toEqual("dark")
     expect(theme.isDark).toEqual(true)
-    expect(document?.querySelector("html")?.classList.contains("dark")).toBeTruthy()
+    expect(document?.querySelector("html")?.classList.contains("dark")).toEqual(true)
   })
 
   it("gets the default value from config when no value is in local storage", () => {
     const theme = useTheme()
-    theme.getDefault()
     expect(theme.value).toEqual("dark")
     expect(theme.isDark).toEqual(true)
   })
 
   it("can toggle the theme", () => {
     const theme = useTheme()
-    theme.getDefault()
     expect(theme.value).toEqual("dark")
     expect(theme.isDark).toEqual(true)
     expect(document?.querySelector("html")?.classList.contains("dark")).toBeTruthy()

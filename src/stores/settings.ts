@@ -13,8 +13,6 @@ export interface Settings {
   currentClipMsg: string
 }
 
-const LOCAL_STORAGE_KEY = "settings"
-
 export const DEFAULT_SETTING: Settings = {
   allowCommands: true,
   commandPrefix: "!cq",
@@ -28,6 +26,9 @@ export const DEFAULT_SETTING: Settings = {
 }
 
 export const useSettings = defineStore("settings", {
+  persist: {
+    key: "settings",
+  },
   state: (): Settings => ({ ...DEFAULT_SETTING }),
   getters: {
     isModified: (state) => {
@@ -38,17 +39,8 @@ export const useSettings = defineStore("settings", {
     },
   },
   actions: {
-    init() {
-      const localStorageSettings = localStorage.getItem(LOCAL_STORAGE_KEY)
-      if (localStorageSettings) {
-        const savedSettings: Settings = JSON.parse(localStorageSettings)
-        this.$patch(savedSettings)
-      }
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.$state))
-    },
     update(settings: Settings) {
       this.$patch(settings)
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.$state))
     },
   },
 })

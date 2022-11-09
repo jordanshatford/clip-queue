@@ -14,9 +14,13 @@ export interface ClipQueue {
   blockedChannels: string[]
 }
 
-export const LOCAL_STORAGE_KEY = "queue"
-
 export const useQueue = defineStore("queue", {
+  persist: {
+    key: "queue",
+    afterRestore: (ctx) => {
+      ctx.store.current = undefined
+    },
+  },
   state: (): ClipQueue => ({
     isOpen: true,
     history: new ClipList(),
@@ -26,13 +30,6 @@ export const useQueue = defineStore("queue", {
     blockedChannels: [],
   }),
   actions: {
-    init() {
-      const localStorageState = localStorage.getItem(LOCAL_STORAGE_KEY)
-      if (localStorageState) {
-        const savedState: ClipQueue = JSON.parse(localStorageState)
-        this.$patch({ ...savedState, current: undefined })
-      }
-    },
     clear() {
       const limit = this.upcoming.limit
       this.upcoming = new ClipList()

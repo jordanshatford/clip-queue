@@ -20,9 +20,13 @@ interface User {
   chat?: TwitchChat
 }
 
-export const LOCAL_STORAGE_KEY = "user"
-
 export const useUser = defineStore("user", {
+  persist: {
+    key: "user",
+    afterRestore: async (ctx) => {
+      await ctx.store.autoLoginIfPossible()
+    },
+  },
   state: (): User => {
     return {
       isLoggedIn: false,
@@ -33,13 +37,7 @@ export const useUser = defineStore("user", {
     }
   },
   actions: {
-    async init() {
-      const localStorageState = localStorage.getItem(LOCAL_STORAGE_KEY)
-      if (localStorageState) {
-        const savedState = JSON.parse(localStorageState)
-        this.$patch({ ...savedState })
-      }
-
+    async autoLoginIfPossible() {
       if (this?.accessToken && (await twitch.isTokenStillValid(this.accessToken))) {
         this.isLoggedIn = true
         this.connectToChat()
@@ -73,7 +71,7 @@ export const useUser = defineStore("user", {
       }
     },
     connectToChat() {
-      this.chat?.disconnect()
+      this.chat?.disconnect?.()
       if (this.username && this.accessToken) {
         this.chat = new TwitchChat(this.username, this.accessToken)
         // setup watching chat

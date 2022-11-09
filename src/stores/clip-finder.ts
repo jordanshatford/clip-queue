@@ -9,9 +9,10 @@ import { useUser } from "@/stores/user"
 
 const { CLIENT_ID } = env
 
-export const LOCAL_STORAGE_KEY = "twitch-cache"
-
 export const useClipFinder = defineStore("clip-finder", {
+  persist: {
+    key: "twitch-cache",
+  },
   state: () => ({
     clips: {} as Record<string, TwitchClip>,
     games: {} as Record<string, TwitchGame>,
@@ -55,13 +56,6 @@ export const useClipFinder = defineStore("clip-finder", {
     },
   },
   actions: {
-    init() {
-      const localStorageState = localStorage.getItem(LOCAL_STORAGE_KEY)
-      if (localStorageState) {
-        const savedState = JSON.parse(localStorageState)
-        this.$patch(savedState)
-      }
-    },
     async getClipsFromSubreddit(subreddit: string): Promise<Clip[]> {
       const r = useReddit()
       const subredditPosts = await reddit.getSubredditPosts(subreddit, r.postsToCheck)

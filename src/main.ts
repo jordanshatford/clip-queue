@@ -1,6 +1,7 @@
 import "@/assets/tailwind.css"
 import { createApp } from "vue"
 import { createPinia } from "pinia"
+import piniaPluginPersistedState from "pinia-plugin-persistedstate"
 import App from "@/App.vue"
 import router from "@/router"
 import sentry from "@/services/sentry"
@@ -15,7 +16,9 @@ import BaseMultiTagSelect from "@/components/ui/BaseMultiTagSelect.vue"
 
 const app = createApp(App)
 sentry.init(app)
-app.use(createPinia())
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedState)
+app.use(pinia)
 app
   .component("BaseAlert", BaseAlert)
   .component("BaseInput", BaseInput)

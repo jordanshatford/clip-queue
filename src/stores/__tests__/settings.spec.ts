@@ -9,22 +9,13 @@ describe("settings.ts", () => {
 
   it("inits the settings with default value", () => {
     const settings = useSettings()
-    settings.init()
     expect(settings.commandPrefix).toEqual("!cq")
     expect(settings.isModified(DEFAULT_SETTING)).toEqual(false)
-  })
-
-  it("inits the settings with values from local storage", () => {
-    const settings = useSettings()
-    localStorage.setItem("settings", JSON.stringify({ commandPrefix: "~" }))
-    settings.init()
-    expect(settings.commandPrefix).toEqual("~")
   })
 
   it("updates the settings in local storage", () => {
     const settings = useSettings()
     localStorage.clear()
-    settings.init()
     expect(settings.commandPrefix).toEqual("!cq")
     settings.update({
       commandPrefix: "~",
