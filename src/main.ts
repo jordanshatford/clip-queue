@@ -4,7 +4,6 @@ import { createPinia } from "pinia"
 import piniaPluginPersistedState from "pinia-plugin-persistedstate"
 import App from "@/App.vue"
 import router from "@/router"
-import sentry from "@/services/sentry"
 import BaseAlert from "@/components/ui/BaseAlert.vue"
 import BaseInput from "@/components/ui/BaseInput.vue"
 import BaseSwitch from "@/components/ui/BaseSwitch.vue"
@@ -15,7 +14,6 @@ import BaseButton from "@/components/ui/BaseButton.vue"
 import BaseMultiTagSelect from "@/components/ui/BaseMultiTagSelect.vue"
 
 const app = createApp(App)
-sentry.init(app)
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedState)
 app.use(pinia)
