@@ -6,6 +6,7 @@ import { useSettings } from "@/stores/settings"
 import commands from "@/utils/commands"
 import { getUrlFromMessage } from "@/utils"
 import { useQueue } from "@/stores/queue"
+import { useModeration } from "@/stores/moderation"
 import { useClipFinder } from "@/stores/clip-finder"
 import { ClipSource } from "@/interfaces/clips"
 
@@ -112,8 +113,8 @@ export const useUser = defineStore("user", {
       }
     },
     onMessageDeleted(c: string, username: string, deletedMessage: string) {
-      const queue = useQueue()
-      if (!queue.autoRemoveClipsOnModeration) {
+      const moderation = useModeration()
+      if (!moderation.hasAutoRemoveClipsEnabled) {
         return
       }
       const url = getUrlFromMessage(deletedMessage)
@@ -121,6 +122,7 @@ export const useUser = defineStore("user", {
         const clipFinder = useClipFinder()
         clipFinder.getTwitchClip(url).then((clip) => {
           if (clip) {
+            const queue = useQueue()
             const submitter = username
             queue.remove({
               ...clip,
@@ -131,10 +133,11 @@ export const useUser = defineStore("user", {
       }
     },
     onTimeout(c: string, username: string) {
-      const queue = useQueue()
-      if (!queue.autoRemoveClipsOnModeration) {
+      const moderation = useModeration()
+      if (!moderation.hasAutoRemoveClipsEnabled) {
         return
       }
+      const queue = useQueue()
       queue.removeSubmitterClips(username)
     },
   },

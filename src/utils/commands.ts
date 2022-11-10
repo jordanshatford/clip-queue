@@ -1,4 +1,5 @@
 import { useQueue } from "@/stores/queue"
+import { useModeration } from "@/stores/moderation"
 
 export enum Command {
   OPEN = "open",
@@ -39,13 +40,15 @@ export function handleCommand(command: string, ...args: string[]) {
     }
     case Command.BLOCK_CHANNEL: {
       if (args[0]) {
-        queue.blockChannel(args[0])
+        const moderation = useModeration()
+        moderation.addBlockedChannel(args[0])
       }
       break
     }
     case Command.UNBLOCK_CHANNEL: {
       if (args[0]) {
-        queue.unblockChannel(args[0])
+        const moderation = useModeration()
+        moderation.removeBlockedChannel(args[0])
       }
       break
     }

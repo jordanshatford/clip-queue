@@ -3,6 +3,7 @@ import { ClipList } from "@/utils/clip-list"
 import type { Clip } from "@/interfaces/clips"
 import { useSettings } from "@/stores/settings"
 import { useUser } from "@/stores/user"
+import { useModeration } from "@/stores/moderation"
 import { formatTemplateString } from "@/utils"
 
 export interface ClipQueue {
@@ -10,8 +11,6 @@ export interface ClipQueue {
   history: ClipList
   current: Clip | undefined
   upcoming: ClipList
-  autoRemoveClipsOnModeration: boolean
-  blockedChannels: string[]
 }
 
 export const useQueue = defineStore("queue", {
@@ -26,8 +25,6 @@ export const useQueue = defineStore("queue", {
     history: new ClipList(),
     current: undefined,
     upcoming: new ClipList(),
-    autoRemoveClipsOnModeration: true,
-    blockedChannels: [],
   }),
   actions: {
     clear() {
@@ -43,13 +40,14 @@ export const useQueue = defineStore("queue", {
       if (!this.open && !force) {
         return
       }
-      // Ignore when the submitter is blocked from adding to the queue
-      if (this.blockedChannels.some((c) => c.toLowerCase() === clip.channel?.toLowerCase())) {
-        return
-      }
       // Ignore when we have previously watched it
       const hasBeenWatched = this.current?.id === clip.id || this.history.includes(clip)
       if (hasBeenWatched) {
+        return
+      }
+      // Clip not allowed
+      const moderation = useModeration()
+      if (!moderation.isAllowed(clip)) {
         return
       }
       this.upcoming.add(clip)
@@ -101,16 +99,6 @@ export const useQueue = defineStore("queue", {
       }
       this.current = this.upcoming.shift()
       this.sendCurrentClipInfoMessageIfNeeded()
-    },
-    blockChannel(channel: string) {
-      // Ignore if already in the blocked channels
-      if (this.blockedChannels.some((c) => c.toLowerCase() === channel.toLowerCase())) {
-        return
-      }
-      this.blockedChannels = [...this.blockedChannels, channel]
-    },
-    unblockChannel(channel: string) {
-      this.blockedChannels = this.blockedChannels.filter((c) => c.toLowerCase() !== channel.toLowerCase())
     },
     sendCurrentClipInfoMessageIfNeeded() {
       const settings = useSettings()
