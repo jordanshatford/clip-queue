@@ -24,6 +24,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue"
 import { useQueue } from "@/stores/queue"
+import { clone } from "@/utils"
 
 const queue = useQueue()
 
@@ -47,7 +48,10 @@ function hideMsg() {
 }
 
 function onReset() {
-  formSettings.value = Object.assign({}, { isLimited: queue.upcoming.limit !== null, limit: queue.upcoming.limit })
+  formSettings.value = clone<{ isLimited: boolean; limit: number | null }>({
+    isLimited: queue.upcoming.limit !== null,
+    limit: queue.upcoming.limit,
+  })
   formKey.value += 1
 }
 

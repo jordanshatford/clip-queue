@@ -30,19 +30,20 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useModeration, type Moderation } from "@/stores/moderation"
+import { clone } from "@/utils"
 
 const moderation = useModeration()
 
 const showSaveMsg = ref(false)
 const formKey = ref(1)
-const formSettings = ref<Moderation>(JSON.parse(JSON.stringify(moderation.$state)))
+const formSettings = ref<Moderation>(clone<Moderation>(moderation.$state, true))
 
 function hideMsg() {
   showSaveMsg.value = false
 }
 
 function onReset() {
-  formSettings.value = JSON.parse(JSON.stringify(moderation.$state))
+  formSettings.value = clone<Moderation>(moderation.$state, true)
   formKey.value += 1
 }
 

@@ -80,20 +80,21 @@ import { ref } from "vue"
 import { useSettings, type Settings } from "@/stores/settings"
 import { useUser } from "@/stores/user"
 import commands from "@/utils/commands"
+import { clone } from "@/utils"
 
 const user = useUser()
 const settings = useSettings()
 
 const showSaveMsg = ref(false)
 const formKey = ref(1)
-const formSettings = ref<Settings>(Object.assign({}, settings.$state))
+const formSettings = ref<Settings>(clone<Settings>(settings.$state))
 
 function hideMsg() {
   showSaveMsg.value = false
 }
 
 function onReset() {
-  formSettings.value = Object.assign({}, settings.$state)
+  formSettings.value = clone<Settings>(settings.$state)
   formKey.value += 1
 }
 

@@ -25,3 +25,11 @@ export function deepEqual(x: any, y: any): boolean {
     ? ok(x).length === ok(y).length && ok(x).every((key) => deepEqual(x[key], y[key]))
     : x === y
 }
+
+export function clone<T>(obj: T, deep = false): T {
+  if (deep) {
+    return JSON.parse(JSON.stringify(obj))
+  } else {
+    return Object.assign({}, obj)
+  }
+}

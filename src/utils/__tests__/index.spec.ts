@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { formatTemplateString, getUrlFromMessage, deepEqual } from ".."
+import { formatTemplateString, getUrlFromMessage, deepEqual, clone } from ".."
 
 describe("index.ts", () => {
   it.each([
@@ -28,5 +28,10 @@ describe("index.ts", () => {
     const obj = { test: "1213", test2: "abc" }
     expect(deepEqual(obj, obj)).toEqual(true)
     expect(deepEqual(obj, { ...obj, test3: "1" })).toEqual(false)
+  })
+
+  it("clones an object", () => {
+    const obj = { test: "1213", test2: "abc" }
+    expect(clone(obj)).toEqual(obj)
   })
 })
