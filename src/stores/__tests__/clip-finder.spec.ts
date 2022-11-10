@@ -97,7 +97,6 @@ describe("clip-finder.ts", () => {
       JSON.stringify({ games: { [testGame.id]: testGame }, clips: { [testClip.id]: testClip } })
     )
     const clipFinder = useClipFinder()
-    clipFinder.init()
     const cachedClip = await clipFinder.getTwitchClip(testClip.url)
     expect(cachedClip?.title).toEqual(testClip.title)
     expect(cachedClip?.game).toEqual(testGame.name)
