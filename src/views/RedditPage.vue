@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 import { PlusIcon } from "@heroicons/vue/24/outline"
-import LoadingIcon from "@/components/LoadingIcon.vue"
+import LoadingIcon from "@/components/icons/LoadingIcon.vue"
 import { useQueue } from "@/stores/queue"
 import { useReddit, DEFAULT_SUBREDDITS } from "@/stores/reddit"
 import { useClipFinder } from "@/stores/clip-finder"

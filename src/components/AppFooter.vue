@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import GithubLogo from "@/components/GithubLogo.vue"
+import GithubLogo from "@/components/icons/GithubLogo.vue"
 import config from "@/assets/config"
 
 const { creator, github, year } = config.App

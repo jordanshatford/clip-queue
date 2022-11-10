@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import TwitchLogo from "@/components/TwitchLogo.vue"
+import TwitchLogo from "@/components/icons/TwitchLogo.vue"
 import { useRouter } from "vue-router"
 import AppNavBarItem from "@/components/AppNavBarItem.vue"
 import AppThemeToggle from "@/components/AppThemeToggle.vue"
