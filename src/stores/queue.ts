@@ -16,9 +16,7 @@ export interface ClipQueue {
 export const useQueue = defineStore("queue", {
   persist: {
     key: "queue",
-    afterRestore: (ctx) => {
-      ctx.store.current = undefined
-    },
+    paths: ["history", "upcoming"],
   },
   state: (): ClipQueue => ({
     isOpen: true,
