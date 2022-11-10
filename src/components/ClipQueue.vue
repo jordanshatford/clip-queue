@@ -11,7 +11,7 @@
     </div>
     <div class="text-left">
       <p class="cq-text text-lg">{{ title }}</p>
-      <span class="mt-3 cq-text-subtle"> {{ clips.length }} {{ clips.length === 1 ? "clip" : "clips" }} </span>
+      <span class="cq-text-subtle mt-3"> {{ clips.length }} {{ clips.length === 1 ? "clip" : "clips" }} </span>
     </div>
     <div class="flex justify-items-start overflow-x-auto mt-3">
       <ClipQueueItem

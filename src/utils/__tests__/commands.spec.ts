@@ -11,8 +11,6 @@ describe("commands.ts", () => {
 
   /* eslint-disable @typescript-eslint/no-explicit-any*/
   it.each([
-    // ["unknown", undefined],
-    // ["", undefined],
     ["prev", "previous"],
     ["next", "next"],
     ["open", "open"],

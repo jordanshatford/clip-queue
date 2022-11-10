@@ -16,10 +16,10 @@
       <h3 class="cq-text-subtle-semibold">
         {{ clip.channel }}<span class="cq-text-subtle"> playing </span>{{ clip.game }}
       </h3>
-      <div class="mt-1 cq-text-subtle">
+      <div class="cq-text-subtle mt-1">
         Submitter: <span class="cq-text-subtle-semibold">{{ clip.submitter }}</span>
       </div>
-      <div class="mt-1 cq-text-subtle">
+      <div class="cq-text-subtle mt-1">
         Source: <span class="cq-text-subtle-semibold">{{ clip.source ?? ClipSource.Unknown }}</span>
       </div>
     </div>

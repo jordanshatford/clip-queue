@@ -48,7 +48,7 @@
           <BaseSwitch id="sendCurrentClipMsg" v-model="formSettings.sendCurrentClipMsg" />
         </div>
         <div v-if="formSettings.sendCurrentClipMsg">
-          <div class="text-left pl-1 mb-2 cq-text-subtle">
+          <div class="cq-text-subtle text-left pl-1 mb-2">
             <label>The following will be replaced in the message sent to chat:</label>
             <ul class="list-disc pl-8">
               <li><span class="cq-text-subtle-semibold">{url}</span>: url of the clip</li>

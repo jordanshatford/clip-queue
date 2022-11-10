@@ -5,7 +5,7 @@
         <label class="cq-form-group-label">Auto remove clips on moderation?</label>
         <BaseSwitch id="autoRemoveClips" v-model="formSettings.hasAutoRemoveClipsEnabled" />
       </div>
-      <div class="text-left pl-1 cq-text-subtle mb-2">
+      <div class="cq-text-subtle text-left pl-1 mb-2">
         <label>
           When a user has their chat message deleted, is timed out, or banned, then the clips they submitted will be
           removed.
