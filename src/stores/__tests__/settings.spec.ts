@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest"
 import { setActivePinia, createPinia } from "pinia"
-import { DEFAULT_SETTING, useSettings, type Settings } from "../settings"
+import { DEFAULTS, useSettings, type Settings } from "../settings"
 
 describe("settings.ts", () => {
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe("settings.ts", () => {
   it("inits the settings with default value", () => {
     const settings = useSettings()
     expect(settings.commandPrefix).toEqual("!cq")
-    expect(settings.isModified(DEFAULT_SETTING)).toEqual(false)
+    expect(settings.isModified(DEFAULTS)).toEqual(false)
   })
 
   it("updates the settings in local storage", () => {

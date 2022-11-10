@@ -13,7 +13,7 @@ export interface Settings {
   currentClipMsg: string
 }
 
-export const DEFAULT_SETTING: Settings = {
+export const DEFAULTS: Settings = {
   allowCommands: true,
   commandPrefix: "!cq",
   sendMsgsInChat: false,
@@ -29,7 +29,7 @@ export const useSettings = defineStore("settings", {
   persist: {
     key: "settings",
   },
-  state: (): Settings => ({ ...DEFAULT_SETTING }),
+  state: (): Settings => ({ ...DEFAULTS }),
   getters: {
     isModified: (state) => {
       return (settings: Settings) => {

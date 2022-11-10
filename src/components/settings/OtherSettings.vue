@@ -1,11 +1,6 @@
 <template>
   <div class="cq-form mb-2">
-    <BaseButton
-      class="w-full"
-      variant="danger"
-      :disabled="!settings.isModified(DEFAULT_SETTING)"
-      @click="resetSettingsToDefault()"
-    >
+    <BaseButton class="w-full" variant="danger" :disabled="!isSettingsModified" @click="resetSettingsToDefault()">
       Reset Settings
     </BaseButton>
     <label class="cq-text-subtle"> Reset settings back to their initial values. </label>
@@ -27,15 +22,23 @@
 </template>
 
 <script setup lang="ts">
-import { useSettings, DEFAULT_SETTING } from "@/stores/settings"
+import { computed } from "vue"
+import { useSettings, DEFAULTS as DEFAULT_SETTINGS } from "@/stores/settings"
+import { useModeration, DEFAULTS as DEFAULT_MODERATION } from "@/stores/moderation"
 import { useQueue } from "@/stores/queue"
 import { useClipFinder } from "@/stores/clip-finder"
 
 const queue = useQueue()
 const settings = useSettings()
+const moderation = useModeration()
 const clipFinder = useClipFinder()
 
+const isSettingsModified = computed(() => {
+  return settings.isModified(DEFAULT_SETTINGS) || moderation.isModified(DEFAULT_MODERATION)
+})
+
 function resetSettingsToDefault() {
-  settings.update(DEFAULT_SETTING)
+  settings.update(DEFAULT_SETTINGS)
+  moderation.update(DEFAULT_MODERATION)
 }
 </script>
