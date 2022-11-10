@@ -242,28 +242,4 @@ describe("clip-list.ts", () => {
     expect(clipList2.size()).toEqual(1)
     expect(clipList2.toArray()[0].submitters?.length).toEqual(1)
   })
-
-  it("can have a clip limit set to prevent additional clips from being added", () => {
-    const clipList2 = new ClipList()
-    clipList2.limit = 2
-    clipList2.add({ id: "test", submitter: "s" })
-    clipList2.add({ id: "test2", submitter: "s" })
-    clipList2.add({ id: "test3", submitter: "s" })
-    expect(clipList2.size()).toEqual(2)
-  })
-
-  it("adds submitter to clips even when the list is full", () => {
-    const clip = { id: "test", submitter: "testsubmitter" } as Clip
-    const clipList2 = new ClipList()
-    clipList2.limit = 1
-    clipList2.add(clip)
-    clipList2.add({ ...clip, submitter: "testsubmitter2" })
-    clipList2.add({ ...clip, id: "test2" })
-    expect(clipList2.size()).toEqual(1)
-    const queuedClip = clipList2.pop()
-    expect(queuedClip?.submitter).toEqual("testsubmitter")
-    expect(queuedClip?.submitters?.length).toEqual(2)
-    expect(queuedClip?.submitters).toContain("testsubmitter")
-    expect(queuedClip?.submitters).toContain("testsubmitter2")
-  })
 })

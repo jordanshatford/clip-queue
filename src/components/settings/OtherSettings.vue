@@ -25,7 +25,7 @@
 import { computed } from "vue"
 import { useSettings, DEFAULTS as DEFAULT_SETTINGS } from "@/stores/settings"
 import { useModeration, DEFAULTS as DEFAULT_MODERATION } from "@/stores/moderation"
-import { useQueue } from "@/stores/queue"
+import { useQueue, DEFAULT_SETTINGS as DEFAULT_QUEUE_SETTINGS } from "@/stores/queue"
 import { useClipFinder } from "@/stores/clip-finder"
 
 const queue = useQueue()
@@ -34,11 +34,16 @@ const moderation = useModeration()
 const clipFinder = useClipFinder()
 
 const isSettingsModified = computed(() => {
-  return settings.isModified(DEFAULT_SETTINGS) || moderation.isModified(DEFAULT_MODERATION)
+  return (
+    settings.isModified(DEFAULT_SETTINGS) ||
+    moderation.isModified(DEFAULT_MODERATION) ||
+    queue.isSettingsModified(DEFAULT_QUEUE_SETTINGS)
+  )
 })
 
 function resetSettingsToDefault() {
   settings.update(DEFAULT_SETTINGS)
   moderation.update(DEFAULT_MODERATION)
+  queue.updateSettings(DEFAULT_QUEUE_SETTINGS)
 }
 </script>

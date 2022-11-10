@@ -4,31 +4,48 @@ import type { Clip } from "@/interfaces/clips"
 import { useSettings } from "@/stores/settings"
 import { useUser } from "@/stores/user"
 import { useModeration } from "@/stores/moderation"
-import { formatTemplateString } from "@/utils"
+import { formatTemplateString, deepEqual } from "@/utils"
+
+export interface QueueSettings {
+  isLimited: boolean
+  limit: number | null
+}
+
+export const DEFAULT_SETTINGS: QueueSettings = {
+  isLimited: false,
+  limit: null,
+}
 
 export interface ClipQueue {
   isOpen: boolean
   history: ClipList
   current: Clip | undefined
   upcoming: ClipList
+  settings: QueueSettings
 }
 
 export const useQueue = defineStore("queue", {
   persist: {
     key: "queue",
-    paths: ["history", "upcoming"],
+    paths: ["history", "upcoming", "settings"],
   },
   state: (): ClipQueue => ({
     isOpen: true,
     history: new ClipList(),
     current: undefined,
     upcoming: new ClipList(),
+    settings: { ...DEFAULT_SETTINGS },
   }),
+  getters: {
+    isSettingsModified: (state) => {
+      return (settings: QueueSettings) => {
+        return !deepEqual(state.settings, settings)
+      }
+    },
+  },
   actions: {
     clear() {
-      const limit = this.upcoming.limit
       this.upcoming = new ClipList()
-      this.upcoming.limit = limit
     },
     purge() {
       this.history = new ClipList()
@@ -47,6 +64,13 @@ export const useQueue = defineStore("queue", {
       const moderation = useModeration()
       if (!moderation.isAllowed(clip)) {
         return
+      }
+      // Queue is full based on limit
+      if (this.settings.isLimited && this.settings.limit && this.upcoming.size() >= this.settings.limit) {
+        // If the clip is already in the queue add it so submitters is updated
+        if (!this.upcoming.includes(clip)) {
+          return
+        }
       }
       this.upcoming.add(clip)
     },
@@ -111,6 +135,9 @@ export const useQueue = defineStore("queue", {
         const user = useUser()
         user.chat?.sendMessage(formatTemplateString(settings.currentClipMsg, valueMappings))
       }
+    },
+    updateSettings(settings: QueueSettings) {
+      this.settings = settings
     },
   },
 })

@@ -13,8 +13,10 @@
         </div>
       </div>
       <div class="mt-3">
-        <BaseButton class="mr-2" type="submit" :disabled="!isQueueSettingsModified">Save</BaseButton>
-        <BaseButton type="reset" variant="danger" :disabled="!isQueueSettingsModified">Cancel</BaseButton>
+        <BaseButton class="mr-2" type="submit" :disabled="!queue.isSettingsModified(formSettings)">Save</BaseButton>
+        <BaseButton type="reset" variant="danger" :disabled="!queue.isSettingsModified(formSettings)"
+          >Cancel</BaseButton
+        >
       </div>
       <BaseAlert v-if="showSaveMsg" variant="success" class="mt-2">Save successful</BaseAlert>
     </form>
@@ -22,47 +24,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue"
-import { useQueue } from "@/stores/queue"
+import { ref } from "vue"
+import { useQueue, type QueueSettings } from "@/stores/queue"
 import { clone } from "@/utils"
 
 const queue = useQueue()
 
 const showSaveMsg = ref(false)
 const formKey = ref(1)
-const formSettings = ref({ isLimited: queue.upcoming.limit !== null, limit: queue.upcoming.limit })
-
-const isQueueSettingsModified = computed<boolean>(() => {
-  const sameLimitValue = queue.upcoming.limit === formSettings.value.limit
-  const sameBeingLimited =
-    (queue.upcoming.limit !== null && formSettings.value.isLimited) ||
-    (queue.upcoming.limit === null && !formSettings.value.isLimited)
-  if (sameLimitValue && sameBeingLimited) {
-    return false
-  }
-  return true
-})
+const formSettings = ref<QueueSettings>(clone<QueueSettings>(queue.settings))
 
 function hideMsg() {
   showSaveMsg.value = false
 }
 
 function onReset() {
-  formSettings.value = clone<{ isLimited: boolean; limit: number | null }>({
-    isLimited: queue.upcoming.limit !== null,
-    limit: queue.upcoming.limit,
-  })
+  formSettings.value = clone<QueueSettings>(queue.settings)
   formKey.value += 1
 }
 
 function onSubmit() {
   showSaveMsg.value = true
   setTimeout(hideMsg, 2000)
-  if (formSettings.value.isLimited) {
-    queue.upcoming.limit = formSettings.value.limit
-  } else {
-    queue.upcoming.limit = null
-  }
+  queue.updateSettings(formSettings.value)
   onReset()
 }
 </script>

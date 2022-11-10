@@ -152,12 +152,36 @@ describe("clips.ts", () => {
     expect(queue.history.size()).toEqual(0)
   })
 
-  it("doesnt clear the queue limit when clearing queue", () => {
+  it("can have a limit set to prevent additional clips from being added", () => {
     const queue = useQueue()
-    expect(queue.upcoming.limit).toEqual(null)
-    queue.upcoming.limit = 2
-    expect(queue.upcoming.limit).toEqual(2)
+    queue.updateSettings({ isLimited: true, limit: 2 })
+    queue.add({ id: "test", submitter: "s" })
+    queue.add({ id: "test2", submitter: "s" })
+    queue.add({ id: "test3", submitter: "s" })
+    expect(queue.upcoming.size()).toEqual(2)
+  })
+
+  it("adds clips that are already there (even when full) to update submitters", () => {
+    const clip = { id: "test", submitter: "testsubmitter" } as Clip
+    const queue = useQueue()
+    queue.updateSettings({ isLimited: true, limit: 1 })
+    queue.add(clip)
+    queue.add({ ...clip, submitter: "testsubmitter2" })
+    queue.add({ ...clip, id: "test2" })
+    expect(queue.upcoming.size()).toEqual(1)
+    const queuedClip = queue.upcoming.pop()
+    expect(queuedClip?.submitter).toEqual("testsubmitter")
+    expect(queuedClip?.submitters?.length).toEqual(2)
+    expect(queuedClip?.submitters).toContain("testsubmitter")
+    expect(queuedClip?.submitters).toContain("testsubmitter2")
+  })
+
+  it("doesnt clear the queue settings when clearing the queue", () => {
+    const queue = useQueue()
+    expect(queue.settings.isLimited).toEqual(false)
+    queue.updateSettings({ isLimited: true, limit: 5 })
+    expect(queue.settings.limit).toEqual(5)
     queue.clear()
-    expect(queue.upcoming.limit).toEqual(2)
+    expect(queue.settings.limit).toEqual(5)
   })
 })
