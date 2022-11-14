@@ -7,8 +7,8 @@
           class="inline-flex p-4 border-b-2 group"
           :class="[
             option.label === modelValue
-              ? 'text-violet-600 border-b-2 border-violet-500 active dark:text-violet-500 dark:border-violet-500'
-              : 'border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:hover:border-gray-600',
+              ? 'text-violet-600 border-violet-600 active dark:text-violet-500 dark:border-violet-500'
+              : 'border-transparent hover:text-zinc-600 hover:border-zinc-300 dark:hover:text-zinc-300 dark:hover:border-zinc-600',
           ]"
         >
           <component v-if="option.icon" :is="option.icon" class="w-5 mr-1" />{{ option.label }}
