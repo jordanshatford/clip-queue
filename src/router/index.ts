@@ -2,15 +2,17 @@ import { createRouter, createWebHistory } from "vue-router"
 import type { RouteRecordRaw } from "vue-router"
 import twitch from "@/services/twitch"
 import { useUser } from "@/stores/user"
+import LandingPage from "@/views/LandingPage.vue"
 import QueuePage from "@/views/QueuePage.vue"
 import RedditPage from "@/views/RedditPage.vue"
-import LandingPage from "@/views/LandingPage.vue"
+import HistoryPage from "@/views/HistoryPage.vue"
 import SettingsPage from "@/views/SettingsPage.vue"
 
 export enum RouteNameConstants {
   LANDING = "landing",
   QUEUE = "queue",
   REDDIT = "reddit",
+  HISTORY = "history",
   SETTINGS = "settings",
 }
 
@@ -30,6 +32,15 @@ export const routes: Array<RouteRecordRaw> = [
     component: RedditPage,
     meta: {
       title: "From Reddit",
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/history",
+    name: RouteNameConstants.HISTORY,
+    component: HistoryPage,
+    meta: {
+      title: "History",
       requiresAuth: true,
     },
   },

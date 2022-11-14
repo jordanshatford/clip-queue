@@ -3,7 +3,7 @@ export const env = {
   REDIRECT_URI: import.meta.env.VITE_TWITCH_REDIRECT_URI as string,
 }
 
-const config = {
+export const config = {
   App: {
     title: "Clip Queue",
     description:
@@ -23,6 +23,7 @@ const config = {
     creator: "Jordan Shatford",
     github: "https://github.com/jordanshatford/clip-queue",
     year: new Date().getFullYear(),
+    historyPageSize: 10,
   },
 }
 

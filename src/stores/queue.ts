@@ -91,6 +91,9 @@ export const useQueue = defineStore("queue", {
     removeSubmitterClips(submitter: string) {
       this.upcoming.removeBySubmitter(submitter)
     },
+    removeFromHistory(clip: Clip) {
+      this.history.remove(clip)
+    },
     play(clip: Clip) {
       if (!this.upcoming.includes(clip)) {
         return
