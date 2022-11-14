@@ -27,7 +27,13 @@ export interface ClipQueue {
 export const useQueue = defineStore("queue", {
   persist: {
     key: "queue",
-    paths: ["history", "upcoming", "settings"],
+    paths: ["history", "current", "upcoming", "settings"],
+    afterRestore: (ctx) => {
+      if (ctx.store.current?.id) {
+        ctx.store.history.add(ctx.store.current)
+      }
+      ctx.store.current = undefined
+    },
   },
   state: (): ClipQueue => ({
     isOpen: true,
@@ -51,8 +57,13 @@ export const useQueue = defineStore("queue", {
       this.history = new ClipList()
     },
     add(clip: Clip, force = false) {
+      // Force add the clip
+      if (force) {
+        this.upcoming.add(clip)
+        return
+      }
       // Ignore clip when queue isnt open
-      if (!this.open && !force) {
+      if (!this.open) {
         return
       }
       // Ignore when we have previously watched it
