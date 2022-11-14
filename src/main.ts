@@ -12,6 +12,7 @@ import BaseTag from "@/components/ui/BaseTag.vue"
 import BaseTextArea from "@/components/ui/BaseTextArea.vue"
 import BaseButton from "@/components/ui/BaseButton.vue"
 import BaseMultiTagSelect from "@/components/ui/BaseMultiTagSelect.vue"
+import BasePagination from "@/components/ui/BasePagination.vue"
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -26,5 +27,6 @@ app
   .component("BaseTextArea", BaseTextArea)
   .component("BaseButton", BaseButton)
   .component("BaseMultiTagSelect", BaseMultiTagSelect)
+  .component("BasePagination", BasePagination)
 app.use(router)
 app.mount("#app")

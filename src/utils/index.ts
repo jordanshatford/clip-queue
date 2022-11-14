@@ -33,3 +33,7 @@ export function clone<T>(obj: T, deep = false): T {
     return Object.assign({}, obj)
   }
 }
+
+export function toRangeArray(start: number, end: number): number[] {
+  return Array.from({ length: end + 1 - start }, (_v, k) => k + start)
+}
