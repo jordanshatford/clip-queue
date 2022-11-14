@@ -20,10 +20,12 @@ export const config = {
       "Customize settings as you wish",
       "Dark and light UI themes",
     ],
-    creator: "Jordan Shatford",
-    github: "https://github.com/jordanshatford/clip-queue",
-    year: new Date().getFullYear(),
     historyPageSize: 10,
+  },
+  github: "https://github.com/jordanshatford/clip-queue",
+  copyright: {
+    owner: "Jordan Shatford",
+    year: 2022,
   },
 }
 

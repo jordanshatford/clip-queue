@@ -10,12 +10,10 @@ describe("AppFooter.vue", () => {
     expect(wrapper.exists()).toEqual(true)
   })
 
-  it("has the proper creator, year, and github from config", () => {
+  it("has the proper copyright and github from config", () => {
     // @ts-ignore
-    expect(wrapper.vm.creator).toEqual(config.App.creator)
+    expect(wrapper.vm.copyright).toEqual(config.copyright)
     // @ts-ignore
-    expect(wrapper.vm.year).toEqual(config.App.year)
-    // @ts-ignore
-    expect(wrapper.vm.github).toEqual(config.App.github)
+    expect(wrapper.vm.github).toEqual(config.github)
   })
 })
