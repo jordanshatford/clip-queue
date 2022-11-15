@@ -2,14 +2,14 @@ import { createRouter, createWebHistory } from "vue-router"
 import type { RouteRecordRaw } from "vue-router"
 import twitch from "@/services/twitch"
 import { useUser } from "@/stores/user"
-import LandingPage from "@/views/LandingPage.vue"
+import HomePage from "@/views/HomePage.vue"
 import QueuePage from "@/views/QueuePage.vue"
 import RedditPage from "@/views/RedditPage.vue"
 import HistoryPage from "@/views/HistoryPage.vue"
 import SettingsPage from "@/views/SettingsPage.vue"
 
 export enum RouteNameConstants {
-  LANDING = "landing",
+  HOME = "home",
   QUEUE = "queue",
   REDDIT = "reddit",
   HISTORY = "history",
@@ -17,6 +17,15 @@ export enum RouteNameConstants {
 }
 
 export const routes: Array<RouteRecordRaw> = [
+  {
+    path: "/",
+    name: RouteNameConstants.HOME,
+    component: HomePage,
+    meta: {
+      title: "Home",
+      requiresAuth: false,
+    },
+  },
   {
     path: "/queue",
     name: RouteNameConstants.QUEUE,
@@ -58,15 +67,10 @@ export const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    {
-      path: "/",
-      name: RouteNameConstants.LANDING,
-      component: LandingPage,
-    },
     ...routes,
     {
       path: "/:pathMatch(.*)*",
-      redirect: { name: RouteNameConstants.LANDING },
+      redirect: { name: RouteNameConstants.HOME },
     },
   ],
 })
@@ -81,7 +85,7 @@ router.beforeEach((to, from, next) => {
     next({ name: RouteNameConstants.QUEUE, hash: "" })
     return
   } else if (!user.isLoggedIn && to.meta.requiresAuth) {
-    next({ name: RouteNameConstants.LANDING })
+    next({ name: RouteNameConstants.HOME })
     return
   }
   next()

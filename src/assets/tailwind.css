@@ -13,9 +13,6 @@
   .cq-title {
     @apply text-5xl font-extrabold text-violet-500 p-5;
   }
-  .cq-heading {
-    @apply text-2xl font-extrabold text-violet-500 p-2;
-  }
   .cq-text {
     @apply text-zinc-600 dark:text-zinc-400 font-normal;
   }

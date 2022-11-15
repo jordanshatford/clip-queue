@@ -52,7 +52,7 @@ import { useQueue } from "@/stores/queue"
 
 const queue = useQueue()
 
-const pageSize = config.App.historyPageSize
+const { pageSize } = config.history
 
 const page = ref<number>(1)
 

@@ -14,8 +14,13 @@
             >{{ title }}</RouterLink
           >
           <div class="hidden sm:block sm:ml-6">
-            <div v-if="user.isLoggedIn" class="flex space-x-4">
-              <AppNavBarItem v-for="route in routes" :route="route" :key="route.name" />
+            <div class="flex space-x-3">
+              <AppNavBarItem
+                v-for="route in routes"
+                :route="route"
+                :isAuthenticated="user.isLoggedIn"
+                :key="route.name"
+              />
             </div>
           </div>
         </div>
@@ -29,11 +34,12 @@
       </div>
     </div>
     <div v-if="showMobileMenu">
-      <div v-if="user.isLoggedIn" class="px-2 pt-2 pb-3 space-y-1">
+      <div class="px-2 pt-2 pb-3 space-y-1">
         <AppNavBarItem
           v-for="route in routes"
           @click="() => (showMobileMenu = false)"
           :route="route"
+          :isAuthenticated="user.isLoggedIn"
           :key="route.name"
           isMobileMenu
         />
@@ -53,7 +59,7 @@ import { routes, RouteNameConstants } from "@/router"
 import config from "@/assets/config"
 import { useUser } from "@/stores/user"
 
-const { title } = config.App
+const { title } = config.about
 const user = useUser()
 const router = useRouter()
 const showMobileMenu = ref(false)
@@ -61,7 +67,7 @@ const showMobileMenu = ref(false)
 async function handleAuthButtonClick() {
   if (user.isLoggedIn) {
     user.logout()
-    await router.push({ name: RouteNameConstants.LANDING })
+    await router.push({ name: RouteNameConstants.HOME })
   } else {
     user.redirect()
   }
