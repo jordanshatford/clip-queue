@@ -24,9 +24,6 @@ Clip Queue is a Vue application created to allow users to easily integrate with 
   - Customize settings as you wish
   - Dark and light UI themes
 
-## Screenshot
-![readme-image](./src/assets/example.png)
-
 ## More Information
 More information can be found in the respective doc in the docs folder.
   - [DEVELOPMENT](./docs/DEVELOPMENT.md)

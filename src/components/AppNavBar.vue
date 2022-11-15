@@ -6,13 +6,13 @@
           <AppHamburger v-if="user.isLoggedIn" v-model="showMobileMenu" />
           <AppThemeToggle />
         </div>
-        <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+        <div class="flex-1 flex items-center justify-center sm:justify-start">
           <RouterLink
             exact-active-class=""
-            to="/"
-            class="text-violet-500 font-extrabold text-lg flex-shrink-0 flex items-center"
-            >{{ title }}</RouterLink
-          >
+            :to="{ name: RouteNameConstants.HOME }"
+            class="flex-shrink-0 flex items-center"
+            ><img class="w-12 aspect-square rounded-lg" src="/icon.png"
+          /></RouterLink>
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-3">
               <AppNavBarItem
@@ -56,10 +56,8 @@ import AppNavBarItem from "@/components/AppNavBarItem.vue"
 import AppThemeToggle from "@/components/AppThemeToggle.vue"
 import AppHamburger from "@/components/AppHamburger.vue"
 import { routes, RouteNameConstants } from "@/router"
-import config from "@/assets/config"
 import { useUser } from "@/stores/user"
 
-const { title } = config.about
 const user = useUser()
 const router = useRouter()
 const showMobileMenu = ref(false)

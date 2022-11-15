@@ -85,7 +85,7 @@ router.beforeEach((to, _from, next) => {
     }
     next({ name: RouteNameConstants.QUEUE, hash: "" })
     return
-  // User is not logged in trying to access auth required route
+    // User is not logged in trying to access auth required route
   } else if (!user.isLoggedIn && to.meta.requiresAuth) {
     next({ name: RouteNameConstants.HOME })
     return
