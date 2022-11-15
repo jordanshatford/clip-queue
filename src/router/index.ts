@@ -75,8 +75,9 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   const user = useUser()
+  // If the user is trying to login via twitch
   if (to.hash && to.hash !== "" && !user.isLoggedIn) {
     const authInfo = twitch.login(to.hash)
     if (authInfo !== null) {
@@ -84,6 +85,7 @@ router.beforeEach((to, from, next) => {
     }
     next({ name: RouteNameConstants.QUEUE, hash: "" })
     return
+  // User is not logged in trying to access auth required route
   } else if (!user.isLoggedIn && to.meta.requiresAuth) {
     next({ name: RouteNameConstants.HOME })
     return
