@@ -1,7 +1,7 @@
 <template>
   <div class="py-10 mx-5">
     <div class="text-left sm:text-center">
-      <h2 class="cq-title text-xl font-semibold py-0">{{ title }}</h2>
+      <h2 class="cq-title text-xl font-semibold p-0">{{ title }}</h2>
       <p class="cq-text mt-2 text-3xl sm:text-4xl font-bold tracking-tight">
         {{ tagline }}
       </p>
