@@ -25,7 +25,7 @@ Then you must specify a value for the following environment variables:
 # The Twitch client id generated for the application
 VITE_TWITCH_CLIENT_ID=
 # The redirect URI (this will be the URI where the application is hosted)
-VITE_TWITCH_REDIRECT_URI=http://localhost:3000/
+VITE_TWITCH_REDIRECT_URI=http://localhost:5173/
 ```
 This can be done by filling out and copying the `example.env` file to a `.env` file.
 
