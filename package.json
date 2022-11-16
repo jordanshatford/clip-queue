@@ -1,5 +1,5 @@
 {
-  "name": "clip-queue",
+  "name": "twitch-clip-queue",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

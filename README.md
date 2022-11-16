@@ -15,17 +15,17 @@
     <a href="https://vercel.com/">
       <img src="https://img.shields.io/badge/Hosted%20on-Vercel-%23000000.svg?style=flat&logo=vercel" alt="Hosted on Vercel">
     </a>
-    <a href="https://codecov.io/gh/jordanshatford/clip-queue">
-      <img src="https://codecov.io/gh/jordanshatford/clip-queue/branch/main/graph/badge.svg?token=55KCL03QIH" alt="Coverage on Codecov">
+    <a href="https://codecov.io/gh/jordanshatford/twitch-clip-queue" >
+      <img src="https://codecov.io/gh/jordanshatford/twitch-clip-queue/branch/main/graph/badge.svg?token=55KCL03QIH"/>
     </a>
-    <a href="https://github.com/jordanshatford/clip-queue/blob/main/LICENSE">
+    <a href="https://github.com/jordanshatford/twitch-clip-queue/blob/main/LICENSE">
       <img src="https://img.shields.io/badge/License-MIT-black.svg?style=flat&logo=license" alt="License: MIT">
     </a>
   </div>
   <p align="center">
     An enhanced Twitch clip viewing experience.
     <br />
-    <a href="https://clipqueue.vercel.app/"><strong>clipqueue.vercel.app »</strong></a>
+    <a href="https://twitchclipqueue.vercel.app/"><strong>twitchclipqueue.vercel.app »</strong></a>
     <br />
     <br />
   </p>
