@@ -2,7 +2,7 @@
   <div class="flex items-center justify-between border-t border-zinc-300 dark:border-zinc-700">
     <button
       @click="previous()"
-      class="cq-text flex space-x-2 items-center hover:text-violet-500 dark:hover:text-violet-500"
+      class="cq-text flex space-x-2 items-center hover:text-brand-500 dark:hover:text-brand-500"
     >
       <ArrowLeftIcon class="w-4 h-4" />
       <p>Previous</p>
@@ -18,10 +18,7 @@
         {{ n }}
       </button>
     </div>
-    <button
-      @click="next()"
-      class="cq-text flex space-x-2 items-center hover:text-violet-500 dark:hover:text-violet-500"
-    >
+    <button @click="next()" class="cq-text flex space-x-2 items-center hover:text-brand-500 dark:hover:text-brand-500">
       <p>Next</p>
       <ArrowRightIcon class="w-4 h-4" />
     </button>

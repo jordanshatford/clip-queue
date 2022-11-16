@@ -1,7 +1,7 @@
 <template>
   <button
     :class="[
-      modelValue ? 'hover:text-red-500 dark:hover:text-red-500' : 'hover:text-violet-500 dark:hover:text-violet-500',
+      modelValue ? 'hover:text-red-500 dark:hover:text-red-500' : 'hover:text-brand-500 dark:hover:text-brand-500',
     ]"
     class="text-zinc-500 dark:text-zinc-200 w-10 h-10 relative focus:outline-none"
     @click="emit('update:modelValue', !modelValue)"

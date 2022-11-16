@@ -4,7 +4,7 @@
     :class="{
       'bg-red-500 hover:bg-red-400': variant === 'danger',
       'bg-blue-500 hover:bg-blue-400': variant === 'primary',
-      'bg-violet-500 hover:bg-violet-400': variant === 'brand',
+      'bg-brand-500 hover:bg-brand-400': variant === 'brand',
     }"
   >
     <slot></slot>

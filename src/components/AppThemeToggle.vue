@@ -1,7 +1,7 @@
 <template>
   <button
     @click="() => theme.toggle()"
-    class="text-zinc-500 dark:text-zinc-200 hover:text-violet-500 dark:hover:text-violet-500 p-2"
+    class="text-zinc-500 dark:text-zinc-200 hover:text-brand-500 dark:hover:text-brand-500 p-2"
   >
     <component :is="ThemeIcon" class="w-7" />
   </button>

@@ -25,7 +25,7 @@ describe("BaseButton.vue", () => {
     wrapper.setProps({ variant: "brand" })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.variant).toEqual("brand")
-    expect(wrapper.classes()).toContain("bg-violet-500")
+    expect(wrapper.classes()).toContain("bg-brand-500")
   })
 
   it("has the correct colors when danger variant is specified", async () => {

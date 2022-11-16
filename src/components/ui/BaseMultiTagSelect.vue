@@ -8,7 +8,7 @@
             <a
               v-if="!hasTag(currentInput)"
               @click.prevent="addTag(currentInput)"
-              class="cq-text block py-1 px-5 cursor-pointer hover:bg-violet-500 hover:text-white"
+              class="cq-text block py-1 px-5 cursor-pointer hover:bg-brand-500 hover:text-white"
             >
               add {{ itemName }} "<span class="font-semibold">{{ currentInput }}</span
               >"
