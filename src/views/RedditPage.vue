@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { PlusIcon } from "@heroicons/vue/24/outline"
+import { PlusIcon } from "@/assets/icons"
 import LoadingIcon from "@/components/icons/LoadingIcon.vue"
 import { useQueue } from "@/stores/queue"
 import { useReddit, DEFAULT_SUBREDDITS } from "@/stores/reddit"

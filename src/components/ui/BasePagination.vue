@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/vue/24/outline"
+import { ArrowLeftIcon, ArrowRightIcon } from "@/assets/icons"
 import { toRangeArray } from "@/utils"
 
 export interface Props {

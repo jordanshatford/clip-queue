@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { SunIcon, MoonIcon } from "@heroicons/vue/24/outline"
+import { SunIcon, MoonIcon } from "@/assets/icons"
 import { useTheme } from "@/stores/theme"
 
 const theme = useTheme()

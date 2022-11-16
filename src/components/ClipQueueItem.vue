@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { BarsArrowUpIcon, TrashIcon } from "@heroicons/vue/24/outline"
+import { BarsArrowUpIcon, TrashIcon } from "@/assets/icons"
 import { ClipSource, type Clip } from "@/interfaces/clips"
 
 export interface Props {

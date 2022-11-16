@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { InformationCircleIcon, CheckCircleIcon, ExclamationTriangleIcon, XCircleIcon } from "@heroicons/vue/24/solid"
+import { InformationCircleIcon, CheckCircleIcon, ExclamationTriangleIcon, XCircleIcon } from "@/assets/icons"
 
 export interface Props {
   variant?: "info" | "success" | "warning" | "danger"

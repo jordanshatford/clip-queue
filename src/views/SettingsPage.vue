@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue"
-import { ChatBubbleLeftRightIcon, Cog8ToothIcon, HandRaisedIcon, QueueListIcon } from "@heroicons/vue/24/outline"
+import { ChatBubbleLeftRightIcon, Cog8ToothIcon, HandRaisedIcon, QueueListIcon } from "@/assets/icons"
 import ChatSettings from "@/components/settings/ChatSettings.vue"
 import QueueSettings from "@/components/settings/QueueSettings.vue"
 import ModerationSettings from "@/components/settings/ModerationSettings.vue"

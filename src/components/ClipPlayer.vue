@@ -57,7 +57,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { ArrowTopRightOnSquareIcon, BackwardIcon, ForwardIcon } from "@heroicons/vue/24/outline"
+import { ArrowTopRightOnSquareIcon, BackwardIcon, ForwardIcon } from "@/assets/icons"
 import { formatDistanceToNow, parseISO } from "date-fns"
 import { ClipSource, type Clip } from "@/interfaces/clips"
 

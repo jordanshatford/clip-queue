@@ -5,7 +5,7 @@ import {
   DocumentDuplicateIcon,
   HandRaisedIcon,
   UserIcon,
-} from "@heroicons/vue/24/outline"
+} from "@/assets/icons"
 
 export const env = {
   CLIENT_ID: import.meta.env.VITE_TWITCH_CLIENT_ID as string,

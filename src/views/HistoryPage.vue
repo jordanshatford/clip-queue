@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue"
-import { PlusIcon, TrashIcon } from "@heroicons/vue/24/outline"
+import { PlusIcon, TrashIcon } from "@/assets/icons"
 import config from "@/assets/config"
 import { useQueue } from "@/stores/queue"
 
