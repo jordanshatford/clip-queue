@@ -1,30 +1,49 @@
-# Clip Queue
+<p align="center">
+  <br />
+  <img width="150" height="150" src="./public/icon.png" alt="Logo">
+  <h1 align="center"><b>Twitch Clip Queue</b></h1>
+  <div align="center">
+    <a href="https://vuejs.org/">
+      <img src="https://img.shields.io/badge/Powered%20by-Vue-%234FC08D.svg?style=flat&logo=Vue.js" alt="Powered by Vue">
+    </a>
+    <a href="https://www.typescriptlang.org/">
+      <img src="https://img.shields.io/badge/Language-Typescript-%233178C6.svg?style=flat&logo=typescript" alt="Language: TypeScript">
+    </a>
+    <a href="https://tailwindcss.com">
+      <img src="https://img.shields.io/badge/CSS%20Framework-TailwindCSS-%2306B6D4?logo=tailwindcss" alt="CSS Framework: TailwindCSS">
+    </a>
+    <a href="https://vercel.com/">
+      <img src="https://img.shields.io/badge/Hosted%20on-Vercel-%23000000.svg?style=flat&logo=vercel" alt="Hosted on Vercel">
+    </a>
+    <a href="https://codecov.io/gh/jordanshatford/clip-queue">
+      <img src="https://codecov.io/gh/jordanshatford/clip-queue/branch/main/graph/badge.svg?token=55KCL03QIH" alt="Coverage on Codecov">
+    </a>
+    <a href="https://github.com/jordanshatford/clip-queue/blob/main/LICENSE">
+      <img src="https://img.shields.io/badge/License-MIT-black.svg?style=flat&logo=license" alt="License: MIT">
+    </a>
+  </div>
+  <p align="center">
+    An enhanced Twitch clip viewing experience.
+    <br />
+    <a href="https://clipqueue.vercel.app/"><strong>clipqueue.vercel.app »</strong></a>
+    <br />
+    <br />
+  </p>
+</p>
 
-[![Powered By Vue](https://img.shields.io/badge/powered%20by-Vue-%234FC08D.svg?style=flat&logo=Vue.js)](https://vuejs.org/)
-[![Language: TypeScript](https://img.shields.io/badge/language-typescript-%233178C6.svg?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwindcss](https://img.shields.io/badge/css--framework-tailwindcss-%2306B6D4?logo=tailwindcss)](https://tailwindcss.com)
-[![Postcss](https://img.shields.io/badge/style-postcss-%23DD3A0A?style=flat&logo=postcss)](https://postcss.org)
-[![Prettier](https://img.shields.io/badge/code--formatter-prettier-%23F7B93E?style=flat&logo=prettier)](https://prettier.io/)
-[![Eslint](https://img.shields.io/badge/linter-eslint-%234B32C3?style=flat&logo=eslint)](https://eslint.org/)
-[![Hosted On Vercel](https://img.shields.io/badge/hosted%20on-vercel-%23000000.svg?style=flat&logo=vercel)](https://vercel.com/)
-[![Coverage On Codecov.io](https://codecov.io/gh/jordanshatford/clip-queue/branch/main/graph/badge.svg?token=55KCL03QIH)](https://codecov.io/gh/jordanshatford/clip-queue)
-[![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat&logo=license)](https://github.com/jordanshatford/clip-queue/blob/main/LICENSE)
+Twitch Clip Queue is a web application designed to allow users to easily integrate with their [Twitch](https://www.twitch.tv/) chat and queue clips sent from their viewers.
 
-Clip Queue is a Vue application created to allow users to easily integrate with their [Twitch](https://www.twitch.tv/) chat and accept clips pasted in chat. These clips are pasted in a queue and allows them to watch clip by clip through the webpage.
-
-## Features
-  - Easily connect your chat with Twitch login
-  - Clip duplication prevention
+# Features
+  - Automatically connect to logged in users Twitch chat to detect clips submitted in chat
+  - Duplicate clip prevention
   - Popular clips rise up in the queue
-  - Clip removal when user is timed-out, banned, or has message deleted
-  - Allows channel moderators to open/close the queue and move to the next/previous clip
-  - Add blocked channels to prevent thier clips from being added to the queue
-  - Allow channel moderators to modify the blocked channels via chat commands
-  - Get clips from subreddit posts automatically
-  - Customize settings as you wish
+  - Chat commands for moderators ([more info](./docs/COMMANDS.md))
+  - Automatic moderation and clip removal
+  - Settings customization to personalize the users experience
+  - Scan subreddits for posts including Twitch clips
   - Dark and light UI themes
 
-## More Information
-More information can be found in the respective doc in the docs folder.
-  - [DEVELOPMENT](./docs/DEVELOPMENT.md)
-  - [DEPLOYMENT](./docs/DEPLOYMENT.md)
+# Additional Documentation
+  - [Commands](./docs/COMMANDS.md)
+  - [Deployment](./docs/DEPLOYMENT.md)
+  - [Development](./docs/DEVELOPMENT.md)
