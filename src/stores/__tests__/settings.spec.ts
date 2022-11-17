@@ -19,10 +19,8 @@ describe("settings.ts", () => {
     expect(settings.commandPrefix).toEqual("!cq")
     settings.update({
       commandPrefix: "~",
-      sendMsgsInChat: true,
     } as Settings)
     expect(settings.commandPrefix).toEqual("~")
-    expect(settings.sendMsgsInChat).toBeTruthy()
   })
 
   it("returns if the settings are different", () => {
@@ -30,13 +28,6 @@ describe("settings.ts", () => {
     expect(
       settings.isModified({
         commandPrefix: "~dsa",
-        sendMsgsInChat: true,
-        sendCurrentClipMsg: true,
-        currentClipMsg: "",
-        sendQueueOpenMsg: true,
-        queueOpenMsg: "",
-        sendQueueCloseMsg: true,
-        queueCloseMsg: "",
       } as Settings)
     ).toEqual(true)
     expect(settings.isModified(settings.$state)).toEqual(false)

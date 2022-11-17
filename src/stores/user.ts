@@ -11,9 +11,9 @@ import { useClipFinder } from "@/stores/clip-finder"
 import { ClipSource } from "@/interfaces/clips"
 
 const { CLIENT_ID, REDIRECT_URI } = env
-const SCOPES = ["openid", "chat:read", "chat:edit"]
+const SCOPES = ["openid", "chat:read"]
 
-interface User {
+export interface User {
   isLoggedIn: boolean
   accessToken: string | null
   idToken: string | null

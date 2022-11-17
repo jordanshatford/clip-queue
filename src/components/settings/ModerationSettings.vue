@@ -12,14 +12,14 @@
         </label>
       </div>
     </div>
-    <div class="cq-form-group mb-1">
+    <div class="cq-form-group">
       <label class="cq-form-group-label">Channels not allowed:</label>
       <BaseMultiTagSelect v-model="formSettings.blockedChannels" itemName="channel" />
       <div class="cq-text-subtle text-left pl-1 my-2">
         <label>Clips of these channels will not be added to the queue.</label>
       </div>
     </div>
-    <div class="mt-2">
+    <div class="mt-3">
       <BaseButton class="mr-2" type="submit" :disabled="!moderation.isModified(formSettings)">Save</BaseButton>
       <BaseButton type="reset" variant="danger" :disabled="!moderation.isModified(formSettings)">Cancel</BaseButton>
     </div>

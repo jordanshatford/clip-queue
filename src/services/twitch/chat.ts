@@ -38,12 +38,6 @@ class TwitchChat extends Client {
       console.info("Disconnected from twitch chat.")
     })
   }
-
-  public async sendMessage(message: string) {
-    if (this.username) {
-      await this.say(this.username, message)
-    }
-  }
 }
 
 export default TwitchChat

@@ -2,9 +2,8 @@ import { defineStore } from "pinia"
 import { ClipList } from "@/utils/clip-list"
 import type { Clip } from "@/interfaces/clips"
 import { useSettings } from "@/stores/settings"
-import { useUser } from "@/stores/user"
 import { useModeration } from "@/stores/moderation"
-import { formatTemplateString, deepEqual } from "@/utils"
+import { deepEqual } from "@/utils"
 
 export interface QueueSettings {
   isLimited: boolean
@@ -103,24 +102,13 @@ export const useQueue = defineStore("queue", {
       }
       this.upcoming.remove(clip)
       this.current = clip
-      this.sendCurrentClipInfoMessageIfNeeded()
     },
     open() {
       const settings = useSettings()
-      /* istanbul ignore next */
-      if (settings.sendQueueOpenMsg) {
-        const user = useUser()
-        user.chat?.sendMessage(settings.queueOpenMsg)
-      }
       this.isOpen = true
     },
     close() {
       const settings = useSettings()
-      /* istanbul ignore next */
-      if (settings.sendQueueCloseMsg) {
-        const user = useUser()
-        user.chat?.sendMessage(settings.queueCloseMsg)
-      }
       this.isOpen = false
     },
     previous() {
@@ -134,21 +122,6 @@ export const useQueue = defineStore("queue", {
         this.history.add(this.current)
       }
       this.current = this.upcoming.shift()
-      this.sendCurrentClipInfoMessageIfNeeded()
-    },
-    sendCurrentClipInfoMessageIfNeeded() {
-      const settings = useSettings()
-      if (this.current?.id && settings.sendMsgsInChat && settings.sendCurrentClipMsg) {
-        const valueMappings = {
-          title: this.current?.title ?? "",
-          url: this.current?.url ?? "",
-          channel: this.current?.channel ?? "",
-          game: this.current?.game ?? "",
-          submitter: this.current?.submitter ?? "",
-        }
-        const user = useUser()
-        user.chat?.sendMessage(formatTemplateString(settings.currentClipMsg, valueMappings))
-      }
     },
     updateSettings(settings: QueueSettings) {
       this.settings = settings
