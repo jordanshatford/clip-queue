@@ -152,6 +152,31 @@ describe("clips.ts", () => {
     expect(queue.history.size()).toEqual(0)
   })
 
+  it("can purge all clips from the history", () => {
+    const queue = useQueue()
+    queue.add(clip)
+    queue.add(clip2)
+    queue.next()
+    queue.next()
+    queue.next()
+    expect(queue.history.size()).toEqual(2)
+    queue.purge()
+    expect(queue.history.size()).toEqual(0)
+  })
+
+  it("can remove a specific clip from the history", () => {
+    const queue = useQueue()
+    queue.add(clip)
+    queue.add(clip2)
+    queue.next()
+    queue.next()
+    queue.next()
+    expect(queue.history.size()).toEqual(2)
+    queue.removeFromHistory(clip2)
+    expect(queue.history.size()).toEqual(1)
+    expect(queue.history.toArray()).not.toContain(clip2)
+  })
+
   it("can have a limit set to prevent additional clips from being added", () => {
     const queue = useQueue()
     queue.updateSettings({ isLimited: true, limit: 2 })
