@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row space-x-4">
-    <div class="h-12 aspect-square flex items-center justify-center rounded-lg bg-brand-500 text-white">
+    <div class="h-12 aspect-square flex items-center justify-center rounded-xl bg-brand-500 text-white">
       <component :is="icon" class="h-8 w-8" />
     </div>
     <div class="flex flex-col">

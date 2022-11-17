@@ -4,7 +4,7 @@
       <BaseInput v-model="currentInput" :placeholder="placeholder" />
       <div :class="[dropdownOpen ? 'block' : 'hidden']">
         <div class="absolute z-40 left-0 mt-1 w-full">
-          <div class="p-1 rounded-lg text-sm bg-white dark:bg-zinc-700 border border-zinc-300 dark:border-zinc-700">
+          <div class="p-1 rounded-xl text-sm bg-white dark:bg-zinc-700 border border-zinc-300 dark:border-zinc-700">
             <a
               v-if="!hasTag(currentInput)"
               @click.prevent="addTag(currentInput)"

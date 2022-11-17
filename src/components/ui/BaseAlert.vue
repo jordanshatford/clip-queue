@@ -1,7 +1,7 @@
 <template>
   <div
     role="alert"
-    class="rounded-lg py-2 px-4 text-base flex justify-center"
+    class="rounded-xl py-2 px-4 text-base flex justify-center"
     :class="{
       'cq-alert-info': variant === 'info',
       'cq-alert-success': variant === 'success',

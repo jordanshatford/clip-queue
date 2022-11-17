@@ -1,6 +1,6 @@
 <template>
   <p class="cq-title">History</p>
-  <div class="min-w-full border-2 rounded-lg border-zinc-100 dark:border-zinc-800">
+  <div class="min-w-full border-2 rounded-xl border-zinc-100 dark:border-zinc-800">
     <table class="min-w-full table-auto">
       <thead class="bg-zinc-100 dark:bg-zinc-800">
         <tr class="cq-text text-left uppercase">
@@ -21,7 +21,7 @@
         <tr v-for="clip in currentPage" :key="clip.id">
           <td class="p-3">
             <div class="flex items-center">
-              <img class="hidden sm:block w-24 rounded-lg aspect-video" :src="clip.thumbnailUrl" :alt="clip.title" />
+              <img class="hidden sm:block w-24 rounded-xl aspect-video" :src="clip.thumbnailUrl" :alt="clip.title" />
               <div class="text-left ml-3 text-sm">
                 <p class="cq-text">{{ clip.title }}</p>
                 <p class="cq-text-subtle-semibold">

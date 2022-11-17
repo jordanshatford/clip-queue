@@ -1,7 +1,6 @@
 import { defineStore } from "pinia"
 import { ClipList } from "@/utils/clip-list"
 import type { Clip } from "@/interfaces/clips"
-import { useSettings } from "@/stores/settings"
 import { useModeration } from "@/stores/moderation"
 import { deepEqual } from "@/utils"
 
@@ -104,11 +103,9 @@ export const useQueue = defineStore("queue", {
       this.current = clip
     },
     open() {
-      const settings = useSettings()
       this.isOpen = true
     },
     close() {
-      const settings = useSettings()
       this.isOpen = false
     },
     previous() {

@@ -1,6 +1,6 @@
 <template>
   <button
-    class="disabled:opacity-50 disabled:cursor-not-allowed text-white py-2 px-4 rounded-lg"
+    class="disabled:opacity-50 disabled:cursor-not-allowed text-white py-2 px-4 rounded-xl"
     :class="{
       'bg-red-500 hover:bg-red-400': variant === 'danger',
       'bg-blue-500 hover:bg-blue-400': variant === 'primary',
