@@ -6,7 +6,15 @@
         <tr class="cq-text text-left uppercase">
           <th class="px-3 py-2">Info</th>
           <th class="px-3 py-2">Submitter</th>
-          <th></th>
+          <th>
+            <BaseButton
+              :disabled="queue.history.empty()"
+              @click="queue.purge()"
+              variant="danger"
+              class="flex text-sm float-right my-1 mr-1 flex"
+              ><TrashIcon class="w-5 mr-2 ml-0" />Delete All</BaseButton
+            >
+          </th>
         </tr>
       </thead>
       <tbody class="divide-y divide-zinc-100 dark:divide-zinc-800">

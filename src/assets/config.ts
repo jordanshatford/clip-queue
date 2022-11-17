@@ -57,7 +57,7 @@ export const config = {
   history: {
     pageSize: 10,
   },
-  github: "https://github.com/jordanshatford/clip-queue",
+  github: "https://github.com/jordanshatford/twitch-clip-queue",
   copyright: {
     owner: "Jordan Shatford",
     year: 2022,
