@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.router-link-exact-active {
-  @apply text-zinc-700 dark:text-white bg-zinc-100 dark:bg-zinc-900 !important;
-}
-
 @layer components {
   .cq-card {
     @apply bg-zinc-100 dark:bg-zinc-800 w-full rounded-lg shadow-md;
