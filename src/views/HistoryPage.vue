@@ -37,7 +37,10 @@
           </td>
           <td class="p-3 text-right">
             <div class="inline-flex mt-2 space-x-2">
-              <BaseButton :disabled="queue.upcoming.includes(clip)" @click="queue.add(clip, true)">
+              <BaseButton
+                :disabled="queue.upcoming.includes(clip)"
+                @click="queue.add({ ...clip, source: ClipSource.HistoryPage }, true)"
+              >
                 <PlusIcon class="w-5 h-5" />
               </BaseButton>
               <BaseButton variant="danger" @click="queue.removeFromHistory(clip)">
@@ -57,6 +60,7 @@ import { computed, ref } from "vue"
 import { PlusIcon, TrashIcon } from "@/assets/icons"
 import config from "@/assets/config"
 import { useQueue } from "@/stores/queue"
+import { ClipSource } from "@/interfaces/clips"
 
 const queue = useQueue()
 
