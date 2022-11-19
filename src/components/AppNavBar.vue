@@ -11,7 +11,7 @@
             exact-active-class=""
             :to="{ name: RouteNameConstants.HOME }"
             class="flex-shrink-0 flex items-center"
-            ><img class="w-12 aspect-square rounded-xl" src="/icon.png"
+            ><img class="w-12 aspect-square" src="/icon.png"
           /></RouterLink>
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-3">
