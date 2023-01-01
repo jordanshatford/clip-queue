@@ -16,7 +16,7 @@
     "axios": "^1.2.1",
     "date-fns": "^2.29.3",
     "pinia": "^2.0.28",
-    "pinia-plugin-persistedstate": "^3.0.1",
+    "pinia-plugin-persistedstate": "^3.0.2",
     "tmi.js": "npm:@coldino/tmi.js-clientonly-fork@^1.8.5-clientonly",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
