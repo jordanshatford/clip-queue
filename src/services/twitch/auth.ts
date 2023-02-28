@@ -1,7 +1,7 @@
-import axios from "axios"
-import type { IDToken, TokenInfo, AuthInfo } from "./types"
+import axios from 'axios'
+import type { IDToken, TokenInfo, AuthInfo } from './types'
 
-const BASE_URL = "https://id.twitch.tv/oauth2"
+const BASE_URL = 'https://id.twitch.tv/oauth2'
 
 export function login(hash: string): AuthInfo | null {
   const authInfo = processAuthHash(hash)
@@ -22,7 +22,7 @@ export function redirect(clientId: string, redirectUri: string, scopes: string[]
     `${BASE_URL}/authorize?client_id=${clientId}` +
       `&redirect_uri=${redirectUri}` +
       `&response_type=token id_token` +
-      `&scope=${scopes.join(" ")}` +
+      `&scope=${scopes.join(' ')}` +
       `&claims={"id_token":{"preferred_username":null}}`
   )
   window.location.assign(loginUrl)
@@ -31,8 +31,8 @@ export function redirect(clientId: string, redirectUri: string, scopes: string[]
 export async function isTokenStillValid(token: string) {
   const { status } = await axios.get<TokenInfo>(`${BASE_URL}/validate`, {
     headers: {
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`
+    }
   })
   return status === 200
 }
@@ -40,9 +40,9 @@ export async function isTokenStillValid(token: string) {
 function processAuthHash(hash: string): AuthInfo {
   const authInfo = hash
     .substring(1)
-    .split("&")
+    .split('&')
     .reduce((authInfo, s) => {
-      const parts = s.split("=")
+      const parts = s.split('=')
       authInfo[parts[0]] = decodeURIComponent(decodeURIComponent(parts[1]))
       return authInfo
       /* eslint-disable @typescript-eslint/no-explicit-any*/
@@ -52,15 +52,15 @@ function processAuthHash(hash: string): AuthInfo {
 
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types*/
 function parseJWT(token: string) {
-  const base64Url = token.split(".")[1]
-  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/")
+  const base64Url = token.split('.')[1]
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
   const jsonPayload = decodeURIComponent(
     atob(base64)
-      .split("")
+      .split('')
       .map(function (c) {
-        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2)
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
       })
-      .join("")
+      .join('')
   )
   return JSON.parse(jsonPayload)
 }
@@ -69,5 +69,5 @@ export default {
   login,
   logout,
   isTokenStillValid,
-  redirect,
+  redirect
 }

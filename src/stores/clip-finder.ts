@@ -1,21 +1,21 @@
-import { defineStore } from "pinia"
-import { env } from "@/assets/config"
-import type { Clip } from "@/interfaces/clips"
-import type { TwitchClip, TwitchGame } from "@/services/twitch"
-import { useReddit } from "@/stores/reddit"
-import reddit from "@/services/reddit"
-import twitch from "@/services/twitch"
-import { useUser } from "@/stores/user"
+import { defineStore } from 'pinia'
+import { env } from '@/assets/config'
+import type { Clip } from '@/interfaces/clips'
+import type { TwitchClip, TwitchGame } from '@/services/twitch'
+import { useReddit } from '@/stores/reddit'
+import reddit from '@/services/reddit'
+import twitch from '@/services/twitch'
+import { useUser } from '@/stores/user'
 
 const { CLIENT_ID } = env
 
-export const useClipFinder = defineStore("clip-finder", {
+export const useClipFinder = defineStore('clip-finder', {
   persist: {
-    key: "twitch-cache",
+    key: 'twitch-cache'
   },
   state: () => ({
     clips: {} as Record<string, TwitchClip>,
-    games: {} as Record<string, TwitchGame>,
+    games: {} as Record<string, TwitchGame>
   }),
   getters: {
     cacheEmpty: (state) => {
@@ -26,12 +26,14 @@ export const useClipFinder = defineStore("clip-finder", {
         const unknownClipIds = [...new Set(ids.filter((id) => !(id in state.clips)))]
         if (unknownClipIds) {
           const user = useUser()
-          const clips = await twitch.getClips(unknownClipIds, CLIENT_ID, user?.accessToken ?? "")
+          const clips = await twitch.getClips(unknownClipIds, CLIENT_ID, user?.accessToken ?? '')
           clips.forEach((c) => {
             state.clips[c.id] = c
           })
-          const unknownGameIds = [...new Set(clips.map((c) => c.game_id).filter((id) => !(id in state.games)))]
-          const games = await twitch.getGames(unknownGameIds, CLIENT_ID, user?.accessToken ?? "")
+          const unknownGameIds = [
+            ...new Set(clips.map((c) => c.game_id).filter((id) => !(id in state.games)))
+          ]
+          const games = await twitch.getGames(unknownGameIds, CLIENT_ID, user?.accessToken ?? '')
           games.forEach((g) => {
             state.games[g.id] = g
           })
@@ -49,11 +51,11 @@ export const useClipFinder = defineStore("clip-finder", {
               timestamp: clip?.created_at,
               url: clip?.url,
               embedUrl: clip?.embed_url,
-              thumbnailUrl: clip?.thumbnail_url,
+              thumbnailUrl: clip?.thumbnail_url
             }
           })
       }
-    },
+    }
   },
   actions: {
     async getClipsFromSubreddit(subreddit: string): Promise<Clip[]> {
@@ -66,7 +68,7 @@ export const useClipFinder = defineStore("clip-finder", {
       const postInfo = filtedSubredditPosts.map((p) => {
         return {
           id: twitch.getClipIdFromUrl(p?.data.url) as string,
-          submitter: p?.data?.author,
+          submitter: p?.data?.author
         }
       })
       const clipIds = postInfo.map((i) => i.id)
@@ -83,6 +85,6 @@ export const useClipFinder = defineStore("clip-finder", {
         const response = await this.getClips([id])
         return response[0]
       }
-    },
-  },
+    }
+  }
 })

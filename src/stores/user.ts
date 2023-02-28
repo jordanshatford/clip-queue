@@ -1,17 +1,17 @@
-import { defineStore } from "pinia"
-import type { Userstate } from "tmi.js"
-import { env } from "@/assets/config"
-import twitch, { TwitchChat, type AuthInfo } from "@/services/twitch"
-import { useSettings } from "@/stores/settings"
-import commands from "@/utils/commands"
-import { getUrlFromMessage } from "@/utils"
-import { useQueue } from "@/stores/queue"
-import { useModeration } from "@/stores/moderation"
-import { useClipFinder } from "@/stores/clip-finder"
-import { ClipSource } from "@/interfaces/clips"
+import { defineStore } from 'pinia'
+import type { ChatUserstate } from 'tmi.js'
+import { env } from '@/assets/config'
+import twitch, { TwitchChat, type AuthInfo } from '@/services/twitch'
+import { useSettings } from '@/stores/settings'
+import commands from '@/utils/commands'
+import { getUrlFromMessage } from '@/utils'
+import { useQueue } from '@/stores/queue'
+import { useModeration } from '@/stores/moderation'
+import { useClipFinder } from '@/stores/clip-finder'
+import { ClipSource } from '@/interfaces/clips'
 
 const { CLIENT_ID, REDIRECT_URI } = env
-const SCOPES = ["openid", "chat:read"]
+const SCOPES = ['openid', 'chat:read']
 
 export interface User {
   isLoggedIn: boolean
@@ -21,13 +21,13 @@ export interface User {
   chat?: TwitchChat
 }
 
-export const useUser = defineStore("user", {
+export const useUser = defineStore('user', {
   persist: {
-    key: "user",
-    paths: ["accessToken", "idToken", "username"],
+    key: 'user',
+    paths: ['accessToken', 'idToken', 'username'],
     afterRestore: async (ctx) => {
       await ctx.store.autoLoginIfPossible()
-    },
+    }
   },
   state: (): User => {
     return {
@@ -35,7 +35,7 @@ export const useUser = defineStore("user", {
       accessToken: null,
       idToken: null,
       username: null,
-      chat: undefined,
+      chat: undefined
     }
   },
   actions: {
@@ -52,10 +52,13 @@ export const useUser = defineStore("user", {
     },
     login(authInfo: AuthInfo): void {
       const { access_token, id_token, decodedIdToken } = authInfo
-      if (this.accessToken !== access_token || this.username !== decodedIdToken?.preferred_username) {
+      if (
+        this.accessToken !== access_token ||
+        this.username !== decodedIdToken?.preferred_username
+      ) {
         this.accessToken = access_token
         this.idToken = id_token
-        this.username = decodedIdToken?.preferred_username ?? ""
+        this.username = decodedIdToken?.preferred_username ?? ''
         this.isLoggedIn = true
         this.connectToChat()
       }
@@ -77,13 +80,13 @@ export const useUser = defineStore("user", {
       if (this.username && this.accessToken) {
         this.chat = new TwitchChat(this.username, this.accessToken)
         // setup watching chat
-        this.chat.on("message", this.onMessage)
-        this.chat.on("messagedeleted", this.onMessageDeleted)
-        this.chat.on("timeout", this.onTimeout)
-        this.chat.on("ban", this.onTimeout)
+        this.chat.on('message', this.onMessage)
+        this.chat.on('messagedeleted', this.onMessageDeleted)
+        this.chat.on('timeout', this.onTimeout)
+        this.chat.on('ban', this.onTimeout)
       }
     },
-    onMessage(c: string, userstate: Userstate, message: string, self: boolean) {
+    onMessage(c: string, userstate: ChatUserstate, message: string, self: boolean) {
       if (self) return
       const settings = useSettings()
       // Check if message is a command and perform command if proper permission to do so
@@ -91,7 +94,7 @@ export const useUser = defineStore("user", {
         if (!twitch.isModerator(userstate)) {
           return
         }
-        const [command, ...args] = message.substring(settings.commandPrefix.length).split(" ")
+        const [command, ...args] = message.substring(settings.commandPrefix.length).split(' ')
         commands.handleCommand(command, ...args)
         return
       }
@@ -106,7 +109,7 @@ export const useUser = defineStore("user", {
             queue.add({
               ...clip,
               submitter,
-              source: ClipSource.TwitchChat,
+              source: ClipSource.TwitchChat
             })
           }
         })
@@ -126,7 +129,7 @@ export const useUser = defineStore("user", {
             const submitter = username
             queue.remove({
               ...clip,
-              submitter,
+              submitter
             })
           }
         })
@@ -139,6 +142,6 @@ export const useUser = defineStore("user", {
       }
       const queue = useQueue()
       queue.removeSubmitterClips(username)
-    },
-  },
+    }
+  }
 })

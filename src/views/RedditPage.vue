@@ -2,7 +2,13 @@
   <p class="cq-title">From Reddit</p>
   <p class="cq-text flex items-center justify-center">
     Queue clips found in the top
-    <BaseInput class="inline py-1 px-1 w-16 mx-1" min="1" max="100" type="number" v-model.trim="reddit.postsToCheck" />
+    <BaseInput
+      class="inline py-1 px-1 w-16 mx-1"
+      min="1"
+      max="100"
+      type="number"
+      v-model.trim="reddit.postsToCheck"
+    />
     posts.
   </p>
   <div class="grid gap-4 grid-cols-1 mt-3">
@@ -15,7 +21,10 @@
             @click="queueClipsForSubreddit(subreddit)"
             :disabled="reddit.isLoading(subreddit)"
           >
-            <component :is="reddit.isLoading(subreddit) ? LoadingIcon : PlusIcon" class="w-5 h-5"></component>
+            <component
+              :is="reddit.isLoading(subreddit) ? LoadingIcon : PlusIcon"
+              class="w-5 h-5"
+            ></component>
           </BaseButton>
         </div>
       </div>
@@ -35,7 +44,10 @@
           @click="queueClipsForSubreddit(reddit.custom)"
           :disabled="reddit.isLoading(reddit.custom) || !reddit.custom"
         >
-          <component :is="reddit.isLoading(reddit.custom) ? LoadingIcon : PlusIcon" class="w-5 h-5"></component>
+          <component
+            :is="reddit.isLoading(reddit.custom) ? LoadingIcon : PlusIcon"
+            class="w-5 h-5"
+          ></component>
         </BaseButton>
       </div>
     </div>
@@ -43,12 +55,12 @@
 </template>
 
 <script setup lang="ts">
-import { PlusIcon } from "@/assets/icons"
-import LoadingIcon from "@/components/icons/LoadingIcon.vue"
-import { useQueue } from "@/stores/queue"
-import { useReddit, DEFAULT_SUBREDDITS } from "@/stores/reddit"
-import { useClipFinder } from "@/stores/clip-finder"
-import { ClipSource } from "@/interfaces/clips"
+import { PlusIcon } from '@/assets/icons'
+import LoadingIcon from '@/components/icons/LoadingIcon.vue'
+import { useQueue } from '@/stores/queue'
+import { useReddit, DEFAULT_SUBREDDITS } from '@/stores/reddit'
+import { useClipFinder } from '@/stores/clip-finder'
+import { ClipSource } from '@/interfaces/clips'
 
 const reddit = useReddit()
 const queue = useQueue()

@@ -5,41 +5,46 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue"
-import { ChatBubbleLeftRightIcon, Cog8ToothIcon, HandRaisedIcon, QueueListIcon } from "@/assets/icons"
-import ChatSettings from "@/components/settings/ChatSettings.vue"
-import QueueSettings from "@/components/settings/QueueSettings.vue"
-import ModerationSettings from "@/components/settings/ModerationSettings.vue"
-import OtherSettings from "@/components/settings/OtherSettings.vue"
+import { computed, ref } from 'vue'
+import {
+  ChatBubbleLeftRightIcon,
+  Cog8ToothIcon,
+  HandRaisedIcon,
+  QueueListIcon
+} from '@/assets/icons'
+import ChatSettings from '@/components/settings/ChatSettings.vue'
+import QueueSettings from '@/components/settings/QueueSettings.vue'
+import ModerationSettings from '@/components/settings/ModerationSettings.vue'
+import OtherSettings from '@/components/settings/OtherSettings.vue'
 
 enum TabOption {
-  Chat = "Chat",
-  Queue = "Queue",
-  Moderation = "Moderation",
-  Other = "Other",
+  Chat = 'Chat',
+  Queue = 'Queue',
+  Moderation = 'Moderation',
+  Other = 'Other'
 }
 
 const tabOptions = [
   {
     label: TabOption.Chat,
     icon: ChatBubbleLeftRightIcon,
-    view: ChatSettings,
+    view: ChatSettings
   },
   {
     label: TabOption.Queue,
     icon: QueueListIcon,
-    view: QueueSettings,
+    view: QueueSettings
   },
   {
     label: TabOption.Moderation,
     icon: HandRaisedIcon,
-    view: ModerationSettings,
+    view: ModerationSettings
   },
   {
     label: TabOption.Other,
     icon: Cog8ToothIcon,
-    view: OtherSettings,
-  },
+    view: OtherSettings
+  }
 ]
 const selectedTab = ref(tabOptions[0].label)
 

@@ -7,8 +7,8 @@
       </div>
       <div class="cq-text-subtle text-left pl-1 mb-2">
         <label>
-          When a user has their chat message deleted, is timed out, or banned, then the clips they submitted will be
-          removed.
+          When a user has their chat message deleted, is timed out, or banned, then the clips they
+          submitted will be removed.
         </label>
       </div>
     </div>
@@ -20,17 +20,21 @@
       </div>
     </div>
     <div class="mt-3">
-      <BaseButton class="mr-2" type="submit" :disabled="!moderation.isModified(formSettings)">Save</BaseButton>
-      <BaseButton type="reset" variant="danger" :disabled="!moderation.isModified(formSettings)">Cancel</BaseButton>
+      <BaseButton class="mr-2" type="submit" :disabled="!moderation.isModified(formSettings)"
+        >Save</BaseButton
+      >
+      <BaseButton type="reset" variant="danger" :disabled="!moderation.isModified(formSettings)"
+        >Cancel</BaseButton
+      >
     </div>
     <BaseAlert v-if="showSaveMsg" variant="success" class="mt-2">Save successful</BaseAlert>
   </form>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import { useModeration, type Moderation } from "@/stores/moderation"
-import { clone } from "@/utils"
+import { ref } from 'vue'
+import { useModeration, type Moderation } from '@/stores/moderation'
+import { clone } from '@/utils'
 
 const moderation = useModeration()
 

@@ -8,9 +8,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
-import { SunIcon, MoonIcon } from "@/assets/icons"
-import { useTheme } from "@/stores/theme"
+import { computed } from 'vue'
+import { SunIcon, MoonIcon } from '@/assets/icons'
+import { useTheme } from '@/stores/theme'
 
 const theme = useTheme()
 

@@ -7,7 +7,9 @@
           class="flex space-x-1 align-middle p-4 border-b-2 group"
           :class="[option.label === modelValue ? 'cq-tab-active' : 'cq-tab']"
         >
-          <component v-if="option.icon" :is="option.icon" class="w-5" /><span>{{ option.label }}</span>
+          <component v-if="option.icon" :is="option.icon" class="w-5" /><span>{{
+            option.label
+          }}</span>
         </button>
       </li>
     </ul>
@@ -15,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Component } from "vue"
+import type { Component } from 'vue'
 
 export interface Props {
   modelValue: string
@@ -25,6 +27,6 @@ export interface Props {
 defineProps<Props>()
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: string): void
+  (e: 'update:modelValue', value: string): void
 }>()
 </script>

@@ -28,6 +28,6 @@ export interface Props {
 withDefaults(defineProps<Props>(), { modelValue: false })
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: boolean): void
+  (e: 'update:modelValue', value: boolean): void
 }>()
 </script>

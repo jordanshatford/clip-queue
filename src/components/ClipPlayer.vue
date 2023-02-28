@@ -56,10 +56,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
-import { ArrowTopRightOnSquareIcon, BackwardIcon, ForwardIcon } from "@/assets/icons"
-import { formatDistanceToNow, parseISO } from "date-fns"
-import { ClipSource, type Clip } from "@/interfaces/clips"
+import { computed } from 'vue'
+import { ArrowTopRightOnSquareIcon, BackwardIcon, ForwardIcon } from '@/assets/icons'
+import { formatDistanceToNow, parseISO } from 'date-fns'
+import { ClipSource, type Clip } from '@/interfaces/clips'
 
 export interface Props {
   clip: Clip
@@ -71,19 +71,19 @@ export interface Props {
 const props = withDefaults(defineProps<Props>(), {
   autoplay: false,
   previousDisabled: false,
-  nextDisabled: false,
+  nextDisabled: false
 })
 
 const emit = defineEmits<{
-  (e: "previous"): void
-  (e: "next"): void
+  (e: 'previous'): void
+  (e: 'next'): void
 }>()
 
 const timeAgo = computed<string>(() => {
   if (props.clip?.timestamp) {
     return formatDistanceToNow(parseISO(props.clip.timestamp))
   }
-  return ""
+  return ''
 })
 
 const hostname = window.location.hostname

@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { XMarkIcon } from "@/assets/icons"
+import { XMarkIcon } from '@/assets/icons'
 
 export interface Props {
   dismissable?: boolean
@@ -21,5 +21,5 @@ export interface Props {
 
 withDefaults(defineProps<Props>(), { dismissable: false })
 
-const emit = defineEmits<{ (e: "dismiss"): void }>()
+const emit = defineEmits<{ (e: 'dismiss'): void }>()
 </script>

@@ -1,6 +1,6 @@
-import axios from "axios"
+import axios from 'axios'
 
-const BASE_URL = "https://api.reddit.com"
+const BASE_URL = 'https://api.reddit.com'
 
 export interface SubredditPost {
   data: {
@@ -14,9 +14,14 @@ export interface Subreddit {
   children: SubredditPost[]
 }
 
-export async function getSubredditPosts(subreddit: string, numPosts = 100): Promise<SubredditPost[]> {
+export async function getSubredditPosts(
+  subreddit: string,
+  numPosts = 100
+): Promise<SubredditPost[]> {
   try {
-    const { data } = await axios.get<{ data: Subreddit }>(`${BASE_URL}/r/${subreddit}/.json?limit=${numPosts}&sort=hot`)
+    const { data } = await axios.get<{ data: Subreddit }>(
+      `${BASE_URL}/r/${subreddit}/.json?limit=${numPosts}&sort=hot`
+    )
     return data.data.children
   } catch (e) {
     console.error({ e })
@@ -25,5 +30,5 @@ export async function getSubredditPosts(subreddit: string, numPosts = 100): Prom
 }
 
 export default {
-  getSubredditPosts,
+  getSubredditPosts
 }

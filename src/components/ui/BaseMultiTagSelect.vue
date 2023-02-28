@@ -4,7 +4,9 @@
       <BaseInput v-model="currentInput" :placeholder="placeholder" />
       <div :class="[dropdownOpen ? 'block' : 'hidden']">
         <div class="absolute z-40 left-0 mt-1 w-full">
-          <div class="p-1 rounded-xl text-sm bg-white dark:bg-zinc-700 border border-zinc-300 dark:border-zinc-700">
+          <div
+            class="p-1 rounded-xl text-sm bg-white dark:bg-zinc-700 border border-zinc-300 dark:border-zinc-700"
+          >
             <a
               v-if="!hasTag(currentInput)"
               @click.prevent="addTag(currentInput)"
@@ -36,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue"
+import { computed, ref } from 'vue'
 
 export interface Props {
   modelValue: string[]
@@ -44,16 +46,16 @@ export interface Props {
   itemName?: string
 }
 
-const props = withDefaults(defineProps<Props>(), { itemName: "tag" })
+const props = withDefaults(defineProps<Props>(), { itemName: 'tag' })
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: string[]): void
+  (e: 'update:modelValue', value: string[]): void
 }>()
 
-const currentInput = ref<string>("")
+const currentInput = ref<string>('')
 
 const dropdownOpen = computed(() => {
-  return currentInput.value.trim() !== ""
+  return currentInput.value.trim() !== ''
 })
 
 const sortedTags = computed(() => {
@@ -62,13 +64,13 @@ const sortedTags = computed(() => {
 })
 
 function clearInput() {
-  currentInput.value = ""
+  currentInput.value = ''
 }
 
 function addTag(tag: string) {
   const trimmedTag = tag.trim()
-  if (trimmedTag !== "" && !hasTag(trimmedTag)) {
-    emit("update:modelValue", [...props.modelValue, trimmedTag])
+  if (trimmedTag !== '' && !hasTag(trimmedTag)) {
+    emit('update:modelValue', [...props.modelValue, trimmedTag])
     clearInput()
   }
 }
@@ -82,6 +84,6 @@ function hasTag(tag: string) {
 function removeTag(index: number) {
   const valueCopy = props.modelValue
   valueCopy.splice(index, 1)
-  emit("update:modelValue", valueCopy)
+  emit('update:modelValue', valueCopy)
 }
 </script>

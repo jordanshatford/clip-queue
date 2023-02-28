@@ -24,8 +24,8 @@
 </template>
 
 <script setup lang="ts">
-import config from "@/assets/config"
-import AppFeature from "@/components/AppFeature.vue"
+import config from '@/assets/config'
+import AppFeature from '@/components/AppFeature.vue'
 
 const { title, tagline, description, features } = config.about
 </script>

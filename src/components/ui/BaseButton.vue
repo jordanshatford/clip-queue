@@ -4,7 +4,7 @@
     :class="{
       'bg-red-500 hover:bg-red-400': variant === 'danger',
       'bg-blue-500 hover:bg-blue-400': variant === 'primary',
-      'bg-brand-500 hover:bg-brand-400': variant === 'brand',
+      'bg-brand-500 hover:bg-brand-400': variant === 'brand'
     }"
   >
     <slot></slot>
@@ -13,8 +13,8 @@
 
 <script setup lang="ts">
 export interface Props {
-  variant?: "primary" | "danger" | "brand"
+  variant?: 'primary' | 'danger' | 'brand'
 }
 
-withDefaults(defineProps<Props>(), { variant: "primary" })
+withDefaults(defineProps<Props>(), { variant: 'primary' })
 </script>

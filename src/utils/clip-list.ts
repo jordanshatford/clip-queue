@@ -1,4 +1,4 @@
-import type { Clip } from "@/interfaces/clips"
+import type { Clip } from '@/interfaces/clips'
 
 export class ClipList {
   private _clips: Clip[]

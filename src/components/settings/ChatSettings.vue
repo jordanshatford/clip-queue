@@ -32,8 +32,12 @@
         </div>
       </div>
       <div class="mt-3">
-        <BaseButton class="mr-2" type="submit" :disabled="!settings.isModified(formSettings)">Save</BaseButton>
-        <BaseButton type="reset" variant="danger" :disabled="!settings.isModified(formSettings)">Cancel</BaseButton>
+        <BaseButton class="mr-2" type="submit" :disabled="!settings.isModified(formSettings)"
+          >Save</BaseButton
+        >
+        <BaseButton type="reset" variant="danger" :disabled="!settings.isModified(formSettings)"
+          >Cancel</BaseButton
+        >
       </div>
       <BaseAlert v-if="showSaveMsg" variant="success" class="mt-2">Save successful</BaseAlert>
     </form>
@@ -41,11 +45,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import { useSettings, type Settings } from "@/stores/settings"
-import { useUser } from "@/stores/user"
-import commands from "@/utils/commands"
-import { clone } from "@/utils"
+import { ref } from 'vue'
+import { useSettings, type Settings } from '@/stores/settings'
+import { useUser } from '@/stores/user'
+import commands from '@/utils/commands'
+import { clone } from '@/utils'
 
 const user = useUser()
 const settings = useSettings()

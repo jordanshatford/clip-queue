@@ -1,17 +1,17 @@
-import { describe, it, expect } from "vitest"
-import { shallowMount } from "@vue/test-utils"
-import AppFeature from "../AppFeature.vue"
+import { describe, it, expect } from 'vitest'
+import { shallowMount } from '@vue/test-utils'
+import AppFeature from '../AppFeature.vue'
 
-describe("AppFeature.vue", () => {
+describe('AppFeature.vue', () => {
   const wrapper = shallowMount(AppFeature, {
     props: {
-      title: "test",
-      description: "test description",
-      icon: {},
-    },
+      title: 'test',
+      description: 'test description',
+      icon: {}
+    }
   })
 
-  it("mounts successfully", () => {
+  it('mounts successfully', () => {
     expect(wrapper.exists()).toEqual(true)
   })
 })

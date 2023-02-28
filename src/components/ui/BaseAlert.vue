@@ -6,7 +6,7 @@
       'cq-alert-info': variant === 'info',
       'cq-alert-success': variant === 'success',
       'cq-alert-warning': variant === 'warning',
-      'cq-alert-danger': variant === 'danger',
+      'cq-alert-danger': variant === 'danger'
     }"
   >
     <component
@@ -26,11 +26,16 @@
 </template>
 
 <script setup lang="ts">
-import { InformationCircleIcon, CheckCircleIcon, ExclamationTriangleIcon, XCircleIcon } from "@/assets/icons"
+import {
+  InformationCircleIcon,
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+  XCircleIcon
+} from '@/assets/icons'
 
 export interface Props {
-  variant?: "info" | "success" | "warning" | "danger"
+  variant?: 'info' | 'success' | 'warning' | 'danger'
 }
 
-withDefaults(defineProps<Props>(), { variant: "info" })
+withDefaults(defineProps<Props>(), { variant: 'info' })
 </script>

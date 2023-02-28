@@ -1,22 +1,22 @@
-import { useQueue } from "@/stores/queue"
-import { useModeration } from "@/stores/moderation"
+import { useQueue } from '@/stores/queue'
+import { useModeration } from '@/stores/moderation'
 
 export enum Command {
-  OPEN = "open",
-  CLOSE = "close",
-  PREV = "prev",
-  NEXT = "next",
-  BLOCK_CHANNEL = "blockchannel",
-  UNBLOCK_CHANNEL = "unblockchannel",
+  OPEN = 'open',
+  CLOSE = 'close',
+  PREV = 'prev',
+  NEXT = 'next',
+  BLOCK_CHANNEL = 'blockchannel',
+  UNBLOCK_CHANNEL = 'unblockchannel'
 }
 
 export const help: Record<Command, string> = {
-  [Command.OPEN]: "Open the queue, allowing clips to be submitted.",
-  [Command.CLOSE]: "Close the queue, preventing clips from being submitted.",
-  [Command.PREV]: "Switch to the previous queue clip.",
-  [Command.NEXT]: "Switch to the next queue clip.",
-  [Command.BLOCK_CHANNEL]: "Block clips from specified channel.",
-  [Command.UNBLOCK_CHANNEL]: "Unblock clips from specified channel.",
+  [Command.OPEN]: 'Open the queue, allowing clips to be submitted.',
+  [Command.CLOSE]: 'Close the queue, preventing clips from being submitted.',
+  [Command.PREV]: 'Switch to the previous queue clip.',
+  [Command.NEXT]: 'Switch to the next queue clip.',
+  [Command.BLOCK_CHANNEL]: 'Block clips from specified channel.',
+  [Command.UNBLOCK_CHANNEL]: 'Unblock clips from specified channel.'
 }
 
 export function handleCommand(command: string, ...args: string[]) {
@@ -60,5 +60,5 @@ export function handleCommand(command: string, ...args: string[]) {
 
 export default {
   help,
-  handleCommand,
+  handleCommand
 }

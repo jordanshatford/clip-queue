@@ -1,14 +1,14 @@
-import { Client } from "tmi.js"
+import { Client } from 'tmi.js'
 
 const OPTIONS = {
   options: {
     skipMembership: true,
-    skipUpdatingEmotesets: true,
+    skipUpdatingEmotesets: true
   },
   connection: {
     reconnect: true,
-    secure: true,
-  },
+    secure: true
+  }
 }
 
 class TwitchChat extends Client {
@@ -19,9 +19,9 @@ class TwitchChat extends Client {
       ...OPTIONS,
       identity: {
         username: username,
-        password: `oauth:${accessToken}`,
+        password: `oauth:${accessToken}`
       },
-      channels: [username],
+      channels: [username]
     })
 
     this.username = username
@@ -31,11 +31,11 @@ class TwitchChat extends Client {
         console.info(`Connected to channel ${username}.`)
       })
       .catch((e) => {
-        console.error("Failed to connect to twitch chat.", e)
+        console.error('Failed to connect to twitch chat.', e)
       })
 
-    this.on("disconnected", () => {
-      console.info("Disconnected from twitch chat.")
+    this.on('disconnected', () => {
+      console.info('Disconnected from twitch chat.')
     })
   }
 }

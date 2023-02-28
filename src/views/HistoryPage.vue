@@ -21,7 +21,11 @@
         <tr v-for="clip in currentPage" :key="clip.id">
           <td class="p-3">
             <div class="flex items-center">
-              <img class="hidden sm:block w-24 rounded-xl aspect-video" :src="clip.thumbnailUrl" :alt="clip.title" />
+              <img
+                class="hidden sm:block w-24 rounded-xl aspect-video"
+                :src="clip.thumbnailUrl"
+                :alt="clip.title"
+              />
               <div class="text-left ml-3 text-sm">
                 <p class="cq-text">{{ clip.title }}</p>
                 <p class="cq-text-subtle-semibold">
@@ -56,11 +60,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue"
-import { PlusIcon, TrashIcon } from "@/assets/icons"
-import config from "@/assets/config"
-import { useQueue } from "@/stores/queue"
-import { ClipSource } from "@/interfaces/clips"
+import { computed, ref } from 'vue'
+import { PlusIcon, TrashIcon } from '@/assets/icons'
+import config from '@/assets/config'
+import { useQueue } from '@/stores/queue'
+import { ClipSource } from '@/interfaces/clips'
 
 const queue = useQueue()
 

@@ -27,8 +27,8 @@
 </template>
 
 <script setup lang="ts">
-import { BarsArrowUpIcon, TrashIcon } from "@/assets/icons"
-import { ClipSource, type Clip } from "@/interfaces/clips"
+import { BarsArrowUpIcon, TrashIcon } from '@/assets/icons'
+import { ClipSource, type Clip } from '@/interfaces/clips'
 
 export interface Props {
   clip: Clip
@@ -37,7 +37,7 @@ export interface Props {
 defineProps<Props>()
 
 const emit = defineEmits<{
-  (e: "play"): void
-  (e: "remove"): void
+  (e: 'play'): void
+  (e: 'remove'): void
 }>()
 </script>

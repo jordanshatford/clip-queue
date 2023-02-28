@@ -11,6 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import AppNavBar from "@/components/AppNavBar.vue"
-import AppFooter from "./components/AppFooter.vue"
+import AppNavBar from '@/components/AppNavBar.vue'
+import AppFooter from './components/AppFooter.vue'
 </script>

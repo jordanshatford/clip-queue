@@ -1,5 +1,5 @@
-import { defineStore } from "pinia"
-import { deepEqual } from "@/utils"
+import { defineStore } from 'pinia'
+import { deepEqual } from '@/utils'
 
 export interface Settings {
   allowCommands: boolean
@@ -8,12 +8,12 @@ export interface Settings {
 
 export const DEFAULTS: Settings = {
   allowCommands: true,
-  commandPrefix: "!cq",
+  commandPrefix: '!cq'
 }
 
-export const useSettings = defineStore("settings", {
+export const useSettings = defineStore('settings', {
   persist: {
-    key: "settings",
+    key: 'settings'
   },
   state: (): Settings => ({ ...DEFAULTS }),
   getters: {
@@ -22,11 +22,11 @@ export const useSettings = defineStore("settings", {
         /* eslint-disable @typescript-eslint/no-explicit-any*/
         return !deepEqual((state as any).$state, settings)
       }
-    },
+    }
   },
   actions: {
     update(settings: Settings) {
       this.$patch(settings)
-    },
-  },
+    }
+  }
 })

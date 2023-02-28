@@ -1,6 +1,6 @@
-import { defineStore } from "pinia"
-import type { Clip } from "@/interfaces/clips"
-import { deepEqual } from "@/utils"
+import { defineStore } from 'pinia'
+import type { Clip } from '@/interfaces/clips'
+import { deepEqual } from '@/utils'
 
 export interface Moderation {
   // Auto remove clips when the submitter has been timed out
@@ -12,15 +12,15 @@ export interface Moderation {
 
 export const DEFAULTS: Moderation = {
   hasAutoRemoveClipsEnabled: true,
-  blockedChannels: [],
+  blockedChannels: []
 }
 
-export const useModeration = defineStore("moderation", {
+export const useModeration = defineStore('moderation', {
   persist: {
-    key: "moderation",
+    key: 'moderation'
   },
   state: (): Moderation => ({
-    ...DEFAULTS,
+    ...DEFAULTS
   }),
   getters: {
     // Compare moderation to currently set moderations
@@ -33,10 +33,12 @@ export const useModeration = defineStore("moderation", {
     // Return if a clip passes moderation
     isAllowed: (state) => {
       return (clip: Clip) => {
-        const blockedChannel = state.blockedChannels.some((c) => c.toLowerCase() === clip.channel?.toLowerCase())
+        const blockedChannel = state.blockedChannels.some(
+          (c) => c.toLowerCase() === clip.channel?.toLowerCase()
+        )
         return !blockedChannel
       }
-    },
+    }
   },
   actions: {
     update(moderation: Moderation) {
@@ -50,7 +52,9 @@ export const useModeration = defineStore("moderation", {
       this.blockedChannels = [...this.blockedChannels, channel]
     },
     removeBlockedChannel(channel: string) {
-      this.blockedChannels = this.blockedChannels.filter((c) => c.toLowerCase() !== channel.toLowerCase())
-    },
-  },
+      this.blockedChannels = this.blockedChannels.filter(
+        (c) => c.toLowerCase() !== channel.toLowerCase()
+      )
+    }
+  }
 })

@@ -24,11 +24,13 @@
             </div>
           </div>
         </div>
-        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div
+          class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+        >
           <AppThemeToggle class="hidden sm:block mr-2" />
           <BaseButton variant="brand" @click="() => handleAuthButtonClick()">
             <span><TwitchLogo class="inline w-5" /></span>
-            {{ user.isLoggedIn ? "Logout" : "Login" }}
+            {{ user.isLoggedIn ? 'Logout' : 'Login' }}
           </BaseButton>
         </div>
       </div>
@@ -49,14 +51,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import TwitchLogo from "@/components/icons/TwitchLogo.vue"
-import { useRouter } from "vue-router"
-import AppNavBarItem from "@/components/AppNavBarItem.vue"
-import AppThemeToggle from "@/components/AppThemeToggle.vue"
-import AppHamburger from "@/components/AppHamburger.vue"
-import { routes, RouteNameConstants } from "@/router"
-import { useUser } from "@/stores/user"
+import { ref } from 'vue'
+import TwitchLogo from '@/components/icons/TwitchLogo.vue'
+import { useRouter } from 'vue-router'
+import AppNavBarItem from '@/components/AppNavBarItem.vue'
+import AppThemeToggle from '@/components/AppThemeToggle.vue'
+import AppHamburger from '@/components/AppHamburger.vue'
+import { routes, RouteNameConstants } from '@/router'
+import { useUser } from '@/stores/user'
 
 const user = useUser()
 const router = useRouter()

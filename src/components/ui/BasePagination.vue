@@ -29,9 +29,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
-import { ArrowLeftIcon, ArrowRightIcon } from "@/assets/icons"
-import { toRangeArray } from "@/utils"
+import { computed } from 'vue'
+import { ArrowLeftIcon, ArrowRightIcon } from '@/assets/icons'
+import { toRangeArray } from '@/utils'
 
 export interface Props {
   modelValue: number // The current page
@@ -41,7 +41,7 @@ export interface Props {
 const props = defineProps<Props>()
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: number): void
+  (e: 'update:modelValue', value: number): void
 }>()
 
 const clickableNumbers = computed(() => {
@@ -51,14 +51,14 @@ const clickableNumbers = computed(() => {
 })
 
 function setPage(page: number) {
-  emit("update:modelValue", page)
+  emit('update:modelValue', page)
 }
 
 function previous() {
-  emit("update:modelValue", Math.max(props.modelValue - 1, 1))
+  emit('update:modelValue', Math.max(props.modelValue - 1, 1))
 }
 
 function next() {
-  emit("update:modelValue", Math.min(props.modelValue + 1, props.totalPages))
+  emit('update:modelValue', Math.min(props.modelValue + 1, props.totalPages))
 }
 </script>

@@ -1,8 +1,8 @@
-import { defineStore } from "pinia"
-import { ClipList } from "@/utils/clip-list"
-import type { Clip } from "@/interfaces/clips"
-import { useModeration } from "@/stores/moderation"
-import { deepEqual } from "@/utils"
+import { defineStore } from 'pinia'
+import { ClipList } from '@/utils/clip-list'
+import type { Clip } from '@/interfaces/clips'
+import { useModeration } from '@/stores/moderation'
+import { deepEqual } from '@/utils'
 
 export interface QueueSettings {
   isLimited: boolean
@@ -11,7 +11,7 @@ export interface QueueSettings {
 
 export const DEFAULT_SETTINGS: QueueSettings = {
   isLimited: false,
-  limit: null,
+  limit: null
 }
 
 export interface ClipQueue {
@@ -22,30 +22,30 @@ export interface ClipQueue {
   settings: QueueSettings
 }
 
-export const useQueue = defineStore("queue", {
+export const useQueue = defineStore('queue', {
   persist: {
-    key: "queue",
-    paths: ["history", "current", "upcoming", "settings"],
+    key: 'queue',
+    paths: ['history', 'current', 'upcoming', 'settings'],
     afterRestore: (ctx) => {
       if (ctx.store.current?.id) {
         ctx.store.history.add(ctx.store.current)
       }
       ctx.store.current = undefined
-    },
+    }
   },
   state: (): ClipQueue => ({
     isOpen: true,
     history: new ClipList(),
     current: undefined,
     upcoming: new ClipList(),
-    settings: { ...DEFAULT_SETTINGS },
+    settings: { ...DEFAULT_SETTINGS }
   }),
   getters: {
     isSettingsModified: (state) => {
       return (settings: QueueSettings) => {
         return !deepEqual(state.settings, settings)
       }
-    },
+    }
   },
   actions: {
     clear() {
@@ -75,7 +75,11 @@ export const useQueue = defineStore("queue", {
         return
       }
       // Queue is full based on limit
-      if (this.settings.isLimited && this.settings.limit && this.upcoming.size() >= this.settings.limit) {
+      if (
+        this.settings.isLimited &&
+        this.settings.limit &&
+        this.upcoming.size() >= this.settings.limit
+      ) {
         // If the clip is already in the queue add it so submitters is updated
         if (!this.upcoming.includes(clip)) {
           return
@@ -122,6 +126,6 @@ export const useQueue = defineStore("queue", {
     },
     updateSettings(settings: QueueSettings) {
       this.settings = settings
-    },
-  },
+    }
+  }
 })
