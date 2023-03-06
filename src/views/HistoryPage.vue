@@ -9,7 +9,7 @@
           <th>
             <BaseButton
               :disabled="queue.history.empty()"
-              @click="queue.purge()"
+              @click="purgeHistory()"
               variant="danger"
               class="flex text-sm float-right my-1 mr-1 flex"
               ><TrashIcon class="w-5 mr-2 ml-0" />Delete All</BaseButton
@@ -18,7 +18,7 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-zinc-100 dark:divide-zinc-800">
-        <tr v-for="clip in currentPage" :key="clip.id">
+        <tr v-for="clip in currentPageClips" :key="clip.id">
           <td class="p-3">
             <div class="flex items-center">
               <img
@@ -60,13 +60,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, inject } from 'vue'
 import { PlusIcon, TrashIcon } from '@/assets/icons'
 import config from '@/assets/config'
 import { useQueue } from '@/stores/queue'
 import { ClipSource } from '@/interfaces/clips'
+import type { ConfirmDialog } from '@/plugins/confirm'
 
 const queue = useQueue()
+
+const confirm = inject<ConfirmDialog>('confirm')!
 
 const { pageSize } = config.history
 
@@ -76,11 +79,21 @@ const totalPages = computed(() => {
   return Math.ceil(queue.history.toArray().length / pageSize)
 })
 
-const currentPage = computed(() => {
+const currentPageClips = computed(() => {
   // pages start at 1, remove 1 to index at 0
   const start = (page.value - 1) * pageSize
   const end = start + pageSize
   // Reverse the cloned array to show history latest -> oldest
   return [...queue.history.toArray()].reverse().slice(start, end)
 })
+
+async function purgeHistory() {
+  const isConfirmed = await confirm({
+    title: 'Delete All History',
+    description: 'Are you sure you want to delete all clips from the history?'
+  })
+  if (isConfirmed) {
+    queue.purge()
+  }
+}
 </script>
