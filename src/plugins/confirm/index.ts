@@ -1,8 +1,6 @@
-import { type Plugin, createVNode, render } from 'vue'
+import { type Plugin, createVNode, render, inject } from 'vue'
 import ConfirmComponent from './ConfirmComponent.vue'
 import type { ConfirmOptions, ConfirmResult, ConfirmDialog } from './types'
-
-export * from './types'
 
 export const plugin: Plugin = {
   install(app) {
@@ -29,3 +27,8 @@ export const plugin: Plugin = {
 }
 
 export default plugin
+
+export function useConfirm() {
+  const confirm = inject<ConfirmDialog>('confirm')!
+  return confirm
+}

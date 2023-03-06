@@ -60,16 +60,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, inject } from 'vue'
+import { computed, ref } from 'vue'
 import { PlusIcon, TrashIcon } from '@/assets/icons'
 import config from '@/assets/config'
 import { useQueue } from '@/stores/queue'
 import { ClipSource } from '@/interfaces/clips'
-import type { ConfirmDialog } from '@/plugins/confirm'
+import { useConfirm } from '@/plugins/confirm'
 
 const queue = useQueue()
-
-const confirm = inject<ConfirmDialog>('confirm')!
+const confirm = useConfirm()
 
 const { pageSize } = config.history
 

@@ -39,19 +39,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue'
+import { computed } from 'vue'
 import { useSettings, DEFAULTS as DEFAULT_SETTINGS } from '@/stores/settings'
 import { useModeration, DEFAULTS as DEFAULT_MODERATION } from '@/stores/moderation'
 import { useQueue, DEFAULT_SETTINGS as DEFAULT_QUEUE_SETTINGS } from '@/stores/queue'
 import { useClipFinder } from '@/stores/clip-finder'
-import type { ConfirmDialog } from '@/plugins/confirm'
+import { useConfirm } from '@/plugins/confirm'
 
 const queue = useQueue()
 const settings = useSettings()
 const moderation = useModeration()
 const clipFinder = useClipFinder()
-
-const confirm = inject<ConfirmDialog>('confirm')!
+const confirm = useConfirm()
 
 const isSettingsModified = computed(() => {
   return (
