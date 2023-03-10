@@ -72,7 +72,7 @@ export const useUser = defineStore('user', {
       this.chat?.disconnect()
       this.chat = undefined
       if (token) {
-        twitch.logout(CLIENT_ID, token)
+        twitch.logout(CLIENT_ID, token).catch()
       }
     },
     connectToChat() {
