@@ -27,7 +27,19 @@
                 :alt="clip.title"
               />
               <div class="text-left ml-3 text-sm">
-                <p class="cq-text">{{ clip.title }}</p>
+                <p class="cq-text">
+                  {{ clip.title }}
+                  <span v-if="clip.url">
+                    <a
+                      :href="clip.url"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="cq-text-subtle text-lg no-underline hover:text-zinc-600 dark:hover:text-zinc-200"
+                    >
+                      <ArrowTopRightOnSquareIcon class="w-5 inline-block mb-1" />
+                    </a>
+                  </span>
+                </p>
                 <p class="cq-text-subtle-semibold">
                   {{ clip.channel }}<span class="cq-text-subtle"> playing </span>{{ clip.game }}
                 </p>
@@ -61,7 +73,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { PlusIcon, TrashIcon } from '@/assets/icons'
+import { PlusIcon, TrashIcon, ArrowTopRightOnSquareIcon } from '@/assets/icons'
 import config from '@/assets/config'
 import { useQueue } from '@/stores/queue'
 import { ClipSource } from '@/interfaces/clips'
