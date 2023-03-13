@@ -13,6 +13,7 @@ import BaseTextArea from '@/components/ui/BaseTextArea.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import BaseMultiTagSelect from '@/components/ui/BaseMultiTagSelect.vue'
 import BasePagination from '@/components/ui/BasePagination.vue'
+import BaseTable from '@/components/ui/BaseTable.vue'
 import ConfirmPlugin from '@/plugins/confirm'
 
 const app = createApp(App)
@@ -30,5 +31,6 @@ app
   .component('BaseButton', BaseButton)
   .component('BaseMultiTagSelect', BaseMultiTagSelect)
   .component('BasePagination', BasePagination)
+  .component('BaseTable', BaseTable)
 app.use(router)
 app.mount('#app')

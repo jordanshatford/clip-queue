@@ -7,6 +7,7 @@ import BaseTextArea from '@/components/ui/BaseTextArea.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import BaseMultiTagSelect from '@/components/ui/BaseMultiTagSelect.vue'
 import BasePagination from '@/components/ui/BasePagination.vue'
+import BaseTable from '@/components/ui/BaseTable.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -19,5 +20,6 @@ declare module '@vue/runtime-core' {
     BaseButton: typeof BaseButton
     BaseMultiTagSelect: typeof BaseMultiTagSelect
     BasePagination: typeof BasePagination
+    BaseTable: typeof BaseTable
   }
 }
