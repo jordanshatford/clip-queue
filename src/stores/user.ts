@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import type { ChatUserstate } from 'tmi.js'
 import { env } from '@/assets/config'
-import twitch, { TwitchChat, type AuthInfo } from '@/services/twitch'
+import twitch, { TwitchChat, type AuthInfo, type RequestCtx } from '@/services/twitch'
 import { useSettings } from '@/stores/settings'
 import commands from '@/utils/commands'
 import { getUrlFromMessage } from '@/utils'
@@ -36,6 +36,11 @@ export const useUser = defineStore('user', {
       idToken: null,
       username: null,
       chat: undefined
+    }
+  },
+  getters: {
+    ctx(): RequestCtx {
+      return { id: CLIENT_ID, token: this.accessToken ?? '' }
     }
   },
   actions: {

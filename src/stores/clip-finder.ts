@@ -1,13 +1,10 @@
 import { defineStore } from 'pinia'
-import { env } from '@/assets/config'
 import type { Clip } from '@/interfaces/clips'
 import type { TwitchClip, TwitchGame } from '@/services/twitch'
 import { useReddit } from '@/stores/reddit'
 import reddit from '@/services/reddit'
 import twitch from '@/services/twitch'
 import { useUser } from '@/stores/user'
-
-const { CLIENT_ID } = env
 
 export const useClipFinder = defineStore('clip-finder', {
   persist: {
@@ -26,14 +23,14 @@ export const useClipFinder = defineStore('clip-finder', {
         const unknownClipIds = [...new Set(ids.filter((id) => !(id in state.clips)))]
         if (unknownClipIds) {
           const user = useUser()
-          const clips = await twitch.getClips(unknownClipIds, CLIENT_ID, user?.accessToken ?? '')
+          const clips = await twitch.getClips(user.ctx, unknownClipIds)
           clips.forEach((c) => {
             state.clips[c.id] = c
           })
           const unknownGameIds = [
             ...new Set(clips.map((c) => c.game_id).filter((id) => !(id in state.games)))
           ]
-          const games = await twitch.getGames(unknownGameIds, CLIENT_ID, user?.accessToken ?? '')
+          const games = await twitch.getGames(user.ctx, unknownGameIds)
           games.forEach((g) => {
             state.games[g.id] = g
           })

@@ -1,13 +1,9 @@
 import axios from 'axios'
-import type { TwitchGame, TwitchClip } from './types'
+import type { TwitchGame, TwitchClip, RequestCtx } from './types'
 
 const BASE_URL = 'https://api.twitch.tv/helix'
 
-export async function getClips(
-  ids: string[],
-  clientId: string,
-  accessToken: string
-): Promise<TwitchClip[]> {
+export async function getClips(ctx: RequestCtx, ids: string[]): Promise<TwitchClip[]> {
   if (ids.length <= 0) {
     return []
   }
@@ -15,19 +11,15 @@ export async function getClips(
     `${BASE_URL}/clips?id=${ids.join('&id=')}`,
     {
       headers: {
-        'Client-ID': clientId,
-        Authorization: `Bearer ${accessToken}`
+        'Client-ID': ctx.id,
+        Authorization: `Bearer ${ctx.token}`
       }
     }
   )
   return data.data
 }
 
-export async function getGames(
-  ids: string[],
-  clientId: string,
-  accessToken: string
-): Promise<TwitchGame[]> {
+export async function getGames(ctx: RequestCtx, ids: string[]): Promise<TwitchGame[]> {
   if (ids.length <= 0) {
     return []
   }
@@ -35,8 +27,8 @@ export async function getGames(
     `${BASE_URL}/games?id=${ids.join('&id=')}`,
     {
       headers: {
-        'Client-ID': clientId,
-        Authorization: `Bearer ${accessToken}`
+        'Client-ID': ctx.id,
+        Authorization: `Bearer ${ctx.token}`
       }
     }
   )

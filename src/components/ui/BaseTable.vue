@@ -35,7 +35,7 @@ export interface Props {
   columns: { key: string; title: string }[]
   rows: any[]
   classes?: {
-    wrapper?: string,
+    wrapper?: string
     table?: string
     headtr?: string
     thead?: string

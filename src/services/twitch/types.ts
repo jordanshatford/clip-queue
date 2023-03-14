@@ -1,3 +1,8 @@
+export interface RequestCtx {
+  id: string
+  token: string
+}
+
 export interface IDToken {
   aud: string
   azp: string

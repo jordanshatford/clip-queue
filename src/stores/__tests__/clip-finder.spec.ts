@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import type { Clip } from '../../interfaces/clips'
-import type { TwitchClip, TwitchGame } from '../../services/twitch'
+import type { TwitchClip, TwitchGame, RequestCtx } from '../../services/twitch'
 import type { SubredditPost } from '../../services/reddit'
 import { useClipFinder } from '../clip-finder'
 
@@ -19,7 +19,7 @@ const testClip = {
 } as TwitchClip
 
 vi.mock('@/services/twitch', () => {
-  const mockFunction = vi.fn((ids: string[]) => {
+  const mockFunction = vi.fn((_: RequestCtx, ids: string[]) => {
     return ids.map((id) => {
       return {
         id,
@@ -33,7 +33,7 @@ vi.mock('@/services/twitch', () => {
       } as TwitchClip
     })
   })
-  const mockFunction2 = vi.fn((ids: string[]) => {
+  const mockFunction2 = vi.fn((_: RequestCtx, ids: string[]) => {
     return ids.map((id) => {
       return { id, name: 'Test Game' } as TwitchGame
     })

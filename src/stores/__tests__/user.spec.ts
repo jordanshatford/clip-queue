@@ -1,11 +1,21 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useUser } from '../user'
 import type { AuthInfo } from '../../services/twitch'
 
+// Overwrite CLIENT_ID for testing
+vi.mock('@/assets/config', () => {
+  return {
+    env: {
+      CLIENT_ID: 'testClientId'
+    }
+  }
+})
+
 describe('user.ts', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
+    import.meta.env.VITE_TWITCH_CLIENT_ID = 't'
   })
 
   it('redirects to twitch auth login', () => {
@@ -13,7 +23,7 @@ describe('user.ts', () => {
     user.redirect()
   })
 
-  it('can uses twitch information to login', () => {
+  it('can use twitch information to login', () => {
     const user = useUser()
     expect(user.isLoggedIn).toEqual(false)
     expect(user.accessToken).toEqual(null)
@@ -28,6 +38,7 @@ describe('user.ts', () => {
     expect(user.accessToken).toEqual('aToken')
     expect(user.idToken).toEqual('idToken')
     expect(user.username).toEqual('username')
+    expect(user.ctx).toEqual({ id: 'testClientId', token: 'aToken' })
   })
 
   it('updates the login info if the username changes', () => {
@@ -50,6 +61,7 @@ describe('user.ts', () => {
     expect(user.accessToken).toEqual('aToken')
     expect(user.idToken).toEqual('idToken')
     expect(user.username).toEqual('username2')
+    expect(user.ctx).toEqual({ id: 'testClientId', token: 'aToken' })
   })
 
   it('logs out the user', async () => {
@@ -68,5 +80,6 @@ describe('user.ts', () => {
     expect(user.accessToken).toEqual(null)
     expect(user.idToken).toEqual(null)
     expect(user.username).toEqual(null)
+    expect(user.ctx).toEqual({ id: 'testClientId', token: '' })
   })
 })
