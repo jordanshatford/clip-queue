@@ -12,42 +12,22 @@
     posts.
   </p>
   <div class="grid gap-4 grid-cols-1 mt-3">
-    <div v-for="(subreddit, index) in DEFAULT_SUBREDDITS" :key="index">
-      <div class="cq-card mx-auto max-w-md">
-        <div class="flex items-center justify-between">
-          <p class="cq-text text-2xl pl-3">r/{{ subreddit }}</p>
-          <BaseButton
-            class="m-3 float-right"
-            @click="queueClipsForSubreddit(subreddit)"
-            :disabled="reddit.isLoading(subreddit)"
-          >
-            <component
-              :is="reddit.isLoading(subreddit) ? LoadingIcon : PlusIcon"
-              class="w-5 h-5"
-            ></component>
-          </BaseButton>
-        </div>
-      </div>
-    </div>
     <div class="cq-card mx-auto max-w-md">
       <div class="flex items-center justify-between">
         <p class="cq-text text-2xl pl-3 pr-1">r/</p>
         <BaseInput
-          :disabled="reddit.isLoading(reddit.custom)"
+          :disabled="reddit.loading"
           class="inline"
           type="text"
           maxlength="25"
-          v-model.trim="reddit.custom"
+          v-model.trim="reddit.subreddit"
         />
         <BaseButton
           class="m-3 float-right"
-          @click="queueClipsForSubreddit(reddit.custom)"
-          :disabled="reddit.isLoading(reddit.custom) || !reddit.custom"
+          @click="queueClipsForSubreddit(reddit.subreddit)"
+          :disabled="reddit.loading"
         >
-          <component
-            :is="reddit.isLoading(reddit.custom) ? LoadingIcon : PlusIcon"
-            class="w-5 h-5"
-          ></component>
+          <component :is="reddit.loading ? LoadingIcon : PlusIcon" class="w-5 h-5"></component>
         </BaseButton>
       </div>
     </div>
@@ -58,7 +38,7 @@
 import { PlusIcon } from '@/assets/icons'
 import LoadingIcon from '@/components/icons/LoadingIcon.vue'
 import { useQueue } from '@/stores/queue'
-import { useReddit, DEFAULT_SUBREDDITS } from '@/stores/reddit'
+import { useReddit } from '@/stores/reddit'
 import { useClipFinder } from '@/stores/clip-finder'
 import { ClipSource } from '@/interfaces/clips'
 
@@ -66,12 +46,12 @@ const reddit = useReddit()
 const queue = useQueue()
 
 async function queueClipsForSubreddit(subreddit: string) {
-  reddit.setLoading(subreddit, true)
+  reddit.loading = true
   const clipFinder = useClipFinder()
   const clips = await clipFinder.getClipsFromSubreddit(subreddit)
   clips.forEach((c) => {
     queue.add({ ...c, source: ClipSource.Reddit }, true)
   })
-  reddit.setLoading(subreddit, false)
+  reddit.loading = false
 }
 </script>
