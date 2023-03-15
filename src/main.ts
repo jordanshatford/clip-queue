@@ -14,13 +14,11 @@ import BaseButton from '@/components/ui/BaseButton.vue'
 import BaseMultiTagSelect from '@/components/ui/BaseMultiTagSelect.vue'
 import BasePagination from '@/components/ui/BasePagination.vue'
 import BaseTable from '@/components/ui/BaseTable.vue'
-import ConfirmPlugin from '@/plugins/confirm'
 
 const app = createApp(App)
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedState)
 app.use(pinia)
-app.use(ConfirmPlugin)
 app
   .component('BaseAlert', BaseAlert)
   .component('BaseInput', BaseInput)
