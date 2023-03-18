@@ -35,6 +35,7 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from 'vue-toastification'
 import { PlusIcon } from '@/assets/icons'
 import LoadingIcon from '@/components/icons/LoadingIcon.vue'
 import { useQueue } from '@/stores/queue'
@@ -42,16 +43,21 @@ import { useReddit } from '@/stores/reddit'
 import { useClipFinder } from '@/stores/clip-finder'
 import { ClipSource } from '@/interfaces/clips'
 
+const toast = useToast()
 const reddit = useReddit()
 const queue = useQueue()
 
 async function queueClipsForSubreddit(subreddit: string) {
   reddit.loading = true
   const clipFinder = useClipFinder()
-  const clips = await clipFinder.getClipsFromSubreddit(subreddit)
-  clips.forEach((c) => {
-    queue.add({ ...c, source: ClipSource.Reddit }, true)
-  })
+  try {
+    const clips = await clipFinder.getClipsFromSubreddit(subreddit)
+    clips.forEach((c) => {
+      queue.add({ ...c, source: ClipSource.Reddit }, true)
+    })
+  } catch (e) {
+    toast.error(`Failed to get clips from r/${subreddit}`)
+  }
   reddit.loading = false
 }
 </script>
