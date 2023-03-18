@@ -65,7 +65,7 @@ function onReset() {
 
 function onSubmit() {
   settings.update(formSettings.value)
-  toast.success('Chat settings saved!')
+  toast.success('Chat settings saved')
   onReset()
 }
 </script>

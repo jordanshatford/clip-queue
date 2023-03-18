@@ -49,7 +49,7 @@ function onReset() {
 
 function onSubmit() {
   moderation.update(formSettings.value)
-  toast.success('Moderation settings saved!')
+  toast.success('Moderation settings saved')
   onReset()
 }
 </script>

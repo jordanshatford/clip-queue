@@ -40,12 +40,14 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useToast } from 'vue-toastification'
 import { useSettings, DEFAULTS as DEFAULT_SETTINGS } from '@/stores/settings'
 import { useModeration, DEFAULTS as DEFAULT_MODERATION } from '@/stores/moderation'
 import { useQueue, DEFAULT_SETTINGS as DEFAULT_QUEUE_SETTINGS } from '@/stores/queue'
 import { useClipFinder } from '@/stores/clip-finder'
 import { useConfirm } from '@/plugins/confirm'
 
+const toast = useToast()
 const queue = useQueue()
 const settings = useSettings()
 const moderation = useModeration()
@@ -69,6 +71,7 @@ async function resetSettingsToDefault() {
     settings.update(DEFAULT_SETTINGS)
     moderation.update(DEFAULT_MODERATION)
     queue.updateSettings(DEFAULT_QUEUE_SETTINGS)
+    toast.success('Settings reset to default')
   }
 }
 
@@ -79,6 +82,7 @@ async function purgeHistory() {
   })
   if (isConfirmed) {
     queue.purge()
+    toast.success('Clip history cleared')
   }
 }
 
@@ -89,6 +93,7 @@ async function purgeCache() {
   })
   if (isConfirmed) {
     clipFinder.$reset()
+    toast.success('Clip cache cleared')
   }
 }
 </script>

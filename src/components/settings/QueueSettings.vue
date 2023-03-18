@@ -52,7 +52,7 @@ function onReset() {
 
 function onSubmit() {
   queue.updateSettings(formSettings.value)
-  toast.success('Queue settings saved!')
+  toast.success('Queue settings saved')
   onReset()
 }
 </script>
