@@ -55,6 +55,7 @@ async function queueClipsForSubreddit(subreddit: string) {
     clips.forEach((c) => {
       queue.add({ ...c, source: ClipSource.Reddit }, true)
     })
+    toast.success(`Added ${clips.length} clips from r/${subreddit} to the queue`)
   } catch (e) {
     toast.error(`Failed to get clips from r/${subreddit}`)
   }
