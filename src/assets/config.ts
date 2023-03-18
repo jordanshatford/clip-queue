@@ -27,7 +27,7 @@ export const config = {
       {
         title: 'Duplicate Prevention',
         description:
-          'Duplicate clips will not be re-added to the queue. This includes clips watched during previous sessions.',
+          'Duplicate clips will not make it into the queue. This includes clips watched during previous sessions.',
         icon: DocumentDuplicateIcon
       },
       {
@@ -51,7 +51,7 @@ export const config = {
       {
         title: 'Settings Customization',
         description:
-          'Personalize your experience through the vast option of customizable settings.',
+          'Personalize your experience through the vast choices of customizable settings.',
         icon: Cog8ToothIcon
       }
     ]
