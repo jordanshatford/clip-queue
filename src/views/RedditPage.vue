@@ -25,7 +25,7 @@
         <BaseButton
           class="m-3 float-right"
           @click="queueClipsForSubreddit(reddit.subreddit)"
-          :disabled="reddit.loading"
+          :disabled="reddit.loading || reddit.subreddit.length === 0"
         >
           <component :is="reddit.loading ? LoadingIcon : PlusIcon" class="w-5 h-5"></component>
         </BaseButton>
