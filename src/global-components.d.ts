@@ -1,4 +1,3 @@
-import BaseAlert from '@/components/ui/BaseAlert.vue'
 import BaseInput from '@/components/ui/BaseInput.vue'
 import BaseSwitch from '@/components/ui/BaseSwitch.vue'
 import BaseTabs from '@/components/ui/BaseTabs.vue'
@@ -11,7 +10,6 @@ import BaseTable from '@/components/ui/BaseTable.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    BaseAlert: typeof BaseAlert
     BaseInput: typeof BaseInput
     BaseSwitch: typeof BaseSwitch
     BaseTabs: typeof BaseTabs

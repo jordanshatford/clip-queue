@@ -18,10 +18,3 @@ export {
   UserIcon,
   XMarkIcon
 } from '@heroicons/vue/24/outline'
-
-export {
-  InformationCircleIcon,
-  CheckCircleIcon,
-  ExclamationTriangleIcon,
-  XCircleIcon
-} from '@heroicons/vue/24/solid'

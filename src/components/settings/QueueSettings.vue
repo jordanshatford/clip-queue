@@ -29,25 +29,21 @@
           >Cancel</BaseButton
         >
       </div>
-      <BaseAlert v-if="showSaveMsg" variant="success" class="mt-2">Save successful</BaseAlert>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useToast } from 'vue-toastification'
 import { useQueue, type QueueSettings } from '@/stores/queue'
 import { clone } from '@/utils'
 
+const toast = useToast()
 const queue = useQueue()
 
-const showSaveMsg = ref(false)
 const formKey = ref(1)
 const formSettings = ref<QueueSettings>(clone<QueueSettings>(queue.settings))
-
-function hideMsg() {
-  showSaveMsg.value = false
-}
 
 function onReset() {
   formSettings.value = clone<QueueSettings>(queue.settings)
@@ -55,9 +51,8 @@ function onReset() {
 }
 
 function onSubmit() {
-  showSaveMsg.value = true
-  setTimeout(hideMsg, 2000)
   queue.updateSettings(formSettings.value)
+  toast.success('Queue settings saved!')
   onReset()
 }
 </script>

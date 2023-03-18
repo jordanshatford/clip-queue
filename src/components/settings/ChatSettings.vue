@@ -39,28 +39,24 @@
           >Cancel</BaseButton
         >
       </div>
-      <BaseAlert v-if="showSaveMsg" variant="success" class="mt-2">Save successful</BaseAlert>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useToast } from 'vue-toastification'
 import { useSettings, type Settings } from '@/stores/settings'
 import { useUser } from '@/stores/user'
 import commands from '@/utils/commands'
 import { clone } from '@/utils'
 
+const toast = useToast()
 const user = useUser()
 const settings = useSettings()
 
-const showSaveMsg = ref(false)
 const formKey = ref(1)
 const formSettings = ref<Settings>(clone<Settings>(settings.$state))
-
-function hideMsg() {
-  showSaveMsg.value = false
-}
 
 function onReset() {
   formSettings.value = clone<Settings>(settings.$state)
@@ -68,9 +64,8 @@ function onReset() {
 }
 
 function onSubmit() {
-  showSaveMsg.value = true
-  setTimeout(hideMsg, 2000)
   settings.update(formSettings.value)
+  toast.success('Chat settings saved!')
   onReset()
 }
 </script>

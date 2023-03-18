@@ -27,24 +27,20 @@
         >Cancel</BaseButton
       >
     </div>
-    <BaseAlert v-if="showSaveMsg" variant="success" class="mt-2">Save successful</BaseAlert>
   </form>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useToast } from 'vue-toastification'
 import { useModeration, type Moderation } from '@/stores/moderation'
 import { clone } from '@/utils'
 
+const toast = useToast()
 const moderation = useModeration()
 
-const showSaveMsg = ref(false)
 const formKey = ref(1)
 const formSettings = ref<Moderation>(clone<Moderation>(moderation.$state, true))
-
-function hideMsg() {
-  showSaveMsg.value = false
-}
 
 function onReset() {
   formSettings.value = clone<Moderation>(moderation.$state, true)
@@ -52,9 +48,8 @@ function onReset() {
 }
 
 function onSubmit() {
-  showSaveMsg.value = true
-  setTimeout(hideMsg, 2000)
   moderation.update(formSettings.value)
+  toast.success('Moderation settings saved!')
   onReset()
 }
 </script>
