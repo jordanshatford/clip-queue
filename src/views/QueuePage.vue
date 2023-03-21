@@ -28,7 +28,7 @@
     @close="queue.close()"
     @remove="queue.remove"
     @play="queue.play"
-    @clear="queue.clear"
+    @clear="queue.clear()"
   />
 </template>
 

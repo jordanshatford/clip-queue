@@ -4,6 +4,7 @@ import { useModeration } from '@/stores/moderation'
 export enum Command {
   OPEN = 'open',
   CLOSE = 'close',
+  CLEAR = 'clear',
   PREV = 'prev',
   NEXT = 'next',
   BLOCK_CHANNEL = 'blockchannel',
@@ -13,6 +14,7 @@ export enum Command {
 export const help: Record<Command, string> = {
   [Command.OPEN]: 'Open the queue, allowing clips to be submitted.',
   [Command.CLOSE]: 'Close the queue, preventing clips from being submitted.',
+  [Command.CLEAR]: 'Clear all clips in the queue.',
   [Command.PREV]: 'Switch to the previous queue clip.',
   [Command.NEXT]: 'Switch to the next queue clip.',
   [Command.BLOCK_CHANNEL]: 'Block clips from specified channel.',
@@ -28,6 +30,10 @@ export function handleCommand(command: string, ...args: string[]) {
     }
     case Command.CLOSE: {
       queue.close()
+      break
+    }
+    case Command.CLEAR: {
+      queue.clear()
       break
     }
     case Command.PREV: {

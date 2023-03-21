@@ -14,7 +14,8 @@ describe('commands.ts', () => {
     ['prev', 'previous'],
     ['next', 'next'],
     ['open', 'open'],
-    ['close', 'close']
+    ['close', 'close'],
+    ['clear', 'clear']
   ])(
     'calls the proper clip queue function when a command is issued (%s, %s)',
     (commandName: string, expectedFunctionCall: any) => {

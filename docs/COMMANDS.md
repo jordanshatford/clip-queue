@@ -9,6 +9,8 @@ Twitch Clip Queue provides a set of commands accessible through Twich chat for m
 
 `!cqclose`: Close the queue, preventing any further clips submitted in chat from being added.
 
+`!cqclear`: Clear the queue, removing all clips. These clips can be resubmitted.
+
 `!cqprev`: Switch back to the previous clip.
 
 > NOTE: if there is no previously viewed clip, this will end the viewing of the current clip anyways
