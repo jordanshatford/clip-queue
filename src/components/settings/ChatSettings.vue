@@ -24,9 +24,12 @@
         <div class="cq-text-subtle text-left pl-1 my-2">
           <label>The following commands are available to mods: </label>
           <ul class="list-disc pl-8">
-            <li v-for="(item, key) in commands.help" :key="key">
-              <span class="cq-text-subtle-semibold">{{ `${settings.commandPrefix}${key}` }}</span
-              >: {{ item }}
+            <li v-for="(help, command) in commands.help" :key="command">
+              <span class="cq-text-subtle-semibold"
+                >{{ `${settings.commandPrefix}${command}` }}
+                {{ help.args?.map((arg) => `<${arg}>`).join(' ') }}</span
+              >
+              : {{ help.description }}
             </li>
           </ul>
         </div>

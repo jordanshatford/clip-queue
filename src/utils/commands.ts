@@ -11,14 +11,25 @@ export enum Command {
   UNBLOCK_CHANNEL = 'unblockchannel'
 }
 
-export const help: Record<Command, string> = {
-  [Command.OPEN]: 'Open the queue, allowing clips to be submitted.',
-  [Command.CLOSE]: 'Close the queue, preventing clips from being submitted.',
-  [Command.CLEAR]: 'Clear all clips in the queue.',
-  [Command.PREV]: 'Switch to the previous queue clip.',
-  [Command.NEXT]: 'Switch to the next queue clip.',
-  [Command.BLOCK_CHANNEL]: 'Block clips from specified channel.',
-  [Command.UNBLOCK_CHANNEL]: 'Unblock clips from specified channel.'
+interface CommandHelp {
+  description: string
+  args?: string[]
+}
+
+const help: Record<Command, CommandHelp> = {
+  [Command.OPEN]: { description: 'Open the queue, allowing clips to be submitted.' },
+  [Command.CLOSE]: { description: 'Close the queue, preventing clips from being submitted.' },
+  [Command.CLEAR]: { description: 'Clear all clips in the queue.' },
+  [Command.PREV]: { description: 'Switch to the previous queue clip.' },
+  [Command.NEXT]: { description: 'Switch to the next queue clip.' },
+  [Command.BLOCK_CHANNEL]: {
+    args: ['channel'],
+    description: 'Block clips from specified channel.'
+  },
+  [Command.UNBLOCK_CHANNEL]: {
+    args: ['channel'],
+    description: 'Unblock clips from specified channel.'
+  }
 }
 
 export function handleCommand(command: string, ...args: string[]) {
