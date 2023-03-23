@@ -126,6 +126,21 @@ export const useQueue = defineStore('queue', {
     },
     updateSettings(settings: QueueSettings) {
       this.settings = settings
+    },
+    setLimit(limit: number) {
+      if (Number.isNaN(limit) || limit < 1) {
+        return
+      }
+      this.updateSettings({
+        isLimited: true,
+        limit: limit
+      })
+    },
+    removeLimit() {
+      this.updateSettings({
+        isLimited: false,
+        limit: this.settings.limit
+      })
     }
   }
 })

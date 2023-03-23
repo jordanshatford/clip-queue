@@ -5,6 +5,8 @@ export enum Command {
   OPEN = 'open',
   CLOSE = 'close',
   CLEAR = 'clear',
+  SET_LIMIT = 'setlimit',
+  REMOVE_LIMIT = 'removelimit',
   PREV = 'prev',
   NEXT = 'next',
   BLOCK_CHANNEL = 'blockchannel',
@@ -20,6 +22,11 @@ const help: Record<Command, CommandHelp> = {
   [Command.OPEN]: { description: 'Open the queue, allowing clips to be submitted.' },
   [Command.CLOSE]: { description: 'Close the queue, preventing clips from being submitted.' },
   [Command.CLEAR]: { description: 'Clear all clips in the queue.' },
+  [Command.SET_LIMIT]: {
+    args: ['number'],
+    description: 'Set the limit of clips allowed in the queue.'
+  },
+  [Command.REMOVE_LIMIT]: { description: 'Remove the clip limit for the queue.' },
   [Command.PREV]: { description: 'Switch to the previous queue clip.' },
   [Command.NEXT]: { description: 'Switch to the next queue clip.' },
   [Command.BLOCK_CHANNEL]: {
@@ -45,6 +52,16 @@ export function handleCommand(command: string, ...args: string[]) {
     }
     case Command.CLEAR: {
       queue.clear()
+      break
+    }
+    case Command.SET_LIMIT: {
+      if (args[0]) {
+        queue.setLimit(Number.parseFloat(args[0]))
+      }
+      break
+    }
+    case Command.REMOVE_LIMIT: {
+      queue.removeLimit()
       break
     }
     case Command.PREV: {

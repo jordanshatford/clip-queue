@@ -15,7 +15,8 @@ describe('commands.ts', () => {
     ['next', 'next'],
     ['open', 'open'],
     ['close', 'close'],
-    ['clear', 'clear']
+    ['clear', 'clear'],
+    ['removelimit', 'removeLimit']
   ])(
     'calls the proper clip queue function when a command is issued (%s, %s)',
     (commandName: string, expectedFunctionCall: any) => {
@@ -30,10 +31,32 @@ describe('commands.ts', () => {
   )
 
   it.each([
+    ['setlimit', ['100'], 'setLimit', [100]],
+    ['setlimit', ['somethinginvalid'], 'setLimit', [NaN]]
+  ])(
+    'calls the proper clip queue function with params when issued (%s, %s)',
+    (
+      commandName: string,
+      args: string[],
+      expectedFunctionCall: any,
+      expectedFunctionArgs: any[]
+    ) => {
+      const queue = useQueue()
+      const randomNumber = Math.floor(Math.random() * 25)
+      const spy = vi.spyOn(queue, expectedFunctionCall)
+      for (let i = 1; i <= randomNumber; i++) {
+        commands.handleCommand(commandName, ...args)
+      }
+      expect(spy).toHaveBeenCalledTimes(randomNumber)
+      expect(spy).toHaveBeenCalledWith(...expectedFunctionArgs)
+    }
+  )
+
+  it.each([
     ['blockchannel', ['test'], 'addBlockedChannel'],
     ['unblockchannel', ['test'], 'removeBlockedChannel']
   ])(
-    'calls the proper clip queue function with params when issued (%s, %s)',
+    'calls the proper clip queue moderation function with params when issued (%s, %s)',
     (commandName: string, args: string[], expectedFunctionCall: any) => {
       const moderation = useModeration()
       const randomNumber = Math.floor(Math.random() * 25)
@@ -42,22 +65,34 @@ describe('commands.ts', () => {
         commands.handleCommand(commandName, ...args)
       }
       expect(spy).toHaveBeenCalledTimes(randomNumber)
+      expect(spy).toHaveBeenCalledWith(args[0])
     }
   )
 
-  /* eslint-disable @typescript-eslint/no-explicit-any*/
   it.each([['unknown'], ['']])(
     'calls nothing when an invalid command is issued (%s, %s)',
     (commandName: string) => {
       const queue = useQueue()
+      const queueCommandFunctions = [
+        'previous',
+        'next',
+        'open',
+        'close',
+        'clear',
+        'setLimit',
+        'removeLimit'
+      ]
       const moderation = useModeration()
+      const moderationCommandFunctions = ['addBlockedChannel', 'removeBlockedChannel']
       commands.handleCommand(commandName)
-      expect(vi.spyOn(queue, 'previous')).toHaveBeenCalledTimes(0)
-      expect(vi.spyOn(queue, 'next')).toHaveBeenCalledTimes(0)
-      expect(vi.spyOn(queue, 'open')).toHaveBeenCalledTimes(0)
-      expect(vi.spyOn(queue, 'close')).toHaveBeenCalledTimes(0)
-      expect(vi.spyOn(moderation, 'addBlockedChannel')).toHaveBeenCalledTimes(0)
-      expect(vi.spyOn(moderation, 'removeBlockedChannel')).toHaveBeenCalledTimes(0)
+      for (const f of queueCommandFunctions) {
+        /* eslint-disable @typescript-eslint/no-explicit-any*/
+        expect(vi.spyOn(queue, f as any)).toHaveBeenCalledTimes(0)
+      }
+      for (const f of moderationCommandFunctions) {
+        /* eslint-disable @typescript-eslint/no-explicit-any*/
+        expect(vi.spyOn(moderation, f as any)).toHaveBeenCalledTimes(0)
+      }
     }
   )
 

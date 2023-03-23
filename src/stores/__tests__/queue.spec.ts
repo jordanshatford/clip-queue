@@ -209,4 +209,34 @@ describe('clips.ts', () => {
     queue.clear()
     expect(queue.settings.limit).toEqual(5)
   })
+
+  it('can set a valid clip limit and remove the limit', () => {
+    const queue = useQueue()
+    expect(queue.settings.isLimited).toEqual(false)
+    expect(queue.settings.limit).toEqual(null)
+    queue.setLimit(100)
+    expect(queue.settings.isLimited).toEqual(true)
+    expect(queue.settings.limit).toEqual(100)
+    queue.removeLimit()
+    expect(queue.settings.isLimited).toEqual(false)
+    // previous limit is kept incase queue limit is enabled again
+    expect(queue.settings.limit).toEqual(100)
+  })
+
+  it('prevents setting the limit to an invalid value', () => {
+    const queue = useQueue()
+    expect(queue.settings.isLimited).toEqual(false)
+    expect(queue.settings.limit).toEqual(null)
+    // limit must be atleast 1
+    queue.setLimit(-1000)
+    expect(queue.settings.isLimited).toEqual(false)
+    expect(queue.settings.limit).toEqual(null)
+    queue.setLimit(0)
+    expect(queue.settings.isLimited).toEqual(false)
+    expect(queue.settings.limit).toEqual(null)
+    // limit cannot be NaN
+    queue.setLimit(NaN)
+    expect(queue.settings.isLimited).toEqual(false)
+    expect(queue.settings.limit).toEqual(null)
+  })
 })

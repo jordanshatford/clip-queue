@@ -11,6 +11,10 @@ Twitch Clip Queue provides a set of commands accessible through Twich chat for m
 
 `!cqclear`: Clear the queue, removing all clips. These clips can be resubmitted.
 
+`!cqsetlimit <number>`: Set the queue limit. This will ensure the amount of clips never exceeds the set limit.
+
+`!cqremovelimit`: Remove the limit from the queue. This will allow infinite clips to be added to the queue.
+
 `!cqprev`: Switch back to the previous clip.
 
 > NOTE: if there is no previously viewed clip, this will end the viewing of the current clip anyways
