@@ -54,12 +54,12 @@ async function queueClipsForSubreddit(subreddit: string) {
     const clips = await clipFinder.getClipsFromSubreddit(subreddit)
     if (clips.length === 0) {
       toast.error(`Could not find any clips on r/${subreddit}`)
-      return
+    } else {
+      clips.forEach((c) => {
+        queue.add({ ...c, source: ClipSource.Reddit }, true)
+      })
+      toast.success(`Added ${clips.length} clip(s) from r/${subreddit} to the queue`)
     }
-    clips.forEach((c) => {
-      queue.add({ ...c, source: ClipSource.Reddit }, true)
-    })
-    toast.success(`Added ${clips.length} clip(s) from r/${subreddit} to the queue`)
   } catch (e) {
     toast.error(`Failed to get clips from r/${subreddit}`)
   }
