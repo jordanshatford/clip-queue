@@ -21,12 +21,9 @@ describe('commands.ts', () => {
     'calls the proper clip queue function when a command is issued (%s, %s)',
     (commandName: string, expectedFunctionCall: any) => {
       const queue = useQueue()
-      const randomNumber = Math.floor(Math.random() * 25)
       const spy = vi.spyOn(queue, expectedFunctionCall)
-      for (let i = 1; i <= randomNumber; i++) {
-        commands.handleCommand(commandName)
-      }
-      expect(spy).toHaveBeenCalledTimes(randomNumber)
+      commands.handleCommand(commandName)
+      expect(spy).toHaveBeenCalledTimes(1)
     }
   )
 
@@ -42,12 +39,9 @@ describe('commands.ts', () => {
       expectedFunctionArgs: any[]
     ) => {
       const queue = useQueue()
-      const randomNumber = Math.floor(Math.random() * 25)
       const spy = vi.spyOn(queue, expectedFunctionCall)
-      for (let i = 1; i <= randomNumber; i++) {
-        commands.handleCommand(commandName, ...args)
-      }
-      expect(spy).toHaveBeenCalledTimes(randomNumber)
+      commands.handleCommand(commandName, ...args)
+      expect(spy).toHaveBeenCalledTimes(1)
       expect(spy).toHaveBeenCalledWith(...expectedFunctionArgs)
     }
   )
@@ -59,12 +53,10 @@ describe('commands.ts', () => {
     'calls the proper clip queue moderation function with params when issued (%s, %s)',
     (commandName: string, args: string[], expectedFunctionCall: any) => {
       const moderation = useModeration()
-      const randomNumber = Math.floor(Math.random() * 25)
       const spy = vi.spyOn(moderation, expectedFunctionCall)
-      for (let i = 1; i <= randomNumber; i++) {
-        commands.handleCommand(commandName, ...args)
-      }
-      expect(spy).toHaveBeenCalledTimes(randomNumber)
+      commands.handleCommand(commandName, ...args)
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(spy).toHaveBeenCalledWith(...args)
     }
   )
 
