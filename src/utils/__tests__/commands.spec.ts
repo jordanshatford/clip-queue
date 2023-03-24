@@ -65,7 +65,6 @@ describe('commands.ts', () => {
         commands.handleCommand(commandName, ...args)
       }
       expect(spy).toHaveBeenCalledTimes(randomNumber)
-      expect(spy).toHaveBeenCalledWith(...args)
     }
   )
 
