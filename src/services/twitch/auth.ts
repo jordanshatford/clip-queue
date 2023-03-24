@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { IDToken, TokenInfo, AuthInfo } from './types'
+import type { IDToken, TokenInfo, AuthInfo, TwitchUserCtx } from './types'
 
 const BASE_URL = 'https://id.twitch.tv/oauth2'
 
@@ -12,14 +12,14 @@ export function login(hash: string): AuthInfo | null {
   return null
 }
 
-export async function logout(clientId: string, token: string): Promise<void> {
+export async function logout(ctx: TwitchUserCtx): Promise<void> {
   // Revoke the token
-  await axios.post(`${BASE_URL}/revoke?client_id=${clientId}&token=${token}`)
+  await axios.post(`${BASE_URL}/revoke?client_id=${ctx.id}&token=${ctx.token}`)
 }
 
-export function redirect(clientId: string, redirectUri: string, scopes: string[]): void {
+export function redirect(ctx: Partial<TwitchUserCtx>, redirectUri: string, scopes: string[]): void {
   const loginUrl = encodeURI(
-    `${BASE_URL}/authorize?client_id=${clientId}` +
+    `${BASE_URL}/authorize?client_id=${ctx.id}` +
       `&redirect_uri=${redirectUri}` +
       `&response_type=token id_token` +
       `&scope=${scopes.join(' ')}` +
@@ -28,10 +28,10 @@ export function redirect(clientId: string, redirectUri: string, scopes: string[]
   window.location.assign(loginUrl)
 }
 
-export async function isTokenStillValid(token: string) {
+export async function isLoginValid(ctx: TwitchUserCtx) {
   const { status } = await axios.get<TokenInfo>(`${BASE_URL}/validate`, {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${ctx.token}`
     }
   })
   return status === 200
@@ -68,6 +68,6 @@ function parseJWT(token: string) {
 export default {
   login,
   logout,
-  isTokenStillValid,
+  isLoginValid,
   redirect
 }

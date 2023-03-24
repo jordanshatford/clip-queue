@@ -45,7 +45,7 @@ export const useUser = defineStore('user', {
   },
   actions: {
     async autoLoginIfPossible() {
-      if (this?.accessToken && (await twitch.isTokenStillValid(this.accessToken))) {
+      if (this?.accessToken && (await twitch.isLoginValid(this.ctx))) {
         this.isLoggedIn = true
         this.connectToChat()
       } else {
@@ -53,7 +53,7 @@ export const useUser = defineStore('user', {
       }
     },
     redirect(): void {
-      twitch.redirect(CLIENT_ID, REDIRECT_URI, SCOPES)
+      twitch.redirect(this.ctx, REDIRECT_URI, SCOPES)
     },
     login(authInfo: AuthInfo): void {
       const { access_token, id_token, decodedIdToken } = authInfo
@@ -77,7 +77,7 @@ export const useUser = defineStore('user', {
       this.chat?.disconnect()
       this.chat = undefined
       if (token) {
-        twitch.logout(CLIENT_ID, token).catch()
+        twitch.logout(this.ctx).catch()
       }
     },
     connectToChat() {
