@@ -1,6 +1,7 @@
-import { Client } from 'tmi.js'
+import { Client, type Options } from 'tmi.js'
+import type { TwitchUserCtx } from './types'
 
-const OPTIONS = {
+const DEFAULT_OPTIONS: Options = {
   options: {
     skipMembership: true,
     skipUpdatingEmotesets: true
@@ -11,24 +12,20 @@ const OPTIONS = {
   }
 }
 
-class TwitchChat extends Client {
-  private username: string
-
-  public constructor(username: string, accessToken: string) {
+export default class TwitchChat extends Client {
+  public constructor(ctx: TwitchUserCtx, options?: Options) {
     super({
-      ...OPTIONS,
+      ...{ ...DEFAULT_OPTIONS, ...options },
       identity: {
-        username: username,
-        password: `oauth:${accessToken}`
+        username: ctx.username,
+        password: `oauth:${ctx.token}`
       },
-      channels: [username]
+      channels: [ctx.username]
     })
-
-    this.username = username
 
     this.connect()
       .then(() => {
-        console.info(`Connected to channel ${username}.`)
+        console.info(`Connected to channel ${ctx.username}.`)
       })
       .catch((e) => {
         console.error('Failed to connect to twitch chat.', e)
@@ -39,5 +36,3 @@ class TwitchChat extends Client {
     })
   }
 }
-
-export default TwitchChat

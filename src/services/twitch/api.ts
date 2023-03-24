@@ -1,9 +1,9 @@
 import axios from 'axios'
-import type { TwitchGame, TwitchClip, RequestCtx } from './types'
+import type { TwitchGame, TwitchClip, TwitchUserCtx } from './types'
 
 const BASE_URL = 'https://api.twitch.tv/helix'
 
-export async function getClips(ctx: RequestCtx, ids: string[]): Promise<TwitchClip[]> {
+export async function getClips(ctx: TwitchUserCtx, ids: string[]): Promise<TwitchClip[]> {
   if (ids.length <= 0) {
     return []
   }
@@ -19,7 +19,7 @@ export async function getClips(ctx: RequestCtx, ids: string[]): Promise<TwitchCl
   return data.data
 }
 
-export async function getGames(ctx: RequestCtx, ids: string[]): Promise<TwitchGame[]> {
+export async function getGames(ctx: TwitchUserCtx, ids: string[]): Promise<TwitchGame[]> {
   if (ids.length <= 0) {
     return []
   }

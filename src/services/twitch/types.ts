@@ -1,6 +1,7 @@
-export interface RequestCtx {
+export interface TwitchUserCtx {
   id: string
   token: string
+  username: string
 }
 
 export interface IDToken {

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import type { ChatUserstate } from 'tmi.js'
 import { env } from '@/assets/config'
-import twitch, { TwitchChat, type AuthInfo, type RequestCtx } from '@/services/twitch'
+import twitch, { TwitchChat, type AuthInfo, type TwitchUserCtx } from '@/services/twitch'
 import { useSettings } from '@/stores/settings'
 import commands from '@/utils/commands'
 import { getUrlFromMessage } from '@/utils'
@@ -39,8 +39,8 @@ export const useUser = defineStore('user', {
     }
   },
   getters: {
-    ctx(): RequestCtx {
-      return { id: CLIENT_ID, token: this.accessToken ?? '' }
+    ctx(): TwitchUserCtx {
+      return { id: CLIENT_ID, token: this.accessToken ?? '', username: this.username ?? '' }
     }
   },
   actions: {
@@ -83,7 +83,7 @@ export const useUser = defineStore('user', {
     connectToChat() {
       this.chat?.disconnect?.()
       if (this.username && this.accessToken) {
-        this.chat = new TwitchChat(this.username, this.accessToken)
+        this.chat = new TwitchChat(this.ctx)
         // setup watching chat
         this.chat.on('message', this.onMessage)
         this.chat.on('messagedeleted', this.onMessageDeleted)

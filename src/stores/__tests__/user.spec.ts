@@ -15,7 +15,6 @@ vi.mock('@/assets/config', () => {
 describe('user.ts', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
-    import.meta.env.VITE_TWITCH_CLIENT_ID = 't'
   })
 
   it('redirects to twitch auth login', () => {
@@ -38,7 +37,7 @@ describe('user.ts', () => {
     expect(user.accessToken).toEqual('aToken')
     expect(user.idToken).toEqual('idToken')
     expect(user.username).toEqual('username')
-    expect(user.ctx).toEqual({ id: 'testClientId', token: 'aToken' })
+    expect(user.ctx).toEqual({ id: 'testClientId', token: 'aToken', username: 'username' })
   })
 
   it('updates the login info if the username changes', () => {
@@ -61,7 +60,7 @@ describe('user.ts', () => {
     expect(user.accessToken).toEqual('aToken')
     expect(user.idToken).toEqual('idToken')
     expect(user.username).toEqual('username2')
-    expect(user.ctx).toEqual({ id: 'testClientId', token: 'aToken' })
+    expect(user.ctx).toEqual({ id: 'testClientId', token: 'aToken', username: 'username2' })
   })
 
   it('logs out the user', async () => {
@@ -80,6 +79,6 @@ describe('user.ts', () => {
     expect(user.accessToken).toEqual(null)
     expect(user.idToken).toEqual(null)
     expect(user.username).toEqual(null)
-    expect(user.ctx).toEqual({ id: 'testClientId', token: '' })
+    expect(user.ctx).toEqual({ id: 'testClientId', token: '', username: '' })
   })
 })
