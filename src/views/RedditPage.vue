@@ -52,6 +52,10 @@ async function queueClipsForSubreddit(subreddit: string) {
   const clipFinder = useClipFinder()
   try {
     const clips = await clipFinder.getClipsFromSubreddit(subreddit)
+    if (clips.length === 0) {
+      toast.error(`Could not find any clips on r/${subreddit}`)
+      return
+    }
     clips.forEach((c) => {
       queue.add({ ...c, source: ClipSource.Reddit }, true)
     })
