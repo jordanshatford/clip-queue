@@ -1,7 +1,8 @@
 import { describe, it, expect, vi } from 'vitest'
 import axios from 'axios'
 import TwitchAPI from '../api'
-import type { TwitchClip, TwitchGame } from '..'
+import { commonHeaders } from '../api'
+import type { TwitchClip, TwitchGame, TwitchUserCtx } from '..'
 
 vi.mock('axios', () => {
   return {
@@ -47,5 +48,13 @@ describe('twitch-api.ts', () => {
     expect(gameInfo.id).toEqual('gameid')
     expect(gameInfo.name).toEqual('Test Game')
     expect(axios.get).toHaveBeenCalledTimes(2)
+  })
+
+  it('gets the common headers based on come ctx', () => {
+    const ctx: TwitchUserCtx = { id: 'test', token: 'testToken' }
+    expect(commonHeaders(ctx)).toEqual({
+      'Client-ID': 'test',
+      Authorization: `Bearer testToken`
+    })
   })
 })
