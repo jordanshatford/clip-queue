@@ -25,18 +25,17 @@ describe('user.ts', () => {
   it('can use twitch information to login', () => {
     const user = useUser()
     expect(user.isLoggedIn).toEqual(false)
-    expect(user.accessToken).toEqual(null)
-    expect(user.idToken).toEqual(null)
-    expect(user.username).toEqual(null)
+    expect(user.ctx.id).toEqual('testClientId')
+    expect(user.ctx.token).toEqual(undefined)
+    expect(user.ctx.username).toEqual(undefined)
     user.login({
       access_token: 'aToken',
       id_token: 'idToken',
       decodedIdToken: { preferred_username: 'username' }
     } as AuthInfo)
     expect(user.isLoggedIn).toEqual(true)
-    expect(user.accessToken).toEqual('aToken')
-    expect(user.idToken).toEqual('idToken')
-    expect(user.username).toEqual('username')
+    expect(user.ctx.token).toEqual('aToken')
+    expect(user.ctx.username).toEqual('username')
     expect(user.ctx).toEqual({ id: 'testClientId', token: 'aToken', username: 'username' })
   })
 
@@ -48,18 +47,16 @@ describe('user.ts', () => {
       decodedIdToken: { preferred_username: 'username' }
     } as AuthInfo)
     expect(user.isLoggedIn).toEqual(true)
-    expect(user.accessToken).toEqual('aToken')
-    expect(user.idToken).toEqual('idToken')
-    expect(user.username).toEqual('username')
+    expect(user.ctx.token).toEqual('aToken')
+    expect(user.ctx.username).toEqual('username')
     user.login({
       access_token: 'aToken',
       id_token: 'idToken',
       decodedIdToken: { preferred_username: 'username2' }
     } as AuthInfo)
     expect(user.isLoggedIn).toEqual(true)
-    expect(user.accessToken).toEqual('aToken')
-    expect(user.idToken).toEqual('idToken')
-    expect(user.username).toEqual('username2')
+    expect(user.ctx.token).toEqual('aToken')
+    expect(user.ctx.username).toEqual('username2')
     expect(user.ctx).toEqual({ id: 'testClientId', token: 'aToken', username: 'username2' })
   })
 
@@ -71,14 +68,12 @@ describe('user.ts', () => {
       decodedIdToken: { preferred_username: 'username' }
     } as AuthInfo)
     expect(user.isLoggedIn).toEqual(true)
-    expect(user.accessToken).toEqual('aToken')
-    expect(user.idToken).toEqual('idToken')
-    expect(user.username).toEqual('username')
+    expect(user.ctx.token).toEqual('aToken')
+    expect(user.ctx.username).toEqual('username')
     await user.logout()
     expect(user.isLoggedIn).toEqual(false)
-    expect(user.accessToken).toEqual(null)
-    expect(user.idToken).toEqual(null)
-    expect(user.username).toEqual(null)
-    expect(user.ctx).toEqual({ id: 'testClientId', token: '', username: '' })
+    expect(user.ctx.token).toEqual(undefined)
+    expect(user.ctx.username).toEqual(undefined)
+    expect(user.ctx).toEqual({ id: 'testClientId', token: undefined, username: undefined })
   })
 })

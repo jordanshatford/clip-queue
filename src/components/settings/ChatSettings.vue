@@ -3,7 +3,7 @@
     <div class="cq-form mb-2">
       <div class="cq-form-group mb-1">
         <label class="cq-form-group-label">Current in chat of:</label>
-        <BaseInput type="text" disabled v-model="user.username" />
+        <BaseInput type="text" disabled v-model="user.ctx.username" />
       </div>
     </div>
     <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey" class="cq-form">

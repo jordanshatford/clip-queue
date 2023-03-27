@@ -15,16 +15,14 @@ const SCOPES = ['openid', 'chat:read']
 
 export interface User {
   isLoggedIn: boolean
-  accessToken: string | null
-  idToken: string | null
-  username: string | null
+  ctx: TwitchUserCtx
   chat?: TwitchChat
 }
 
 export const useUser = defineStore('user', {
   persist: {
     key: 'user',
-    paths: ['accessToken', 'idToken', 'username'],
+    paths: ['ctx.token', 'ctx.username'],
     afterRestore: async (ctx) => {
       await ctx.store.autoLoginIfPossible()
     }
@@ -32,20 +30,17 @@ export const useUser = defineStore('user', {
   state: (): User => {
     return {
       isLoggedIn: false,
-      accessToken: null,
-      idToken: null,
-      username: null,
+      ctx: {
+        id: CLIENT_ID,
+        token: undefined,
+        username: undefined
+      },
       chat: undefined
-    }
-  },
-  getters: {
-    ctx(): TwitchUserCtx {
-      return { id: CLIENT_ID, token: this.accessToken ?? '', username: this.username ?? '' }
     }
   },
   actions: {
     async autoLoginIfPossible() {
-      if (this?.accessToken && (await twitch.isLoginValid(this.ctx))) {
+      if (this.ctx.token && (await twitch.isLoginValid(this.ctx))) {
         this.isLoggedIn = true
         this.connectToChat()
       } else {
@@ -56,33 +51,37 @@ export const useUser = defineStore('user', {
       twitch.redirect(this.ctx, REDIRECT_URI, SCOPES)
     },
     login(authInfo: AuthInfo): void {
-      const { access_token, id_token, decodedIdToken } = authInfo
+      const { access_token, decodedIdToken } = authInfo
       if (
-        this.accessToken !== access_token ||
-        this.username !== decodedIdToken?.preferred_username
+        this.ctx.token !== access_token ||
+        this.ctx.username !== decodedIdToken.preferred_username
       ) {
-        this.accessToken = access_token
-        this.idToken = id_token
-        this.username = decodedIdToken?.preferred_username ?? ''
+        this.ctx = {
+          ...this.ctx,
+          token: access_token,
+          username: decodedIdToken.preferred_username
+        }
         this.isLoggedIn = true
         this.connectToChat()
       }
     },
     async logout(): Promise<void> {
-      const token = this.accessToken
-      this.idToken = null
-      this.accessToken = null
-      this.username = null
+      const ctx = this.ctx
+      this.ctx = {
+        ...this.ctx,
+        token: undefined,
+        username: undefined
+      }
       this.isLoggedIn = false
       this.chat?.disconnect()
       this.chat = undefined
-      if (token) {
-        twitch.logout(this.ctx).catch()
+      if (ctx.id && ctx.token) {
+        twitch.logout(ctx).catch()
       }
     },
     connectToChat() {
       this.chat?.disconnect?.()
-      if (this.username && this.accessToken) {
+      if (this.ctx.username && this.ctx.token) {
         this.chat = new TwitchChat(this.ctx)
         // setup watching chat
         this.chat.on('message', this.onMessage)
