@@ -13,7 +13,7 @@ const DEFAULT_OPTIONS: Options = {
 }
 
 export default class TwitchChat extends Client {
-  public constructor(ctx: TwitchUserCtx, options?: Options) {
+  public constructor(ctx: TwitchUserCtx, options?: Partial<Options>) {
     if (!ctx.username) {
       throw Error('No username specified in TwitchUserCtx')
     }
