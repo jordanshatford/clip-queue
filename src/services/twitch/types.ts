@@ -53,3 +53,16 @@ export interface TwitchClip {
   thumbnail_url: string
   duration: number
 }
+
+// This will be an empty object when no pages are left
+export interface TwitchPagination {
+  cursor?: string
+}
+
+export interface TwitchResponse<T> {
+  data: T
+}
+
+export interface TwitchPagedResponse<T> extends TwitchResponse<T> {
+  pagination: TwitchPagination
+}
