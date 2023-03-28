@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import { createTestingPinia } from '@pinia/testing'
-import RedditPage from '../RedditPage.vue'
+import SearchPage from '../SearchPage.vue'
 
-describe('RedditPage.vue', () => {
-  const wrapper = shallowMount(RedditPage, {
+describe('SearchPage.vue', () => {
+  const wrapper = shallowMount(SearchPage, {
     global: {
       plugins: [createTestingPinia()]
     }
