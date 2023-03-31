@@ -1,7 +1,7 @@
 import { beforeEach, describe, it, expect, vi } from 'vitest'
 import axios from 'axios'
 import TwitchAPI from '../api'
-import { toCommonHeaders, toURLParams } from '../api'
+import { toCommonHeaders } from '../api'
 import type { TwitchClip, TwitchGame, TwitchUserCtx } from '..'
 
 function mockTwitchResponse(url: string) {
@@ -72,16 +72,5 @@ describe('twitch-api.ts', () => {
       'Client-ID': 'test',
       Authorization: `Bearer testToken`
     })
-  })
-
-  it.each([
-    ['id', ['test1', 'test2', 'test3']],
-    ['game_id', ['duplicate', 'duplicate', 'duplicate', 'new']],
-    ['broadcaster_id', ['user', 'user1', 'user2']]
-  ])('gets url search params for values passed (%s, %s)', (key: string, values: string[]) => {
-    const p = toURLParams(key, values)
-    expect(p.has(key)).toEqual(true)
-    expect(p.getAll(key).length).toEqual(values.length)
-    expect(p.toString()).toEqual(`${key}=${values.join(`&${key}=`)}`)
   })
 })

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toURLParams } from './utils'
 import type {
   TwitchGame,
   TwitchClip,
@@ -16,12 +17,6 @@ export function toCommonHeaders(ctx: TwitchUserCtx) {
     'Client-ID': ctx.id,
     Authorization: `Bearer ${ctx.token}`
   }
-}
-
-export function toURLParams(key: string, values: string[]): URLSearchParams {
-  const params = new URLSearchParams()
-  values.forEach((v) => params.append(key, v))
-  return params
 }
 
 export async function getClips(ctx: TwitchUserCtx, ids: string[]): Promise<TwitchClip[]> {

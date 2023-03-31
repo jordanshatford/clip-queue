@@ -40,6 +40,12 @@ export function getClipIdFromUrl(url: string): string | undefined {
   }
 }
 
+export function toURLParams(key: string, values: string[]): URLSearchParams {
+  const params = new URLSearchParams()
+  values.forEach((v) => params.append(key, v))
+  return params
+}
+
 export default {
   isModerator,
   isClipUrl,

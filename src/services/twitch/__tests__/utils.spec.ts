@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import type { ChatUserstate } from 'tmi.js'
-import { isModerator, isClipUrl, getClipIdFromUrl } from '../utils'
+import { isModerator, isClipUrl, getClipIdFromUrl, toURLParams } from '../utils'
 
 describe('utils.ts', () => {
   it.each([
@@ -37,5 +37,16 @@ describe('utils.ts', () => {
     ['', undefined]
   ])('gets an id from a clip url', (input: string, expected: string | undefined) => {
     expect(getClipIdFromUrl(input)).toEqual(expected)
+  })
+
+  it.each([
+    ['id', ['test1', 'test2', 'test3']],
+    ['game_id', ['duplicate', 'duplicate', 'duplicate', 'new']],
+    ['broadcaster_id', ['user', 'user1', 'user2']]
+  ])('gets url search params for values passed (%s, %s)', (key: string, values: string[]) => {
+    const p = toURLParams(key, values)
+    expect(p.has(key)).toEqual(true)
+    expect(p.getAll(key).length).toEqual(values.length)
+    expect(p.toString()).toEqual(`${key}=${values.join(`&${key}=`)}`)
   })
 })

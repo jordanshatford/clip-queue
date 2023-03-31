@@ -1,5 +1,5 @@
 <template>
-  <p class="cq-title">From Reddit</p>
+  <p class="cq-title">Search Reddit</p>
   <p class="cq-text flex items-center justify-center">
     Queue clips found in the top
     <BaseInput
