@@ -7,7 +7,7 @@
       min="1"
       max="100"
       type="number"
-      v-model.trim="reddit.postsToCheck"
+      v-model.trim="search.size"
     />
     posts.
   </p>
@@ -16,18 +16,18 @@
       <div class="flex items-center justify-between">
         <p class="cq-text text-2xl pl-3 pr-1">r/</p>
         <BaseInput
-          :disabled="reddit.loading"
+          :disabled="search.loading"
           class="inline"
           type="text"
           maxlength="25"
-          v-model.trim="reddit.subreddit"
+          v-model.trim="search.term"
         />
         <BaseButton
           class="m-3 float-right"
-          @click="queueClipsForSubreddit(reddit.subreddit)"
-          :disabled="reddit.loading || reddit.subreddit.length === 0"
+          @click="queueClipsForSubreddit(search.term)"
+          :disabled="search.loading || search.term.length === 0"
         >
-          <component :is="reddit.loading ? LoadingIcon : PlusIcon" class="w-5 h-5"></component>
+          <component :is="search.loading ? LoadingIcon : PlusIcon" class="w-5 h-5"></component>
         </BaseButton>
       </div>
     </div>
@@ -39,16 +39,16 @@ import { useToast } from 'vue-toastification'
 import { PlusIcon } from '@/assets/icons'
 import LoadingIcon from '@/components/icons/LoadingIcon.vue'
 import { useQueue } from '@/stores/queue'
-import { useReddit } from '@/stores/reddit'
+import { useSearch } from '@/stores/search'
 import { useClipFinder } from '@/stores/clip-finder'
 import { ClipSource } from '@/interfaces/clips'
 
 const toast = useToast()
-const reddit = useReddit()
+const search = useSearch()
 const queue = useQueue()
 
 async function queueClipsForSubreddit(subreddit: string) {
-  reddit.loading = true
+  search.loading = true
   const clipFinder = useClipFinder()
   try {
     const clips = await clipFinder.getClipsFromSubreddit(subreddit)
@@ -63,6 +63,6 @@ async function queueClipsForSubreddit(subreddit: string) {
   } catch (e) {
     toast.error(`Failed to get clips from r/${subreddit}`)
   }
-  reddit.loading = false
+  search.loading = false
 }
 </script>

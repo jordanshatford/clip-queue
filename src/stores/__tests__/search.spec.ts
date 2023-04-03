@@ -1,15 +1,15 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import { useReddit } from '../reddit'
+import { useSearch } from '../search'
 
-describe('reddit.ts', () => {
+describe('search.ts', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
   })
 
   it('is created in a none loading state', () => {
-    const reddit = useReddit()
-    expect(reddit.subreddit).toEqual('')
-    expect(reddit.loading).toEqual(false)
+    const search = useSearch()
+    expect(search.term).toEqual('')
+    expect(search.loading).toEqual(false)
   })
 })
