@@ -1,6 +1,6 @@
 <template>
   <p class="cq-title">Search Reddit</p>
-  <div class="grid gap-4 grid-cols-1 mt-3">
+  <form @submit.prevent="search.getFromSubreddit()" class="grid gap-4 grid-cols-1 mt-3">
     <div class="cq-card mx-auto max-w-md">
       <div class="flex items-center justify-between">
         <p class="cq-text text-2xl pl-3 pr-1">r/</p>
@@ -14,8 +14,8 @@
         <BaseButton
           class="m-3 float-right"
           title="Search"
-          @click="search.getFromSubreddit()"
           :disabled="search.loading || search.term.length === 0"
+          type="submit"
         >
           <component
             :is="search.loading ? LoadingIcon : MagnifyingGlassIcon"
@@ -24,7 +24,7 @@
         </BaseButton>
       </div>
     </div>
-  </div>
+  </form>
   <div class="mt-4">
     <div class="flex flex-wrap justify-center gap-y-4 gap-x-2">
       <ClipCard
