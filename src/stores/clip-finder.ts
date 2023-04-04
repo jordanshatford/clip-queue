@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import type { Clip } from '@/interfaces/clips'
 import type { TwitchClip, TwitchGame } from '@/services/twitch'
-import { useSearch } from '@/stores/search'
 import reddit from '@/services/reddit'
 import twitch from '@/services/twitch'
 import { useUser } from '@/stores/user'
@@ -55,9 +54,8 @@ export const useClipFinder = defineStore('clip-finder', {
     }
   },
   actions: {
-    async getClipsFromSubreddit(subreddit: string): Promise<Clip[]> {
-      const search = useSearch()
-      const subredditPosts = await reddit.getSubredditPosts(subreddit, search.size)
+    async getClipsFromSubreddit(subreddit: string, numPosts?: number): Promise<Clip[]> {
+      const subredditPosts = await reddit.getSubredditPosts(subreddit, numPosts)
       const filtedSubredditPosts = subredditPosts.filter((p) => {
         const clipId = twitch.getClipIdFromUrl(p?.data?.url) !== undefined
         return !p.data?.stickied && clipId
