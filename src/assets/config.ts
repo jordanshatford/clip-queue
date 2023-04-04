@@ -56,6 +56,9 @@ export const config = {
       }
     ]
   },
+  search: {
+    resultsSize: 100
+  },
   history: {
     pageSize: 10
   },

@@ -1,10 +1,12 @@
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toastification'
+import { config } from '@/assets/config'
 import { useClipFinder } from '@/stores/clip-finder'
 import { ClipSource, type Clip } from '@/interfaces/clips'
 
+const { resultsSize } = config.search
+
 export interface Search {
-  size: number
   term: string
   loading: boolean
   results: Clip[]
@@ -12,7 +14,6 @@ export interface Search {
 
 export const useSearch = defineStore('search', {
   state: (): Search => ({
-    size: 50,
     term: '',
     loading: false,
     results: []
@@ -24,7 +25,7 @@ export const useSearch = defineStore('search', {
       const clipFinder = useClipFinder()
       const subreddit = this.term
       try {
-        const clips = await clipFinder.getClipsFromSubreddit(subreddit, this.size)
+        const clips = await clipFinder.getClipsFromSubreddit(subreddit, resultsSize)
         if (clips.length === 0) {
           this.results = []
           toast.error(`Could not find any clips on r/${subreddit}`)

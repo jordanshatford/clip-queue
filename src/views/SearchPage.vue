@@ -1,16 +1,5 @@
 <template>
   <p class="cq-title">Search Reddit</p>
-  <p class="cq-text flex items-center justify-center">
-    Queue clips found in the top
-    <BaseInput
-      class="inline py-1 px-1 w-16 mx-1"
-      min="1"
-      max="100"
-      type="number"
-      v-model.trim="search.size"
-    />
-    posts.
-  </p>
   <div class="grid gap-4 grid-cols-1 mt-3">
     <div class="cq-card mx-auto max-w-md">
       <div class="flex items-center justify-between">

@@ -84,7 +84,6 @@ describe('search.ts', () => {
 
   it('is created in a none loading state', () => {
     const search = useSearch()
-    expect(search.size).toEqual(50)
     expect(search.term).toEqual('')
     expect(search.loading).toEqual(false)
     expect(search.results).toEqual([])
