@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import ClipQueueItem from '../ClipQueueItem.vue'
+import ClipCard from '../ClipCard.vue'
 
-describe('ClipQueueItem.vue', () => {
-  const wrapper = shallowMount(ClipQueueItem, {
+describe('ClipCard.vue', () => {
+  const wrapper = shallowMount(ClipCard, {
     props: {
       clip: {
         id: 'test',

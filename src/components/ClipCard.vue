@@ -1,15 +1,22 @@
 <template>
-  <div class="cq-card max-w-[16rem] overflow-hidden">
+  <div class="cq-card max-w-[16rem] overflow-hidden text-left flex-shrink-0">
     <div
       class="flex items-end justify-end h-36 w-full bg-cover"
       :style="'background-image: url(' + clip.thumbnailUrl + ')'"
     >
-      <BaseButton class="pb-2 mr-2 -mb-2" @click="emit('play')">
-        <BarsArrowUpIcon class="w-6" />
-      </BaseButton>
-      <BaseButton variant="danger" class="pb-2 mr-2 -mb-2" @click="emit('remove')">
-        <TrashIcon class="w-6" />
-      </BaseButton>
+      <span v-if="inQueue">
+        <BaseButton title="Play now" class="pb-2 mr-2 -mb-2" @click="emit('play')">
+          <BarsArrowUpIcon class="w-6" />
+        </BaseButton>
+        <BaseButton title="Remove" variant="danger" class="pb-2 mr-2 -mb-2" @click="emit('remove')">
+          <TrashIcon class="w-6" />
+        </BaseButton>
+      </span>
+      <span v-else>
+        <BaseButton title="Add to queue" class="pb-2 mr-2 -mb-2" @click="emit('add')">
+          <PlusIcon class="w-6" />
+        </BaseButton>
+      </span>
     </div>
     <div class="p-3">
       <span class="cq-text mt-2">{{ clip.title }}</span>
@@ -27,17 +34,19 @@
 </template>
 
 <script setup lang="ts">
-import { BarsArrowUpIcon, TrashIcon } from '@/assets/icons'
+import { BarsArrowUpIcon, TrashIcon, PlusIcon } from '@/assets/icons'
 import { ClipSource, type Clip } from '@/interfaces/clips'
 
 export interface Props {
   clip: Clip
+  inQueue?: boolean
 }
 
-defineProps<Props>()
+withDefaults(defineProps<Props>(), { inQueue: false })
 
 const emit = defineEmits<{
   (e: 'play'): void
   (e: 'remove'): void
+  (e: 'add'): void
 }>()
 </script>

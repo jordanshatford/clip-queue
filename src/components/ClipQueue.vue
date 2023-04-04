@@ -24,20 +24,21 @@
       </span>
     </div>
     <div class="flex justify-items-start overflow-x-auto mt-3">
-      <ClipQueueItem
+      <ClipCard
         v-for="clip in clips"
         :key="clip.id"
         :clip="clip"
+        inQueue
         @play="emit('play', clip)"
         @remove="emit('remove', clip)"
-        class="text-left flex-shrink-0 mr-2"
+        class="mr-2"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import ClipQueueItem from '@/components/ClipQueueItem.vue'
+import ClipCard from '@/components/ClipCard.vue'
 import type { Clip } from '@/interfaces/clips'
 
 export interface Props {
