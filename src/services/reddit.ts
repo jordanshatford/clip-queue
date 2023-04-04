@@ -24,7 +24,6 @@ export async function getSubredditPosts(
     )
     return data.data.children
   } catch (e) {
-    console.error({ e })
     return []
   }
 }
