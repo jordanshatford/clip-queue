@@ -10,6 +10,7 @@ export {
   DocumentDuplicateIcon,
   ForwardIcon,
   HandRaisedIcon,
+  MagnifyingGlassIcon,
   MoonIcon,
   PlusIcon,
   QueueListIcon,

@@ -24,45 +24,41 @@
         />
         <BaseButton
           class="m-3 float-right"
-          @click="queueClipsForSubreddit(search.term)"
+          title="Search"
+          @click="search.getFromSubreddit()"
           :disabled="search.loading || search.term.length === 0"
         >
-          <component :is="search.loading ? LoadingIcon : PlusIcon" class="w-5 h-5"></component>
+          <component
+            :is="search.loading ? LoadingIcon : MagnifyingGlassIcon"
+            class="w-5 h-5"
+          ></component>
         </BaseButton>
       </div>
+    </div>
+  </div>
+  <div class="mt-4">
+    <div class="flex flex-wrap justify-center gap-y-4 gap-x-2">
+      <ClipCard
+        v-for="clip in search.results"
+        :key="clip.id"
+        :clip="clip"
+        :inQueue="queue.upcoming.includes(clip)"
+        @add="queue.add(clip, true)"
+        @remove="queue.remove(clip)"
+        @play="queue.play(clip)"
+        class="mr-2"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useToast } from 'vue-toastification'
-import { PlusIcon } from '@/assets/icons'
+import { MagnifyingGlassIcon } from '@/assets/icons'
 import LoadingIcon from '@/components/icons/LoadingIcon.vue'
-import { useQueue } from '@/stores/queue'
+import ClipCard from '@/components/ClipCard.vue'
 import { useSearch } from '@/stores/search'
-import { useClipFinder } from '@/stores/clip-finder'
-import { ClipSource } from '@/interfaces/clips'
+import { useQueue } from '@/stores/queue'
 
-const toast = useToast()
 const search = useSearch()
 const queue = useQueue()
-
-async function queueClipsForSubreddit(subreddit: string) {
-  search.loading = true
-  const clipFinder = useClipFinder()
-  try {
-    const clips = await clipFinder.getClipsFromSubreddit(subreddit)
-    if (clips.length === 0) {
-      toast.error(`Could not find any clips on r/${subreddit}`)
-    } else {
-      clips.forEach((c) => {
-        queue.add({ ...c, source: ClipSource.Reddit }, true)
-      })
-      toast.success(`Added ${clips.length} clip(s) from r/${subreddit} to the queue`)
-    }
-  } catch (e) {
-    toast.error(`Failed to get clips from r/${subreddit}`)
-  }
-  search.loading = false
-}
 </script>
