@@ -113,7 +113,7 @@ export const useUser = defineStore('user', {
             queue.add({
               ...clip,
               submitter,
-              source: ClipSource.TwitchChat
+              source: ClipSource.CHAT
             })
           }
         })

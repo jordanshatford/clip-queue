@@ -27,7 +27,7 @@
         Submitter: <span class="cq-text-subtle-semibold">{{ clip.submitter }}</span>
       </div>
       <div class="cq-text-subtle mt-1">
-        Source: <span class="cq-text-subtle-semibold">{{ clip.source ?? ClipSource.Unknown }}</span>
+        Source: <span class="cq-text-subtle-semibold">{{ clip.source ?? ClipSource.UNKNOWN }}</span>
       </div>
     </div>
   </div>

@@ -44,7 +44,7 @@
         <div v-else-if="column.key === 'actions'" class="inline-flex mt-2 space-x-2">
           <BaseButton
             :disabled="queue.upcoming.includes(row)"
-            @click="queue.add({ ...row, source: ClipSource.HistoryPage }, true)"
+            @click="queue.add({ ...row, source: ClipSource.HISTORY }, true)"
           >
             <PlusIcon class="w-5 h-5" />
           </BaseButton>

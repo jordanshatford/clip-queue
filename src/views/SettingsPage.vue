@@ -18,30 +18,30 @@ import ModerationSettings from '@/components/settings/ModerationSettings.vue'
 import OtherSettings from '@/components/settings/OtherSettings.vue'
 
 enum TabOption {
-  Chat = 'Chat',
-  Queue = 'Queue',
-  Moderation = 'Moderation',
-  Other = 'Other'
+  CHAT = 'Chat',
+  QUEUE = 'Queue',
+  MODERATION = 'Moderation',
+  OTHER = 'Other'
 }
 
 const tabOptions = [
   {
-    label: TabOption.Chat,
+    label: TabOption.CHAT,
     icon: ChatBubbleLeftRightIcon,
     view: ChatSettings
   },
   {
-    label: TabOption.Queue,
+    label: TabOption.QUEUE,
     icon: QueueListIcon,
     view: QueueSettings
   },
   {
-    label: TabOption.Moderation,
+    label: TabOption.MODERATION,
     icon: HandRaisedIcon,
     view: ModerationSettings
   },
   {
-    label: TabOption.Other,
+    label: TabOption.OTHER,
     icon: Cog8ToothIcon,
     view: OtherSettings
   }

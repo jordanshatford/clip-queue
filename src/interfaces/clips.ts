@@ -1,8 +1,8 @@
 export enum ClipSource {
-  Unknown = 'Unknown',
-  TwitchChat = 'Twitch Chat',
-  Reddit = 'Reddit',
-  HistoryPage = 'History Page'
+  UNKNOWN = 'Unknown',
+  CHAT = 'Twitch Chat',
+  REDDIT = 'Reddit',
+  HISTORY = 'History Page'
 }
 
 export interface Clip {

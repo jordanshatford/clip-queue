@@ -30,7 +30,7 @@ export const useSearch = defineStore('search', {
           this.results = []
           toast.error(`Could not find any clips on r/${subreddit}`)
         } else {
-          this.results = clips.map((c) => ({ ...c, source: ClipSource.Reddit }))
+          this.results = clips.map((c) => ({ ...c, source: ClipSource.REDDIT }))
           toast.success(`Found ${clips.length} clip(s) on r/${subreddit}`)
         }
       } catch (e) {
