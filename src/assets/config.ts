@@ -62,6 +62,9 @@ export const config = {
   history: {
     pageSize: 10
   },
+  twitch: {
+    scopes: ['openid', 'chat:read']
+  },
   github: 'https://github.com/jordanshatford/twitch-clip-queue',
   copyright: {
     owner: 'Jordan Shatford',

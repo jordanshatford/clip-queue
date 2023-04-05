@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import type { ChatUserstate } from 'tmi.js'
-import { env } from '@/assets/config'
+import { env, config } from '@/assets/config'
 import twitch, { TwitchChat, type AuthInfo, type TwitchUserCtx } from '@/services/twitch'
 import { useSettings } from '@/stores/settings'
 import commands from '@/utils/commands'
@@ -11,7 +11,7 @@ import { useClipFinder } from '@/stores/clip-finder'
 import { ClipSource } from '@/interfaces/clips'
 
 const { CLIENT_ID, REDIRECT_URI } = env
-const SCOPES = ['openid', 'chat:read']
+const { scopes } = config.twitch
 
 export interface User {
   isLoggedIn: boolean
@@ -48,7 +48,7 @@ export const useUser = defineStore('user', {
       }
     },
     redirect(): void {
-      twitch.redirect(this.ctx, REDIRECT_URI, SCOPES)
+      twitch.redirect(this.ctx, REDIRECT_URI, scopes)
     },
     login(authInfo: AuthInfo): void {
       const { access_token, decodedIdToken } = authInfo
