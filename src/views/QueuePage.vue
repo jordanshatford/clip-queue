@@ -9,8 +9,11 @@
     @next="queue.next()"
   />
   <div v-else class="text-center">
-    <p class="cq-title">Queue Open</p>
-    <p class="cq-text">Start sending clips now for them to be added to the queue.</p>
+    <p class="cq-title">Queue {{ queue.isOpen ? 'Open' : 'Closed' }}</p>
+    <p v-if="queue.isOpen" class="cq-text">
+      Start sending clips now for them to be added to the queue.
+    </p>
+    <p v-else class="cq-text">Open the queue to start collecting clips sent in chat.</p>
     <BaseButton
       variant="brand"
       :disabled="queue.upcoming.empty()"
