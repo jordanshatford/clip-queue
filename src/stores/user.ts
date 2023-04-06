@@ -14,6 +14,7 @@ const { CLIENT_ID, REDIRECT_URI } = env
 const { scopes } = config.twitch
 
 export interface User {
+  hasValidatedToken: boolean
   isLoggedIn: boolean
   ctx: TwitchUserCtx
   chat?: TwitchChat
@@ -22,13 +23,11 @@ export interface User {
 export const useUser = defineStore('user', {
   persist: {
     key: 'user',
-    paths: ['ctx.token', 'ctx.username'],
-    afterRestore: async (ctx) => {
-      await ctx.store.autoLoginIfPossible()
-    }
+    paths: ['ctx.token', 'ctx.username']
   },
   state: (): User => {
     return {
+      hasValidatedToken: false,
       isLoggedIn: false,
       ctx: {
         id: CLIENT_ID,
@@ -40,12 +39,16 @@ export const useUser = defineStore('user', {
   },
   actions: {
     async autoLoginIfPossible() {
+      if (this.hasValidatedToken) {
+        return
+      }
       if (this.ctx.token && (await twitch.isLoginValid(this.ctx))) {
         this.isLoggedIn = true
         this.connectToChat()
       } else {
         this.logout()
       }
+      this.hasValidatedToken = true
     },
     redirect(): void {
       twitch.redirect(this.ctx, REDIRECT_URI, scopes)
@@ -91,7 +94,9 @@ export const useUser = defineStore('user', {
       }
     },
     onMessage(c: string, userstate: ChatUserstate, message: string, self: boolean) {
-      if (self) return
+      if (self) {
+        return
+      }
       const settings = useSettings()
       // Check if message is a command and perform command if proper permission to do so
       if (settings.allowCommands && message.startsWith(settings.commandPrefix)) {
