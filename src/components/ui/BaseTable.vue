@@ -20,8 +20,8 @@
             :key="column.key"
             :class="[classes.td, { 'text-right': isLastColumn(cIndex) }]"
           >
-            <slot name="cell" :row="row" :column="column" :cell="row[column.key]">{{
-              row[column.key]
+            <slot name="cell" :row="row" :column="column" :cell="(row as any)[column.key]">{{
+              (row as any)[column.key]
             }}</slot>
           </td>
         </tr>
@@ -30,10 +30,10 @@
   </div>
 </template>
 
-<script setup lang="ts">
-export interface Props {
+<script setup lang="ts" generic="T">
+export interface Props<T> {
   columns: { key: string; title: string }[]
-  rows: any[]
+  rows: T[]
   classes?: {
     wrapper?: string
     table?: string
@@ -46,7 +46,7 @@ export interface Props {
   }
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props<T>>(), {
   classes: () => ({
     wrapper: 'min-w-full border-2 rounded-xl border-zinc-100 dark:border-zinc-800',
     table: 'min-w-full table-auto',

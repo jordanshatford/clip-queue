@@ -3,7 +3,7 @@ import { shallowMount } from '@vue/test-utils'
 import BaseButton from '../BaseButton.vue'
 
 describe('BaseButton.vue', () => {
-  const wrapper = shallowMount(BaseButton)
+  const wrapper = shallowMount(BaseButton as any)
 
   it('mounts successfully', () => {
     expect(wrapper.exists()).toEqual(true)

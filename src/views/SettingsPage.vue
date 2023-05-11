@@ -1,7 +1,7 @@
 <template>
   <p class="cq-title">Settings</p>
   <BaseTabs v-model="selectedTab" :options="tabOptions" />
-  <component :is="selectedView" />
+  <component :is="selectedView as any" />
 </template>
 
 <script setup lang="ts">
