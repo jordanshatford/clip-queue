@@ -20,13 +20,16 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
       - name: Run linting check
-        run: npm run lint
+        run: pnpm lint
       - name: Run type check
-        run: npm run typecheck
+        run: pnpm typecheck
       - name: Run build
-        run: npm run build
+        run: pnpm build
       - name: Run Tests
-        run: npm run test
+        run: pnpm test

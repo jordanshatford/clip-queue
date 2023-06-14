@@ -2,11 +2,13 @@ FROM node:lts-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+RUN npm install -g pnpm
+
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install
 
 COPY . .
 
 EXPOSE 5173
 EXPOSE 24678
-CMD [ "npm", "run", "dev", "--host" ]
+CMD [ "pnpm", "run", "dev", "--host" ]

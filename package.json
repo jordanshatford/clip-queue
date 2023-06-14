@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "npm run typecheck && vite build",
+    "build": "pnpm typecheck && vite build",
     "preview": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
