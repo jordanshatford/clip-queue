@@ -41,12 +41,15 @@ function processAuthHash(hash: string): AuthInfo {
   const authInfo = hash
     .substring(1)
     .split('&')
-    .reduce((authInfo, s) => {
-      const parts = s.split('=')
-      authInfo[parts[0]] = decodeURIComponent(decodeURIComponent(parts[1]))
-      return authInfo
-      /* eslint-disable @typescript-eslint/no-explicit-any*/
-    }, {} as Record<string, any>) as AuthInfo
+    .reduce(
+      (authInfo, s) => {
+        const parts = s.split('=')
+        authInfo[parts[0]] = decodeURIComponent(decodeURIComponent(parts[1]))
+        return authInfo
+        /* eslint-disable @typescript-eslint/no-explicit-any*/
+      },
+      {} as Record<string, any>
+    ) as AuthInfo
   return authInfo
 }
 
