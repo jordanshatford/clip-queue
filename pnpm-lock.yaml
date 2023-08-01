@@ -18,8 +18,8 @@ dependencies:
     specifier: ^2.1.4
     version: 2.1.4(typescript@5.1.6)(vue@3.3.4)
   pinia-plugin-persistedstate:
-    specifier: ^3.1.0
-    version: 3.1.0(pinia@2.1.4)
+    specifier: ^3.2.0
+    version: 3.2.0(pinia@2.1.4)
   tmi.js:
     specifier: npm:@coldino/tmi.js-clientonly-fork@1.8.5-clientonly
     version: /@coldino/tmi.js-clientonly-fork@1.8.5-clientonly
@@ -2233,8 +2233,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /pinia-plugin-persistedstate@3.1.0(pinia@2.1.4):
-    resolution: {integrity: sha512-8UN+vYMEPBdgNLwceY08mi5olI0wkYaEb8b6hD6xW7SnBRuPydWHlEhZvUWgNb/ibuf4PvufpvtS+dmhYjJQOw==}
+  /pinia-plugin-persistedstate@3.2.0(pinia@2.1.4):
+    resolution: {integrity: sha512-tZbNGf2vjAQcIm7alK40sE51Qu/m9oWr+rEgNm/2AWr1huFxj72CjvpQcIQzMknDBJEkQznCLAGtJTIcLKrKdw==}
     peerDependencies:
       pinia: ^2.0.0
     dependencies:
