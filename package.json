@@ -16,7 +16,7 @@
     "@heroicons/vue": "^2.0.18",
     "axios": "^1.4.0",
     "date-fns": "^2.30.0",
-    "pinia": "^2.1.4",
+    "pinia": "^2.1.6",
     "pinia-plugin-persistedstate": "^3.1.0",
     "tmi.js": "npm:@coldino/tmi.js-clientonly-fork@1.8.5-clientonly",
     "vue": "^3.3.4",
