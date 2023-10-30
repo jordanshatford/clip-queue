@@ -8,11 +8,14 @@ export interface Moderation {
   hasAutoRemoveClipsEnabled: boolean
   // Clips from these channels will not be allowed in the queue.
   blockedChannels: string[]
+  // Users submitting clips will not be allowed in the queue.
+  blockedSubmitters: string[]
 }
 
 export const DEFAULTS: Moderation = {
   hasAutoRemoveClipsEnabled: true,
-  blockedChannels: []
+  blockedChannels: [],
+  blockedSubmitters: []
 }
 
 export const useModeration = defineStore('moderation', {
@@ -36,7 +39,10 @@ export const useModeration = defineStore('moderation', {
         const blockedChannel = state.blockedChannels.some(
           (c) => c.toLowerCase() === clip.channel?.toLowerCase()
         )
-        return !blockedChannel
+        const blockedSubmitter = state.blockedSubmitters.some(
+          (s) => s.toLowerCase() === clip.submitter?.toLowerCase()
+        )
+        return !blockedChannel && !blockedSubmitter
       }
     }
   },
@@ -54,6 +60,18 @@ export const useModeration = defineStore('moderation', {
     removeBlockedChannel(channel: string) {
       this.blockedChannels = this.blockedChannels.filter(
         (c) => c.toLowerCase() !== channel.toLowerCase()
+      )
+    },
+    addBlockedSubmitter(submitter: string) {
+      // Ignore if the channel is already blocked
+      if (this.blockedSubmitters.some((s) => s.toLowerCase() === submitter.toLowerCase())) {
+        return
+      }
+      this.blockedSubmitters = [...this.blockedSubmitters, submitter]
+    },
+    removeBlockedSubmitter(submitter: string) {
+      this.blockedSubmitters = this.blockedSubmitters.filter(
+        (s) => s.toLowerCase() !== submitter.toLowerCase()
       )
     }
   }

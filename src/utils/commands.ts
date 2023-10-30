@@ -10,7 +10,9 @@ export enum Command {
   PREV = 'prev',
   NEXT = 'next',
   BLOCK_CHANNEL = 'blockchannel',
-  UNBLOCK_CHANNEL = 'unblockchannel'
+  UNBLOCK_CHANNEL = 'unblockchannel',
+  BLOCK_SUBMITTER = 'blocksubmitter',
+  UNBLOCK_SUBMITTER = 'unblocksubmitter'
 }
 
 interface CommandHelp {
@@ -36,6 +38,14 @@ const help: Record<Command, CommandHelp> = {
   [Command.UNBLOCK_CHANNEL]: {
     args: ['channel'],
     description: 'Unblock clips from specified channel.'
+  },
+  [Command.BLOCK_SUBMITTER]: {
+    args: ['submitter'],
+    description: 'Block clips submitted from specified user.'
+  },
+  [Command.UNBLOCK_SUBMITTER]: {
+    args: ['submitter'],
+    description: 'Unblock clips submitted from specified user.'
   }
 }
 
@@ -83,6 +93,20 @@ export function handleCommand(command: string, ...args: string[]) {
       if (args[0]) {
         const moderation = useModeration()
         moderation.removeBlockedChannel(args[0])
+      }
+      break
+    }
+    case Command.BLOCK_SUBMITTER: {
+      if (args[0]) {
+        const moderation = useModeration()
+        moderation.addBlockedSubmitter(args[0])
+      }
+      break
+    }
+    case Command.UNBLOCK_SUBMITTER: {
+      if (args[0]) {
+        const moderation = useModeration()
+        moderation.removeBlockedSubmitter(args[0])
       }
       break
     }

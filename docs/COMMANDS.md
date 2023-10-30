@@ -31,3 +31,11 @@ Twitch Clip Queue provides a set of commands accessible through Twich chat for m
 `!cqunblockchannel <channel>`: Unblock clips of a given channel. Any further clips of this channel will be added to the queue.
 
 > NOTE: if the channel was not previously blocked, then this does nothing.
+
+`!cqblocksubmitter <submitter>`: Block clips submitted by a given user. Any clips submitted by this user will be ignored.
+
+> NOTE: If the submitter is already blocked, then this does nothing.
+
+`!cqunblocksubmitter <submitter>`: Unblock clips submitted by a given user. Any further clips submitted by this user will be added to the queue.
+
+> NOTE: if the submitter was not previously blocked, then this does nothing.

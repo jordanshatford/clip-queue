@@ -19,6 +19,13 @@
         <label>Clips of these channels will not be added to the queue.</label>
       </div>
     </div>
+    <div class="cq-form-group">
+      <label class="cq-form-group-label">Submitters not allowed:</label>
+      <BaseMultiTagSelect v-model="formSettings.blockedSubmitters" itemName="submitter" />
+      <div class="cq-text-subtle text-left pl-1 my-2">
+        <label>Clips submitted by these users will not be added to the queue.</label>
+      </div>
+    </div>
     <div class="mt-3">
       <BaseButton class="mr-2" type="submit" :disabled="!moderation.isModified(formSettings)"
         >Save</BaseButton

@@ -51,4 +51,23 @@ describe('moderation.ts', () => {
     expect(moderation.blockedChannels.length).toEqual(1)
     expect(moderation.blockedChannels).not.toContain('test2')
   })
+
+  it('can block a submitter from submitting clips', () => {
+    const moderation = useModeration()
+    moderation.addBlockedSubmitter('test')
+    moderation.addBlockedSubmitter('test2')
+    expect(moderation.blockedSubmitters.length).toEqual(2)
+    moderation.addBlockedSubmitter('test2')
+    expect(moderation.blockedSubmitters.length).toEqual(2)
+  })
+
+  it('can unblock a submitter from submitting clips', () => {
+    const moderation = useModeration()
+    moderation.addBlockedSubmitter('test')
+    moderation.addBlockedSubmitter('test2')
+    expect(moderation.blockedSubmitters.length).toEqual(2)
+    moderation.removeBlockedSubmitter('Test2')
+    expect(moderation.blockedSubmitters.length).toEqual(1)
+    expect(moderation.blockedSubmitters).not.toContain('test2')
+  })
 })

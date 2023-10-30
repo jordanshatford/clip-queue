@@ -48,7 +48,9 @@ describe('commands.ts', () => {
 
   it.each([
     ['blockchannel', ['test'], 'addBlockedChannel'],
-    ['unblockchannel', ['test'], 'removeBlockedChannel']
+    ['unblockchannel', ['test'], 'removeBlockedChannel'],
+    ['blocksubmitter', ['test'], 'addBlockedSubmitter'],
+    ['unblocksubmitter', ['test'], 'removeBlockedSubmitter']
   ])(
     'calls the proper clip queue moderation function with params when issued (%s, %s)',
     (commandName: string, args: string[], expectedFunctionCall: any) => {
