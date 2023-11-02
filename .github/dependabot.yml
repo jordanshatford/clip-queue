@@ -3,21 +3,36 @@
 
 version: 2
 updates:
-  - package-ecosystem: 'npm'
-    directory: '/'
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
-      interval: 'monthly'
+      interval: "weekly"
     assignees:
-      - 'jordanshatford'
-  - package-ecosystem: 'docker'
-    directory: '/'
+      - "jordanshatford"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
-      interval: 'monthly'
+      interval: "weekly"
     assignees:
-      - 'jordanshatford'
-  - package-ecosystem: 'github-actions'
-    directory: '/'
+      - "jordanshatford"
+    groups:
+      prod-npm:
+        dependency-type: "production"
+      dev-npm:
+        dependency-type: "development"
+
+  - package-ecosystem: "docker"
+    directory: "/"
     schedule:
-      interval: 'monthly'
+      interval: "weekly"
     assignees:
-      - 'jordanshatford'
+      - "jordanshatford"
+    groups:
+      docker:
+        patterns:
+          - "*"
