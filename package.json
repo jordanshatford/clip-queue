@@ -19,7 +19,7 @@
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.0",
     "tmi.js": "npm:@coldino/tmi.js-clientonly-fork@1.8.5-clientonly",
-    "vue": "^3.3.9",
+    "vue": "^3.3.11",
     "vue-router": "^4.2.5",
     "vue-toastification": "^2.0.0-rc.5"
   },
