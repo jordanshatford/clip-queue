@@ -29,12 +29,16 @@ export function redirect(ctx: Partial<TwitchUserCtx>, redirectUri: string, scope
 }
 
 export async function isLoginValid(ctx: TwitchUserCtx) {
-  const { status } = await axios.get<TokenInfo>(`${BASE_URL}/validate`, {
-    headers: {
-      Authorization: `Bearer ${ctx.token}`
-    }
-  })
-  return status === 200
+  try {
+    const { status } = await axios.get<TokenInfo>(`${BASE_URL}/validate`, {
+      headers: {
+        Authorization: `Bearer ${ctx.token}`
+      }
+    })
+    return status === 200
+  } catch {
+    return false
+  }
 }
 
 function processAuthHash(hash: string): AuthInfo {

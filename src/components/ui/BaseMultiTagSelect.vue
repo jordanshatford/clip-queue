@@ -41,16 +41,13 @@
 import { computed, ref } from 'vue'
 
 export interface Props {
-  modelValue: string[]
   placeholder?: string
   itemName?: string
 }
 
-const props = withDefaults(defineProps<Props>(), { itemName: 'tag' })
+const modelValue = defineModel<string[]>({ required: true })
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string[]): void
-}>()
+withDefaults(defineProps<Props>(), { itemName: 'tag' })
 
 const currentInput = ref<string>('')
 
@@ -59,7 +56,7 @@ const dropdownOpen = computed(() => {
 })
 
 const sortedTags = computed(() => {
-  const valueCopy = props.modelValue
+  const valueCopy = modelValue.value
   return valueCopy.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
 })
 
@@ -70,20 +67,20 @@ function clearInput() {
 function addTag(tag: string) {
   const trimmedTag = tag.trim()
   if (trimmedTag !== '' && !hasTag(trimmedTag)) {
-    emit('update:modelValue', [...props.modelValue, trimmedTag])
+    modelValue.value = [...modelValue.value, trimmedTag]
     clearInput()
   }
 }
 
 function hasTag(tag: string) {
-  return props.modelValue.some((t) => {
+  return modelValue.value.some((t) => {
     return t.toLowerCase() === tag.toLowerCase()
   })
 }
 
 function removeTag(index: number) {
-  const valueCopy = props.modelValue
+  const valueCopy = modelValue.value
   valueCopy.splice(index, 1)
-  emit('update:modelValue', valueCopy)
+  modelValue.value = valueCopy
 }
 </script>

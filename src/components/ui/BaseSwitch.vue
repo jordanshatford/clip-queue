@@ -14,7 +14,7 @@
       :name="id"
       class="w-full h-full appearance-none focus:outline-none"
       :value="modelValue"
-      @input="emit('update:modelValue', !modelValue)"
+      @input="modelValue = !modelValue"
     />
   </div>
 </template>
@@ -22,12 +22,8 @@
 <script setup lang="ts">
 export interface Props {
   id: string
-  modelValue: boolean
 }
 
-withDefaults(defineProps<Props>(), { modelValue: false })
-
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: boolean): void
-}>()
+const modelValue = defineModel<boolean>({ default: false })
+defineProps<Props>()
 </script>

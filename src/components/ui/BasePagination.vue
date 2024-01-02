@@ -34,31 +34,28 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@/assets/icons'
 import { toRangeArray } from '@/utils'
 
 export interface Props {
-  modelValue: number // The current page
   totalPages: number
 }
 
+// The current page
+const modelValue = defineModel<number>({ required: true })
 const props = defineProps<Props>()
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: number): void
-}>()
-
 const clickableNumbers = computed(() => {
-  const start = Math.max(props.modelValue - 3, 1)
-  const end = Math.min(props.modelValue + 3, props.totalPages)
+  const start = Math.max(modelValue.value - 3, 1)
+  const end = Math.min(modelValue.value + 3, props.totalPages)
   return toRangeArray(start, end)
 })
 
 function setPage(page: number) {
-  emit('update:modelValue', page)
+  modelValue.value = page
 }
 
 function previous() {
-  emit('update:modelValue', Math.max(props.modelValue - 1, 1))
+  modelValue.value = Math.max(modelValue.value - 1, 1)
 }
 
 function next() {
-  emit('update:modelValue', Math.min(props.modelValue + 1, props.totalPages))
+  modelValue.value = Math.min(modelValue.value + 1, props.totalPages)
 }
 </script>

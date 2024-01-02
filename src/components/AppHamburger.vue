@@ -6,7 +6,7 @@
         : 'hover:text-brand-500 dark:hover:text-brand-500'
     ]"
     class="text-zinc-500 dark:text-zinc-200 w-10 h-10 relative focus:outline-none"
-    @click="emit('update:modelValue', !modelValue)"
+    @click="modelValue = !modelValue"
   >
     <div class="block w-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <span
@@ -29,13 +29,5 @@
 </template>
 
 <script setup lang="ts">
-export interface Props {
-  modelValue: boolean
-}
-
-defineProps<Props>()
-
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: boolean): void
-}>()
+const modelValue = defineModel<boolean>({ required: true })
 </script>
