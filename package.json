@@ -15,11 +15,11 @@
   "dependencies": {
     "@heroicons/vue": "^2.1.1",
     "axios": "^1.6.5",
-    "date-fns": "^3.2.0",
+    "date-fns": "^3.3.1",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "tmi.js": "npm:@coldino/tmi.js-clientonly-fork@1.8.5-clientonly",
-    "vue": "^3.4.14",
+    "vue": "^3.4.15",
     "vue-router": "^4.2.5",
     "vue-toastification": "^2.0.0-rc.5"
   },
