@@ -43,7 +43,8 @@ Twitch Clip Queue is a web application designed to allow users to easily integra
   - Scan subreddits for posts including Twitch clips
   - Dark and light UI themes
 
+# Developer Guide
+Please refer to the [contributing guide](CONTRIBUTING.md) for how to install the project for development purposes.
+
 # Additional Documentation
   - [Commands](./docs/COMMANDS.md)
-  - [Deployment](./docs/DEPLOYMENT.md)
-  - [Development](./docs/DEVELOPMENT.md)
