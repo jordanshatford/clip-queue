@@ -45,7 +45,7 @@
         <span v-if="clip.submitter">
           - Submitted by
           <span className="cq-text-subtle-semibold">{{ clip.submitter }}</span>
-          <span v-if="clip.source && clip.source !== ClipSource.UNKNOWN">
+          <span v-if="clip.source">
             from
             <span className="cq-text-subtle-semibold">{{ clip.source }}</span>
           </span>
