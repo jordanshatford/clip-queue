@@ -1,0 +1,37 @@
+name: Bug report
+description: Report an issue with the project.
+labels: ['bug']
+assignees:
+  - jordanshatford
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please do your best to fill out as much information as possible.
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the bug
+      description: Please check if there is an existing bug report before creating a new issue. If you intend to submit a PR to fix this issue, let us know in the description.
+      placeholder: Bug description
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Please provide steps to reproduce the bug. This may include code snippets, links to repositories, numeric steps, etc.
+      placeholder: Reproduction
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - annoyance
+        - serious, but I can work around it
+        - breaking
+        - other
+    validations:
+      required: true
