@@ -2,11 +2,21 @@
   <div class="player player-container">
     <div v-if="clip.id" class="player player-container h-auto w-full bg-black">
       <iframe
+        v-if="type === 'iframe'"
         :src="`${clip.embedUrl}&autoplay=${autoplay}&parent=${hostname}`"
         :title="clip.title"
         class="player h-auto w-full bg-black"
         allowfullscreen
       ></iframe>
+      <VideoJS
+        v-else-if="type === 'video'"
+        :source="clip.embedUrl"
+        :poster="clip.thumbnailUrl"
+        :autoplay="autoplay"
+      />
+      <div v-else class="cq-text flex h-full items-center justify-center">
+        <p>Unsupported video format</p>
+      </div>
     </div>
     <div class="text-left">
       <h2 class="cq-text mb-1 mt-2 text-2xl font-bold">
@@ -59,8 +69,10 @@ import { computed } from 'vue'
 import { ArrowTopRightOnSquareIcon, BackwardIcon, ForwardIcon } from '@/assets/icons'
 import { formatDistanceToNow, parseISO } from 'date-fns'
 import type { Clip } from '@/interfaces/clips'
+import VideoJS from './VideoJSPlayer.vue'
 
 export interface Props {
+  type: 'iframe' | 'video'
   clip: Clip
   autoplay?: boolean
   previousDisabled?: boolean
@@ -68,6 +80,7 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  type: 'iframe',
   autoplay: false,
   previousDisabled: false,
   nextDisabled: false

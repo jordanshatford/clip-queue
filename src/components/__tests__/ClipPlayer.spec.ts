@@ -32,4 +32,17 @@ describe('ClipPlayer.vue', () => {
     // @ts-ignore
     expect(wrapper.vm.timeAgo).toEqual('')
   })
+
+  it('can use VideoJSPlayer component', async () => {
+    wrapper.setProps({ type: 'video' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.exists()).toEqual(true)
+  })
+
+  it('can handle unknown type', async () => {
+    // @ts-ignore
+    wrapper.setProps({ type: 'test' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.exists()).toEqual(true)
+  })
 })
