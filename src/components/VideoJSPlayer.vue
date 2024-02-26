@@ -5,9 +5,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import videojs from 'video.js'
-// TODO: remove once types are fixed in video.js
-//  ref: https://github.com/videojs/video.js/issues/8242
-import Player from 'video.js/dist/types/player'
 import 'video.js/dist/video-js.css'
 
 export interface Props {
@@ -22,7 +19,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const videoElement = ref<HTMLVideoElement | null>(null)
 
-let player: Player | undefined = undefined
+// TODO: fix typing once video.js is updated.
+// ref: https://github.com/videojs/video.js/issues/8242
+let player: any | undefined = undefined
 
 onMounted(() => {
   if (videoElement.value) {
