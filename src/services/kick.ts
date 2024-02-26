@@ -48,20 +48,12 @@ const api = axios.create({
   baseURL: 'https://kick.com/api/v2'
 })
 
-export async function getClips(ids: string[]): Promise<KickClip[]> {
-  if (ids.length <= 0) {
-    return []
+export async function getClip(id: string): Promise<KickClip | undefined> {
+  if (id.length <= 0) {
+    return
   }
-  const clips: KickClip[] = []
-  for (const id of ids) {
-    try {
-      const { data } = await api.get<{ clip: KickClip }>(`clips/${id}`)
-      clips.push(data.clip)
-    } catch (e) {
-      continue
-    }
-  }
-  return clips
+  const { data } = await api.get<{ clip: KickClip }>(`clips/${id}`)
+  return data.clip
 }
 
 export function isClipUrl(url: string): boolean {
@@ -95,6 +87,6 @@ export function getClipIdFromUrl(url: string): string | undefined {
 }
 
 export default {
-  getClips,
+  getClip,
   getClipIdFromUrl
 }

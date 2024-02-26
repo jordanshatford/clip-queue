@@ -1,6 +1,6 @@
 import { beforeEach, describe, it, expect, vi } from 'vitest'
 import axios from 'axios'
-import { isClipUrl, getClipIdFromUrl, getClips, type KickClip } from '../kick'
+import { isClipUrl, getClipIdFromUrl, getClip, type KickClip } from '../kick'
 
 function mockKickResponse(url: string) {
   const clip: KickClip = {
@@ -74,11 +74,10 @@ describe('kick.ts', () => {
   })
 
   it('gets a kick clip from kick api', async () => {
-    const clips = await getClips(['testid'])
-    const clipInfo = clips[0]
-    expect(clipInfo.id).toEqual('testid')
-    expect(clipInfo.title).toEqual('Test title')
-    expect(clipInfo.channel.username).toEqual('testchannel')
+    const clip = await getClip('testid')
+    expect(clip?.id).toEqual('testid')
+    expect(clip?.title).toEqual('Test title')
+    expect(clip?.channel.username).toEqual('testchannel')
     expect(axios.create().get).toHaveBeenCalledTimes(1)
   })
 
