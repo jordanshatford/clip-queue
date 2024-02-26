@@ -1,6 +1,6 @@
 <template>
   <div class="mx-0 mt-2">
-    <div class="w-full mb-2 mt-1 border-t border-zinc-300 dark:border-zinc-700"></div>
+    <div class="mb-2 mt-1 w-full border-t border-zinc-300 dark:border-zinc-700"></div>
     <div class="float-right">
       <BaseButton
         variant="primary"
@@ -23,7 +23,7 @@
         {{ clips.length }} {{ clips.length === 1 ? 'clip' : 'clips' }}
       </span>
     </div>
-    <div class="flex justify-items-start overflow-x-auto mt-3">
+    <div class="mt-3 flex justify-items-start overflow-x-auto">
       <ClipCard
         v-for="clip in clips"
         :key="clip.id"

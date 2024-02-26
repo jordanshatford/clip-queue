@@ -14,7 +14,7 @@
           v-model="formSettings.limit"
           :disabled="!formSettings.isLimited"
         />
-        <div class="cq-text-subtle text-left pl-1 my-2">
+        <div class="cq-text-subtle my-2 pl-1 text-left">
           <label>Clips will be ignored when queue limit is reached.</label>
         </div>
       </div>

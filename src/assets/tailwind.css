@@ -4,54 +4,54 @@
 
 @layer components {
   .cq-card {
-    @apply bg-zinc-100 dark:bg-zinc-800 w-full rounded-xl shadow-md;
+    @apply w-full rounded-xl bg-zinc-100 shadow-md dark:bg-zinc-800;
   }
   .cq-title {
-    @apply text-5xl font-extrabold text-brand-500 p-5;
+    @apply p-5 text-5xl font-extrabold text-brand-500;
   }
   .cq-text {
-    @apply text-zinc-600 dark:text-zinc-400 font-normal;
+    @apply font-normal text-zinc-600 dark:text-zinc-400;
   }
   .cq-text-subtle {
-    @apply text-zinc-400 dark:text-zinc-600 font-normal text-sm;
+    @apply text-sm font-normal text-zinc-400 dark:text-zinc-600;
   }
   .cq-text-subtle-semibold {
-    @apply text-zinc-400 dark:text-zinc-600 font-semibold text-sm;
+    @apply text-sm font-semibold text-zinc-400 dark:text-zinc-600;
   }
   .cq-text-input {
     @apply text-zinc-500;
   }
   .cq-tab {
-    @apply border-transparent hover:text-zinc-600 hover:border-zinc-300 dark:hover:text-zinc-300 dark:hover:border-zinc-700;
+    @apply border-transparent hover:border-zinc-300 hover:text-zinc-600 dark:hover:border-zinc-700 dark:hover:text-zinc-300;
   }
   .cq-tab-active {
-    @apply text-brand-500 border-brand-500 dark:text-brand-500 dark:border-brand-500;
+    @apply border-brand-500 text-brand-500 dark:border-brand-500 dark:text-brand-500;
   }
   .cq-input {
-    @apply block w-full px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed text-zinc-500 dark:text-zinc-500 bg-white dark:bg-zinc-900 bg-clip-padding border-2 border-solid border-zinc-300 dark:border-zinc-700 rounded-xl transition ease-in-out m-0 focus:text-zinc-700 focus:border-brand-500 focus:outline-none dark:focus:text-zinc-200 dark:focus:border-brand-500 dark:focus:outline-none;
+    @apply m-0 block w-full rounded-xl border-2 border-solid border-zinc-300 bg-white bg-clip-padding px-4 py-2 text-zinc-500 transition ease-in-out focus:border-brand-500 focus:text-zinc-700 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-500 dark:focus:border-brand-500 dark:focus:text-zinc-200 dark:focus:outline-none;
   }
   .cq-alert-info {
-    @apply bg-blue-100 dark:bg-blue-200 text-blue-700;
+    @apply bg-blue-100 text-blue-700 dark:bg-blue-200;
   }
   .cq-alert-success {
-    @apply bg-green-100 dark:bg-green-200 text-green-700;
+    @apply bg-green-100 text-green-700 dark:bg-green-200;
   }
   .cq-alert-warning {
-    @apply bg-yellow-100 dark:bg-yellow-200 text-yellow-700;
+    @apply bg-yellow-100 text-yellow-700 dark:bg-yellow-200;
   }
   .cq-alert-danger {
-    @apply bg-red-100 dark:bg-red-200 text-red-700;
+    @apply bg-red-100 text-red-700 dark:bg-red-200;
   }
   .cq-form {
-    @apply cq-card mx-auto p-3 max-w-lg;
+    @apply cq-card mx-auto max-w-lg p-3;
   }
   .cq-form-group {
     @apply py-1;
   }
   .cq-toggle-form-group {
-    @apply cq-form-group w-full flex justify-between pr-1 pb-0;
+    @apply cq-form-group flex w-full justify-between pb-0 pr-1;
   }
   .cq-form-group-label {
-    @apply cq-text float-left inline-block pl-1 mb-2;
+    @apply cq-text float-left mb-2 inline-block pl-1;
   }
 }

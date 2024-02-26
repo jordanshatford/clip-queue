@@ -1,8 +1,8 @@
 <template>
-  <footer class="bg-white dark:bg-zinc-800 border-t border-zinc-300 dark:border-zinc-700">
-    <div class="flex flex-col items-center px-8 py-6 mx-auto max-w-6xl sm:flex-row">
+  <footer class="border-t border-zinc-300 bg-white dark:border-zinc-700 dark:bg-zinc-800">
+    <div class="mx-auto flex max-w-6xl flex-col items-center px-8 py-6 sm:flex-row">
       <p class="cq-text">© {{ copyright.year }} {{ copyright.owner }}</p>
-      <span class="inline-flex justify-center mt-4 space-x-5 sm:ml-auto sm:mt-0 sm:justify-start">
+      <span class="mt-4 inline-flex justify-center space-x-5 sm:ml-auto sm:mt-0 sm:justify-start">
         <p class="cq-text">
           <a
             :href="github"

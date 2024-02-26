@@ -5,7 +5,7 @@
         <label class="cq-form-group-label">Auto remove clips on moderation?</label>
         <BaseSwitch id="autoRemoveClips" v-model="formSettings.hasAutoRemoveClipsEnabled" />
       </div>
-      <div class="cq-text-subtle text-left pl-1 mb-2">
+      <div class="cq-text-subtle mb-2 pl-1 text-left">
         <label>
           When a user has their chat message deleted, is timed out, or banned, then the clips they
           submitted will be removed.
@@ -15,14 +15,14 @@
     <div class="cq-form-group">
       <label class="cq-form-group-label">Channels not allowed:</label>
       <BaseMultiTagSelect v-model="formSettings.blockedChannels" itemName="channel" />
-      <div class="cq-text-subtle text-left pl-1 my-2">
+      <div class="cq-text-subtle my-2 pl-1 text-left">
         <label>Clips of these channels will not be added to the queue.</label>
       </div>
     </div>
     <div class="cq-form-group">
       <label class="cq-form-group-label">Submitters not allowed:</label>
       <BaseMultiTagSelect v-model="formSettings.blockedSubmitters" itemName="submitter" />
-      <div class="cq-text-subtle text-left pl-1 my-2">
+      <div class="cq-text-subtle my-2 pl-1 text-left">
         <label>Clips submitted by these users will not be added to the queue.</label>
       </div>
     </div>

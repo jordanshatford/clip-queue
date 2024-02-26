@@ -1,19 +1,19 @@
 <template>
-  <div class="cq-card max-w-[16rem] overflow-hidden text-left flex-shrink-0">
+  <div class="cq-card max-w-[16rem] flex-shrink-0 overflow-hidden text-left">
     <div
-      class="flex items-end justify-end h-36 w-full bg-cover"
+      class="flex h-36 w-full items-end justify-end bg-cover"
       :style="'background-image: url(' + clip.thumbnailUrl + ')'"
     >
       <span v-if="inQueue">
-        <BaseButton title="Play now" class="pb-2 mr-2 -mb-2" @click="emit('play')">
+        <BaseButton title="Play now" class="-mb-2 mr-2 pb-2" @click="emit('play')">
           <BarsArrowUpIcon class="w-6" />
         </BaseButton>
-        <BaseButton title="Remove" variant="danger" class="pb-2 mr-2 -mb-2" @click="emit('remove')">
+        <BaseButton title="Remove" variant="danger" class="-mb-2 mr-2 pb-2" @click="emit('remove')">
           <TrashIcon class="w-6" />
         </BaseButton>
       </span>
       <span v-else>
-        <BaseButton title="Add to queue" class="pb-2 mr-2 -mb-2" @click="emit('add')">
+        <BaseButton title="Add to queue" class="-mb-2 mr-2 pb-2" @click="emit('add')">
           <PlusIcon class="w-6" />
         </BaseButton>
       </span>

@@ -3,19 +3,19 @@
     <div class="relative" @keydown.enter.prevent="addTag(currentInput)">
       <BaseInput v-model="currentInput" :placeholder="placeholder" />
       <div :class="[dropdownOpen ? 'block' : 'hidden']">
-        <div class="absolute z-40 left-0 mt-1 w-full">
+        <div class="absolute left-0 z-40 mt-1 w-full">
           <div
-            class="p-1 rounded-xl text-sm bg-white dark:bg-zinc-700 border border-zinc-300 dark:border-zinc-700"
+            class="rounded-xl border border-zinc-300 bg-white p-1 text-sm dark:border-zinc-700 dark:bg-zinc-700"
           >
             <a
               v-if="!hasTag(currentInput)"
               @click.prevent="addTag(currentInput)"
-              class="cq-text block py-1 px-5 cursor-pointer hover:bg-brand-500 hover:text-white"
+              class="cq-text block cursor-pointer px-5 py-1 hover:bg-brand-500 hover:text-white"
             >
               add {{ itemName }} "<span class="font-semibold">{{ currentInput }}</span
               >"
             </a>
-            <p v-else class="cq-text block py-1 px-5">
+            <p v-else class="cq-text block px-5 py-1">
               {{ itemName }} "<span class="font-semibold">{{ currentInput }}</span
               >" already added
             </p>

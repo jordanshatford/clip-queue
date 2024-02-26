@@ -1,10 +1,10 @@
 <template>
-  <div class="mx-auto max-w-xl mb-3 border-b border-zinc-300 dark:border-zinc-700">
-    <ul class="cq-text text-sm md:text-base flex flex-wrap -mb-px text-center">
+  <div class="mx-auto mb-3 max-w-xl border-b border-zinc-300 dark:border-zinc-700">
+    <ul class="cq-text -mb-px flex flex-wrap text-center text-sm md:text-base">
       <li v-for="option in options" :key="option.label" class="mr-2">
         <button
           @click="modelValue = option.label"
-          class="flex space-x-1 align-middle p-4 border-b-2 group"
+          class="group flex space-x-1 border-b-2 p-4 align-middle"
           :class="[option.label === modelValue ? 'cq-tab-active' : 'cq-tab']"
         >
           <component v-if="option.icon" :is="option.icon" class="w-5" /><span>{{

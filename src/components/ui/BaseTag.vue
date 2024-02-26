@@ -1,11 +1,11 @@
 <template>
-  <div class="cq-text bg-zinc-200 dark:bg-zinc-700 inline-flex items-center text-sm rounded-xl">
-    <span class="px-2 mx-2 my-1 truncate max-w-xs mx-auto"><slot></slot></span>
+  <div class="cq-text inline-flex items-center rounded-xl bg-zinc-200 text-sm dark:bg-zinc-700">
+    <span class="mx-2 mx-auto my-1 max-w-xs truncate px-2"><slot></slot></span>
     <button
       v-if="dismissable"
       type="button"
       @click="emit('dismiss')"
-      class="w-5 h-5 mr-1 inline-block align-middle hover:text-red-500 dark:hover:text-red-500"
+      class="mr-1 inline-block h-5 w-5 align-middle hover:text-red-500 dark:hover:text-red-500"
     >
       <XMarkIcon class="fill-current" />
     </button>
