@@ -88,5 +88,6 @@ export function getClipIdFromUrl(url: string): string | undefined {
 
 export default {
   getClip,
+  isClipUrl,
   getClipIdFromUrl
 }
