@@ -72,7 +72,7 @@ import type { Clip } from '@/interfaces/clips'
 import VideoJS from './VideoJSPlayer.vue'
 
 export interface Props {
-  type: 'iframe' | 'video'
+  type?: 'iframe' | 'video'
   clip: Clip
   autoplay?: boolean
   previousDisabled?: boolean
