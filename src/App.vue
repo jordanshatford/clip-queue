@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen h-full dark:bg-zinc-900">
+  <div class="h-full min-h-screen dark:bg-zinc-900">
     <div class="h-full">
       <AppNavBar />
-      <main class="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-5 text-center">
+      <main class="mx-auto h-full max-w-7xl px-4 pb-5 pt-20 text-center sm:px-6 lg:px-8">
         <RouterView />
       </main>
     </div>

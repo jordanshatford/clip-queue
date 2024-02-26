@@ -1,19 +1,19 @@
 <template>
-  <nav class="bg-white dark:bg-zinc-800 shadow dark:shadow-dark fixed top-0 z-40 w-full">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-      <div class="relative flex items-center justify-between h-16">
+  <nav class="dark:shadow-dark fixed top-0 z-40 w-full bg-white shadow dark:bg-zinc-800">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <AppHamburger v-model="showMobileMenu" />
           <AppThemeToggle />
         </div>
-        <div class="flex-1 flex items-center justify-center sm:justify-start">
+        <div class="flex flex-1 items-center justify-center sm:justify-start">
           <RouterLink
             exact-active-class=""
             :to="{ name: RouteNameConstants.HOME }"
-            class="flex-shrink-0 flex items-center"
-            ><img class="w-12 aspect-square" src="/icon.png"
+            class="flex flex-shrink-0 items-center"
+            ><img class="aspect-square w-12" src="/icon.png"
           /></RouterLink>
-          <div class="hidden sm:block sm:ml-6">
+          <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-3">
               <AppNavBarItem
                 v-for="route in routes"
@@ -27,7 +27,7 @@
         <div
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
-          <AppThemeToggle class="hidden sm:block mr-2" />
+          <AppThemeToggle class="mr-2 hidden sm:block" />
           <BaseButton variant="brand" @click="() => handleAuthButtonClick()">
             <span><TwitchLogo class="inline w-5" /></span>
             {{ user.isLoggedIn ? 'Logout' : 'Login' }}
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div v-if="showMobileMenu">
-      <div class="px-2 pt-2 pb-3 space-y-1">
+      <div class="space-y-1 px-2 pb-3 pt-2">
         <AppNavBarItem
           v-for="route in routes"
           @click="() => (showMobileMenu = false)"

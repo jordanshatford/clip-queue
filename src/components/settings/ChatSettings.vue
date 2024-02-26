@@ -21,7 +21,7 @@
           :disabled="!formSettings.allowCommands"
           v-model="formSettings.commandPrefix"
         />
-        <div class="cq-text-subtle text-left pl-1 my-2">
+        <div class="cq-text-subtle my-2 pl-1 text-left">
           <label>The following commands are available to mods: </label>
           <ul class="list-disc pl-8">
             <li v-for="(help, command) in commands.help" :key="command">

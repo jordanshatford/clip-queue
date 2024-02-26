@@ -2,17 +2,17 @@
   <div class="flex items-center justify-between border-t border-zinc-300 dark:border-zinc-700">
     <button
       @click="previous()"
-      class="cq-text p-3 flex space-x-2 items-center hover:text-brand-500 dark:hover:text-brand-500"
+      class="cq-text flex items-center space-x-2 p-3 hover:text-brand-500 dark:hover:text-brand-500"
     >
-      <ArrowLeftIcon class="w-4 h-4" />
+      <ArrowLeftIcon class="h-4 w-4" />
       <p>Previous</p>
     </button>
-    <div class="cq-text sm:flex hidden space-x-2">
+    <div class="cq-text hidden space-x-2 sm:flex">
       <button
         v-for="n in clickableNumbers"
         @click="setPage(n)"
         :key="n"
-        class="p-3 border-t-2"
+        class="border-t-2 p-3"
         :class="[n === modelValue ? 'cq-tab-active' : 'cq-tab']"
       >
         {{ n }}
@@ -20,10 +20,10 @@
     </div>
     <button
       @click="next()"
-      class="cq-text p-3 flex space-x-2 items-center hover:text-brand-500 dark:hover:text-brand-500"
+      class="cq-text flex items-center space-x-2 p-3 hover:text-brand-500 dark:hover:text-brand-500"
     >
       <p>Next</p>
-      <ArrowRightIcon class="w-4 h-4" />
+      <ArrowRightIcon class="h-4 w-4" />
     </button>
   </div>
 </template>

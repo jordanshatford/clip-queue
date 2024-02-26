@@ -1,6 +1,6 @@
 <template>
   <p class="cq-title">History</p>
-  <div class="min-h-[80vh] flex flex-col justify-between">
+  <div class="flex min-h-[80vh] flex-col justify-between">
     <BaseTable :columns="columns" :rows="currentPageClips">
       <template #head="{ column }">
         <BaseButton
@@ -8,18 +8,18 @@
           :disabled="queue.history.empty()"
           @click="purgeHistory()"
           variant="danger"
-          class="flex text-sm float-right"
-          ><TrashIcon class="w-5 mr-1" />Delete All</BaseButton
+          class="float-right flex text-sm"
+          ><TrashIcon class="mr-1 w-5" />Delete All</BaseButton
         >
       </template>
       <template #cell="{ column, row }">
         <div v-if="column.key === 'info'" class="flex items-center">
           <img
-            class="hidden sm:block w-24 rounded-xl aspect-video"
+            class="hidden aspect-video w-24 rounded-xl sm:block"
             :src="row.thumbnailUrl"
             :alt="row.title"
           />
-          <div class="text-left ml-3 text-sm">
+          <div class="ml-3 text-left text-sm">
             <p class="cq-text">
               {{ row.title }}
               <span v-if="row.url">
@@ -29,7 +29,7 @@
                   rel="noreferrer"
                   className="cq-text-subtle text-lg no-underline hover:text-zinc-600 dark:hover:text-zinc-200"
                 >
-                  <ArrowTopRightOnSquareIcon class="w-5 inline-block mb-1" />
+                  <ArrowTopRightOnSquareIcon class="mb-1 inline-block w-5" />
                 </a>
               </span>
             </p>
@@ -41,15 +41,15 @@
         <p v-else-if="column.key === 'submitter'" class="cq-text text-left text-sm">
           {{ row.submitter }} <span class="cq-text-subtle">({{ row.source }})</span>
         </p>
-        <div v-else-if="column.key === 'actions'" class="inline-flex mt-2 space-x-2">
+        <div v-else-if="column.key === 'actions'" class="mt-2 inline-flex space-x-2">
           <BaseButton
             :disabled="queue.upcoming.includes(row)"
             @click="queue.add({ ...row, source: ClipSource.HISTORY }, true)"
           >
-            <PlusIcon class="w-5 h-5" />
+            <PlusIcon class="h-5 w-5" />
           </BaseButton>
           <BaseButton variant="danger" @click="queue.removeFromHistory(row)">
-            <TrashIcon class="w-5 h-5" />
+            <TrashIcon class="h-5 w-5" />
           </BaseButton>
         </div>
       </template>

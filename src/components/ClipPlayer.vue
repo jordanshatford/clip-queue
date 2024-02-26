@@ -1,16 +1,15 @@
 <template>
   <div class="player player-container">
-    <div class="w-full h-auto bg-black player player-container">
+    <div v-if="clip.id" class="player player-container h-auto w-full bg-black">
       <iframe
-        v-if="clip.id"
         :src="`${clip.embedUrl}&autoplay=${autoplay}&parent=${hostname}`"
         :title="clip.title"
-        class="w-full h-auto bg-black player"
+        class="player h-auto w-full bg-black"
         allowfullscreen
       ></iframe>
     </div>
     <div class="text-left">
-      <h2 class="cq-text font-bold text-2xl mt-2 mb-1">
+      <h2 class="cq-text mb-1 mt-2 text-2xl font-bold">
         {{ clip.title }}
         <span v-if="clip.url">
           <a
@@ -19,10 +18,10 @@
             rel="noreferrer"
             className="cq-text-subtle text-lg no-underline hover:text-zinc-600 dark:hover:text-zinc-200"
           >
-            <ArrowTopRightOnSquareIcon class="w-6 inline-block mb-3" />
+            <ArrowTopRightOnSquareIcon class="mb-3 inline-block w-6" />
           </a>
         </span>
-        <div class="text-base float-right">
+        <div class="float-right text-base">
           <BaseButton :disabled="previousDisabled" class="mr-2" @click="emit('previous')">
             <BackwardIcon class="w-8" />
           </BaseButton>
@@ -59,7 +58,7 @@
 import { computed } from 'vue'
 import { ArrowTopRightOnSquareIcon, BackwardIcon, ForwardIcon } from '@/assets/icons'
 import { formatDistanceToNow, parseISO } from 'date-fns'
-import { ClipSource, type Clip } from '@/interfaces/clips'
+import type { Clip } from '@/interfaces/clips'
 
 export interface Props {
   clip: Clip
