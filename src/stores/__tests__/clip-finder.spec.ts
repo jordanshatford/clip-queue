@@ -2,7 +2,6 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { ClipProvider, type Clip } from '../../interfaces/clips'
 import type { TwitchClip, TwitchGame, TwitchUserCtx } from '../../services/twitch'
-import type { SubredditPost } from '../../services/reddit'
 import { useClipFinder } from '../clip-finder'
 import type { KickClip } from '@/services/kick'
 
@@ -55,33 +54,6 @@ vi.mock('@/services/twitch', () => {
           return undefined
         }
       })
-    }
-  }
-})
-
-vi.mock('@/services/reddit', () => {
-  const mockFunction = vi.fn((subreddit: string) => {
-    const testPost: SubredditPost[] = [
-      {
-        data: {
-          author: `${subreddit}0`,
-          url: 'https://clips.twitch.tv/0',
-          stickied: false
-        }
-      },
-      {
-        data: {
-          author: `${subreddit}1`,
-          url: 'https://clips.twitch.tv/1',
-          stickied: true
-        }
-      }
-    ]
-    return testPost
-  })
-  return {
-    default: {
-      getSubredditPosts: mockFunction
     }
   }
 })
@@ -196,14 +168,6 @@ describe('clip-finder.ts', () => {
       thumbnailUrl: '',
       provider: ClipProvider.TWITCH
     })
-  })
-
-  it('returns clips from a subreddit', async () => {
-    const clipFinder = useClipFinder()
-    const result = await clipFinder.getClipsFromSubreddit('testReddit')
-    expect(result).toHaveLength(1)
-    expect(result[0].id).toEqual('0')
-    expect(result[0].submitter).toEqual('testReddit0')
   })
 
   it('returns a clip for valid kick links', async () => {

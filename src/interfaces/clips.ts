@@ -1,7 +1,6 @@
 export enum ClipSource {
   UNKNOWN = 'Unknown',
   CHAT = 'Twitch Chat',
-  REDDIT = 'Reddit',
   HISTORY = 'History Page'
 }
 

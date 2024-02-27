@@ -40,7 +40,6 @@ Twitch Clip Queue is a web application designed to allow users to easily integra
   - Chat commands for moderators ([more info](./docs/COMMANDS.md))
   - Automatic moderation and clip removal
   - Settings customization to personalize the users experience
-  - Scan subreddits for posts including Twitch clips
   - Dark and light UI themes
 
 # Developer Guide

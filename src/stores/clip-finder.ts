@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { ClipProvider, type Clip } from '@/interfaces/clips'
 import type { TwitchClip, TwitchGame } from '@/services/twitch'
-import reddit from '@/services/reddit'
 import twitch from '@/services/twitch'
 import kick from '@/services/kick'
 import { useUser } from '@/stores/user'
@@ -56,26 +55,6 @@ export const useClipFinder = defineStore('clip-finder', {
     }
   },
   actions: {
-    async getClipsFromSubreddit(subreddit: string, numPosts?: number): Promise<Clip[]> {
-      const subredditPosts = await reddit.getSubredditPosts(subreddit, numPosts)
-      const filtedSubredditPosts = subredditPosts.filter((p) => {
-        const clipId = twitch.getClipIdFromUrl(p?.data?.url) !== undefined
-        return !p.data?.stickied && clipId
-      })
-      const postInfo = filtedSubredditPosts.map((p) => {
-        return {
-          id: twitch.getClipIdFromUrl(p?.data.url) as string,
-          submitter: p?.data?.author
-        }
-      })
-      const clipIds = postInfo.map((i) => i.id)
-      const clips = await this.getClips(clipIds)
-      clips.map((c) => {
-        const submitter = postInfo.findIndex((v) => v.id === c.id)
-        c.submitter = postInfo?.[submitter]?.submitter
-      })
-      return clips
-    },
     async getTwitchClip(url: string): Promise<Clip | undefined> {
       const id = twitch.getClipIdFromUrl(url)
       if (id) {

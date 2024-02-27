@@ -4,14 +4,12 @@ import twitch from '@/services/twitch'
 import { useUser } from '@/stores/user'
 import HomePage from '@/views/HomePage.vue'
 import QueuePage from '@/views/QueuePage.vue'
-import SearchPage from '@/views/SearchPage.vue'
 import HistoryPage from '@/views/HistoryPage.vue'
 import SettingsPage from '@/views/SettingsPage.vue'
 
 export enum RouteNameConstants {
   HOME = 'home',
   QUEUE = 'queue',
-  SEARCH = 'search',
   HISTORY = 'history',
   SETTINGS = 'settings'
 }
@@ -32,15 +30,6 @@ export const routes: Array<RouteRecordRaw> = [
     component: QueuePage,
     meta: {
       title: 'Queue',
-      requiresAuth: true
-    }
-  },
-  {
-    path: '/search',
-    name: RouteNameConstants.SEARCH,
-    component: SearchPage,
-    meta: {
-      title: 'Search',
       requiresAuth: true
     }
   },
