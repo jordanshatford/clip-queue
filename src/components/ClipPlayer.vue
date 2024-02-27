@@ -2,14 +2,14 @@
   <div class="player player-container">
     <div v-if="clip.id" class="player player-container h-auto w-full bg-black">
       <iframe
-        v-if="type === 'iframe'"
+        v-if="clip.provider === ClipProvider.TWITCH"
         :src="`${clip.embedUrl}&autoplay=${autoplay}&parent=${hostname}`"
         :title="clip.title"
         class="player h-auto w-full bg-black"
         allowfullscreen
       ></iframe>
       <VideoJS
-        v-else-if="type === 'video'"
+        v-else-if="clip.provider === ClipProvider.KICK"
         :source="clip.embedUrl"
         :poster="clip.thumbnailUrl"
         :autoplay="autoplay"
@@ -68,11 +68,10 @@
 import { computed } from 'vue'
 import { ArrowTopRightOnSquareIcon, BackwardIcon, ForwardIcon } from '@/assets/icons'
 import { formatDistanceToNow, parseISO } from 'date-fns'
-import type { Clip } from '@/interfaces/clips'
+import { ClipProvider, type Clip } from '@/interfaces/clips'
 import VideoJS from './VideoJSPlayer.vue'
 
 export interface Props {
-  type?: 'iframe' | 'video'
   clip: Clip
   autoplay?: boolean
   previousDisabled?: boolean
@@ -80,7 +79,6 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  type: 'iframe',
   autoplay: false,
   previousDisabled: false,
   nextDisabled: false

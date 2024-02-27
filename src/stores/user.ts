@@ -114,10 +114,19 @@ export const useUser = defineStore('user', {
         clipFinder.getTwitchClip(url).then((clip) => {
           if (clip) {
             const queue = useQueue()
-            const submitter = userstate.username
             queue.add({
               ...clip,
-              submitter,
+              submitter: userstate.username,
+              source: ClipSource.CHAT
+            })
+          }
+        })
+        clipFinder.getKickClip(url).then((clip) => {
+          if (clip) {
+            const queue = useQueue()
+            queue.add({
+              ...clip,
+              submitter: userstate.username,
               source: ClipSource.CHAT
             })
           }
@@ -135,10 +144,18 @@ export const useUser = defineStore('user', {
         clipFinder.getTwitchClip(url).then((clip) => {
           if (clip) {
             const queue = useQueue()
-            const submitter = username
             queue.remove({
               ...clip,
-              submitter
+              submitter: username
+            })
+          }
+        })
+        clipFinder.getKickClip(url).then((clip) => {
+          if (clip) {
+            const queue = useQueue()
+            queue.remove({
+              ...clip,
+              submitter: username
             })
           }
         })

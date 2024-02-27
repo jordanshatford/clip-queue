@@ -5,6 +5,12 @@ export enum ClipSource {
   HISTORY = 'History Page'
 }
 
+export enum ClipProvider {
+  UNKNOWN = 'Unknown',
+  KICK = 'Kick',
+  TWITCH = 'Twitch'
+}
+
 export interface Clip {
   id?: string
   title?: string
@@ -17,4 +23,5 @@ export interface Clip {
   embedUrl?: string
   thumbnailUrl?: string
   source?: ClipSource
+  provider?: ClipProvider
 }
