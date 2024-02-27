@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
-import type { Clip } from '@/interfaces/clips'
+import { ClipProvider, type Clip } from '@/interfaces/clips'
 import type { TwitchClip, TwitchGame } from '@/services/twitch'
 import reddit from '@/services/reddit'
 import twitch from '@/services/twitch'
+import kick from '@/services/kick'
 import { useUser } from '@/stores/user'
 
 export const useClipFinder = defineStore('clip-finder', {
@@ -36,7 +37,7 @@ export const useClipFinder = defineStore('clip-finder', {
         }
         return ids
           .filter((id) => id in state.clips)
-          .map((id) => {
+          .map<Clip>((id) => {
             const clip = state.clips?.[id]
             const game = state.games?.[clip?.game_id]
             return {
@@ -47,7 +48,8 @@ export const useClipFinder = defineStore('clip-finder', {
               timestamp: clip?.created_at,
               url: clip?.url,
               embedUrl: clip?.embed_url,
-              thumbnailUrl: clip?.thumbnail_url
+              thumbnailUrl: clip?.thumbnail_url,
+              provider: ClipProvider.TWITCH
             }
           })
       }
@@ -79,6 +81,26 @@ export const useClipFinder = defineStore('clip-finder', {
       if (id) {
         const response = await this.getClips([id])
         return response[0]
+      }
+    },
+    async getKickClip(url: string): Promise<Clip | undefined> {
+      const id = kick.getClipIdFromUrl(url)
+      if (id) {
+        const clip = await kick.getClip(id)
+        if (clip) {
+          const response: Clip = {
+            id: clip.id,
+            title: clip.title,
+            channel: clip.channel.username,
+            game: clip.category.name,
+            timestamp: clip.created_at,
+            url: url,
+            embedUrl: clip.clip_url,
+            thumbnailUrl: clip.thumbnail_url,
+            provider: ClipProvider.KICK
+          }
+          return response
+        }
       }
     }
   }

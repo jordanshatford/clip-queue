@@ -29,6 +29,10 @@
       <div class="cq-text-subtle mt-1">
         Source: <span class="cq-text-subtle-semibold">{{ clip.source ?? ClipSource.UNKNOWN }}</span>
       </div>
+      <div class="cq-text-subtle mt-1">
+        Provider:
+        <span class="cq-text-subtle-semibold">{{ clip.provider ?? ClipSource.UNKNOWN }}</span>
+      </div>
     </div>
   </div>
 </template>
