@@ -36,6 +36,11 @@
       Twitch clips submitted are cached for future use, this clears all cached clip information.
     </label>
   </div>
+  <div class="cq-form mt-2">
+    <p class="cq-text-subtle">
+      Application version: <span>v{{ version }}</span>
+    </p>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -46,6 +51,8 @@ import { useModeration, DEFAULTS as DEFAULT_MODERATION } from '@/stores/moderati
 import { useQueue, DEFAULT_SETTINGS as DEFAULT_QUEUE_SETTINGS } from '@/stores/queue'
 import { useClipFinder } from '@/stores/clip-finder'
 import { useConfirm } from '@/plugins/confirm'
+
+const version = __APP_VERSION__
 
 const toast = useToast()
 const queue = useQueue()
