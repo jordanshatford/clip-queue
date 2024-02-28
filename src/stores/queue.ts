@@ -65,7 +65,9 @@ export const useQueue = defineStore('queue', {
         return
       }
       // Ignore when we have previously watched it
-      const hasBeenWatched = this.current?.id === clip.id || this.history.includes(clip)
+      const hasBeenWatched =
+        (this.current?.id === clip.id && this.current?.provider === clip.provider) ||
+        this.history.includes(clip)
       if (hasBeenWatched) {
         return
       }

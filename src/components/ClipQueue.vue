@@ -26,7 +26,7 @@
     <div class="mt-3 flex justify-items-start overflow-x-auto">
       <ClipCard
         v-for="clip in clips"
-        :key="clip.id"
+        :key="clip.provider + ':' + clip.id"
         :clip="clip"
         inQueue
         @play="emit('play', clip)"

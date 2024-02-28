@@ -13,7 +13,7 @@ export class ClipList {
   public add(...clips: Clip[]): Clip[] {
     clips.forEach((clip) => {
       if (this.includes(clip)) {
-        const index = this._clips.findIndex((c) => c.id === clip.id)
+        const index = this._clips.findIndex((c) => c.id === clip.id && c.provider === clip.provider)
         const submitters = this._clips[index]?.submitters ?? []
         const submitter = clip.submitter?.toLowerCase()
         if (submitter && !submitters.includes(submitter)) {
@@ -29,7 +29,7 @@ export class ClipList {
   }
 
   public remove(clip: Clip): void {
-    const index = this._clips.findIndex((c) => c.id === clip.id)
+    const index = this._clips.findIndex((c) => c.id === clip.id && c.provider === clip.provider)
     if (index > -1) {
       this.removeSubmitterFromClip(clip?.submitter?.toLowerCase() as string, index)
       this.sort()
@@ -44,7 +44,7 @@ export class ClipList {
   }
 
   public includes(clip: Clip): boolean {
-    return this._clips.some((c) => c.id === clip.id)
+    return this._clips.some((c) => c.id === clip.id && c.provider === clip.provider)
   }
 
   public pop(): Clip | undefined {

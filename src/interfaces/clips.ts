@@ -22,5 +22,5 @@ export interface Clip {
   embedUrl?: string
   thumbnailUrl?: string
   source?: ClipSource
-  provider?: ClipProvider
+  provider: ClipProvider
 }
