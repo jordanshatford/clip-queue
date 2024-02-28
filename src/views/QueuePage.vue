@@ -2,7 +2,6 @@
   <ClipPlayer
     v-if="queue.current && queue.current.id"
     :clip="queue.current"
-    :autoplay="true"
     :previous-disabled="queue.history.empty()"
     :next-disabled="queue.upcoming.empty()"
     @previous="queue.previous()"

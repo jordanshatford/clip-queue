@@ -8,9 +8,9 @@ import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
 
 export interface Props {
-  autoplay: boolean
   poster: string | undefined
   source: string | undefined
+  autoplay?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

@@ -3,7 +3,7 @@
     <div v-if="clip.id" class="player player-container h-auto w-full bg-black">
       <iframe
         v-if="clip.provider === ClipProvider.TWITCH"
-        :src="`${clip.embedUrl}&autoplay=${autoplay}&parent=${hostname}`"
+        :src="`${clip.embedUrl}&autoplay=true&parent=${hostname}`"
         :title="clip.title"
         class="player h-auto w-full bg-black"
         allowfullscreen
@@ -12,7 +12,7 @@
         v-else-if="clip.provider === ClipProvider.KICK"
         :source="clip.embedUrl"
         :poster="clip.thumbnailUrl"
-        :autoplay="autoplay"
+        autoplay
       />
       <div v-else class="cq-text flex h-full items-center justify-center">
         <p>Unsupported video format</p>
@@ -73,13 +73,11 @@ import VideoJS from './VideoJSPlayer.vue'
 
 export interface Props {
   clip: Clip
-  autoplay?: boolean
   previousDisabled?: boolean
   nextDisabled?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  autoplay: false,
   previousDisabled: false,
   nextDisabled: false
 })
