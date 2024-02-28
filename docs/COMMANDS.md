@@ -5,6 +5,7 @@ Twitch Clip Queue provides a set of commands accessible through Twich chat for m
 > NOTE: the command prefix is customizable via the settings, for the sake of documenation, the default prefix (`!cq`) will be used.
 
 ## Queue Commands
+
 `!cqopen`: Open the queue, allowing clips to be submitted via chat.
 
 `!cqclose`: Close the queue, preventing any further clips submitted in chat from being added.
@@ -24,6 +25,7 @@ Twitch Clip Queue provides a set of commands accessible through Twich chat for m
 > NOTE: if there are no clips in the queue, this will end the viewing of the current clip anyways
 
 ## Moderation Commands
+
 `!cqblockchannel <channel>`: Block clips of a given channel. Any clips submitted of this channel will be ignored.
 
 > NOTE: If the channel is already blocked, then this does nothing.
@@ -39,3 +41,9 @@ Twitch Clip Queue provides a set of commands accessible through Twich chat for m
 `!cqunblocksubmitter <submitter>`: Unblock clips submitted by a given user. Any further clips submitted by this user will be added to the queue.
 
 > NOTE: if the submitter was not previously blocked, then this does nothing.
+
+## Caching and History Commands
+
+`!cqpurgecache`: Purge all cached clips. Clips are cached to prevent needing to reuse the providers API many times for the same clip.
+
+`!cqpurgehistory`: Purge all clips previously viewed allowing them to be resubmitted.

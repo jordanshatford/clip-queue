@@ -1,5 +1,6 @@
 import { useQueue } from '@/stores/queue'
 import { useModeration } from '@/stores/moderation'
+import { useClipFinder } from '@/stores/clip-finder'
 
 export enum Command {
   OPEN = 'open',
@@ -12,7 +13,9 @@ export enum Command {
   BLOCK_CHANNEL = 'blockchannel',
   UNBLOCK_CHANNEL = 'unblockchannel',
   BLOCK_SUBMITTER = 'blocksubmitter',
-  UNBLOCK_SUBMITTER = 'unblocksubmitter'
+  UNBLOCK_SUBMITTER = 'unblocksubmitter',
+  PURGE_CACHE = 'purgecache',
+  PURGE_HISTORY = 'purgehistory'
 }
 
 interface CommandHelp {
@@ -46,6 +49,12 @@ const help: Record<Command, CommandHelp> = {
   [Command.UNBLOCK_SUBMITTER]: {
     args: ['submitter'],
     description: 'Unblock clips submitted from specified user.'
+  },
+  [Command.PURGE_CACHE]: {
+    description: 'Purge all cached clips.'
+  },
+  [Command.PURGE_HISTORY]: {
+    description: 'Purge all clips previously viewed allowing them to be resubmitted.'
   }
 }
 
@@ -108,6 +117,16 @@ export function handleCommand(command: string, ...args: string[]) {
         const moderation = useModeration()
         moderation.removeBlockedSubmitter(args[0])
       }
+      break
+    }
+    case Command.PURGE_CACHE: {
+      const clipFinder = useClipFinder()
+      clipFinder.$reset()
+      break
+    }
+    case Command.PURGE_HISTORY: {
+      const queue = useQueue()
+      queue.purge()
       break
     }
     default: {
