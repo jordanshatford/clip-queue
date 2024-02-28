@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import type { Clip } from '../../interfaces/clips'
+import { ClipProvider, type Clip } from '../../interfaces/clips'
 import { useQueue } from '../queue'
 
 describe('clips.ts', () => {
@@ -84,7 +84,7 @@ describe('clips.ts', () => {
     const queue = useQueue()
     queue.add(clip)
     queue.add(clip2)
-    queue.play({ id: 'not-valid' })
+    queue.play({ id: 'not-valid', provider: ClipProvider.TWITCH })
     expect(queue.upcoming.toArray()).toContainEqual(clip)
     expect(queue.upcoming.toArray()).toContainEqual(clip2)
     expect(queue.current).toEqual(undefined)
@@ -99,7 +99,7 @@ describe('clips.ts', () => {
     queue.remove(clip)
     expect(queue.upcoming.toArray()).not.toContainEqual(clip)
     expect(queue.upcoming.size()).toEqual(queueLength - 1)
-    queue.remove({ id: 'not-valid' })
+    queue.remove({ id: 'not-valid', provider: ClipProvider.TWITCH })
     expect(queue.upcoming.size()).toEqual(queueLength - 1)
   })
 
@@ -180,9 +180,9 @@ describe('clips.ts', () => {
   it('can have a limit set to prevent additional clips from being added', () => {
     const queue = useQueue()
     queue.updateSettings({ isLimited: true, limit: 2 })
-    queue.add({ id: 'test', submitter: 's' })
-    queue.add({ id: 'test2', submitter: 's' })
-    queue.add({ id: 'test3', submitter: 's' })
+    queue.add({ id: 'test', submitter: 's', provider: ClipProvider.TWITCH })
+    queue.add({ id: 'test2', submitter: 's', provider: ClipProvider.TWITCH })
+    queue.add({ id: 'test3', submitter: 's', provider: ClipProvider.TWITCH })
     expect(queue.upcoming.size()).toEqual(2)
   })
 

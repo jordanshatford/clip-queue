@@ -31,7 +31,7 @@ describe('ClipPlayer.vue', () => {
   })
 
   it('returns no time ago when it doesnt have a clip timestamp', async () => {
-    wrapper.setProps({ clip: {} })
+    wrapper.setProps({ clip: { id: 'test', provider: ClipProvider.TWITCH } })
     await wrapper.vm.$nextTick()
     // @ts-ignore
     expect(wrapper.vm.timeAgo).toEqual('')
