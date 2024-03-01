@@ -27,7 +27,7 @@
     <BaseButton
       class="w-full"
       variant="danger"
-      :disabled="clipFinder.cacheEmpty"
+      :disabled="!providers.hasCachedData"
       @click="purgeCache()"
     >
       Purge Cache
@@ -49,7 +49,7 @@ import { useToast } from 'vue-toastification'
 import { useSettings, DEFAULTS as DEFAULT_SETTINGS } from '@/stores/settings'
 import { useModeration, DEFAULTS as DEFAULT_MODERATION } from '@/stores/moderation'
 import { useQueue, DEFAULT_SETTINGS as DEFAULT_QUEUE_SETTINGS } from '@/stores/queue'
-import { useClipFinder } from '@/stores/clip-finder'
+import { useProviders } from '@/stores/providers'
 import { useConfirm } from '@/plugins/confirm'
 
 const version = __APP_VERSION__
@@ -58,7 +58,7 @@ const toast = useToast()
 const queue = useQueue()
 const settings = useSettings()
 const moderation = useModeration()
-const clipFinder = useClipFinder()
+const providers = useProviders()
 const confirm = useConfirm()
 
 const isSettingsModified = computed(() => {
@@ -99,7 +99,7 @@ async function purgeCache() {
     description: 'Are you sure you want to purge all clips cached locally?'
   })
   if (isConfirmed) {
-    clipFinder.$reset()
+    providers.purge()
     toast.success('Clip cache cleared')
   }
 }

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ClipList } from '@/utils/clip-list'
-import type { Clip } from '@/interfaces/clips'
+import type { Clip } from '@/providers'
 import { useModeration } from '@/stores/moderation'
 import { deepEqual } from '@/utils'
 

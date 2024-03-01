@@ -1,6 +1,6 @@
 import { useQueue } from '@/stores/queue'
 import { useModeration } from '@/stores/moderation'
-import { useClipFinder } from '@/stores/clip-finder'
+import { useProviders } from '@/stores/providers'
 
 export enum Command {
   OPEN = 'open',
@@ -120,8 +120,8 @@ export function handleCommand(command: string, ...args: string[]) {
       break
     }
     case Command.PURGE_CACHE: {
-      const clipFinder = useClipFinder()
-      clipFinder.$reset()
+      const providers = useProviders()
+      providers.purge()
       break
     }
     case Command.PURGE_HISTORY: {

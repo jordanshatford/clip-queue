@@ -21,17 +21,14 @@
     <div class="p-3">
       <span class="cq-text mt-2">{{ clip.title }}</span>
       <h3 class="cq-text-subtle-semibold">
-        {{ clip.channel }}<span class="cq-text-subtle"> playing </span>{{ clip.game }}
+        {{ clip.channel }}<span class="cq-text-subtle"> playing </span>{{ clip.category }}
       </h3>
       <div class="cq-text-subtle mt-1">
-        Submitter: <span class="cq-text-subtle-semibold">{{ clip.submitter }}</span>
-      </div>
-      <div class="cq-text-subtle mt-1">
-        Source: <span class="cq-text-subtle-semibold">{{ clip.source ?? ClipSource.UNKNOWN }}</span>
+        Submitter: <span class="cq-text-subtle-semibold">{{ clip.submitters[0] }}</span>
       </div>
       <div class="cq-text-subtle mt-1">
         Provider:
-        <span class="cq-text-subtle-semibold">{{ clip.provider ?? ClipSource.UNKNOWN }}</span>
+        <span class="cq-text-subtle-semibold">{{ clip.provider }}</span>
       </div>
     </div>
   </div>
@@ -39,7 +36,7 @@
 
 <script setup lang="ts">
 import { BarsArrowUpIcon, TrashIcon, PlusIcon } from '@/assets/icons'
-import { ClipSource, type Clip } from '@/interfaces/clips'
+import type { Clip } from '@/providers'
 
 export interface Props {
   clip: Clip

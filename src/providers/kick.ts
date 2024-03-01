@@ -51,5 +51,3 @@ export class KickProvider implements IClipProvider {
     return clip.embedUrl
   }
 }
-
-export const kickProvider = new KickProvider()
