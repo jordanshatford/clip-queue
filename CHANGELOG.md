@@ -1,5 +1,17 @@
 # twitch-clip-queue
 
+## 1.2.0
+
+### Minor Changes
+
+- feat: rework using new clip interface and providers ([#239](https://github.com/jordanshatford/twitch-clip-queue/pull/239))
+
+- feat: cache each provider data separately ([#239](https://github.com/jordanshatford/twitch-clip-queue/pull/239))
+
+- feat: unify clip providers into common interface ([#239](https://github.com/jordanshatford/twitch-clip-queue/pull/239))
+
+- feat: show provider on clip card and history page ([#239](https://github.com/jordanshatford/twitch-clip-queue/pull/239))
+
 ## 1.1.0
 
 ### Minor Changes
