@@ -1,13 +1,12 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
+import type { AuthInfo } from '@/services/twitch'
 import { useUser } from '../user'
-import type { AuthInfo } from '../../services/twitch'
 
 // Overwrite CLIENT_ID for testing
-vi.mock('@/assets/config', async () => {
-  const actual = await vi.importActual<any>('@/assets/config')
+vi.mock('@/assets/config', async (importOriginal) => {
   return {
-    ...actual,
+    ...(await importOriginal<typeof import('@/assets/config')>()),
     env: {
       CLIENT_ID: 'testClientId'
     }

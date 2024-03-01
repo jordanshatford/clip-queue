@@ -1,38 +1,13 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import { ClipProvider, type Clip } from '../../interfaces/clips'
+import { clipFromTwitch, clipFromKick } from '@/__tests__/mocks'
+import { ClipProvider, type Clip } from '@/providers'
 import { useQueue } from '../queue'
 
 describe('clips.ts', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
   })
-
-  const clip = {
-    id: 'test',
-    submitter: 'jordan',
-    submitters: ['jordan'],
-    title: 'Test title',
-    channel: 'testchannel',
-    game: 'testgame',
-    timestamp: new Date('December 17, 1995 03:24:00').toDateString(),
-    url: 'https://www.twitch.tv/test',
-    embedUrl: 'https://www.twitch.tv/test',
-    thumbnailUrl: 'test'
-  } as Clip
-
-  const clip2 = {
-    id: 'test2',
-    submitter: 'jordan2',
-    submitters: ['jordan2'],
-    title: 'Test title 2',
-    channel: 'testchannel2',
-    game: 'testgame2',
-    timestamp: new Date('December 17, 1995 03:24:00').toDateString(),
-    url: 'https://www.twitch.tv/test2',
-    embedUrl: 'https://www.twitch.tv/test2',
-    thumbnailUrl: 'test2'
-  } as Clip
 
   beforeEach(() => {
     const queue = useQueue()
@@ -48,67 +23,67 @@ describe('clips.ts', () => {
   it('adds a clip to the queue', () => {
     const queue = useQueue()
     const queueLength = queue.upcoming.size()
-    queue.add(clip)
+    queue.add(clipFromTwitch)
     expect(queue.upcoming.size()).toEqual(queueLength + 1)
-    expect(queue.upcoming.includes(clip)).toEqual(true)
+    expect(queue.upcoming.includes(clipFromTwitch)).toEqual(true)
   })
 
   it('skips duplicate clips when adding to the queue', () => {
     const queue = useQueue()
     const queueLength = queue.upcoming.size()
-    queue.add(clip)
+    queue.add(clipFromTwitch)
     expect(queue.upcoming.size()).toEqual(queueLength + 1)
-    expect(queue.upcoming.toArray()).toContainEqual(clip)
-    queue.add(clip)
+    expect(queue.upcoming.toArray()).toContainEqual(clipFromTwitch)
+    queue.add(clipFromTwitch)
     expect(queue.upcoming.size()).toEqual(queueLength + 1)
   })
 
   it('can start to play a specific clip at any time', () => {
     const queue = useQueue()
     const queueLength = queue.upcoming.size()
-    queue.add(clip)
-    queue.add(clip2)
+    queue.add(clipFromTwitch)
+    queue.add(clipFromKick)
     expect(queue.upcoming.size()).toEqual(queueLength + 2)
-    queue.play(clip)
+    queue.play(clipFromTwitch)
     expect(queue.upcoming.size()).toEqual(queueLength + 1)
-    expect(queue.current).toEqual(clip)
-    expect(queue.upcoming.toArray()).toContainEqual(clip2)
-    expect(queue.upcoming.toArray()).not.toContainEqual(clip)
-    queue.play(clip2)
+    expect(queue.current).toEqual(clipFromTwitch)
+    expect(queue.upcoming.toArray()).toContainEqual(clipFromKick)
+    expect(queue.upcoming.toArray()).not.toContainEqual(clipFromTwitch)
+    queue.play(clipFromKick)
     expect(queue.upcoming.size()).toEqual(queueLength)
-    expect(queue.current).toEqual(clip2)
-    expect(queue.upcoming.toArray()).not.toContainEqual(clip2)
+    expect(queue.current).toEqual(clipFromKick)
+    expect(queue.upcoming.toArray()).not.toContainEqual(clipFromKick)
   })
 
   it('will do nothing if it trys to play a current clip that doesnt exist', () => {
     const queue = useQueue()
-    queue.add(clip)
-    queue.add(clip2)
-    queue.play({ id: 'not-valid', provider: ClipProvider.TWITCH })
-    expect(queue.upcoming.toArray()).toContainEqual(clip)
-    expect(queue.upcoming.toArray()).toContainEqual(clip2)
+    queue.add(clipFromTwitch)
+    queue.add(clipFromKick)
+    queue.play({ id: 'not-valid', provider: ClipProvider.TWITCH, submitters: [] })
+    expect(queue.upcoming.toArray()).toContainEqual(clipFromTwitch)
+    expect(queue.upcoming.toArray()).toContainEqual(clipFromKick)
     expect(queue.current).toEqual(undefined)
   })
 
   it('can remove clips when they are in the queue', () => {
     const queue = useQueue()
-    queue.add(clip)
-    queue.add(clip2)
+    queue.add(clipFromTwitch)
+    queue.add(clipFromKick)
     const queueLength = queue.upcoming.size()
     expect(queueLength).toEqual(2)
-    queue.remove(clip)
-    expect(queue.upcoming.toArray()).not.toContainEqual(clip)
+    queue.remove(clipFromTwitch)
+    expect(queue.upcoming.toArray()).not.toContainEqual(clipFromTwitch)
     expect(queue.upcoming.size()).toEqual(queueLength - 1)
-    queue.remove({ id: 'not-valid', provider: ClipProvider.TWITCH })
+    queue.remove({ id: 'not-valid', provider: ClipProvider.TWITCH, submitters: [] })
     expect(queue.upcoming.size()).toEqual(queueLength - 1)
   })
 
   it('removes user clips from the queue', () => {
     const queue = useQueue()
-    queue.add(clip2)
-    queue.add({ ...clip2, id: 'other' })
-    queue.add({ ...clip2, id: 'other2' })
-    queue.removeSubmitterClips('jordan2')
+    queue.add({ ...clipFromKick, submitters: ['jordan'] })
+    queue.add({ ...clipFromKick, id: 'other', submitters: ['jordan'] })
+    queue.add({ ...clipFromKick, id: 'other2', submitters: ['jordan'] })
+    queue.removeSubmitterClips('jordan')
     expect(queue.upcoming.size()).toEqual(0)
   })
 
@@ -122,40 +97,40 @@ describe('clips.ts', () => {
 
   it('can go back to playing the previous clip', () => {
     const queue = useQueue()
-    queue.add(clip)
-    queue.add(clip2)
+    queue.add(clipFromTwitch)
+    queue.add(clipFromKick)
     queue.next()
-    expect(queue.current).toEqual(clip)
+    expect(queue.current).toEqual(clipFromTwitch)
     queue.next()
-    expect(queue.current).toEqual(clip2)
+    expect(queue.current).toEqual(clipFromKick)
     queue.previous()
-    expect(queue.current).toEqual(clip)
+    expect(queue.current).toEqual(clipFromTwitch)
     queue.previous()
     expect(queue.current).toEqual(undefined)
   })
 
   it('can start playing the next clip', () => {
     const queue = useQueue()
-    queue.add(clip)
-    queue.add(clip2)
+    queue.add(clipFromTwitch)
+    queue.add(clipFromKick)
     queue.next()
-    expect(queue.current).toEqual(clip)
+    expect(queue.current).toEqual(clipFromTwitch)
     queue.next()
-    expect(queue.current).toEqual(clip2)
+    expect(queue.current).toEqual(clipFromKick)
     expect(queue.history.size()).toEqual(1)
   })
 
   it('does not add the current clip to previous when it is not defined', () => {
     const queue = useQueue()
-    queue.add(clip)
+    queue.add(clipFromTwitch)
     queue.next()
     expect(queue.history.size()).toEqual(0)
   })
 
   it('can purge all clips from the history', () => {
     const queue = useQueue()
-    queue.add(clip)
-    queue.add(clip2)
+    queue.add(clipFromTwitch)
+    queue.add(clipFromKick)
     queue.next()
     queue.next()
     queue.next()
@@ -166,36 +141,36 @@ describe('clips.ts', () => {
 
   it('can remove a specific clip from the history', () => {
     const queue = useQueue()
-    queue.add(clip)
-    queue.add(clip2)
+    queue.add(clipFromTwitch)
+    queue.add(clipFromKick)
     queue.next()
     queue.next()
     queue.next()
     expect(queue.history.size()).toEqual(2)
-    queue.removeFromHistory(clip2)
+    queue.removeFromHistory(clipFromKick)
     expect(queue.history.size()).toEqual(1)
-    expect(queue.history.toArray()).not.toContain(clip2)
+    expect(queue.history.toArray()).not.toContain(clipFromKick)
   })
 
   it('can have a limit set to prevent additional clips from being added', () => {
     const queue = useQueue()
     queue.updateSettings({ isLimited: true, limit: 2 })
-    queue.add({ id: 'test', submitter: 's', provider: ClipProvider.TWITCH })
-    queue.add({ id: 'test2', submitter: 's', provider: ClipProvider.TWITCH })
-    queue.add({ id: 'test3', submitter: 's', provider: ClipProvider.TWITCH })
+    queue.add({ id: 'test', submitters: ['s'], provider: ClipProvider.TWITCH })
+    queue.add({ id: 'test2', submitters: ['s'], provider: ClipProvider.TWITCH })
+    queue.add({ id: 'test3', submitters: ['s'], provider: ClipProvider.TWITCH })
     expect(queue.upcoming.size()).toEqual(2)
   })
 
   it('adds clips that are already there (even when full) to update submitters', () => {
-    const clip = { id: 'test', submitter: 'testsubmitter' } as Clip
+    const clip: Clip = { id: 'test', submitters: ['testsubmitter'], provider: ClipProvider.TWITCH }
     const queue = useQueue()
     queue.updateSettings({ isLimited: true, limit: 1 })
     queue.add(clip)
-    queue.add({ ...clip, submitter: 'testsubmitter2' })
+    queue.add({ ...clip, submitters: ['testsubmitter2'] })
     queue.add({ ...clip, id: 'test2' })
     expect(queue.upcoming.size()).toEqual(1)
     const queuedClip = queue.upcoming.pop()
-    expect(queuedClip?.submitter).toEqual('testsubmitter')
+    expect(queuedClip?.submitters[0]).toEqual('testsubmitter')
     expect(queuedClip?.submitters?.length).toEqual(2)
     expect(queuedClip?.submitters).toContain('testsubmitter')
     expect(queuedClip?.submitters).toContain('testsubmitter2')

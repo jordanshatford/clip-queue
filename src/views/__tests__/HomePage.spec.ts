@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
+import config from '@/assets/config'
 import HomePage from '../HomePage.vue'
-import config from '../../assets/config'
 
 describe('HomePage.vue', () => {
   const wrapper = shallowMount(HomePage)

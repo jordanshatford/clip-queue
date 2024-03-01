@@ -1,60 +1,17 @@
 import { beforeEach, describe, it, expect, vi } from 'vitest'
 import axios from 'axios'
-import { isClipUrl, getClipIdFromUrl, getClip, type KickClip } from '../kick'
-
-function mockKickResponse(url: string) {
-  const clip: KickClip = {
-    id: 'testid',
-    livestream_id: '12',
-    category_id: '1',
-    channel_id: 123,
-    user_id: 456,
-    title: 'Test title',
-    clip_url: url,
-    thumbnail_url: 'https://some.url',
-    privacy: 'CLIP_PRIVACY_PUBLIC',
-    likes: 1,
-    liked: false,
-    views: 123,
-    duration: 22,
-    started_at: '2024-02-22T08:45:01.796Z',
-    created_at: '2024-02-22T08:47:27.015764Z',
-    is_mature: true,
-    video_url: 'https://some.url',
-    view_count: 123,
-    likes_count: 1,
-    category: {
-      id: 15,
-      name: 'Just Chatting',
-      slug: 'just-chatting',
-      responsive:
-        'https://files.kick.com/images/subcategories/15/banner/b697a8a3-62db-4779-aa76-e4e47662af97',
-      banner:
-        'https://files.kick.com/images/subcategories/15/banner/b697a8a3-62db-4779-aa76-e4e47662af97',
-      parent_category: 'irl'
-    },
-    creator: {
-      id: 123,
-      username: 'test',
-      slug: 'test',
-      profile_picture: null
-    },
-    channel: {
-      id: 456,
-      username: 'testchannel',
-      slug: 'testchannel',
-      profile_picture: null
-    }
-  }
-  return {
-    clip: clip
-  }
-}
+import { mockKickClip } from '@/__tests__/mocks'
+import { isClipUrl, getClipIdFromUrl, getClip } from '../kick'
 
 vi.mock('axios', async () => {
   const mockGet = vi.fn().mockImplementation((url: string) => {
     return {
-      data: mockKickResponse(url)
+      data: {
+        clip: {
+          ...mockKickClip,
+          clip_url: url
+        }
+      }
     }
   })
   return {
@@ -74,9 +31,9 @@ describe('kick.ts', () => {
   })
 
   it('gets a kick clip from kick api', async () => {
-    const clip = await getClip('testid')
-    expect(clip?.id).toEqual('testid')
-    expect(clip?.title).toEqual('Test title')
+    const clip = await getClip('testclip')
+    expect(clip?.id).toEqual('testclip')
+    expect(clip?.title).toEqual('testtitle')
     expect(clip?.channel.username).toEqual('testchannel')
     expect(axios.create().get).toHaveBeenCalledTimes(1)
   })

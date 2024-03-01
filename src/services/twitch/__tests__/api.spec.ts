@@ -1,36 +1,22 @@
 import { beforeEach, describe, it, expect, vi } from 'vitest'
 import axios from 'axios'
+import { mockTwitchClip, mockTwitchGame } from '@/__tests__/mocks'
 import TwitchAPI from '../api'
 import { toCommonHeaders } from '../api'
-import type { TwitchClip, TwitchGame, TwitchUserCtx } from '..'
-
-function mockTwitchResponse(url: string) {
-  let data = {}
-  if (url.includes('clips')) {
-    data = [
-      {
-        id: 'testid',
-        game_id: 'testgame',
-        title: 'Test title',
-        broadcaster_name: 'testbroadcast',
-        created_at: '',
-        thumbnail_url: '',
-        url: 'https://clips.twitch.tv/CoyAuspiciousLarkDeIlluminati-2bABUuW_9EbnIv6j',
-        embed_url: 'https://clips.twitch.tv/CoyAuspiciousLarkDeIlluminati-2bABUuW_9EbnIv6j'
-      } as TwitchClip
-    ]
-  } else if (url.includes('games')) {
-    data = [{ id: 'gameid', name: 'Test Game' } as TwitchGame]
-  }
-  return {
-    data: data
-  }
-}
+import type { TwitchUserCtx } from '..'
 
 vi.mock('axios', async () => {
   const mockGet = vi.fn().mockImplementation((url: string) => {
+    let data = {}
+    if (url.includes('clips')) {
+      data = [mockTwitchClip]
+    } else if (url.includes('games')) {
+      data = [mockTwitchGame]
+    }
     return {
-      data: mockTwitchResponse(url)
+      data: {
+        data: data
+      }
     }
   })
   return {
@@ -50,19 +36,19 @@ describe('twitch-api.ts', () => {
   })
 
   it('gets a twitch clips from twitch api', async () => {
-    const clips = await TwitchAPI.getClips({ id: '', token: '', username: '' }, ['testid'])
+    const clips = await TwitchAPI.getClips({ id: '', token: '', username: '' }, ['testclip'])
     const clipInfo = clips[0]
-    expect(clipInfo.id).toEqual('testid')
-    expect(clipInfo.title).toEqual('Test title')
-    expect(clipInfo.broadcaster_name).toEqual('testbroadcast')
+    expect(clipInfo.id).toEqual('testclip')
+    expect(clipInfo.title).toEqual('testtitle')
+    expect(clipInfo.broadcaster_name).toEqual('testbroadcaster')
     expect(axios.create().get).toHaveBeenCalledTimes(1)
   })
 
   it('gets a twitch games from twitch api', async () => {
-    const games = await TwitchAPI.getGames({ id: '', token: '', username: '' }, ['gameid'])
+    const games = await TwitchAPI.getGames({ id: '', token: '', username: '' }, ['testgame'])
     const gameInfo = games[0]
-    expect(gameInfo.id).toEqual('gameid')
-    expect(gameInfo.name).toEqual('Test Game')
+    expect(gameInfo.id).toEqual('testgame')
+    expect(gameInfo.name).toEqual('testgame')
     expect(axios.create().get).toHaveBeenCalledTimes(1)
   })
 
