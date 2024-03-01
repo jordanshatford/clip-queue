@@ -38,14 +38,14 @@
             </p>
           </div>
         </div>
+        <p v-else-if="column.key === 'provider'" class="cq-text text-left text-sm">
+          {{ row.provider }}
+        </p>
         <p v-else-if="column.key === 'submitter'" class="cq-text text-left text-sm">
-          {{ row.submitter }} <span class="cq-text-subtle">({{ row.source }})</span>
+          {{ row.submitters[0] }}
         </p>
         <div v-else-if="column.key === 'actions'" class="mt-2 inline-flex space-x-2">
-          <BaseButton
-            :disabled="queue.upcoming.includes(row)"
-            @click="queue.add({ ...row, source: ClipSource.HISTORY }, true)"
-          >
+          <BaseButton :disabled="queue.upcoming.includes(row)" @click="queue.add(row, true)">
             <PlusIcon class="h-5 w-5" />
           </BaseButton>
           <BaseButton variant="danger" @click="queue.removeFromHistory(row)">
@@ -63,7 +63,6 @@ import { computed, ref } from 'vue'
 import { PlusIcon, TrashIcon, ArrowTopRightOnSquareIcon } from '@/assets/icons'
 import config from '@/assets/config'
 import { useQueue } from '@/stores/queue'
-import { ClipSource } from '@/interfaces/clips'
 import { useConfirm } from '@/plugins/confirm'
 
 const queue = useQueue()
@@ -75,6 +74,10 @@ const columns = [
   {
     key: 'info',
     title: 'Info'
+  },
+  {
+    key: 'provider',
+    title: 'Provider'
   },
   {
     key: 'submitter',

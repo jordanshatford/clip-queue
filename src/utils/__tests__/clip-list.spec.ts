@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { ClipProvider, type Clip } from '../../interfaces/clips'
+import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
+import { ClipProvider } from '@/providers'
 import { ClipList } from '../clip-list'
 
 describe('clip-list.ts', () => {
@@ -11,30 +12,27 @@ describe('clip-list.ts', () => {
     clipList = new ClipList()
     randomNumber = Math.floor(Math.random() * 25) + 5
     for (let i = startNumber; i <= randomNumber; i++) {
-      clipList.add({ id: `test-id-${i}`, submitter: 'test', provider: ClipProvider.TWITCH })
+      clipList.add({ ...clipFromTwitch, id: `test-id-${i}` })
     }
   })
 
   it('can be constructed with clips', () => {
-    const clipList2 = new ClipList(
-      { id: '1', provider: ClipProvider.TWITCH },
-      { id: '2', provider: ClipProvider.TWITCH }
-    )
+    const clipList2 = new ClipList(clipFromTwitch, clipFromKick)
     expect(clipList2.size()).toEqual(2)
-    expect(clipList2.shift()?.id).toEqual('1')
-    expect(clipList2.shift()?.id).toEqual('2')
+    expect(clipList2.shift()?.id).toEqual('testcliptwitch')
+    expect(clipList2.shift()?.id).toEqual('testclipkick')
   })
 
   it('can have clips added to it', () => {
     expect(clipList.size()).toEqual(randomNumber)
-    clipList.add({ id: 'test-id-push', submitter: 'test', provider: ClipProvider.TWITCH })
+    clipList.add({ ...clipFromTwitch, id: 'test-id-push' })
     expect(clipList.size()).toEqual(randomNumber + 1)
     expect(clipList.pop()?.id).toEqual('test-id-push')
   })
 
   it('can have clips unshifted to it', () => {
     expect(clipList.size()).toEqual(randomNumber)
-    clipList.unshift({ id: 'test-id-push', provider: ClipProvider.TWITCH })
+    clipList.unshift({ ...clipFromTwitch, id: 'test-id-push' })
     expect(clipList.size()).toEqual(randomNumber + 1)
     expect(clipList.shift()?.id).toEqual('test-id-push')
   })
@@ -51,21 +49,29 @@ describe('clip-list.ts', () => {
 
   it('can have clips removed from it', () => {
     expect(
-      clipList.includes({ id: `test-id-${startNumber}`, provider: ClipProvider.TWITCH })
+      clipList.includes({
+        ...clipFromTwitch,
+        id: `test-id-${startNumber}`
+      })
     ).toEqual(true)
     clipList.remove({
-      id: `test-id-${startNumber}`,
-      submitter: 'test',
-      provider: ClipProvider.TWITCH
+      ...clipFromTwitch,
+      id: `test-id-${startNumber}`
     })
     expect(
-      clipList.includes({ id: `test-id-${startNumber}`, provider: ClipProvider.TWITCH })
+      clipList.includes({
+        ...clipFromTwitch,
+        id: `test-id-${startNumber}`
+      })
     ).toEqual(false)
   })
 
   it('can return if it has a clip', () => {
     expect(
-      clipList.includes({ id: `test-id-${startNumber}`, provider: ClipProvider.TWITCH })
+      clipList.includes({
+        ...clipFromTwitch,
+        id: `test-id-${startNumber}`
+      })
     ).toEqual(true)
   })
 
@@ -87,7 +93,7 @@ describe('clip-list.ts', () => {
     expect(testClipList.size()).toEqual(0)
     const randomNumber2 = Math.floor(Math.random() * 25) + 5
     for (let i = 1; i <= randomNumber2; i++) {
-      testClipList.add({ id: `${i}`, provider: ClipProvider.TWITCH })
+      testClipList.add({ ...clipFromTwitch, id: `${i}` })
       expect(testClipList.size()).toEqual(i)
     }
     expect(testClipList.size()).toEqual(randomNumber2)
@@ -106,7 +112,10 @@ describe('clip-list.ts', () => {
   })
 
   it('can have clips removed from it based on submitter when the clip has one submitter', () => {
-    const clipWithSubmitter = { id: 'withuser', submitter: 'jordan', provider: ClipProvider.TWITCH }
+    const clipWithSubmitter = {
+      ...clipFromTwitch,
+      submitters: ['jordan']
+    }
     expect(clipList.includes(clipWithSubmitter)).toEqual(false)
     clipList.add(clipWithSubmitter)
     expect(clipList.includes(clipWithSubmitter)).toEqual(true)
@@ -115,88 +124,84 @@ describe('clip-list.ts', () => {
   })
 
   it('can add multiple submitters for the same clip', () => {
-    const clip = { id: 'test', submitter: 'testsubmitter' } as Clip
     const clipList2 = new ClipList()
-    clipList2.add(clip)
-    clipList2.add({ ...clip, submitter: 'testsubmitter2' })
+    clipList2.add(clipFromTwitch)
+    clipList2.add({ ...clipFromTwitch, submitters: ['testsubmitter2'] })
     expect(clipList2.size()).toEqual(1)
     const queuedClip = clipList2.pop()
-    expect(queuedClip?.submitter).toEqual('testsubmitter')
+    expect(queuedClip?.submitters[0]).toEqual('testsubmittertwitch')
     expect(queuedClip?.submitters?.length).toEqual(2)
-    expect(queuedClip?.submitters).toContain('testsubmitter')
+    expect(queuedClip?.submitters).toContain('testsubmittertwitch')
     expect(queuedClip?.submitters).toContain('testsubmitter2')
   })
 
   it('can remove by submitter the first submitter from a clip which has multiple submitters', () => {
-    const clip = { id: 'test', submitter: 'testsubmitter' } as Clip
     const clipList2 = new ClipList()
-    clipList2.add(clip)
-    clipList2.add({ ...clip, submitter: 'testsubmitter2' })
+    clipList2.add(clipFromTwitch)
+    clipList2.add({ ...clipFromTwitch, submitters: ['testsubmitter2'] })
     expect(clipList2.size()).toEqual(1)
-    clipList2.removeBySubmitter('testsubmitter')
+    clipList2.removeBySubmitter('testsubmittertwitch')
     expect(clipList2.size()).toEqual(1)
     const queuedClip = clipList2.pop()
-    expect(queuedClip?.submitter).toEqual('testsubmitter2')
+    expect(queuedClip?.submitters[0]).toEqual('testsubmitter2')
     expect(queuedClip?.submitters?.length).toEqual(1)
-    expect(queuedClip?.submitters).not.toContain('testsubmitter')
+    expect(queuedClip?.submitters).not.toContain('testsubmittertwitch')
     expect(queuedClip?.submitters).toContain('testsubmitter2')
   })
 
   it('can remove by submitter the second submitter from a clip which has multiple submitters', () => {
-    const clip = { id: 'test', submitter: 'testsubmitter' } as Clip
     const clipList2 = new ClipList()
-    clipList2.add(clip)
-    clipList2.add({ ...clip, submitter: 'testsubmitter2' })
+    clipList2.add({ ...clipFromTwitch, submitters: ['testsubmitter'] })
+    clipList2.add({ ...clipFromTwitch, submitters: ['testsubmitter2'] })
     expect(clipList2.size()).toEqual(1)
+    expect(clipList2.toArray()[0].submitters.length).toEqual(2)
     clipList2.removeBySubmitter('testsubmitter2')
     expect(clipList2.size()).toEqual(1)
     const queuedClip = clipList2.pop()
-    expect(queuedClip?.submitter).toEqual('testsubmitter')
+    expect(queuedClip?.submitters[0]).toEqual('testsubmitter')
     expect(queuedClip?.submitters?.length).toEqual(1)
     expect(queuedClip?.submitters).not.toContain('testsubmitter2')
     expect(queuedClip?.submitters).toContain('testsubmitter')
   })
 
   it('can remove the first submitter from a clip which has multiple submitters', () => {
-    const clip = { id: 'test', submitter: 'testsubmitter' } as Clip
     const clipList2 = new ClipList()
-    clipList2.add(clip)
-    clipList2.add({ ...clip, submitter: 'testsubmitter2' })
+    clipList2.add({ ...clipFromTwitch, submitters: ['testsubmitter'] })
+    clipList2.add({ ...clipFromTwitch, submitters: ['testsubmitter2'] })
     expect(clipList2.size()).toEqual(1)
-    clipList2.remove({ ...clip, submitter: 'testsubmitter2' })
+    clipList2.remove({ ...clipFromTwitch, submitters: ['testsubmitter2'] })
     expect(clipList2.size()).toEqual(1)
     const queuedClip = clipList2.pop()
-    expect(queuedClip?.submitter).toEqual('testsubmitter')
+    // expect(queuedClip?.submitter).toEqual('testsubmitter')
     expect(queuedClip?.submitters?.length).toEqual(1)
     expect(queuedClip?.submitters).not.toContain('testsubmitter2')
     expect(queuedClip?.submitters).toContain('testsubmitter')
   })
 
   it('can remove the second submitter from a clip which has multiple submitters', () => {
-    const clip = { id: 'test', submitter: 'testsubmitter', provider: ClipProvider.TWITCH } as Clip
     const clipList2 = new ClipList()
-    clipList2.add(clip)
-    clipList2.add({ ...clip, submitter: 'testsubmitter2' })
+    clipList2.add(clipFromTwitch)
+    clipList2.add({ ...clipFromTwitch, submitters: ['testsubmitter2'] })
     expect(clipList2.size()).toEqual(1)
-    clipList2.remove({ id: 'test', submitter: 'testsubmitter', provider: ClipProvider.TWITCH })
+    clipList2.remove({ ...clipFromTwitch, submitters: ['testsubmittertwitch'] })
     expect(clipList2.size()).toEqual(1)
     const queuedClip = clipList2.pop()
-    expect(queuedClip?.submitter).toEqual('testsubmitter2')
+    expect(queuedClip?.submitters[0]).toEqual('testsubmitter2')
     expect(queuedClip?.submitters?.length).toEqual(1)
-    expect(queuedClip?.submitters).not.toContain('testsubmitter')
+    expect(queuedClip?.submitters).not.toContain('testsubmittertwitch')
     expect(queuedClip?.submitters).toContain('testsubmitter2')
   })
 
   it('sorts the list of clips based on number of submitters', () => {
     const clipList2 = new ClipList()
     for (let i = 1; i <= 8; i++) {
-      clipList2.add({ id: 'test', submitter: `submitter${i}`, provider: ClipProvider.TWITCH })
+      clipList2.add({ ...clipFromTwitch, id: 'test', submitters: [`submitter${i}`] })
     }
     for (let i = 1; i <= 10; i++) {
-      clipList2.add({ id: 'test2', submitter: `submitter${i}`, provider: ClipProvider.TWITCH })
+      clipList2.add({ ...clipFromTwitch, id: 'test2', submitters: [`submitter${i}`] })
     }
     for (let i = 1; i <= 3; i++) {
-      clipList2.add({ id: 'test3', submitter: `submitter${i}`, provider: ClipProvider.TWITCH })
+      clipList2.add({ ...clipFromTwitch, id: 'test3', submitters: [`submitter${i}`] })
     }
     const clipListArray2 = clipList2.toArray()
     expect(clipListArray2[0]?.id).toEqual('test2')
@@ -207,13 +212,13 @@ describe('clip-list.ts', () => {
   it('sorts the list of clips based on number of submitters then the time submitted', () => {
     const clipList2 = new ClipList()
     for (let i = 1; i <= 10; i++) {
-      clipList2.add({ id: 'test', submitter: `submitter${i}`, provider: ClipProvider.TWITCH })
+      clipList2.add({ ...clipFromTwitch, id: 'test', submitters: [`submitter${i}`] })
     }
     for (let i = 1; i <= 10; i++) {
-      clipList2.add({ id: 'test2', submitter: `submitter${i}`, provider: ClipProvider.TWITCH })
+      clipList2.add({ ...clipFromTwitch, id: 'test2', submitters: [`submitter${i}`] })
     }
     for (let i = 1; i <= 10; i++) {
-      clipList2.add({ id: 'test3', submitter: `submitter${i}`, provider: ClipProvider.TWITCH })
+      clipList2.add({ ...clipFromTwitch, id: 'test3', submitters: [`submitter${i}`] })
     }
     const clipListArray2 = clipList2.toArray()
     expect(clipListArray2[0]?.id).toEqual('test')
@@ -224,7 +229,7 @@ describe('clip-list.ts', () => {
   it('can remove multiple clips when removing based on submitter', () => {
     const clipList2 = new ClipList()
     for (let i = 1; i <= 10; i++) {
-      clipList2.add({ id: `test${i}`, submitter: 's', provider: ClipProvider.TWITCH })
+      clipList2.add({ ...clipFromTwitch, id: `test${i}`, submitters: ['s'] })
     }
     expect(clipList2.size()).toEqual(10)
     clipList2.removeBySubmitter('s')
@@ -233,7 +238,7 @@ describe('clip-list.ts', () => {
 
   it('does not care about case of the submitter when removing based on a submitter', () => {
     const clipList2 = new ClipList()
-    clipList2.add({ id: 'test', submitter: 's', provider: ClipProvider.TWITCH })
+    clipList2.add({ ...clipFromTwitch, id: 'test', submitters: ['s'] })
     expect(clipList2.size()).toEqual(1)
     clipList2.removeBySubmitter('S')
     expect(clipList2.size()).toEqual(0)
@@ -241,25 +246,25 @@ describe('clip-list.ts', () => {
 
   it('does not care about case of submitter when removing clip', () => {
     const clipList2 = new ClipList()
-    clipList2.add({ id: 'test', submitter: 's', provider: ClipProvider.TWITCH })
+    clipList2.add({ ...clipFromTwitch, id: 'test', submitters: ['s'] })
     expect(clipList2.size()).toEqual(1)
-    clipList2.remove({ id: 'test', submitter: 'S', provider: ClipProvider.TWITCH })
+    clipList2.remove({ ...clipFromTwitch, id: 'test', submitters: ['S'] })
     expect(clipList2.size()).toEqual(0)
   })
 
   it('does not add the same submitter to a clip twice', () => {
     const clipList2 = new ClipList()
-    clipList2.add({ id: 'test', submitter: 's', provider: ClipProvider.TWITCH })
-    clipList2.add({ id: 'test', submitter: 'S', provider: ClipProvider.TWITCH })
-    clipList2.add({ id: 'test', submitter: 's', provider: ClipProvider.TWITCH })
+    clipList2.add({ ...clipFromTwitch, id: 'test', submitters: ['s'] })
+    clipList2.add({ ...clipFromTwitch, id: 'test', submitters: ['S'] })
+    clipList2.add({ ...clipFromTwitch, id: 'test', submitters: ['s'] })
     expect(clipList2.size()).toEqual(1)
     expect(clipList2.toArray()[0].submitters?.length).toEqual(1)
   })
 
   it('adds multiple clips with the same id if they are from different providers', () => {
     const clipList2 = new ClipList()
-    clipList2.add({ id: 'test', submitter: 's', provider: ClipProvider.TWITCH })
-    clipList2.add({ id: 'test', submitter: 'S', provider: ClipProvider.KICK })
+    clipList2.add({ ...clipFromTwitch, id: 'test', submitters: ['s'] })
+    clipList2.add({ ...clipFromKick, id: 'test', submitters: ['S'] })
     expect(clipList2.size()).toEqual(2)
     expect(clipList2.toArray()[0].id).toEqual(clipList2.toArray()[1].id)
     expect(clipList2.toArray()[0].provider).toEqual(ClipProvider.TWITCH)

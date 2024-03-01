@@ -1,4 +1,4 @@
-import type { Clip } from '@/interfaces/clips'
+import type { Clip } from '@/providers'
 
 export class ClipList {
   private _clips: Clip[]
@@ -15,13 +15,12 @@ export class ClipList {
       if (this.includes(clip)) {
         const index = this._clips.findIndex((c) => c.id === clip.id && c.provider === clip.provider)
         const submitters = this._clips[index]?.submitters ?? []
-        const submitter = clip.submitter?.toLowerCase()
+        const submitter = clip.submitters[0]?.toLowerCase()
         if (submitter && !submitters.includes(submitter)) {
           this._clips[index].submitters = [...submitters, submitter]
         }
       } else {
-        const submitter = clip.submitter?.toLowerCase()
-        this._clips.push({ ...clip, submitter, submitters: submitter ? [submitter] : [] })
+        this._clips.push(clip)
       }
     })
     this.sort()
@@ -31,7 +30,7 @@ export class ClipList {
   public remove(clip: Clip): void {
     const index = this._clips.findIndex((c) => c.id === clip.id && c.provider === clip.provider)
     if (index > -1) {
-      this.removeSubmitterFromClip(clip?.submitter?.toLowerCase() as string, index)
+      this.removeSubmitterFromClip(clip?.submitters[0]?.toLowerCase(), index)
       this.sort()
     }
   }
@@ -82,10 +81,6 @@ export class ClipList {
         // Remove only the submitter
         const submitters = c.submitters?.filter((s) => !(s === submitter))
         this._clips[index].submitters = submitters
-        // Check if submitter needs to be set from list of submitters
-        if (c.submitter === submitter) {
-          this._clips[index].submitter = submitters[0]
-        }
       }
     }
   }

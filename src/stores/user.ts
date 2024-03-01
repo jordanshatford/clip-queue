@@ -7,8 +7,7 @@ import commands from '@/utils/commands'
 import { getUrlFromMessage } from '@/utils'
 import { useQueue } from '@/stores/queue'
 import { useModeration } from '@/stores/moderation'
-import { useClipFinder } from '@/stores/clip-finder'
-import { ClipSource } from '@/interfaces/clips'
+import { useProviders } from '@/stores/providers'
 
 const { CLIENT_ID, REDIRECT_URI } = env
 const { scopes } = config.twitch
@@ -110,24 +109,13 @@ export const useUser = defineStore('user', {
 
       const url = getUrlFromMessage(message)
       if (url) {
-        const clipFinder = useClipFinder()
-        clipFinder.getTwitchClip(url).then((clip) => {
-          if (clip) {
+        const providers = useProviders()
+        providers.getClip(url).then((clip) => {
+          if (clip && userstate.username) {
             const queue = useQueue()
             queue.add({
               ...clip,
-              submitter: userstate.username,
-              source: ClipSource.CHAT
-            })
-          }
-        })
-        clipFinder.getKickClip(url).then((clip) => {
-          if (clip) {
-            const queue = useQueue()
-            queue.add({
-              ...clip,
-              submitter: userstate.username,
-              source: ClipSource.CHAT
+              submitters: [userstate.username]
             })
           }
         })
@@ -140,22 +128,13 @@ export const useUser = defineStore('user', {
       }
       const url = getUrlFromMessage(deletedMessage)
       if (url) {
-        const clipFinder = useClipFinder()
-        clipFinder.getTwitchClip(url).then((clip) => {
+        const providers = useProviders()
+        providers.getClip(url).then((clip) => {
           if (clip) {
             const queue = useQueue()
             queue.remove({
               ...clip,
-              submitter: username
-            })
-          }
-        })
-        clipFinder.getKickClip(url).then((clip) => {
-          if (clip) {
-            const queue = useQueue()
-            queue.remove({
-              ...clip,
-              submitter: username
+              submitters: [username]
             })
           }
         })

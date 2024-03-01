@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import ClipCard from '@/components/ClipCard.vue'
-import type { Clip } from '@/interfaces/clips'
+import type { Clip } from '@/providers'
 
 export interface Props {
   title?: string

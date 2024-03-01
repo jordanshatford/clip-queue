@@ -2,15 +2,15 @@
   <div class="player player-container">
     <div v-if="clip.id" class="player player-container h-auto w-full bg-black">
       <iframe
-        v-if="clip.provider === ClipProvider.TWITCH"
-        :src="`${clip.embedUrl}&autoplay=true&parent=${hostname}`"
+        v-if="playerFormat === 'iframe'"
+        :src="playerSource"
         :title="clip.title"
         class="player h-auto w-full bg-black"
         allowfullscreen
       ></iframe>
       <VideoJS
-        v-else-if="clip.provider === ClipProvider.KICK"
-        :source="clip.embedUrl"
+        v-else-if="playerFormat === 'video'"
+        :source="playerSource"
         :poster="clip.thumbnailUrl"
         autoplay
       />
@@ -41,22 +41,22 @@
         </div>
       </h2>
       <div class="cq-text-subtle">
-        <span v-if="clip.channel && clip.game">
+        <span v-if="clip.channel && clip.category">
           <span className="cq-text-subtle-semibold">{{ clip.channel }}</span>
           playing
-          <span className="cq-text-subtle-semibold">{{ clip.game }}</span>
+          <span className="cq-text-subtle-semibold">{{ clip.category }}</span>
         </span>
         <span v-if="timeAgo">
           - clipped
           <span className="cq-text-subtle-semibold">{{ timeAgo }}</span>
           ago
         </span>
-        <span v-if="clip.submitter">
+        <span v-if="clip.submitters[0]">
           - Submitted by
-          <span className="cq-text-subtle-semibold">{{ clip.submitter }}</span>
-          <span v-if="clip.source">
+          <span className="cq-text-subtle-semibold">{{ clip.submitters[0] }}</span>
+          <span v-if="clip.provider">
             from
-            <span className="cq-text-subtle-semibold">{{ clip.source }}</span>
+            <span className="cq-text-subtle-semibold">{{ clip.provider }}</span>
           </span>
         </span>
       </div>
@@ -68,8 +68,9 @@
 import { computed } from 'vue'
 import { ArrowTopRightOnSquareIcon, BackwardIcon, ForwardIcon } from '@/assets/icons'
 import { formatDistanceToNow, parseISO } from 'date-fns'
-import { ClipProvider, type Clip } from '@/interfaces/clips'
-import VideoJS from './VideoJSPlayer.vue'
+import type { Clip, PlayerFormat } from '@/providers'
+import { useProviders } from '@/stores/providers'
+import VideoJS from '@/components/VideoJSPlayer.vue'
 
 export interface Props {
   clip: Clip
@@ -87,14 +88,22 @@ const emit = defineEmits<{
   (e: 'next'): void
 }>()
 
+const providers = useProviders()
+
+const playerFormat = computed<PlayerFormat | undefined>(() => {
+  return providers.getPlayerFormat(props.clip)
+})
+
+const playerSource = computed<string | undefined>(() => {
+  return providers.getPlayerSource(props.clip)
+})
+
 const timeAgo = computed<string>(() => {
-  if (props.clip?.timestamp) {
-    return formatDistanceToNow(parseISO(props.clip.timestamp))
+  if (props.clip?.createdAt) {
+    return formatDistanceToNow(parseISO(props.clip.createdAt))
   }
   return ''
 })
-
-const hostname = window.location.hostname
 </script>
 
 <style>

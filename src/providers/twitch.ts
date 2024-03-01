@@ -66,5 +66,3 @@ export class TwitchProvider implements IClipProvider {
     return `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`
   }
 }
-
-export const twitchProvider = new TwitchProvider()

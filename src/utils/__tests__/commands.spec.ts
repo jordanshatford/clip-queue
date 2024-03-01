@@ -1,8 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
+import { useQueue } from '@/stores/queue'
+import { useModeration } from '@/stores/moderation'
+import { useProviders } from '@/stores/providers'
 import commands from '../commands'
-import { useQueue } from '../../stores/queue'
-import { useModeration } from '../../stores/moderation'
 
 describe('commands.ts', () => {
   beforeEach(() => {
@@ -16,12 +17,24 @@ describe('commands.ts', () => {
     ['open', 'open'],
     ['close', 'close'],
     ['clear', 'clear'],
-    ['removelimit', 'removeLimit']
+    ['removelimit', 'removeLimit'],
+    ['purgehistory', 'purge']
   ])(
     'calls the proper clip queue function when a command is issued (%s, %s)',
     (commandName: string, expectedFunctionCall: any) => {
       const queue = useQueue()
       const spy = vi.spyOn(queue, expectedFunctionCall)
+      commands.handleCommand(commandName)
+      expect(spy).toHaveBeenCalledTimes(1)
+    }
+  )
+
+  /* eslint-disable @typescript-eslint/no-explicit-any*/
+  it.each([['purgecache', 'purge']])(
+    'calls the proper clip queue function when a command is issued (%s, %s)',
+    (commandName: string, expectedFunctionCall: any) => {
+      const providers = useProviders()
+      const spy = vi.spyOn(providers, expectedFunctionCall)
       commands.handleCommand(commandName)
       expect(spy).toHaveBeenCalledTimes(1)
     }

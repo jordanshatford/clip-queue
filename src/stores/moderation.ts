@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Clip } from '@/interfaces/clips'
+import type { Clip } from '@/providers'
 import { deepEqual } from '@/utils'
 
 export interface Moderation {
@@ -40,7 +40,7 @@ export const useModeration = defineStore('moderation', {
           (c) => c.toLowerCase() === clip.channel?.toLowerCase()
         )
         const blockedSubmitter = state.blockedSubmitters.some(
-          (s) => s.toLowerCase() === clip.submitter?.toLowerCase()
+          (s) => s.toLowerCase() === clip.submitters[0]?.toLowerCase()
         )
         return !blockedChannel && !blockedSubmitter
       }
