@@ -1,6 +1,7 @@
 import { useQueue } from '@/stores/queue'
 import { useModeration } from '@/stores/moderation'
 import { useProviders } from '@/stores/providers'
+import { ClipProvider } from '@/providers'
 
 export enum Command {
   OPEN = 'open',
@@ -14,6 +15,9 @@ export enum Command {
   UNBLOCK_CHANNEL = 'unblockchannel',
   BLOCK_SUBMITTER = 'blocksubmitter',
   UNBLOCK_SUBMITTER = 'unblocksubmitter',
+  REMOVE_BY_SUBMITTER = 'removebysubmitter',
+  REMOVE_BY_CHANNEL = 'removebychannel',
+  REMOVE_BY_PROVIDER = 'removebyprovider',
   PURGE_CACHE = 'purgecache',
   PURGE_HISTORY = 'purgehistory'
 }
@@ -49,6 +53,19 @@ const help: Record<Command, CommandHelp> = {
   [Command.UNBLOCK_SUBMITTER]: {
     args: ['submitter'],
     description: 'Unblock clips submitted from specified user.'
+  },
+  [Command.REMOVE_BY_SUBMITTER]: {
+    args: ['submitter'],
+    description:
+      'Remove any clips that are in the queue and have been submitted by the given submitter.'
+  },
+  [Command.REMOVE_BY_CHANNEL]: {
+    args: ['channel'],
+    description: 'Remove any clips in the queue that are of the given channel.'
+  },
+  [Command.REMOVE_BY_PROVIDER]: {
+    args: ['provider'],
+    description: 'Remove any clips in the queue that are from a given provider.'
   },
   [Command.PURGE_CACHE]: {
     description: 'Purge all cached clips.'
@@ -116,6 +133,27 @@ export function handleCommand(command: string, ...args: string[]) {
       if (args[0]) {
         const moderation = useModeration()
         moderation.removeBlockedSubmitter(args[0])
+      }
+      break
+    }
+    case Command.REMOVE_BY_SUBMITTER: {
+      if (args[0]) {
+        queue.removeSubmitterClips(args[0])
+        return
+      }
+      break
+    }
+    case Command.REMOVE_BY_CHANNEL: {
+      if (args[0]) {
+        queue.removeChannelClips(args[0])
+        return
+      }
+      break
+    }
+    case Command.REMOVE_BY_PROVIDER: {
+      if (args[0]) {
+        queue.removeProviderClips(args[0] as ClipProvider)
+        return
       }
       break
     }

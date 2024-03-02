@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ClipList } from '@/utils/clip-list'
-import type { Clip } from '@/providers'
+import type { Clip, ClipProvider } from '@/providers'
 import { useModeration } from '@/stores/moderation'
 import { deepEqual } from '@/utils'
 
@@ -94,6 +94,12 @@ export const useQueue = defineStore('queue', {
     },
     removeSubmitterClips(submitter: string) {
       this.upcoming.removeBySubmitter(submitter)
+    },
+    removeChannelClips(channel: string) {
+      this.upcoming.removeByChannel(channel)
+    },
+    removeProviderClips(provider: ClipProvider) {
+      this.upcoming.removeByProvider(provider)
     },
     removeFromHistory(clip: Clip) {
       this.history.remove(clip)

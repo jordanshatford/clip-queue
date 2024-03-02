@@ -42,6 +42,20 @@ Twitch Clip Queue provides a set of commands accessible through Twich chat for m
 
 > NOTE: if the submitter was not previously blocked, then this does nothing.
 
+## Remove Clip Commands
+
+`!cqremovebysubmitter <submitter>`: Remove any clips that are in the queue and have been submitted by the given submitter.
+
+> NOTE: if the submitter exists on multiple providers it will remove all of those clips. If a clip has multiple submitters it will remove the submitter from that clip.
+
+`!cqremovebychannel <channel>`: Remove any clips in the queue that are of the given channel.
+
+> NOTE: if the channel exists on multiple providers it will remove clips from all of the providers.
+
+`!cqremovebyprovider <provider>`: Remove any clips in the queue that are from a given provider.
+
+> NOTE: if the provider specified is invalid this will be ignored.
+
 ## Caching and History Commands
 
 `!cqpurgecache`: Purge all cached clips. Clips are cached to prevent needing to reuse the providers API many times for the same clip.

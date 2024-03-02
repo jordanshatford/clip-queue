@@ -83,8 +83,30 @@ describe('clips.ts', () => {
     queue.add({ ...clipFromKick, submitters: ['jordan'] })
     queue.add({ ...clipFromKick, id: 'other', submitters: ['jordan'] })
     queue.add({ ...clipFromKick, id: 'other2', submitters: ['jordan'] })
+    expect(queue.upcoming.size()).toEqual(3)
     queue.removeSubmitterClips('jordan')
     expect(queue.upcoming.size()).toEqual(0)
+  })
+
+  it('removes channel clips from the queue', () => {
+    const queue = useQueue()
+    queue.add({ ...clipFromKick, channel: 'testchannel' })
+    queue.add({ ...clipFromKick, id: 'other', channel: 'testchannel' })
+    queue.add({ ...clipFromKick, id: 'other2', channel: 'testchannel' })
+    expect(queue.upcoming.size()).toEqual(3)
+    queue.removeChannelClips('testchannel')
+    expect(queue.upcoming.size()).toEqual(0)
+  })
+
+  it('removes provider clips from the queue', () => {
+    const queue = useQueue()
+    queue.add(clipFromKick)
+    queue.add({ ...clipFromKick, id: 'other' })
+    queue.add({ ...clipFromKick, id: 'other2' })
+    queue.add(clipFromTwitch)
+    expect(queue.upcoming.size()).toEqual(4)
+    queue.removeProviderClips(ClipProvider.KICK)
+    expect(queue.upcoming.size()).toEqual(1)
   })
 
   it('opens and closes the queue properly', () => {

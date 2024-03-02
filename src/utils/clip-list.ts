@@ -1,4 +1,4 @@
-import type { Clip } from '@/providers'
+import type { Clip, ClipProvider } from '@/providers'
 
 export class ClipList {
   private _clips: Clip[]
@@ -40,6 +40,14 @@ export class ClipList {
       this.removeSubmitterFromClip(submitter.toLowerCase(), i)
     }
     this.sort()
+  }
+
+  public removeByChannel(channel: string): void {
+    this._clips = this._clips.filter((c) => c.channel?.toLowerCase() !== channel.toLowerCase())
+  }
+
+  public removeByProvider(provider: ClipProvider): void {
+    this._clips = this._clips.filter((c) => c.provider.toLowerCase() !== provider.toLowerCase())
   }
 
   public includes(clip: Clip): boolean {

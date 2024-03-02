@@ -42,7 +42,10 @@ describe('commands.ts', () => {
 
   it.each([
     ['setlimit', ['100'], 'setLimit', [100]],
-    ['setlimit', ['somethinginvalid'], 'setLimit', [NaN]]
+    ['setlimit', ['somethinginvalid'], 'setLimit', [NaN]],
+    ['removebysubmitter', ['testsubmitter'], 'removeSubmitterClips', ['testsubmitter']],
+    ['removebychannel', ['testchannel'], 'removeChannelClips', ['testchannel']],
+    ['removebyprovider', ['testprovider'], 'removeProviderClips', ['testprovider']]
   ])(
     'calls the proper clip queue function with params when issued (%s, %s)',
     (
