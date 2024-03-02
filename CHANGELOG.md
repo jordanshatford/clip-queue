@@ -1,5 +1,15 @@
 # twitch-clip-queue
 
+## 1.3.0
+
+### Minor Changes
+
+- feat: add command to remove clips by submitter ([#241](https://github.com/jordanshatford/twitch-clip-queue/pull/241))
+
+- feat: add command to remove clips by provider ([#241](https://github.com/jordanshatford/twitch-clip-queue/pull/241))
+
+- feat: add command to remove clips by channel ([#241](https://github.com/jordanshatford/twitch-clip-queue/pull/241))
+
 ## 1.2.0
 
 ### Minor Changes
