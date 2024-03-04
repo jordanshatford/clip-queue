@@ -25,11 +25,10 @@
           <label>The following commands are available to mods: </label>
           <ul class="list-disc pl-8">
             <li v-for="(help, command) in commands.help" :key="command">
-              <span class="cq-text-subtle-semibold"
-                >{{ `${settings.commandPrefix}${command}` }}
-                {{ help.args?.map((arg) => `<${arg}>`).join(' ') }}</span
-              >
-              : {{ help.description }}
+              <code class="cq-text-subtle-semibold"
+                >{{ `${settings.commandPrefix}${command}` }}{{ help.args?.length > 0 ? ' ' : ''
+                }}{{ help.args?.map((arg) => `<${arg}>`).join(' ') }}</code
+              >: {{ help.description }}
             </li>
           </ul>
         </div>
