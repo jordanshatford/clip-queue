@@ -52,7 +52,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useToast } from 'vue-toastification'
+import { useToast } from 'primevue/usetoast'
 import { useModeration, type Moderation } from '@/stores/moderation'
 import { clone } from '@/utils'
 
@@ -69,7 +69,11 @@ function onReset() {
 
 function onSubmit() {
   moderation.update(formSettings.value)
-  toast.success('Moderation settings saved')
+  toast.add({
+    severity: 'success',
+    summary: 'Moderation settings saved',
+    life: 3000
+  })
   onReset()
 }
 </script>

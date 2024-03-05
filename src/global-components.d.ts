@@ -8,6 +8,7 @@ import InputSwitch from 'primevue/inputswitch'
 import InputText from 'primevue/inputtext'
 import MultiSelect from 'primevue/multiselect'
 import TabMenu from 'primevue/tabmenu'
+import Toast from 'primevue/toast'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -21,5 +22,6 @@ declare module '@vue/runtime-core' {
     InputText: typeof InputText
     MultiSelect: typeof MultiSelect
     TabMenu: typeof TabMenu
+    TToast: typeof Toast
   }
 }

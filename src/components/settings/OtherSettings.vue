@@ -48,7 +48,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useToast } from 'vue-toastification'
+import { useToast } from 'primevue/usetoast'
 import { useConfirm } from 'primevue/useconfirm'
 import { useSettings, DEFAULTS as DEFAULT_SETTINGS } from '@/stores/settings'
 import { useModeration, DEFAULTS as DEFAULT_MODERATION } from '@/stores/moderation'
@@ -89,7 +89,11 @@ async function resetSettingsToDefault() {
       moderation.update(DEFAULT_MODERATION)
       queue.updateSettings(DEFAULT_QUEUE_SETTINGS)
       providers.enabledProviders = DEFAULT_ENABLED_PROVIDERS
-      toast.success('Settings reset to default')
+      toast.add({
+        severity: 'success',
+        summary: 'Settings reset to default',
+        life: 3000
+      })
     },
     reject: () => {}
   })
@@ -107,7 +111,11 @@ async function purgeHistory() {
       'text-white dark:text-surface-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-300 hover:border-red-600 dark:hover:border-red-300 focus:ring-red-400/50 dark:focus:ring-red-300/50',
     accept: () => {
       queue.purge()
-      toast.success('Clip history cleared')
+      toast.add({
+        severity: 'success',
+        summary: 'Clip history cleared',
+        life: 3000
+      })
     },
     reject: () => {}
   })
@@ -125,7 +133,11 @@ async function purgeCache() {
       'text-white dark:text-surface-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-300 hover:border-red-600 dark:hover:border-red-300 focus:ring-red-400/50 dark:focus:ring-red-300/50',
     accept: () => {
       providers.purge()
-      toast.success('Clip cache cleared')
+      toast.add({
+        severity: 'success',
+        summary: 'Clip cache cleared',
+        life: 3000
+      })
     },
     reject: () => {}
   })

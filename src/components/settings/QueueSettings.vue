@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useToast } from 'vue-toastification'
+import { useToast } from 'primevue/usetoast'
 import { useQueue, type QueueSettings } from '@/stores/queue'
 import { clone, deepEqual } from '@/utils'
 import { ClipProvider } from '@/providers'
@@ -79,7 +79,11 @@ function onReset() {
 function onSubmit() {
   queue.updateSettings(formQueueSettings.value)
   providers.enabledProviders = formProviders.value
-  toast.success('Queue settings saved')
+  toast.add({
+    severity: 'success',
+    summary: 'Queue settings saved',
+    life: 3000
+  })
   onReset()
 }
 </script>

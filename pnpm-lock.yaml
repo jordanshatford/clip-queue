@@ -35,9 +35,6 @@ dependencies:
   vue-router:
     specifier: ^4.3.0
     version: 4.3.0(vue@3.4.21)
-  vue-toastification:
-    specifier: 2.0.0-rc.5
-    version: 2.0.0-rc.5(vue@3.4.21)
 
 devDependencies:
   '@changesets/cli':
@@ -5373,14 +5370,6 @@ packages:
       de-indent: 1.0.2
       he: 1.2.0
     dev: true
-
-  /vue-toastification@2.0.0-rc.5(vue@3.4.21):
-    resolution: {integrity: sha512-q73e5jy6gucEO/U+P48hqX+/qyXDozAGmaGgLFm5tXX4wJBcVsnGp4e/iJqlm9xzHETYOilUuwOUje2Qg1JdwA==}
-    peerDependencies:
-      vue: ^3.0.2
-    dependencies:
-      vue: 3.4.21(typescript@5.3.3)
-    dev: false
 
   /vue-tsc@2.0.4(typescript@5.3.3):
     resolution: {integrity: sha512-FJk+F1QhqROr6DK8raTuWk5ezNw1/kZ+7TYhc08k+cpvb1fmi7wguPZHX0svIhT4bAxCGDtF8534It8fiAkScg==}

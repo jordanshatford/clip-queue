@@ -13,11 +13,11 @@ import InputSwitch from 'primevue/inputswitch'
 import InputText from 'primevue/inputtext'
 import MultiSelect from 'primevue/multiselect'
 import TabMenu from 'primevue/tabmenu'
+import Toast from 'primevue/toast'
+import ToastService from 'primevue/toastservice'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
-import Toastification, { type PluginOptions } from 'vue-toastification'
-import 'vue-toastification/dist/index.css'
 import App from '@/App.vue'
 import router from '@/router'
 // @ts-ignore
@@ -26,6 +26,7 @@ import Lara from '@/assets/presets/lara'
 const app = createApp(App)
 app.use(PrimeVue, { unstyled: true, pt: Lara })
 app.use(ConfirmationService)
+app.use(ToastService)
 app.component('BButton', Button)
 app.component('ConfirmDialog', ConfirmDialog)
 app.component('DataTable', DataTable)
@@ -36,18 +37,9 @@ app.component('InputSwitch', InputSwitch)
 app.component('InputText', InputText)
 app.component('MultiSelect', MultiSelect)
 app.component('TabMenu', TabMenu)
+app.component('TToast', Toast)
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedState)
 app.use(pinia)
-app.use(Toastification, {
-  transition: 'Vue-Toastification__bounce',
-  position: 'bottom-center',
-  timeout: 5000,
-  closeOnClick: true,
-  pauseOnHover: true,
-  pauseOnFocusLoss: true,
-  showCloseButtonOnHover: true,
-  icon: true
-} as PluginOptions)
 app.use(router)
 app.mount('#app')

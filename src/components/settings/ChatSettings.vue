@@ -54,7 +54,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useToast } from 'vue-toastification'
+import { useToast } from 'primevue/usetoast'
 import { useSettings, type Settings } from '@/stores/settings'
 import { useUser } from '@/stores/user'
 import commands, { Command, type CommandHelp } from '@/utils/commands'
@@ -83,7 +83,11 @@ function onReset() {
 
 function onSubmit() {
   settings.update(formSettings.value)
-  toast.success('Chat settings saved')
+  toast.add({
+    severity: 'success',
+    summary: 'Chat settings saved',
+    life: 3000
+  })
   onReset()
 }
 </script>

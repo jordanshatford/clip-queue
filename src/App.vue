@@ -1,4 +1,5 @@
 <template>
+  <TToast position="bottom-center" />
   <ConfirmDialog :draggable="false" />
   <div class="h-full min-h-screen dark:bg-zinc-900">
     <div class="h-full">
