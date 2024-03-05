@@ -1,5 +1,19 @@
 # twitch-clip-queue
 
+## 1.5.0
+
+### Minor Changes
+
+- feat: replace confirmation plugin with prime vue confirmation (closes: #247) ([`87f93a22ea6e77b65ed81040638a4aed255d57bb`](https://github.com/jordanshatford/twitch-clip-queue/commit/87f93a22ea6e77b65ed81040638a4aed255d57bb))
+
+- feat: display warning message in queue when no providers are enabled ([`b18fe18cecb9852442026c8d3f99ef26a239fea9`](https://github.com/jordanshatford/twitch-clip-queue/commit/b18fe18cecb9852442026c8d3f99ef26a239fea9))
+
+- feat: replace vue toastification with prime vue toasts (closes: #248) ([`056edc1f5d8e76a8784836ab20a56ec84989275e`](https://github.com/jordanshatford/twitch-clip-queue/commit/056edc1f5d8e76a8784836ab20a56ec84989275e))
+
+### Patch Changes
+
+- fix: reset enabled providers to defaults when resetting settings ([`1fe1d6221d3dba6f72c7febf5d60f38602ecb0c8`](https://github.com/jordanshatford/twitch-clip-queue/commit/1fe1d6221d3dba6f72c7febf5d60f38602ecb0c8))
+
 ## 1.4.0
 
 ### Minor Changes
