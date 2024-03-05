@@ -1,5 +1,17 @@
 # twitch-clip-queue
 
+## 1.4.0
+
+### Minor Changes
+
+- feat: add setting to modify enabled providers (closes: #232) ([`9260d56f3e306eeb768aaf73c0c7040c41e50d90`](https://github.com/jordanshatford/twitch-clip-queue/commit/9260d56f3e306eeb768aaf73c0c7040c41e50d90))
+
+- feat: use PrimeVue and PrimeIcons with TailwindCSS (closes: #225) ([`9451636bf2120aac32ff5cc803aaa1f4f7f45ffe`](https://github.com/jordanshatford/twitch-clip-queue/commit/9451636bf2120aac32ff5cc803aaa1f4f7f45ffe))
+
+### Patch Changes
+
+- fix: properly display category in history table ([`9451636bf2120aac32ff5cc803aaa1f4f7f45ffe`](https://github.com/jordanshatford/twitch-clip-queue/commit/9451636bf2120aac32ff5cc803aaa1f4f7f45ffe))
+
 ## 1.3.0
 
 ### Minor Changes
