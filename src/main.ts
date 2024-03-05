@@ -10,6 +10,7 @@ import DataTable from 'primevue/datatable'
 import InputNumber from 'primevue/inputnumber'
 import InputSwitch from 'primevue/inputswitch'
 import InputText from 'primevue/inputtext'
+import MultiSelect from 'primevue/multiselect'
 import TabMenu from 'primevue/tabmenu'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -46,6 +47,7 @@ app
   .component('InputNumber', InputNumber)
   .component('InputSwitch', InputSwitch)
   .component('InputText', InputText)
+  .component('MultiSelect', MultiSelect)
   .component('TabMenu', TabMenu)
 app.use(router)
 app.mount('#app')

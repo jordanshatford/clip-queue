@@ -5,6 +5,7 @@ import DataTable from 'primevue/datatable'
 import InputNumber from 'primevue/inputnumber'
 import InputSwitch from 'primevue/inputswitch'
 import InputText from 'primevue/inputtext'
+import MultiSelect from 'primevue/multiselect'
 import TabMenu from 'primevue/tabmenu'
 
 declare module '@vue/runtime-core' {
@@ -16,6 +17,7 @@ declare module '@vue/runtime-core' {
     InputNumber: typeof InputNumber
     InputSwitch: typeof InputSwitch
     InputText: typeof InputText
+    MultiSelect: typeof MultiSelect
     TabMenu: typeof TabMenu
   }
 }
