@@ -11,5 +11,6 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
-  }
+  },
+  ignorePatterns: ['src/assets/presets/**/*.js']
 }
