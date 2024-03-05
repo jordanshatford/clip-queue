@@ -26,7 +26,7 @@
         <MultiSelect
           id="allowedProviders"
           v-model="formProviders"
-          :options="[ClipProvider.KICK, ClipProvider.TWITCH]"
+          :options="Object.values(ClipProvider)"
           placeholder="None"
           display="chip"
           aria-describedby="allowedProviders-help"

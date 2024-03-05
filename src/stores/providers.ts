@@ -8,7 +8,7 @@ import {
   ClipProvider
 } from '@/providers'
 
-export const DEFAULTS = [ClipProvider.KICK, ClipProvider.TWITCH]
+export const DEFAULTS = Object.values(ClipProvider)
 
 export interface Providers {
   providers: Record<ClipProvider, IClipProvider>
