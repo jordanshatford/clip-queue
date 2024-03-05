@@ -2,36 +2,49 @@
   <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey" class="cq-form">
     <div>
       <div class="cq-toggle-form-group">
-        <label class="cq-form-group-label">Auto remove clips on moderation?</label>
-        <BaseSwitch id="autoRemoveClips" v-model="formSettings.hasAutoRemoveClipsEnabled" />
+        <label for="autoRemoveClips" class="cq-text">Auto remove clips on moderation?</label>
+        <InputSwitch inputId="autoRemoveClips" v-model="formSettings.hasAutoRemoveClipsEnabled" />
       </div>
-      <div class="cq-text-subtle mb-2 pl-1 text-left">
+      <div class="cq-text-subtle mb-2 text-left">
         <label>
           When a user has their chat message deleted, is timed out, or banned, then the clips they
           submitted will be removed.
         </label>
       </div>
     </div>
-    <div class="cq-form-group">
-      <label class="cq-form-group-label">Channels not allowed:</label>
-      <BaseMultiTagSelect v-model="formSettings.blockedChannels" itemName="channel" />
-      <div class="cq-text-subtle my-2 pl-1 text-left">
+    <div class="flex flex-col gap-2 text-left">
+      <label for="blockedChannels" class="cq-text">Channels not allowed:</label>
+      <InputChips inputId="blockedChannels" v-model="formSettings.blockedChannels" separator=" " />
+      <div class="cq-text-subtle pb-2">
         <label>Clips of these channels will not be added to the queue.</label>
       </div>
     </div>
-    <div class="cq-form-group">
-      <label class="cq-form-group-label">Submitters not allowed:</label>
-      <BaseMultiTagSelect v-model="formSettings.blockedSubmitters" itemName="submitter" />
-      <div class="cq-text-subtle my-2 pl-1 text-left">
+    <div class="flex flex-col gap-2 text-left">
+      <label for="blockedSubmitter" class="cq-text">Submitters not allowed:</label>
+      <InputChips
+        inputId="blockedSubmitters"
+        v-model="formSettings.blockedSubmitters"
+        separator=" "
+      />
+      <div class="cq-text-subtle pb-2">
         <label>Clips submitted by these users will not be added to the queue.</label>
       </div>
     </div>
     <div class="mt-3">
-      <BaseButton class="mr-2" type="submit" :disabled="!moderation.isModified(formSettings)"
-        >Save</BaseButton
+      <BButton
+        class="mr-2"
+        severity="info"
+        size="small"
+        type="submit"
+        :disabled="!moderation.isModified(formSettings)"
+        >Save</BButton
       >
-      <BaseButton type="reset" variant="danger" :disabled="!moderation.isModified(formSettings)"
-        >Cancel</BaseButton
+      <BButton
+        type="reset"
+        severity="danger"
+        size="small"
+        :disabled="!moderation.isModified(formSettings)"
+        >Cancel</BButton
       >
     </div>
   </form>

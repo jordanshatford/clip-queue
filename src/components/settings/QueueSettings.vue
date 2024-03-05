@@ -2,31 +2,40 @@
   <div>
     <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey" class="cq-form">
       <div class="cq-toggle-form-group">
-        <label class="cq-form-group-label">Limit Queue Size?</label>
-        <BaseSwitch id="allowCommands" v-model="formSettings.isLimited" />
+        <label for="limitQueueSize" class="cq-text">Limit Queue Size?</label>
+        <InputSwitch inputId="limitQueueSize" v-model="formSettings.isLimited" />
       </div>
-      <div>
-        <label class="cq-form-group-label">Limit:</label>
-        <BaseInput
-          type="number"
-          required
-          :min="1"
+      <div class="flex flex-col gap-2 text-left">
+        <label for="limit" class="cq-text">Limit:</label>
+        <InputNumber
+          id="limit"
           v-model="formSettings.limit"
+          :allow-empty="false"
+          :min="1"
+          :step="1"
+          show-buttons
           :disabled="!formSettings.isLimited"
+          aria-describedby="limit-help"
         />
-        <div class="cq-text-subtle my-2 pl-1 text-left">
-          <label>Clips will be ignored when queue limit is reached.</label>
-        </div>
+        <small id="limit-help" class="cq-text-subtle"
+          >Clips will be ignored when queue limit is reached.</small
+        >
       </div>
       <div class="mt-3">
-        <BaseButton class="mr-2" type="submit" :disabled="!queue.isSettingsModified(formSettings)"
-          >Save</BaseButton
-        >
-        <BaseButton
-          type="reset"
-          variant="danger"
+        <BButton
+          class="mr-2"
+          type="submit"
+          severity="info"
+          size="small"
           :disabled="!queue.isSettingsModified(formSettings)"
-          >Cancel</BaseButton
+          >Save</BButton
+        >
+        <BButton
+          type="reset"
+          severity="danger"
+          size="small"
+          :disabled="!queue.isSettingsModified(formSettings)"
+          >Cancel</BButton
         >
       </div>
     </form>

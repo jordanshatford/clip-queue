@@ -1,37 +1,40 @@
 <template>
-  <div class="cq-form mb-2">
-    <BaseButton
+  <div class="cq-form mb-2 text-left">
+    <BButton
       class="w-full"
-      variant="danger"
+      size="small"
+      severity="danger"
       :disabled="!isSettingsModified"
       @click="resetSettingsToDefault()"
     >
       Reset Settings
-    </BaseButton>
+    </BButton>
     <label class="cq-text-subtle">Reset settings back to their initial values.</label>
   </div>
-  <div class="cq-form mt-2">
-    <BaseButton
+  <div class="cq-form mt-2 text-left">
+    <BButton
       class="w-full"
-      variant="danger"
+      size="small"
+      severity="danger"
       :disabled="queue.history.empty()"
       @click="purgeHistory()"
     >
       Purge History
-    </BaseButton>
+    </BButton>
     <label class="cq-text-subtle"
       >Purge all clips previously viewed allowing them to be resubmitted.</label
     >
   </div>
-  <div class="cq-form mt-2">
-    <BaseButton
+  <div class="cq-form mt-2 text-left">
+    <BButton
       class="w-full"
-      variant="danger"
+      size="small"
+      severity="danger"
       :disabled="!providers.hasCachedData"
       @click="purgeCache()"
     >
       Purge Cache
-    </BaseButton>
+    </BButton>
     <label class="cq-text-subtle">
       Twitch clips submitted are cached for future use, this clears all cached clip information.
     </label>

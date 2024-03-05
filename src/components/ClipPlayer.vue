@@ -28,16 +28,22 @@
             rel="noreferrer"
             className="cq-text-subtle text-lg no-underline hover:text-zinc-600 dark:hover:text-zinc-200"
           >
-            <ArrowTopRightOnSquareIcon class="mb-3 inline-block w-6" />
+            <i class="pi pi-external-link"></i>
           </a>
         </span>
         <div class="float-right text-base">
-          <BaseButton :disabled="previousDisabled" class="mr-2" @click="emit('previous')">
-            <BackwardIcon class="w-8" />
-          </BaseButton>
-          <BaseButton :disabled="nextDisabled" @click="emit('next')">
-            <ForwardIcon class="w-8" />
-          </BaseButton>
+          <BButton
+            severity="info"
+            size="small"
+            :disabled="previousDisabled"
+            class="mr-2"
+            @click="emit('previous')"
+          >
+            <i class="pi pi-backward px-1 text-lg"></i>
+          </BButton>
+          <BButton severity="info" size="small" :disabled="nextDisabled" @click="emit('next')">
+            <i class="pi pi-forward px-1 text-lg"></i>
+          </BButton>
         </div>
       </h2>
       <div class="cq-text-subtle">
@@ -66,7 +72,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ArrowTopRightOnSquareIcon, BackwardIcon, ForwardIcon } from '@/assets/icons'
 import { formatDistanceToNow, parseISO } from 'date-fns'
 import type { Clip, PlayerFormat } from '@/providers'
 import { useProviders } from '@/stores/providers'

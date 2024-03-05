@@ -9,7 +9,7 @@
             class="text-3xl hover:text-brand-500 dark:hover:text-brand-500"
             target="_blank"
           >
-            <GithubLogo class="w-8" />
+            <i class="pi pi-github"></i>
           </a>
         </p>
       </span>
@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import GithubLogo from '@/components/icons/GithubLogo.vue'
 import config from '@/assets/config'
 
 const { copyright, github } = config

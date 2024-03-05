@@ -13,14 +13,9 @@
       Start sending clips now for them to be added to the queue.
     </p>
     <p v-else class="cq-text">Open the queue to start collecting clips sent in chat.</p>
-    <BaseButton
-      variant="brand"
-      :disabled="queue.upcoming.empty()"
-      @click="queue.next()"
-      class="my-5"
-    >
+    <BButton :disabled="queue.upcoming.empty()" size="small" @click="queue.next()" class="my-5">
       Start Viewing!
-    </BaseButton>
+    </BButton>
   </div>
   <ClipQueue
     title="Upcoming Clips"

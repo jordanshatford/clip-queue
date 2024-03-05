@@ -7,7 +7,7 @@ describe('AppFeature.vue', () => {
     props: {
       title: 'test',
       description: 'test description',
-      icon: {}
+      icon: 'test-icon'
     }
   })
 

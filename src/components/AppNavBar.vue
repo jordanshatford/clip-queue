@@ -28,10 +28,10 @@
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
           <AppThemeToggle class="mr-2 hidden sm:block" />
-          <BaseButton variant="brand" @click="() => handleAuthButtonClick()">
-            <span><TwitchLogo class="inline w-5" /></span>
+          <BButton size="small" @click="() => handleAuthButtonClick()">
+            <span><TwitchLogo class="mr-2 inline w-5" /></span>
             {{ user.isLoggedIn ? 'Logout' : 'Login' }}
-          </BaseButton>
+          </BButton>
         </div>
       </div>
     </div>

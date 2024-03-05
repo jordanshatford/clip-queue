@@ -22,7 +22,7 @@ export enum Command {
   PURGE_HISTORY = 'purgehistory'
 }
 
-interface CommandHelp {
+export interface CommandHelp {
   description: string
   args?: string[]
 }

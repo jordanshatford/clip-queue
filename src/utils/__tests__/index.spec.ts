@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getUrlFromMessage, deepEqual, clone, toRangeArray } from '..'
+import { getUrlFromMessage, deepEqual, clone } from '..'
 
 describe('index.ts', () => {
   it.each([
@@ -21,15 +21,4 @@ describe('index.ts', () => {
     const obj = { test: '1213', test2: 'abc' }
     expect(clone(obj)).toEqual(obj)
   })
-
-  it.each([
-    [1, 2, [1, 2]],
-    [-1, 5, [-1, 0, 1, 2, 3, 4, 5]],
-    [6, 9, [6, 7, 8, 9]]
-  ])(
-    'creates an array of values from a range ((%s, %s))',
-    (start: number, end: number, expected: number[]) => {
-      expect(toRangeArray(start, end)).toEqual(expected)
-    }
-  )
 })

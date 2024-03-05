@@ -4,19 +4,24 @@
       class="flex h-36 w-full items-end justify-end bg-cover"
       :style="'background-image: url(' + clip.thumbnailUrl + ')'"
     >
-      <span v-if="inQueue">
-        <BaseButton title="Play now" class="-mb-2 mr-2 pb-2" @click="emit('play')">
-          <BarsArrowUpIcon class="w-6" />
-        </BaseButton>
-        <BaseButton title="Remove" variant="danger" class="-mb-2 mr-2 pb-2" @click="emit('remove')">
-          <TrashIcon class="w-6" />
-        </BaseButton>
-      </span>
-      <span v-else>
-        <BaseButton title="Add to queue" class="-mb-2 mr-2 pb-2" @click="emit('add')">
-          <PlusIcon class="w-6" />
-        </BaseButton>
-      </span>
+      <BButton
+        title="Play now"
+        severity="info"
+        size="small"
+        class="-mb-2 mr-2 pb-2"
+        @click="emit('play')"
+      >
+        <i class="pi pi-play p-1"></i>
+      </BButton>
+      <BButton
+        title="Remove"
+        severity="danger"
+        size="small"
+        class="-mb-2 mr-2 pb-2"
+        @click="emit('remove')"
+      >
+        <i class="pi pi-trash p-1"></i>
+      </BButton>
     </div>
     <div class="p-3">
       <span class="cq-text mt-2">{{ clip.title }}</span>
@@ -35,15 +40,13 @@
 </template>
 
 <script setup lang="ts">
-import { BarsArrowUpIcon, TrashIcon, PlusIcon } from '@/assets/icons'
 import type { Clip } from '@/providers'
 
 export interface Props {
   clip: Clip
-  inQueue?: boolean
 }
 
-withDefaults(defineProps<Props>(), { inQueue: false })
+defineProps<Props>()
 
 const emit = defineEmits<{
   (e: 'play'): void

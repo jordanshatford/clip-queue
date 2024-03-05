@@ -3,7 +3,7 @@
     <div
       class="flex aspect-square h-12 items-center justify-center rounded-xl bg-brand-500 text-white"
     >
-      <component :is="icon" class="h-8 w-8" />
+      <i :class="['text-xl', icon]"></i>
     </div>
     <div class="flex flex-col">
       <p class="cq-text text-lg font-semibold">{{ title }}</p>
@@ -15,12 +15,10 @@
 </template>
 
 <script setup lang="ts">
-import type { Component } from 'vue'
-
 export interface Props {
   title: string
   description: string
-  icon: Component
+  icon: string
 }
 
 defineProps<Props>()

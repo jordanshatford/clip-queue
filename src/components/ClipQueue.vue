@@ -2,20 +2,22 @@
   <div class="mx-0 mt-2">
     <div class="mb-2 mt-1 w-full border-t border-zinc-300 dark:border-zinc-700"></div>
     <div class="float-right">
-      <BaseButton
-        variant="primary"
+      <BButton
+        severity="info"
+        size="small"
         :disabled="clips.length === 0"
         class="ml-2"
         @click="emit('clear')"
-        >Clear</BaseButton
+        >Clear</BButton
       >
-      <BaseButton
-        :variant="isOpen ? 'danger' : 'primary'"
+      <BButton
+        :severity="isOpen ? 'danger' : 'info'"
+        size="small"
         class="ml-2"
         @click="isOpen ? emit('close') : emit('open')"
       >
         {{ isOpen ? 'Close' : 'Open' }}
-      </BaseButton>
+      </BButton>
     </div>
     <div class="text-left">
       <p class="cq-text text-lg">{{ title }}</p>
@@ -28,7 +30,6 @@
         v-for="clip in clips"
         :key="clip.provider + ':' + clip.id"
         :clip="clip"
-        inQueue
         @play="emit('play', clip)"
         @remove="emit('remove', clip)"
         class="mr-2"
