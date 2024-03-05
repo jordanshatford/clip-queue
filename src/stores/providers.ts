@@ -39,7 +39,6 @@ export const useProviders = defineStore('providers', {
       for (const ep of this.enabledProviders) {
         const p = this.providers[ep]
         const c = await p.getClip(url)
-        console.log(p.name, c)
         if (c !== undefined) {
           return c
         }
