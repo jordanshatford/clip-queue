@@ -11,6 +11,7 @@ import DataTable from 'primevue/datatable'
 import InputNumber from 'primevue/inputnumber'
 import InputSwitch from 'primevue/inputswitch'
 import InputText from 'primevue/inputtext'
+import Message from 'primevue/message'
 import MultiSelect from 'primevue/multiselect'
 import TabMenu from 'primevue/tabmenu'
 import Toast from 'primevue/toast'
@@ -35,6 +36,7 @@ app.component('InputChips', Chips)
 app.component('InputNumber', InputNumber)
 app.component('InputSwitch', InputSwitch)
 app.component('InputText', InputText)
+app.component('MessageAlert', Message)
 app.component('MultiSelect', MultiSelect)
 app.component('TabMenu', TabMenu)
 app.component('TToast', Toast)

@@ -16,6 +16,9 @@
     <BButton :disabled="queue.upcoming.empty()" size="small" @click="queue.next()" class="my-5">
       Start Viewing!
     </BButton>
+    <MessageAlert v-if="providers.enabledProviders.length === 0" severity="warn"
+      >No clip providers enabled. Please enable one in the settings.</MessageAlert
+    >
   </div>
   <ClipQueue
     title="Upcoming Clips"
@@ -33,6 +36,8 @@
 import ClipPlayer from '@/components/ClipPlayer.vue'
 import ClipQueue from '@/components/ClipQueue.vue'
 import { useQueue } from '@/stores/queue'
+import { useProviders } from '@/stores/providers'
 
 const queue = useQueue()
+const providers = useProviders()
 </script>
