@@ -51,8 +51,8 @@ import { computed } from 'vue'
 import { useToast } from 'vue-toastification'
 import { useSettings, DEFAULTS as DEFAULT_SETTINGS } from '@/stores/settings'
 import { useModeration, DEFAULTS as DEFAULT_MODERATION } from '@/stores/moderation'
+import { useProviders, DEFAULTS as DEFAULT_ENABLED_PROVIDERS } from '@/stores/providers'
 import { useQueue, DEFAULT_SETTINGS as DEFAULT_QUEUE_SETTINGS } from '@/stores/queue'
-import { useProviders } from '@/stores/providers'
 import { useConfirm } from '@/plugins/confirm'
 
 const version = __APP_VERSION__
@@ -81,6 +81,7 @@ async function resetSettingsToDefault() {
     settings.update(DEFAULT_SETTINGS)
     moderation.update(DEFAULT_MODERATION)
     queue.updateSettings(DEFAULT_QUEUE_SETTINGS)
+    providers.enabledProviders = DEFAULT_ENABLED_PROVIDERS
     toast.success('Settings reset to default')
   }
 }

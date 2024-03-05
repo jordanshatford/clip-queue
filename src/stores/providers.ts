@@ -8,6 +8,8 @@ import {
   ClipProvider
 } from '@/providers'
 
+export const DEFAULTS = [ClipProvider.KICK, ClipProvider.TWITCH]
+
 export interface Providers {
   providers: Record<ClipProvider, IClipProvider>
   enabledProviders: ClipProvider[]
@@ -22,7 +24,7 @@ export const useProviders = defineStore('providers', {
       [ClipProvider.KICK]: new KickProvider(),
       [ClipProvider.TWITCH]: new TwitchProvider()
     },
-    enabledProviders: [ClipProvider.KICK, ClipProvider.TWITCH]
+    enabledProviders: [...DEFAULTS]
   }),
   getters: {
     hasCachedData: (state) => {
