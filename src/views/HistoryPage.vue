@@ -8,6 +8,7 @@
     :rows="10"
     :rowsPerPageOptions="[10, 20, 50]"
   >
+    <template #empty>No clips previously watched.</template>
     <DataTableColumn field="title" header="Info" sortable :sortField="(data: Clip) => data.title">
       <template #body="{ data }: { data: Clip }">
         <div class="flex items-center">
@@ -75,20 +76,27 @@
 </template>
 
 <script setup lang="ts">
+import { useConfirm } from 'primevue/useconfirm'
 import { useQueue } from '@/stores/queue'
-import { useConfirm } from '@/plugins/confirm'
 import type { Clip } from '@/providers'
 
-const queue = useQueue()
 const confirm = useConfirm()
+const queue = useQueue()
 
 async function purgeHistory() {
-  const isConfirmed = await confirm({
-    title: 'Delete All History',
-    description: 'Are you sure you want to delete all clips from the history?'
+  confirm.require({
+    header: 'Delete All History',
+    message: 'Are you sure you want to delete all clips from the history?',
+    rejectLabel: 'Cancel',
+    acceptLabel: 'Confirm',
+    rejectClass:
+      'text-white dark:text-surface-900 bg-surface-500 dark:bg-surface-400 border border-surface-500 dark:border-surface-400 hover:bg-surface-600 dark:hover:bg-surface-300 hover:border-surface-600 dark:hover:border-surface-300 focus:ring-surface-400/50 dark:focus:ring-surface-300/50',
+    acceptClass:
+      'text-white dark:text-surface-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-300 hover:border-red-600 dark:hover:border-red-300 focus:ring-red-400/50 dark:focus:ring-red-300/50',
+    accept: () => {
+      queue.purge()
+    },
+    reject: () => {}
   })
-  if (isConfirmed) {
-    queue.purge()
-  }
 }
 </script>

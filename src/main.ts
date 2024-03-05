@@ -2,10 +2,11 @@ import '@/assets/tailwind.css'
 import '@/assets/base.css'
 import 'primeicons/primeicons.css'
 import PrimeVue from 'primevue/config'
-import ToastService from 'primevue/toastservice'
 import Button from 'primevue/button'
 import Chips from 'primevue/chips'
 import Column from 'primevue/column'
+import ConfirmationService from 'primevue/confirmationservice'
+import ConfirmDialog from 'primevue/confirmdialog'
 import DataTable from 'primevue/datatable'
 import InputNumber from 'primevue/inputnumber'
 import InputSwitch from 'primevue/inputswitch'
@@ -24,7 +25,17 @@ import Lara from '@/assets/presets/lara'
 
 const app = createApp(App)
 app.use(PrimeVue, { unstyled: true, pt: Lara })
-app.use(ToastService)
+app.use(ConfirmationService)
+app.component('BButton', Button)
+app.component('ConfirmDialog', ConfirmDialog)
+app.component('DataTable', DataTable)
+app.component('DataTableColumn', Column)
+app.component('InputChips', Chips)
+app.component('InputNumber', InputNumber)
+app.component('InputSwitch', InputSwitch)
+app.component('InputText', InputText)
+app.component('MultiSelect', MultiSelect)
+app.component('TabMenu', TabMenu)
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedState)
 app.use(pinia)
@@ -38,16 +49,5 @@ app.use(Toastification, {
   showCloseButtonOnHover: true,
   icon: true
 } as PluginOptions)
-
-app
-  .component('BButton', Button)
-  .component('DataTable', DataTable)
-  .component('DataTableColumn', Column)
-  .component('InputChips', Chips)
-  .component('InputNumber', InputNumber)
-  .component('InputSwitch', InputSwitch)
-  .component('InputText', InputText)
-  .component('MultiSelect', MultiSelect)
-  .component('TabMenu', TabMenu)
 app.use(router)
 app.mount('#app')
