@@ -1,6 +1,6 @@
 <template>
   <div class="player player-container">
-    <div v-if="clip.id" class="player player-container h-auto w-full bg-black">
+    <div class="player player-container h-auto w-full bg-black">
       <iframe
         v-if="playerFormat === 'iframe'"
         :src="playerSource"

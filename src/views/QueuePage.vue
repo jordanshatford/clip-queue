@@ -1,6 +1,7 @@
 <template>
   <ClipPlayer
     v-if="queue.current && queue.current.id"
+    :key="queue.current.id + queue.current.provider"
     :clip="queue.current"
     :previous-disabled="queue.history.empty()"
     :next-disabled="queue.upcoming.empty()"
