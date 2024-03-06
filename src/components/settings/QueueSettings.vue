@@ -25,7 +25,7 @@
         <label for="allowedProviders" class="cq-text">Allowed Providers:</label>
         <MultiSelect
           id="allowedProviders"
-          v-model="formProviders"
+          v-model="formProviders.enabled"
           :options="Object.values(ClipProvider)"
           placeholder="None"
           display="chip"

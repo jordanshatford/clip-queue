@@ -36,7 +36,9 @@ export const useProviders = defineStore('providers', {
     },
     isModified: (state) => {
       return (providers: Providers) => {
-        return providers.enabled.filter((p) => !state.enabled.includes(p)).length > 0
+        return Object.values(ClipProvider).some(
+          (p) => state.enabled.includes(p) !== providers.enabled.includes(p)
+        )
       }
     }
   },
