@@ -1,5 +1,11 @@
 # twitch-clip-queue
 
+## 1.5.1
+
+### Patch Changes
+
+- fix: new providers added will not be available without clearing storage (closes: #249) ([`3771d3f18a6eca1176af0d830564c536052883e8`](https://github.com/jordanshatford/twitch-clip-queue/commit/3771d3f18a6eca1176af0d830564c536052883e8))
+
 ## 1.5.0
 
 ### Minor Changes
