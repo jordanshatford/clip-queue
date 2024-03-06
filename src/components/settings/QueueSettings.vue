@@ -51,9 +51,9 @@
 import { computed, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import { useQueue, type QueueSettings } from '@/stores/queue'
-import { clone, deepEqual } from '@/utils'
+import { clone } from '@/utils'
 import { ClipProvider } from '@/providers'
-import { useProviders } from '@/stores/providers'
+import { useProviders, type Providers } from '@/stores/providers'
 
 const providers = useProviders()
 const toast = useToast()
@@ -61,24 +61,23 @@ const queue = useQueue()
 
 const formKey = ref(1)
 const formQueueSettings = ref<QueueSettings>(clone<QueueSettings>(queue.settings))
-const formProviders = ref<ClipProvider[]>([...providers.enabledProviders])
+const formProviders = ref<Providers>(clone<Providers>(providers.$state))
 
 const isFormModified = computed(() => {
   return (
-    queue.isSettingsModified(formQueueSettings.value) ||
-    !deepEqual(formProviders.value, providers.enabledProviders)
+    queue.isSettingsModified(formQueueSettings.value) || providers.isModified(formProviders.value)
   )
 })
 
 function onReset() {
   formQueueSettings.value = clone<QueueSettings>(queue.settings)
-  formProviders.value = [...providers.enabledProviders]
+  formProviders.value = clone<Providers>(providers.$state)
   formKey.value += 1
 }
 
 function onSubmit() {
   queue.updateSettings(formQueueSettings.value)
-  providers.enabledProviders = formProviders.value
+  providers.update(formProviders.value)
   toast.add({
     severity: 'success',
     summary: 'Success',

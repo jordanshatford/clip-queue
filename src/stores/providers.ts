@@ -8,53 +8,65 @@ import {
   ClipProvider
 } from '@/providers'
 
-export const DEFAULTS = Object.values(ClipProvider)
-
 export interface Providers {
-  providers: Record<ClipProvider, IClipProvider>
-  enabledProviders: ClipProvider[]
+  providers: Partial<Record<ClipProvider, IClipProvider>>
+  enabled: ClipProvider[]
+}
+
+export const DEFAULTS: Providers = {
+  providers: {},
+  enabled: Object.values(ClipProvider)
 }
 
 export const useProviders = defineStore('providers', {
   persist: {
-    key: 'providers-cache'
+    key: 'providers',
+    paths: ['enabled']
   },
   state: (): Providers => ({
     providers: {
       [ClipProvider.KICK]: new KickProvider(),
       [ClipProvider.TWITCH]: new TwitchProvider()
     },
-    enabledProviders: [...DEFAULTS]
+    enabled: [...DEFAULTS.enabled]
   }),
   getters: {
     hasCachedData: (state) => {
       return Object.values(state.providers).some((p) => p.hasCachedData)
+    },
+    isModified: (state) => {
+      return (providers: Providers) => {
+        return providers.enabled.filter((p) => !state.enabled.includes(p)).length > 0
+      }
     }
   },
   actions: {
+    update(providers: Providers) {
+      this.enabled = providers.enabled
+    },
     purge() {
       for (const p of Object.values(this.providers)) {
         p.clearCache?.()
       }
     },
     async getClip(url: string): Promise<Clip | undefined> {
-      for (const ep of this.enabledProviders) {
+      for (const ep of this.enabled) {
         const p = this.providers[ep]
-        const c = await p.getClip(url)
+        const c = await p?.getClip(url)
         if (c !== undefined) {
           return c
         }
       }
     },
     getPlayerFormat(clip: Clip): PlayerFormat | undefined {
-      if (!this.enabledProviders.includes(clip.provider)) {
+      if (!this.enabled.includes(clip.provider)) {
         return
       }
       const p = this.providers[clip.provider]
       return p?.getPlayerFormat(clip)
     },
     getPlayerSource(clip: Clip): string | undefined {
-      if (!this.enabledProviders.includes(clip.provider)) {
+      if (!this.enabled.includes(clip.provider)) {
         return
       }
       const p = this.providers[clip.provider]

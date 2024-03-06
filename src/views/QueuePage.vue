@@ -16,7 +16,7 @@
     <BButton :disabled="queue.upcoming.empty()" size="small" @click="queue.next()" class="my-5">
       Start Viewing!
     </BButton>
-    <MessageAlert v-if="providers.enabledProviders.length === 0" severity="warn"
+    <MessageAlert v-if="providers.enabled.length === 0" severity="warn"
       >No clip providers enabled. Please enable one in the settings.</MessageAlert
     >
   </div>

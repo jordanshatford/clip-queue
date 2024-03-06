@@ -74,7 +74,7 @@ describe('providers.ts', () => {
             }
           }
         },
-        enabledProviders: [ClipProvider.KICK, ClipProvider.TWITCH]
+        enabled: [ClipProvider.KICK, ClipProvider.TWITCH]
       })
     )
     const providers = useProviders()

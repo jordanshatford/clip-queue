@@ -52,9 +52,8 @@ import { useToast } from 'primevue/usetoast'
 import { useConfirm } from 'primevue/useconfirm'
 import { useSettings, DEFAULTS as DEFAULT_SETTINGS } from '@/stores/settings'
 import { useModeration, DEFAULTS as DEFAULT_MODERATION } from '@/stores/moderation'
-import { useProviders, DEFAULTS as DEFAULT_ENABLED_PROVIDERS } from '@/stores/providers'
+import { useProviders, DEFAULTS as DEFAULT_PROVIDERS } from '@/stores/providers'
 import { useQueue, DEFAULT_SETTINGS as DEFAULT_QUEUE_SETTINGS } from '@/stores/queue'
-import { deepEqual } from '@/utils'
 
 const version = __APP_VERSION__
 
@@ -70,7 +69,7 @@ const isSettingsModified = computed(() => {
     settings.isModified(DEFAULT_SETTINGS) ||
     moderation.isModified(DEFAULT_MODERATION) ||
     queue.isSettingsModified(DEFAULT_QUEUE_SETTINGS) ||
-    !deepEqual(DEFAULT_ENABLED_PROVIDERS, providers.enabledProviders)
+    providers.isModified(DEFAULT_PROVIDERS)
   )
 })
 
@@ -88,7 +87,7 @@ async function resetSettingsToDefault() {
       settings.update(DEFAULT_SETTINGS)
       moderation.update(DEFAULT_MODERATION)
       queue.updateSettings(DEFAULT_QUEUE_SETTINGS)
-      providers.enabledProviders = DEFAULT_ENABLED_PROVIDERS
+      providers.update(DEFAULT_PROVIDERS)
       toast.add({
         severity: 'success',
         summary: 'Success',

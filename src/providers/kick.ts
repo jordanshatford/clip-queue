@@ -3,6 +3,7 @@ import { ClipProvider, type Clip, type IClipProvider, type PlayerFormat } from '
 
 export class KickProvider implements IClipProvider {
   public name = ClipProvider.KICK
+
   private cache: Record<string, KickClip> = {}
 
   public get hasCachedData(): boolean {
