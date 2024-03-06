@@ -91,7 +91,8 @@ async function resetSettingsToDefault() {
       providers.enabledProviders = DEFAULT_ENABLED_PROVIDERS
       toast.add({
         severity: 'success',
-        summary: 'Settings reset to default',
+        summary: 'Success',
+        detail: 'Settings reset to default',
         life: 3000
       })
     },
@@ -113,7 +114,8 @@ async function purgeHistory() {
       queue.purge()
       toast.add({
         severity: 'success',
-        summary: 'Clip history cleared',
+        summary: 'Success',
+        detail: 'Clip history cleared',
         life: 3000
       })
     },
@@ -135,7 +137,8 @@ async function purgeCache() {
       providers.purge()
       toast.add({
         severity: 'success',
-        summary: 'Clip cache cleared',
+        summary: 'Success',
+        detail: 'Clip cache cleared',
         life: 3000
       })
     },

@@ -85,7 +85,8 @@ function onSubmit() {
   settings.update(formSettings.value)
   toast.add({
     severity: 'success',
-    summary: 'Chat settings saved',
+    summary: 'Success',
+    detail: 'Chat settings saved',
     life: 3000
   })
   onReset()

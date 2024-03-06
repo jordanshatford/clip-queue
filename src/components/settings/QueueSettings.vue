@@ -81,7 +81,8 @@ function onSubmit() {
   providers.enabledProviders = formProviders.value
   toast.add({
     severity: 'success',
-    summary: 'Queue settings saved',
+    summary: 'Success',
+    detail: 'Queue settings saved',
     life: 3000
   })
   onReset()

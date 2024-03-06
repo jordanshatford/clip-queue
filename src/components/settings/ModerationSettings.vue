@@ -71,7 +71,8 @@ function onSubmit() {
   moderation.update(formSettings.value)
   toast.add({
     severity: 'success',
-    summary: 'Moderation settings saved',
+    summary: 'Success',
+    detail: 'Moderation settings saved',
     life: 3000
   })
   onReset()
