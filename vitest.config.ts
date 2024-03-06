@@ -10,7 +10,11 @@ export default mergeConfig(
       watch: false,
       setupFiles: ["src/__tests__/setup.js"],
       exclude: [...configDefaults.exclude, 'e2e/*'],
-      root: fileURLToPath(new URL('./', import.meta.url))
+      root: fileURLToPath(new URL('./', import.meta.url)),
+      coverage: {
+        include: ["src/**"],
+        exclude: ['src/assets/**']
+      }
     }
   })
 )
