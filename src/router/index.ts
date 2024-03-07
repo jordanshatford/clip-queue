@@ -6,12 +6,20 @@ import HomePage from '@/views/HomePage.vue'
 import QueuePage from '@/views/QueuePage.vue'
 import HistoryPage from '@/views/HistoryPage.vue'
 import SettingsPage from '@/views/SettingsPage.vue'
+import ChatSettings from '@/views/settings/ChatSettings.vue'
+import ModerationSettings from '@/views/settings/ModerationSettings.vue'
+import QueueSettings from '@/views/settings/QueueSettings.vue'
+import OtherSettings from '@/views/settings/OtherSettings.vue'
 
 export enum RouteNameConstants {
   HOME = 'home',
   QUEUE = 'queue',
   HISTORY = 'history',
-  SETTINGS = 'settings'
+  SETTINGS = 'settings',
+  SETTINGS_CHAT = 'settings_chat',
+  SETTINGS_QUEUE = 'settings_queue',
+  SETTINGS_MODERATION = 'settings_moderation',
+  SETTINGS_OTHER = 'settings_other'
 }
 
 export const routes: Array<RouteRecordRaw> = [
@@ -45,11 +53,50 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: '/settings',
     name: RouteNameConstants.SETTINGS,
+    redirect: { name: RouteNameConstants.SETTINGS_CHAT },
     component: SettingsPage,
     meta: {
       title: 'Settings',
       requiresAuth: true
-    }
+    },
+    children: [
+      {
+        path: 'chat',
+        name: RouteNameConstants.SETTINGS_CHAT,
+        component: ChatSettings,
+        meta: {
+          title: 'Chat',
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'queue',
+        name: RouteNameConstants.SETTINGS_QUEUE,
+        component: QueueSettings,
+        meta: {
+          title: 'Queue',
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'moderation',
+        name: RouteNameConstants.SETTINGS_MODERATION,
+        component: ModerationSettings,
+        meta: {
+          title: 'Moderation',
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'other',
+        name: RouteNameConstants.SETTINGS_OTHER,
+        component: OtherSettings,
+        meta: {
+          title: 'Other',
+          requiresAuth: true
+        }
+      }
+    ]
   }
 ]
 

@@ -1,28 +1,35 @@
 <template>
   <p class="cq-title">Settings</p>
   <div class="mx-auto mb-3 max-w-xl">
-    <TabMenu v-model:activeIndex="activeTabIndex" :model="tabs" />
+    <TabMenu :model="tabs" :activeIndex="activeIndex">
+      <template #item="{ item, props }">
+        <RouterLink v-if="item.route" v-slot="{ href, navigate }" :to="{ name: item.route }" custom>
+          <a :href="href" v-bind="props.action" @click="navigate">
+            <span v-bind="props.icon"></span>
+            <span v-bind="props.label">{{ item.label }}</span>
+          </a>
+        </RouterLink>
+      </template>
+    </TabMenu>
   </div>
-  <component :is="activeTabView" />
+  <RouterView />
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import ChatSettings from '@/components/settings/ChatSettings.vue'
-import QueueSettings from '@/components/settings/QueueSettings.vue'
-import ModerationSettings from '@/components/settings/ModerationSettings.vue'
-import OtherSettings from '@/components/settings/OtherSettings.vue'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { RouteNameConstants } from '@/router'
+
+const route = useRoute()
 
 const tabs = [
-  { label: 'Chat', icon: 'pi pi-comments', view: ChatSettings },
-  { label: 'Queue', icon: 'pi pi-list', view: QueueSettings },
-  { label: 'Moderation', icon: 'pi pi-flag', view: ModerationSettings },
-  { label: 'Other', icon: 'pi pi-cog', view: OtherSettings }
+  { label: 'Chat', icon: 'pi pi-comments', route: RouteNameConstants.SETTINGS_CHAT },
+  { label: 'Queue', icon: 'pi pi-list', route: RouteNameConstants.SETTINGS_QUEUE },
+  { label: 'Moderation', icon: 'pi pi-flag', route: RouteNameConstants.SETTINGS_MODERATION },
+  { label: 'Other', icon: 'pi pi-cog', route: RouteNameConstants.SETTINGS_OTHER }
 ]
 
-const activeTabIndex = ref<number>(0)
-
-const activeTabView = computed(() => {
-  return tabs[activeTabIndex.value].view
+const activeIndex = computed(() => {
+  return tabs.findIndex((tab) => tab.route === route?.name)
 })
 </script>
