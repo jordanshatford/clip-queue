@@ -1,5 +1,15 @@
 # twitch-clip-queue
 
+## 1.6.0
+
+### Minor Changes
+
+- feat: handle deleted clips in queue and history page ([`b66d4e08a93ebf1175160dea179990135067b505`](https://github.com/jordanshatford/twitch-clip-queue/commit/b66d4e08a93ebf1175160dea179990135067b505))
+
+### Patch Changes
+
+- fix: player breaking when switching from kick to twitch clip ([`a9c5f52c466264b146331097083610948d280986`](https://github.com/jordanshatford/twitch-clip-queue/commit/a9c5f52c466264b146331097083610948d280986))
+
 ## 1.5.1
 
 ### Patch Changes
