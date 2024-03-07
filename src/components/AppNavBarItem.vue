@@ -2,9 +2,9 @@
   <RouterLink
     v-if="route && ((route.meta?.requiresAuth && isAuthenticated) || !route.meta?.requiresAuth)"
     :to="route.path"
-    class="my-auto rounded-xl px-3 py-2 text-zinc-400 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-700"
+    class="my-auto rounded-xl px-3 py-2 text-surface-400 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-700"
     :class="{ block: isMobileMenu }"
-    active-class="text-zinc-700 dark:text-white bg-zinc-100 dark:bg-zinc-900"
+    active-class="text-surface-700 dark:text-white bg-surface-100 dark:bg-surface-900"
   >
     {{ route?.meta?.title }}
   </RouterLink>

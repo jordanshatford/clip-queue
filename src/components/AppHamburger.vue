@@ -3,9 +3,9 @@
     :class="[
       modelValue
         ? 'hover:text-red-500 dark:hover:text-red-500'
-        : 'hover:text-brand-500 dark:hover:text-brand-500'
+        : 'hover:text-primary-500 dark:hover:text-primary-500'
     ]"
-    class="relative h-10 w-10 text-zinc-500 focus:outline-none dark:text-zinc-200"
+    class="relative h-10 w-10 text-surface-500 focus:outline-none dark:text-surface-200"
     @click="modelValue = !modelValue"
   >
     <div class="absolute left-1/2 top-1/2 block w-5 -translate-x-1/2 -translate-y-1/2 transform">

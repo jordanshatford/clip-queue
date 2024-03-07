@@ -1,6 +1,6 @@
 <template>
   <div class="mx-0 mt-2">
-    <div class="mb-2 mt-1 w-full border-t border-zinc-300 dark:border-zinc-700"></div>
+    <div class="mb-2 mt-1 w-full border-t border-surface-300 dark:border-surface-700"></div>
     <div class="float-right">
       <BButton
         severity="info"

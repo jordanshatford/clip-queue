@@ -4,16 +4,16 @@
 
 @layer components {
   .cq-title {
-    @apply p-5 text-5xl font-extrabold text-brand-500;
+    @apply p-5 text-5xl font-extrabold text-primary-500;
   }
   .cq-text {
-    @apply font-normal text-zinc-600 dark:text-zinc-400;
+    @apply font-normal text-surface-600 dark:text-surface-400;
   }
   .cq-text-subtle {
-    @apply text-sm font-normal text-zinc-400 dark:text-zinc-600;
+    @apply text-sm font-normal text-surface-400 dark:text-surface-600;
   }
   .cq-text-subtle-semibold {
-    @apply text-sm font-semibold text-zinc-400 dark:text-zinc-600;
+    @apply text-sm font-semibold text-surface-400 dark:text-surface-600;
   }
   .cq-toggle-form-group {
     @apply mb-1 flex w-full justify-between py-1 pb-0 pr-1;

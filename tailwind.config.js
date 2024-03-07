@@ -1,5 +1,3 @@
-const colors = require("tailwindcss/colors")
-
 /* eslint-env node */
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
@@ -18,7 +16,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: colors.violet,
         'primary-50': 'rgb(var(--primary-50))',
         'primary-100': 'rgb(var(--primary-100))',
         'primary-200': 'rgb(var(--primary-200))',

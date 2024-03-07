@@ -1,7 +1,7 @@
 <template>
   <button
     @click="() => theme.toggle()"
-    class="p-2 text-zinc-500 hover:text-brand-500 dark:text-zinc-200 dark:hover:text-brand-500"
+    class="p-2 text-surface-500 hover:text-primary-500 dark:text-surface-200 dark:hover:text-primary-500"
   >
     <i :class="['text-xl', 'pi', theme.isDark ? 'pi-sun' : 'pi-moon']"></i>
   </button>

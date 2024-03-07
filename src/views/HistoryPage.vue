@@ -26,7 +26,7 @@
                   :href="data.url"
                   target="_blank"
                   rel="noreferrer"
-                  className="cq-text-subtle text-lg no-underline hover:text-zinc-600 dark:hover:text-zinc-200"
+                  className="cq-text-subtle text-lg no-underline hover:text-surface-600 dark:hover:text-surface-200"
                 >
                   <i class="pi pi-external-link text-sm"></i>
                 </a>
