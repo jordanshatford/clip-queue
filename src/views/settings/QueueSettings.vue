@@ -2,7 +2,7 @@
   <CCard class="mx-auto max-w-lg">
     <template #content>
       <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
-        <div class="cq-toggle-form-group">
+        <div class="flex justify-between">
           <label for="limitQueueSize" class="cq-text">Limit Queue Size?</label>
           <InputSwitch inputId="limitQueueSize" v-model="formQueueSettings.isLimited" />
         </div>

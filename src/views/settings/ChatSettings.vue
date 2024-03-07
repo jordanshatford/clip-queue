@@ -11,7 +11,7 @@
     <CCard class="mx-auto max-w-lg">
       <template #content>
         <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
-          <div class="cq-toggle-form-group">
+          <div class="flex justify-between">
             <label for="allowCommands" class="cq-text">Allow chat commands?</label>
             <InputSwitch inputId="allowCommands" v-model="formSettings.allowCommands" />
           </div>

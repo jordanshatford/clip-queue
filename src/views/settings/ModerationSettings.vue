@@ -3,7 +3,7 @@
     <template #content>
       <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
         <div>
-          <div class="cq-toggle-form-group">
+          <div class="flex justify-between pb-1">
             <label for="autoRemoveClips" class="cq-text">Auto remove clips on moderation?</label>
             <InputSwitch
               inputId="autoRemoveClips"
