@@ -13,6 +13,7 @@
       <template #body="{ data }: { data: Clip }">
         <div class="flex items-center">
           <img
+            @error="queue.history.remove(data)"
             class="hidden aspect-video w-24 rounded-xl sm:block"
             :src="data.thumbnailUrl"
             :alt="data.title"
