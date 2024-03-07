@@ -6,7 +6,7 @@ import { deepEqual } from '@/utils'
 
 export interface QueueSettings {
   isLimited: boolean
-  limit: number | null
+  limit: number
 }
 
 export const DEFAULT_SETTINGS: QueueSettings = {
