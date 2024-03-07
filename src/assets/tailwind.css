@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-  .cq-card {
-    @apply w-full rounded-xl bg-zinc-100 shadow-md dark:bg-zinc-800;
-  }
   .cq-title {
     @apply p-5 text-5xl font-extrabold text-brand-500;
   }
@@ -17,9 +14,6 @@
   }
   .cq-text-subtle-semibold {
     @apply text-sm font-semibold text-zinc-400 dark:text-zinc-600;
-  }
-  .cq-form {
-    @apply cq-card mx-auto max-w-lg p-3;
   }
   .cq-toggle-form-group {
     @apply mb-1 flex w-full justify-between py-1 pb-0 pr-1;

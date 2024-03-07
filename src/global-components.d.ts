@@ -1,4 +1,5 @@
 import Button from 'primevue/button'
+import Card from 'primevue/card'
 import Chips from 'primevue/chips'
 import Column from 'primevue/column'
 import ConfirmDialog from 'primevue/confirmdialog'
@@ -14,6 +15,7 @@ import Toast from 'primevue/toast'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     BButton: typeof Button
+    CCard: typeof Card
     ConfirmDialog: typeof ConfirmDialog
     DataTable: typeof DataTable
     DataTableColumn: typeof Column

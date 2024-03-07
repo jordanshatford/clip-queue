@@ -1,42 +1,38 @@
 <template>
-  <div class="cq-card max-w-[16rem] flex-shrink-0 overflow-hidden text-left">
-    <div
-      class="flex h-36 w-full items-end justify-end bg-cover"
-      :style="'background-image: url(' + clip.thumbnailUrl + ')'"
+  <CCard class="max-w-[16rem] flex-shrink-0 overflow-hidden text-left">
+    <template #header>
+      <div class="relative">
+        <img class="w-full" :alt="clip.title" :src="clip.thumbnailUrl" />
+        <div class="absolute -bottom-6 -right-2 m-2 p-2">
+          <div class="flex gap-2">
+            <BButton title="Play now" severity="info" size="small" @click="emit('play')">
+              <i class="pi pi-play p-1"></i>
+            </BButton>
+            <BButton title="Remove" severity="danger" size="small" @click="emit('remove')">
+              <i class="pi pi-trash p-1"></i>
+            </BButton>
+          </div>
+        </div>
+      </div>
+    </template>
+    <template #title
+      ><span class="cq-text">{{ clip.title }}</span></template
     >
-      <BButton
-        title="Play now"
-        severity="info"
-        size="small"
-        class="-mb-2 mr-2 pb-2"
-        @click="emit('play')"
-      >
-        <i class="pi pi-play p-1"></i>
-      </BButton>
-      <BButton
-        title="Remove"
-        severity="danger"
-        size="small"
-        class="-mb-2 mr-2 pb-2"
-        @click="emit('remove')"
-      >
-        <i class="pi pi-trash p-1"></i>
-      </BButton>
-    </div>
-    <div class="p-3">
-      <span class="cq-text mt-2">{{ clip.title }}</span>
-      <h3 class="cq-text-subtle-semibold">
+    <template #subtitle>
+      <div class="cq-text-subtle-semibold">
         {{ clip.channel }}<span class="cq-text-subtle"> playing </span>{{ clip.category }}
-      </h3>
-      <div class="cq-text-subtle mt-1">
+      </div>
+    </template>
+    <template #content>
+      <div class="cq-text-subtle">
         Submitter: <span class="cq-text-subtle-semibold">{{ clip.submitters[0] }}</span>
       </div>
-      <div class="cq-text-subtle mt-1">
+      <div class="cq-text-subtle">
         Provider:
         <span class="cq-text-subtle-semibold">{{ clip.provider }}</span>
       </div>
-    </div>
-  </div>
+    </template>
+  </CCard>
 </template>
 
 <script setup lang="ts">

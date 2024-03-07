@@ -3,6 +3,7 @@ import '@/assets/base.css'
 import 'primeicons/primeicons.css'
 import PrimeVue from 'primevue/config'
 import Button from 'primevue/button'
+import Card from 'primevue/card'
 import Chips from 'primevue/chips'
 import Column from 'primevue/column'
 import ConfirmationService from 'primevue/confirmationservice'
@@ -29,6 +30,7 @@ app.use(PrimeVue, { unstyled: true, pt: Lara })
 app.use(ConfirmationService)
 app.use(ToastService)
 app.component('BButton', Button)
+app.component('CCard', Card)
 app.component('ConfirmDialog', ConfirmDialog)
 app.component('DataTable', DataTable)
 app.component('DataTableColumn', Column)

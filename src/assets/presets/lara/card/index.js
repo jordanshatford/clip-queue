@@ -6,15 +6,15 @@ export default {
       'shadow-md',
 
       //Color
-      'bg-surface-0 dark:bg-surface-900',
+      'bg-surface-100 dark:bg-surface-800',
       'text-surface-700 dark:text-surface-0'
     ]
   },
   body: {
-    class: 'p-5'
+    class: 'p-3'
   },
   title: {
-    class: 'text-2xl font-bold mb-2'
+    class: 'text-base font-bold mb-1'
   },
   subtitle: {
     class: [
@@ -22,16 +22,16 @@ export default {
       'font-normal',
 
       //Spacing
-      'mb-2',
+      'mb-1',
 
       //Color
       'text-surface-600 dark:text-surface-0/60'
     ]
   },
   content: {
-    class: 'py-5' // Vertical padding.
+    class: 'py-2' // Vertical padding.
   },
   footer: {
-    class: 'pt-5' // Top padding.
+    class: 'pt-2' // Top padding.
   }
 }

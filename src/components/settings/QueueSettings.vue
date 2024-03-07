@@ -1,50 +1,57 @@
 <template>
-  <div>
-    <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey" class="cq-form">
-      <div class="cq-toggle-form-group">
-        <label for="limitQueueSize" class="cq-text">Limit Queue Size?</label>
-        <InputSwitch inputId="limitQueueSize" v-model="formQueueSettings.isLimited" />
-      </div>
-      <div class="flex flex-col gap-2 text-left">
-        <label for="limit" class="cq-text">Limit:</label>
-        <InputNumber
-          id="limit"
-          v-model="formQueueSettings.limit"
-          :allow-empty="false"
-          :min="1"
-          :step="1"
-          show-buttons
-          :disabled="!formQueueSettings.isLimited"
-          aria-describedby="limit-help"
-        />
-        <small id="limit-help" class="cq-text-subtle pb-2"
-          >Clips will be ignored when queue limit is reached.</small
-        >
-      </div>
-      <div class="flex flex-col gap-2 text-left">
-        <label for="allowedProviders" class="cq-text">Allowed Providers:</label>
-        <MultiSelect
-          id="allowedProviders"
-          v-model="formProviders.enabled"
-          :options="Object.values(ClipProvider)"
-          placeholder="None"
-          display="chip"
-          aria-describedby="allowedProviders-help"
-        />
-        <small id="allowedProviders-help" class="cq-text-subtle pb-2"
-          >Clips from these providers will be allowed in the queue.</small
-        >
-      </div>
-      <div class="mt-3">
-        <BButton class="mr-2" type="submit" severity="info" size="small" :disabled="!isFormModified"
-          >Save</BButton
-        >
-        <BButton type="reset" severity="danger" size="small" :disabled="!isFormModified"
-          >Cancel</BButton
-        >
-      </div>
-    </form>
-  </div>
+  <CCard class="mx-auto max-w-lg">
+    <template #content>
+      <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
+        <div class="cq-toggle-form-group">
+          <label for="limitQueueSize" class="cq-text">Limit Queue Size?</label>
+          <InputSwitch inputId="limitQueueSize" v-model="formQueueSettings.isLimited" />
+        </div>
+        <div class="flex flex-col gap-2 text-left">
+          <label for="limit" class="cq-text">Limit:</label>
+          <InputNumber
+            id="limit"
+            v-model="formQueueSettings.limit"
+            :allow-empty="false"
+            :min="1"
+            :step="1"
+            show-buttons
+            :disabled="!formQueueSettings.isLimited"
+            aria-describedby="limit-help"
+          />
+          <small id="limit-help" class="cq-text-subtle pb-2"
+            >Clips will be ignored when queue limit is reached.</small
+          >
+        </div>
+        <div class="flex flex-col gap-2 text-left">
+          <label for="allowedProviders" class="cq-text">Allowed Providers:</label>
+          <MultiSelect
+            id="allowedProviders"
+            v-model="formProviders.enabled"
+            :options="Object.values(ClipProvider)"
+            placeholder="None"
+            display="chip"
+            aria-describedby="allowedProviders-help"
+          />
+          <small id="allowedProviders-help" class="cq-text-subtle pb-2"
+            >Clips from these providers will be allowed in the queue.</small
+          >
+        </div>
+        <div class="mt-3">
+          <BButton
+            class="mr-2"
+            type="submit"
+            severity="info"
+            size="small"
+            :disabled="!isFormModified"
+            >Save</BButton
+          >
+          <BButton type="reset" severity="danger" size="small" :disabled="!isFormModified"
+            >Cancel</BButton
+          >
+        </div>
+      </form>
+    </template>
+  </CCard>
 </template>
 
 <script setup lang="ts">
