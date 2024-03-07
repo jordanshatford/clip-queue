@@ -1,5 +1,13 @@
 # twitch-clip-queue
 
+## 1.7.0
+
+### Minor Changes
+
+- feat: make each settings page a unique route (closes: #243) ([`44acb6efc727edf06f5b6e5aef576242c3f98aab`](https://github.com/jordanshatford/twitch-clip-queue/commit/44acb6efc727edf06f5b6e5aef576242c3f98aab))
+
+- feat: collapse command descriptions in settings by default ([`09b1a47ec407a37978d7248b0ea7e47c8dfe3c18`](https://github.com/jordanshatford/twitch-clip-queue/commit/09b1a47ec407a37978d7248b0ea7e47c8dfe3c18))
+
 ## 1.6.0
 
 ### Minor Changes
