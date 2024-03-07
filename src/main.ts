@@ -14,6 +14,7 @@ import InputSwitch from 'primevue/inputswitch'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
 import MultiSelect from 'primevue/multiselect'
+import Panel from 'primevue/panel'
 import TabMenu from 'primevue/tabmenu'
 import Toast from 'primevue/toast'
 import ToastService from 'primevue/toastservice'
@@ -40,6 +41,7 @@ app.component('InputSwitch', InputSwitch)
 app.component('InputText', InputText)
 app.component('MessageAlert', Message)
 app.component('MultiSelect', MultiSelect)
+app.component('PPanel', Panel)
 app.component('TabMenu', TabMenu)
 app.component('TToast', Toast)
 const pinia = createPinia()

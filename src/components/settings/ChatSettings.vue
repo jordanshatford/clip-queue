@@ -25,15 +25,21 @@
               :disabled="!formSettings.allowCommands"
               v-model="formSettings.commandPrefix"
             />
-            <div class="cq-text-subtle my-2 pl-1 text-left">
-              <label>The following commands are available to mods: </label>
-              <ul class="list-disc pl-8">
-                <li v-for="(help, command) in commands.help" :key="command">
-                  <code class="cq-text-subtle-semibold">{{ toCommandCall(command, help) }}</code
-                  >: {{ help.description }}
-                </li>
-              </ul>
-            </div>
+            <PPanel
+              class="cq-text-subtle"
+              header="Commands available to mods:"
+              toggleable
+              :collapsed="true"
+            >
+              <div class="cq-text-subtle px-3 text-left">
+                <ul class="list-disc">
+                  <li v-for="(help, command) in commands.help" :key="command">
+                    <code class="cq-text-subtle-semibold">{{ toCommandCall(command, help) }}</code
+                    >: {{ help.description }}
+                  </li>
+                </ul>
+              </div>
+            </PPanel>
           </div>
           <div class="mt-3">
             <BButton
