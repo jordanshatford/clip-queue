@@ -11,7 +11,7 @@ export interface QueueSettings {
 
 export const DEFAULT_SETTINGS: QueueSettings = {
   isLimited: false,
-  limit: null
+  limit: 1
 }
 
 export interface ClipQueue {
