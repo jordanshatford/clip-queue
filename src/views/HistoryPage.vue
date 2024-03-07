@@ -1,5 +1,4 @@
 <template>
-  <p class="cq-title">History</p>
   <DataTable
     :value="queue.history.toArray()"
     size="small"
@@ -7,6 +6,7 @@
     removableSort
     :rows="10"
     :rowsPerPageOptions="[10, 20, 50]"
+    class="my-4"
   >
     <template #empty>No clips previously watched.</template>
     <DataTableColumn field="title" header="Info" sortable :sortField="(data: Clip) => data.title">

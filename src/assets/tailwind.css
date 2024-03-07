@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-  .cq-title {
-    @apply p-5 text-5xl font-extrabold text-primary-500;
-  }
   .cq-text {
     @apply font-normal text-surface-600 dark:text-surface-400;
   }

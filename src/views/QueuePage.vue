@@ -8,19 +8,9 @@
     @previous="queue.previous()"
     @next="queue.next()"
   />
-  <div v-else class="text-center">
-    <p class="cq-title">Queue {{ queue.isOpen ? 'Open' : 'Closed' }}</p>
-    <p v-if="queue.isOpen" class="cq-text">
-      Start sending clips now for them to be added to the queue.
-    </p>
-    <p v-else class="cq-text">Open the queue to start collecting clips sent in chat.</p>
-    <BButton :disabled="queue.upcoming.empty()" size="small" @click="queue.next()" class="my-5">
-      Start Viewing!
-    </BButton>
-    <MessageAlert v-if="providers.enabled.length === 0" severity="warn"
-      >No clip providers enabled. Please enable one in the settings.</MessageAlert
-    >
-  </div>
+  <MessageAlert v-else-if="providers.enabled.length === 0" severity="error"
+    >No clip providers enabled. Please enable one in the settings.</MessageAlert
+  >
   <ClipQueue
     title="Upcoming Clips"
     :clips="queue.upcoming.toArray()"

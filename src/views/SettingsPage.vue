@@ -1,5 +1,4 @@
 <template>
-  <p class="cq-title">Settings</p>
   <div class="mx-auto mb-3 max-w-xl">
     <TabMenu :model="tabs" :activeIndex="activeIndex">
       <template #item="{ item, props }">
