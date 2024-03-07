@@ -15,7 +15,7 @@
         autoplay
       />
       <div v-else class="cq-text flex h-full items-center justify-center">
-        <p>Unsupported video format</p>
+        <p>Unsupported clip. You may need to enable the provider of this clip.</p>
       </div>
     </div>
     <div class="text-left">
