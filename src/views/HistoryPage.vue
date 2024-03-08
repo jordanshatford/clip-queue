@@ -39,7 +39,11 @@
         </div>
       </template>
     </DataTableColumn>
-    <DataTableColumn field="provider" sortable header="Provider"></DataTableColumn>
+    <DataTableColumn field="provider" sortable header="Provider">
+      <template #body="{ data }: { data: Clip }">
+        <ProviderName :provider="data.provider" />
+      </template>
+    </DataTableColumn>
     <DataTableColumn
       :field="(data: Clip) => data.submitters?.[0]"
       sortable
@@ -80,6 +84,7 @@
 import { useConfirm } from 'primevue/useconfirm'
 import { useQueue } from '@/stores/queue'
 import type { Clip } from '@/providers'
+import ProviderName from '@/components/ProviderName.vue'
 
 const confirm = useConfirm()
 const queue = useQueue()

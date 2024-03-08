@@ -31,7 +31,14 @@
             placeholder="None"
             display="chip"
             aria-describedby="allowedProviders-help"
-          />
+          >
+            <template #option="{ option }: { option: ClipProvider }">
+              <ProviderName :provider="option" />
+            </template>
+            <template #chip="{ value }: { value: ClipProvider }">
+              <ProviderName :provider="value" />
+            </template>
+          </MultiSelect>
           <small id="allowedProviders-help" class="cq-text-subtle pb-2"
             >Clips from these providers will be allowed in the queue.</small
           >
@@ -61,6 +68,7 @@ import { useQueue, type QueueSettings } from '@/stores/queue'
 import { clone } from '@/utils'
 import { ClipProvider } from '@/providers'
 import { useProviders, type Providers } from '@/stores/providers'
+import ProviderName from '@/components/ProviderName.vue'
 
 const providers = useProviders()
 const toast = useToast()

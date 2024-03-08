@@ -20,7 +20,9 @@ export interface Clip {
 }
 
 export interface IClipProvider {
+  // Name and svg for display in the UI.
   name: ClipProvider
+  svg?: string
   // Cache related. We may or may not want to implement caching for each provider.
   hasCachedData?: boolean
   clearCache?: () => void

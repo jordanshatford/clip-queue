@@ -24,19 +24,17 @@
       </div>
     </template>
     <template #content>
-      <div class="cq-text-subtle">
+      <div class="cq-text-subtle mb-2">
         Submitter: <span class="cq-text-subtle-semibold">{{ clip.submitters[0] }}</span>
       </div>
-      <div class="cq-text-subtle">
-        Provider:
-        <span class="cq-text-subtle-semibold">{{ clip.provider }}</span>
-      </div>
+      <ProviderName :provider="clip.provider" class="cq-text" />
     </template>
   </CCard>
 </template>
 
 <script setup lang="ts">
 import type { Clip } from '@/providers'
+import ProviderName from '@/components/ProviderName.vue'
 
 export interface Props {
   clip: Clip
