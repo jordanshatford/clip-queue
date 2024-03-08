@@ -1,5 +1,17 @@
 # twitch-clip-queue
 
+## 1.8.0
+
+### Minor Changes
+
+- feat: add provider icon when displaying clip provider ([`ce8e9ab69d20dd54878d332bfa7bdbaf1ca9369e`](https://github.com/jordanshatford/twitch-clip-queue/commit/ce8e9ab69d20dd54878d332bfa7bdbaf1ca9369e))
+
+- feat: detect multiple urls in messsage (closes: #229) ([`70e32a3ee150bcd3af1abc0e7ea256b66110b3ca`](https://github.com/jordanshatford/twitch-clip-queue/commit/70e32a3ee150bcd3af1abc0e7ea256b66110b3ca))
+
+### Patch Changes
+
+- fix: do not allow duplicates for blocked channels and submitters ([`cfea42a4d4dcb04ba9ec097531031c94c82a4f80`](https://github.com/jordanshatford/twitch-clip-queue/commit/cfea42a4d4dcb04ba9ec097531031c94c82a4f80))
+
 ## 1.7.0
 
 ### Minor Changes
