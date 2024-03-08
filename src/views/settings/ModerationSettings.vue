@@ -23,6 +23,7 @@
             inputId="blockedChannels"
             v-model="formSettings.blockedChannels"
             separator=" "
+            :allowDuplicate="false"
           />
           <div class="cq-text-subtle pb-2">
             <label>Clips of these channels will not be added to the queue.</label>
@@ -34,6 +35,7 @@
             inputId="blockedSubmitters"
             v-model="formSettings.blockedSubmitters"
             separator=" "
+            :allowDuplicate="false"
           />
           <div class="cq-text-subtle pb-2">
             <label>Clips submitted by these users will not be added to the queue.</label>
