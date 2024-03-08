@@ -1,3 +1,4 @@
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import type { Clip } from '@/providers'
 import { deepEqual } from '@/utils'
@@ -18,61 +19,88 @@ export const DEFAULTS: Moderation = {
   blockedSubmitters: []
 }
 
-export const useModeration = defineStore('moderation', {
-  persist: {
-    key: 'moderation'
-  },
-  state: (): Moderation => ({
-    ...DEFAULTS
-  }),
-  getters: {
-    // Compare moderation to currently set moderations
-    isModified: (state) => {
+export const useModeration = defineStore(
+  'moderation',
+  () => {
+    const hasAutoRemoveClipsEnabled = ref<boolean>(DEFAULTS.hasAutoRemoveClipsEnabled)
+    const blockedChannels = ref<string[]>(DEFAULTS.blockedChannels)
+    const blockedSubmitters = ref<string[]>(DEFAULTS.blockedSubmitters)
+
+    const $state = computed(() => ({
+      hasAutoRemoveClipsEnabled: hasAutoRemoveClipsEnabled.value,
+      blockedChannels: blockedChannels.value,
+      blockedSubmitters: blockedSubmitters.value
+    }))
+
+    const isModified = computed(() => {
       return (moderation: Moderation) => {
-        /* eslint-disable @typescript-eslint/no-explicit-any*/
-        return !deepEqual((state as any).$state, moderation)
+        return !deepEqual($state.value, moderation)
       }
-    },
-    // Return if a clip passes moderation
-    isAllowed: (state) => {
+    })
+
+    const isAllowed = computed(() => {
       return (clip: Clip) => {
-        const blockedChannel = state.blockedChannels.some(
+        const blockedChannel = $state.value.blockedChannels.some(
           (c) => c.toLowerCase() === clip.channel?.toLowerCase()
         )
-        const blockedSubmitter = state.blockedSubmitters.some(
+        const blockedSubmitter = $state.value.blockedSubmitters.some(
           (s) => s.toLowerCase() === clip.submitters[0]?.toLowerCase()
         )
         return !blockedChannel && !blockedSubmitter
       }
+    })
+
+    function update(moderation: Moderation) {
+      hasAutoRemoveClipsEnabled.value = moderation.hasAutoRemoveClipsEnabled
+      blockedChannels.value = moderation.blockedChannels
+      blockedSubmitters.value = moderation.blockedSubmitters
     }
-  },
-  actions: {
-    update(moderation: Moderation) {
-      this.$patch(moderation)
-    },
-    addBlockedChannel(channel: string) {
+
+    function addBlockedChannel(channel: string) {
       // Ignore if the channel is already blocked
-      if (this.blockedChannels.some((c) => c.toLowerCase() === channel.toLowerCase())) {
+      if (blockedChannels.value.some((c) => c.toLowerCase() === channel.toLowerCase())) {
         return
       }
-      this.blockedChannels = [...this.blockedChannels, channel]
-    },
-    removeBlockedChannel(channel: string) {
-      this.blockedChannels = this.blockedChannels.filter(
+      blockedChannels.value = [...blockedChannels.value, channel.toLowerCase()]
+    }
+
+    function removeBlockedChannel(channel: string) {
+      blockedChannels.value = blockedChannels.value.filter(
         (c) => c.toLowerCase() !== channel.toLowerCase()
       )
-    },
-    addBlockedSubmitter(submitter: string) {
+    }
+
+    function addBlockedSubmitter(submitter: string) {
       // Ignore if the channel is already blocked
-      if (this.blockedSubmitters.some((s) => s.toLowerCase() === submitter.toLowerCase())) {
+      if (blockedSubmitters.value.some((s) => s.toLowerCase() === submitter.toLowerCase())) {
         return
       }
-      this.blockedSubmitters = [...this.blockedSubmitters, submitter]
-    },
-    removeBlockedSubmitter(submitter: string) {
-      this.blockedSubmitters = this.blockedSubmitters.filter(
+      blockedSubmitters.value = [...blockedSubmitters.value, submitter.toLowerCase()]
+    }
+
+    function removeBlockedSubmitter(submitter: string) {
+      blockedSubmitters.value = blockedSubmitters.value.filter(
         (s) => s.toLowerCase() !== submitter.toLowerCase()
       )
     }
+
+    return {
+      hasAutoRemoveClipsEnabled,
+      blockedChannels,
+      blockedSubmitters,
+      isModified,
+      $state,
+      isAllowed,
+      update,
+      addBlockedChannel,
+      removeBlockedChannel,
+      addBlockedSubmitter,
+      removeBlockedSubmitter
+    }
+  },
+  {
+    persist: {
+      key: 'moderation'
+    }
   }
-})
+)

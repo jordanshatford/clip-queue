@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { ChatUserstate } from 'tmi.js'
 import { env, config } from '@/assets/config'
@@ -19,80 +20,78 @@ export interface User {
   chat?: TwitchChat
 }
 
-export const useUser = defineStore('user', {
-  persist: {
-    key: 'user',
-    paths: ['ctx.token', 'ctx.username']
-  },
-  state: (): User => {
-    return {
-      hasValidatedToken: false,
-      isLoggedIn: false,
-      ctx: {
-        id: CLIENT_ID,
-        token: undefined,
-        username: undefined
-      },
-      chat: undefined
+export const useUser = defineStore(
+  'user',
+  () => {
+    const hasValidatedToken = ref<boolean>(false)
+    const isLoggedIn = ref<boolean>(false)
+    const ctx = ref<TwitchUserCtx>({ id: CLIENT_ID, token: undefined, username: undefined })
+    const chat = ref<TwitchChat | undefined>(undefined)
+
+    function redirect(): void {
+      twitch.redirect(ctx.value, REDIRECT_URI, scopes)
     }
-  },
-  actions: {
-    async autoLoginIfPossible() {
-      if (this.hasValidatedToken) {
+
+    async function autoLoginIfPossible() {
+      if (hasValidatedToken.value) {
         return
       }
-      if (this.ctx.token && (await twitch.isLoginValid(this.ctx))) {
-        this.isLoggedIn = true
-        this.connectToChat()
+      if (ctx.value.token && (await twitch.isLoginValid(ctx.value))) {
+        isLoggedIn.value = true
+        connectToChat()
       } else {
-        this.logout()
+        logout()
       }
-      this.hasValidatedToken = true
-    },
-    redirect(): void {
-      twitch.redirect(this.ctx, REDIRECT_URI, scopes)
-    },
-    login(authInfo: AuthInfo): void {
+      hasValidatedToken.value = true
+    }
+
+    function login(authInfo: AuthInfo): void {
       const { access_token, decodedIdToken } = authInfo
+      const currentCtx = ctx.value
       if (
-        this.ctx.token !== access_token ||
-        this.ctx.username !== decodedIdToken.preferred_username
+        currentCtx.token !== access_token ||
+        currentCtx.username !== decodedIdToken.preferred_username
       ) {
-        this.ctx = {
-          ...this.ctx,
+        ctx.value = {
+          ...currentCtx,
           token: access_token,
           username: decodedIdToken.preferred_username
         }
-        this.isLoggedIn = true
-        this.connectToChat()
+        isLoggedIn.value = true
+        connectToChat()
       }
-    },
-    async logout(): Promise<void> {
-      const ctx = this.ctx
-      this.ctx = {
-        ...this.ctx,
+    }
+
+    async function logout(): Promise<void> {
+      const originalCtx = ctx.value
+      ctx.value = {
+        ...originalCtx,
         token: undefined,
         username: undefined
       }
-      this.isLoggedIn = false
-      this.chat?.disconnect()
-      this.chat = undefined
-      if (ctx.id && ctx.token) {
-        twitch.logout(ctx).catch()
+      isLoggedIn.value = false
+      chat.value?.disconnect()
+      chat.value = undefined
+      if (originalCtx.id && originalCtx.token) {
+        twitch.logout(originalCtx).catch()
       }
-    },
-    connectToChat() {
-      this.chat?.disconnect?.()
-      if (this.ctx.username && this.ctx.token) {
-        this.chat = new TwitchChat(this.ctx)
+    }
+
+    function connectToChat() {
+      chat.value?.disconnect?.()
+      const currentCtx = ctx.value
+      if (currentCtx.username && currentCtx.token) {
+        const c = new TwitchChat(currentCtx)
         // setup watching chat
-        this.chat.on('message', this.onMessage)
-        this.chat.on('messagedeleted', this.onMessageDeleted)
-        this.chat.on('timeout', this.onTimeout)
-        this.chat.on('ban', this.onTimeout)
+        c.on('message', onMessage)
+        c.on('messagedeleted', onMessageDeleted)
+        c.on('timeout', onTimeout)
+        c.on('ban', onTimeout)
+        chat.value = c
       }
-    },
-    onMessage(c: string, userstate: ChatUserstate, message: string, self: boolean) {
+    }
+
+    function onMessage(c: string, userstate: ChatUserstate, message: string, self: boolean) {
       if (self) {
         return
       }
@@ -120,8 +119,9 @@ export const useUser = defineStore('user', {
           }
         })
       }
-    },
-    onMessageDeleted(c: string, username: string, deletedMessage: string) {
+    }
+
+    function onMessageDeleted(c: string, username: string, deletedMessage: string) {
       const moderation = useModeration()
       if (!moderation.hasAutoRemoveClipsEnabled) {
         return
@@ -139,8 +139,9 @@ export const useUser = defineStore('user', {
           }
         })
       }
-    },
-    onTimeout(c: string, username: string) {
+    }
+
+    function onTimeout(c: string, username: string) {
       const moderation = useModeration()
       if (!moderation.hasAutoRemoveClipsEnabled) {
         return
@@ -148,5 +149,21 @@ export const useUser = defineStore('user', {
       const queue = useQueue()
       queue.removeSubmitterClips(username)
     }
+
+    return {
+      hasValidatedToken,
+      isLoggedIn,
+      ctx,
+      autoLoginIfPossible,
+      redirect,
+      login,
+      logout
+    }
+  },
+  {
+    persist: {
+      key: 'user',
+      paths: ['ctx.token', 'ctx.username']
+    }
   }
-})
+)

@@ -1,5 +1,5 @@
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { deepEqual } from '@/utils'
 
 export interface Settings {
   allowCommands: boolean
@@ -11,22 +11,32 @@ export const DEFAULTS: Settings = {
   commandPrefix: '!cq'
 }
 
-export const useSettings = defineStore('settings', {
-  persist: {
-    key: 'settings'
-  },
-  state: (): Settings => ({ ...DEFAULTS }),
-  getters: {
-    isModified: (state) => {
+export const useSettings = defineStore(
+  'settings',
+  () => {
+    const allowCommands = ref<boolean>(DEFAULTS.allowCommands)
+    const commandPrefix = ref<string>(DEFAULTS.commandPrefix)
+
+    const isModified = computed(() => {
       return (settings: Settings) => {
-        /* eslint-disable @typescript-eslint/no-explicit-any*/
-        return !deepEqual((state as any).$state, settings)
+        return (
+          allowCommands.value !== settings.allowCommands ||
+          commandPrefix.value !== settings.commandPrefix
+        )
       }
+    })
+
+    function update(settings: Settings) {
+      allowCommands.value = settings.allowCommands
+      commandPrefix.value = settings.commandPrefix
+    }
+
+    return {
+      allowCommands,
+      commandPrefix,
+      isModified,
+      update
     }
   },
-  actions: {
-    update(settings: Settings) {
-      this.$patch(settings)
-    }
-  }
-})
+  { persist: { key: 'settings' } }
+)

@@ -11,7 +11,6 @@ describe('clips.ts', () => {
 
   beforeEach(() => {
     const queue = useQueue()
-    queue.$reset()
     expect(queue.isOpen).toEqual(true)
     expect(queue.current).toEqual(undefined)
     expect(queue.upcoming.size()).toEqual(0)

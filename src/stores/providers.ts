@@ -1,3 +1,4 @@
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import {
   KickProvider,
@@ -18,61 +19,85 @@ export const DEFAULTS: Providers = {
   enabled: Object.values(ClipProvider)
 }
 
-export const useProviders = defineStore('providers', {
-  persist: {
-    key: 'providers',
-    paths: ['enabled']
-  },
-  state: (): Providers => ({
-    providers: {
+export const useProviders = defineStore(
+  'providers',
+  () => {
+    const providers = ref<Partial<Record<ClipProvider, IClipProvider>>>({
       [ClipProvider.KICK]: new KickProvider(),
       [ClipProvider.TWITCH]: new TwitchProvider()
-    },
-    enabled: [...DEFAULTS.enabled]
-  }),
-  getters: {
-    hasCachedData: (state) => {
-      return Object.values(state.providers).some((p) => p.hasCachedData)
-    },
-    isModified: (state) => {
+    })
+    const enabled = ref<ClipProvider[]>([...DEFAULTS.enabled])
+
+    const hasCachedData = computed(() => {
+      return Object.values(providers.value).some((p) => p.hasCachedData)
+    })
+
+    const isModified = computed(() => {
       return (providers: Providers) => {
         return Object.values(ClipProvider).some(
-          (p) => state.enabled.includes(p) !== providers.enabled.includes(p)
+          (p) => enabled.value.includes(p) !== providers.enabled.includes(p)
         )
       }
+    })
+
+    function update(providers: Providers) {
+      enabled.value = providers.enabled
     }
-  },
-  actions: {
-    update(providers: Providers) {
-      this.enabled = providers.enabled
-    },
-    purge() {
-      for (const p of Object.values(this.providers)) {
+
+    function purge() {
+      for (const p of Object.values(providers.value)) {
         p.clearCache?.()
       }
-    },
-    async getClip(url: string): Promise<Clip | undefined> {
-      for (const ep of this.enabled) {
-        const p = this.providers[ep]
+    }
+
+    async function getClip(url: string): Promise<Clip | undefined> {
+      for (const ep of enabled.value) {
+        const p = providers.value[ep]
         const c = await p?.getClip(url)
         if (c !== undefined) {
           return c
         }
       }
-    },
-    getPlayerFormat(clip: Clip): PlayerFormat | undefined {
-      if (!this.enabled.includes(clip.provider)) {
+    }
+
+    function getPlayerFormat(clip: Clip): PlayerFormat | undefined {
+      if (!enabled.value.includes(clip.provider)) {
         return
       }
-      const p = this.providers[clip.provider]
+      const p = providers.value[clip.provider]
       return p?.getPlayerFormat(clip)
-    },
-    getPlayerSource(clip: Clip): string | undefined {
-      if (!this.enabled.includes(clip.provider)) {
+    }
+
+    function getPlayerSource(clip: Clip): string | undefined {
+      if (!enabled.value.includes(clip.provider)) {
         return
       }
-      const p = this.providers[clip.provider]
+      const p = providers.value[clip.provider]
       return p?.getPlayerSource(clip)
     }
+
+    const $state = computed(() => ({
+      providers: providers.value,
+      enabled: enabled.value
+    }))
+
+    return {
+      providers,
+      enabled,
+      hasCachedData,
+      isModified,
+      update,
+      purge,
+      getClip,
+      getPlayerFormat,
+      getPlayerSource,
+      $state
+    }
+  },
+  {
+    persist: {
+      key: 'providers',
+      paths: ['enabled']
+    }
   }
-})
+)

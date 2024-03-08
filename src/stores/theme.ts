@@ -1,3 +1,4 @@
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export enum Theme {
@@ -16,25 +17,31 @@ export function getInferredDefaultTheme(): Theme {
   }
 }
 
-export const useTheme = defineStore('theme', {
-  persist: {
-    key: 'theme',
-    afterRestore: (ctx) => {
-      if (ctx.store.value === Theme.DARK) {
-        document?.querySelector('html')?.classList.add(Theme.DARK)
-      }
-    }
-  },
-  state: () => ({
-    value: getInferredDefaultTheme()
-  }),
-  getters: {
-    isDark: (state) => state.value === Theme.DARK
-  },
-  actions: {
-    toggle() {
-      this.value = this.value === Theme.DARK ? Theme.LIGHT : Theme.DARK
+export const useTheme = defineStore(
+  'theme',
+  () => {
+    const value = ref<Theme>(getInferredDefaultTheme())
+    const isDark = computed(() => value.value === Theme.DARK)
+
+    function toggle() {
+      value.value = value.value === Theme.DARK ? Theme.LIGHT : Theme.DARK
       document.querySelector('html')?.classList.toggle(Theme.DARK)
     }
+
+    return {
+      value,
+      isDark,
+      toggle
+    }
+  },
+  {
+    persist: {
+      key: 'theme',
+      afterRestore: (ctx) => {
+        if (ctx.store.value === Theme.DARK) {
+          document?.querySelector('html')?.classList.add(Theme.DARK)
+        }
+      }
+    }
   }
-})
+)

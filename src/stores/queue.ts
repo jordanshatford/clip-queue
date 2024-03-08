@@ -1,3 +1,4 @@
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { ClipList } from '@/utils/clip-list'
 import { ClipProvider, type Clip, toUUID } from '@/providers'
@@ -22,51 +23,42 @@ export interface ClipQueue {
   settings: QueueSettings
 }
 
-export const useQueue = defineStore('queue', {
-  persist: {
-    key: 'queue',
-    paths: ['history', 'current', 'upcoming', 'settings'],
-    afterRestore: (ctx) => {
-      if (ctx.store.current?.id) {
-        ctx.store.history.add(ctx.store.current)
+export const useQueue = defineStore(
+  'queue',
+  () => {
+    const isOpen = ref<boolean>(true)
+    const history = ref<ClipList>(new ClipList())
+    const current = ref<Clip | undefined>(undefined)
+    const upcoming = ref<ClipList>(new ClipList())
+    const settings = ref<QueueSettings>(DEFAULT_SETTINGS)
+
+    const isSettingsModified = computed(() => {
+      return (s: QueueSettings) => {
+        return !deepEqual(settings.value, s)
       }
-      ctx.store.current = undefined
+    })
+
+    function clear() {
+      upcoming.value = new ClipList()
     }
-  },
-  state: (): ClipQueue => ({
-    isOpen: true,
-    history: new ClipList(),
-    current: undefined,
-    upcoming: new ClipList(),
-    settings: { ...DEFAULT_SETTINGS }
-  }),
-  getters: {
-    isSettingsModified: (state) => {
-      return (settings: QueueSettings) => {
-        return !deepEqual(state.settings, settings)
-      }
+
+    function purge() {
+      history.value = new ClipList()
     }
-  },
-  actions: {
-    clear() {
-      this.upcoming = new ClipList()
-    },
-    purge() {
-      this.history = new ClipList()
-    },
-    add(clip: Clip, force = false) {
+
+    function add(clip: Clip, force = false) {
       // Force add the clip
       if (force) {
-        this.upcoming.add(clip)
+        upcoming.value.add(clip)
         return
       }
       // Ignore clip when queue isnt open
-      if (!this.open) {
+      if (!isOpen.value) {
         return
       }
       // Ignore when we have previously watched it
       const hasBeenWatched =
-        (this.current && toUUID(this.current) === toUUID(clip)) || this.history.includes(clip)
+        (current.value && toUUID(current.value) === toUUID(clip)) || history.value.includes(clip)
       if (hasBeenWatched) {
         return
       }
@@ -77,77 +69,127 @@ export const useQueue = defineStore('queue', {
       }
       // Queue is full based on limit
       if (
-        this.settings.isLimited &&
-        this.settings.limit &&
-        this.upcoming.size() >= this.settings.limit
+        settings.value.isLimited &&
+        settings.value.limit &&
+        upcoming.value.size() >= settings.value.limit
       ) {
         // If the clip is already in the queue add it so submitters is updated
-        if (!this.upcoming.includes(clip)) {
+        if (!upcoming.value.includes(clip)) {
           return
         }
       }
-      this.upcoming.add(clip)
-    },
-    remove(clip: Clip) {
-      this.upcoming.remove(clip)
-    },
-    removeSubmitterClips(submitter: string) {
-      this.upcoming.removeBySubmitter(submitter)
-    },
-    removeChannelClips(channel: string) {
-      this.upcoming.removeByChannel(channel)
-    },
-    removeProviderClips(provider: ClipProvider) {
-      this.upcoming.removeByProvider(provider)
-    },
-    removeFromHistory(clip: Clip) {
-      this.history.remove(clip)
-    },
-    play(clip: Clip) {
-      if (!this.upcoming.includes(clip)) {
+      upcoming.value.add(clip)
+    }
+
+    function remove(clip: Clip) {
+      upcoming.value.remove(clip)
+    }
+
+    function removeSubmitterClips(submitter: string) {
+      upcoming.value.removeBySubmitter(submitter)
+    }
+
+    function removeChannelClips(channel: string) {
+      upcoming.value.removeByChannel(channel)
+    }
+
+    function removeProviderClips(provider: ClipProvider) {
+      upcoming.value.removeByProvider(provider)
+    }
+
+    function removeFromHistory(clip: Clip) {
+      history.value.remove(clip)
+    }
+
+    function play(clip: Clip) {
+      if (!upcoming.value.includes(clip)) {
         return
       }
-      if (this.current?.id) {
-        this.history.add(this.current)
+      if (current.value?.id) {
+        history.value.add(current.value)
       }
-      this.upcoming.remove(clip)
-      this.current = clip
-    },
-    open() {
-      this.isOpen = true
-    },
-    close() {
-      this.isOpen = false
-    },
-    previous() {
-      if (this.current?.id) {
-        this.upcoming.unshift(this.current)
+      upcoming.value.remove(clip)
+      current.value = clip
+    }
+
+    function open() {
+      isOpen.value = true
+    }
+
+    function close() {
+      isOpen.value = false
+    }
+
+    function previous() {
+      if (current.value?.id) {
+        upcoming.value.unshift(current.value)
       }
-      this.current = this.history.pop()
-    },
-    next() {
-      if (this.current?.id) {
-        this.history.add(this.current)
+      current.value = history.value.pop()
+    }
+
+    function next() {
+      if (current.value?.id) {
+        history.value.add(current.value)
       }
-      this.current = this.upcoming.shift()
-    },
-    updateSettings(settings: QueueSettings) {
-      this.settings = settings
-    },
-    setLimit(limit: number) {
+      current.value = upcoming.value.shift()
+    }
+
+    function updateSettings(s: QueueSettings) {
+      settings.value = s
+    }
+
+    function setLimit(limit: number) {
       if (Number.isNaN(limit) || limit < 1) {
         return
       }
-      this.updateSettings({
+      updateSettings({
         isLimited: true,
         limit: limit
       })
-    },
-    removeLimit() {
-      this.updateSettings({
+    }
+
+    function removeLimit() {
+      updateSettings({
         isLimited: false,
-        limit: this.settings.limit
+        limit: settings.value.limit
       })
     }
+
+    return {
+      isOpen,
+      history,
+      current,
+      upcoming,
+      settings,
+      isSettingsModified,
+      clear,
+      purge,
+      add,
+      remove,
+      removeSubmitterClips,
+      removeChannelClips,
+      removeProviderClips,
+      removeFromHistory,
+      play,
+      open,
+      close,
+      previous,
+      next,
+      updateSettings,
+      setLimit,
+      removeLimit
+    }
+  },
+  {
+    persist: {
+      key: 'queue',
+      paths: ['history', 'current', 'upcoming', 'settings'],
+      afterRestore: (ctx) => {
+        if (ctx.store.current?.id) {
+          ctx.store.history.add(ctx.store.current)
+        }
+        ctx.store.current = undefined
+      }
+    }
   }
-})
+)
