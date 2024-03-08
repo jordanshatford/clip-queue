@@ -1,4 +1,4 @@
-import type { Clip, ClipProvider } from '@/providers'
+import { type Clip, type ClipProvider, toUUID } from '@/providers'
 
 export class ClipList {
   private _clips: Clip[]
@@ -13,7 +13,7 @@ export class ClipList {
   public add(...clips: Clip[]): Clip[] {
     clips.forEach((clip) => {
       if (this.includes(clip)) {
-        const index = this._clips.findIndex((c) => c.id === clip.id && c.provider === clip.provider)
+        const index = this._clips.findIndex((c) => toUUID(c) === toUUID(clip))
         const submitters = this._clips[index]?.submitters ?? []
         const submitter = clip.submitters[0]?.toLowerCase()
         if (submitter && !submitters.includes(submitter)) {
@@ -28,7 +28,7 @@ export class ClipList {
   }
 
   public remove(clip: Clip): void {
-    const index = this._clips.findIndex((c) => c.id === clip.id && c.provider === clip.provider)
+    const index = this._clips.findIndex((c) => toUUID(c) === toUUID(clip))
     if (index > -1) {
       this.removeSubmitterFromClip(clip?.submitters[0]?.toLowerCase(), index)
       this.sort()
@@ -51,7 +51,7 @@ export class ClipList {
   }
 
   public includes(clip: Clip): boolean {
-    return this._clips.some((c) => c.id === clip.id && c.provider === clip.provider)
+    return this._clips.some((c) => toUUID(c) === toUUID(clip))
   }
 
   public pop(): Clip | undefined {

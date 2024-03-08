@@ -30,3 +30,8 @@ export interface IClipProvider {
   getPlayerFormat: (clip: Clip) => PlayerFormat | undefined
   getPlayerSource: (clip: Clip) => string | undefined
 }
+
+// Return a UUID from a given clip.
+export function toUUID(clip: Clip): string {
+  return `${clip.provider.toString()}:${clip.id}`
+}

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ClipList } from '@/utils/clip-list'
-import { ClipProvider, type Clip } from '@/providers'
+import { ClipProvider, type Clip, toUUID } from '@/providers'
 import { useModeration } from '@/stores/moderation'
 import { deepEqual } from '@/utils'
 
@@ -66,8 +66,7 @@ export const useQueue = defineStore('queue', {
       }
       // Ignore when we have previously watched it
       const hasBeenWatched =
-        (this.current?.id === clip.id && this.current?.provider === clip.provider) ||
-        this.history.includes(clip)
+        (this.current && toUUID(this.current) === toUUID(clip)) || this.history.includes(clip)
       if (hasBeenWatched) {
         return
       }

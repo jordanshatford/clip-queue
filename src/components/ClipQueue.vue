@@ -28,7 +28,7 @@
     <div class="mt-3 flex justify-items-start overflow-x-auto">
       <ClipCard
         v-for="clip in clips"
-        :key="clip.provider + ':' + clip.id"
+        :key="toUUID(clip)"
         :clip="clip"
         @play="emit('play', clip)"
         @remove="emit('remove', clip)"
@@ -40,7 +40,7 @@
 
 <script setup lang="ts">
 import ClipCard from '@/components/ClipCard.vue'
-import type { Clip } from '@/providers'
+import { type Clip, toUUID } from '@/providers'
 
 export interface Props {
   title?: string
