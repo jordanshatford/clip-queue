@@ -5,7 +5,7 @@ import { env, config } from '@/assets/config'
 import twitch, { TwitchChat, type AuthInfo, type TwitchUserCtx } from '@/services/twitch'
 import { useSettings } from '@/stores/settings'
 import commands from '@/utils/commands'
-import { getUrlFromMessage } from '@/utils'
+import { getAllURLsFromText } from '@/utils'
 import { useQueue } from '@/stores/queue'
 import { useModeration } from '@/stores/moderation'
 import { useProviders } from '@/stores/providers'
@@ -106,8 +106,8 @@ export const useUser = defineStore(
         return
       }
 
-      const url = getUrlFromMessage(message)
-      if (url) {
+      const urls = getAllURLsFromText(message)
+      for (const url of urls) {
         const providers = useProviders()
         providers.getClip(url).then((clip) => {
           if (clip && userstate.username) {
@@ -126,8 +126,8 @@ export const useUser = defineStore(
       if (!moderation.hasAutoRemoveClipsEnabled) {
         return
       }
-      const url = getUrlFromMessage(deletedMessage)
-      if (url) {
+      const urls = getAllURLsFromText(deletedMessage)
+      for (const url of urls) {
         const providers = useProviders()
         providers.getClip(url).then((clip) => {
           if (clip) {
