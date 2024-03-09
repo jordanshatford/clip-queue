@@ -10,9 +10,7 @@ describe('HomePage.vue', () => {
     expect(wrapper.exists()).toEqual(true)
   })
 
-  it('has the proper title, tagline, description, and features from config', () => {
-    // @ts-ignore
-    expect(wrapper.vm.title).toEqual(config.about.title)
+  it('has the proper tagline, description, and features from config', () => {
     // @ts-ignore
     expect(wrapper.vm.tagline).toEqual(config.about.tagline)
     // @ts-ignore

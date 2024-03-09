@@ -26,5 +26,5 @@
 import config from '@/assets/config'
 import AppFeature from '@/components/AppFeature.vue'
 
-const { title, tagline, description, features } = config.about
+const { tagline, description, features } = config.about
 </script>
