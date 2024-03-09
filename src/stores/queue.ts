@@ -3,16 +3,13 @@ import { defineStore } from 'pinia'
 import { ClipList } from '@/utils/clip-list'
 import { ClipProvider, type Clip, toUUID } from '@/providers'
 import { useModeration } from '@/stores/moderation'
-import { deepEqual } from '@/utils'
 
 export interface QueueSettings {
-  isLimited: boolean
-  limit: number
+  limit: number | null
 }
 
 export const DEFAULT_SETTINGS: QueueSettings = {
-  isLimited: false,
-  limit: 1
+  limit: null
 }
 
 export interface ClipQueue {
@@ -34,7 +31,7 @@ export const useQueue = defineStore(
 
     const isSettingsModified = computed(() => {
       return (s: QueueSettings) => {
-        return !deepEqual(settings.value, s)
+        return settings.value.limit !== s.limit
       }
     })
 
@@ -68,11 +65,7 @@ export const useQueue = defineStore(
         return
       }
       // Queue is full based on limit
-      if (
-        settings.value.isLimited &&
-        settings.value.limit &&
-        upcoming.value.size() >= settings.value.limit
-      ) {
+      if (settings.value.limit && upcoming.value.size() >= settings.value.limit) {
         // If the clip is already in the queue add it so submitters is updated
         if (!upcoming.value.includes(clip)) {
           return
@@ -142,17 +135,11 @@ export const useQueue = defineStore(
       if (Number.isNaN(limit) || limit < 1) {
         return
       }
-      updateSettings({
-        isLimited: true,
-        limit: limit
-      })
+      updateSettings({ limit })
     }
 
     function removeLimit() {
-      updateSettings({
-        isLimited: false,
-        limit: settings.value.limit
-      })
+      updateSettings({ limit: null })
     }
 
     return {

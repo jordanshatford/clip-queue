@@ -175,7 +175,7 @@ describe('clips.ts', () => {
 
   it('can have a limit set to prevent additional clips from being added', () => {
     const queue = useQueue()
-    queue.updateSettings({ isLimited: true, limit: 2 })
+    queue.updateSettings({ limit: 2 })
     queue.add({ id: 'test', submitters: ['s'], provider: ClipProvider.TWITCH })
     queue.add({ id: 'test2', submitters: ['s'], provider: ClipProvider.TWITCH })
     queue.add({ id: 'test3', submitters: ['s'], provider: ClipProvider.TWITCH })
@@ -185,7 +185,7 @@ describe('clips.ts', () => {
   it('adds clips that are already there (even when full) to update submitters', () => {
     const clip: Clip = { id: 'test', submitters: ['testsubmitter'], provider: ClipProvider.TWITCH }
     const queue = useQueue()
-    queue.updateSettings({ isLimited: true, limit: 1 })
+    queue.updateSettings({ limit: 1 })
     queue.add(clip)
     queue.add({ ...clip, submitters: ['testsubmitter2'] })
     queue.add({ ...clip, id: 'test2' })
@@ -199,8 +199,8 @@ describe('clips.ts', () => {
 
   it('doesnt clear the queue settings when clearing the queue', () => {
     const queue = useQueue()
-    expect(queue.settings.isLimited).toEqual(false)
-    queue.updateSettings({ isLimited: true, limit: 5 })
+    expect(queue.settings.limit).toEqual(null)
+    queue.updateSettings({ limit: 5 })
     expect(queue.settings.limit).toEqual(5)
     queue.clear()
     expect(queue.settings.limit).toEqual(5)
@@ -208,31 +208,23 @@ describe('clips.ts', () => {
 
   it('can set a valid clip limit and remove the limit', () => {
     const queue = useQueue()
-    expect(queue.settings.isLimited).toEqual(false)
-    expect(queue.settings.limit).toEqual(1)
+    expect(queue.settings.limit).toEqual(null)
     queue.setLimit(100)
-    expect(queue.settings.isLimited).toEqual(true)
     expect(queue.settings.limit).toEqual(100)
     queue.removeLimit()
-    expect(queue.settings.isLimited).toEqual(false)
-    // previous limit is kept incase queue limit is enabled again
-    expect(queue.settings.limit).toEqual(100)
+    expect(queue.settings.limit).toEqual(null)
   })
 
   it('prevents setting the limit to an invalid value', () => {
     const queue = useQueue()
-    expect(queue.settings.isLimited).toEqual(false)
-    expect(queue.settings.limit).toEqual(1)
+    expect(queue.settings.limit).toEqual(null)
     // limit must be atleast 1
     queue.setLimit(-1000)
-    expect(queue.settings.isLimited).toEqual(false)
-    expect(queue.settings.limit).toEqual(1)
+    expect(queue.settings.limit).toEqual(null)
     queue.setLimit(0)
-    expect(queue.settings.isLimited).toEqual(false)
-    expect(queue.settings.limit).toEqual(1)
+    expect(queue.settings.limit).toEqual(null)
     // limit cannot be NaN
     queue.setLimit(NaN)
-    expect(queue.settings.isLimited).toEqual(false)
-    expect(queue.settings.limit).toEqual(1)
+    expect(queue.settings.limit).toEqual(null)
   })
 })

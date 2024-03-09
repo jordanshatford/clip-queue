@@ -2,24 +2,19 @@
   <CCard class="mx-auto max-w-lg">
     <template #content>
       <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
-        <div class="flex justify-between">
-          <label for="limitQueueSize" class="cq-text">Limit Queue Size?</label>
-          <InputSwitch inputId="limitQueueSize" v-model="formQueueSettings.isLimited" />
-        </div>
         <div class="flex flex-col gap-2 text-left">
-          <label for="limit" class="cq-text">Limit:</label>
+          <label for="limit" class="cq-text">Size Limit:</label>
           <InputNumber
             id="limit"
             v-model="formQueueSettings.limit"
-            :allow-empty="false"
+            allow-empty
             :min="1"
             :step="1"
             show-buttons
-            :disabled="!formQueueSettings.isLimited"
             aria-describedby="limit-help"
           />
           <small id="limit-help" class="cq-text-subtle pb-2"
-            >Clips will be ignored when queue limit is reached.</small
+            >The number of clips allowed in the queue. Leave empty for no limit.</small
           >
         </div>
         <div class="flex flex-col gap-2 text-left">
