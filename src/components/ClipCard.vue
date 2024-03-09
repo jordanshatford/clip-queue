@@ -2,7 +2,12 @@
   <CCard class="max-w-[16rem] flex-shrink-0 overflow-hidden text-left">
     <template #header>
       <div class="relative">
-        <img @error="emit('remove')" class="w-full" :alt="clip.title" :src="clip.thumbnailUrl" />
+        <img
+          @error="emit('remove')"
+          class="aspect-video w-full"
+          :alt="clip.title"
+          :src="clip.thumbnailUrl"
+        />
         <div class="absolute -bottom-6 -right-2 m-2 p-2">
           <div class="flex gap-2">
             <BButton title="Play now" severity="info" size="small" @click="emit('play')">
