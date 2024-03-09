@@ -22,7 +22,6 @@
               @keydown.space.prevent
               required
               maxlength="8"
-              :disabled="!formSettings.allowCommands"
               v-model="formSettings.commandPrefix"
             />
             <PPanel
