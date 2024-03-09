@@ -14,8 +14,6 @@ describe('HomePage.vue', () => {
     // @ts-ignore
     expect(wrapper.vm.tagline).toEqual(config.about.tagline)
     // @ts-ignore
-    expect(wrapper.vm.description).toEqual(config.about.description)
-    // @ts-ignore
     expect(wrapper.vm.features.length).toEqual(config.about.features.length)
     // @ts-ignore
     expect(wrapper.vm.features).toEqual(config.about.features)

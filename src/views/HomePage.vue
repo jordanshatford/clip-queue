@@ -4,9 +4,6 @@
       <p class="cq-text mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
         {{ tagline }}
       </p>
-      <p class="cq-text-subtle mx-auto mt-2 text-lg">
-        {{ description }}
-      </p>
     </div>
     <div class="mt-12 text-left">
       <div class="grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-12">
@@ -26,5 +23,5 @@
 import config from '@/assets/config'
 import AppFeature from '@/components/AppFeature.vue'
 
-const { tagline, description, features } = config.about
+const { tagline, features } = config.about
 </script>

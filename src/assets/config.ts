@@ -6,7 +6,6 @@ export const env = {
 export const config = {
   about: {
     tagline: 'An enhanced clip viewing experience',
-    description: 'Quickly connect to your Twitch chat to queue clips linked in chat',
     features: [
       {
         title: 'Connect to Chat',
