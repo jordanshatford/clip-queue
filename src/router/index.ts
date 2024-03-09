@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import twitch from '@/services/twitch'
+import { config } from '@/assets/config'
 import { useUser } from '@/stores/user'
 import HomePage from '@/views/HomePage.vue'
 import QueuePage from '@/views/QueuePage.vue'
@@ -65,7 +66,7 @@ export const routes: Array<RouteRecordRaw> = [
         name: RouteNameConstants.SETTINGS_CHAT,
         component: ChatSettings,
         meta: {
-          title: 'Chat',
+          title: 'Chat Settings',
           requiresAuth: true
         }
       },
@@ -74,7 +75,7 @@ export const routes: Array<RouteRecordRaw> = [
         name: RouteNameConstants.SETTINGS_QUEUE,
         component: QueueSettings,
         meta: {
-          title: 'Queue',
+          title: 'Queue Settings',
           requiresAuth: true
         }
       },
@@ -83,7 +84,7 @@ export const routes: Array<RouteRecordRaw> = [
         name: RouteNameConstants.SETTINGS_MODERATION,
         component: ModerationSettings,
         meta: {
-          title: 'Moderation',
+          title: 'Moderation Settings',
           requiresAuth: true
         }
       },
@@ -92,7 +93,7 @@ export const routes: Array<RouteRecordRaw> = [
         name: RouteNameConstants.SETTINGS_OTHER,
         component: OtherSettings,
         meta: {
-          title: 'Other',
+          title: 'Other Settings',
           requiresAuth: true
         }
       }
@@ -112,6 +113,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, _from, next) => {
+  document.title = `${to.meta.title} - ${config.about.title}`
   const user = useUser()
   // Attempt to validate the token if not previously done so. This is
   // to ensure the refresh returns you to the same route.
