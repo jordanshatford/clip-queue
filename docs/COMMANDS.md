@@ -1,6 +1,6 @@
 # Commands
 
-Twitch Clip Queue provides a set of commands accessible through Twich chat for moderators and the streamer. The following is a list of commands and what they are used for:
+Clip Queue provides a set of commands accessible through Twich chat for moderators and the streamer. The following is a list of commands and what they are used for:
 
 > NOTE: the command prefix is customizable via the settings, for the sake of documenation, the default prefix (`!cq`) will be used.
 

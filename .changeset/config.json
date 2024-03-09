@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.3.1/schema.json",
-  "changelog": ["@svitejs/changesets-changelog-github-compact", { "repo": "jordanshatford/twitch-clip-queue" }],
+  "changelog": ["@svitejs/changesets-changelog-github-compact", { "repo": "jordanshatford/clip-queue" }],
   "commit": false,
   "fixed": [],
   "linked": [],

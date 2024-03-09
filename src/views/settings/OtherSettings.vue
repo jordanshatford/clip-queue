@@ -41,7 +41,7 @@
         Purge Cache
       </BButton>
       <label class="cq-text-subtle">
-        Twitch clips submitted are cached for future use, this clears all cached clip information.
+        Clips submitted may be cached for future use. Purge all cached clips.
       </label>
     </template>
   </CCard>

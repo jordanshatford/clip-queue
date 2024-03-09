@@ -5,8 +5,7 @@ export const env = {
 
 export const config = {
   about: {
-    title: 'Twitch Clip Queue',
-    tagline: 'An enhanced Twitch clip viewing experience',
+    tagline: 'An enhanced clip viewing experience',
     description: 'Quickly connect to your Twitch chat to queue clips linked in chat',
     features: [
       {
@@ -50,7 +49,7 @@ export const config = {
   twitch: {
     scopes: ['openid', 'chat:read']
   },
-  github: 'https://github.com/jordanshatford/twitch-clip-queue',
+  github: 'https://github.com/jordanshatford/clip-queue',
   copyright: {
     owner: 'Jordan Shatford',
     year: 2022

@@ -4,7 +4,7 @@ services:
   web:
     build:
       context: .
-    image: twitch-clip-queue-web:latest
+    image: clip-queue:latest
     restart: always
     environment:
       VITE_TWITCH_CLIENT_ID: ${VITE_TWITCH_CLIENT_ID}
