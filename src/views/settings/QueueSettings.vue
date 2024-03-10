@@ -2,25 +2,24 @@
   <CCard class="mx-auto max-w-lg">
     <template #content>
       <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
-        <div>
-          <div class="flex justify-between pb-1">
-            <label for="autoRemoveClips" class="cq-text">Auto remove clips on moderation?</label>
+        <div class="flex flex-col gap-2 text-left">
+          <div class="flex justify-between">
+            <label for="autoModeration" class="cq-text">Auto remove clips on moderation?</label>
             <InputSwitch
-              inputId="autoRemoveClips"
+              inputId="autoModeration"
               v-model="formModerationSettings.hasAutoRemoveClipsEnabled"
+              aria-describedby="autoModeration-help"
             />
           </div>
-          <div class="cq-text-subtle mb-2 text-left">
-            <label>
-              When a user has their chat message deleted, is timed out, or banned, the clips they
-              submitted will be removed.
-            </label>
-          </div>
+          <small id="autoModeration-help" class="cq-text-subtle pb-2">
+            When a user has their chat message deleted, is timed out, or banned, the clips they
+            submitted will be removed.
+          </small>
         </div>
         <div class="flex flex-col gap-2 text-left">
           <label for="limit" class="cq-text">Size Limit:</label>
           <InputNumber
-            id="limit"
+            inputId="limit"
             v-model="formQueueSettings.limit"
             allow-empty
             :min="1"
@@ -35,7 +34,7 @@
         <div class="flex flex-col gap-2 text-left">
           <label for="allowedProviders" class="cq-text">Allowed Providers:</label>
           <MultiSelect
-            id="allowedProviders"
+            inputId="allowedProviders"
             v-model="formProviders.enabled"
             :options="Object.values(ClipProvider)"
             placeholder="None"
