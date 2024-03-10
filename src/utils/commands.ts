@@ -11,10 +11,6 @@ export enum Command {
   REMOVE_LIMIT = 'removelimit',
   PREV = 'prev',
   NEXT = 'next',
-  BLOCK_CHANNEL = 'blockchannel',
-  UNBLOCK_CHANNEL = 'unblockchannel',
-  BLOCK_SUBMITTER = 'blocksubmitter',
-  UNBLOCK_SUBMITTER = 'unblocksubmitter',
   REMOVE_BY_SUBMITTER = 'removebysubmitter',
   REMOVE_BY_CHANNEL = 'removebychannel',
   REMOVE_BY_PROVIDER = 'removebyprovider',
@@ -38,22 +34,6 @@ const help: Record<Command, CommandHelp> = {
   [Command.REMOVE_LIMIT]: { description: 'Remove the clip limit for the queue.' },
   [Command.PREV]: { description: 'Switch to the previous queue clip.' },
   [Command.NEXT]: { description: 'Switch to the next queue clip.' },
-  [Command.BLOCK_CHANNEL]: {
-    args: ['channel'],
-    description: 'Block clips from specified channel.'
-  },
-  [Command.UNBLOCK_CHANNEL]: {
-    args: ['channel'],
-    description: 'Unblock clips from specified channel.'
-  },
-  [Command.BLOCK_SUBMITTER]: {
-    args: ['submitter'],
-    description: 'Block clips submitted from specified user.'
-  },
-  [Command.UNBLOCK_SUBMITTER]: {
-    args: ['submitter'],
-    description: 'Unblock clips submitted from specified user.'
-  },
   [Command.REMOVE_BY_SUBMITTER]: {
     args: ['submitter'],
     description:
@@ -106,34 +86,6 @@ export function handleCommand(command: string, ...args: string[]) {
     }
     case Command.NEXT: {
       queue.next()
-      break
-    }
-    case Command.BLOCK_CHANNEL: {
-      if (args[0]) {
-        const moderation = useModeration()
-        moderation.addBlockedChannel(args[0])
-      }
-      break
-    }
-    case Command.UNBLOCK_CHANNEL: {
-      if (args[0]) {
-        const moderation = useModeration()
-        moderation.removeBlockedChannel(args[0])
-      }
-      break
-    }
-    case Command.BLOCK_SUBMITTER: {
-      if (args[0]) {
-        const moderation = useModeration()
-        moderation.addBlockedSubmitter(args[0])
-      }
-      break
-    }
-    case Command.UNBLOCK_SUBMITTER: {
-      if (args[0]) {
-        const moderation = useModeration()
-        moderation.removeBlockedSubmitter(args[0])
-      }
       break
     }
     case Command.REMOVE_BY_SUBMITTER: {

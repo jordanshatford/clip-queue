@@ -62,22 +62,6 @@ describe('commands.ts', () => {
     }
   )
 
-  it.each([
-    ['blockchannel', ['test'], 'addBlockedChannel'],
-    ['unblockchannel', ['test'], 'removeBlockedChannel'],
-    ['blocksubmitter', ['test'], 'addBlockedSubmitter'],
-    ['unblocksubmitter', ['test'], 'removeBlockedSubmitter']
-  ])(
-    'calls the proper clip queue moderation function with params when issued (%s, %s)',
-    (commandName: string, args: string[], expectedFunctionCall: any) => {
-      const moderation = useModeration()
-      const spy = vi.spyOn(moderation, expectedFunctionCall)
-      commands.handleCommand(commandName, ...args)
-      expect(spy).toHaveBeenCalledTimes(1)
-      expect(spy).toHaveBeenCalledWith(...args)
-    }
-  )
-
   it.each([['unknown'], ['']])(
     'calls nothing when an invalid command is issued (%s, %s)',
     (commandName: string) => {
@@ -91,16 +75,10 @@ describe('commands.ts', () => {
         'setLimit',
         'removeLimit'
       ]
-      const moderation = useModeration()
-      const moderationCommandFunctions = ['addBlockedChannel', 'removeBlockedChannel']
       commands.handleCommand(commandName)
       for (const f of queueCommandFunctions) {
         /* eslint-disable @typescript-eslint/no-explicit-any*/
         expect(vi.spyOn(queue, f as any)).toHaveBeenCalledTimes(0)
-      }
-      for (const f of moderationCommandFunctions) {
-        /* eslint-disable @typescript-eslint/no-explicit-any*/
-        expect(vi.spyOn(moderation, f as any)).toHaveBeenCalledTimes(0)
       }
     }
   )

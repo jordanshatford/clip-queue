@@ -17,30 +17,6 @@
             </label>
           </div>
         </div>
-        <div class="flex flex-col gap-2 text-left">
-          <label for="blockedChannels" class="cq-text">Channels not allowed:</label>
-          <InputChips
-            inputId="blockedChannels"
-            v-model="formSettings.blockedChannels"
-            separator=" "
-            :allowDuplicate="false"
-          />
-          <div class="cq-text-subtle pb-2">
-            <label>Clips of these channels will not be added to the queue.</label>
-          </div>
-        </div>
-        <div class="flex flex-col gap-2 text-left">
-          <label for="blockedSubmitter" class="cq-text">Submitters not allowed:</label>
-          <InputChips
-            inputId="blockedSubmitters"
-            v-model="formSettings.blockedSubmitters"
-            separator=" "
-            :allowDuplicate="false"
-          />
-          <div class="cq-text-subtle pb-2">
-            <label>Clips submitted by these users will not be added to the queue.</label>
-          </div>
-        </div>
         <div class="mt-3">
           <BButton
             class="mr-2"

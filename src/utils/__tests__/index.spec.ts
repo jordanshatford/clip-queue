@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { deepEqual, clone, getAllURLsFromText } from '..'
+import { clone, getAllURLsFromText } from '..'
 
 describe('index.ts', () => {
   it.each([
@@ -17,12 +17,6 @@ describe('index.ts', () => {
     ]
   ])('gets a url from a message when possible', (input: string, expected: string[]) => {
     expect(getAllURLsFromText(input)).toEqual(expected)
-  })
-
-  it('checks if two objects are deeply equal to each other', () => {
-    const obj = { test: '1213', test2: 'abc' }
-    expect(deepEqual(obj, obj)).toEqual(true)
-    expect(deepEqual(obj, { ...obj, test3: '1' })).toEqual(false)
   })
 
   it('clones an object', () => {

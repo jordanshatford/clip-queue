@@ -2,7 +2,6 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { ClipList } from '@/utils/clip-list'
 import { ClipProvider, type Clip, toUUID } from '@/providers'
-import { useModeration } from '@/stores/moderation'
 
 export interface QueueSettings {
   limit: number | null
@@ -57,11 +56,6 @@ export const useQueue = defineStore(
       const hasBeenWatched =
         (current.value && toUUID(current.value) === toUUID(clip)) || history.value.includes(clip)
       if (hasBeenWatched) {
-        return
-      }
-      // Clip not allowed
-      const moderation = useModeration()
-      if (!moderation.isAllowed(clip)) {
         return
       }
       // Queue is full based on limit
