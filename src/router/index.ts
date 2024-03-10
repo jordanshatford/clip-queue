@@ -8,7 +8,6 @@ import QueuePage from '@/views/QueuePage.vue'
 import HistoryPage from '@/views/HistoryPage.vue'
 import SettingsPage from '@/views/SettingsPage.vue'
 import ChatSettings from '@/views/settings/ChatSettings.vue'
-import ModerationSettings from '@/views/settings/ModerationSettings.vue'
 import QueueSettings from '@/views/settings/QueueSettings.vue'
 import OtherSettings from '@/views/settings/OtherSettings.vue'
 
@@ -19,7 +18,6 @@ export enum RouteNameConstants {
   SETTINGS = 'settings',
   SETTINGS_CHAT = 'settings_chat',
   SETTINGS_QUEUE = 'settings_queue',
-  SETTINGS_MODERATION = 'settings_moderation',
   SETTINGS_OTHER = 'settings_other'
 }
 
@@ -76,15 +74,6 @@ export const routes: Array<RouteRecordRaw> = [
         component: QueueSettings,
         meta: {
           title: 'Queue Settings',
-          requiresAuth: true
-        }
-      },
-      {
-        path: 'moderation',
-        name: RouteNameConstants.SETTINGS_MODERATION,
-        component: ModerationSettings,
-        meta: {
-          title: 'Moderation Settings',
           requiresAuth: true
         }
       },

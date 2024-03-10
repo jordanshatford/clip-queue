@@ -24,7 +24,6 @@ const route = useRoute()
 const tabs = [
   { label: 'Chat', icon: 'pi pi-comments', route: RouteNameConstants.SETTINGS_CHAT },
   { label: 'Queue', icon: 'pi pi-list', route: RouteNameConstants.SETTINGS_QUEUE },
-  { label: 'Moderation', icon: 'pi pi-flag', route: RouteNameConstants.SETTINGS_MODERATION },
   { label: 'Other', icon: 'pi pi-cog', route: RouteNameConstants.SETTINGS_OTHER }
 ]
 

@@ -2,6 +2,21 @@
   <CCard class="mx-auto max-w-lg">
     <template #content>
       <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
+        <div>
+          <div class="flex justify-between pb-1">
+            <label for="autoRemoveClips" class="cq-text">Auto remove clips on moderation?</label>
+            <InputSwitch
+              inputId="autoRemoveClips"
+              v-model="formModerationSettings.hasAutoRemoveClipsEnabled"
+            />
+          </div>
+          <div class="cq-text-subtle mb-2 text-left">
+            <label>
+              When a user has their chat message deleted, is timed out, or banned, the clips they
+              submitted will be removed.
+            </label>
+          </div>
+        </div>
         <div class="flex flex-col gap-2 text-left">
           <label for="limit" class="cq-text">Size Limit:</label>
           <InputNumber
@@ -60,6 +75,7 @@
 import { computed, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import { useQueue, type QueueSettings } from '@/stores/queue'
+import { useModeration, type Moderation } from '@/stores/moderation'
 import { clone } from '@/utils'
 import { ClipProvider } from '@/providers'
 import { useProviders, type Providers } from '@/stores/providers'
@@ -68,26 +84,32 @@ import ProviderName from '@/components/ProviderName.vue'
 const providers = useProviders()
 const toast = useToast()
 const queue = useQueue()
+const moderation = useModeration()
 
 const formKey = ref(1)
 const formQueueSettings = ref<QueueSettings>(clone<QueueSettings>(queue.settings))
 const formProviders = ref<Providers>(clone<Providers>(providers.$state))
+const formModerationSettings = ref<Moderation>(clone<Moderation>(moderation.$state, true))
 
 const isFormModified = computed(() => {
   return (
-    queue.isSettingsModified(formQueueSettings.value) || providers.isModified(formProviders.value)
+    queue.isSettingsModified(formQueueSettings.value) ||
+    providers.isModified(formProviders.value) ||
+    moderation.isModified(formModerationSettings.value)
   )
 })
 
 function onReset() {
   formQueueSettings.value = clone<QueueSettings>(queue.settings)
   formProviders.value = clone<Providers>(providers.$state)
+  formModerationSettings.value = clone<Moderation>(moderation.$state, true)
   formKey.value += 1
 }
 
 function onSubmit() {
   queue.updateSettings(formQueueSettings.value)
   providers.update(formProviders.value)
+  moderation.update(formModerationSettings.value)
   toast.add({
     severity: 'success',
     summary: 'Success',
