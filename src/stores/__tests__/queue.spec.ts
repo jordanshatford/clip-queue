@@ -25,6 +25,8 @@ describe('clips.ts', () => {
     queue.add(clipFromTwitch)
     expect(queue.upcoming.size()).toEqual(queueLength + 1)
     expect(queue.upcoming.includes(clipFromTwitch)).toEqual(true)
+    queue.clear()
+    expect(queue.upcoming.size()).toEqual(0)
   })
 
   it('skips duplicate clips when adding to the queue', () => {

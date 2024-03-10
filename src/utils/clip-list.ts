@@ -70,6 +70,10 @@ export class ClipList {
     return this._clips.length
   }
 
+  public clear(): void {
+    this._clips = []
+  }
+
   public empty(): boolean {
     return this._clips.length === 0
   }

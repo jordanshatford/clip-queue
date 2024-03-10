@@ -36,11 +36,11 @@ export const useQueue = defineStore(
     })
 
     function clear() {
-      upcoming.value = new ClipList()
+      upcoming.value.clear()
     }
 
     function purge() {
-      history.value = new ClipList()
+      history.value.clear()
     }
 
     function add(clip: Clip, force = false) {

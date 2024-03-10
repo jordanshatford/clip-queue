@@ -99,6 +99,12 @@ describe('clip-list.ts', () => {
     expect(testClipList.size()).toEqual(randomNumber2)
   })
 
+  it('can clear the clip list', () => {
+    expect(clipList.empty()).toBeFalsy()
+    clipList.clear()
+    expect(clipList.empty()).toBeTruthy()
+  })
+
   it('can check if the clip list is empty', () => {
     expect(clipList.empty()).toBeFalsy()
     const testClipList = new ClipList()
