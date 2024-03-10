@@ -1,5 +1,17 @@
 # clip-queue
 
+## 1.9.0
+
+### Minor Changes
+
+- feat: allow clip limit to be empty to represent no limit ([`40212fbf2e47d41ce28889dcb0d0edec13d46dd7`](https://github.com/jordanshatford/clip-queue/commit/40212fbf2e47d41ce28889dcb0d0edec13d46dd7))
+
+- revert: ability to add blocked channels in settings ([`89fa7f6944ccd476179484d88c72a835b36112bc`](https://github.com/jordanshatford/clip-queue/commit/89fa7f6944ccd476179484d88c72a835b36112bc))
+
+- revert: ability to add blocked submitters in settings ([`89fa7f6944ccd476179484d88c72a835b36112bc`](https://github.com/jordanshatford/clip-queue/commit/89fa7f6944ccd476179484d88c72a835b36112bc))
+
+- refactor: move auto moderation toggle to queue settings ([`94f7933410aa275b348cf101d4f5a3d733d373a6`](https://github.com/jordanshatford/clip-queue/commit/94f7933410aa275b348cf101d4f5a3d733d373a6))
+
 ## 1.8.0
 
 ### Minor Changes
