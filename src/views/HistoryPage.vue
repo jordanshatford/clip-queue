@@ -32,8 +32,11 @@
                 </a>
               </span>
             </p>
-            <p class="cq-text-subtle-semibold">
+            <p v-if="data.category" class="cq-text-subtle-semibold">
               {{ data.channel }}<span class="cq-text-subtle"> playing </span>{{ data.category }}
+            </p>
+            <p v-else class="cq-text-subtle-semibold">
+              {{ data.channel }}
             </p>
           </div>
         </div>

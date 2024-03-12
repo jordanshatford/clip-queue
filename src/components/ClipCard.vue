@@ -24,8 +24,11 @@
       ><span class="cq-text">{{ clip.title }}</span></template
     >
     <template #subtitle>
-      <div class="cq-text-subtle-semibold">
+      <div v-if="clip.category" class="cq-text-subtle-semibold">
         {{ clip.channel }}<span class="cq-text-subtle"> playing </span>{{ clip.category }}
+      </div>
+      <div v-else class="cq-text-subtle-semibold">
+        {{ clip.channel }}
       </div>
     </template>
     <template #content>

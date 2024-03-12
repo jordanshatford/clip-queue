@@ -54,8 +54,11 @@
           playing
           <span className="cq-text-subtle-semibold">{{ clip.category }}</span>
         </span>
+        <span v-else>
+          <span className="cq-text-subtle-semibold">{{ clip.channel }}</span>
+        </span>
         <span v-if="timeAgo">
-          - clipped
+          - Created
           <span className="cq-text-subtle-semibold">{{ timeAgo }}</span>
           ago
         </span>
