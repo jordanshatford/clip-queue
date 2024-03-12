@@ -1,5 +1,19 @@
 # clip-queue
 
+## 1.10.0
+
+### Minor Changes
+
+- feat: add support for youtube clips (closes: #231) ([`c7b8f650bdd4c811eae63351f670f4a246f3ed65`](https://github.com/jordanshatford/clip-queue/commit/c7b8f650bdd4c811eae63351f670f4a246f3ed65))
+
+- feat: display when experimental providers are enabled ([`4ffba9d9a1a562f17f19bef19d1ba5ae83a2fb60`](https://github.com/jordanshatford/clip-queue/commit/4ffba9d9a1a562f17f19bef19d1ba5ae83a2fb60))
+
+- feat: add YouTube service to get clip information ([`5db76760605f0cca75b6a2082dfa971d91fbc655`](https://github.com/jordanshatford/clip-queue/commit/5db76760605f0cca75b6a2082dfa971d91fbc655))
+
+### Patch Changes
+
+- fix: handle cases where category or created at are not known for a given clip ([`6f3758b1cd920bcdf0e739a760bed2fd87a693fa`](https://github.com/jordanshatford/clip-queue/commit/6f3758b1cd920bcdf0e739a760bed2fd87a693fa))
+
 ## 1.9.0
 
 ### Minor Changes
