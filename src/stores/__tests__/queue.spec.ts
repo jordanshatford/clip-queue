@@ -90,16 +90,6 @@ describe('clips.ts', () => {
     expect(queue.upcoming.size()).toEqual(0)
   })
 
-  it('removes channel clips from the queue', () => {
-    const queue = useQueue()
-    queue.add({ ...clipFromKick, channel: 'testchannel' })
-    queue.add({ ...clipFromKick, id: 'other', channel: 'testchannel' })
-    queue.add({ ...clipFromKick, id: 'other2', channel: 'testchannel' })
-    expect(queue.upcoming.size()).toEqual(3)
-    queue.removeChannelClips('testchannel')
-    expect(queue.upcoming.size()).toEqual(0)
-  })
-
   it('removes provider clips from the queue', () => {
     const queue = useQueue()
     queue.add(clipFromKick)

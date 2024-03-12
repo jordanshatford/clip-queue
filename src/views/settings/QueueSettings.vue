@@ -4,7 +4,7 @@
       <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
         <div class="flex flex-col gap-2 text-left">
           <div class="flex justify-between">
-            <label for="autoModeration" class="cq-text">Auto moderation?</label>
+            <label for="autoModeration" class="cq-text">Auto Moderation:</label>
             <InputSwitch
               inputId="autoModeration"
               v-model="formSettings.hasAutoModerationEnabled"

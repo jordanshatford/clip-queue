@@ -42,10 +42,6 @@ export class ClipList {
     this.sort()
   }
 
-  public removeByChannel(channel: string): void {
-    this._clips = this._clips.filter((c) => c.channel?.toLowerCase() !== channel.toLowerCase())
-  }
-
   public removeByProvider(provider: ClipProvider): void {
     this._clips = this._clips.filter((c) => c.provider.toLowerCase() !== provider.toLowerCase())
   }

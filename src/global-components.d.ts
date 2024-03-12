@@ -1,6 +1,5 @@
 import Button from 'primevue/button'
 import Card from 'primevue/card'
-import Chips from 'primevue/chips'
 import Column from 'primevue/column'
 import ConfirmDialog from 'primevue/confirmdialog'
 import DataTable from 'primevue/datatable'
@@ -20,7 +19,6 @@ declare module '@vue/runtime-core' {
     ConfirmDialog: typeof ConfirmDialog
     DataTable: typeof DataTable
     DataTableColumn: typeof Column
-    InputChips: typeof Chips
     InputNumber: typeof InputNumber
     InputSwitch: typeof InputSwitch
     InputText: typeof InputText

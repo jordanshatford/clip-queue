@@ -41,7 +41,6 @@ describe('commands.ts', () => {
 
   it.each([
     [Command.REMOVE_BY_SUBMITTER, ['testsubmitter'], 'removeSubmitterClips', ['testsubmitter']],
-    [Command.REMOVE_BY_CHANNEL, ['testchannel'], 'removeChannelClips', ['testchannel']],
     [Command.REMOVE_BY_PROVIDER, ['testprovider'], 'removeProviderClips', ['testprovider']]
   ])(
     'calls the proper clip queue function with params when issued (%s, %s)',

@@ -12,7 +12,6 @@ export enum Command {
   PREV = 'prev',
   NEXT = 'next',
   REMOVE_BY_SUBMITTER = 'removebysubmitter',
-  REMOVE_BY_CHANNEL = 'removebychannel',
   REMOVE_BY_PROVIDER = 'removebyprovider',
   PURGE_CACHE = 'purgecache',
   PURGE_HISTORY = 'purgehistory'
@@ -24,34 +23,29 @@ export interface CommandHelp {
 }
 
 const help: Record<Command, CommandHelp> = {
-  [Command.OPEN]: { description: 'Open the queue, allowing clips to be submitted.' },
-  [Command.CLOSE]: { description: 'Close the queue, preventing clips from being submitted.' },
-  [Command.CLEAR]: { description: 'Clear all clips in the queue.' },
+  [Command.OPEN]: { description: 'Open the queue.' },
+  [Command.CLOSE]: { description: 'Close the queue.' },
+  [Command.CLEAR]: { description: 'Remove all clips in the queue.' },
   [Command.SET_LIMIT]: {
     args: ['number'],
-    description: 'Set the limit of clips allowed in the queue.'
+    description: 'Set queue size limit.'
   },
-  [Command.REMOVE_LIMIT]: { description: 'Remove the clip limit for the queue.' },
-  [Command.PREV]: { description: 'Switch to the previous queue clip.' },
-  [Command.NEXT]: { description: 'Switch to the next queue clip.' },
+  [Command.REMOVE_LIMIT]: { description: 'Remove the queue size limit.' },
+  [Command.PREV]: { description: 'Switch to the previous clip.' },
+  [Command.NEXT]: { description: 'Switch to the next clip.' },
   [Command.REMOVE_BY_SUBMITTER]: {
-    args: ['provider', 'submitter'],
-    description:
-      'Remove any clips that are in the queue and have been submitted by the given submitter.'
-  },
-  [Command.REMOVE_BY_CHANNEL]: {
-    args: ['provider', 'channel'],
-    description: 'Remove any clips in the queue that are of the given channel.'
+    args: ['submitter'],
+    description: 'Remove clips sent by the submitter.'
   },
   [Command.REMOVE_BY_PROVIDER]: {
     args: ['provider'],
-    description: 'Remove any clips in the queue that are from a given provider.'
+    description: 'Remove clips from the provider.'
   },
   [Command.PURGE_CACHE]: {
     description: 'Purge all cached clips.'
   },
   [Command.PURGE_HISTORY]: {
-    description: 'Purge all clips previously viewed allowing them to be resubmitted.'
+    description: 'Purge all historically watched clips.'
   }
 }
 
@@ -97,13 +91,6 @@ export function handleCommand(command: string, ...args: string[]) {
     case Command.REMOVE_BY_SUBMITTER: {
       if (args[0]) {
         queue.removeSubmitterClips(args[0])
-        return
-      }
-      break
-    }
-    case Command.REMOVE_BY_CHANNEL: {
-      if (args[0]) {
-        queue.removeChannelClips(args[0])
         return
       }
       break

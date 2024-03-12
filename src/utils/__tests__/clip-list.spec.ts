@@ -277,20 +277,6 @@ describe('clip-list.ts', () => {
     expect(clipList2.toArray()[1].provider).toEqual(ClipProvider.KICK)
   })
 
-  it('can remove clips based on the channel the clip is of', () => {
-    const clipList2 = new ClipList()
-    clipList2.add({ ...clipFromTwitch, channel: 'testchannel', id: 'test' })
-    clipList2.add({ ...clipFromTwitch, channel: 'testchannel', id: 'test2' })
-    clipList2.add({ ...clipFromTwitch, channel: 'testchannel', id: 'test3' })
-    expect(clipList2.size()).toEqual(3)
-    clipList2.add({ ...clipFromTwitch, channel: 'otherchannel', id: 'test4' })
-    clipList2.add({ ...clipFromTwitch, channel: 'otherchannel2', id: 'test5' })
-    expect(clipList2.size()).toEqual(5)
-    clipList2.removeByChannel('testchannel')
-    expect(clipList2.size()).toEqual(2)
-    expect(clipList2.toArray().some((c) => c.channel === 'testchannel')).toEqual(false)
-  })
-
   it('can remove clips based on the provider of the clip', () => {
     const clipList2 = new ClipList()
     clipList2.add({ ...clipFromTwitch, id: 'test' })

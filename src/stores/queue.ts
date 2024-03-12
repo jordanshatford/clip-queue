@@ -63,10 +63,6 @@ export const useQueue = defineStore(
       upcoming.value.removeBySubmitter(submitter)
     }
 
-    function removeChannelClips(channel: string) {
-      upcoming.value.removeByChannel(channel)
-    }
-
     function removeProviderClips(provider: ClipProvider) {
       upcoming.value.removeByProvider(provider)
     }
@@ -118,7 +114,6 @@ export const useQueue = defineStore(
       add,
       remove,
       removeSubmitterClips,
-      removeChannelClips,
       removeProviderClips,
       removeFromHistory,
       play,

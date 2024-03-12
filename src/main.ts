@@ -4,7 +4,6 @@ import 'primeicons/primeicons.css'
 import PrimeVue from 'primevue/config'
 import Button from 'primevue/button'
 import Card from 'primevue/card'
-import Chips from 'primevue/chips'
 import Column from 'primevue/column'
 import ConfirmationService from 'primevue/confirmationservice'
 import ConfirmDialog from 'primevue/confirmdialog'
@@ -35,7 +34,6 @@ app.component('CCard', Card)
 app.component('ConfirmDialog', ConfirmDialog)
 app.component('DataTable', DataTable)
 app.component('DataTableColumn', Column)
-app.component('InputChips', Chips)
 app.component('InputNumber', InputNumber)
 app.component('InputSwitch', InputSwitch)
 app.component('InputText', InputText)
