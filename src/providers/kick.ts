@@ -51,7 +51,7 @@ export class KickProvider implements IClipProvider {
       url,
       embedUrl: clip.clip_url,
       thumbnailUrl: clip.thumbnail_url,
-      provider: ClipProvider.KICK,
+      provider: this.name,
       submitters: []
     }
     return response

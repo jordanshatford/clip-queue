@@ -72,7 +72,7 @@ export class TwitchProvider implements IClipProvider {
       url,
       embedUrl: clip.embed_url,
       thumbnailUrl: clip.thumbnail_url,
-      provider: ClipProvider.TWITCH,
+      provider: this.name,
       submitters: []
     }
     return response
