@@ -13,7 +13,7 @@
         <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
           <div class="flex justify-between">
             <label for="allowCommands" class="cq-text">Allow chat commands?</label>
-            <InputSwitch inputId="allowCommands" v-model="formSettings.allowCommands" />
+            <InputSwitch inputId="allowCommands" v-model="formSettings.enabled" />
           </div>
           <div class="flex flex-col gap-2 text-left">
             <label for="commandPrefix" class="cq-text">Chat command prefix:</label>
@@ -22,7 +22,7 @@
               @keydown.space.prevent
               required
               maxlength="8"
-              v-model="formSettings.commandPrefix"
+              v-model="formSettings.prefix"
             />
             <PPanel
               class="cq-text-subtle"
@@ -46,14 +46,14 @@
               size="small"
               class="mr-2"
               type="submit"
-              :disabled="!settings.isModified(formSettings)"
+              :disabled="!settings.isCommandsSettingsModified(formSettings)"
               >Save</BButton
             >
             <BButton
               type="reset"
               severity="danger"
               size="small"
-              :disabled="!settings.isModified(formSettings)"
+              :disabled="!settings.isCommandsSettingsModified(formSettings)"
               >Cancel</BButton
             >
           </div>
@@ -64,22 +64,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, toRaw } from 'vue'
 import { useToast } from 'primevue/usetoast'
-import { useSettings, type Settings } from '@/stores/settings'
+import { useSettings } from '@/stores/settings'
 import { useUser } from '@/stores/user'
 import commands, { Command, type CommandHelp } from '@/utils/commands'
-import { clone } from '@/utils'
 
 const toast = useToast()
 const user = useUser()
 const settings = useSettings()
 
 const formKey = ref(1)
-const formSettings = ref<Settings>(clone<Settings>(settings.$state))
+const formSettings = ref(structuredClone(toRaw(settings.commands)))
 
 function toCommandCall(command: Command, help: CommandHelp) {
-  let cmd = settings.commandPrefix + command.toString()
+  let cmd = settings.commands.prefix + command.toString()
   if (help.args && help.args.length > 0) {
     cmd += ' '
     cmd += help.args.map((arg) => `<${arg}>`).join(' ')
@@ -88,12 +87,12 @@ function toCommandCall(command: Command, help: CommandHelp) {
 }
 
 function onReset() {
-  formSettings.value = clone<Settings>(settings.$state)
+  formSettings.value = structuredClone(toRaw(settings.commands))
   formKey.value += 1
 }
 
 function onSubmit() {
-  settings.update(formSettings.value)
+  settings.commands = formSettings.value
   toast.add({
     severity: 'success',
     summary: 'Success',

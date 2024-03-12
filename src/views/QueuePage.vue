@@ -8,7 +8,7 @@
     @previous="queue.previous()"
     @next="queue.next()"
   />
-  <MessageAlert v-else-if="providers.enabled.length === 0" severity="error"
+  <MessageAlert v-else-if="settings.queue.providers.length === 0" severity="error"
     >No clip providers enabled. Please enable one in the settings.</MessageAlert
   >
   <ClipQueue
@@ -28,8 +28,8 @@ import ClipPlayer from '@/components/ClipPlayer.vue'
 import ClipQueue from '@/components/ClipQueue.vue'
 import { toUUID } from '@/providers'
 import { useQueue } from '@/stores/queue'
-import { useProviders } from '@/stores/providers'
+import { useSettings } from '@/stores/settings'
 
 const queue = useQueue()
-const providers = useProviders()
+const settings = useSettings()
 </script>

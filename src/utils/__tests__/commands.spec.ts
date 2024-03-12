@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useQueue } from '@/stores/queue'
-import { useModeration } from '@/stores/moderation'
 import { useProviders } from '@/stores/providers'
-import commands from '../commands'
+import { useSettings } from '@/stores/settings'
+import commands, { Command } from '../commands'
 
 describe('commands.ts', () => {
   beforeEach(() => {
@@ -12,51 +12,48 @@ describe('commands.ts', () => {
 
   /* eslint-disable @typescript-eslint/no-explicit-any*/
   it.each([
-    ['prev', 'previous'],
-    ['next', 'next'],
-    ['open', 'open'],
-    ['close', 'close'],
-    ['clear', 'clear'],
-    ['removelimit', 'removeLimit'],
-    ['purgehistory', 'purge']
+    [Command.PREV, 'previous'],
+    [Command.NEXT, 'next'],
+    [Command.OPEN, 'open'],
+    [Command.CLOSE, 'close'],
+    [Command.CLEAR, 'clear'],
+    [Command.PURGE_HISTORY, 'purge']
   ])(
     'calls the proper clip queue function when a command is issued (%s, %s)',
-    (commandName: string, expectedFunctionCall: any) => {
+    (commandName: Command, expectedFunctionCall: any) => {
       const queue = useQueue()
       const spy = vi.spyOn(queue, expectedFunctionCall)
-      commands.handleCommand(commandName)
+      commands.handleCommand(commandName.toString())
       expect(spy).toHaveBeenCalledTimes(1)
     }
   )
 
   /* eslint-disable @typescript-eslint/no-explicit-any*/
-  it.each([['purgecache', 'purge']])(
+  it.each([[Command.PURGE_CACHE, 'purge']])(
     'calls the proper clip queue function when a command is issued (%s, %s)',
-    (commandName: string, expectedFunctionCall: any) => {
+    (commandName: Command, expectedFunctionCall: any) => {
       const providers = useProviders()
       const spy = vi.spyOn(providers, expectedFunctionCall)
-      commands.handleCommand(commandName)
+      commands.handleCommand(commandName.toString())
       expect(spy).toHaveBeenCalledTimes(1)
     }
   )
 
   it.each([
-    ['setlimit', ['100'], 'setLimit', [100]],
-    ['setlimit', ['somethinginvalid'], 'setLimit', [NaN]],
-    ['removebysubmitter', ['testsubmitter'], 'removeSubmitterClips', ['testsubmitter']],
-    ['removebychannel', ['testchannel'], 'removeChannelClips', ['testchannel']],
-    ['removebyprovider', ['testprovider'], 'removeProviderClips', ['testprovider']]
+    [Command.REMOVE_BY_SUBMITTER, ['testsubmitter'], 'removeSubmitterClips', ['testsubmitter']],
+    [Command.REMOVE_BY_CHANNEL, ['testchannel'], 'removeChannelClips', ['testchannel']],
+    [Command.REMOVE_BY_PROVIDER, ['testprovider'], 'removeProviderClips', ['testprovider']]
   ])(
     'calls the proper clip queue function with params when issued (%s, %s)',
     (
-      commandName: string,
+      commandName: Command,
       args: string[],
       expectedFunctionCall: any,
       expectedFunctionArgs: any[]
     ) => {
       const queue = useQueue()
       const spy = vi.spyOn(queue, expectedFunctionCall)
-      commands.handleCommand(commandName, ...args)
+      commands.handleCommand(commandName.toString(), ...args)
       expect(spy).toHaveBeenCalledTimes(1)
       expect(spy).toHaveBeenCalledWith(...expectedFunctionArgs)
     }
@@ -66,15 +63,7 @@ describe('commands.ts', () => {
     'calls nothing when an invalid command is issued (%s, %s)',
     (commandName: string) => {
       const queue = useQueue()
-      const queueCommandFunctions = [
-        'previous',
-        'next',
-        'open',
-        'close',
-        'clear',
-        'setLimit',
-        'removeLimit'
-      ]
+      const queueCommandFunctions = ['previous', 'next', 'open', 'close', 'clear']
       commands.handleCommand(commandName)
       for (const f of queueCommandFunctions) {
         /* eslint-disable @typescript-eslint/no-explicit-any*/
@@ -82,6 +71,19 @@ describe('commands.ts', () => {
       }
     }
   )
+
+  it('can set the queue limit and clear it', () => {
+    const settings = useSettings()
+    expect(settings.queue.limit).toEqual(null)
+    commands.handleCommand(Command.SET_LIMIT.toString(), '0') // Invalid
+    expect(settings.queue.limit).toEqual(null)
+    commands.handleCommand(Command.SET_LIMIT.toString(), '100')
+    expect(settings.queue.limit).toEqual(100)
+    commands.handleCommand(Command.SET_LIMIT.toString(), 'some_non_number') // Invalid
+    expect(settings.queue.limit).toEqual(100)
+    commands.handleCommand(Command.REMOVE_LIMIT.toString())
+    expect(settings.queue.limit).toEqual(null)
+  })
 
   it('returns help information for commands', () => {
     expect(commands.help).toBeDefined()

@@ -1,38 +1,25 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { ClipList } from '@/utils/clip-list'
 import { ClipProvider, type Clip, toUUID } from '@/providers'
-
-export interface QueueSettings {
-  limit: number | null
-}
-
-export const DEFAULT_SETTINGS: QueueSettings = {
-  limit: null
-}
+import { useSettings } from '@/stores/settings'
 
 export interface ClipQueue {
   isOpen: boolean
   history: ClipList
   current: Clip | undefined
   upcoming: ClipList
-  settings: QueueSettings
 }
 
 export const useQueue = defineStore(
   'queue',
   () => {
+    const settings = useSettings()
+
     const isOpen = ref<boolean>(true)
     const history = ref<ClipList>(new ClipList())
     const current = ref<Clip | undefined>(undefined)
     const upcoming = ref<ClipList>(new ClipList())
-    const settings = ref<QueueSettings>(DEFAULT_SETTINGS)
-
-    const isSettingsModified = computed(() => {
-      return (s: QueueSettings) => {
-        return settings.value.limit !== s.limit
-      }
-    })
 
     function clear() {
       upcoming.value.clear()
@@ -59,7 +46,7 @@ export const useQueue = defineStore(
         return
       }
       // Queue is full based on limit
-      if (settings.value.limit && upcoming.value.size() >= settings.value.limit) {
+      if (settings.queue.limit && upcoming.value.size() >= settings.queue.limit) {
         // If the clip is already in the queue add it so submitters is updated
         if (!upcoming.value.includes(clip)) {
           return
@@ -121,28 +108,11 @@ export const useQueue = defineStore(
       current.value = upcoming.value.shift()
     }
 
-    function updateSettings(s: QueueSettings) {
-      settings.value = s
-    }
-
-    function setLimit(limit: number) {
-      if (Number.isNaN(limit) || limit < 1) {
-        return
-      }
-      updateSettings({ limit })
-    }
-
-    function removeLimit() {
-      updateSettings({ limit: null })
-    }
-
     return {
       isOpen,
       history,
       current,
       upcoming,
-      settings,
-      isSettingsModified,
       clear,
       purge,
       add,
@@ -155,16 +125,13 @@ export const useQueue = defineStore(
       open,
       close,
       previous,
-      next,
-      updateSettings,
-      setLimit,
-      removeLimit
+      next
     }
   },
   {
     persist: {
-      key: 'queue',
-      paths: ['history', 'current', 'upcoming', 'settings'],
+      key: 'cq-queue',
+      paths: ['history', 'current', 'upcoming'],
       afterRestore: (ctx) => {
         if (ctx.store.current?.id) {
           ctx.store.history.add(ctx.store.current)

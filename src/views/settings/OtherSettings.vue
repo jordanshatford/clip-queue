@@ -5,7 +5,7 @@
         class="w-full"
         size="small"
         severity="danger"
-        :disabled="!isSettingsModified"
+        :disabled="!settings.isModified"
         @click="resetSettingsToDefault()"
       >
         Reset Settings
@@ -55,13 +55,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import { useConfirm } from 'primevue/useconfirm'
-import { useSettings, DEFAULTS as DEFAULT_SETTINGS } from '@/stores/settings'
-import { useModeration, DEFAULTS as DEFAULT_MODERATION } from '@/stores/moderation'
-import { useProviders, DEFAULTS as DEFAULT_PROVIDERS } from '@/stores/providers'
-import { useQueue, DEFAULT_SETTINGS as DEFAULT_QUEUE_SETTINGS } from '@/stores/queue'
+import { useSettings } from '@/stores/settings'
+import { useProviders } from '@/stores/providers'
+import { useQueue } from '@/stores/queue'
 
 const version = __APP_VERSION__
 
@@ -69,17 +67,7 @@ const toast = useToast()
 const confirm = useConfirm()
 const queue = useQueue()
 const settings = useSettings()
-const moderation = useModeration()
 const providers = useProviders()
-
-const isSettingsModified = computed(() => {
-  return (
-    settings.isModified(DEFAULT_SETTINGS) ||
-    moderation.isModified(DEFAULT_MODERATION) ||
-    queue.isSettingsModified(DEFAULT_QUEUE_SETTINGS) ||
-    providers.isModified(DEFAULT_PROVIDERS)
-  )
-})
 
 async function resetSettingsToDefault() {
   confirm.require({
@@ -92,10 +80,7 @@ async function resetSettingsToDefault() {
     acceptClass:
       'text-white dark:text-surface-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-300 hover:border-red-600 dark:hover:border-red-300 focus:ring-red-400/50 dark:focus:ring-red-300/50',
     accept: () => {
-      settings.update(DEFAULT_SETTINGS)
-      moderation.update(DEFAULT_MODERATION)
-      queue.updateSettings(DEFAULT_QUEUE_SETTINGS)
-      providers.update(DEFAULT_PROVIDERS)
+      settings.$reset()
       toast.add({
         severity: 'success',
         summary: 'Success',

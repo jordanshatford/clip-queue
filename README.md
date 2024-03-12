@@ -34,7 +34,7 @@ Clip Queue is a web application designed to allow users to easily integrate with
   - Automatically connect to logged in users Twitch chat to detect clips submitted in chat
   - Duplicate clip prevention
   - Popular clips rise up in the queue
-  - Support for multiple clip providers (Twitch, Kick)
+  - Support for multiple clip providers (Twitch, Kick, YouTube)
   - Chat commands for moderators ([more info](./docs/COMMANDS.md))
   - Automatic moderation and clip removal
   - Settings customization to personalize the users experience

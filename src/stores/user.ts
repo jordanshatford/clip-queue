@@ -7,7 +7,6 @@ import { useSettings } from '@/stores/settings'
 import commands from '@/utils/commands'
 import { getAllURLsFromText } from '@/utils'
 import { useQueue } from '@/stores/queue'
-import { useModeration } from '@/stores/moderation'
 import { useProviders } from '@/stores/providers'
 
 const { CLIENT_ID, REDIRECT_URI } = env
@@ -97,11 +96,11 @@ export const useUser = defineStore(
       }
       const settings = useSettings()
       // Check if message is a command and perform command if proper permission to do so
-      if (settings.allowCommands && message.startsWith(settings.commandPrefix)) {
+      if (settings.commands.enabled && message.startsWith(settings.commands.prefix)) {
         if (!twitch.isModerator(userstate)) {
           return
         }
-        const [command, ...args] = message.substring(settings.commandPrefix.length).split(' ')
+        const [command, ...args] = message.substring(settings.commands.prefix.length).split(' ')
         commands.handleCommand(command, ...args)
         return
       }
@@ -122,8 +121,8 @@ export const useUser = defineStore(
     }
 
     function onMessageDeleted(c: string, username: string, deletedMessage: string) {
-      const moderation = useModeration()
-      if (!moderation.hasAutoRemoveClipsEnabled) {
+      const settings = useSettings()
+      if (!settings.queue.hasAutoModerationEnabled) {
         return
       }
       const urls = getAllURLsFromText(deletedMessage)
@@ -142,8 +141,8 @@ export const useUser = defineStore(
     }
 
     function onTimeout(c: string, username: string) {
-      const moderation = useModeration()
-      if (!moderation.hasAutoRemoveClipsEnabled) {
+      const settings = useSettings()
+      if (!settings.queue.hasAutoModerationEnabled) {
         return
       }
       const queue = useQueue()
@@ -162,7 +161,7 @@ export const useUser = defineStore(
   },
   {
     persist: {
-      key: 'user',
+      key: 'cq-user',
       paths: ['ctx.token', 'ctx.username']
     }
   }

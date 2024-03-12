@@ -7,7 +7,7 @@ import {
   mockTwitchClip,
   mockTwitchGame
 } from '@/__tests__/mocks'
-import { ClipProvider, type Clip, type PlayerFormat } from '@/providers'
+import type { Clip, PlayerFormat } from '@/providers'
 import type { TwitchUserCtx } from '@/services/twitch'
 import { useProviders } from '../providers'
 

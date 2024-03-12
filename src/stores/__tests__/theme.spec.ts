@@ -44,7 +44,7 @@ describe('theme.ts', () => {
   })
 
   it('gets the default value from localstorage if possible (light)', () => {
-    localStorage.setItem('theme', VALUE_LIGHT)
+    localStorage.setItem('cq-theme', VALUE_LIGHT)
     const theme = useTheme()
     expect(theme.value).toEqual('light')
     expect(theme.isDark).toEqual(false)
@@ -52,7 +52,7 @@ describe('theme.ts', () => {
   })
 
   it('gets the default value from localstorage if possible (dark)', () => {
-    localStorage.setItem('theme', VALUE_DARK)
+    localStorage.setItem('cq-theme', VALUE_DARK)
     const theme = useTheme()
     expect(theme.value).toEqual('dark')
     expect(theme.isDark).toEqual(true)

@@ -4,10 +4,10 @@
       <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
         <div class="flex flex-col gap-2 text-left">
           <div class="flex justify-between">
-            <label for="autoModeration" class="cq-text">Auto remove clips on moderation?</label>
+            <label for="autoModeration" class="cq-text">Auto moderation?</label>
             <InputSwitch
               inputId="autoModeration"
-              v-model="formModerationSettings.hasAutoRemoveClipsEnabled"
+              v-model="formSettings.hasAutoModerationEnabled"
               aria-describedby="autoModeration-help"
             />
           </div>
@@ -20,7 +20,7 @@
           <label for="limit" class="cq-text">Size Limit:</label>
           <InputNumber
             inputId="limit"
-            v-model="formQueueSettings.limit"
+            v-model="formSettings.limit"
             allow-empty
             :min="1"
             :step="1"
@@ -35,7 +35,7 @@
           <label for="allowedProviders" class="cq-text">Allowed Providers:</label>
           <MultiSelect
             inputId="allowedProviders"
-            v-model="formProviders.enabled"
+            v-model="formSettings.providers"
             :options="Object.values(ClipProvider)"
             placeholder="None"
             display="chip"
@@ -65,10 +65,14 @@
             type="submit"
             severity="info"
             size="small"
-            :disabled="!isFormModified"
+            :disabled="!settings.isQueueSettingsModified(formSettings)"
             >Save</BButton
           >
-          <BButton type="reset" severity="danger" size="small" :disabled="!isFormModified"
+          <BButton
+            type="reset"
+            severity="danger"
+            size="small"
+            :disabled="!settings.isQueueSettingsModified(formSettings)"
             >Cancel</BButton
           >
         </div>
@@ -78,48 +82,31 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, toRaw } from 'vue'
 import { useToast } from 'primevue/usetoast'
-import { useQueue, type QueueSettings } from '@/stores/queue'
-import { useModeration, type Moderation } from '@/stores/moderation'
-import { clone } from '@/utils'
+import { useSettings } from '@/stores/settings'
 import { ClipProvider } from '@/providers'
-import { useProviders, type Providers } from '@/stores/providers'
+import { useProviders } from '@/stores/providers'
 import ProviderName from '@/components/ProviderName.vue'
 
-const providers = useProviders()
 const toast = useToast()
-const queue = useQueue()
-const moderation = useModeration()
+const settings = useSettings()
+const providers = useProviders()
 
 const formKey = ref(1)
-const formQueueSettings = ref<QueueSettings>(clone<QueueSettings>(queue.settings))
-const formProviders = ref<Providers>(clone<Providers>(providers.$state))
-const formModerationSettings = ref<Moderation>(clone<Moderation>(moderation.$state, true))
+const formSettings = ref(structuredClone(toRaw(settings.queue)))
 
 const selectedExperimentalProviders = computed(() => {
-  return formProviders.value.enabled.filter((p) => providers.providers[p]?.isExperimental)
-})
-
-const isFormModified = computed(() => {
-  return (
-    queue.isSettingsModified(formQueueSettings.value) ||
-    providers.isModified(formProviders.value) ||
-    moderation.isModified(formModerationSettings.value)
-  )
+  return formSettings.value.providers.filter((p) => providers.providers[p]?.isExperimental)
 })
 
 function onReset() {
-  formQueueSettings.value = clone<QueueSettings>(queue.settings)
-  formProviders.value = clone<Providers>(providers.$state)
-  formModerationSettings.value = clone<Moderation>(moderation.$state, true)
+  formSettings.value = structuredClone(toRaw(settings.queue))
   formKey.value += 1
 }
 
 function onSubmit() {
-  queue.updateSettings(formQueueSettings.value)
-  providers.update(formProviders.value)
-  moderation.update(formModerationSettings.value)
+  settings.queue = formSettings.value
   toast.add({
     severity: 'success',
     summary: 'Success',

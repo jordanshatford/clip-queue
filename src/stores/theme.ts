@@ -36,7 +36,7 @@ export const useTheme = defineStore(
   },
   {
     persist: {
-      key: 'theme',
+      key: 'cq-theme',
       afterRestore: (ctx) => {
         if (ctx.store.value === Theme.DARK) {
           document?.querySelector('html')?.classList.add(Theme.DARK)

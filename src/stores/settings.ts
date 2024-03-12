@@ -1,42 +1,83 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { ClipProvider } from '@/providers'
 
-export interface Settings {
-  allowCommands: boolean
-  commandPrefix: string
+export interface CommandSettings {
+  // If chat commands are enabled.
+  enabled: boolean
+  // Prefix for chat commands.
+  prefix: string
 }
 
-export const DEFAULTS: Settings = {
-  allowCommands: true,
-  commandPrefix: '!cq'
+export interface QueueSettings {
+  // Auto remove clips when the submitter has there message deleted, or is timed out / banned.
+  hasAutoModerationEnabled: boolean
+  // Limit of clips allowed in queue at one time.
+  limit: number | null
+  // Allowed clip providers (Kick, Twitch, Etc.)
+  providers: ClipProvider[]
+}
+
+export const DEFAULTS: { commands: CommandSettings; queue: QueueSettings } = {
+  commands: {
+    enabled: true,
+    prefix: '!cq'
+  },
+  queue: {
+    hasAutoModerationEnabled: true,
+    limit: null,
+    providers: Object.values(ClipProvider)
+  }
 }
 
 export const useSettings = defineStore(
   'settings',
   () => {
-    const allowCommands = ref<boolean>(DEFAULTS.allowCommands)
-    const commandPrefix = ref<string>(DEFAULTS.commandPrefix)
+    const commands = ref<CommandSettings>({ ...DEFAULTS.commands })
+    const queue = ref<QueueSettings>({ ...DEFAULTS.queue })
 
-    const isModified = computed(() => {
-      return (settings: Settings) => {
+    const isCommandsSettingsModified = computed(() => {
+      return (c: CommandSettings) => {
+        return commands.value.enabled !== c.enabled || commands.value.prefix !== c.prefix
+      }
+    })
+
+    const isQueueSettingsModified = computed(() => {
+      return (q: QueueSettings) => {
         return (
-          allowCommands.value !== settings.allowCommands ||
-          commandPrefix.value !== settings.commandPrefix
+          queue.value.hasAutoModerationEnabled !== q.hasAutoModerationEnabled ||
+          queue.value.limit !== q.limit ||
+          Object.values(ClipProvider).some(
+            (p) => queue.value.providers.includes(p) !== q.providers.includes(p)
+          )
         )
       }
     })
 
-    function update(settings: Settings) {
-      allowCommands.value = settings.allowCommands
-      commandPrefix.value = settings.commandPrefix
+    const isModified = computed(() => {
+      return (
+        isCommandsSettingsModified.value(DEFAULTS.commands) ||
+        isQueueSettingsModified.value(DEFAULTS.queue)
+      )
+    })
+
+    function $reset() {
+      commands.value = DEFAULTS.commands
+      queue.value = DEFAULTS.queue
     }
 
     return {
-      allowCommands,
-      commandPrefix,
+      commands,
+      queue,
       isModified,
-      update
+      isCommandsSettingsModified,
+      isQueueSettingsModified,
+      $reset
     }
   },
-  { persist: { key: 'settings' } }
+  {
+    persist: {
+      key: 'cq-settings'
+    }
+  }
 )

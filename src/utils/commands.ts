@@ -1,6 +1,6 @@
 import { useQueue } from '@/stores/queue'
-import { useModeration } from '@/stores/moderation'
 import { useProviders } from '@/stores/providers'
+import { useSettings } from '@/stores/settings'
 import { ClipProvider } from '@/providers'
 
 export enum Command {
@@ -35,12 +35,12 @@ const help: Record<Command, CommandHelp> = {
   [Command.PREV]: { description: 'Switch to the previous queue clip.' },
   [Command.NEXT]: { description: 'Switch to the next queue clip.' },
   [Command.REMOVE_BY_SUBMITTER]: {
-    args: ['submitter'],
+    args: ['provider', 'submitter'],
     description:
       'Remove any clips that are in the queue and have been submitted by the given submitter.'
   },
   [Command.REMOVE_BY_CHANNEL]: {
-    args: ['channel'],
+    args: ['provider', 'channel'],
     description: 'Remove any clips in the queue that are of the given channel.'
   },
   [Command.REMOVE_BY_PROVIDER]: {
@@ -72,12 +72,18 @@ export function handleCommand(command: string, ...args: string[]) {
     }
     case Command.SET_LIMIT: {
       if (args[0]) {
-        queue.setLimit(Number.parseFloat(args[0]))
+        const limit = Number.parseInt(args[0])
+        if (Number.isNaN(limit) || limit < 1) {
+          return
+        }
+        const settings = useSettings()
+        settings.queue.limit = limit
       }
       break
     }
     case Command.REMOVE_LIMIT: {
-      queue.removeLimit()
+      const settings = useSettings()
+      settings.queue.limit = null
       break
     }
     case Command.PREV: {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { clone, getAllURLsFromText } from '..'
+import { getAllURLsFromText } from '..'
 
 describe('index.ts', () => {
   it.each([
@@ -17,10 +17,5 @@ describe('index.ts', () => {
     ]
   ])('gets a url from a message when possible', (input: string, expected: string[]) => {
     expect(getAllURLsFromText(input)).toEqual(expected)
-  })
-
-  it('clones an object', () => {
-    const obj = { test: '1213', test2: 'abc' }
-    expect(clone(obj)).toEqual(obj)
   })
 })
