@@ -7,6 +7,8 @@
         :title="clip.title"
         class="player h-auto w-full bg-black"
         allowfullscreen
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        frameborder="0"
       ></iframe>
       <VideoJS
         v-else-if="playerFormat === 'video'"

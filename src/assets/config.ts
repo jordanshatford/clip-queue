@@ -34,8 +34,7 @@ export const config = {
       },
       {
         title: 'Automatic Moderation',
-        description:
-          'Moderation performed in chat will effect the clips submitted by those users.',
+        description: 'Moderation performed in chat will effect the clips submitted by those users.',
         icon: 'pi pi-flag'
       },
       {
