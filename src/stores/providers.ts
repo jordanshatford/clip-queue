@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import {
   KickProvider,
   TwitchProvider,
+  YouTubeProvider,
   type Clip,
   type PlayerFormat,
   type IClipProvider,
@@ -24,7 +25,8 @@ export const useProviders = defineStore(
   () => {
     const providers = ref<Partial<Record<ClipProvider, IClipProvider>>>({
       [ClipProvider.KICK]: new KickProvider(),
-      [ClipProvider.TWITCH]: new TwitchProvider()
+      [ClipProvider.TWITCH]: new TwitchProvider(),
+      [ClipProvider.YOUTUBE]: new YouTubeProvider()
     })
     const enabled = ref<ClipProvider[]>([...DEFAULTS.enabled])
 

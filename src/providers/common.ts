@@ -1,6 +1,7 @@
 export enum ClipProvider {
   KICK = 'Kick',
-  TWITCH = 'Twitch'
+  TWITCH = 'Twitch',
+  YOUTUBE = 'YouTube'
 }
 
 export type PlayerFormat = 'iframe' | 'video' | 'unknown'

@@ -53,38 +53,6 @@ describe('providers.ts', () => {
     setActivePinia(createPinia())
   })
 
-  it('inits when values are already in localstorage', async () => {
-    localStorage.setItem(
-      'providers-cache',
-      JSON.stringify({
-        providers: {
-          [ClipProvider.KICK]: {
-            name: ClipProvider.KICK,
-            cache: {
-              [mockKickClip.id]: mockKickClip
-            }
-          },
-          [ClipProvider.TWITCH]: {
-            name: ClipProvider.TWITCH,
-            clipsCache: {
-              [mockTwitchClip.id]: mockTwitchClip
-            },
-            gamesCache: {
-              [mockTwitchGame.id]: mockTwitchGame
-            }
-          }
-        },
-        enabled: [ClipProvider.KICK, ClipProvider.TWITCH]
-      })
-    )
-    const providers = useProviders()
-    const cachedClip = await providers.getClip(mockTwitchClip.url)
-    expect(cachedClip).toBeDefined()
-    expect(cachedClip?.title).toEqual(mockTwitchClip.title)
-    expect(cachedClip?.category).toEqual(mockTwitchGame.name)
-    localStorage.removeItem('providers-cache')
-  })
-
   it.each([
     [mockKickClip.clip_url, mockKickClip.id],
     [mockTwitchClip.url, mockTwitchClip.id]

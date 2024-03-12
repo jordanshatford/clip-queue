@@ -56,7 +56,7 @@ vi.mock('axios', async () => {
   }
 })
 
-describe('kick.ts', () => {
+describe('youtube.ts', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })
