@@ -36,6 +36,11 @@ describe('twitch.ts', () => {
     setActivePinia(createPinia())
   })
 
+  it('knows if it is an experimental provider', () => {
+    const twitchProvider = new TwitchProvider()
+    expect(twitchProvider.isExperimental).toEqual(false)
+  })
+
   it('gets the player format of the clip', () => {
     const twitchProvider = new TwitchProvider()
     expect(twitchProvider.getPlayerFormat()).toEqual('iframe')

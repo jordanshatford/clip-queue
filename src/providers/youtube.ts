@@ -14,6 +14,8 @@ export class YouTubeProvider implements IClipProvider {
     </svg>
   `
 
+  public isExperimental = true
+
   private cache: Record<string, YouTubeClip> = {}
 
   public get hasCachedData(): boolean {

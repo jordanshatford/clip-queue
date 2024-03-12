@@ -51,6 +51,13 @@
           <small id="allowedProviders-help" class="cq-text-subtle pb-2"
             >Clips from these providers will be allowed in the queue.</small
           >
+          <MessageAlert
+            v-if="selectedExperimentalProviders.length > 0"
+            severity="warn"
+            :closable="false"
+            class="mt-0"
+            >Experimental providers selected: {{ selectedExperimentalProviders.join(', ') }}
+          </MessageAlert>
         </div>
         <div class="mt-3">
           <BButton
@@ -89,6 +96,10 @@ const formKey = ref(1)
 const formQueueSettings = ref<QueueSettings>(clone<QueueSettings>(queue.settings))
 const formProviders = ref<Providers>(clone<Providers>(providers.$state))
 const formModerationSettings = ref<Moderation>(clone<Moderation>(moderation.$state, true))
+
+const selectedExperimentalProviders = computed(() => {
+  return formProviders.value.enabled.filter((p) => providers.providers[p]?.isExperimental)
+})
 
 const isFormModified = computed(() => {
   return (

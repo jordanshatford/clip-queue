@@ -17,6 +17,8 @@ export class KickProvider implements IClipProvider {
     </svg>
   `
 
+  public isExperimental = false
+
   private cache: Record<string, KickClip> = {}
 
   public get hasCachedData(): boolean {

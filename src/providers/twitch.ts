@@ -25,6 +25,8 @@ export class TwitchProvider implements IClipProvider {
     </svg>
   `
 
+  public isExperimental = false
+
   private clipsCache: Record<string, TwitchClip> = {}
   private gamesCache: Record<string, TwitchGame> = {}
 

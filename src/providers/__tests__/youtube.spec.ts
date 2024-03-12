@@ -16,6 +16,11 @@ describe('youtube.ts', () => {
     vi.clearAllMocks()
   })
 
+  it('knows if it is an experimental provider', () => {
+    const youTubeProvider = new YouTubeProvider()
+    expect(youTubeProvider.isExperimental).toEqual(true)
+  })
+
   it('gets the player format of the clip', () => {
     const youTubeProvider = new YouTubeProvider()
     expect(youTubeProvider.getPlayerFormat()).toEqual('iframe')

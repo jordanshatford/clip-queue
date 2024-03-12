@@ -16,6 +16,11 @@ describe('kick.ts', () => {
     vi.clearAllMocks()
   })
 
+  it('knows if it is an experimental provider', () => {
+    const kickProvider = new KickProvider()
+    expect(kickProvider.isExperimental).toEqual(false)
+  })
+
   it('gets the player format of the clip', () => {
     const kickProvider = new KickProvider()
     expect(kickProvider.getPlayerFormat()).toEqual('video')
