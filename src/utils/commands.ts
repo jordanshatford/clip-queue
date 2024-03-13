@@ -13,6 +13,8 @@ export enum Command {
   NEXT = 'next',
   REMOVE_BY_SUBMITTER = 'removebysubmitter',
   REMOVE_BY_PROVIDER = 'removebyprovider',
+  ENABLE_PROVIDER = 'enableprovider',
+  DISABLE_PROVIDER = 'disableprovider',
   PURGE_CACHE = 'purgecache',
   PURGE_HISTORY = 'purgehistory'
 }
@@ -40,6 +42,14 @@ const help: Record<Command, CommandHelp> = {
   [Command.REMOVE_BY_PROVIDER]: {
     args: ['provider'],
     description: 'Remove clips from the provider.'
+  },
+  [Command.ENABLE_PROVIDER]: {
+    args: ['provider'],
+    description: 'Enable the specified provider if it is valid.'
+  },
+  [Command.DISABLE_PROVIDER]: {
+    args: ['provider'],
+    description: 'Disable the specified provider if it is valid.'
   },
   [Command.PURGE_CACHE]: {
     description: 'Purge all cached clips.'
@@ -91,14 +101,36 @@ export function handleCommand(command: string, ...args: string[]) {
     case Command.REMOVE_BY_SUBMITTER: {
       if (args[0]) {
         queue.removeSubmitterClips(args[0])
-        return
       }
       break
     }
     case Command.REMOVE_BY_PROVIDER: {
       if (args[0]) {
         queue.removeProviderClips(args[0] as ClipProvider)
-        return
+      }
+      break
+    }
+    case Command.ENABLE_PROVIDER: {
+      if (args[0]) {
+        const provider = Object.values(ClipProvider).find(
+          (p) => p.toLowerCase() === args[0].toLowerCase()
+        )
+        const settings = useSettings()
+        if (provider && !settings.queue.providers.includes(provider)) {
+          settings.queue.providers = [...settings.queue.providers, provider]
+        }
+      }
+      break
+    }
+    case Command.DISABLE_PROVIDER: {
+      if (args[0]) {
+        const provider = Object.values(ClipProvider).find(
+          (p) => p.toLowerCase() === args[0].toLowerCase()
+        )
+        const settings = useSettings()
+        if (provider && settings.queue.providers.includes(provider)) {
+          settings.queue.providers = settings.queue.providers.filter((p) => p !== provider)
+        }
       }
       break
     }

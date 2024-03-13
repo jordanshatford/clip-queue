@@ -3,6 +3,7 @@ import { setActivePinia, createPinia } from 'pinia'
 import { useQueue } from '@/stores/queue'
 import { useProviders } from '@/stores/providers'
 import { useSettings } from '@/stores/settings'
+import { ClipProvider } from '@/providers'
 import commands, { Command } from '../commands'
 
 describe('commands.ts', () => {
@@ -82,6 +83,22 @@ describe('commands.ts', () => {
     expect(settings.queue.limit).toEqual(100)
     commands.handleCommand(Command.REMOVE_LIMIT.toString())
     expect(settings.queue.limit).toEqual(null)
+  })
+
+  it('can enable and disable providers', () => {
+    const settings = useSettings()
+    expect(settings.queue.providers).toEqual(Object.values(ClipProvider))
+    commands.handleCommand(Command.DISABLE_PROVIDER.toString(), 'test') // Invalid provider
+    expect(settings.queue.providers).toEqual(Object.values(ClipProvider))
+    commands.handleCommand(Command.DISABLE_PROVIDER.toString(), 'kick')
+    expect(settings.queue.providers).not.toContain(ClipProvider.KICK)
+    commands.handleCommand(Command.ENABLE_PROVIDER.toString(), 'test') // Invalid provider
+    expect(settings.queue.providers).not.toContain(ClipProvider.KICK)
+    commands.handleCommand(Command.ENABLE_PROVIDER.toString(), 'kick')
+    expect(settings.queue.providers).toContain(ClipProvider.KICK)
+    for (const p of Object.values(ClipProvider)) {
+      expect(settings.queue.providers).toContain(p)
+    }
   })
 
   it('returns help information for commands', () => {
