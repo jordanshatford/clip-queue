@@ -1,45 +1,65 @@
 # Commands
 
-Clip Queue provides a set of commands accessible through Twich chat for moderators and the streamer. The following is a list of commands and what they are used for:
+Clip Queue provides commands accessible through Twitch chat for the streamer and moderators of the stream. The following is a list of available commands:
 
-> NOTE: the command prefix is customizable via the settings, for the sake of documenation, the default prefix (`!cq`) will be used.
+> NOTE: the command prefix can be customized in the settings. The default prefix is `!cq`.
 
 ## Queue Commands
 
-`!cqopen`: Open the queue, allowing clips to be submitted via chat.
+`!cqopen`: Open the queue.
 
-`!cqclose`: Close the queue, preventing any further clips submitted in chat from being added.
+> NOTE: This does nothing if the queue is already open.
 
-`!cqclear`: Clear the queue, removing all clips. These clips can be resubmitted.
+`!cqclose`: Close the queue.
 
-`!cqsetlimit <number>`: Set the queue limit. This will ensure the amount of clips never exceeds the set limit.
+> NOTE: This does nothing if the queue is already closed.
 
-`!cqremovelimit`: Remove the limit from the queue. This will allow infinite clips to be added to the queue.
+`!cqclear`: Remove all clips in the queue.
 
-`!cqprev`: Switch back to the previous clip.
+> NOTE: This does nothing if the queue is empty.
 
-> NOTE: if there is no previously viewed clip, this will end the viewing of the current clip anyways
+`!cqsetlimit <number>`: Set the queue size limit.
 
-`!cqnext`: Switch to the next clip in queue.
+> NOTE: This does nothing if the `<number>` is not 1 or more.
 
-> NOTE: if there are no clips in the queue, this will end the viewing of the current clip anyways
+`!cqremovelimit`: Remove the queue size limit.
 
-## Remove Clip Commands
+> NOTE: This does nothing if the queue is not limited.
 
-`!cqremovebysubmitter <submitter>`: Remove any clips that are in the queue and have been submitted by the given submitter.
+`!cqprev`: Switch to the previous clip.
 
-> NOTE: if the submitter exists on multiple providers it will remove all of those clips. If a clip has multiple submitters it will remove the submitter from that clip.
+> NOTE: If there is no previous clip, this will end the viewing of the current clip.
 
-`!cqremovebychannel <channel>`: Remove any clips in the queue that are of the given channel.
+`!cqnext`: Switch to the next clip.
 
-> NOTE: if the channel exists on multiple providers it will remove clips from all of the providers.
+> NOTE: If there is no next clip, this will end the viewing of the current clip.
 
-`!cqremovebyprovider <provider>`: Remove any clips in the queue that are from a given provider.
+`!cqremovebysubmitter <submitter>`: Remove clips sent by the submitter.
 
-> NOTE: if the provider specified is invalid this will be ignored.
+> NOTE: If a clip has multiple submitters it will remove the submitter from that clip but the clip will stay in the queue.
 
-## Caching and History Commands
+`!cqremovebyprovider <provider>`: Remove clips from the provider.
 
-`!cqpurgecache`: Purge all cached clips. Clips are cached to prevent needing to reuse the providers API many times for the same clip.
+> NOTE: This does nothing if the `<provider>` is not a valid provider.
 
-`!cqpurgehistory`: Purge all clips previously viewed allowing them to be resubmitted.
+`!cqenableprovider <provider>`: Enable the specified provider if it is valid.
+
+> NOTE: This does nothing if the `<provider>` is already enabled or is not a valid provider.
+
+`!cqdisableprovider <provider>`: Disable the specified provider if it is valid.
+
+> NOTE: This does nothing if the `<provider>` is already disabled or is not a valid provider.
+
+`!cqenableautomod`: Enable auto moderation.
+
+> NOTE: This does nothing if auto moderation is already enabled.
+
+`!cqdisableautomod`: Disable auto moderation.
+
+> NOTE: This does nothing if auto moderation is already disabled.
+
+## Other Commands
+
+`!cqpurgecache`: Purge all cached clips.
+
+`!cqpurgehistory`: Purge all historically watched clips.

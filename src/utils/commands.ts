@@ -47,11 +47,11 @@ const help: Record<Command, CommandHelp> = {
   },
   [Command.ENABLE_PROVIDER]: {
     args: ['provider'],
-    description: 'Enable the specified provider if it is valid.'
+    description: 'Enable the specified provider.'
   },
   [Command.DISABLE_PROVIDER]: {
     args: ['provider'],
-    description: 'Disable the specified provider if it is valid.'
+    description: 'Disable the specified provider.'
   },
   [Command.ENABLE_AUTO_MODERATION]: {
     description: 'Enable auto moderation.'
