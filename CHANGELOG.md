@@ -1,5 +1,13 @@
 # clip-queue
 
+## 1.11.0
+
+### Minor Changes
+
+- feat: allow configuring allowed chat commands (closes: #253) ([`5ef8adfdb8233f3b4de6a03c8d7acf13f591b45b`](https://github.com/jordanshatford/clip-queue/commit/5ef8adfdb8233f3b4de6a03c8d7acf13f591b45b))
+
+- revert: command to remove clips by channel name ([`5621873009f2eac7bcb4a3a434782a5a05b7cec3`](https://github.com/jordanshatford/clip-queue/commit/5621873009f2eac7bcb4a3a434782a5a05b7cec3))
+
 ## 1.10.0
 
 ### Minor Changes
