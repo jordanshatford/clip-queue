@@ -8,7 +8,6 @@ import InputSwitch from 'primevue/inputswitch'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
 import MultiSelect from 'primevue/multiselect'
-import Panel from 'primevue/panel'
 import TabMenu from 'primevue/tabmenu'
 import Toast from 'primevue/toast'
 
@@ -24,7 +23,6 @@ declare module '@vue/runtime-core' {
     InputText: typeof InputText
     MessageAlert: typeof Message
     MultiSelect: typeof MultiSelect
-    PPanel: typeof Panel
     TabMenu: typeof TabMenu
     TToast: typeof Toast
   }

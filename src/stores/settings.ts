@@ -1,12 +1,13 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { ClipProvider } from '@/providers'
+import { Command } from '@/utils/commands'
 
 export interface CommandSettings {
-  // If chat commands are enabled.
-  enabled: boolean
   // Prefix for chat commands.
   prefix: string
+  // Commands allowed to be used in chat.
+  allowed: Command[]
 }
 
 export interface QueueSettings {
@@ -20,8 +21,8 @@ export interface QueueSettings {
 
 export const DEFAULTS: { commands: CommandSettings; queue: QueueSettings } = {
   commands: {
-    enabled: true,
-    prefix: '!cq'
+    prefix: '!cq',
+    allowed: Object.values(Command)
   },
   queue: {
     hasAutoModerationEnabled: true,
@@ -38,7 +39,12 @@ export const useSettings = defineStore(
 
     const isCommandsSettingsModified = computed(() => {
       return (c: CommandSettings) => {
-        return commands.value.enabled !== c.enabled || commands.value.prefix !== c.prefix
+        return (
+          commands.value.prefix !== c.prefix ||
+          Object.values(Command).some(
+            (cmd) => commands.value.allowed.includes(cmd) !== c.allowed.includes(cmd)
+          )
+        )
       }
     })
 

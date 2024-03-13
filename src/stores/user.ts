@@ -4,7 +4,7 @@ import type { ChatUserstate } from 'tmi.js'
 import { env, config } from '@/assets/config'
 import twitch, { TwitchChat, type AuthInfo, type TwitchUserCtx } from '@/services/twitch'
 import { useSettings } from '@/stores/settings'
-import commands from '@/utils/commands'
+import commands, { Command } from '@/utils/commands'
 import { getAllURLsFromText } from '@/utils'
 import { useQueue } from '@/stores/queue'
 import { useProviders } from '@/stores/providers'
@@ -96,11 +96,14 @@ export const useUser = defineStore(
       }
       const settings = useSettings()
       // Check if message is a command and perform command if proper permission to do so
-      if (settings.commands.enabled && message.startsWith(settings.commands.prefix)) {
+      if (message.startsWith(settings.commands.prefix)) {
+        const [command, ...args] = message.substring(settings.commands.prefix.length).split(' ')
+        if (!settings.commands.allowed.includes(command as Command)) {
+          return
+        }
         if (!twitch.isModerator(userstate)) {
           return
         }
-        const [command, ...args] = message.substring(settings.commands.prefix.length).split(' ')
         commands.handleCommand(command, ...args)
         return
       }
