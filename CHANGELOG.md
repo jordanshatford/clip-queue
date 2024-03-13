@@ -1,5 +1,13 @@
 # clip-queue
 
+## 1.12.0
+
+### Minor Changes
+
+- feat: add commands to enable and disable auto moderation ([`de20ecdd4fe0bc45ab1dc7680c1aeebafc5f2710`](https://github.com/jordanshatford/clip-queue/commit/de20ecdd4fe0bc45ab1dc7680c1aeebafc5f2710))
+
+- feat: add commands to enable and disable specified providers ([`5ad88ad8f7261f0cdc3f329f55135d44b32175e3`](https://github.com/jordanshatford/clip-queue/commit/5ad88ad8f7261f0cdc3f329f55135d44b32175e3))
+
 ## 1.11.0
 
 ### Minor Changes
