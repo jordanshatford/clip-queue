@@ -15,6 +15,8 @@ export enum Command {
   REMOVE_BY_PROVIDER = 'removebyprovider',
   ENABLE_PROVIDER = 'enableprovider',
   DISABLE_PROVIDER = 'disableprovider',
+  ENABLE_AUTO_MODERATION = 'enableautomod',
+  DISABLE_AUTO_MODERATION = 'disableautomod',
   PURGE_CACHE = 'purgecache',
   PURGE_HISTORY = 'purgehistory'
 }
@@ -51,6 +53,12 @@ const help: Record<Command, CommandHelp> = {
     args: ['provider'],
     description: 'Disable the specified provider if it is valid.'
   },
+  [Command.ENABLE_AUTO_MODERATION]: {
+    description: 'Enable auto moderation.'
+  },
+  [Command.DISABLE_AUTO_MODERATION]: {
+    description: 'Disable auto moderation.'
+  },
   [Command.PURGE_CACHE]: {
     description: 'Purge all cached clips.'
   },
@@ -61,6 +69,7 @@ const help: Record<Command, CommandHelp> = {
 
 export function handleCommand(command: string, ...args: string[]) {
   const queue = useQueue()
+  const settings = useSettings()
   switch (command as Command) {
     case Command.OPEN: {
       queue.open()
@@ -80,13 +89,11 @@ export function handleCommand(command: string, ...args: string[]) {
         if (Number.isNaN(limit) || limit < 1) {
           return
         }
-        const settings = useSettings()
         settings.queue.limit = limit
       }
       break
     }
     case Command.REMOVE_LIMIT: {
-      const settings = useSettings()
       settings.queue.limit = null
       break
     }
@@ -115,7 +122,6 @@ export function handleCommand(command: string, ...args: string[]) {
         const provider = Object.values(ClipProvider).find(
           (p) => p.toLowerCase() === args[0].toLowerCase()
         )
-        const settings = useSettings()
         if (provider && !settings.queue.providers.includes(provider)) {
           settings.queue.providers = [...settings.queue.providers, provider]
         }
@@ -127,11 +133,18 @@ export function handleCommand(command: string, ...args: string[]) {
         const provider = Object.values(ClipProvider).find(
           (p) => p.toLowerCase() === args[0].toLowerCase()
         )
-        const settings = useSettings()
         if (provider && settings.queue.providers.includes(provider)) {
           settings.queue.providers = settings.queue.providers.filter((p) => p !== provider)
         }
       }
+      break
+    }
+    case Command.ENABLE_AUTO_MODERATION: {
+      settings.queue.hasAutoModerationEnabled = true
+      break
+    }
+    case Command.DISABLE_AUTO_MODERATION: {
+      settings.queue.hasAutoModerationEnabled = false
       break
     }
     case Command.PURGE_CACHE: {

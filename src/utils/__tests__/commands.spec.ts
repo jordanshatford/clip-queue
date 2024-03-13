@@ -101,6 +101,15 @@ describe('commands.ts', () => {
     }
   })
 
+  it('can enable and disable auto moderation', () => {
+    const settings = useSettings()
+    expect(settings.queue.hasAutoModerationEnabled).toEqual(true)
+    commands.handleCommand(Command.DISABLE_AUTO_MODERATION)
+    expect(settings.queue.hasAutoModerationEnabled).toEqual(false)
+    commands.handleCommand(Command.ENABLE_AUTO_MODERATION)
+    expect(settings.queue.hasAutoModerationEnabled).toEqual(true)
+  })
+
   it('returns help information for commands', () => {
     expect(commands.help).toBeDefined()
   })
