@@ -1,6 +1,6 @@
 <template>
   <div class="mx-auto mb-3 max-w-xl">
-    <TabMenu :model="tabs" :activeIndex="activeIndex">
+    <TabMenu :model="tabs" :active-index="activeIndex">
       <template #item="{ item, props }">
         <RouterLink v-if="item.route" v-slot="{ href, navigate }" :to="{ name: item.route }" custom>
           <a :href="href" v-bind="props.action" @click="navigate">

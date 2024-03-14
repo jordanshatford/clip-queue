@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center">
     <div class="h-5">
-      <svg v-if="svg" v-html="svg" class="mr-2 h-5 w-5"></svg>
+      <svg v-if="svg" class="mr-2 h-5 w-5" v-html="svg"></svg>
     </div>
     <div>{{ provider }}</div>
   </div>

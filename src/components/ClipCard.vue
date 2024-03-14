@@ -3,10 +3,10 @@
     <template #header>
       <div class="relative">
         <img
-          @error="emit('remove')"
           class="aspect-video w-full"
           :alt="clip.title"
           :src="clip.thumbnailUrl"
+          @error="emit('remove')"
         />
         <div class="absolute -bottom-6 -right-2 m-2 p-2">
           <div class="flex gap-2">

@@ -4,29 +4,29 @@
       <template #content>
         <div class="m-0 flex flex-col gap-2 p-0 text-left">
           <label for="username" class="cq-text">Connected Chat:</label>
-          <InputText id="username" disabled v-model="user.ctx.username" />
+          <InputText id="username" v-model="user.ctx.username" disabled />
         </div>
       </template>
     </CCard>
     <CCard class="mx-auto max-w-lg">
       <template #content>
-        <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
+        <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">
             <label for="commandPrefix" class="cq-text">Commands Prefix:</label>
             <InputText
               id="commandPrefix"
-              @keydown.space.prevent
+              v-model="formSettings.prefix"
               required
               maxlength="8"
-              v-model="formSettings.prefix"
+              @keydown.space.prevent
             />
             <small id="commandPrefix-help" class="cq-text-subtle pb-2"
               >Commands in chat must be prefixed by this value.</small
             >
             <label for="allowedCommands" class="cq-text">Allowed Commands:</label>
             <MultiSelect
-              inputId="allowedCommands"
               v-model="formSettings.allowed"
+              input-id="allowedCommands"
               :options="Object.values(Command)"
               placeholder="None"
               display="chip"

@@ -1,13 +1,13 @@
 <template>
   <CCard class="mx-auto max-w-lg">
     <template #content>
-      <form @submit.prevent="onSubmit" @reset="onReset" :key="formKey">
+      <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
         <div class="flex flex-col gap-2 text-left">
           <div class="flex justify-between">
             <label for="autoModeration" class="cq-text">Auto Moderation:</label>
             <InputSwitch
-              inputId="autoModeration"
               v-model="formSettings.hasAutoModerationEnabled"
+              input-id="autoModeration"
               aria-describedby="autoModeration-help"
             />
           </div>
@@ -19,8 +19,8 @@
         <div class="flex flex-col gap-2 text-left">
           <label for="limit" class="cq-text">Size Limit:</label>
           <InputNumber
-            inputId="limit"
             v-model="formSettings.limit"
+            input-id="limit"
             allow-empty
             :min="1"
             :step="1"
@@ -34,8 +34,8 @@
         <div class="flex flex-col gap-2 text-left">
           <label for="allowedProviders" class="cq-text">Allowed Providers:</label>
           <MultiSelect
-            inputId="allowedProviders"
             v-model="formSettings.providers"
+            input-id="allowedProviders"
             :options="Object.values(ClipProvider)"
             placeholder="None"
             display="chip"

@@ -30,9 +30,9 @@
         v-for="clip in clips"
         :key="toUUID(clip)"
         :clip="clip"
+        class="mr-2"
         @play="emit('play', clip)"
         @remove="emit('remove', clip)"
-        class="mr-2"
       />
     </div>
   </div>

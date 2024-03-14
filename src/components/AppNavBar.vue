@@ -17,9 +17,9 @@
             <div class="flex space-x-3">
               <AppNavBarItem
                 v-for="route in routes"
-                :route="route"
-                :isAuthenticated="user.isLoggedIn"
                 :key="route.name"
+                :route="route"
+                :is-authenticated="user.isLoggedIn"
               />
             </div>
           </div>
@@ -39,11 +39,11 @@
       <div class="space-y-1 px-2 pb-3 pt-2">
         <AppNavBarItem
           v-for="route in routes"
-          @click="() => (showMobileMenu = false)"
-          :route="route"
-          :isAuthenticated="user.isLoggedIn"
           :key="route.name"
-          isMobileMenu
+          :route="route"
+          :is-authenticated="user.isLoggedIn"
+          is-mobile-menu
+          @click="() => (showMobileMenu = false)"
         />
       </div>
     </div>

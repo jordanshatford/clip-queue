@@ -3,20 +3,20 @@
     :value="queue.history.toArray()"
     size="small"
     paginator
-    removableSort
+    removable-sort
     :rows="10"
-    :rowsPerPageOptions="[10, 20, 50]"
+    :rows-per-page-options="[10, 20, 50]"
     class="my-4"
   >
     <template #empty>No clips previously watched.</template>
-    <DataTableColumn field="title" header="Info" sortable :sortField="(data: Clip) => data.title">
+    <DataTableColumn field="title" header="Info" sortable :sort-field="(data: Clip) => data.title">
       <template #body="{ data }: { data: Clip }">
         <div class="flex items-center">
           <img
-            @error="queue.history.remove(data)"
             class="hidden aspect-video w-24 rounded-xl sm:block"
             :src="data.thumbnailUrl"
             :alt="data.title"
+            @error="queue.history.remove(data)"
           />
           <div class="ml-3 text-left text-sm">
             <p class="cq-text">
@@ -50,7 +50,7 @@
     <DataTableColumn
       :field="(data: Clip) => data.submitters?.[0]"
       sortable
-      :sortField="(data: Clip) => data.submitters?.[0]"
+      :sort-field="(data: Clip) => data.submitters?.[0]"
       header="Submitter"
     >
     </DataTableColumn>
@@ -58,9 +58,9 @@
       <template #header>
         <BButton
           :disabled="queue.history.empty()"
-          @click="purgeHistory()"
           severity="danger"
           size="small"
+          @click="purgeHistory()"
           ><i class="pi pi-trash mr-2"></i>Delete All</BButton
         >
       </template>
