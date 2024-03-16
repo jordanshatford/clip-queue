@@ -1,5 +1,11 @@
 # clip-queue
 
+## 1.13.0
+
+### Minor Changes
+
+- feat: allow for passing context to providers ([`8fdbd82347a21c479c1bb72fe342eb8b543c684f`](https://github.com/jordanshatford/clip-queue/commit/8fdbd82347a21c479c1bb72fe342eb8b543c684f))
+
 ## 1.12.0
 
 ### Minor Changes
