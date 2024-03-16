@@ -1,24 +1,20 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import {
-  KickProvider,
-  TwitchProvider,
-  YouTubeProvider,
-  type Clip,
-  type PlayerFormat,
-  type IClipProvider,
-  ClipProvider
-} from '@/providers'
+import { providers as ps, ClipProvider, type Clip, type PlayerFormat } from '@/providers'
 import { useSettings } from '@/stores/settings'
+import { useUser } from '@/stores/user'
 
 export const useProviders = defineStore('providers', () => {
   const settings = useSettings()
 
-  const providers = ref<Partial<Record<ClipProvider, IClipProvider>>>({
-    [ClipProvider.KICK]: new KickProvider(),
-    [ClipProvider.TWITCH]: new TwitchProvider(),
-    [ClipProvider.YOUTUBE]: new YouTubeProvider()
-  })
+  const providers = ref(
+    ps.all({
+      [ClipProvider.TWITCH]: () => {
+        const user = useUser()
+        return user.ctx
+      }
+    })
+  )
 
   const hasCachedData = computed(() => {
     return Object.values(providers.value).some((p) => p.hasCachedData)

@@ -1,6 +1,6 @@
 import twitch, { type TwitchGame, type TwitchClip } from '@/services/twitch'
 import { ClipProvider, type Clip, type IClipProvider, type PlayerFormat } from '@/providers/common'
-import { useUser } from '@/stores/user'
+import type { ClipProviderCtxCallback } from '.'
 
 export class TwitchProvider implements IClipProvider {
   public name = ClipProvider.TWITCH
@@ -30,6 +30,14 @@ export class TwitchProvider implements IClipProvider {
   private clipsCache: Record<string, TwitchClip> = {}
   private gamesCache: Record<string, TwitchGame> = {}
 
+  private ctx: ClipProviderCtxCallback = () => ({ id: '' })
+
+  public constructor(cb?: ClipProviderCtxCallback) {
+    if (cb) {
+      this.ctx = cb
+    }
+  }
+
   public get hasCachedData(): boolean {
     return Object.keys(this.clipsCache).length > 0 || Object.keys(this.gamesCache).length > 0
   }
@@ -48,8 +56,7 @@ export class TwitchProvider implements IClipProvider {
     if (id in this.clipsCache) {
       clip = this.clipsCache[id]
     } else {
-      const user = useUser()
-      const clips = await twitch.getClips(user.ctx, [id])
+      const clips = await twitch.getClips(this.ctx(), [id])
       clip = clips[0]
     }
     if (!clip) {
@@ -59,8 +66,7 @@ export class TwitchProvider implements IClipProvider {
     if (clip.game_id in this.gamesCache) {
       game = this.gamesCache[clip.game_id]
     } else {
-      const user = useUser()
-      const games = await twitch.getGames(user.ctx, [clip.game_id])
+      const games = await twitch.getGames(this.ctx(), [clip.game_id])
       game = games[0]
     }
     this.clipsCache[id] = clip
