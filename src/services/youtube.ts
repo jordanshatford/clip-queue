@@ -47,7 +47,7 @@ export interface YouTubeClip {
   end: number
 }
 
-const YOUTUBE_HOSTNAME = 'youtube.com'
+const ALLOWED_YOUTUBE_CLIP_HOSTS = ['youtube.com']
 const YOUTUBE_CLIP_SUFFIX = '/clip/'
 
 const operationalApi = axios.create({ baseURL: 'https://yt.lemnoslife.com' })
@@ -95,7 +95,7 @@ export async function getClip(id: string): Promise<YouTubeClip | undefined> {
 export function isClipUrl(url: string): boolean {
   try {
     const uri = new URL(url)
-    if (uri.hostname.endsWith(YOUTUBE_HOSTNAME)) {
+    if (ALLOWED_YOUTUBE_CLIP_HOSTS.includes(uri.hostname)) {
       if (uri.pathname.includes(YOUTUBE_CLIP_SUFFIX)) {
         return true
       }

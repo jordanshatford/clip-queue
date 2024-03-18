@@ -41,7 +41,7 @@ export interface KickClip {
   channel: KickChannel
 }
 
-const KICK_HOSTNAME = 'kick.com'
+const ALLOWED_KICK_CLIP_HOSTS = ['kick.com']
 const KICK_CLIP_PARAM_NAME = 'clip'
 
 const api = axios.create({
@@ -59,7 +59,8 @@ export async function getClip(id: string): Promise<KickClip | undefined> {
 export function isClipUrl(url: string): boolean {
   try {
     const uri = new URL(url)
-    if (uri.hostname.endsWith(KICK_HOSTNAME)) {
+    console.log(uri)
+    if (ALLOWED_KICK_CLIP_HOSTS.includes(uri.hostname)) {
       try {
         const uri = new URL(url)
         return uri.searchParams.get(KICK_CLIP_PARAM_NAME) !== null
