@@ -47,7 +47,7 @@ export interface YouTubeClip {
   end: number
 }
 
-const ALLOWED_YOUTUBE_CLIP_HOSTS = ['youtube.com']
+const ALLOWED_YOUTUBE_CLIP_HOSTS = ['youtube.com', 'www.youtube.com']
 const YOUTUBE_CLIP_SUFFIX = '/clip/'
 
 const operationalApi = axios.create({ baseURL: 'https://yt.lemnoslife.com' })

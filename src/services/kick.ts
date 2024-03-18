@@ -41,7 +41,7 @@ export interface KickClip {
   channel: KickChannel
 }
 
-const ALLOWED_KICK_CLIP_HOSTS = ['kick.com']
+const ALLOWED_KICK_CLIP_HOSTS = ['kick.com', 'www.kick.com']
 const KICK_CLIP_PARAM_NAME = 'clip'
 
 const api = axios.create({
