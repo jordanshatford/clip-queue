@@ -4,13 +4,14 @@ services:
   web:
     build:
       context: .
-    image: clip-queue:latest
+    image: cq/web:latest
     restart: always
-    environment:
-      VITE_TWITCH_CLIENT_ID: ${VITE_TWITCH_CLIENT_ID}
-      VITE_TWITCH_REDIRECT_URI: ${VITE_TWITCH_REDIRECT_URI}
+    env_file:
+      - apps/web/.env
     ports:
       - 5173:5173
       - 24678:24678
     volumes:
-      - .:/app
+      - .:/workspace
+      - /workspace/node_modules
+      - /workspace/apps/web/node_modules
