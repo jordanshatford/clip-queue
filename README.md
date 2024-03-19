@@ -1,6 +1,6 @@
 <p align="center">
   <br />
-  <img width="150" height="150" src="./public/icon.png" alt="Logo">
+  <img width="150" height="150" src="./apps/web/public/icon.png" alt="Logo">
   <h1 align="center"><b>Clip Queue</b></h1>
   <div align="center">
     <a href="https://vuejs.org/">
@@ -31,17 +31,26 @@
 Clip Queue is a web application designed to allow users to easily integrate with their [Twitch](https://www.twitch.tv/) chat and queue clips sent from their viewers.
 
 # Features
-  - Automatically connect to logged in users Twitch chat to detect clips submitted in chat
-  - Duplicate clip prevention
-  - Popular clips rise up in the queue
-  - Support for multiple clip providers (Twitch, Kick, YouTube)
-  - Chat commands for moderators ([more info](./docs/COMMANDS.md))
-  - Automatic moderation and clip removal
-  - Settings customization to personalize the users experience
-  - Dark and light UI themes
+
+- Automatically connect to logged in users Twitch chat to detect clips submitted in chat
+- Duplicate clip prevention
+- Popular clips rise up in the queue
+- Support for multiple clip providers (Twitch, Kick, YouTube)
+- Chat commands for moderators ([more info](./docs/COMMANDS.md))
+- Automatic moderation and clip removal
+- Settings customization to personalize the users experience
+- Dark and light UI themes
 
 # Developer Guide
+
 Please refer to the [contributing guide](CONTRIBUTING.md) for how to install the project for development purposes.
 
+## Monorepo structure:
+
+### Apps:
+
+- `web`: A web application developed using [Vue](https://vuejs.org/).
+
 # Additional Documentation
-  - [Commands](./docs/COMMANDS.md)
+
+- [Commands](./docs/COMMANDS.md)
