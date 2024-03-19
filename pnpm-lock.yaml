@@ -23,9 +23,15 @@ importers:
       '@svitejs/changesets-changelog-github-compact':
         specifier: ^1.1.0
         version: 1.1.0
+      '@vitest/coverage-v8':
+        specifier: ^1.4.0
+        version: 1.4.0(vitest@1.4.0)
       husky:
         specifier: ^9.0.11
         version: 9.0.11
+      vitest:
+        specifier: ^1.4.0
+        version: 1.4.0(@types/node@20.11.28)(jsdom@24.0.0)
 
   apps/web:
     dependencies:
