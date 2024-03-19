@@ -35,7 +35,7 @@ corepack prepare
 # Install all dependencies
 pnpm install
 # Run the projects web app in development mode
-pnpm dev:web
+pnpm web dev
 ```
 
 #### Running formatting, linting, and checking
