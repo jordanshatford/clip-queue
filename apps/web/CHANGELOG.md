@@ -1,4 +1,4 @@
-# clip-queue
+# @cq/web
 
 ## 1.13.0
 
