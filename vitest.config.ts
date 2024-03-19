@@ -5,7 +5,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ["apps/**"],
-      exclude: ['apps/web/assets/**']
+      exclude: ['apps/web/src/assets/**']
     }
   }
 });
