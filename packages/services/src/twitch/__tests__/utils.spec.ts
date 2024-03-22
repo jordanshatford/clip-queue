@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import type { ChatUserstate } from 'tmi.js'
-import { isModerator, isClipUrl, getClipIdFromUrl, toURLParams } from '../utils'
+import { isModerator, getClipIdFromUrl, toURLParams } from '../utils'
 
 describe('utils.ts', () => {
   it.each([
@@ -10,15 +10,6 @@ describe('utils.ts', () => {
     [{ mod: false, badges: { broadcaster: '0' } } as ChatUserstate, false]
   ])('checks if a user is a moderator', (user: ChatUserstate, expected: boolean) => {
     expect(isModerator(user)).toEqual(expected)
-  })
-
-  it.each([
-    ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', false],
-    ['', false],
-    ['https://clips.twitch.tv/TangibleFreezingPheasantPartyTime-jBBRudZqr_7KehsW', true],
-    ['https://m.twitch.tv/clip/RockySteamyWalrusMoreCowbell-ZBrnUiZwQsENj3pi', true]
-  ])('checks if link is a clip url', (input: string, expected: boolean) => {
-    expect(isClipUrl(input)).toEqual(expected)
   })
 
   it.each([
@@ -34,7 +25,9 @@ describe('utils.ts', () => {
       'https://clips.twitch.tv/FantasticQuaintWrenchPogChamp-seNiJaPPjYls0ID8',
       'FantasticQuaintWrenchPogChamp-seNiJaPPjYls0ID8'
     ],
-    ['', undefined]
+    ['', undefined],
+    ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', undefined],
+    ['https://m.twitch.tv/c/RockySteamyWalrusMoreCowbell-ZBrnUiZwQsENj3pi', undefined]
   ])('gets an id from a clip url', (input: string, expected: string | undefined) => {
     expect(getClipIdFromUrl(input)).toEqual(expected)
   })

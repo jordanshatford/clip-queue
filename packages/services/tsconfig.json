@@ -1,0 +1,14 @@
+{
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "include": ["src/**/*"],
+  "exclude": ["src/**/__tests__/*"],
+  "compilerOptions": {
+    "lib": ["DOM"],
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "types": ["node"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}

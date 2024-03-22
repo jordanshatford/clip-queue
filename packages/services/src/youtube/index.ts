@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export interface YouTubeClipLookupResponseItem {
+interface YouTubeClipLookupResponseItem {
   kind: string
   etag: string
   id: string
@@ -13,13 +13,13 @@ export interface YouTubeClipLookupResponseItem {
   }
 }
 
-export interface YouTubeClipLookupResponse {
+interface YouTubeClipLookupResponse {
   kind: string
   etag: string
   items: YouTubeClipLookupResponseItem[]
 }
 
-export interface YouTubeOEmbedResponse {
+interface YouTubeOEmbedResponse {
   title: string
   author_name: string
   author_url: string
@@ -92,28 +92,15 @@ export async function getClip(id: string): Promise<YouTubeClip | undefined> {
   }
 }
 
-export function isClipUrl(url: string): boolean {
+export function getClipIdFromUrl(url: string): string | undefined {
   try {
     const uri = new URL(url)
     if (ALLOWED_YOUTUBE_CLIP_HOSTS.includes(uri.hostname)) {
       if (uri.pathname.includes(YOUTUBE_CLIP_SUFFIX)) {
-        return true
+        const idStart = uri.pathname.lastIndexOf('/')
+        return uri.pathname.slice(idStart).split('?')?.[0]?.slice(1)
       }
     }
-    return false
-  } catch {
-    return false
-  }
-}
-
-export function getClipIdFromUrl(url: string): string | undefined {
-  if (!isClipUrl(url)) {
-    return undefined
-  }
-  try {
-    const uri = new URL(url)
-    const idStart = uri.pathname.lastIndexOf('/')
-    return uri.pathname.slice(idStart).split('?')[0].slice(1)
   } catch {
     return undefined
   }
@@ -121,6 +108,5 @@ export function getClipIdFromUrl(url: string): string | undefined {
 
 export default {
   getClip,
-  isClipUrl,
   getClipIdFromUrl
 }

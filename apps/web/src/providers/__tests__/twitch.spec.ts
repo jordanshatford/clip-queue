@@ -1,13 +1,13 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { mockKickClip, mockTwitchClip, mockTwitchGame } from '@/__tests__/mocks'
-import type { TwitchUserCtx } from '@/services/twitch'
+import type { TwitchUserCtx } from '@cq/services/twitch'
 import { TwitchProvider } from '../twitch'
 
-vi.mock('@/services/twitch', async (importOriginal) => {
+vi.mock('@cq/services/twitch', async (importOriginal) => {
   return {
     default: {
-      ...(await importOriginal<typeof import('@/services/twitch')>()),
+      ...(await importOriginal<typeof import('@cq/services/twitch')>()),
       getClips: vi.fn((_: TwitchUserCtx, ids: string[]) => {
         return ids.map((id) => ({ ...mockTwitchClip, id }))
       }),

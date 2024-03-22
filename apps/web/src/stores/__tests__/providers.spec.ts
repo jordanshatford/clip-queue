@@ -8,22 +8,22 @@ import {
   mockTwitchGame
 } from '@/__tests__/mocks'
 import type { Clip, PlayerFormat } from '@/providers'
-import type { TwitchUserCtx } from '@/services/twitch'
+import type { TwitchUserCtx } from '@cq/services/twitch'
 import { useProviders } from '../providers'
 
-vi.mock('@/services/kick', async (importOriginal) => {
+vi.mock('@cq/services/kick', async (importOriginal) => {
   return {
     default: {
-      ...(await importOriginal<typeof import('@/services/kick')>()),
+      ...(await importOriginal<typeof import('@cq/services/kick')>()),
       getClip: vi.fn((id: string) => ({ ...mockKickClip, id }))
     }
   }
 })
 
-vi.mock('@/services/twitch', async (importOriginal) => {
+vi.mock('@cq/services/twitch', async (importOriginal) => {
   return {
     default: {
-      ...(await importOriginal<typeof import('@/services/twitch')>()),
+      ...(await importOriginal<typeof import('@cq/services/twitch')>()),
       getClips: vi.fn((_: TwitchUserCtx, ids: string[]) => {
         return ids.map((id) => ({ ...mockTwitchClip, id }))
       }),

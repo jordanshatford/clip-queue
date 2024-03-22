@@ -1,4 +1,4 @@
-import youtube, { type YouTubeClip } from '@/services/youtube'
+import youtube, { type YouTubeClip } from '@cq/services/youtube'
 import { ClipProvider, type Clip, type IClipProvider, type PlayerFormat } from '@/providers/common'
 
 export class YouTubeProvider implements IClipProvider {

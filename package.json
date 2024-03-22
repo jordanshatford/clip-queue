@@ -5,6 +5,7 @@
   "scripts": {
     "prepare": "husky",
     "web": "pnpm --filter @cq/web -- ",
+    "services": "pnpm --filter @cq/services -- ",
     "build": "pnpm --recursive build",
     "lint": "pnpm --recursive lint",
     "format": "pnpm --recursive format",

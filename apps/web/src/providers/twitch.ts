@@ -1,4 +1,4 @@
-import twitch, { type TwitchGame, type TwitchClip } from '@/services/twitch'
+import twitch, { type TwitchGame, type TwitchClip } from '@cq/services/twitch'
 import { ClipProvider, type Clip, type IClipProvider, type PlayerFormat } from '@/providers/common'
 import type { ClipProviderCtxCallback } from '.'
 

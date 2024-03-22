@@ -1,8 +1,12 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { ChatUserstate } from 'tmi.js'
 import { env, config } from '@/assets/config'
-import twitch, { TwitchChat, type AuthInfo, type TwitchUserCtx } from '@/services/twitch'
+import twitch, {
+  TwitchChat,
+  type AuthInfo,
+  type TwitchUserCtx,
+  type ChatUserstate
+} from '@cq/services/twitch'
 import { useSettings } from '@/stores/settings'
 import commands, { Command } from '@/utils/commands'
 import { getAllURLsFromText } from '@/utils'

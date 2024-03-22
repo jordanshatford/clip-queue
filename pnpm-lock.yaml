@@ -35,9 +35,9 @@ importers:
 
   apps/web:
     dependencies:
-      axios:
-        specifier: ^1.6.8
-        version: 1.6.8
+      '@cq/services':
+        specifier: workspace:*
+        version: link:../../packages/services
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
@@ -53,9 +53,6 @@ importers:
       primevue:
         specifier: ^3.50.0
         version: 3.50.0(vue@3.4.21)
-      tmi.js:
-        specifier: npm:@coldino/tmi.js-clientonly-fork@1.8.5-clientonly
-        version: /@coldino/tmi.js-clientonly-fork@1.8.5-clientonly
       video.js:
         specifier: ^8.10.0
         version: 8.10.0
@@ -84,9 +81,6 @@ importers:
       '@types/node':
         specifier: ^20.11.28
         version: 20.11.28
-      '@types/tmi.js':
-        specifier: ^1.8.6
-        version: 1.8.6
       '@vitejs/plugin-vue':
         specifier: ^5.0.4
         version: 5.0.4(vite@5.1.6)(vue@3.4.21)
@@ -135,6 +129,28 @@ importers:
       vue-tsc:
         specifier: ^2.0.6
         version: 2.0.6(typescript@5.4.2)
+
+  packages/services:
+    dependencies:
+      axios:
+        specifier: ^1.6.8
+        version: 1.6.8
+      tmi.js:
+        specifier: npm:@coldino/tmi.js-clientonly-fork@1.8.5-clientonly
+        version: /@coldino/tmi.js-clientonly-fork@1.8.5-clientonly
+    devDependencies:
+      '@tsconfig/node20':
+        specifier: ^20.1.2
+        version: 20.1.2
+      '@types/node':
+        specifier: ^20.11.28
+        version: 20.11.28
+      '@types/tmi.js':
+        specifier: ^1.8.6
+        version: 1.8.6
+      typescript:
+        specifier: ^5.4.2
+        version: 5.4.2
 
 packages:
 

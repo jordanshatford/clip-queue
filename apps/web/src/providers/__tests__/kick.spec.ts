@@ -2,10 +2,10 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { mockKickClip, mockTwitchClip } from '@/__tests__/mocks'
 import { KickProvider } from '../kick'
 
-vi.mock('@/services/kick', async (importOriginal) => {
+vi.mock('@cq/services/kick', async (importOriginal) => {
   return {
     default: {
-      ...(await importOriginal<typeof import('@/services/kick')>()),
+      ...(await importOriginal<typeof import('@cq/services/kick')>()),
       getClip: vi.fn((id: string) => ({ ...mockKickClip, id }))
     }
   }

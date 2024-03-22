@@ -1,4 +1,4 @@
-import kick, { type KickClip } from '@/services/kick'
+import kick, { type KickClip } from '@cq/services/kick'
 import { ClipProvider, type Clip, type IClipProvider, type PlayerFormat } from '@/providers/common'
 
 export class KickProvider implements IClipProvider {

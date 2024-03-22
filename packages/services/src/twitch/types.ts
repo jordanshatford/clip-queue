@@ -1,3 +1,5 @@
+export type { ChatUserstate } from 'tmi.js'
+
 export interface TwitchUserCtx {
   id: string
   token?: string

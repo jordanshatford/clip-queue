@@ -56,32 +56,12 @@ export async function getClip(id: string): Promise<KickClip | undefined> {
   return data.clip
 }
 
-export function isClipUrl(url: string): boolean {
-  try {
-    const uri = new URL(url)
-    console.log(uri)
-    if (ALLOWED_KICK_CLIP_HOSTS.includes(uri.hostname)) {
-      try {
-        const uri = new URL(url)
-        return uri.searchParams.get(KICK_CLIP_PARAM_NAME) !== null
-      } catch {
-        return false
-      }
-    }
-    return false
-  } catch {
-    return false
-  }
-}
-
 export function getClipIdFromUrl(url: string): string | undefined {
-  if (!isClipUrl(url)) {
-    return undefined
-  }
-
   try {
     const uri = new URL(url)
-    return uri.searchParams.get(KICK_CLIP_PARAM_NAME) ?? undefined
+    if (ALLOWED_KICK_CLIP_HOSTS.includes(uri.hostname)) {
+      return uri.searchParams.get(KICK_CLIP_PARAM_NAME) ?? undefined
+    }
   } catch {
     return undefined
   }
@@ -89,6 +69,5 @@ export function getClipIdFromUrl(url: string): string | undefined {
 
 export default {
   getClip,
-  isClipUrl,
   getClipIdFromUrl
 }

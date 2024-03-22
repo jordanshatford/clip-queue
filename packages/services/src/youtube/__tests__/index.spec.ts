@@ -1,7 +1,18 @@
 import { beforeEach, describe, it, expect, vi } from 'vitest'
 import axios from 'axios'
-import { mockYouTubeClip } from '@/__tests__/mocks'
-import { isClipUrl, getClipIdFromUrl, getClip } from '../youtube'
+import { getClipIdFromUrl, getClip, type YouTubeClip } from '..'
+
+const mockYouTubeClip: YouTubeClip = {
+  id: 'testclip',
+  url: 'https://www.youtube.com/clip/testclip',
+  video_id: 'testvideo',
+  video_url: 'https://www.youtube.com/watch?v=testvideo',
+  title: 'testtitle',
+  author_name: 'testauthor',
+  thumbnail_url: 'https://www.youtube.com/thumbnail',
+  start: 0,
+  end: 100
+}
 
 vi.mock('axios', async () => {
   const mockGet = vi.fn().mockImplementation((url: string) => {
@@ -72,18 +83,11 @@ describe('youtube.ts', () => {
   })
 
   it.each([
-    ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', false],
-    ['', false],
-    ['https://www.youtube.com/clip/1234', true],
-    ['https://www.youtube.com/clip/test', true]
-  ])('checks if link is a clip url', (input: string, expected: boolean) => {
-    expect(isClipUrl(input)).toEqual(expected)
-  })
-
-  it.each([
     ['https://www.youtube.com/clip/01HQ7ZWTEKKJP16Y34SDFF2SBC', '01HQ7ZWTEKKJP16Y34SDFF2SBC'],
     ['https://www.youtube.com/clip/test', 'test'],
-    ['', undefined]
+    ['', undefined],
+    ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', undefined],
+    ['https://www.youtube.com/c/test', undefined]
   ])('gets an id from a clip url', (input: string, expected: string | undefined) => {
     expect(getClipIdFromUrl(input)).toEqual(expected)
   })

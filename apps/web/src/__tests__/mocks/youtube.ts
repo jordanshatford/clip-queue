@@ -1,4 +1,4 @@
-import type { YouTubeClip } from '@/services/youtube'
+import type { YouTubeClip } from '@cq/services/youtube'
 
 export const mockYouTubeClip: YouTubeClip = {
   id: 'testclip',

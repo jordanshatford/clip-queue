@@ -10,7 +10,7 @@ export function isModerator(userstate: ChatUserstate): boolean {
   return isMod || isBroadcaster
 }
 
-export function isClipUrl(url: string): boolean {
+function isClipUrl(url: string): boolean {
   try {
     const uri = new URL(url)
     if (CLIP_HOSTNAMES.includes(uri.hostname)) {
@@ -48,6 +48,5 @@ export function toURLParams(key: string, values: string[]): URLSearchParams {
 
 export default {
   isModerator,
-  isClipUrl,
   getClipIdFromUrl
 }

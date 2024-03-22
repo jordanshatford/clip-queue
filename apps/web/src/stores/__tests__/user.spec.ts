@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import type { AuthInfo } from '@/services/twitch'
+import type { AuthInfo } from '@cq/services/twitch'
 import { useUser } from '../user'
 
 // Overwrite CLIENT_ID for testing
