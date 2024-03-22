@@ -51,6 +51,10 @@ Please refer to the [contributing guide](CONTRIBUTING.md) for how to install the
 
 - `web`: A web application developed using [Vue](https://vuejs.org/).
 
+### Packages
+
+- `services`: Various API clients used to interact with external services developed using [TypeScript](https://www.typescriptlang.org/)
+
 # Additional Documentation
 
 - [Commands](./docs/COMMANDS.md)
