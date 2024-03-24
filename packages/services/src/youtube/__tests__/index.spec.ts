@@ -1,18 +1,7 @@
 import { beforeEach, describe, it, expect, vi } from 'vitest'
 import axios from 'axios'
-import { getClipIdFromUrl, getClip, type YouTubeClip } from '..'
-
-const mockYouTubeClip: YouTubeClip = {
-  id: 'testclip',
-  url: 'https://www.youtube.com/clip/testclip',
-  video_id: 'testvideo',
-  video_url: 'https://www.youtube.com/watch?v=testvideo',
-  title: 'testtitle',
-  author_name: 'testauthor',
-  thumbnail_url: 'https://www.youtube.com/thumbnail',
-  start: 0,
-  end: 100
-}
+import { getClipIdFromUrl, getClip } from '..'
+import { mockYouTubeClip } from '../../__tests__/mocks'
 
 vi.mock('axios', async () => {
   const mockGet = vi.fn().mockImplementation((url: string) => {
