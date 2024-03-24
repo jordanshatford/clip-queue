@@ -48,7 +48,11 @@ function processAuthHash(hash: string): AuthInfo {
     .reduce(
       (authInfo, s) => {
         const parts = s.split('=')
-        authInfo[parts[0]] = decodeURIComponent(decodeURIComponent(parts[1]))
+        const part0 = parts[0]
+        const part1 = parts[1]
+        if (part0 !== undefined && part1 !== undefined) {
+          authInfo[part0] = decodeURIComponent(decodeURIComponent(part1))
+        }
         return authInfo
         /* eslint-disable @typescript-eslint/no-explicit-any*/
       },
@@ -60,16 +64,18 @@ function processAuthHash(hash: string): AuthInfo {
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types*/
 function parseJWT(token: string) {
   const base64Url = token.split('.')[1]
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-  const jsonPayload = decodeURIComponent(
-    atob(base64)
-      .split('')
-      .map(function (c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-      })
-      .join('')
-  )
-  return JSON.parse(jsonPayload)
+  if (base64Url !== undefined) {
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map(function (c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        })
+        .join('')
+    )
+    return JSON.parse(jsonPayload)
+  }
 }
 
 export default {

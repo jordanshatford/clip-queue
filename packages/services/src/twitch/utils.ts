@@ -34,7 +34,7 @@ export function getClipIdFromUrl(url: string): string | undefined {
   try {
     const uri = new URL(url)
     const idStart = uri.pathname.lastIndexOf('/')
-    return uri.pathname.slice(idStart).split('?')[0].slice(1)
+    return uri.pathname.slice(idStart).split('?')[0]?.slice(1)
   } catch {
     return undefined
   }
