@@ -6,7 +6,13 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ['apps/**', 'packages/**'],
-      exclude: ['apps/web/src/assets/**', '**/*.config.js', '**/*.eslintrc.cjs', '**/*.d.ts', 'packages/configs/**']
+      exclude: [
+        '**/*.config.js',
+        '**/*.eslintrc.cjs',
+        '**/*.d.ts',
+        'apps/web/src/assets/**',
+        'packages/config/**'
+      ]
     }
   }
 });
