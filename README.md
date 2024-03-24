@@ -53,7 +53,8 @@ Please refer to the [contributing guide](CONTRIBUTING.md) for how to install the
 
 ### Packages
 
-- `services`: Various API clients used to interact with external services developed using [TypeScript](https://www.typescriptlang.org/)
+- `config`: Common configs shared between other apps and packages in the monorepo.
+- `services`: Various API clients used to interact with external services developed using [TypeScript](https://www.typescriptlang.org/).
 
 # Additional Documentation
 

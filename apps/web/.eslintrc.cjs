@@ -1,16 +1,8 @@
 /* eslint-env node */
 require('@rushstack/eslint-patch/modern-module-resolution')
 
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
-  root: true,
-  'extends': [
-    'plugin:vue/vue3-recommended',
-    'eslint:recommended',
-    '@vue/eslint-config-typescript',
-    '@vue/eslint-config-prettier/skip-formatting'
-  ],
-  parserOptions: {
-    ecmaVersion: 'latest'
-  },
+  extends: [require.resolve('@cq/config/eslint/vue')],
   ignorePatterns: ['src/assets/presets/**/*.js']
 }

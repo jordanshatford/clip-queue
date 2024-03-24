@@ -1,0 +1,31 @@
+{
+  "name": "@cq/config",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    "./eslint/typescript": "./eslint/typescript.js",
+    "./eslint/vue": "./eslint/vue.js",
+    "./prettier/base": "./prettier/base.js",
+    "./prettier/vue": "./prettier/vue.js",
+    "./tailwind": "./tailwind/base.js",
+    "./tsconfig/node": "./tsconfig/node.json",
+    "./test.css": "./."
+  },
+  "prettier": "./prettier/base",
+  "scripts": {
+    "lint": "prettier --check . && eslint .",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.2",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.12",
+    "tailwindcss": "^3.4.1"
+  }
+}
