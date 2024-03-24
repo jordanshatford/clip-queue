@@ -1,5 +1,11 @@
 # @cq/services
 
+## 1.0.1
+
+### Patch Changes
+
+- fix: check before accessing array indexs ([`f626c0e0ecdbf77aefbdb6509047f6fd9c548d75`](https://github.com/jordanshatford/clip-queue/commit/f626c0e0ecdbf77aefbdb6509047f6fd9c548d75))
+
 ## 1.0.0
 
 ### Major Changes
