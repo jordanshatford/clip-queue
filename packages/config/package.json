@@ -8,8 +8,7 @@
     "./prettier/base": "./prettier/base.js",
     "./prettier/vue": "./prettier/vue.js",
     "./tailwind": "./tailwind/base.js",
-    "./tsconfig/node": "./tsconfig/node.json",
-    "./test.css": "./."
+    "./tsconfig/node": "./tsconfig/node.json"
   },
   "prettier": "./prettier/base",
   "scripts": {
