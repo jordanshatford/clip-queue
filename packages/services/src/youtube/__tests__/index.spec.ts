@@ -71,6 +71,10 @@ describe('youtube.ts', () => {
     expect(axios.create().get).toHaveBeenCalledTimes(2)
   })
 
+  it('returns undefined if no clip is passed', async () => {
+    expect(await getClip('')).toBeUndefined()
+  })
+
   it.each([
     ['https://www.youtube.com/clip/01HQ7ZWTEKKJP16Y34SDFF2SBC', '01HQ7ZWTEKKJP16Y34SDFF2SBC'],
     ['https://www.youtube.com/clip/test', 'test'],
