@@ -1,0 +1,22 @@
+{
+  "name": "@cq/providers",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "lint": "prettier --check . && eslint ."
+  },
+  "dependencies": {
+    "@cq/services": "workspace:*"
+  },
+  "devDependencies": {
+    "@cq/config": "workspace:*",
+    "@types/node": "^20.11.30",
+    "typescript": "^5.4.3"
+  }
+}

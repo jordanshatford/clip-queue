@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
+import { ClipProvider } from '@cq/providers'
 import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
-import { ClipProvider } from '@/providers'
 import { ClipList } from '../clip-list'
 
 describe('clip-list.ts', () => {

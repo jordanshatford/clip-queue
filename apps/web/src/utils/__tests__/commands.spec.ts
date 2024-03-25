@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
+import { ClipProvider } from '@cq/providers'
 import { useQueue } from '@/stores/queue'
 import { useProviders } from '@/stores/providers'
 import { useSettings } from '@/stores/settings'
-import { ClipProvider } from '@/providers'
 import commands, { Command } from '../commands'
 
 describe('commands.ts', () => {

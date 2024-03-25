@@ -39,8 +39,8 @@
 </template>
 
 <script setup lang="ts">
+import { type Clip, toUUID } from '@cq/providers'
 import ClipCard from '@/components/ClipCard.vue'
-import { type Clip, toUUID } from '@/providers'
 
 export interface Props {
   title?: string

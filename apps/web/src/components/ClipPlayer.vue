@@ -78,7 +78,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { formatDistanceToNow, parseISO } from 'date-fns'
-import type { Clip, PlayerFormat } from '@/providers'
+import type { Clip, PlayerFormat } from '@cq/providers'
 import { useProviders } from '@/stores/providers'
 import VideoJS from '@/components/VideoJSPlayer.vue'
 

@@ -6,7 +6,6 @@ export enum ClipProvider {
 
 export type PlayerFormat = 'iframe' | 'video' | 'unknown'
 
-// NOTE: provider and id together make a unique value.
 export interface Clip {
   provider: ClipProvider
   submitters: string[]
@@ -36,7 +35,13 @@ export interface IClipProvider {
   getPlayerSource: (clip: Clip) => string | undefined
 }
 
-// Return a UUID from a given clip.
-export function toUUID(clip: Clip): string {
-  return `${clip.provider.toString()}:${clip.id}`
+export interface ClipProviderCtx {
+  id: string
+  token?: string
 }
+
+export type ClipProviderCtxCallback = () => ClipProviderCtx
+
+export type ClipProviderMap = Partial<Record<ClipProvider, IClipProvider>>
+
+export type ClipProviderCtxCallbackMap = Partial<Record<ClipProvider, ClipProviderCtxCallback>>

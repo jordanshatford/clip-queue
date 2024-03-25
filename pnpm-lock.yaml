@@ -35,6 +35,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@cq/providers':
+        specifier: workspace:*
+        version: link:../../packages/providers
       '@cq/services':
         specifier: workspace:*
         version: link:../../packages/services
@@ -141,6 +144,22 @@ importers:
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.1
+
+  packages/providers:
+    dependencies:
+      '@cq/services':
+        specifier: workspace:*
+        version: link:../services
+    devDependencies:
+      '@cq/config':
+        specifier: workspace:*
+        version: link:../config
+      '@types/node':
+        specifier: ^20.11.30
+        version: 20.11.30
+      typescript:
+        specifier: ^5.4.3
+        version: 5.4.3
 
   packages/services:
     dependencies:

@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { providers as ps, ClipProvider, type Clip, type PlayerFormat } from '@/providers'
+import { providers as ps, ClipProvider, type Clip, type PlayerFormat } from '@cq/providers'
 import { useSettings } from '@/stores/settings'
 import { useUser } from '@/stores/user'
 

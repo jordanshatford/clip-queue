@@ -1,4 +1,4 @@
-import { type Clip, type ClipProvider, toUUID } from '@/providers'
+import { type Clip, type ClipProvider, toUUID } from '@cq/providers'
 
 export class ClipList {
   private _clips: Clip[]

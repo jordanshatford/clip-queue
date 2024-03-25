@@ -1,5 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
+import type { Clip, PlayerFormat } from '@cq/providers'
+import type { TwitchUserCtx } from '@cq/services/twitch'
 import {
   clipFromKick,
   clipFromTwitch,
@@ -7,8 +9,6 @@ import {
   mockTwitchClip,
   mockTwitchGame
 } from '@/__tests__/mocks'
-import type { Clip, PlayerFormat } from '@/providers'
-import type { TwitchUserCtx } from '@cq/services/twitch'
 import { useProviders } from '../providers'
 
 vi.mock('@cq/services/kick', async (importOriginal) => {

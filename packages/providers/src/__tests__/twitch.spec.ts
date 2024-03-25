@@ -1,6 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { createPinia, setActivePinia } from 'pinia'
-import { mockKickClip, mockTwitchClip, mockTwitchGame } from '@/__tests__/mocks'
+import { mockKickClip, mockTwitchClip, mockTwitchGame } from './mocks'
 import type { TwitchUserCtx } from '@cq/services/twitch'
 import { TwitchProvider } from '../twitch'
 
@@ -21,7 +20,7 @@ vi.mock('@cq/services/twitch', async (importOriginal) => {
         try {
           const uri = new URL(url)
           const idStart = uri.pathname.lastIndexOf('/')
-          return uri.pathname.slice(idStart).split('?')[0].slice(1)
+          return uri.pathname.slice(idStart).split('?')[0]?.slice(1)
         } catch {
           return undefined
         }
@@ -33,7 +32,6 @@ vi.mock('@cq/services/twitch', async (importOriginal) => {
 describe('twitch.ts', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    setActivePinia(createPinia())
   })
 
   it('knows if it is an experimental provider', () => {

@@ -83,9 +83,9 @@
 
 <script setup lang="ts">
 import { computed, ref, toRaw } from 'vue'
+import { ClipProvider } from '@cq/providers'
 import { useToast } from '@cq/ui'
 import { useSettings } from '@/stores/settings'
-import { ClipProvider } from '@/providers'
 import { useProviders } from '@/stores/providers'
 import ProviderName from '@/components/ProviderName.vue'
 

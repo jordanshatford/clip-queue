@@ -84,9 +84,9 @@
 </template>
 
 <script setup lang="ts">
+import type { Clip } from '@cq/providers'
 import { useConfirm } from '@cq/ui'
 import { useQueue } from '@/stores/queue'
-import type { Clip } from '@/providers'
 import ProviderName from '@/components/ProviderName.vue'
 
 const confirm = useConfirm()

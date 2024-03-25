@@ -1,7 +1,7 @@
+import { ClipProvider } from '@cq/providers'
 import { useQueue } from '@/stores/queue'
 import { useProviders } from '@/stores/providers'
 import { useSettings } from '@/stores/settings'
-import { ClipProvider } from '@/providers'
 
 export enum Command {
   OPEN = 'open',

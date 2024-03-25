@@ -12,6 +12,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@cq/providers": "workspace:*",
     "@cq/services": "workspace:*",
     "@cq/ui": "workspace:*",
     "date-fns": "^3.6.0",

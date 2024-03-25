@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Clip } from '@/providers'
+import type { Clip } from '@cq/providers'
 import ProviderName from '@/components/ProviderName.vue'
 
 export interface Props {

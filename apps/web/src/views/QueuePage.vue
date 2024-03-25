@@ -24,9 +24,9 @@
 </template>
 
 <script setup lang="ts">
+import { toUUID } from '@cq/providers'
 import ClipPlayer from '@/components/ClipPlayer.vue'
 import ClipQueue from '@/components/ClipQueue.vue'
-import { toUUID } from '@/providers'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
 

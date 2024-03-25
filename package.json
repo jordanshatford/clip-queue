@@ -6,6 +6,7 @@
     "prepare": "husky",
     "web": "pnpm --filter @cq/web -- ",
     "cfg": "pnpm --filter @cq/config -- ",
+    "providers": "pnpm --filter @cq/providers -- ",
     "services": "pnpm --filter @cq/services -- ",
     "ui": "pnpm --filter @cq/ui -- ",
     "build": "pnpm --recursive build",

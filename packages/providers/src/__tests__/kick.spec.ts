@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { mockKickClip, mockTwitchClip } from '@/__tests__/mocks'
+import { mockKickClip, mockTwitchClip } from './mocks'
 import { KickProvider } from '../kick'
 
 vi.mock('@cq/services/kick', async (importOriginal) => {

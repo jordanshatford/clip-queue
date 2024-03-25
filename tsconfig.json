@@ -6,6 +6,9 @@
 			"path": "apps/web"
 		},
     {
+      "path": "packages/providers"
+    },
+    {
       "path": "packages/services"
     },
     {

@@ -1,6 +1,11 @@
 import twitch, { type TwitchGame, type TwitchClip } from '@cq/services/twitch'
-import { ClipProvider, type Clip, type IClipProvider, type PlayerFormat } from '@/providers/common'
-import type { ClipProviderCtxCallback } from '.'
+import {
+  ClipProvider,
+  type Clip,
+  type IClipProvider,
+  type PlayerFormat,
+  type ClipProviderCtxCallback
+} from './types'
 
 export class TwitchProvider implements IClipProvider {
   public name = ClipProvider.TWITCH
@@ -70,12 +75,14 @@ export class TwitchProvider implements IClipProvider {
       game = games[0]
     }
     this.clipsCache[id] = clip
-    this.gamesCache[clip.game_id] = game
+    if (game) {
+      this.gamesCache[clip.game_id] = game
+    }
     const response: Clip = {
       id: clip.id,
       title: clip.title,
       channel: clip.broadcaster_name,
-      category: game.name,
+      category: game?.name,
       createdAt: clip.created_at,
       url,
       embedUrl: clip.embed_url,
