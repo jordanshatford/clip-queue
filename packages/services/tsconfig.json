@@ -1,7 +1,6 @@
 {
   "extends": "@cq/config/tsconfig/node",
   "include": ["src/**/*"],
-  "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "lib": ["DOM"],
     "outDir": "./dist",

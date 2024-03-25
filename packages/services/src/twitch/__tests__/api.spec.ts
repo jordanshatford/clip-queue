@@ -38,17 +38,17 @@ describe('twitch-api.ts', () => {
   it('gets a twitch clips from twitch api', async () => {
     const clips = await TwitchAPI.getClips({ id: '', token: '', username: '' }, ['testclip'])
     const clipInfo = clips[0]
-    expect(clipInfo.id).toEqual('testclip')
-    expect(clipInfo.title).toEqual('testtitle')
-    expect(clipInfo.broadcaster_name).toEqual('testbroadcaster')
+    expect(clipInfo?.id).toEqual('testclip')
+    expect(clipInfo?.title).toEqual('testtitle')
+    expect(clipInfo?.broadcaster_name).toEqual('testbroadcaster')
     expect(axios.create().get).toHaveBeenCalledTimes(1)
   })
 
   it('gets a twitch games from twitch api', async () => {
     const games = await TwitchAPI.getGames({ id: '', token: '', username: '' }, ['testgame'])
     const gameInfo = games[0]
-    expect(gameInfo.id).toEqual('testgame')
-    expect(gameInfo.name).toEqual('testgame')
+    expect(gameInfo?.id).toEqual('testgame')
+    expect(gameInfo?.name).toEqual('testgame')
     expect(axios.create().get).toHaveBeenCalledTimes(1)
   })
 
