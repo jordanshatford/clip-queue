@@ -4,14 +4,12 @@ services:
   web:
     build:
       context: .
+      target: production
+      args:
+        DOCKER_BUILDKIT: 1
     image: cq/web:latest
     restart: always
     env_file:
       - apps/web/.env
     ports:
       - 5173:5173
-      - 24678:24678
-    volumes:
-      - .:/workspace
-      - /workspace/node_modules
-      - /workspace/apps/web/node_modules

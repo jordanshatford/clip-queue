@@ -19,7 +19,7 @@ Setting up the project using docker is simple. Simply run the following command 
 
 ```sh
 # NOTE: ensure to specify the dev docker compose file for features like hot reload when code changes
-docker compose up --build
+docker compose -f docker-compose.dev.yml up --build
 ```
 > NOTE: using this method will only allow running the project. You must setup the project without docker to be able to format, lint, and check the project.
 
