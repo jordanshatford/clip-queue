@@ -10,8 +10,8 @@ export default defineConfig({
         '**/*.config.js',
         '**/*.eslintrc.cjs',
         '**/*.d.ts',
-        'apps/web/src/assets/**',
-        'packages/config/**'
+        'packages/config/**',
+        'packages/ui/src/primevue/presets/**'
       ]
     }
   }

@@ -68,7 +68,7 @@
 
 <script setup lang="ts">
 import { ref, toRaw } from 'vue'
-import { useToast } from 'primevue/usetoast'
+import { useToast } from '@cq/ui'
 import { useSettings } from '@/stores/settings'
 import { useUser } from '@/stores/user'
 import commands, { Command } from '@/utils/commands'

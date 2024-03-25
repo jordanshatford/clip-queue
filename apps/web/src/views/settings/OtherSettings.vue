@@ -55,8 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { useToast } from 'primevue/usetoast'
-import { useConfirm } from 'primevue/useconfirm'
+import { useConfirm, useToast } from '@cq/ui'
 import { useSettings } from '@/stores/settings'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'

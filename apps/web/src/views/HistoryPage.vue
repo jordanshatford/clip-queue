@@ -84,7 +84,7 @@
 </template>
 
 <script setup lang="ts">
-import { useConfirm } from 'primevue/useconfirm'
+import { useConfirm } from '@cq/ui'
 import { useQueue } from '@/stores/queue'
 import type { Clip } from '@/providers'
 import ProviderName from '@/components/ProviderName.vue'

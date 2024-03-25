@@ -49,12 +49,13 @@ Please refer to the [contributing guide](CONTRIBUTING.md) for how to install the
 
 ### Apps:
 
-- `web`: A web application developed using [Vue](https://vuejs.org/).
+- `web`: A web application developed using [Vue.js](https://vuejs.org/).
 
 ### Packages
 
 - `config`: Common configs shared between other apps and packages in the monorepo.
 - `services`: Various API clients used to interact with external services developed using [TypeScript](https://www.typescriptlang.org/).
+- `ui`: A UI library developed using [Vue.js](https://vuejs.org/), [TailwindCSS](https://tailwindcss.com/), and [PrimeVue](https://primevue.org/).
 
 # Additional Documentation
 

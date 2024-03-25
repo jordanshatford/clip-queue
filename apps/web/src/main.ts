@@ -1,31 +1,31 @@
-import '@/assets/tailwind.css'
-import '@/assets/base.css'
-import 'primeicons/primeicons.css'
-import PrimeVue from 'primevue/config'
-import Button from 'primevue/button'
-import Card from 'primevue/card'
-import Column from 'primevue/column'
-import ConfirmationService from 'primevue/confirmationservice'
-import ConfirmDialog from 'primevue/confirmdialog'
-import DataTable from 'primevue/datatable'
-import InputNumber from 'primevue/inputnumber'
-import InputSwitch from 'primevue/inputswitch'
-import InputText from 'primevue/inputtext'
-import Message from 'primevue/message'
-import MultiSelect from 'primevue/multiselect'
-import TabMenu from 'primevue/tabmenu'
-import Toast from 'primevue/toast'
-import ToastService from 'primevue/toastservice'
+import '@cq/ui/primeicons'
+import {
+  PrimeVue,
+  Button,
+  Card,
+  Column,
+  ConfirmationService,
+  ConfirmDialog,
+  DataTable,
+  InputNumber,
+  InputSwitch,
+  InputText,
+  Message,
+  MultiSelect,
+  TabMenu,
+  Toast,
+  ToastService
+} from '@cq/ui'
+// @ts-ignore
+import LaraPreset from '@cq/ui/presets/lara'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
 import App from '@/App.vue'
 import router from '@/router'
-// @ts-ignore
-import Lara from '@/assets/presets/lara'
 
 const app = createApp(App)
-app.use(PrimeVue, { unstyled: true, pt: Lara })
+app.use(PrimeVue, { unstyled: true, pt: LaraPreset })
 app.use(ConfirmationService)
 app.use(ToastService)
 app.component('BButton', Button)

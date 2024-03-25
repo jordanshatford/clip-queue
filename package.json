@@ -7,6 +7,7 @@
     "web": "pnpm --filter @cq/web -- ",
     "cfg": "pnpm --filter @cq/config -- ",
     "services": "pnpm --filter @cq/services -- ",
+    "ui": "pnpm --filter @cq/ui -- ",
     "build": "pnpm --recursive build",
     "lint": "pnpm --recursive lint",
     "format": "pnpm --recursive format",

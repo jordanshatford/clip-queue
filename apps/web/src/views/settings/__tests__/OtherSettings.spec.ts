@@ -1,8 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import { createTestingPinia } from '@pinia/testing'
-import ToastService from 'primevue/toastservice'
-import ConfirmationService from 'primevue/confirmationservice'
+import { ConfirmationService, ToastService } from '@cq/ui'
 import OtherSettings from '../OtherSettings.vue'
 
 describe('OtherSettings.vue', () => {

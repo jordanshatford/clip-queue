@@ -1,15 +1,17 @@
-import Button from 'primevue/button'
-import Card from 'primevue/card'
-import Column from 'primevue/column'
-import ConfirmDialog from 'primevue/confirmdialog'
-import DataTable from 'primevue/datatable'
-import InputNumber from 'primevue/inputnumber'
-import InputSwitch from 'primevue/inputswitch'
-import InputText from 'primevue/inputtext'
-import Message from 'primevue/message'
-import MultiSelect from 'primevue/multiselect'
-import TabMenu from 'primevue/tabmenu'
-import Toast from 'primevue/toast'
+import {
+  Button,
+  Card,
+  Column,
+  ConfirmDialog,
+  DataTable,
+  InputNumber,
+  InputSwitch,
+  InputText,
+  Message,
+  MultiSelect,
+  TabMenu,
+  Toast
+} from '@cq/ui'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
