@@ -1,5 +1,5 @@
 ---
-"@cq/providers": minor
+"@cq/providers": major
 "@cq/web": minor
 ---
 
