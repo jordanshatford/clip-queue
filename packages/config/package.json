@@ -12,8 +12,9 @@
   },
   "prettier": "./prettier/base",
   "scripts": {
+    "format": "prettier --write .",
     "lint": "prettier --check . && eslint .",
-    "format": "prettier --write ."
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.3",

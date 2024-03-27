@@ -11,6 +11,7 @@
     "ui": "pnpm --filter @cq/ui -- ",
     "build": "pnpm --recursive build",
     "lint": "pnpm --recursive lint",
+    "lint:fix": "pnpm --recursive lint:fix",
     "format": "pnpm --recursive format",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",

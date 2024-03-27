@@ -9,7 +9,8 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
-    "lint": "prettier --check . && eslint ."
+    "lint": "prettier --check . && eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@cq/services": "workspace:*"
