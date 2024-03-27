@@ -1,5 +1,18 @@
 # @cq/web
 
+## 1.15.0
+
+### Minor Changes
+
+- remove: all global components and import instead ([`f03f0044fcc48ed8e2178b5ff3abcced112c9ae3`](https://github.com/jordanshatford/clip-queue/commit/f03f0044fcc48ed8e2178b5ff3abcced112c9ae3))
+
+- feat: add player package to store the clip player component ([`a4482e5efc4ef57b291a33157819630d148d2f8e`](https://github.com/jordanshatford/clip-queue/commit/a4482e5efc4ef57b291a33157819630d148d2f8e))
+
+### Patch Changes
+
+- Updated dependencies [[`a4482e5efc4ef57b291a33157819630d148d2f8e`](https://github.com/jordanshatford/clip-queue/commit/a4482e5efc4ef57b291a33157819630d148d2f8e)]:
+  - @cq/player@1.0.0
+
 ## 1.14.0
 
 ### Minor Changes
