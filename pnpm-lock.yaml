@@ -35,6 +35,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@cq/player':
+        specifier: workspace:*
+        version: link:../../packages/player
       '@cq/providers':
         specifier: workspace:*
         version: link:../../packages/providers
@@ -53,9 +56,6 @@ importers:
       pinia-plugin-persistedstate:
         specifier: ^3.2.1
         version: 3.2.1(pinia@2.1.7)
-      video.js:
-        specifier: ^8.10.0
-        version: 8.10.0
       vue:
         specifier: ^3.4.21
         version: 3.4.21(typescript@5.4.3)
@@ -144,6 +144,55 @@ importers:
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.1
+
+  packages/player:
+    dependencies:
+      video.js:
+        specifier: ^8.10.0
+        version: 8.10.0
+      vue:
+        specifier: ^3.4.21
+        version: 3.4.21(typescript@5.4.3)
+    devDependencies:
+      '@cq/config':
+        specifier: workspace:*
+        version: link:../config
+      '@types/jsdom':
+        specifier: ^21.1.6
+        version: 21.1.6
+      '@types/node':
+        specifier: ^20.11.30
+        version: 20.11.30
+      '@vitejs/plugin-vue':
+        specifier: ^5.0.4
+        version: 5.0.4(vite@5.2.6)(vue@3.4.21)
+      '@vue/test-utils':
+        specifier: ^2.4.5
+        version: 2.4.5
+      '@vue/tsconfig':
+        specifier: ^0.5.1
+        version: 0.5.1
+      autoprefixer:
+        specifier: ^10.4.19
+        version: 10.4.19(postcss@8.4.38)
+      jsdom:
+        specifier: ^24.0.0
+        version: 24.0.0
+      postcss:
+        specifier: ^8.4.38
+        version: 8.4.38
+      tailwindcss:
+        specifier: ^3.4.1
+        version: 3.4.1
+      typescript:
+        specifier: ^5.4.3
+        version: 5.4.3
+      vite:
+        specifier: ^5.2.6
+        version: 5.2.6(@types/node@20.11.30)
+      vue-tsc:
+        specifier: ^2.0.7
+        version: 2.0.7(typescript@5.4.3)
 
   packages/providers:
     dependencies:

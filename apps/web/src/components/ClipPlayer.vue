@@ -1,25 +1,11 @@
 <template>
   <div class="player player-container">
-    <div class="player player-container h-auto w-full bg-black">
-      <iframe
-        v-if="playerFormat === 'iframe'"
-        :src="playerSource"
-        :title="clip.title"
-        class="player h-auto w-full bg-black"
-        allowfullscreen
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-        frameborder="0"
-      ></iframe>
-      <VideoJS
-        v-else-if="playerFormat === 'video'"
-        :source="playerSource"
-        :poster="clip.thumbnailUrl"
-        autoplay
-      />
-      <div v-else class="cq-text flex h-full items-center justify-center">
-        <p>Unsupported clip. You may need to enable the provider of this clip.</p>
-      </div>
-    </div>
+    <Player
+      :title="clip.title"
+      :format="playerFormat"
+      :source="playerSource"
+      :thumbnail-url="clip.thumbnailUrl"
+    />
     <div class="text-left">
       <h2 class="cq-text mb-1 mt-2 text-2xl font-bold">
         {{ clip.title }}
@@ -78,9 +64,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { formatDistanceToNow, parseISO } from 'date-fns'
+import Player from '@cq/player'
 import type { Clip, PlayerFormat } from '@cq/providers'
 import { useProviders } from '@/stores/providers'
-import VideoJS from '@/components/VideoJSPlayer.vue'
 
 export interface Props {
   clip: Clip

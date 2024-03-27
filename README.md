@@ -54,6 +54,7 @@ Please refer to the [contributing guide](CONTRIBUTING.md) for how to install the
 ### Packages
 
 - `config`: Common configs shared between other apps and packages in the monorepo.
+- `player`: A clip player used for displaying clips developed using [Video JS](https://videojs.com/) and [Vue.js](https://vuejs.org/).
 - `providers`: Various clip providers used to get clips developed using [TypeScript](https://www.typescriptlang.org/).
 - `services`: Various API clients used to interact with external services developed using [TypeScript](https://www.typescriptlang.org/).
 - `ui`: A UI library developed using [Vue.js](https://vuejs.org/), [TailwindCSS](https://tailwindcss.com/), and [PrimeVue](https://primevue.org/).

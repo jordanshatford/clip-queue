@@ -5,6 +5,7 @@ import VideoJSPlayer from '../VideoJSPlayer.vue'
 describe('VideoJSPlayer.vue', () => {
   const wrapper = shallowMount(VideoJSPlayer, {
     props: {
+      title: '',
       poster: '',
       source: ''
     }

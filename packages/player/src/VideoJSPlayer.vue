@@ -1,5 +1,9 @@
 <template>
-  <video ref="videoElement" class="video-js vjs-default-skin vjs-big-play-centered"></video>
+  <video
+    ref="videoElement"
+    :title="title"
+    class="video-js vjs-default-skin vjs-big-play-centered"
+  ></video>
 </template>
 
 <script setup lang="ts">
@@ -11,10 +15,12 @@ export interface Props {
   poster: string | undefined
   source: string | undefined
   autoplay?: boolean
+  title?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  autoplay: true
+  autoplay: true,
+  title: undefined
 })
 
 const videoElement = ref<HTMLVideoElement | null>(null)

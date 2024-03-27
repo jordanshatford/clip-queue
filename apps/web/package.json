@@ -12,13 +12,13 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@cq/player": "workspace:*",
     "@cq/providers": "workspace:*",
     "@cq/services": "workspace:*",
     "@cq/ui": "workspace:*",
     "date-fns": "^3.6.0",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
-    "video.js": "^8.10.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
