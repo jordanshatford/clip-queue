@@ -1,7 +1,7 @@
 <template>
-  <CCard class="mx-auto mb-2 max-w-lg text-left">
+  <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
-      <BButton
+      <Button
         class="w-full"
         size="small"
         severity="danger"
@@ -9,13 +9,13 @@
         @click="resetSettingsToDefault()"
       >
         Reset Settings
-      </BButton>
+      </Button>
       <label class="cq-text-subtle">Reset settings back to their initial values.</label>
     </template>
-  </CCard>
-  <CCard class="mx-auto mb-2 max-w-lg text-left">
+  </Card>
+  <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
-      <BButton
+      <Button
         class="w-full"
         size="small"
         severity="danger"
@@ -23,15 +23,15 @@
         @click="purgeHistory()"
       >
         Purge History
-      </BButton>
+      </Button>
       <label class="cq-text-subtle"
         >Purge all clips previously viewed allowing them to be resubmitted.</label
       >
     </template>
-  </CCard>
-  <CCard class="mx-auto mb-2 max-w-lg text-left">
+  </Card>
+  <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
-      <BButton
+      <Button
         class="w-full"
         size="small"
         severity="danger"
@@ -39,23 +39,23 @@
         @click="purgeCache()"
       >
         Purge Cache
-      </BButton>
+      </Button>
       <label class="cq-text-subtle">
         Clips submitted may be cached for future use. Purge all cached clips.
       </label>
     </template>
-  </CCard>
-  <CCard class="mx-auto max-w-lg">
+  </Card>
+  <Card class="mx-auto max-w-lg">
     <template #content>
       <p class="cq-text-subtle">
         Application version: <span>v{{ version }}</span>
       </p>
     </template>
-  </CCard>
+  </Card>
 </template>
 
 <script setup lang="ts">
-import { useConfirm, useToast } from '@cq/ui'
+import { Button, Card, useConfirm, useToast } from '@cq/ui'
 import { useSettings } from '@/stores/settings'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'

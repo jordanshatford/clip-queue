@@ -8,8 +8,8 @@
     @previous="queue.previous()"
     @next="queue.next()"
   />
-  <MessageAlert v-else-if="settings.queue.providers.length === 0" severity="error"
-    >No clip providers enabled. Please enable one in the settings.</MessageAlert
+  <Message v-else-if="settings.queue.providers.length === 0" severity="error"
+    >No clip providers enabled. Please enable one in the settings.</Message
   >
   <ClipQueue
     title="Upcoming Clips"
@@ -25,6 +25,7 @@
 
 <script setup lang="ts">
 import { toUUID } from '@cq/providers'
+import { Message } from '@cq/ui'
 import ClipPlayer from '@/components/ClipPlayer.vue'
 import ClipQueue from '@/components/ClipQueue.vue'
 import { useQueue } from '@/stores/queue'

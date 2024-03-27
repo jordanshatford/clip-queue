@@ -9,7 +9,7 @@
     class="my-4"
   >
     <template #empty>No clips previously watched.</template>
-    <DataTableColumn field="title" header="Info" sortable :sort-field="(data: Clip) => data.title">
+    <Column field="title" header="Info" sortable :sort-field="(data: Clip) => data.title">
       <template #body="{ data }: { data: Clip }">
         <div class="flex items-center">
           <img
@@ -41,51 +41,51 @@
           </div>
         </div>
       </template>
-    </DataTableColumn>
-    <DataTableColumn field="provider" sortable header="Provider">
+    </Column>
+    <Column field="provider" sortable header="Provider">
       <template #body="{ data }: { data: Clip }">
         <ProviderName :provider="data.provider" />
       </template>
-    </DataTableColumn>
-    <DataTableColumn
+    </Column>
+    <Column
       :field="(data: Clip) => data.submitters?.[0]"
       sortable
       :sort-field="(data: Clip) => data.submitters?.[0]"
       header="Submitter"
     >
-    </DataTableColumn>
-    <DataTableColumn field="actions">
+    </Column>
+    <Column field="actions">
       <template #header>
-        <BButton
+        <Button
           :disabled="queue.history.empty()"
           severity="danger"
           size="small"
           @click="purgeHistory()"
-          ><i class="pi pi-trash mr-2"></i>Delete All</BButton
+          ><i class="pi pi-trash mr-2"></i>Delete All</Button
         >
       </template>
       <template #body="{ data }: { data: Clip }">
         <div class="inline-flex space-x-2">
-          <BButton
+          <Button
             severity="info"
             size="small"
             :disabled="queue.upcoming.includes(data)"
             @click="queue.add(data, true)"
           >
             <i class="pi pi-plus p-1"></i>
-          </BButton>
-          <BButton severity="danger" size="small" @click="queue.removeFromHistory(data)">
+          </Button>
+          <Button severity="danger" size="small" @click="queue.removeFromHistory(data)">
             <i class="pi pi-trash p-1"></i>
-          </BButton>
+          </Button>
         </div>
       </template>
-    </DataTableColumn>
+    </Column>
   </DataTable>
 </template>
 
 <script setup lang="ts">
 import type { Clip } from '@cq/providers'
-import { useConfirm } from '@cq/ui'
+import { Button, Column, DataTable, useConfirm } from '@cq/ui'
 import { useQueue } from '@/stores/queue'
 import ProviderName from '@/components/ProviderName.vue'
 

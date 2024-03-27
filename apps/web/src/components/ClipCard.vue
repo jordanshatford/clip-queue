@@ -1,5 +1,5 @@
 <template>
-  <CCard class="max-w-[16rem] flex-shrink-0 overflow-hidden text-left">
+  <Card class="max-w-[16rem] flex-shrink-0 overflow-hidden text-left">
     <template #header>
       <div class="relative">
         <img
@@ -10,12 +10,12 @@
         />
         <div class="absolute -bottom-6 -right-2 m-2 p-2">
           <div class="flex gap-2">
-            <BButton title="Play now" severity="info" size="small" @click="emit('play')">
+            <Button title="Play now" severity="info" size="small" @click="emit('play')">
               <i class="pi pi-play p-1"></i>
-            </BButton>
-            <BButton title="Remove" severity="danger" size="small" @click="emit('remove')">
+            </Button>
+            <Button title="Remove" severity="danger" size="small" @click="emit('remove')">
               <i class="pi pi-trash p-1"></i>
-            </BButton>
+            </Button>
           </div>
         </div>
       </div>
@@ -37,11 +37,12 @@
       </div>
       <ProviderName :provider="clip.provider" class="cq-text" />
     </template>
-  </CCard>
+  </Card>
 </template>
 
 <script setup lang="ts">
 import type { Clip } from '@cq/providers'
+import { Button, Card } from '@cq/ui'
 import ProviderName from '@/components/ProviderName.vue'
 
 export interface Props {

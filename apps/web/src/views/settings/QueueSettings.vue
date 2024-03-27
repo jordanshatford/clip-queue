@@ -1,5 +1,5 @@
 <template>
-  <CCard class="mx-auto max-w-lg">
+  <Card class="mx-auto max-w-lg">
     <template #content>
       <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
         <div class="flex flex-col gap-2 text-left">
@@ -51,40 +51,40 @@
           <small id="allowedProviders-help" class="cq-text-subtle pb-2"
             >Clips from these providers will be allowed in the queue.</small
           >
-          <MessageAlert
+          <Message
             v-if="selectedExperimentalProviders.length > 0"
             severity="warn"
             :closable="false"
             class="mt-0"
             >Experimental providers selected: {{ selectedExperimentalProviders.join(', ') }}
-          </MessageAlert>
+          </Message>
         </div>
         <div class="mt-3">
-          <BButton
+          <Button
             class="mr-2"
             type="submit"
             severity="info"
             size="small"
             :disabled="!settings.isQueueSettingsModified(formSettings)"
-            >Save</BButton
+            >Save</Button
           >
-          <BButton
+          <Button
             type="reset"
             severity="danger"
             size="small"
             :disabled="!settings.isQueueSettingsModified(formSettings)"
-            >Cancel</BButton
+            >Cancel</Button
           >
         </div>
       </form>
     </template>
-  </CCard>
+  </Card>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, toRaw } from 'vue'
 import { ClipProvider } from '@cq/providers'
-import { useToast } from '@cq/ui'
+import { Button, Card, InputNumber, InputSwitch, Message, MultiSelect, useToast } from '@cq/ui'
 import { useSettings } from '@/stores/settings'
 import { useProviders } from '@/stores/providers'
 import ProviderName from '@/components/ProviderName.vue'

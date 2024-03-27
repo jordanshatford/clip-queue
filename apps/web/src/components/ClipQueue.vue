@@ -2,22 +2,22 @@
   <div class="mx-0 mt-4">
     <div class="mb-2 mt-1 w-full border-t border-surface-300 dark:border-surface-700"></div>
     <div class="float-right">
-      <BButton
+      <Button
         severity="info"
         size="small"
         :disabled="clips.length === 0"
         class="ml-2"
         @click="emit('clear')"
-        >Clear</BButton
+        >Clear</Button
       >
-      <BButton
+      <Button
         :severity="isOpen ? 'danger' : 'info'"
         size="small"
         class="ml-2"
         @click="isOpen ? emit('close') : emit('open')"
       >
         {{ isOpen ? 'Close' : 'Open' }}
-      </BButton>
+      </Button>
     </div>
     <div class="text-left">
       <p class="cq-text text-lg">{{ title }}</p>
@@ -40,6 +40,7 @@
 
 <script setup lang="ts">
 import { type Clip, toUUID } from '@cq/providers'
+import { Button } from '@cq/ui'
 import ClipCard from '@/components/ClipCard.vue'
 
 export interface Props {

@@ -1,5 +1,5 @@
 <template>
-  <TToast position="bottom-center" />
+  <Toast position="bottom-center" />
   <ConfirmDialog :draggable="false" />
   <div class="h-full min-h-screen dark:bg-surface-900">
     <div class="h-full">
@@ -13,6 +13,7 @@
 </template>
 
 <script setup lang="ts">
+import { ConfirmDialog, Toast } from '@cq/ui'
 import AppNavBar from '@/components/AppNavBar.vue'
 import AppFooter from './components/AppFooter.vue'
 </script>

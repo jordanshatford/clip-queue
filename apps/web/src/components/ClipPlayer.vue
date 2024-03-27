@@ -20,7 +20,7 @@
           </a>
         </span>
         <div class="float-right text-base">
-          <BButton
+          <Button
             severity="info"
             size="small"
             :disabled="previousDisabled"
@@ -28,10 +28,10 @@
             @click="emit('previous')"
           >
             <i class="pi pi-backward px-1 text-lg"></i>
-          </BButton>
-          <BButton severity="info" size="small" :disabled="nextDisabled" @click="emit('next')">
+          </Button>
+          <Button severity="info" size="small" :disabled="nextDisabled" @click="emit('next')">
             <i class="pi pi-forward px-1 text-lg"></i>
-          </BButton>
+          </Button>
         </div>
       </h2>
       <div class="cq-text-subtle">
@@ -66,6 +66,7 @@ import { computed } from 'vue'
 import { formatDistanceToNow, parseISO } from 'date-fns'
 import Player from '@cq/player'
 import type { Clip, PlayerFormat } from '@cq/providers'
+import { Button } from '@cq/ui'
 import { useProviders } from '@/stores/providers'
 
 export interface Props {

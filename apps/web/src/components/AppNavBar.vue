@@ -28,10 +28,10 @@
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
           <AppThemeToggle class="mr-2 hidden sm:block" />
-          <BButton size="small" @click="() => handleAuthButtonClick()">
+          <Button size="small" @click="() => handleAuthButtonClick()">
             <span><TwitchLogo class="mr-2 inline w-5" /></span>
             {{ user.isLoggedIn ? 'Logout' : 'Login' }}
-          </BButton>
+          </Button>
         </div>
       </div>
     </div>
@@ -52,8 +52,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import TwitchLogo from '@/components/icons/TwitchLogo.vue'
 import { useRouter } from 'vue-router'
+import { Button } from '@cq/ui'
+import TwitchLogo from '@/components/icons/TwitchLogo.vue'
 import AppNavBarItem from '@/components/AppNavBarItem.vue'
 import AppThemeToggle from '@/components/AppThemeToggle.vue'
 import AppHamburger from '@/components/AppHamburger.vue'

@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { TabMenu } from '@cq/ui'
 import { RouteNameConstants } from '@/router'
 
 const route = useRoute()

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <CCard class="mx-auto mb-2 max-w-lg">
+    <Card class="mx-auto mb-2 max-w-lg">
       <template #content>
         <div class="m-0 flex flex-col gap-2 p-0 text-left">
           <label for="username" class="cq-text">Connected Chat:</label>
           <InputText id="username" v-model="user.ctx.username" disabled />
         </div>
       </template>
-    </CCard>
-    <CCard class="mx-auto max-w-lg">
+    </Card>
+    <Card class="mx-auto max-w-lg">
       <template #content>
         <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">
@@ -44,31 +44,31 @@
             >
           </div>
           <div class="mt-3">
-            <BButton
+            <Button
               severity="info"
               size="small"
               class="mr-2"
               type="submit"
               :disabled="!settings.isCommandsSettingsModified(formSettings)"
-              >Save</BButton
+              >Save</Button
             >
-            <BButton
+            <Button
               type="reset"
               severity="danger"
               size="small"
               :disabled="!settings.isCommandsSettingsModified(formSettings)"
-              >Cancel</BButton
+              >Cancel</Button
             >
           </div>
         </form>
       </template>
-    </CCard>
+    </Card>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, toRaw } from 'vue'
-import { useToast } from '@cq/ui'
+import { Button, Card, InputText, MultiSelect, useToast } from '@cq/ui'
 import { useSettings } from '@/stores/settings'
 import { useUser } from '@/stores/user'
 import commands, { Command } from '@/utils/commands'
