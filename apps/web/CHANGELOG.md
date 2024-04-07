@@ -1,5 +1,11 @@
 # @cq/web
 
+## 1.16.0
+
+### Minor Changes
+
+- feat: add sentry for error tracing ([`99f8a02c177dde3f7c8e9dd1eabfe9fb3370f84f`](https://github.com/jordanshatford/clip-queue/commit/99f8a02c177dde3f7c8e9dd1eabfe9fb3370f84f))
+
 ## 1.15.0
 
 ### Minor Changes
