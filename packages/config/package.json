@@ -11,7 +11,6 @@
     "./tailwind": "./tailwind/base.js",
     "./tsconfig/node": "./tsconfig/node.json"
   },
-  "prettier": "./prettier/base",
   "scripts": {
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint .",
