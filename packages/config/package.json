@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./eslint/typescript": "./eslint/typescript.js",
-    "./eslint/vue": "./eslint/vue.js",
+    "./eslint/typescript": "./eslint/typescript.cjs",
+    "./eslint/vue": "./eslint/vue.cjs",
     "./prettier/base": "./prettier/base.js",
     "./prettier/vue": "./prettier/vue.js",
     "./tailwind": "./tailwind/base.js",

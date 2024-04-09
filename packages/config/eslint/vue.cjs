@@ -1,5 +1,5 @@
 /** @type {import('eslint').Linter.Config} */
-export default {
+module.exports = {
   extends: [
     'plugin:vue/vue3-recommended',
     'eslint:recommended',
