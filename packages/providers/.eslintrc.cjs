@@ -1,4 +1,6 @@
+import typescript from '@cq/config/eslint/typescript'
+
 /** @type {import('eslint').Linter.Config} */
-module.exports = {
-  extends: [require.resolve('@cq/config/eslint/typescript')]
+export default {
+  extends: [typescript]
 }

@@ -1,5 +1,7 @@
+import base from './base.js'
+
 /** @type {import("prettier").Config} */
-module.exports = {
-  ...require('./base'),
+export default {
+  ...base,
   plugins: ['prettier-plugin-tailwindcss']
 }

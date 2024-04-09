@@ -2,6 +2,7 @@
   "name": "clip-queue",
   "version": "1.13.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "prepare": "husky",
     "web": "pnpm --filter @cq/web -- ",

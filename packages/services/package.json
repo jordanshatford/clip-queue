@@ -2,6 +2,7 @@
   "name": "@cq/services",
   "version": "1.0.1",
   "private": true,
+  "type": "module",
   "description": "Clients to interact with various external services.",
   "exports": {
     "./kick": "./src/kick/index.ts",

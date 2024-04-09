@@ -2,6 +2,7 @@
   "name": "@cq/config",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "exports": {
     "./eslint/typescript": "./eslint/typescript.js",
     "./eslint/vue": "./eslint/vue.js",

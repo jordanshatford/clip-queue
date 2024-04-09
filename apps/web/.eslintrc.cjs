@@ -1,7 +1,6 @@
-/* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
+import vue from '@cq/config/eslint/vue';
 
 /** @type {import('eslint').Linter.Config} */
-module.exports = {
-  extends: [require.resolve('@cq/config/eslint/vue')],
+export default {
+  extends: [vue],
 }

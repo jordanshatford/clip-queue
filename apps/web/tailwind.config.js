@@ -1,6 +1,6 @@
-/* eslint-env node */
+import preset from '@cq/config/tailwind'
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  presets: [require('@cq/config/tailwind')],
+export default {
+  presets: [preset],
 }
