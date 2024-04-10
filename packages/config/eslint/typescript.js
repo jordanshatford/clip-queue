@@ -1,9 +1,7 @@
-import { FlatCompat } from '@eslint/eslintrc'
+import globals from 'globals'
 import js from '@eslint/js'
-
-const compat = new FlatCompat({
-  recommendedConfig: js.configs.recommended
-})
+import prettier from 'eslint-config-prettier'
+import ts from 'typescript-eslint'
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
@@ -20,18 +18,20 @@ export default [
       'yarn.lock'
     ]
   },
-  ...compat.config({
-    extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
-    parser: '@typescript-eslint/parser',
-    plugins: ['@typescript-eslint'],
-    parserOptions: {
-      sourceType: 'module',
-      ecmaVersion: 2020
-    },
-    env: {
-      browser: true,
-      es2017: true,
-      node: true
+  js.configs.recommended,
+  ...ts.configs.recommended,
+  {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.es2017,
+        ...globals.node
+      },
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: 'module'
+      }
     }
-  })
+  },
+  prettier
 ]
