@@ -13,17 +13,17 @@
         aria-hidden="true"
         class="absolute block h-0.5 w-5 transform bg-current transition duration-500 ease-in-out"
         :class="{ 'rotate-45': modelValue, ' -translate-y-1.5': !modelValue }"
-      ></span>
+      />
       <span
         aria-hidden="true"
         class="absolute block h-0.5 w-5 transform bg-current transition duration-500 ease-in-out"
         :class="{ 'opacity-0': modelValue }"
-      ></span>
+      />
       <span
         aria-hidden="true"
         class="absolute block h-0.5 w-5 transform bg-current transition duration-500 ease-in-out"
         :class="{ '-rotate-45': modelValue, ' translate-y-1.5': !modelValue }"
-      ></span>
+      />
     </div>
   </button>
 </template>

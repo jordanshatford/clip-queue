@@ -9,7 +9,7 @@
             class="text-3xl hover:text-primary-500 dark:hover:text-primary-500"
             target="_blank"
           >
-            <i class="pi pi-github"></i>
+            <i class="pi pi-github" />
           </a>
         </p>
       </span>

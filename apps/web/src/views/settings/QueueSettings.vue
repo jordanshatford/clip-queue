@@ -56,7 +56,8 @@
             severity="warn"
             :closable="false"
             class="mt-0"
-            >Experimental providers selected: {{ selectedExperimentalProviders.join(', ') }}
+          >
+            Experimental providers selected: {{ selectedExperimentalProviders.join(', ') }}
           </Message>
         </div>
         <div class="mt-3">
@@ -66,15 +67,17 @@
             severity="info"
             size="small"
             :disabled="!settings.isQueueSettingsModified(formSettings)"
-            >Save</Button
           >
+            Save
+          </Button>
           <Button
             type="reset"
             severity="danger"
             size="small"
             :disabled="!settings.isQueueSettingsModified(formSettings)"
-            >Cancel</Button
           >
+            Cancel
+          </Button>
         </div>
       </form>
     </template>

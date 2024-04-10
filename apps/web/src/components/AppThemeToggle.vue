@@ -3,7 +3,7 @@
     class="flex items-center p-2 text-surface-500 hover:text-primary-500 dark:text-surface-200 dark:hover:text-primary-500"
     @click="() => theme.toggle()"
   >
-    <i :class="['text-xl', 'pi', theme.isDark ? 'pi-sun' : 'pi-moon']"></i>
+    <i :class="['text-xl', 'pi', theme.isDark ? 'pi-sun' : 'pi-moon']" />
   </button>
 </template>
 

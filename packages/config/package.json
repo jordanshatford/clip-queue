@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./eslint/typescript": "./eslint/typescript.cjs",
-    "./eslint/vue": "./eslint/vue.cjs",
+    "./eslint/typescript": "./eslint/typescript.js",
+    "./eslint/vue": "./eslint/vue.js",
     "./prettier/base": "./prettier/base.js",
     "./prettier/vue": "./prettier/vue.js",
     "./tailwind": "./tailwind/base.js",
@@ -17,6 +17,7 @@
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.0.2",
     "@tsconfig/node20": "^20.1.4",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@typescript-eslint/parser": "^7.5.0",

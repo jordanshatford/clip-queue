@@ -11,8 +11,9 @@
             exact-active-class=""
             :to="{ name: RouteNameConstants.HOME }"
             class="flex flex-shrink-0 items-center"
-            ><img class="aspect-square w-12" src="/icon.png"
-          /></RouterLink>
+          >
+            <img class="aspect-square w-12" src="/icon.png" />
+          </RouterLink>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-3">
               <AppNavBarItem
@@ -29,7 +30,7 @@
         >
           <AppThemeToggle class="mr-2 hidden sm:block" />
           <Button size="small" @click="() => handleAuthButtonClick()">
-            <i class="pi pi-twitch mr-2"></i>
+            <i class="pi pi-twitch mr-2" />
             {{ user.isLoggedIn ? 'Logout' : 'Login' }}
           </Button>
         </div>

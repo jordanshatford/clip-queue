@@ -8,9 +8,9 @@
     @previous="queue.previous()"
     @next="queue.next()"
   />
-  <Message v-else-if="settings.queue.providers.length === 0" severity="error"
-    >No clip providers enabled. Please enable one in the settings.</Message
-  >
+  <Message v-else-if="settings.queue.providers.length === 0" severity="error">
+    No clip providers enabled. Please enable one in the settings.
+  </Message>
   <ClipQueue
     title="Upcoming Clips"
     :clips="queue.upcoming.toArray()"
