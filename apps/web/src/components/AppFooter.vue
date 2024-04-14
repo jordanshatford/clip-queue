@@ -6,7 +6,7 @@
         <p class="cq-text">
           <a
             :href="github"
-            class="text-3xl hover:text-primary-500 dark:hover:text-primary-500"
+            class="text-3xl hover:text-primary-700 dark:hover:text-primary-700"
             target="_blank"
           >
             <i class="pi pi-github" />

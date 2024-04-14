@@ -3,7 +3,7 @@
     :class="[
       modelValue
         ? 'hover:text-red-500 dark:hover:text-red-500'
-        : 'hover:text-primary-500 dark:hover:text-primary-500'
+        : 'hover:text-primary-700 dark:hover:text-primary-700'
     ]"
     class="relative h-10 w-10 text-surface-500 focus:outline-none dark:text-surface-200"
     @click="modelValue = !modelValue"

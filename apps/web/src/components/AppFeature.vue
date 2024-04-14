@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row space-x-4">
     <div
-      class="flex aspect-square h-12 items-center justify-center rounded-xl bg-primary-500 text-white"
+      class="flex aspect-square h-12 items-center justify-center rounded-xl bg-primary-700 text-white"
     >
       <i :class="['text-xl', icon]"></i>
     </div>

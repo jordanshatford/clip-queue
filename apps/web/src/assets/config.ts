@@ -7,7 +7,7 @@ export const env = {
 export const config = {
   about: {
     title: 'Clip Queue',
-    tagline: 'An enhanced clip viewing experience',
+    tagline: 'An enhanced clip viewing experience.',
     features: [
       {
         title: 'Connect to Chat',
