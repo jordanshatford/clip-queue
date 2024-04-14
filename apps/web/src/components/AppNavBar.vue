@@ -29,7 +29,7 @@
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
           <AppThemeToggle class="mr-2 hidden sm:block" />
-          <Button size="small" @click="() => handleAuthButtonClick()">
+          <Button size="small" outlined @click="() => handleAuthButtonClick()">
             <i class="pi pi-twitch mr-2" />
             {{ user.isLoggedIn ? 'Logout' : 'Login' }}
           </Button>
