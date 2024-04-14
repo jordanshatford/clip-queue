@@ -102,7 +102,11 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, _from, next) => {
-  document.title = `${to.meta.title} - ${config.about.title}`
+  if (to.name === RouteNameConstants.HOME) {
+    document.title = config.about.title
+  } else {
+    document.title = `${to.meta.title} - ${config.about.title}`
+  }
   const user = useUser()
   // Attempt to validate the token if not previously done so. This is
   // to ensure the refresh returns you to the same route.
