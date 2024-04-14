@@ -26,7 +26,7 @@
                   :href="data.url"
                   target="_blank"
                   rel="noreferrer"
-                  className="cq-text-subtle text-lg no-underline hover:text-surface-600 dark:hover:text-surface-200"
+                  class="cq-text-subtle text-lg no-underline hover:text-surface-600 dark:hover:text-surface-200"
                 >
                   <i class="pi pi-external-link text-sm"></i>
                 </a>
@@ -57,26 +57,29 @@
     <Column field="actions">
       <template #header>
         <Button
+          icon="pi pi-trash"
+          label="Delete All"
           :disabled="queue.history.empty()"
           severity="danger"
           size="small"
           @click="purgeHistory()"
-          ><i class="pi pi-trash mr-2"></i>Delete All</Button
-        >
+        ></Button>
       </template>
       <template #body="{ data }: { data: Clip }">
         <div class="inline-flex space-x-2">
           <Button
+            icon="pi pi-plus"
             severity="info"
             size="small"
             :disabled="queue.upcoming.includes(data)"
             @click="queue.add(data, true)"
-          >
-            <i class="pi pi-plus p-1"></i>
-          </Button>
-          <Button severity="danger" size="small" @click="queue.removeFromHistory(data)">
-            <i class="pi pi-trash p-1"></i>
-          </Button>
+          ></Button>
+          <Button
+            icon="pi pi-trash"
+            severity="danger"
+            size="small"
+            @click="queue.removeFromHistory(data)"
+          ></Button>
         </div>
       </template>
     </Column>

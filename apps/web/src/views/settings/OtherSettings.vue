@@ -2,28 +2,26 @@
   <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
       <Button
+        label="Reset Settings"
         class="w-full"
         size="small"
         severity="danger"
         :disabled="!settings.isModified"
         @click="resetSettingsToDefault()"
-      >
-        Reset Settings
-      </Button>
+      ></Button>
       <label class="cq-text-subtle">Reset settings back to their initial values.</label>
     </template>
   </Card>
   <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
       <Button
+        label="Purge History"
         class="w-full"
         size="small"
         severity="danger"
         :disabled="queue.history.empty()"
         @click="purgeHistory()"
-      >
-        Purge History
-      </Button>
+      ></Button>
       <label class="cq-text-subtle"
         >Purge all clips previously viewed allowing them to be resubmitted.</label
       >
@@ -32,14 +30,13 @@
   <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
       <Button
+        label="Purge Cache"
         class="w-full"
         size="small"
         severity="danger"
         :disabled="!providers.hasCachedData"
         @click="purgeCache()"
-      >
-        Purge Cache
-      </Button>
+      ></Button>
       <label class="cq-text-subtle">
         Clips submitted may be cached for future use. Purge all cached clips.
       </label>

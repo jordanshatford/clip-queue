@@ -62,22 +62,20 @@
         </div>
         <div class="mt-3">
           <Button
+            label="Save"
             class="mr-2"
             type="submit"
             severity="info"
             size="small"
             :disabled="!settings.isQueueSettingsModified(formSettings)"
-          >
-            Save
-          </Button>
+          ></Button>
           <Button
+            label="Cancel"
             type="reset"
             severity="danger"
             size="small"
             :disabled="!settings.isQueueSettingsModified(formSettings)"
-          >
-            Cancel
-          </Button>
+          ></Button>
         </div>
       </form>
     </template>

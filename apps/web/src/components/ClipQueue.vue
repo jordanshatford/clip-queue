@@ -4,19 +4,20 @@
     <div class="float-right">
       <Button
         severity="info"
+        label="Clear"
         size="small"
         :disabled="clips.length === 0"
         class="ml-2"
         @click="emit('clear')"
-        >Clear</Button
       >
+      </Button>
       <Button
         :severity="isOpen ? 'danger' : 'info'"
+        :label="isOpen ? 'Close' : 'Open'"
         size="small"
         class="ml-2"
         @click="isOpen ? emit('close') : emit('open')"
       >
-        {{ isOpen ? 'Close' : 'Open' }}
       </Button>
     </div>
     <div class="text-left">

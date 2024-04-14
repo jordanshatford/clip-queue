@@ -46,19 +46,19 @@
           <div class="mt-3">
             <Button
               severity="info"
+              label="Save"
               size="small"
               class="mr-2"
               type="submit"
               :disabled="!settings.isCommandsSettingsModified(formSettings)"
-              >Save</Button
-            >
+            ></Button>
             <Button
               type="reset"
               severity="danger"
+              label="Cancel"
               size="small"
               :disabled="!settings.isCommandsSettingsModified(formSettings)"
-              >Cancel</Button
-            >
+            ></Button>
           </div>
         </form>
       </template>

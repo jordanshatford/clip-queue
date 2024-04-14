@@ -10,11 +10,21 @@
         />
         <div class="absolute -bottom-6 -right-2 m-2 p-2">
           <div class="flex gap-2">
-            <Button title="Play now" severity="info" size="small" @click="emit('play')">
-              <i class="pi pi-play p-1"></i>
+            <Button
+              icon="pi pi-play"
+              title="Play now"
+              severity="info"
+              size="small"
+              @click="emit('play')"
+            >
             </Button>
-            <Button title="Remove" severity="danger" size="small" @click="emit('remove')">
-              <i class="pi pi-trash p-1"></i>
+            <Button
+              icon="pi pi-trash"
+              title="Remove"
+              severity="danger"
+              size="small"
+              @click="emit('remove')"
+            >
             </Button>
           </div>
         </div>

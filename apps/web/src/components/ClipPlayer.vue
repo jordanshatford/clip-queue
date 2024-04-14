@@ -14,46 +14,54 @@
             :href="clip.url"
             target="_blank"
             rel="noreferrer"
-            className="cq-text-subtle text-lg no-underline hover:text-surface-600 dark:hover:text-surface-200"
+            class="cq-text-subtle text-lg no-underline hover:text-surface-600 dark:hover:text-surface-200"
           >
             <i class="pi pi-external-link"></i>
           </a>
         </span>
         <div class="float-right text-base">
           <Button
+            icon="pi pi-backward"
+            label="Previous"
             severity="info"
             size="small"
             :disabled="previousDisabled"
             class="mr-2"
             @click="emit('previous')"
           >
-            <i class="pi pi-backward px-1 text-lg"></i>
           </Button>
-          <Button severity="info" size="small" :disabled="nextDisabled" @click="emit('next')">
-            <i class="pi pi-forward px-1 text-lg"></i>
+          <Button
+            icon="pi pi-forward"
+            icon-pos="right"
+            label="Next"
+            severity="info"
+            size="small"
+            :disabled="nextDisabled"
+            @click="emit('next')"
+          >
           </Button>
         </div>
       </h2>
       <div class="cq-text-subtle">
         <span v-if="clip.channel && clip.category">
-          <span className="cq-text-subtle-semibold">{{ clip.channel }}</span>
+          <span class="cq-text-subtle-semibold">{{ clip.channel }}</span>
           playing
-          <span className="cq-text-subtle-semibold">{{ clip.category }}</span>
+          <span class="cq-text-subtle-semibold">{{ clip.category }}</span>
         </span>
         <span v-else>
-          <span className="cq-text-subtle-semibold">{{ clip.channel }}</span>
+          <span class="cq-text-subtle-semibold">{{ clip.channel }}</span>
         </span>
         <span v-if="timeAgo">
           - Created
-          <span className="cq-text-subtle-semibold">{{ timeAgo }}</span>
+          <span class="cq-text-subtle-semibold">{{ timeAgo }}</span>
           ago
         </span>
         <span v-if="clip.submitters[0]">
           - Submitted by
-          <span className="cq-text-subtle-semibold">{{ clip.submitters[0] }}</span>
+          <span class="cq-text-subtle-semibold">{{ clip.submitters[0] }}</span>
           <span v-if="clip.provider">
             from
-            <span className="cq-text-subtle-semibold">{{ clip.provider }}</span>
+            <span class="cq-text-subtle-semibold">{{ clip.provider }}</span>
           </span>
         </span>
       </div>
