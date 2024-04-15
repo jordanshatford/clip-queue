@@ -18,7 +18,7 @@ describe('youtube.ts', () => {
 
   it('knows if it is an experimental provider', () => {
     const youTubeProvider = new YouTubeProvider()
-    expect(youTubeProvider.isExperimental).toEqual(true)
+    expect(youTubeProvider.isExperimental).toEqual(false)
   })
 
   it('gets the player format of the clip', () => {
