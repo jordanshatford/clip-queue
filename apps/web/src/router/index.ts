@@ -23,15 +23,6 @@ export enum RouteNameConstants {
 
 export const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: RouteNameConstants.HOME,
-    component: HomePage,
-    meta: {
-      title: 'Home',
-      requiresAuth: false
-    }
-  },
-  {
     path: '/queue',
     name: RouteNameConstants.QUEUE,
     component: QueuePage,
@@ -93,6 +84,11 @@ export const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    {
+      path: '/',
+      name: RouteNameConstants.HOME,
+      component: HomePage
+    },
     ...routes,
     {
       path: '/:pathMatch(.*)*',
