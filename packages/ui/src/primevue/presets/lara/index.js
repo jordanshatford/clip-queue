@@ -2,6 +2,7 @@ import button from './button'
 import card from './card'
 import datatable from './datatable'
 import dialog from './dialog'
+import dropdown from './dropdown'
 import global from './global'
 import inputnumber from './inputnumber'
 import inputswitch from './inputswitch'
@@ -22,6 +23,7 @@ export default {
   },
 
   //forms
+  dropdown,
   inputnumber,
   inputtext,
   inputswitch,
