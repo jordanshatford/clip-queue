@@ -19,7 +19,7 @@ Clip Queue integrates into a users [Twitch](https://www.twitch.tv/) chat and que
 - Duplicate clip prevention
 - Popular clips rise up in the queue
 - Support for multiple clip providers (Twitch, Kick, YouTube)
-- Chat commands for moderators ([more info](./docs/COMMANDS.md))
+- Chat commands for moderators
 - Automatic moderation and clip removal
 - Settings customization to personalize user experience
 - Dark and light UI themes
@@ -41,7 +41,3 @@ Please refer to the [contributing guide](CONTRIBUTING.md) for how to install the
 - `providers`: Various clip providers used to get clips developed using [TypeScript](https://www.typescriptlang.org/).
 - `services`: Various API clients used to interact with external services developed using [TypeScript](https://www.typescriptlang.org/).
 - `ui`: A UI library developed using [Vue.js](https://vuejs.org/), [TailwindCSS](https://tailwindcss.com/), and [PrimeVue](https://primevue.org/).
-
-# Additional Documentation
-
-- [Commands](./docs/COMMANDS.md)

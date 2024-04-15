@@ -8,7 +8,6 @@ export default defineConfig({
       include: ['apps/**', 'packages/**'],
       exclude: [
         '**/*.config.js',
-        '**/*.eslintrc.cjs',
         '**/*.d.ts',
         'packages/config/**',
         'packages/ui/src/primevue/presets/**'
