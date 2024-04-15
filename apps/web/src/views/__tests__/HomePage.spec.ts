@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import config from '@/assets/config'
+import config from '@/config'
 import HomePage from '../HomePage.vue'
 
 describe('HomePage.vue', () => {

@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import config from '@/assets/config'
+import config from '@/config'
 
 const { copyright, github } = config
 </script>

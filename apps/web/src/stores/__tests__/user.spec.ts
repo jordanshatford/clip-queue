@@ -4,9 +4,9 @@ import type { AuthInfo } from '@cq/services/twitch'
 import { useUser } from '../user'
 
 // Overwrite CLIENT_ID for testing
-vi.mock('@/assets/config', async (importOriginal) => {
+vi.mock('@/config', async (importOriginal) => {
   return {
-    ...(await importOriginal<typeof import('@/assets/config')>()),
+    ...(await importOriginal<typeof import('@/config')>()),
     env: {
       CLIENT_ID: 'testClientId'
     }

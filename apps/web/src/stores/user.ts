@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { env, config } from '@/assets/config'
+import { env, config } from '@/config'
 import twitch, {
   TwitchChat,
   type AuthInfo,

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import twitch from '@cq/services/twitch'
-import { config } from '@/assets/config'
+import { config } from '@/config'
 import { useUser } from '@/stores/user'
 import HomePage from '@/views/HomePage.vue'
 import QueuePage from '@/views/QueuePage.vue'

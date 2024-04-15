@@ -8,7 +8,7 @@ import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
 import * as Sentry from '@sentry/vue'
 import App from '@/App.vue'
 import router from '@/router'
-import { env } from './assets/config'
+import { env } from '@/config'
 
 const app = createApp(App)
 
