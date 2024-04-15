@@ -1,6 +1,25 @@
 <template>
+  <div class="flex flex-row-reverse gap-2">
+    <Button
+      icon="pi pi-trash"
+      label="Delete"
+      :disabled="!selection.length"
+      severity="danger"
+      size="small"
+      @click="deleteClips()"
+    ></Button>
+    <Button
+      icon="pi pi-plus"
+      label="Queue"
+      :disabled="isQueueClipsDisabled"
+      severity="secondary"
+      size="small"
+      @click="queueClips()"
+    ></Button>
+  </div>
   <DataTable
     :value="queue.history.toArray()"
+    v-model:selection="selection"
     size="small"
     paginator
     removable-sort
@@ -9,6 +28,7 @@
     class="my-4"
   >
     <template #empty>No clips previously watched.</template>
+    <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
     <Column field="title" header="Info" sortable :sort-field="(data: Clip) => data.title">
       <template #body="{ data }: { data: Clip }">
         <div class="flex items-center">
@@ -54,39 +74,11 @@
       header="Submitter"
     >
     </Column>
-    <Column field="actions">
-      <template #header>
-        <Button
-          icon="pi pi-trash"
-          label="Delete All"
-          :disabled="queue.history.empty()"
-          severity="danger"
-          size="small"
-          @click="purgeHistory()"
-        ></Button>
-      </template>
-      <template #body="{ data }: { data: Clip }">
-        <div class="inline-flex space-x-2">
-          <Button
-            icon="pi pi-plus"
-            severity="info"
-            size="small"
-            :disabled="queue.upcoming.includes(data)"
-            @click="queue.add(data, true)"
-          ></Button>
-          <Button
-            icon="pi pi-trash"
-            severity="danger"
-            size="small"
-            @click="queue.removeFromHistory(data)"
-          ></Button>
-        </div>
-      </template>
-    </Column>
   </DataTable>
 </template>
 
 <script setup lang="ts">
+import { computed, ref } from 'vue'
 import type { Clip } from '@cq/providers'
 import { Button, Column, DataTable, useConfirm } from '@cq/ui'
 import { useQueue } from '@/stores/queue'
@@ -95,10 +87,25 @@ import ProviderName from '@/components/ProviderName.vue'
 const confirm = useConfirm()
 const queue = useQueue()
 
-async function purgeHistory() {
+const selection = ref<Clip[]>([])
+
+const isQueueClipsDisabled = computed(() => {
+  return selection.value.length === 0 || selection.value.every((c) => queue.upcoming.includes(c))
+})
+
+function queueClips() {
+  const clips = selection.value
+  selection.value = []
+  for (const clip of clips) {
+    queue.add(clip, true)
+  }
+}
+
+function deleteClips() {
+  const clips = selection.value
   confirm.require({
-    header: 'Delete All History',
-    message: 'Are you sure you want to delete all clips from the history?',
+    header: 'Delete History',
+    message: `Are you sure you want to delete ${clips.length} clip(s) from the history?`,
     rejectLabel: 'Cancel',
     acceptLabel: 'Confirm',
     rejectClass:
@@ -106,7 +113,9 @@ async function purgeHistory() {
     acceptClass:
       'text-white dark:text-surface-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-300 hover:border-red-600 dark:hover:border-red-300 focus:ring-red-400/50 dark:focus:ring-red-300/50',
     accept: () => {
-      queue.purge()
+      for (const clip of clips) {
+        queue.removeFromHistory(clip)
+      }
     },
     reject: () => {}
   })
