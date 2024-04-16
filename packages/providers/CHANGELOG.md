@@ -1,5 +1,11 @@
 # @cq/providers
 
+## 1.1.0
+
+### Minor Changes
+
+- feat: YouTube provider no longer experimental ([`d284cbf04a40830845b7cc8b0c61c1ae120a63e0`](https://github.com/jordanshatford/clip-queue/commit/d284cbf04a40830845b7cc8b0c61c1ae120a63e0))
+
 ## 1.0.0
 
 ### Major Changes
