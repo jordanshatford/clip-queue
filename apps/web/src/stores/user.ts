@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { env, config } from '@/config'
+import { env } from '@/config'
 import twitch, {
   TwitchChat,
   type AuthInfo,
@@ -14,7 +14,6 @@ import { useQueue } from '@/stores/queue'
 import { useProviders } from '@/stores/providers'
 
 const { CLIENT_ID, REDIRECT_URI } = env
-const { scopes } = config.twitch
 
 export interface User {
   hasValidatedToken: boolean
@@ -32,7 +31,7 @@ export const useUser = defineStore(
     const chat = ref<TwitchChat | undefined>(undefined)
 
     function redirect(): void {
-      twitch.redirect(ctx.value, REDIRECT_URI, scopes)
+      twitch.redirect(ctx.value, REDIRECT_URI, ['openid', 'chat:read'])
     }
 
     async function autoLoginIfPossible() {

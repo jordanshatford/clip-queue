@@ -46,9 +46,6 @@ export const config = {
       }
     ]
   },
-  twitch: {
-    scopes: ['openid', 'chat:read']
-  },
   github: 'https://github.com/jordanshatford/clip-queue',
   copyright: {
     owner: 'Jordan Shatford',
