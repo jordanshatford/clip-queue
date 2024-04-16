@@ -1,5 +1,21 @@
 # @cq/web
 
+## 1.17.0
+
+### Minor Changes
+
+- feat: improve history selection, re-adding, and deletion ([`32b951003c8df3315dc3665bb6b869f53819347f`](https://github.com/jordanshatford/clip-queue/commit/32b951003c8df3315dc3665bb6b869f53819347f))
+
+- remove: home from navigation menu ([`74ff036ed0e87de30cd5c3185ceee13b037761c6`](https://github.com/jordanshatford/clip-queue/commit/74ff036ed0e87de30cd5c3185ceee13b037761c6))
+
+- feat: add ability to configure color preferences ([`055718c5f168104d6c65597bcab17845ff9c8a73`](https://github.com/jordanshatford/clip-queue/commit/055718c5f168104d6c65597bcab17845ff9c8a73))
+
+### Patch Changes
+
+- Updated dependencies [[`055718c5f168104d6c65597bcab17845ff9c8a73`](https://github.com/jordanshatford/clip-queue/commit/055718c5f168104d6c65597bcab17845ff9c8a73), [`d284cbf04a40830845b7cc8b0c61c1ae120a63e0`](https://github.com/jordanshatford/clip-queue/commit/d284cbf04a40830845b7cc8b0c61c1ae120a63e0), [`66b606865245d7671c8050cc34c7e4bc227e21e4`](https://github.com/jordanshatford/clip-queue/commit/66b606865245d7671c8050cc34c7e4bc227e21e4)]:
+  - @cq/ui@1.1.0
+  - @cq/providers@1.1.0
+
 ## 1.16.0
 
 ### Minor Changes
