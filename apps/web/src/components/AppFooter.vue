@@ -1,11 +1,11 @@
 <template>
-  <footer class="border-t border-surface-300 bg-white dark:border-surface-700 dark:bg-surface-800">
-    <div class="mx-auto flex max-w-6xl flex-col items-center px-8 py-6 sm:flex-row">
-      <p class="font-normal text-surface-600 dark:text-surface-400">
+  <footer class="border-t border-surface-100 bg-white dark:border-surface-700 dark:bg-surface-900">
+    <div class="mx-auto flex max-w-6xl flex-col items-center px-8 py-4 sm:flex-row">
+      <p class="font-normal text-surface-600 dark:text-surface-300">
         © {{ copyright.year }} {{ copyright.owner }}
       </p>
       <span class="mt-4 inline-flex justify-center space-x-5 sm:ml-auto sm:mt-0 sm:justify-start">
-        <p class="font-normal text-surface-600 dark:text-surface-400">
+        <p class="font-normal text-surface-600 dark:text-surface-300">
           <a
             :href="github"
             class="text-3xl hover:text-primary-700 dark:hover:text-primary-700"
