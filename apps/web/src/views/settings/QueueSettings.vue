@@ -4,20 +4,27 @@
       <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
         <div class="flex flex-col gap-2 text-left">
           <div class="flex justify-between">
-            <label for="autoModeration" class="cq-text">Auto Moderation:</label>
+            <label for="autoModeration" class="font-normal text-surface-600 dark:text-surface-400"
+              >Auto Moderation:</label
+            >
             <InputSwitch
               v-model="formSettings.hasAutoModerationEnabled"
               input-id="autoModeration"
               aria-describedby="autoModeration-help"
             />
           </div>
-          <small id="autoModeration-help" class="cq-text-subtle pb-2">
+          <small
+            id="autoModeration-help"
+            class="pb-2 text-sm font-normal text-surface-400 dark:text-surface-600"
+          >
             When a user has their chat message deleted, is timed out, or banned, the clips they
             submitted will be removed.
           </small>
         </div>
         <div class="flex flex-col gap-2 text-left">
-          <label for="limit" class="cq-text">Size Limit:</label>
+          <label for="limit" class="font-normal text-surface-600 dark:text-surface-400"
+            >Size Limit:</label
+          >
           <InputNumber
             v-model="formSettings.limit"
             input-id="limit"
@@ -27,12 +34,16 @@
             show-buttons
             aria-describedby="limit-help"
           />
-          <small id="limit-help" class="cq-text-subtle pb-2"
+          <small
+            id="limit-help"
+            class="pb-2 text-sm font-normal text-surface-400 dark:text-surface-600"
             >The number of clips allowed in the queue. Leave empty for no limit.</small
           >
         </div>
         <div class="flex flex-col gap-2 text-left">
-          <label for="allowedProviders" class="cq-text">Allowed Providers:</label>
+          <label for="allowedProviders" class="font-normal text-surface-600 dark:text-surface-400"
+            >Allowed Providers:</label
+          >
           <MultiSelect
             v-model="formSettings.providers"
             input-id="allowedProviders"
@@ -48,7 +59,9 @@
               <ProviderName :provider="value" />
             </template>
           </MultiSelect>
-          <small id="allowedProviders-help" class="cq-text-subtle pb-2"
+          <small
+            id="allowedProviders-help"
+            class="pb-2 text-sm font-normal text-surface-400 dark:text-surface-600"
             >Clips from these providers will be allowed in the queue.</small
           >
           <Message

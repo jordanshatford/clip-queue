@@ -61,7 +61,6 @@ function processAuthHash(hash: string): AuthInfo {
   return authInfo
 }
 
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types*/
 function parseJWT(token: string) {
   const base64Url = token.split('.')[1]
   if (base64Url !== undefined) {

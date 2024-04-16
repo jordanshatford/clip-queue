@@ -18,8 +18,8 @@
     ></Button>
   </div>
   <DataTable
-    :value="queue.history.toArray()"
     v-model:selection="selection"
+    :value="queue.history.toArray()"
     size="small"
     paginator
     removable-sort
@@ -28,7 +28,7 @@
     class="my-4"
   >
     <template #empty>No clips previously watched.</template>
-    <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
+    <Column selection-mode="multiple" header-style="width: 3rem"></Column>
     <Column field="title" header="Info" sortable :sort-field="(data: Clip) => data.title">
       <template #body="{ data }: { data: Clip }">
         <div class="flex items-center">
@@ -39,23 +39,29 @@
             @error="queue.history.remove(data)"
           />
           <div class="ml-3 text-left text-sm">
-            <p class="cq-text">
+            <p class="font-normal text-surface-600 dark:text-surface-400">
               {{ data.title }}
               <span v-if="data.url">
                 <a
                   :href="data.url"
                   target="_blank"
                   rel="noreferrer"
-                  class="cq-text-subtle text-lg no-underline hover:text-surface-600 dark:hover:text-surface-200"
+                  class="text-lg text-sm font-normal text-surface-400 no-underline hover:text-surface-600 dark:text-surface-600 dark:hover:text-surface-200"
                 >
                   <i class="pi pi-external-link text-sm"></i>
                 </a>
               </span>
             </p>
-            <p v-if="data.category" class="cq-text-subtle-semibold">
-              {{ data.channel }}<span class="cq-text-subtle"> playing </span>{{ data.category }}
+            <p
+              v-if="data.category"
+              class="text-sm font-semibold text-surface-400 dark:text-surface-600"
+            >
+              {{ data.channel
+              }}<span class="text-sm font-normal text-surface-400 dark:text-surface-600">
+                playing </span
+              >{{ data.category }}
             </p>
-            <p v-else class="cq-text-subtle-semibold">
+            <p v-else class="text-sm font-semibold text-surface-400 dark:text-surface-600">
               {{ data.channel }}
             </p>
           </div>

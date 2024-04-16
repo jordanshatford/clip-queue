@@ -1,7 +1,9 @@
 <template>
   <div class="mx-5 py-10">
     <div class="text-left sm:text-center">
-      <p class="cq-text mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+      <p
+        class="mt-2 text-3xl font-bold tracking-tight text-surface-600 dark:text-surface-400 sm:text-4xl"
+      >
         {{ tagline }}
       </p>
     </div>

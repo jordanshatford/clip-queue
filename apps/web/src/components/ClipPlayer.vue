@@ -7,14 +7,14 @@
       :thumbnail-url="clip.thumbnailUrl"
     />
     <div class="text-left">
-      <h2 class="cq-text mb-1 mt-2 text-2xl font-bold">
+      <h2 class="mb-1 mt-2 text-2xl font-bold font-normal text-surface-600 dark:text-surface-400">
         {{ clip.title }}
         <span v-if="clip.url">
           <a
             :href="clip.url"
             target="_blank"
             rel="noreferrer"
-            class="cq-text-subtle text-lg no-underline hover:text-surface-600 dark:hover:text-surface-200"
+            class="text-lg text-sm font-normal text-surface-400 no-underline hover:text-surface-600 dark:text-surface-600 dark:hover:text-surface-200"
           >
             <i class="pi pi-external-link"></i>
           </a>
@@ -42,26 +42,38 @@
           </Button>
         </div>
       </h2>
-      <div class="cq-text-subtle">
+      <div class="text-sm font-normal text-surface-400 dark:text-surface-600">
         <span v-if="clip.channel && clip.category">
-          <span class="cq-text-subtle-semibold">{{ clip.channel }}</span>
+          <span class="text-sm font-semibold text-surface-400 dark:text-surface-600">{{
+            clip.channel
+          }}</span>
           playing
-          <span class="cq-text-subtle-semibold">{{ clip.category }}</span>
+          <span class="text-sm font-semibold text-surface-400 dark:text-surface-600">{{
+            clip.category
+          }}</span>
         </span>
         <span v-else>
-          <span class="cq-text-subtle-semibold">{{ clip.channel }}</span>
+          <span class="text-sm font-semibold text-surface-400 dark:text-surface-600">{{
+            clip.channel
+          }}</span>
         </span>
         <span v-if="timeAgo">
           - Created
-          <span class="cq-text-subtle-semibold">{{ timeAgo }}</span>
+          <span class="text-sm font-semibold text-surface-400 dark:text-surface-600">{{
+            timeAgo
+          }}</span>
           ago
         </span>
         <span v-if="clip.submitters[0]">
           - Submitted by
-          <span class="cq-text-subtle-semibold">{{ clip.submitters[0] }}</span>
+          <span class="text-sm font-semibold text-surface-400 dark:text-surface-600">{{
+            clip.submitters[0]
+          }}</span>
           <span v-if="clip.provider">
             from
-            <span class="cq-text-subtle-semibold">{{ clip.provider }}</span>
+            <span class="text-sm font-semibold text-surface-400 dark:text-surface-600">{{
+              clip.provider
+            }}</span>
           </span>
         </span>
       </div>

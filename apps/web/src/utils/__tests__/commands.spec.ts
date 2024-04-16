@@ -11,7 +11,6 @@ describe('commands.ts', () => {
     setActivePinia(createPinia())
   })
 
-  /* eslint-disable @typescript-eslint/no-explicit-any*/
   it.each([
     [Command.PREV, 'previous'],
     [Command.NEXT, 'next'],
@@ -29,7 +28,6 @@ describe('commands.ts', () => {
     }
   )
 
-  /* eslint-disable @typescript-eslint/no-explicit-any*/
   it.each([[Command.PURGE_CACHE, 'purge']])(
     'calls the proper clip queue function when a command is issued (%s, %s)',
     (commandName: Command, expectedFunctionCall: any) => {
@@ -66,7 +64,6 @@ describe('commands.ts', () => {
       const queueCommandFunctions = ['previous', 'next', 'open', 'close', 'clear']
       commands.handleCommand(commandName)
       for (const f of queueCommandFunctions) {
-        /* eslint-disable @typescript-eslint/no-explicit-any*/
         expect(vi.spyOn(queue, f as any)).toHaveBeenCalledTimes(0)
       }
     }

@@ -21,8 +21,8 @@
       </Button>
     </div>
     <div class="text-left">
-      <p class="cq-text text-lg">{{ title }}</p>
-      <span class="cq-text-subtle mt-3">
+      <p class="text-lg font-normal text-surface-600 dark:text-surface-400">{{ title }}</p>
+      <span class="mt-3 text-sm font-normal text-surface-400 dark:text-surface-600">
         {{ clips.length }} {{ clips.length === 1 ? 'clip' : 'clips' }}
       </span>
     </div>

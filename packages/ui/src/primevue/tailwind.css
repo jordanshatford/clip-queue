@@ -1,15 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer components {
-  .cq-text {
-    @apply font-normal text-surface-600 dark:text-surface-400;
-  }
-  .cq-text-subtle {
-    @apply text-sm font-normal text-surface-400 dark:text-surface-600;
-  }
-  .cq-text-subtle-semibold {
-    @apply text-sm font-semibold text-surface-400 dark:text-surface-600;
-  }
-}

@@ -6,8 +6,10 @@
       <i :class="['text-xl', icon]"></i>
     </div>
     <div class="flex flex-col">
-      <p class="cq-text text-lg font-semibold">{{ title }}</p>
-      <p class="cq-text-subtle mt-1 text-base">
+      <p class="text-lg font-normal font-semibold text-surface-600 dark:text-surface-400">
+        {{ title }}
+      </p>
+      <p class="mt-1 text-base text-sm font-normal text-surface-400 dark:text-surface-600">
         {{ description }}
       </p>
     </div>

@@ -3,7 +3,9 @@
     <Card class="mx-auto mb-2 max-w-lg">
       <template #content>
         <div class="m-0 flex flex-col gap-2 p-0 text-left">
-          <label for="username" class="cq-text">Connected Chat:</label>
+          <label for="username" class="font-normal text-surface-600 dark:text-surface-400"
+            >Connected Chat:</label
+          >
           <InputText id="username" v-model="user.ctx.username" disabled />
         </div>
       </template>
@@ -12,7 +14,9 @@
       <template #content>
         <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">
-            <label for="commandPrefix" class="cq-text">Commands Prefix:</label>
+            <label for="commandPrefix" class="font-normal text-surface-600 dark:text-surface-400"
+              >Commands Prefix:</label
+            >
             <InputText
               id="commandPrefix"
               v-model="formSettings.prefix"
@@ -20,10 +24,14 @@
               maxlength="8"
               @keydown.space.prevent
             />
-            <small id="commandPrefix-help" class="cq-text-subtle pb-2"
+            <small
+              id="commandPrefix-help"
+              class="pb-2 text-sm font-normal text-surface-400 dark:text-surface-600"
               >Commands in chat must be prefixed by this value.</small
             >
-            <label for="allowedCommands" class="cq-text">Allowed Commands:</label>
+            <label for="allowedCommands" class="font-normal text-surface-600 dark:text-surface-400"
+              >Allowed Commands:</label
+            >
             <MultiSelect
               v-model="formSettings.allowed"
               input-id="allowedCommands"
@@ -39,7 +47,9 @@
                 </div>
               </template>
             </MultiSelect>
-            <small id="allowedCommands-help" class="cq-text-subtle pb-2"
+            <small
+              id="allowedCommands-help"
+              class="pb-2 text-sm font-normal text-surface-400 dark:text-surface-600"
               >Commands allowed to be used in chat.</small
             >
           </div>

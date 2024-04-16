@@ -4,7 +4,9 @@
       <template #content>
         <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">
-            <label for="primaryColor" class="cq-text">Primary Color:</label>
+            <label for="primaryColor" class="font-normal text-surface-600 dark:text-surface-400"
+              >Primary Color:</label
+            >
             <Dropdown
               v-model="formTheme.primary"
               :options="colors"
@@ -19,10 +21,14 @@
                 <ColorName :name="option.name" :color="option.palette[6]" />
               </template>
             </Dropdown>
-            <small id="primaryColor-help" class="cq-text-subtle pb-2"
+            <small
+              id="primaryColor-help"
+              class="pb-2 text-sm font-normal text-surface-400 dark:text-surface-600"
               >Primary color used throughout the UI.</small
             >
-            <label for="surfaceColor" class="cq-text">Surface Color:</label>
+            <label for="surfaceColor" class="font-normal text-surface-600 dark:text-surface-400"
+              >Surface Color:</label
+            >
             <Dropdown
               v-model="formTheme.surface"
               data-key="name"
@@ -37,7 +43,9 @@
                 <ColorName :name="option.name" :color="option.palette[6]" />
               </template>
             </Dropdown>
-            <small id="surfaceColor-help" class="cq-text-subtle pb-2"
+            <small
+              id="surfaceColor-help"
+              class="pb-2 text-sm font-normal text-surface-400 dark:text-surface-600"
               >Surface color used throughout the UI.</small
             >
           </div>
@@ -66,7 +74,7 @@
 
 <script setup lang="ts">
 import { ref, toRaw } from 'vue'
-import { Button, Card, colors,  type ColorOption, Dropdown, surfaces, useToast } from '@cq/ui'
+import { Button, Card, colors, type ColorOption, Dropdown, surfaces, useToast } from '@cq/ui'
 import { useTheme } from '@/stores/theme'
 import ColorName from '@/components/ColorName.vue'
 
