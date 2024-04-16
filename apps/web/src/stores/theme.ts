@@ -1,46 +1,89 @@
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
+import { type ColorOption, colors, surfaces, setColorPalette } from '@cq/ui'
 
-export enum Theme {
-  DARK = 'dark',
-  LIGHT = 'light'
-}
+type Theme = 'dark' | 'light'
 
-export function getInferredDefaultTheme(): Theme {
+export function getInferredDefaultTheme(fallback: Theme): Theme {
   if (!window.matchMedia) {
-    return Theme.DARK
+    return fallback
   }
   if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return Theme.DARK
+    return 'dark'
   } else {
-    return Theme.LIGHT
+    return 'light'
   }
+}
+
+export interface ThemePreferences {
+  theme: Theme
+  primary: ColorOption
+  surface: ColorOption
+}
+
+export const DEFAULTS: ThemePreferences = {
+  theme: getInferredDefaultTheme('light'),
+  primary: structuredClone(colors[12]), // Violet
+  surface: structuredClone(surfaces[2]) // Zinc
 }
 
 export const useTheme = defineStore(
   'theme',
   () => {
-    const value = ref<Theme>(getInferredDefaultTheme())
-    const isDark = computed(() => value.value === Theme.DARK)
+    const preferences = ref<ThemePreferences>(structuredClone(DEFAULTS))
+
+    const isDark = computed(() => preferences.value.theme === 'dark')
+
+    const isModifiedFrom = computed(() => {
+      return (p: ThemePreferences) => {
+        return (
+          preferences.value.primary.name !== p.primary.name ||
+          preferences.value.surface.name !== p.surface.name
+        )
+      }
+    })
+
+    const isModified = computed(() => {
+      return isModifiedFrom.value({ ...DEFAULTS })
+    })
+
+    function setPreferences(p?: ThemePreferences) {
+      if (p) {
+        preferences.value = p
+      }
+      setColorPalette('primary', preferences.value.primary.palette)
+      setColorPalette('surface', preferences.value.surface.palette)
+      if (preferences.value.theme === 'dark') {
+        document?.querySelector('html')?.classList.add('dark')
+      } else {
+        document.querySelector('html')?.classList.remove('dark')
+      }
+    }
 
     function toggle() {
-      value.value = value.value === Theme.DARK ? Theme.LIGHT : Theme.DARK
-      document.querySelector('html')?.classList.toggle(Theme.DARK)
+      preferences.value.theme = preferences.value.theme === 'dark' ? 'light' : 'dark'
+      document.querySelector('html')?.classList.toggle('dark')
+    }
+
+    function $reset() {
+      setPreferences(structuredClone({ ...DEFAULTS, theme: preferences.value.theme }))
     }
 
     return {
-      value,
+      preferences,
       isDark,
-      toggle
+      isModified,
+      isModifiedFrom,
+      setPreferences,
+      toggle,
+      $reset
     }
   },
   {
     persist: {
       key: 'cq-theme',
       afterRestore: (ctx) => {
-        if (ctx.store.value === Theme.DARK) {
-          document?.querySelector('html')?.classList.add(Theme.DARK)
-        }
+        ctx.store.setPreferences()
       }
     }
   }

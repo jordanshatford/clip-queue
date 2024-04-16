@@ -6,7 +6,7 @@
         class="w-full"
         size="small"
         severity="danger"
-        :disabled="!settings.isModified"
+        :disabled="!(settings.isModified || theme.isModified)"
         @click="resetSettingsToDefault()"
       ></Button>
       <label class="cq-text-subtle">Reset settings back to their initial values.</label>
@@ -53,6 +53,7 @@
 
 <script setup lang="ts">
 import { Button, Card, useConfirm, useToast } from '@cq/ui'
+import { useTheme } from '@/stores/theme'
 import { useSettings } from '@/stores/settings'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
@@ -61,6 +62,7 @@ const version = __APP_VERSION__
 
 const toast = useToast()
 const confirm = useConfirm()
+const theme = useTheme()
 const queue = useQueue()
 const settings = useSettings()
 const providers = useProviders()
@@ -77,6 +79,7 @@ async function resetSettingsToDefault() {
       'text-white dark:text-surface-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-300 hover:border-red-600 dark:hover:border-red-300 focus:ring-red-400/50 dark:focus:ring-red-300/50',
     accept: () => {
       settings.$reset()
+      theme.$reset()
       toast.add({
         severity: 'success',
         summary: 'Success',

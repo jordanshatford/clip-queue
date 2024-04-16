@@ -25,3 +25,6 @@ export { default as Toast } from 'primevue/toast'
 // PrimeVue Composables
 export { useConfirm } from 'primevue/useconfirm'
 export { useToast } from 'primevue/usetoast'
+
+// Color Palettes
+export { type ColorOption, colors, surfaces, setColorPalette } from './palettes'

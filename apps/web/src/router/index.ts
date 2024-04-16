@@ -9,6 +9,7 @@ import HistoryPage from '@/views/HistoryPage.vue'
 import SettingsPage from '@/views/SettingsPage.vue'
 import ChatSettings from '@/views/settings/ChatSettings.vue'
 import QueueSettings from '@/views/settings/QueueSettings.vue'
+import PreferenceSettings from '@/views/settings/PreferenceSettings.vue'
 import OtherSettings from '@/views/settings/OtherSettings.vue'
 
 export enum RouteNameConstants {
@@ -18,6 +19,7 @@ export enum RouteNameConstants {
   SETTINGS = 'settings',
   SETTINGS_CHAT = 'settings_chat',
   SETTINGS_QUEUE = 'settings_queue',
+  SETTINGS_PREFERENCES = 'settings_preferences',
   SETTINGS_OTHER = 'settings_other'
 }
 
@@ -65,6 +67,15 @@ export const routes: Array<RouteRecordRaw> = [
         component: QueueSettings,
         meta: {
           title: 'Queue Settings',
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'preferences',
+        name: RouteNameConstants.SETTINGS_PREFERENCES,
+        component: PreferenceSettings,
+        meta: {
+          title: 'Preferences',
           requiresAuth: true
         }
       },
