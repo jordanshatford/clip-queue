@@ -9,11 +9,11 @@
       </main>
     </div>
   </div>
-  <AppFooter />
+  <Footer :copyright="config.copyright" :github="config.github" />
 </template>
 
 <script setup lang="ts">
-import { ConfirmDialog, Toast } from '@cq/ui'
+import { ConfirmDialog, Footer, Toast } from '@cq/ui'
+import { config } from '@/config'
 import AppNavBar from '@/components/AppNavBar.vue'
-import AppFooter from '@/components/AppFooter.vue'
 </script>
