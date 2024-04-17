@@ -49,7 +49,7 @@ export const useTheme = defineStore(
 
     function setPreferences(p?: ThemePreferences) {
       if (p) {
-        preferences.value = p
+        preferences.value = { ...p, theme: preferences.value.theme }
       }
       setColorPalette('primary', preferences.value.primary.palette)
       setColorPalette('surface', preferences.value.surface.palette)
