@@ -19,6 +19,8 @@
   </div>
   <DataTable
     v-model:selection="selection"
+    v-model:filters="filters"
+    :globalFilterFields="['category', 'channel', 'provider', 'submitters', 'title']"
     :value="queue.history.toArray()"
     size="small"
     paginator
@@ -28,6 +30,22 @@
     class="my-4"
   >
     <template #empty>No clips previously watched.</template>
+    <template #header>
+      <div class="flex items-center justify-between">
+        <span class="text-900 text-xl font-bold">History</span>
+        <span class="relative">
+          <i
+            class="pi pi-search absolute left-3 top-2/4 -mt-2 text-surface-400 dark:text-surface-500"
+          ></i>
+          <InputText
+            size="small"
+            v-model="filters['global'].value"
+            placeholder="Search"
+            class="pl-10 font-normal"
+          />
+        </span>
+      </div>
+    </template>
     <Column selection-mode="multiple" header-style="width: 3rem"></Column>
     <Column field="title" header="Info" sortable :sort-field="(data: Clip) => data.title">
       <template #body="{ data }: { data: Clip }">
@@ -86,9 +104,13 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import type { Clip } from '@cq/providers'
-import { Button, Column, DataTable, useConfirm } from '@cq/ui'
+import { Button, Column, DataTable, FilterMatchMode, InputText, useConfirm } from '@cq/ui'
 import { useQueue } from '@/stores/queue'
 import ProviderName from '@/components/ProviderName.vue'
+
+const filters = ref({
+  global: { value: null, matchMode: FilterMatchMode.CONTAINS }
+})
 
 const confirm = useConfirm()
 const queue = useQueue()

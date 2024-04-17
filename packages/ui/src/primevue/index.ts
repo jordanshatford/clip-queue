@@ -7,6 +7,9 @@ export { default as PrimeVue } from 'primevue/config'
 export { default as ConfirmationService } from 'primevue/confirmationservice'
 export { default as ToastService } from 'primevue/toastservice'
 
+// PriveVue API
+export { FilterMatchMode } from 'primevue/api'
+
 // PrimeVue Components
 export { default as Button } from 'primevue/button'
 export { default as Card } from 'primevue/card'
