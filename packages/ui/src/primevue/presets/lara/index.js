@@ -7,6 +7,7 @@ import global from './global'
 import inputnumber from './inputnumber'
 import inputswitch from './inputswitch'
 import inputtext from './inputtext'
+import menubar from './menubar'
 import message from './message'
 import multiselect from './multiselect'
 import paginator from './paginator'
@@ -42,6 +43,7 @@ export default {
   //file
 
   //menu
+  menubar,
   tabmenu,
 
   //overlays
