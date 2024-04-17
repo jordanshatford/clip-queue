@@ -1,5 +1,22 @@
 # @cq/web
 
+## 1.18.0
+
+### Minor Changes
+
+- feat: redesign navbar using primvue menubar ([`464b48fe65f554853090e822aa64565b77d2cd7b`](https://github.com/jordanshatford/clip-queue/commit/464b48fe65f554853090e822aa64565b77d2cd7b))
+
+### Patch Changes
+
+- fix: only trigger theme change when value has changed ([`4a9df3e9f8db35f287e544b5d9ec5cb41e2b944d`](https://github.com/jordanshatford/clip-queue/commit/4a9df3e9f8db35f287e544b5d9ec5cb41e2b944d))
+
+- fix: do not reset dark/light mode preference when saving preferences ([`33fb2727a0528f40b1daeb7940aeaf59b2f1aecd`](https://github.com/jordanshatford/clip-queue/commit/33fb2727a0528f40b1daeb7940aeaf59b2f1aecd))
+
+- fix: crash when saving preference value in settings ([`4a9df3e9f8db35f287e544b5d9ec5cb41e2b944d`](https://github.com/jordanshatford/clip-queue/commit/4a9df3e9f8db35f287e544b5d9ec5cb41e2b944d))
+
+- Updated dependencies [[`8f965385da023b91b5f83a85d7de1d30596e26ab`](https://github.com/jordanshatford/clip-queue/commit/8f965385da023b91b5f83a85d7de1d30596e26ab), [`55e89e5b948b94d7fa6ae8cdf7b1f97e3c83c7ca`](https://github.com/jordanshatford/clip-queue/commit/55e89e5b948b94d7fa6ae8cdf7b1f97e3c83c7ca)]:
+  - @cq/ui@1.2.0
+
 ## 1.17.0
 
 ### Minor Changes

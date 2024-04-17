@@ -1,5 +1,13 @@
 # @cq/ui
 
+## 1.2.0
+
+### Minor Changes
+
+- feat: add primevue menubar component ([`8f965385da023b91b5f83a85d7de1d30596e26ab`](https://github.com/jordanshatford/clip-queue/commit/8f965385da023b91b5f83a85d7de1d30596e26ab))
+
+- feat: add support for searching history table ([`55e89e5b948b94d7fa6ae8cdf7b1f97e3c83c7ca`](https://github.com/jordanshatford/clip-queue/commit/55e89e5b948b94d7fa6ae8cdf7b1f97e3c83c7ca))
+
 ## 1.1.0
 
 ### Minor Changes
