@@ -2,7 +2,7 @@
   <div class="mx-auto mb-3 max-w-xl">
     <TabMenu :model="tabs" :active-index="activeIndex">
       <template #item="{ item, props }">
-        <RouterLink v-if="item.route" v-slot="{ href, navigate }" :to="{ name: item.route }" custom>
+        <RouterLink v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
           <a :href="href" v-bind="props.action" @click="navigate">
             <span v-bind="props.icon"></span>
             <span v-bind="props.label">{{ item.label }}</span>
@@ -18,18 +18,14 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { TabMenu } from '@cq/ui'
-import { RouteNameConstants } from '@/router'
+import { RouteNameConstants, routes, toAllowedMenuItems } from '@/router'
 
 const route = useRoute()
 
-const tabs = [
-  { label: 'Chat', icon: 'pi pi-comments', route: RouteNameConstants.SETTINGS_CHAT },
-  { label: 'Queue', icon: 'pi pi-list', route: RouteNameConstants.SETTINGS_QUEUE },
-  { label: 'Preferences', icon: 'pi pi-palette', route: RouteNameConstants.SETTINGS_PREFERENCES },
-  { label: 'Other', icon: 'pi pi-cog', route: RouteNameConstants.SETTINGS_OTHER }
-]
+const settingChildren = routes.find((r) => r.name === RouteNameConstants.SETTINGS)?.children ?? []
+const tabs = toAllowedMenuItems(settingChildren)
 
 const activeIndex = computed(() => {
-  return tabs.findIndex((tab) => tab.route === route?.name)
+  return tabs.findIndex((tab) => tab.route.name === route?.name)
 })
 </script>

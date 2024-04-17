@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import twitch from '@cq/services/twitch'
+import type { MenuItem } from '@cq/ui'
 import { config } from '@/config'
 import { useUser } from '@/stores/user'
 import HomePage from '@/views/HomePage.vue'
@@ -23,12 +24,13 @@ export enum RouteNameConstants {
   SETTINGS_OTHER = 'settings_other'
 }
 
-export const routes: Array<RouteRecordRaw> = [
+export const routes: RouteRecordRaw[] = [
   {
     path: '/queue',
     name: RouteNameConstants.QUEUE,
     component: QueuePage,
     meta: {
+      icon: 'pi pi-list',
       title: 'Queue',
       requiresAuth: true
     }
@@ -38,6 +40,7 @@ export const routes: Array<RouteRecordRaw> = [
     name: RouteNameConstants.HISTORY,
     component: HistoryPage,
     meta: {
+      icon: 'pi pi-history',
       title: 'History',
       requiresAuth: true
     }
@@ -48,6 +51,7 @@ export const routes: Array<RouteRecordRaw> = [
     redirect: { name: RouteNameConstants.SETTINGS_CHAT },
     component: SettingsPage,
     meta: {
+      icon: 'pi pi-cog',
       title: 'Settings',
       requiresAuth: true
     },
@@ -57,6 +61,7 @@ export const routes: Array<RouteRecordRaw> = [
         name: RouteNameConstants.SETTINGS_CHAT,
         component: ChatSettings,
         meta: {
+          icon: 'pi pi-comments',
           title: 'Chat Settings',
           requiresAuth: true
         }
@@ -66,6 +71,7 @@ export const routes: Array<RouteRecordRaw> = [
         name: RouteNameConstants.SETTINGS_QUEUE,
         component: QueueSettings,
         meta: {
+          icon: 'pi pi-list',
           title: 'Queue Settings',
           requiresAuth: true
         }
@@ -75,6 +81,7 @@ export const routes: Array<RouteRecordRaw> = [
         name: RouteNameConstants.SETTINGS_PREFERENCES,
         component: PreferenceSettings,
         meta: {
+          icon: 'pi pi-palette',
           title: 'Preferences',
           requiresAuth: true
         }
@@ -84,6 +91,7 @@ export const routes: Array<RouteRecordRaw> = [
         name: RouteNameConstants.SETTINGS_OTHER,
         component: OtherSettings,
         meta: {
+          icon: 'pi pi-cog',
           title: 'Other Settings',
           requiresAuth: true
         }
@@ -137,3 +145,29 @@ router.beforeEach(async (to, _from, next) => {
 })
 
 export default router
+
+/**
+ * Convert list of routes to MenuItem used by UI. These are authorized routes only.
+ * @param routes - the routes to use.
+ * @param recursive - if children routes should be included.
+ * @returns MenuItem[]
+ */
+export function toAllowedMenuItems(
+  routes: RouteRecordRaw[],
+  recursive: boolean = false
+): MenuItem[] {
+  const user = useUser()
+  return routes
+    .filter((r) => (r.meta?.requiresAuth && user.isLoggedIn) || !r.meta?.requiresAuth)
+    .map((r) => {
+      // If it is a settings route 'Other Settings', make the label simply 'Other'
+      const isSettingsRoute = r.name?.toString().startsWith('settings_')
+      const label = r.meta?.title ? String(r.meta.title) : ''
+      return {
+        icon: r.meta?.icon ? String(r.meta.icon) : undefined,
+        label: isSettingsRoute ? label.replace('Settings', '').trim() : label,
+        route: r.children && recursive ? undefined : { name: r.name },
+        items: recursive && r.children ? toAllowedMenuItems(r.children, recursive) : undefined
+      }
+    })
+}

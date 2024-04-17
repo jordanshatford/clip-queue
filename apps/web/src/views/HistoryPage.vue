@@ -12,6 +12,7 @@
       icon="pi pi-plus"
       label="Queue"
       :disabled="isQueueClipsDisabled"
+      severity="info"
       size="small"
       @click="queueClips()"
     ></Button>
