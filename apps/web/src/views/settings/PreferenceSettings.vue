@@ -90,7 +90,7 @@ function onReset() {
 }
 
 function onSubmit() {
-  theme.setPreferences(formTheme.value)
+  theme.preferences = formTheme.value
   toast.add({
     severity: 'success',
     summary: 'Success',

@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 import { type ColorOption, colors, surfaces, setColorPalette } from '@cq/ui'
 
@@ -22,7 +22,7 @@ export interface ThemePreferences {
 }
 
 export const DEFAULTS: ThemePreferences = {
-  theme: getInferredDefaultTheme('light'),
+  theme: 'light',
   primary: structuredClone(colors[12]), // Violet
   surface: structuredClone(surfaces[2]) // Zinc
 }
@@ -31,6 +31,9 @@ export const useTheme = defineStore(
   'theme',
   () => {
     const preferences = ref<ThemePreferences>(structuredClone(DEFAULTS))
+    preferences.value.theme = getInferredDefaultTheme(DEFAULTS.theme)
+
+    watch(preferences, updatePreferences, { deep: true })
 
     const isDark = computed(() => preferences.value.theme === 'dark')
 
@@ -47,16 +50,19 @@ export const useTheme = defineStore(
       return isModifiedFrom.value({ ...DEFAULTS })
     })
 
-    function setPreferences(p?: ThemePreferences) {
-      if (p) {
-        preferences.value = { ...p, theme: preferences.value.theme }
+    function updatePreferences(value: ThemePreferences, old?: ThemePreferences) {
+      if (value.primary.name !== old?.primary.name) {
+        setColorPalette('primary', value.primary.palette)
       }
-      setColorPalette('primary', preferences.value.primary.palette)
-      setColorPalette('surface', preferences.value.surface.palette)
-      if (preferences.value.theme === 'dark') {
-        document?.querySelector('html')?.classList.add('dark')
-      } else {
-        document.querySelector('html')?.classList.remove('dark')
+      if (value.surface.name !== old?.surface.name) {
+        setColorPalette('surface', value.surface.palette)
+      }
+      if (value.theme !== old?.theme) {
+        if (value.theme === 'dark') {
+          document?.querySelector('html')?.classList.add('dark')
+        } else {
+          document.querySelector('html')?.classList.remove('dark')
+        }
       }
     }
 
@@ -66,7 +72,7 @@ export const useTheme = defineStore(
     }
 
     function $reset() {
-      setPreferences(structuredClone({ ...DEFAULTS, theme: preferences.value.theme }))
+      preferences.value = { ...DEFAULTS, theme: preferences.value.theme }
     }
 
     return {
@@ -74,7 +80,7 @@ export const useTheme = defineStore(
       isDark,
       isModified,
       isModifiedFrom,
-      setPreferences,
+      updatePreferences,
       toggle,
       $reset
     }
@@ -83,7 +89,7 @@ export const useTheme = defineStore(
     persist: {
       key: 'cq-theme',
       afterRestore: (ctx) => {
-        ctx.store.setPreferences()
+        ctx.store.updatePreferences(ctx.store.preferences)
       }
     }
   }
