@@ -20,7 +20,7 @@
   <DataTable
     v-model:selection="selection"
     v-model:filters="filters"
-    :globalFilterFields="['category', 'channel', 'provider', 'submitters', 'title']"
+    :global-filter-fields="['category', 'channel', 'provider', 'submitters', 'title']"
     :value="queue.history.toArray()"
     size="small"
     paginator
@@ -32,14 +32,14 @@
     <template #empty>No clips previously watched.</template>
     <template #header>
       <div class="flex items-center justify-between">
-        <span class="text-900 text-xl font-bold">History</span>
+        <span class="text-xl">History</span>
         <span class="relative">
           <i
             class="pi pi-search absolute left-3 top-2/4 -mt-2 text-surface-400 dark:text-surface-500"
           ></i>
           <InputText
-            size="small"
             v-model="filters['global'].value"
+            size="small"
             placeholder="Search"
             class="pl-10 font-normal"
           />
@@ -51,37 +51,31 @@
       <template #body="{ data }: { data: Clip }">
         <div class="flex items-center">
           <img
-            class="hidden aspect-video w-24 rounded-xl sm:block"
+            class="hidden aspect-video w-24 rounded-lg sm:block"
             :src="data.thumbnailUrl"
             :alt="data.title"
             @error="queue.history.remove(data)"
           />
           <div class="ml-3 text-left text-sm">
-            <p class="font-normal text-surface-600 dark:text-surface-400">
+            <p class="font-normal">
               {{ data.title }}
               <span v-if="data.url">
                 <a
                   :href="data.url"
                   target="_blank"
                   rel="noreferrer"
-                  class="text-lg text-sm font-normal text-surface-400 no-underline hover:text-surface-600 dark:text-surface-600 dark:hover:text-surface-200"
+                  class="text-surface-400 no-underline hover:text-surface-600 dark:text-surface-600 dark:hover:text-surface-200"
                 >
-                  <i class="pi pi-external-link text-sm"></i>
+                  <i class="pi pi-external-link"></i>
                 </a>
               </span>
             </p>
-            <p
-              v-if="data.category"
-              class="text-sm font-semibold text-surface-400 dark:text-surface-600"
-            >
-              {{ data.channel
-              }}<span class="text-sm font-normal text-surface-400 dark:text-surface-600">
-                playing </span
-              >{{ data.category }}
-            </p>
-            <p v-else class="text-sm font-semibold text-surface-400 dark:text-surface-600">
-              {{ data.channel }}
-            </p>
+            <div class="text-xs text-surface-400">
+              <p v-if="data.category">{{ data.channel }} - {{ data.category }}</p>
+              <p v-else>
+                {{ data.channel }}
+              </p>
+            </div>
           </div>
         </div>
       </template>

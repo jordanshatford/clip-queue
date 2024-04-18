@@ -30,35 +30,20 @@
         </div>
       </div>
     </template>
-    <template #title
-      ><span class="font-normal text-surface-600 dark:text-surface-400">{{
-        clip.title
-      }}</span></template
-    >
+    <template #title>
+      <span class="font-normal">{{ clip.title }}</span>
+    </template>
     <template #subtitle>
-      <div
-        v-if="clip.category"
-        class="text-sm font-semibold text-surface-400 dark:text-surface-600"
-      >
-        {{ clip.channel
-        }}<span class="text-sm font-normal text-surface-400 dark:text-surface-600"> playing </span
-        >{{ clip.category }}
-      </div>
-      <div v-else class="text-sm font-semibold text-surface-400 dark:text-surface-600">
-        {{ clip.channel }}
+      <div class="text-xs text-surface-400">
+        <p v-if="clip.category">{{ clip.channel }} - {{ clip.category }}</p>
+        <p v-else>
+          {{ clip.channel }}
+        </p>
       </div>
     </template>
     <template #content>
-      <div class="mb-2 text-sm font-normal text-surface-400 dark:text-surface-600">
-        Submitter:
-        <span class="text-sm font-semibold text-surface-400 dark:text-surface-600">{{
-          clip.submitters[0]
-        }}</span>
-      </div>
-      <ProviderName
-        :provider="clip.provider"
-        class="font-normal text-surface-600 dark:text-surface-400"
-      />
+      <div class="text-xs text-surface-400">Submitter: {{ clip.submitters[0] }}</div>
+      <ProviderName :provider="clip.provider" class="pt-2 font-normal" />
     </template>
   </Card>
 </template>

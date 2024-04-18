@@ -4,9 +4,7 @@
       <template #content>
         <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">
-            <label for="primaryColor" class="font-normal text-surface-600 dark:text-surface-400"
-              >Primary Color:</label
-            >
+            <label for="primaryColor">Primary Color:</label>
             <Dropdown
               v-model="formTheme.primary"
               :options="colors"
@@ -21,14 +19,10 @@
                 <ColorName :name="option.name" :color="option.palette[6]" />
               </template>
             </Dropdown>
-            <small
-              id="primaryColor-help"
-              class="pb-2 text-sm font-normal text-surface-400 dark:text-surface-600"
+            <small id="primaryColor-help" class="pb-2 text-sm text-surface-400"
               >Primary color used throughout the UI.</small
             >
-            <label for="surfaceColor" class="font-normal text-surface-600 dark:text-surface-400"
-              >Surface Color:</label
-            >
+            <label for="surfaceColor">Surface Color:</label>
             <Dropdown
               v-model="formTheme.surface"
               data-key="name"
@@ -43,9 +37,7 @@
                 <ColorName :name="option.name" :color="option.palette[6]" />
               </template>
             </Dropdown>
-            <small
-              id="surfaceColor-help"
-              class="pb-2 text-sm font-normal text-surface-400 dark:text-surface-600"
+            <small id="surfaceColor-help" class="pb-2 text-sm text-surface-400"
               >Surface color used throughout the UI.</small
             >
           </div>

@@ -9,9 +9,7 @@
         :disabled="!(settings.isModified || theme.isModified)"
         @click="resetSettingsToDefault()"
       ></Button>
-      <label class="text-sm font-normal text-surface-400 dark:text-surface-600"
-        >Reset settings back to their initial values.</label
-      >
+      <label class="text-sm text-surface-400">Reset settings back to their initial values.</label>
     </template>
   </Card>
   <Card class="mx-auto mb-2 max-w-lg text-left">
@@ -24,7 +22,7 @@
         :disabled="queue.history.empty()"
         @click="purgeHistory()"
       ></Button>
-      <label class="text-sm font-normal text-surface-400 dark:text-surface-600"
+      <label class="text-sm text-surface-400"
         >Purge all clips previously viewed allowing them to be resubmitted.</label
       >
     </template>
@@ -39,14 +37,14 @@
         :disabled="!providers.hasCachedData"
         @click="purgeCache()"
       ></Button>
-      <label class="text-sm font-normal text-surface-400 dark:text-surface-600">
+      <label class="text-sm text-surface-400">
         Clips submitted may be cached for future use. Purge all cached clips.
       </label>
     </template>
   </Card>
   <Card class="mx-auto max-w-lg">
     <template #content>
-      <p class="text-sm font-normal text-surface-400 dark:text-surface-600">
+      <p class="text-sm text-surface-400">
         Application version: <span>v{{ version }}</span>
       </p>
     </template>
