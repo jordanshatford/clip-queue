@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import AppFeature from '../AppFeature.vue'
+import AppFeatureCard from '../AppFeatureCard.vue'
 
-describe('AppFeature.vue', () => {
-  const wrapper = shallowMount(AppFeature, {
+describe('AppFeatureCard.vue', () => {
+  const wrapper = shallowMount(AppFeatureCard, {
     props: {
       title: 'test',
       description: 'test description',

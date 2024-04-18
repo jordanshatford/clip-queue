@@ -9,7 +9,7 @@
     </div>
     <div class="mt-12 text-left">
       <div class="grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-12">
-        <AppFeature
+        <FeatureCard
           v-for="(feature, index) in features"
           :key="index"
           :title="feature.title"
@@ -22,8 +22,8 @@
 </template>
 
 <script setup lang="ts">
+import { FeatureCard } from '@cq/ui'
 import config from '@/config'
-import AppFeature from '@/components/AppFeature.vue'
 
 const { tagline, features } = config.about
 </script>
