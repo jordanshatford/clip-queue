@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { ClipProvider } from '@cq/providers'
-import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
+import { clipFromKick, clipFromTwitch } from './mocks'
 import { ClipList } from '../clip-list'
 
 describe('clip-list.ts', () => {
@@ -160,7 +160,7 @@ describe('clip-list.ts', () => {
     clipList2.add({ ...clipFromTwitch, submitters: ['testsubmitter'] })
     clipList2.add({ ...clipFromTwitch, submitters: ['testsubmitter2'] })
     expect(clipList2.size()).toEqual(1)
-    expect(clipList2.toArray()[0].submitters.length).toEqual(2)
+    expect(clipList2.toArray()[0]?.submitters.length).toEqual(2)
     clipList2.removeBySubmitter('testsubmitter2')
     expect(clipList2.size()).toEqual(1)
     const queuedClip = clipList2.pop()
@@ -264,7 +264,7 @@ describe('clip-list.ts', () => {
     clipList2.add({ ...clipFromTwitch, id: 'test', submitters: ['S'] })
     clipList2.add({ ...clipFromTwitch, id: 'test', submitters: ['s'] })
     expect(clipList2.size()).toEqual(1)
-    expect(clipList2.toArray()[0].submitters?.length).toEqual(1)
+    expect(clipList2.toArray()[0]?.submitters?.length).toEqual(1)
   })
 
   it('adds multiple clips with the same id if they are from different providers', () => {
@@ -272,9 +272,9 @@ describe('clip-list.ts', () => {
     clipList2.add({ ...clipFromTwitch, id: 'test', submitters: ['s'] })
     clipList2.add({ ...clipFromKick, id: 'test', submitters: ['S'] })
     expect(clipList2.size()).toEqual(2)
-    expect(clipList2.toArray()[0].id).toEqual(clipList2.toArray()[1].id)
-    expect(clipList2.toArray()[0].provider).toEqual(ClipProvider.TWITCH)
-    expect(clipList2.toArray()[1].provider).toEqual(ClipProvider.KICK)
+    expect(clipList2.toArray()[0]?.id).toEqual(clipList2.toArray()[1]?.id)
+    expect(clipList2.toArray()[0]?.provider).toEqual(ClipProvider.TWITCH)
+    expect(clipList2.toArray()[1]?.provider).toEqual(ClipProvider.KICK)
   })
 
   it('can remove clips based on the provider of the clip', () => {

@@ -1,6 +1,7 @@
 import type { KickClip, KickCategory, KickChannel } from '@cq/services/kick'
 import type { TwitchGame, TwitchClip } from '@cq/services/twitch'
 import type { YouTubeClip } from '@cq/services/youtube'
+import { type Clip, ClipProvider } from '..'
 
 export const mockKickCategory: KickCategory = {
   id: 123,
@@ -77,4 +78,30 @@ export const mockYouTubeClip: YouTubeClip = {
   thumbnail_url: 'https://www.youtube.com/thumbnail',
   start: 0,
   end: 100
+}
+
+export const clipFromKick: Clip = {
+  provider: ClipProvider.KICK,
+  submitters: ['testsubmitterkick'],
+  id: 'testclipkick',
+  title: 'testclipkick',
+  channel: 'testchannelkick',
+  category: 'testcategorykick',
+  createdAt: '2024-02-22T08:47:27.000Z',
+  url: 'https://kick.com/channel?clip=testclip',
+  embedUrl: 'https://kick.com/channel?clip=testclip',
+  thumbnailUrl: 'https://kick.com/thumbnail'
+}
+
+export const clipFromTwitch: Clip = {
+  provider: ClipProvider.TWITCH,
+  submitters: ['testsubmittertwitch'],
+  id: 'testcliptwitch',
+  title: 'testcliptwitch',
+  channel: 'testchanneltwitch',
+  category: 'testcategorytwitch',
+  createdAt: '2024-02-22T08:47:27.000Z',
+  url: 'https://clips.twitch.tv/testclip',
+  embedUrl: 'https://clips.twitch.tv/testclip',
+  thumbnailUrl: 'https://twitch.tv/thumbnail'
 }

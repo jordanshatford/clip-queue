@@ -1,4 +1,5 @@
-import { type Clip, type ClipProvider, toUUID } from '@cq/providers'
+import type { Clip, ClipProvider } from './types'
+import { toUUID } from './utils'
 
 export class ClipList {
   private _clips: Clip[]
@@ -16,8 +17,10 @@ export class ClipList {
         const index = this._clips.findIndex((c) => toUUID(c) === toUUID(clip))
         const submitters = this._clips[index]?.submitters ?? []
         const submitter = clip.submitters[0]?.toLowerCase()
-        if (submitter && !submitters.includes(submitter)) {
-          this._clips[index].submitters = [...submitters, submitter]
+        const c = this._clips[index]
+        if (submitter && !submitters.includes(submitter) && c !== undefined) {
+          c.submitters = [...submitters, submitter]
+          this._clips[index] = c
         }
       } else {
         this._clips.push(clip)
@@ -29,8 +32,9 @@ export class ClipList {
 
   public remove(clip: Clip): void {
     const index = this._clips.findIndex((c) => toUUID(c) === toUUID(clip))
-    if (index > -1) {
-      this.removeSubmitterFromClip(clip?.submitters[0]?.toLowerCase(), index)
+    const submitter = clip?.submitters[0]?.toLowerCase()
+    if (index > -1 && submitter) {
+      this.removeSubmitterFromClip(submitter, index)
       this.sort()
     }
   }
@@ -80,15 +84,15 @@ export class ClipList {
 
   private removeSubmitterFromClip(submitter: string, index: number): void {
     const c = this._clips[index]
-    if (c.submitters?.includes(submitter)) {
-      const submittersLength = c.submitters?.length ?? 0
-      if (submittersLength === 1) {
+    if (c?.submitters?.includes(submitter)) {
+      if (c.submitters.length === 1) {
         // Remove the clip from the list
         this._clips.splice(index, 1)
-      } else if (submittersLength > 1) {
+      } else if (c.submitters.length > 1) {
         // Remove only the submitter
         const submitters = c.submitters?.filter((s) => !(s === submitter))
-        this._clips[index].submitters = submitters
+        c.submitters = submitters
+        this._clips[index] = c
       }
     }
   }

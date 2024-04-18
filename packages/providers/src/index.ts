@@ -1,3 +1,4 @@
+export * from './clip-list'
 export * from './kick'
 export * from './twitch'
 export * from './types'
