@@ -23,7 +23,7 @@
     </template>
     <template #end>
       <div class="flex items-center gap-2">
-        <AppThemeToggle />
+        <ThemeToggle :is-dark-mode="theme.isDark" @toggle="theme.toggle()" />
         <Button
           icon="pi pi-twitch"
           :label="user.isLoggedIn ? 'Logout' : 'Login'"
@@ -39,11 +39,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { Button, Menubar } from '@cq/ui'
+import { Button, Menubar, ThemeToggle } from '@cq/ui'
+import { useTheme } from '@/stores/theme'
 import { useUser } from '@/stores/user'
 import { RouteNameConstants, routes, toAllowedMenuItems } from '@/router'
-import AppThemeToggle from '@/components/AppThemeToggle.vue'
 
+const theme = useTheme()
 const user = useUser()
 const router = useRouter()
 
