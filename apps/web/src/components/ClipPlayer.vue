@@ -6,27 +6,27 @@
       :source="playerSource"
       :thumbnail-url="clip.thumbnailUrl"
     />
-    <div class="text-left">
-      <h2 class="mb-1 mt-2 text-2xl font-bold font-normal text-surface-600 dark:text-surface-400">
-        {{ clip.title }}
-        <span v-if="clip.url">
+    <div class="mt-2 text-left">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2 text-2xl font-bold font-normal text-surface-400">
+          <span>{{ clip.title }}</span>
           <a
+            v-if="clip.url"
             :href="clip.url"
             target="_blank"
             rel="noreferrer"
-            class="text-lg text-sm font-normal text-surface-400 no-underline hover:text-surface-600 dark:text-surface-600 dark:hover:text-surface-200"
+            class="text-base no-underline hover:text-surface-600 dark:hover:text-surface-200"
           >
             <i class="pi pi-external-link"></i>
           </a>
-        </span>
-        <div class="float-right text-base">
+        </div>
+        <div class="flex gap-2">
           <Button
             icon="pi pi-backward"
             label="Previous"
             severity="info"
             size="small"
             :disabled="previousDisabled"
-            class="mr-2"
             @click="emit('previous')"
           >
           </Button>
@@ -41,41 +41,14 @@
           >
           </Button>
         </div>
-      </h2>
-      <div class="text-sm font-normal text-surface-400 dark:text-surface-600">
-        <span v-if="clip.channel && clip.category">
-          <span class="text-sm font-semibold text-surface-400 dark:text-surface-600">{{
-            clip.channel
-          }}</span>
-          playing
-          <span class="text-sm font-semibold text-surface-400 dark:text-surface-600">{{
-            clip.category
-          }}</span>
+      </div>
+      <div class="flex flex-col gap-1 text-sm font-normal text-surface-400">
+        <span>
+          {{ clip.channel }}
+          <span v-if="clip.category"> - {{ clip.category }} </span>
+          <span v-if="clip.submitters[0]"> - Submitter: {{ clip.submitters[0] }} </span>
         </span>
-        <span v-else>
-          <span class="text-sm font-semibold text-surface-400 dark:text-surface-600">{{
-            clip.channel
-          }}</span>
-        </span>
-        <span v-if="timeAgo">
-          - Created
-          <span class="text-sm font-semibold text-surface-400 dark:text-surface-600">{{
-            timeAgo
-          }}</span>
-          ago
-        </span>
-        <span v-if="clip.submitters[0]">
-          - Submitted by
-          <span class="text-sm font-semibold text-surface-400 dark:text-surface-600">{{
-            clip.submitters[0]
-          }}</span>
-          <span v-if="clip.provider">
-            from
-            <span class="text-sm font-semibold text-surface-400 dark:text-surface-600">{{
-              clip.provider
-            }}</span>
-          </span>
-        </span>
+        <ProviderName :provider="clip.provider" />
       </div>
     </div>
   </div>
@@ -83,11 +56,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { formatDistanceToNow, parseISO } from 'date-fns'
 import Player from '@cq/player'
 import type { Clip, PlayerFormat } from '@cq/providers'
 import { Button } from '@cq/ui'
 import { useProviders } from '@/stores/providers'
+import ProviderName from './ProviderName.vue'
 
 export interface Props {
   clip: Clip
@@ -113,13 +86,6 @@ const playerFormat = computed<PlayerFormat | undefined>(() => {
 
 const playerSource = computed<string | undefined>(() => {
   return providers.getPlayerSource(props.clip)
-})
-
-const timeAgo = computed<string>(() => {
-  if (props.clip?.createdAt) {
-    return formatDistanceToNow(parseISO(props.clip.createdAt))
-  }
-  return ''
 })
 </script>
 
