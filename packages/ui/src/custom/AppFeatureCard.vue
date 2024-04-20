@@ -1,22 +1,20 @@
 <template>
-  <div class="flex flex-row space-x-4">
-    <div
-      class="flex aspect-square h-12 items-center justify-center rounded-xl bg-primary-700 text-white"
-    >
-      <i :class="['text-xl', icon]"></i>
-    </div>
-    <div class="flex flex-col">
-      <p class="text-lg font-normal font-semibold text-surface-600 dark:text-surface-400">
-        {{ title }}
-      </p>
-      <p class="mt-1 text-base text-sm font-normal text-surface-400 dark:text-surface-600">
-        {{ description }}
-      </p>
-    </div>
-  </div>
+  <Card class="p-2">
+    <template #title>
+      <div class="flex flex-col gap-2">
+        <i :class="['text-xl text-primary-500 dark:text-primary-400', icon]"></i>
+        <span> {{ title }}</span>
+      </div>
+    </template>
+    <template #content>
+      <p class="text-sm text-surface-400">{{ description }}</p>
+    </template>
+  </Card>
 </template>
 
 <script setup lang="ts">
+import Card from 'primevue/card'
+
 export interface Props {
   title: string
   description: string

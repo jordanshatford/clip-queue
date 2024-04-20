@@ -1,11 +1,11 @@
 <template>
   <Button
-    @click="() => emit('toggle')"
     :icon="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'"
     size="small"
     text
     rounded
     aria-label="Theme"
+    @click="() => emit('toggle')"
   ></Button>
 </template>
 

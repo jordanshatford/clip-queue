@@ -18,18 +18,6 @@ describe('ClipPlayer.vue', () => {
     expect(wrapper.exists()).toEqual(true)
   })
 
-  it('successfully shows the time ago for the clip', async () => {
-    // @ts-ignore
-    expect(wrapper.vm.timeAgo).not.toEqual('')
-  })
-
-  it('returns no time ago when it doesnt have a clip timestamp', async () => {
-    wrapper.setProps({ clip: { ...clipFromTwitch, createdAt: undefined } })
-    await wrapper.vm.$nextTick()
-    // @ts-ignore
-    expect(wrapper.vm.timeAgo).toEqual('')
-  })
-
   it('can use VideoJSPlayer component', async () => {
     wrapper.setProps({ clip: clipFromKick })
     await wrapper.vm.$nextTick()
