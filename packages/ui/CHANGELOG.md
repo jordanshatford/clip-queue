@@ -1,5 +1,13 @@
 # @cq/ui
 
+## 1.3.0
+
+### Minor Changes
+
+- feat: redesign feature card using primevue card ([`e805270da2e59f454c4dc5af87789b815e1d4ba9`](https://github.com/jordanshatford/clip-queue/commit/e805270da2e59f454c4dc5af87789b815e1d4ba9))
+
+- feat: redesign theme toggle button using primevue button ([`7736728eb30981f07b7a8e6e07e8e4da49836815`](https://github.com/jordanshatford/clip-queue/commit/7736728eb30981f07b7a8e6e07e8e4da49836815))
+
 ## 1.2.0
 
 ### Minor Changes
