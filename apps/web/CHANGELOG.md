@@ -1,5 +1,16 @@
 # @cq/web
 
+## 1.19.0
+
+### Minor Changes
+
+- feat: redesign clip player visually ([`9de0acb6db64cc9d8515ee9d5b673ebd33e44913`](https://github.com/jordanshatford/clip-queue/commit/9de0acb6db64cc9d8515ee9d5b673ebd33e44913))
+
+### Patch Changes
+
+- Updated dependencies [[`e805270da2e59f454c4dc5af87789b815e1d4ba9`](https://github.com/jordanshatford/clip-queue/commit/e805270da2e59f454c4dc5af87789b815e1d4ba9), [`7736728eb30981f07b7a8e6e07e8e4da49836815`](https://github.com/jordanshatford/clip-queue/commit/7736728eb30981f07b7a8e6e07e8e4da49836815)]:
+  - @cq/ui@1.3.0
+
 ## 1.18.0
 
 ### Minor Changes
