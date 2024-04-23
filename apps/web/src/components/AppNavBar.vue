@@ -5,7 +5,7 @@
         :to="{ name: RouteNameConstants.HOME }"
         class="mr-2 flex flex-shrink-0 items-center"
       >
-        <img class="aspect-square w-12" src="/icon.png" />
+        <img class="aspect-square w-10" src="/icon.png" />
       </RouterLink>
     </template>
     <template #item="{ item, props, hasSubmenu }">
