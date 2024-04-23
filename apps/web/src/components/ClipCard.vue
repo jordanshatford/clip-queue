@@ -1,49 +1,51 @@
 <template>
   <Card class="max-w-[16rem] flex-shrink-0 overflow-hidden text-left">
     <template #header>
-      <div class="relative">
-        <img
-          class="aspect-video w-full"
-          :alt="clip.title"
-          :src="clip.thumbnailUrl"
-          @error="emit('remove')"
-        />
-        <div class="absolute -bottom-6 -right-2 m-2 p-2">
-          <div class="flex gap-2">
-            <Button
-              icon="pi pi-play"
-              title="Play now"
-              severity="info"
-              size="small"
-              @click="emit('play')"
-            >
-            </Button>
-            <Button
-              icon="pi pi-trash"
-              title="Remove"
-              severity="danger"
-              size="small"
-              @click="emit('remove')"
-            >
-            </Button>
-          </div>
-        </div>
-      </div>
+      <img
+        class="aspect-video w-full"
+        :alt="clip.title"
+        :src="clip.thumbnailUrl"
+        @error="emit('remove')"
+      />
     </template>
     <template #title>
       <span class="font-normal">{{ clip.title }}</span>
     </template>
-    <template #subtitle>
-      <div class="text-xs text-surface-400">
+    <template #subtitle> </template>
+    <template #content>
+      <div class="mb-4 text-xs text-surface-400">
         <p v-if="clip.category">{{ clip.channel }} - {{ clip.category }}</p>
         <p v-else>
           {{ clip.channel }}
         </p>
+        <p>Submitter: {{ clip.submitters[0] }}</p>
+        <div class="flex items-center gap-1">
+          <p>Provider:</p>
+          <ProviderName :provider="clip.provider" class="font-normal" />
+        </div>
       </div>
-    </template>
-    <template #content>
-      <div class="text-xs text-surface-400">Submitter: {{ clip.submitters[0] }}</div>
-      <ProviderName :provider="clip.provider" class="pt-2 font-normal" />
+      <div class="flex gap-1">
+        <Button
+          icon="pi pi-play"
+          class="w-1/2"
+          title="Play Now"
+          label="Play Now"
+          severity="info"
+          size="small"
+          @click="emit('play')"
+        >
+        </Button>
+        <Button
+          icon="pi pi-trash"
+          class="w-1/2"
+          title="Remove"
+          label="Remove"
+          severity="danger"
+          size="small"
+          @click="emit('remove')"
+        >
+        </Button>
+      </div>
     </template>
   </Card>
 </template>
