@@ -1,6 +1,7 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { mockKickClip, mockTwitchClip } from './mocks'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+
 import { KickProvider } from '../kick'
+import { mockKickClip, mockTwitchClip } from './mocks'
 
 vi.mock('@cq/services/kick', async (importOriginal) => {
   return {

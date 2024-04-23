@@ -1,4 +1,4 @@
-import type { KickClip, KickCategory, KickChannel } from '../kick'
+import type { KickCategory, KickChannel, KickClip } from '../kick'
 import type { TwitchClip, TwitchGame } from '../twitch'
 import type { YouTubeClip } from '../youtube'
 

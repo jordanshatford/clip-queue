@@ -23,6 +23,7 @@
 
 <script setup lang="ts">
 import { FeatureCard } from '@cq/ui'
+
 import config from '@/config'
 
 const { tagline, features } = config.about

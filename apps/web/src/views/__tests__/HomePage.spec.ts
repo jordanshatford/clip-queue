@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
+
 import config from '@/config'
 import HomePage from '../HomePage.vue'
 

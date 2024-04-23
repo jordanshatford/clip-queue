@@ -1,4 +1,4 @@
-import type { TwitchGame, TwitchClip } from '@cq/services/twitch'
+import type { TwitchClip, TwitchGame } from '@cq/services/twitch'
 
 export const mockTwitchGame: TwitchGame = {
   id: 'testgame',

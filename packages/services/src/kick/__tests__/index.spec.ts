@@ -1,6 +1,7 @@
-import { beforeEach, describe, it, expect, vi } from 'vitest'
 import axios from 'axios'
-import { getClipIdFromUrl, getClip } from '..'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+
+import { getClip, getClipIdFromUrl } from '..'
 import { mockKickClip } from '../../__tests__/mocks'
 
 vi.mock('axios', async () => {

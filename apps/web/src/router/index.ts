@@ -1,17 +1,19 @@
-import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
-import twitch from '@cq/services/twitch'
+import { createRouter, createWebHistory } from 'vue-router'
+
 import type { MenuItem } from '@cq/ui'
+import twitch from '@cq/services/twitch'
+
 import { config } from '@/config'
 import { useUser } from '@/stores/user'
+import HistoryPage from '@/views/HistoryPage.vue'
 import HomePage from '@/views/HomePage.vue'
 import QueuePage from '@/views/QueuePage.vue'
-import HistoryPage from '@/views/HistoryPage.vue'
-import SettingsPage from '@/views/SettingsPage.vue'
 import ChatSettings from '@/views/settings/ChatSettings.vue'
-import QueueSettings from '@/views/settings/QueueSettings.vue'
-import PreferenceSettings from '@/views/settings/PreferenceSettings.vue'
 import OtherSettings from '@/views/settings/OtherSettings.vue'
+import PreferenceSettings from '@/views/settings/PreferenceSettings.vue'
+import QueueSettings from '@/views/settings/QueueSettings.vue'
+import SettingsPage from '@/views/SettingsPage.vue'
 
 export enum RouteNameConstants {
   HOME = 'home',

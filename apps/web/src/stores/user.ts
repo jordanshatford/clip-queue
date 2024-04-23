@@ -1,17 +1,15 @@
-import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
+
+import type { AuthInfo, ChatUserstate, TwitchUserCtx } from '@cq/services/twitch'
+import twitch, { TwitchChat } from '@cq/services/twitch'
+
 import { env } from '@/config'
-import twitch, {
-  TwitchChat,
-  type AuthInfo,
-  type TwitchUserCtx,
-  type ChatUserstate
-} from '@cq/services/twitch'
-import { useSettings } from '@/stores/settings'
-import commands, { Command } from '@/utils/commands'
-import { getAllURLsFromText } from '@/utils'
-import { useQueue } from '@/stores/queue'
 import { useProviders } from '@/stores/providers'
+import { useQueue } from '@/stores/queue'
+import { useSettings } from '@/stores/settings'
+import { getAllURLsFromText } from '@/utils'
+import commands, { Command } from '@/utils/commands'
 
 const { CLIENT_ID, REDIRECT_URI } = env
 

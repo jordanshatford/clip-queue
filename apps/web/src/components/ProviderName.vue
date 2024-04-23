@@ -9,6 +9,7 @@
 
 <script setup lang="ts">
 import type { ClipProvider } from '@cq/providers'
+
 import { useProviders } from '@/stores/providers'
 
 export interface Props {

@@ -1,7 +1,9 @@
-import type { KickClip, KickCategory, KickChannel } from '@cq/services/kick'
-import type { TwitchGame, TwitchClip } from '@cq/services/twitch'
+import type { KickCategory, KickChannel, KickClip } from '@cq/services/kick'
+import type { TwitchClip, TwitchGame } from '@cq/services/twitch'
 import type { YouTubeClip } from '@cq/services/youtube'
-import { type Clip, ClipProvider } from '..'
+
+import type { Clip } from '..'
+import { ClipProvider } from '..'
 
 export const mockKickCategory: KickCategory = {
   id: 123,

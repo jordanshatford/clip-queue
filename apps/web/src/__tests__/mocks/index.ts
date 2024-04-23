@@ -1,4 +1,5 @@
-import { ClipProvider, type Clip } from '@cq/providers'
+import type { Clip } from '@cq/providers'
+import { ClipProvider } from '@cq/providers'
 
 export * from './kick'
 export * from './twitch'

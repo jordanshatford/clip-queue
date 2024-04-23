@@ -26,6 +26,7 @@
 <script setup lang="ts">
 import { toUUID } from '@cq/providers'
 import { Message } from '@cq/ui'
+
 import ClipPlayer from '@/components/ClipPlayer.vue'
 import ClipQueue from '@/components/ClipQueue.vue'
 import { useQueue } from '@/stores/queue'

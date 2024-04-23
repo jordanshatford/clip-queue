@@ -1,14 +1,17 @@
 import '@cq/ui/primeicons'
-import { PrimeVue, ConfirmationService, ToastService } from '@cq/ui'
-// @ts-ignore
-import LaraPreset from '@cq/ui/presets/lara'
-import { createApp } from 'vue'
+
+import * as Sentry from '@sentry/vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
-import * as Sentry from '@sentry/vue'
+import { createApp } from 'vue'
+
+import { ConfirmationService, PrimeVue, ToastService } from '@cq/ui'
+// @ts-ignore
+import LaraPreset from '@cq/ui/presets/lara'
+
 import App from '@/App.vue'
-import router from '@/router'
 import { env } from '@/config'
+import router from '@/router'
 
 const app = createApp(App)
 

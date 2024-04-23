@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 import { ConfirmDialog, Footer, Toast } from '@cq/ui'
-import { config } from '@/config'
+
 import AppNavBar from '@/components/AppNavBar.vue'
+import { config } from '@/config'
 </script>

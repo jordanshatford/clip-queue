@@ -51,6 +51,7 @@
 <script setup lang="ts">
 import type { Clip } from '@cq/providers'
 import { Button, Card } from '@cq/ui'
+
 import ProviderName from '@/components/ProviderName.vue'
 
 export interface Props {

@@ -1,12 +1,13 @@
 import axios from 'axios'
-import { toURLParams } from './utils'
+
 import type {
-  TwitchGame,
   TwitchClip,
-  TwitchResponse,
+  TwitchGame,
   TwitchPagedResponse,
+  TwitchResponse,
   TwitchUserCtx
 } from './types'
+import { toURLParams } from './utils'
 
 const api = axios.create({
   baseURL: 'https://api.twitch.tv/helix'

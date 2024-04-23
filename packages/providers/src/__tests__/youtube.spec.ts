@@ -1,6 +1,7 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { mockYouTubeClip, mockTwitchClip } from './mocks'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+
 import { YouTubeProvider } from '../youtube'
+import { mockTwitchClip, mockYouTubeClip } from './mocks'
 
 vi.mock('@cq/services/youtube', async (importOriginal) => {
   return {

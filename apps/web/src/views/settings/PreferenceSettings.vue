@@ -66,9 +66,12 @@
 
 <script setup lang="ts">
 import { ref, toRaw } from 'vue'
-import { Button, Card, colors, type ColorOption, Dropdown, surfaces, useToast } from '@cq/ui'
-import { useTheme } from '@/stores/theme'
+
+import type { ColorOption } from '@cq/ui'
+import { Button, Card, colors, Dropdown, surfaces, useToast } from '@cq/ui'
+
 import ColorName from '@/components/ColorName.vue'
+import { useTheme } from '@/stores/theme'
 
 const toast = useToast()
 const theme = useTheme()

@@ -56,9 +56,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import Player from '@cq/player'
+
 import type { Clip, PlayerFormat } from '@cq/providers'
+import Player from '@cq/player'
 import { Button } from '@cq/ui'
+
 import { useProviders } from '@/stores/providers'
 import ProviderName from './ProviderName.vue'
 

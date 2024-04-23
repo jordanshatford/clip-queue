@@ -1,5 +1,6 @@
 import axios from 'axios'
-import type { IDToken, TokenInfo, AuthInfo, TwitchUserCtx } from './types'
+
+import type { AuthInfo, IDToken, TokenInfo, TwitchUserCtx } from './types'
 
 const BASE_URL = 'https://id.twitch.tv/oauth2'
 

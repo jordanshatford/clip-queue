@@ -53,10 +53,11 @@
 
 <script setup lang="ts">
 import { Button, Card, useConfirm, useToast } from '@cq/ui'
-import { useTheme } from '@/stores/theme'
-import { useSettings } from '@/stores/settings'
+
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
+import { useSettings } from '@/stores/settings'
+import { useTheme } from '@/stores/theme'
 
 const version = __APP_VERSION__
 

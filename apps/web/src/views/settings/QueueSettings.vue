@@ -84,11 +84,13 @@
 
 <script setup lang="ts">
 import { computed, ref, toRaw } from 'vue'
+
 import { ClipProvider } from '@cq/providers'
 import { Button, Card, InputNumber, InputSwitch, Message, MultiSelect, useToast } from '@cq/ui'
-import { useSettings } from '@/stores/settings'
-import { useProviders } from '@/stores/providers'
+
 import ProviderName from '@/components/ProviderName.vue'
+import { useProviders } from '@/stores/providers'
+import { useSettings } from '@/stores/settings'
 
 const toast = useToast()
 const settings = useSettings()

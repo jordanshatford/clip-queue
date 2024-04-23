@@ -1,9 +1,9 @@
-import { beforeEach, describe, it, expect, vi } from 'vitest'
 import axios from 'axios'
-import TwitchAPI from '../api'
-import { toCommonHeaders } from '../api'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+
 import type { TwitchUserCtx } from '..'
 import { mockTwitchClip, mockTwitchGame } from '../../__tests__/mocks'
+import TwitchAPI, { toCommonHeaders } from '../api'
 
 vi.mock('axios', async () => {
   const mockGet = vi.fn().mockImplementation((url: string) => {

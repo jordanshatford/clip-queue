@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
+
 import ClipQueue from '../ClipQueue.vue'
 
 describe('ClipQueue.vue', () => {

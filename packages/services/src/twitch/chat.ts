@@ -1,4 +1,6 @@
-import { Client, type Options } from 'tmi.js'
+import type { Options } from 'tmi.js'
+import { Client } from 'tmi.js'
+
 import type { TwitchUserCtx } from './types'
 
 const DEFAULT_OPTIONS: Options = {

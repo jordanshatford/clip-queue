@@ -1,6 +1,8 @@
-import { computed, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
-import { type ColorOption, colors, surfaces, setColorPalette } from '@cq/ui'
+import { computed, ref, watch } from 'vue'
+
+import type { ColorOption } from '@cq/ui'
+import { colors, setColorPalette, surfaces } from '@cq/ui'
 
 type Theme = 'dark' | 'light'
 

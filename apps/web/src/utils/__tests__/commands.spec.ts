@@ -1,8 +1,10 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { setActivePinia, createPinia } from 'pinia'
+import { createPinia, setActivePinia } from 'pinia'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+
 import { ClipProvider } from '@cq/providers'
-import { useQueue } from '@/stores/queue'
+
 import { useProviders } from '@/stores/providers'
+import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
 import commands, { Command } from '../commands'
 

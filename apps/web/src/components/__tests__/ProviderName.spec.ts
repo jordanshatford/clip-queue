@@ -1,7 +1,9 @@
-import { describe, it, expect } from 'vitest'
-import { shallowMount } from '@vue/test-utils'
 import { createTestingPinia } from '@pinia/testing'
+import { shallowMount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
+
 import { ClipProvider } from '@cq/providers'
+
 import ProviderName from '../ProviderName.vue'
 
 describe('ProviderName.vue', () => {

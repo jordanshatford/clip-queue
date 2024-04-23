@@ -1,8 +1,9 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { createApp } from 'vue'
-import { setActivePinia, createPinia } from 'pinia'
+import { createPinia, setActivePinia } from 'pinia'
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
-import { useTheme, getInferredDefaultTheme } from '../theme'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { createApp } from 'vue'
+
+import { getInferredDefaultTheme, useTheme } from '../theme'
 
 const VALUE_LIGHT = '{"preferences": {"theme": "light"}}'
 const VALUE_DARK = '{"preferences": {"theme": "dark"}}'

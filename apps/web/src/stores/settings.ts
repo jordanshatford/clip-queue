@@ -1,6 +1,8 @@
-import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { computed, ref } from 'vue'
+
 import { ClipProvider } from '@cq/providers'
+
 import { Command } from '@/utils/commands'
 
 export interface CommandSettings {

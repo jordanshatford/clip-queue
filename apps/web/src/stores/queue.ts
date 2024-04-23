@@ -1,6 +1,9 @@
-import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { ClipProvider, type Clip, toUUID, ClipList } from '@cq/providers'
+import { ref } from 'vue'
+
+import type { Clip } from '@cq/providers'
+import { ClipList, ClipProvider, toUUID } from '@cq/providers'
+
 import { useSettings } from '@/stores/settings'
 
 export interface ClipQueue {

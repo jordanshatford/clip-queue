@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest'
 import type { ChatUserstate } from 'tmi.js'
-import { isModerator, getClipIdFromUrl, toURLParams } from '../utils'
+import { describe, expect, it } from 'vitest'
+
+import { getClipIdFromUrl, isModerator, toURLParams } from '../utils'
 
 describe('utils.ts', () => {
   it.each([

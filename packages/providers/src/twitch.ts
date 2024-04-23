@@ -1,11 +1,8 @@
-import twitch, { type TwitchGame, type TwitchClip } from '@cq/services/twitch'
-import {
-  ClipProvider,
-  type Clip,
-  type IClipProvider,
-  type PlayerFormat,
-  type ClipProviderCtxCallback
-} from './types'
+import type { TwitchClip, TwitchGame } from '@cq/services/twitch'
+import twitch from '@cq/services/twitch'
+
+import type { Clip, ClipProviderCtxCallback, IClipProvider, PlayerFormat } from './types'
+import { ClipProvider } from './types'
 
 export class TwitchProvider implements IClipProvider {
   public name = ClipProvider.TWITCH

@@ -7,8 +7,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
 import videojs from 'video.js'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+
 import 'video.js/dist/video-js.css'
 
 export interface Props {

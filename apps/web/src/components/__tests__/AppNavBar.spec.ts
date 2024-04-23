@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest'
-import { shallowMount } from '@vue/test-utils'
 import { createTestingPinia } from '@pinia/testing'
+import { shallowMount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
+
 import AppNavBar from '../AppNavBar.vue'
 
 describe('AppNavBar.vue', () => {

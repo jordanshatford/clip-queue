@@ -39,10 +39,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+
 import { Button, Menubar, ThemeToggle } from '@cq/ui'
+
+import { RouteNameConstants, routes, toAllowedMenuItems } from '@/router'
 import { useTheme } from '@/stores/theme'
 import { useUser } from '@/stores/user'
-import { RouteNameConstants, routes, toAllowedMenuItems } from '@/router'
 
 const theme = useTheme()
 const user = useUser()

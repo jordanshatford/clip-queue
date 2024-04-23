@@ -40,8 +40,10 @@
 </template>
 
 <script setup lang="ts">
-import { type Clip, toUUID } from '@cq/providers'
+import type { Clip } from '@cq/providers'
+import { toUUID } from '@cq/providers'
 import { Button } from '@cq/ui'
+
 import ClipCard from '@/components/ClipCard.vue'
 
 export interface Props {
