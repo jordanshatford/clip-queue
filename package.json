@@ -27,9 +27,9 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/types": "^19.0.3",
     "@svitejs/changesets-changelog-github-compact": "^1.1.0",
-    "@vitest/coverage-v8": "^1.5.3",
+    "@vitest/coverage-v8": "^1.6.0",
     "husky": "^9.0.11",
-    "vitest": "^1.5.3"
+    "vitest": "^1.6.0"
   },
   "packageManager": "pnpm@9.0.1+sha256.46d50ee2afecb42b185ebbd662dc7bdd52ef5be56bf035bb615cab81a75345df",
   "engines": {
