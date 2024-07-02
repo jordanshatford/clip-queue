@@ -22,8 +22,8 @@
   },
   "devDependencies": {
     "@cq/config": "workspace:*",
-    "@types/node": "^20.14.8",
+    "@types/node": "^20.14.9",
     "@types/tmi.js": "^1.8.6",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.3"
   }
 }
