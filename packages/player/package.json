@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "video.js": "^8.16.1",
-    "vue": "^3.4.31"
+    "vue": "^3.4.33"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
