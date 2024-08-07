@@ -14,8 +14,8 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "video.js": "^8.16.1",
-    "vue": "^3.4.31"
+    "video.js": "^8.17.2",
+    "vue": "^3.4.36"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
