@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "primeicons": "^7.0.0",
-    "primevue": "^3.53.0",
-    "vue": "^3.4.31"
+    "primevue": "^4.0.4",
+    "vue": "^3.4.37"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
