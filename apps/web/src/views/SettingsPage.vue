@@ -1,15 +1,17 @@
 <template>
   <div class="mx-auto mb-3 max-w-xl">
-    <TabMenu :model="tabs" :active-index="activeIndex">
-      <template #item="{ item, props }">
-        <RouterLink v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
-          <a :href="href" v-bind="props.action" @click="navigate">
-            <span v-bind="props.icon"></span>
-            <span v-bind="props.label">{{ item.label }}</span>
-          </a>
-        </RouterLink>
-      </template>
-    </TabMenu>
+    <Tabs :value="active">
+      <TabList>
+        <Tab v-for="tab in tabs" :key="tab.label" :value="tab.route.name">
+          <RouterLink v-if="tab.route" v-slot="{ href, navigate }" :to="tab.route" custom>
+            <a :href="href" class="flex items-center gap-2 text-inherit" @click="navigate">
+              <i :class="tab.icon"></i>
+              <span>{{ tab.label }}</span>
+            </a>
+          </RouterLink>
+        </Tab>
+      </TabList>
+    </Tabs>
   </div>
   <RouterView />
 </template>
@@ -18,7 +20,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { TabMenu } from '@cq/ui'
+import { Tab, TabList, Tabs } from '@cq/ui'
 
 import { RouteNameConstants, routes, toAllowedMenuItems } from '@/router'
 
@@ -27,7 +29,5 @@ const route = useRoute()
 const settingChildren = routes.find((r) => r.name === RouteNameConstants.SETTINGS)?.children ?? []
 const tabs = toAllowedMenuItems(settingChildren)
 
-const activeIndex = computed(() => {
-  return tabs.findIndex((tab) => tab.route.name === route?.name)
-})
+const active = computed(() => route?.name)
 </script>

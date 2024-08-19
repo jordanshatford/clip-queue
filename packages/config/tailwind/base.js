@@ -1,3 +1,5 @@
+import primevue from 'tailwindcss-primeui'
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -5,7 +7,7 @@ export default {
     '../../apps/*/src/**/*.{vue,js,ts,jsx,tsx}',
     '../../packages/*/src/**/*.{vue,js,ts,jsx,tsx}'
   ],
-  darkMode: 'class',
+  darkMode: ['selector', '[class*="app-dark"]'],
   variants: {
     extend: {
       backgroundColor: [
@@ -55,5 +57,5 @@ export default {
       }
     }
   },
-  plugins: []
+  plugins: [primevue]
 }

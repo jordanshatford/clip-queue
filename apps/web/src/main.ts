@@ -7,7 +7,7 @@ import { createApp } from 'vue'
 
 import { ConfirmationService, PrimeVue, ToastService } from '@cq/ui'
 // @ts-ignore
-import LaraPreset from '@cq/ui/presets/lara'
+import AuraPreset from '@cq/ui/presets/aura'
 
 import App from '@/App.vue'
 import { env } from '@/config'
@@ -22,7 +22,7 @@ Sentry.init({
 })
 
 // Prime vue
-app.use(PrimeVue, { unstyled: true, pt: LaraPreset })
+app.use(PrimeVue, { unstyled: true, pt: AuraPreset })
 app.use(ConfirmationService)
 app.use(ToastService)
 

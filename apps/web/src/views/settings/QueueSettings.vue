@@ -5,7 +5,7 @@
         <div class="flex flex-col gap-2 text-left">
           <div class="flex justify-between">
             <label for="autoModeration">Auto Moderation:</label>
-            <InputSwitch
+            <ToggleSwitch
               v-model="formSettings.hasAutoModerationEnabled"
               input-id="autoModeration"
               aria-describedby="autoModeration-help"
@@ -45,7 +45,9 @@
               <ProviderName :provider="option" />
             </template>
             <template #chip="{ value }: { value: ClipProvider }">
-              <ProviderName :provider="value" />
+              <Chip>
+                <ProviderName :provider="value" />
+              </Chip>
             </template>
           </MultiSelect>
           <small id="allowedProviders-help" class="pb-2 text-sm text-surface-400"
@@ -86,7 +88,16 @@
 import { computed, ref, toRaw } from 'vue'
 
 import { ClipProvider } from '@cq/providers'
-import { Button, Card, InputNumber, InputSwitch, Message, MultiSelect, useToast } from '@cq/ui'
+import {
+  Button,
+  Card,
+  Chip,
+  InputNumber,
+  Message,
+  MultiSelect,
+  ToggleSwitch,
+  useToast
+} from '@cq/ui'
 
 import ProviderName from '@/components/ProviderName.vue'
 import { useProviders } from '@/stores/providers'

@@ -5,7 +5,7 @@
         <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">
             <label for="primaryColor">Primary Color:</label>
-            <Dropdown
+            <Select
               v-model="formTheme.primary"
               :options="colors"
               data-key="name"
@@ -13,17 +13,17 @@
               input-id="primaryColor"
             >
               <template #value="{ value }: { value: ColorOption }">
-                <ColorName :name="value.name" :color="value.palette[6]" />
+                <ColorName :name="value.name" :color="value.palette[500]" />
               </template>
               <template #option="{ option }: { option: ColorOption }">
-                <ColorName :name="option.name" :color="option.palette[6]" />
+                <ColorName :name="option.name" :color="option.palette[500]" />
               </template>
-            </Dropdown>
+            </Select>
             <small id="primaryColor-help" class="pb-2 text-sm text-surface-400"
               >Primary color used throughout the UI.</small
             >
             <label for="surfaceColor">Surface Color:</label>
-            <Dropdown
+            <Select
               v-model="formTheme.surface"
               data-key="name"
               :options="surfaces"
@@ -31,12 +31,12 @@
               input-id="surfaceColor"
             >
               <template #value="{ value }: { value: ColorOption }">
-                <ColorName :name="value.name" :color="value.palette[6]" />
+                <ColorName :name="value.name" :color="value.palette[500]" />
               </template>
               <template #option="{ option }: { option: ColorOption }">
-                <ColorName :name="option.name" :color="option.palette[6]" />
+                <ColorName :name="option.name" :color="option.palette[500]" />
               </template>
-            </Dropdown>
+            </Select>
             <small id="surfaceColor-help" class="pb-2 text-sm text-surface-400"
               >Surface color used throughout the UI.</small
             >
@@ -68,7 +68,7 @@
 import { ref, toRaw } from 'vue'
 
 import type { ColorOption } from '@cq/ui'
-import { Button, Card, colors, Dropdown, surfaces, useToast } from '@cq/ui'
+import { Button, Card, colors, Select, surfaces, useToast } from '@cq/ui'
 
 import ColorName from '@/components/ColorName.vue'
 import { useTheme } from '@/stores/theme'

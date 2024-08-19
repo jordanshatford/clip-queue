@@ -99,13 +99,13 @@
 import { computed, ref } from 'vue'
 
 import type { Clip } from '@cq/providers'
-import { Button, Column, DataTable, FilterMatchMode, InputText, useConfirm } from '@cq/ui'
+import { Button, Column, DataTable, InputText, useConfirm } from '@cq/ui'
 
 import ProviderName from '@/components/ProviderName.vue'
 import { useQueue } from '@/stores/queue'
 
 const filters = ref({
-  global: { value: null, matchMode: FilterMatchMode.CONTAINS }
+  global: { value: null, matchMode: 'contains' }
 })
 
 const confirm = useConfirm()

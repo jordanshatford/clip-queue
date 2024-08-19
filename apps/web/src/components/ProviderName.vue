@@ -8,6 +8,8 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import type { ClipProvider } from '@cq/providers'
 
 import { useProviders } from '@/stores/providers'
@@ -20,5 +22,5 @@ const props = defineProps<Props>()
 
 const providers = useProviders()
 
-const svg = providers.providers?.[props.provider]?.svg
+const svg = computed(() => providers.providers?.[props.provider]?.svg)
 </script>

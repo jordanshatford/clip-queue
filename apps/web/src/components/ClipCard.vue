@@ -24,12 +24,11 @@
           <ProviderName :provider="clip.provider" class="font-normal" />
         </div>
       </div>
-      <div class="flex gap-1">
+      <div class="flex justify-around gap-2">
         <Button
           icon="pi pi-play"
-          class="w-1/2"
-          title="Play Now"
-          label="Play Now"
+          title="Play"
+          label="Play"
           severity="info"
           size="small"
           @click="emit('play')"
@@ -37,7 +36,6 @@
         </Button>
         <Button
           icon="pi pi-trash"
-          class="w-1/2"
           title="Remove"
           label="Remove"
           severity="danger"

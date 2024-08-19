@@ -1,7 +1,7 @@
 <template>
   <Toast position="bottom-center" />
   <ConfirmDialog :draggable="false" />
-  <div class="h-full min-h-screen dark:bg-surface-900">
+  <div class="h-full min-h-screen dark:bg-surface-950">
     <div class="h-full">
       <AppNavBar />
       <main class="mx-auto h-full max-w-7xl px-4 py-5 text-center sm:px-6 lg:px-8">

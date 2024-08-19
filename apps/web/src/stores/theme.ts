@@ -25,7 +25,7 @@ export interface ThemePreferences {
 
 export const DEFAULTS: ThemePreferences = {
   theme: 'light',
-  primary: structuredClone(colors[12]), // Violet
+  primary: structuredClone(colors[12]), // Purple
   surface: structuredClone(surfaces[2]) // Zinc
 }
 
@@ -61,16 +61,16 @@ export const useTheme = defineStore(
       }
       if (value.theme !== old?.theme) {
         if (value.theme === 'dark') {
-          document?.querySelector('html')?.classList.add('dark')
+          document?.querySelector('html')?.classList.add('app-dark')
         } else {
-          document.querySelector('html')?.classList.remove('dark')
+          document.querySelector('html')?.classList.remove('app-dark')
         }
       }
     }
 
     function toggle() {
       preferences.value.theme = preferences.value.theme === 'dark' ? 'light' : 'dark'
-      document.querySelector('html')?.classList.toggle('dark')
+      document.querySelector('html')?.classList.toggle('app-dark')
     }
 
     function $reset() {
