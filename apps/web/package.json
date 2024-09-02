@@ -17,9 +17,9 @@
     "@cq/providers": "workspace:*",
     "@cq/services": "workspace:*",
     "@cq/ui": "workspace:*",
-    "@sentry/vue": "^8.26.0",
+    "@sentry/vue": "^8.27.0",
     "pinia": "^2.2.2",
-    "pinia-plugin-persistedstate": "^3.2.1",
+    "pinia-plugin-persistedstate": "^3.2.3",
     "tailwindcss-primeui": "^0.3.4",
     "vue": "^3.4.38",
     "vue-router": "^4.4.3"
