@@ -128,8 +128,8 @@ export const useQueue = defineStore(
   {
     persist: {
       key: 'cq-queue',
-      paths: ['history', 'current', 'upcoming'],
-      afterRestore: (ctx) => {
+      pick: ['history', 'current', 'upcoming'],
+      afterHydrate: (ctx) => {
         if (ctx.store.current?.id) {
           ctx.store.history.add(ctx.store.current)
         }

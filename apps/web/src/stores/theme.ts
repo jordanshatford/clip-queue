@@ -90,7 +90,7 @@ export const useTheme = defineStore(
   {
     persist: {
       key: 'cq-theme',
-      afterRestore: (ctx) => {
+      afterHydrate: (ctx) => {
         ctx.store.updatePreferences(ctx.store.preferences)
       }
     }

@@ -166,7 +166,7 @@ export const useUser = defineStore(
   {
     persist: {
       key: 'cq-user',
-      paths: ['ctx.token', 'ctx.username']
+      pick: ['ctx.token', 'ctx.username']
     }
   }
 )
