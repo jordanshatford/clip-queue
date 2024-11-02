@@ -1,5 +1,16 @@
 # @cq/providers
 
+## 1.2.0
+
+### Minor Changes
+
+- feat: make youtube provider experimental ([`7f5b0db`](https://github.com/jordanshatford/clip-queue/commit/7f5b0db8419a211a11c60e11e6b0e827bd37cf68))
+
+### Patch Changes
+
+- Updated dependencies [[`5c72e98`](https://github.com/jordanshatford/clip-queue/commit/5c72e985fa779a208bf88e9507b266e1ac7a9502)]:
+  - @cq/services@1.0.2
+
 ## 1.1.0
 
 ### Minor Changes

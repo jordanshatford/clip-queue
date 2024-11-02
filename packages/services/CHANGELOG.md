@@ -1,5 +1,11 @@
 # @cq/services
 
+## 1.0.2
+
+### Patch Changes
+
+- fix: kick clip service to support new clip links ([`5c72e98`](https://github.com/jordanshatford/clip-queue/commit/5c72e985fa779a208bf88e9507b266e1ac7a9502))
+
 ## 1.0.1
 
 ### Patch Changes
