@@ -51,6 +51,10 @@ describe('kick.ts', () => {
     ],
     ['https://kick.com/test?clip=123', '123'],
     ['https://kick.com/test?somenonclipparam=123', undefined],
+    [
+      'https://kick.com/test/clips/clip_01JBKJJC162V3P5TBT8EAY6Z13',
+      'clip_01JBKJJC162V3P5TBT8EAY6Z13'
+    ],
     ['', undefined]
   ])('gets an id from a clip url', (input: string, expected: string | undefined) => {
     expect(getClipIdFromUrl(input)).toEqual(expected)
