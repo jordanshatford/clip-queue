@@ -22,8 +22,9 @@ describe('commands.ts', () => {
     [Command.PURGE_HISTORY, 'purge']
   ])(
     'calls the proper clip queue function when a command is issued (%s, %s)',
-    (commandName: Command, expectedFunctionCall: any) => {
+    (commandName: Command, expectedFunctionCall: unknown) => {
       const queue = useQueue()
+      // @ts-expect-error function with unknown type
       const spy = vi.spyOn(queue, expectedFunctionCall)
       commands.handleCommand(commandName.toString())
       expect(spy).toHaveBeenCalledTimes(1)
@@ -32,8 +33,9 @@ describe('commands.ts', () => {
 
   it.each([[Command.PURGE_CACHE, 'purge']])(
     'calls the proper clip queue function when a command is issued (%s, %s)',
-    (commandName: Command, expectedFunctionCall: any) => {
+    (commandName: Command, expectedFunctionCall: unknown) => {
       const providers = useProviders()
+      // @ts-expect-error function with unknown type
       const spy = vi.spyOn(providers, expectedFunctionCall)
       commands.handleCommand(commandName.toString())
       expect(spy).toHaveBeenCalledTimes(1)
@@ -48,10 +50,11 @@ describe('commands.ts', () => {
     (
       commandName: Command,
       args: string[],
-      expectedFunctionCall: any,
-      expectedFunctionArgs: any[]
+      expectedFunctionCall: unknown,
+      expectedFunctionArgs: unknown[]
     ) => {
       const queue = useQueue()
+      // @ts-expect-error function with unknown type
       const spy = vi.spyOn(queue, expectedFunctionCall)
       commands.handleCommand(commandName.toString(), ...args)
       expect(spy).toHaveBeenCalledTimes(1)
@@ -66,7 +69,8 @@ describe('commands.ts', () => {
       const queueCommandFunctions = ['previous', 'next', 'open', 'close', 'clear']
       commands.handleCommand(commandName)
       for (const f of queueCommandFunctions) {
-        expect(vi.spyOn(queue, f as any)).toHaveBeenCalledTimes(0)
+        // @ts-expect-error function with unknown type
+        expect(vi.spyOn(queue, f)).toHaveBeenCalledTimes(0)
       }
     }
   )

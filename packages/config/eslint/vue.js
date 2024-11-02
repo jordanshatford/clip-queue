@@ -1,9 +1,7 @@
-import { FlatCompat } from '@eslint/eslintrc'
 import js from '@eslint/js'
-
-const compat = new FlatCompat({
-  recommendedConfig: js.configs.recommended
-})
+import vuePrettier from '@vue/eslint-config-prettier'
+import vueTs from '@vue/eslint-config-typescript'
+import vue from 'eslint-plugin-vue'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -20,15 +18,8 @@ export default [
       'yarn.lock'
     ]
   },
-  ...compat.config({
-    extends: [
-      'plugin:vue/vue3-recommended',
-      'eslint:recommended',
-      '@vue/eslint-config-typescript',
-      '@vue/eslint-config-prettier/skip-formatting'
-    ],
-    parserOptions: {
-      ecmaVersion: 'latest'
-    }
-  })
+  ...vue.configs['flat/recommended'],
+  js.configs.recommended,
+  ...vueTs(),
+  vuePrettier
 ]

@@ -28,7 +28,7 @@ const videoElement = ref<HTMLVideoElement | null>(null)
 
 // TODO: fix typing once video.js is updated.
 // ref: https://github.com/videojs/video.js/issues/8242
-let player: any | undefined = undefined
+let player: ReturnType<typeof videojs> | undefined = undefined
 
 onMounted(() => {
   if (videoElement.value) {

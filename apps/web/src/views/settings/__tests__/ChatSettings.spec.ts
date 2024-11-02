@@ -18,17 +18,17 @@ describe('ChatSettings.vue', () => {
   })
 
   it('has the same settings values as previous', () => {
-    // @ts-ignore
+    // @ts-expect-error Test VM not typed properly
     expect(wrapper.vm.formSettings.prefix).toEqual('!cq')
   })
 
   it('resets the form to the settings when not saved', async () => {
-    // @ts-ignore
+    // @ts-expect-error Test VM not typed properly
     wrapper.vm.formSettings.prefix = '~'
     await wrapper.vm.$nextTick()
-    // @ts-ignore
+    // @ts-expect-error Test VM not typed properly
     wrapper.vm.onReset()
-    // @ts-ignore
+    // @ts-expect-error Test VM not typed properly
     expect(wrapper.vm.formSettings.prefix).toEqual('!cq')
   })
 })

@@ -6,7 +6,7 @@ import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'
 
 import { ConfirmationService, PrimeVue, ToastService } from '@cq/ui'
-// @ts-ignore
+// @ts-expect-error PrimeVue preset not properly typed
 import AuraPreset from '@cq/ui/presets/aura'
 
 import App from '@/App.vue'
