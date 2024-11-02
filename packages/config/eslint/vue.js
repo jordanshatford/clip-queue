@@ -5,7 +5,7 @@ const compat = new FlatCompat({
   recommendedConfig: js.configs.recommended
 })
 
-/** @type {import('eslint').Linter.FlatConfig[]} */
+/** @type {import('eslint').Linter.Config[]} */
 export default [
   {
     ignores: [
