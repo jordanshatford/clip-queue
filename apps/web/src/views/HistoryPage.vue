@@ -34,9 +34,7 @@
       <div class="flex items-center justify-between">
         <span class="text-xl">History</span>
         <span class="relative">
-          <i
-            class="pi pi-search absolute left-3 top-2/4 -mt-2 text-surface-400 dark:text-surface-500"
-          ></i>
+          <i class="pi pi-search absolute left-3 top-1 text-surface-400 dark:text-surface-500"></i>
           <InputText
             v-model="filters['global'].value"
             size="small"

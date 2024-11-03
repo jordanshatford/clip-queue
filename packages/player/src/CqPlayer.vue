@@ -9,13 +9,9 @@
       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
       frameborder="0"
     ></iframe>
-    <VideoJS
-      v-else-if="format === 'video'"
-      :poster="thumbnailUrl"
-      :source="source"
-      :title="title"
-      autoplay
-    />
+    <div v-else-if="format === 'video'" class="player">
+      <VideoJS :poster="thumbnailUrl" :source="source" :title="title" autoplay />
+    </div>
     <div
       v-else
       class="flex h-full items-center justify-center font-normal text-surface-600 dark:text-surface-400"

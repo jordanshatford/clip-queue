@@ -1,5 +1,5 @@
 <template>
-  <div class="player player-container">
+  <div class="player-container">
     <Player
       :title="clip.title"
       :format="playerFormat"
@@ -91,13 +91,8 @@ const playerSource = computed<string | undefined>(() => {
 })
 </script>
 
-<style>
+<style scoped>
 .player-container {
   grid-area: player;
-}
-
-.player {
-  aspect-ratio: 16 / 9;
-  max-height: calc(100vh - 11rem);
 }
 </style>
