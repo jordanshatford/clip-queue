@@ -1,0 +1,9 @@
+@import './badge';
+
+.p-overlaybadge {
+  @apply relative;
+}
+
+.p-overlaybadge .p-badge {
+  @apply absolute right-0 top-0 m-0 origin-[100%_0] translate-x-[50%] translate-y-[-50%] outline outline-2 outline-surface-0 dark:outline-surface-900;
+}

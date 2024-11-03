@@ -24,7 +24,7 @@
           <ProviderName :provider="clip.provider" class="font-normal" />
         </div>
       </div>
-      <div class="flex justify-around gap-2">
+      <div class="flex justify-around">
         <Button
           icon="pi pi-play"
           title="Play"
