@@ -70,8 +70,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/config
       '@pinia/testing':
-        specifier: ^0.1.6
-        version: 0.1.6(pinia@2.2.6(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3)))(vue@3.5.12(typescript@5.6.3))
+        specifier: ^0.1.7
+        version: 0.1.7(pinia@2.2.6(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3)))(vue@3.5.12(typescript@5.6.3))
       '@tsconfig/node20':
         specifier: ^20.1.4
         version: 20.1.4
@@ -146,8 +146,8 @@ importers:
         specifier: ^9.1.0
         version: 9.1.0(eslint@9.14.0(jiti@2.4.0))
       globals:
-        specifier: ^15.11.0
-        version: 15.11.0
+        specifier: ^15.12.0
+        version: 15.12.0
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -774,10 +774,10 @@ packages:
   '@one-ini/wasm@0.1.1':
     resolution: {integrity: sha512-XuySG1E38YScSJoMlqovLru4KTUNSjgVTIjyh7qMX6aNN5HY5Ct5LhRJdxO79JtTzKfzV/bnWpz+zquYrISsvw==}
 
-  '@pinia/testing@0.1.6':
-    resolution: {integrity: sha512-Q40s3kpjXpjmcnc61l84wyG83yVmkBi5rRdSoPpwQoRfSnNKKr52XjFFt6hP8iBxehYS9NR+D57T1uzgnEVPHg==}
+  '@pinia/testing@0.1.7':
+    resolution: {integrity: sha512-xcDq6Ry/kNhZ5bsUMl7DeoFXwdume1NYzDggCiDUDKoPQ6Mo0eH9VU7bJvBtlurqe6byAntWoX5IhVFqWzRz/Q==}
     peerDependencies:
-      pinia: '>=2.2.3'
+      pinia: '>=2.2.6'
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -1812,8 +1812,8 @@ packages:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
     engines: {node: '>=18'}
 
-  globals@15.11.0:
-    resolution: {integrity: sha512-yeyNSjdbyVaWurlwCpcA6XNBrHTMIeDdj0/hnvX/OLJ9ekOXYbLsLinH/MucQyGvNnXhidTdNhTtJaffL2sMfw==}
+  globals@15.12.0:
+    resolution: {integrity: sha512-1+gLErljJFhbOVyaetcwJiJ4+eLe45S2E7P5UiZ9xGfeq3ATQf5DOv9G7MH3gGbKQLkzmNh2DxfZwLdw+j6oTQ==}
     engines: {node: '>=18'}
 
   globby@11.1.0:
@@ -3804,7 +3804,7 @@ snapshots:
 
   '@one-ini/wasm@0.1.1': {}
 
-  '@pinia/testing@0.1.6(pinia@2.2.6(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3)))(vue@3.5.12(typescript@5.6.3))':
+  '@pinia/testing@0.1.7(pinia@2.2.6(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3)))(vue@3.5.12(typescript@5.6.3))':
     dependencies:
       pinia: 2.2.6(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))
       vue-demi: 0.14.10(vue@3.5.12(typescript@5.6.3))
@@ -4944,7 +4944,7 @@ snapshots:
 
   globals@14.0.0: {}
 
-  globals@15.11.0: {}
+  globals@15.12.0: {}
 
   globby@11.1.0:
     dependencies:
