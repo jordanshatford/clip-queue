@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@cq/config": "workspace:*",
-    "@pinia/testing": "^0.1.6",
+    "@pinia/testing": "^0.1.7",
     "@tsconfig/node20": "^20.1.4",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.8.7",
