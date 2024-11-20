@@ -23,7 +23,7 @@
   "devDependencies": {
     "@cq/config": "workspace:*",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^22.9.0",
+    "@types/node": "^22.9.1",
     "@vitejs/plugin-vue": "^5.2.0",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.6.0",
