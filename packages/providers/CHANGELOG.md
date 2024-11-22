@@ -1,5 +1,11 @@
 # @cq/providers
 
+## 1.3.0
+
+### Minor Changes
+
+- feat: allow clip provider ctx callback to be promise ([`ab0cad4`](https://github.com/jordanshatford/clip-queue/commit/ab0cad44f2eb26078fd170759cc5cdac01166eaf))
+
 ## 1.2.0
 
 ### Minor Changes
