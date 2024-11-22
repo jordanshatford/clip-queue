@@ -1,5 +1,16 @@
 # @cq/providers
 
+## 1.4.0
+
+### Minor Changes
+
+- feat: add logo string to each service ([`8689bc2`](https://github.com/jordanshatford/clip-queue/commit/8689bc2a7efec1753208ec5861eb71d7819bb1ab))
+
+### Patch Changes
+
+- Updated dependencies [[`8689bc2`](https://github.com/jordanshatford/clip-queue/commit/8689bc2a7efec1753208ec5861eb71d7819bb1ab)]:
+  - @cq/services@1.1.0
+
 ## 1.3.0
 
 ### Minor Changes
