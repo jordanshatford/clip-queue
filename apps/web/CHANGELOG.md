@@ -1,5 +1,12 @@
 # @cq/web
 
+## 1.19.2
+
+### Patch Changes
+
+- Updated dependencies [[`ab0cad4`](https://github.com/jordanshatford/clip-queue/commit/ab0cad44f2eb26078fd170759cc5cdac01166eaf)]:
+  - @cq/providers@1.3.0
+
 ## 1.19.1
 
 ### Patch Changes
