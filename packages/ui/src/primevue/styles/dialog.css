@@ -95,8 +95,25 @@
   @apply [transform:translate3d(100%,0,0)];
 }
 
+.p-dialog-left:dir(rtl) .p-dialog-enter-from,
+.p-dialog-left:dir(rtl) .p-dialog-leave-to,
+.p-dialog-topleft:dir(rtl) .p-dialog-enter-from,
+.p-dialog-topleft:dir(rtl) .p-dialog-leave-to,
+.p-dialog-bottomleft:dir(rtl) .p-dialog-enter-from,
+.p-dialog-bottomleft:dir(rtl) .p-dialog-leave-to {
+  @apply [transform:translate3d(100%,0,0)];
+}
+.p-dialog-right:dir(rtl) .p-dialog-enter-from,
+.p-dialog-right:dir(rtl) .p-dialog-leave-to,
+.p-dialog-topright:dir(rtl) .p-dialog-enter-from,
+.p-dialog-topright:dir(rtl) .p-dialog-leave-to,
+.p-dialog-bottomright:dir(rtl) .p-dialog-enter-from,
+.p-dialog-bottomright:dir(rtl) .p-dialog-leave-to {
+  @apply [transform:translate3d(-100%,0,0)];
+}
+
 .p-dialog-maximized {
-  @apply left-0 top-0 !h-screen max-h-full !w-screen rounded-none;
+  @apply start-0 top-0 !h-screen max-h-full !w-screen rounded-none;
 }
 
 .p-dialog-maximized .p-dialog-content {

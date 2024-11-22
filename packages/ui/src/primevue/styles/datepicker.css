@@ -10,11 +10,11 @@
 }
 
 .p-datepicker:has(.p-datepicker-dropdown) .p-datepicker-input {
-  @apply rounded-r-none;
+  @apply rounded-e-none;
 }
 
 .p-datepicker-dropdown {
-  @apply relative inline-flex w-10 cursor-pointer select-none items-center justify-center overflow-hidden rounded-r-md border border-l-0 border-surface-300 bg-surface-100 text-surface-600 transition-colors duration-200 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-primary enabled:hover:bg-surface-200 enabled:hover:text-surface-700 enabled:active:bg-surface-300 enabled:active:text-surface-800 dark:border-surface-700 dark:bg-surface-800 dark:text-surface-300 dark:enabled:hover:bg-surface-700 dark:enabled:hover:text-surface-200 dark:enabled:active:bg-surface-600 dark:enabled:active:text-surface-100;
+  @apply relative inline-flex w-10 cursor-pointer select-none items-center justify-center overflow-hidden rounded-e-md border border-s-0 border-surface-300 bg-surface-100 text-surface-600 transition-colors duration-200 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-primary enabled:hover:bg-surface-200 enabled:hover:text-surface-700 enabled:active:bg-surface-300 enabled:active:text-surface-800 dark:border-surface-700 dark:bg-surface-800 dark:text-surface-300 dark:enabled:hover:bg-surface-700 dark:enabled:hover:text-surface-200 dark:enabled:active:bg-surface-600 dark:enabled:active:text-surface-100;
 }
 
 .p-datepicker:has(.p-datepicker-input-icon-container) {
@@ -22,11 +22,11 @@
 }
 
 .p-datepicker:has(.p-datepicker-input-icon-container) .p-datepicker-input {
-  @apply pr-10;
+  @apply pe-10;
 }
 
 .p-datepicker-input-icon-container {
-  @apply absolute right-3 top-1/2 -mt-2 cursor-pointer text-surface-400;
+  @apply absolute end-3 top-1/2 -mt-2 cursor-pointer text-surface-400;
 }
 
 .p-datepicker-fluid {
@@ -53,6 +53,13 @@
   @apply flex items-center justify-between gap-2 border-b border-surface-200 bg-surface-0 px-0 pb-2 pt-0 font-medium text-surface-700 dark:border-surface-700 dark:bg-surface-900 dark:text-surface-0;
 }
 
+.p-datepicker-next-button:dir(rtl) {
+  @apply order-[-1];
+}
+.p-datepicker-prev-button:dir(rtl) {
+  @apply order-1;
+}
+
 .p-datepicker-title {
   @apply flex items-center justify-between gap-2 font-medium;
 }
@@ -67,7 +74,7 @@
 }
 
 .p-datepicker-calendar-container .p-datepicker-calendar {
-  @apply flex-auto gap-3 border-l border-surface-200 first:border-l-0 first:pl-0 last:pr-0 dark:border-surface-700;
+  @apply flex-auto gap-3 border-s border-surface-200 first:border-s-0 first:ps-0 last:pe-0 dark:border-surface-700;
 }
 
 .p-datepicker-day-view {

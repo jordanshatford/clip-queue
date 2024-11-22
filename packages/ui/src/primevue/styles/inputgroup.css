@@ -15,11 +15,11 @@
 
 .p-inputgroupaddon:first-child,
 .p-inputgroupaddon + .p-inputgroupaddon {
-  @apply border-l;
+  @apply border-s;
 }
 
 .p-inputgroupaddon:last-child {
-  @apply border-r;
+  @apply border-e;
 }
 
 .p-inputgroup > .p-component,
@@ -38,7 +38,7 @@
 .p-inputgroup > .p-floatlabel:first-child > .p-inputwrapper > .p-component,
 .p-inputgroup > .p-iftalabel:first-child > .p-component,
 .p-inputgroup > .p-iftalabel:first-child > .p-inputwrapper > .p-component {
-  @apply rounded-l-md;
+  @apply rounded-s-md;
 }
 
 .p-inputgroupaddon:last-child,
@@ -48,7 +48,7 @@
 .p-inputgroup > .p-floatlabel:last-child > .p-inputwrapper > .p-component,
 .p-inputgroup > .p-iftalabel:last-child > .p-component,
 .p-inputgroup > .p-iftalabel:last-child > .p-inputwrapper > .p-component {
-  @apply rounded-r-md;
+  @apply rounded-e-md;
 }
 
 .p-inputgroup .p-component:focus,

@@ -51,7 +51,7 @@
 }
 
 .p-overlay-mask {
-  @apply fixed left-0 top-0 h-full w-full bg-black/50 text-surface-200 transition-colors duration-150;
+  @apply fixed start-0 top-0 h-full w-full bg-black/50 text-surface-200 transition-colors duration-150;
 }
 
 .p-overlay-mask-enter {

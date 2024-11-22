@@ -12,6 +12,10 @@
   @apply flex flex-row gap-1;
 }
 
+.p-carousel-content:dir(rtl) {
+  @apply flex-row-reverse;
+}
+
 .p-carousel-viewport {
   @apply w-full overflow-hidden;
 }
@@ -27,6 +31,10 @@
 
 .p-carousel-indicator-list {
   @apply m-0 flex list-none flex-row flex-wrap justify-center gap-2 p-4;
+}
+
+.p-carousel-indicator-list:dir(rtl) {
+  @apply rtl:flex-row-reverse;
 }
 
 .p-carousel-indicator-button {

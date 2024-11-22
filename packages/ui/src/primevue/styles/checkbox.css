@@ -1,9 +1,9 @@
 .p-checkbox {
-  @apply relative inline-flex h-5 w-5 select-none;
+  @apply relative inline-flex h-5 w-5 select-none align-bottom;
 }
 
 .p-checkbox-input {
-  @apply absolute left-0 top-0 z-10 m-0 h-full w-full cursor-pointer appearance-none rounded-sm border border-transparent p-0 opacity-0 disabled:cursor-default;
+  @apply absolute start-0 top-0 z-10 m-0 h-full w-full cursor-pointer appearance-none rounded-sm border border-transparent p-0 opacity-0 disabled:cursor-default;
 }
 
 .p-checkbox-box {
@@ -56,4 +56,22 @@
 
 .p-checkbox.p-disabled .p-checkbox-box .p-checkbox-icon {
   @apply text-surface-700 dark:text-surface-400;
+}
+
+.p-checkbox-sm,
+.p-checkbox-sm .p-checkbox-box {
+  @apply h-4 w-4;
+}
+
+.p-checkbox-sm .p-checkbox-icon {
+  @apply h-3 w-3;
+}
+
+.p-checkbox-lg,
+.p-checkbox-lg .p-checkbox-box {
+  @apply h-6 w-6;
+}
+
+.p-checkbox-lg .p-checkbox-icon {
+  @apply h-4 w-4;
 }

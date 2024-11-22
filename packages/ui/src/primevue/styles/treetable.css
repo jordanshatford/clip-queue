@@ -74,7 +74,7 @@
 }
 
 .p-treetable-column-resizer {
-  @apply absolute right-0 top-0 m-0 block h-full w-2 cursor-col-resize border border-transparent p-0;
+  @apply absolute end-0 top-0 m-0 block h-full w-2 cursor-col-resize border border-transparent p-0;
 }
 
 .p-treetable-column-header-content {
@@ -106,7 +106,7 @@
 }
 
 .p-treetable-header-cell {
-  @apply border-b border-surface-200 bg-surface-0 px-4 py-3 text-left font-normal text-surface-700 transition-colors duration-200 dark:border-surface-700 dark:bg-surface-900 dark:text-surface-0;
+  @apply border-b border-surface-200 bg-surface-0 px-4 py-3 text-start font-normal text-surface-700 transition-colors duration-200 dark:border-surface-700 dark:bg-surface-900 dark:text-surface-0;
 }
 
 .p-treetable-column-title {
@@ -118,7 +118,7 @@
 }
 
 .p-treetable-tbody > tr > td {
-  @apply border-b border-surface-200 px-4 py-3 text-left dark:border-surface-800;
+  @apply border-b border-surface-200 px-4 py-3 text-start dark:border-surface-800;
 }
 
 .p-treetable-hoverable .p-treetable-tbody > tr:not(.p-treetable-row-selected):hover {
@@ -143,7 +143,7 @@
 }
 
 .p-treetable-tfoot > tr > td {
-  @apply border-b border-surface-200 bg-surface-0 px-4 py-3 text-left text-surface-700 dark:border-surface-800 dark:bg-surface-900 dark:text-surface-0;
+  @apply border-b border-surface-200 bg-surface-0 px-4 py-3 text-start text-surface-700 dark:border-surface-800 dark:bg-surface-900 dark:text-surface-0;
 }
 
 .p-treetable-column-footer {
@@ -209,26 +209,26 @@
 }
 
 .p-treetable-gridlines .p-treetable-tbody > tr > td {
-  @apply border-l border-t last:border-r;
+  @apply border-s border-t last:border-r;
 }
 
 .p-treetable-gridlines .p-treetable-tbody > tr:last-child > td {
-  @apply border-y border-l last:border;
+  @apply border-y border-s last:border;
 }
 
 .p-treetable-gridlines .p-treetable-tfoot > tr > td {
-  @apply border-y border-l last:border;
+  @apply border-y border-s last:border;
 }
 
 .p-treetable.p-treetable-gridlines .p-treetable-thead + .p-treetable-tfoot > tr > td {
-  @apply border-b border-l last:border-r;
+  @apply border-b border-s last:border-r;
 }
 
 .p-treetable.p-treetable-gridlines:has(.p-treetable-thead):has(.p-treetable-tbody)
   .p-treetable-tbody
   > tr
   > td {
-  @apply border-b border-l last:border-r;
+  @apply border-b border-s last:border-r;
 }
 
 .p-treetable.p-treetable-gridlines:has(.p-treetable-tbody):has(.p-treetable-tfoot)
@@ -292,4 +292,8 @@
 
 .p-treetable-tbody > tr.p-treetable-row-selected .p-treetable-node-toggle-button:hover {
   @apply bg-surface-0 text-primary dark:bg-surface-900;
+}
+
+.p-treetable-node-toggle-icon:dir(rtl) {
+  @apply rotate-180;
 }

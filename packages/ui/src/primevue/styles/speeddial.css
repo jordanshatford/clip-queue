@@ -27,7 +27,7 @@
 }
 
 .p-speeddial-mask {
-  @apply absolute left-0 top-0 h-full w-full rounded-md bg-white/40 opacity-0 transition-opacity duration-150 dark:bg-white/60;
+  @apply absolute start-0 top-0 h-full w-full rounded-md bg-white/40 opacity-0 transition-opacity duration-150 dark:bg-white/60;
 }
 
 .p-speeddial-mask-visible {

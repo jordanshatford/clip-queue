@@ -45,3 +45,10 @@
 .p-paginator-jtp-input .p-inputtext {
   @apply max-w-10;
 }
+
+.p-paginator-first:dir(rtl),
+.p-paginator-prev:dir(rtl),
+.p-paginator-next:dir(rtl),
+.p-paginator-last:dir(rtl) {
+  @apply rotate-180;
+}

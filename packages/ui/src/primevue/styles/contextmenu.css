@@ -28,7 +28,7 @@
 }
 
 .p-contextmenu-submenu-icon {
-  @apply ml-auto h-[0.875rem] w-[0.875rem] text-sm text-surface-400 dark:text-surface-500;
+  @apply ms-auto h-[0.875rem] w-[0.875rem] text-sm text-surface-400 dark:text-surface-500;
 }
 
 .p-contextmenu-item.p-focus > .p-contextmenu-item-content {

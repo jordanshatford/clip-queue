@@ -28,7 +28,7 @@
 }
 
 .p-multiselect-dropdown {
-  @apply flex w-10 shrink-0 items-center justify-center rounded-r-md bg-transparent text-surface-500 dark:text-surface-400;
+  @apply flex w-10 shrink-0 items-center justify-center rounded-e-md bg-transparent text-surface-500 dark:text-surface-400;
 }
 
 .p-multiselect-label-container {
@@ -64,7 +64,7 @@
 }
 
 .p-multiselect-header .p-checkbox {
-  @apply mr-2;
+  @apply me-2;
 }
 
 .p-multiselect-filter-container {
@@ -109,4 +109,20 @@
 
 .p-multiselect-fluid {
   @apply flex;
+}
+
+.p-multiselect-sm .p-multiselect-label {
+  @apply px-[0.625rem] py-[0.375rem] text-sm;
+}
+
+.p-multiselect-sm .p-multiselect-dropdown .p-icon {
+  @apply h-[0.875rem] w-[0.875rem] text-sm;
+}
+
+.p-multiselect-lg .p-multiselect-label {
+  @apply px-[0.875rem] py-[0.625rem] text-lg;
+}
+
+.p-multiselect-lg .p-multiselect-dropdown .p-icon {
+  @apply h-[1.125rem] w-[1.125rem] text-lg;
 }

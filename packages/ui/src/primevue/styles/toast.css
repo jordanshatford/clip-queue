@@ -27,7 +27,11 @@
 }
 
 .p-toast-close-button {
-  @apply relative -right-1/4 -mt-[25%] flex h-7 w-7 cursor-pointer select-none items-center justify-center overflow-hidden rounded-full border-none bg-transparent p-0 text-inherit transition-colors duration-200 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2;
+  @apply relative -end-1/4 -mt-[25%] flex h-7 w-7 cursor-pointer select-none items-center justify-center overflow-hidden rounded-full border-none bg-transparent p-0 text-inherit transition-colors duration-200 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2;
+}
+
+.p-toast-close-button:dir(rtl) {
+  @apply end-auto ms-auto;
 }
 
 .p-toast-message-info,

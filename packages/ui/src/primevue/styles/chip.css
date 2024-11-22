@@ -7,11 +7,11 @@
 }
 
 .p-chip-image {
-  @apply -ml-2 h-8 w-8 rounded-full;
+  @apply -ms-2 h-8 w-8 rounded-full;
 }
 
 .p-chip:has(.p-chip-remove-icon) {
-  @apply pr-2;
+  @apply pe-2;
 }
 
 .p-chip:has(.p-chip-image) {

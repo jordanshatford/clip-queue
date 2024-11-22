@@ -3,7 +3,7 @@
 }
 
 .p-radiobutton-input {
-  @apply absolute left-0 top-0 z-10 m-0 h-full w-full cursor-pointer appearance-none rounded-full border border-transparent p-0 opacity-0 disabled:cursor-default;
+  @apply absolute start-0 top-0 z-10 m-0 h-full w-full cursor-pointer appearance-none rounded-full border border-transparent p-0 opacity-0 disabled:cursor-default;
 }
 
 .p-radiobutton-box {
@@ -66,4 +66,22 @@
 
 .p-radiobutton-checked.p-disabled .p-radiobutton-box .p-radiobutton-icon {
   @apply bg-surface-700 dark:bg-surface-400;
+}
+
+.p-radiobutton-sm,
+.p-radiobutton-sm .p-radiobutton-box {
+  @apply h-4 w-4;
+}
+
+.p-radiobutton-sm .p-radiobutton-icon {
+  @apply h-2 w-2;
+}
+
+.p-radiobutton-lg,
+.p-radiobutton-lg .p-radiobutton-box {
+  @apply h-6 w-6;
+}
+
+.p-radiobutton-lg .p-radiobutton-icon {
+  @apply h-4 w-4;
 }

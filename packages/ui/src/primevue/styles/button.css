@@ -8,6 +8,14 @@
   @apply order-1;
 }
 
+.p-button-icon-right:dir(rtl) {
+  @apply order-[-1];
+}
+
+.p-button:not(.p-button-vertical) .p-button-icon:not(.p-button-icon-right):dir(rtl) {
+  @apply order-1;
+}
+
 .p-button-icon-bottom {
   @apply order-2;
 }

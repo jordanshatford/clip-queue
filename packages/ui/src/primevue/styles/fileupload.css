@@ -19,7 +19,7 @@
 }
 
 .p-fileupload-content .p-progressbar {
-  @apply absolute left-0 top-0 h-1 w-full;
+  @apply absolute start-0 top-0 h-1 w-full;
 }
 
 .p-fileupload-file-list {
@@ -39,7 +39,7 @@
 }
 
 .p-fileupload-file-actions {
-  @apply ml-auto;
+  @apply ms-auto;
 }
 
 .p-fileupload-highlight {

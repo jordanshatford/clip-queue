@@ -75,7 +75,7 @@
 }
 
 .p-stepitem .p-steppanel-content {
-  @apply w-full pl-4;
+  @apply w-full ps-4;
 }
 
 .p-stepitem .p-steppanel {
@@ -83,7 +83,7 @@
 }
 
 .p-stepitem .p-stepper-separator {
-  @apply relative left-[-2.5px] ml-[1.625rem] h-auto w-[2px] flex-shrink-0 flex-grow-0 basis-auto;
+  @apply relative start-[-2.5px] ms-[1.625rem] h-auto w-[2px] flex-shrink-0 flex-grow-0 basis-auto;
 }
 
 .p-stepitem:has(~ .p-stepitem-active) .p-stepper-separator {

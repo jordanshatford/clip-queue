@@ -11,7 +11,7 @@
 }
 
 .p-terminal-prompt-label {
-  @apply mr-1;
+  @apply me-1;
 }
 
 .p-terminal-input::-ms-clear {

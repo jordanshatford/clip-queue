@@ -10,8 +10,12 @@
   @apply [clip-path:polygon(0_0,50%_0,50%_100%,0_100%)];
 }
 
+.p-imagecompare:dir(rtl) img + img {
+  @apply [clip-path:polygon(50%_0,100%_0,100%_100%,50%_100%)];
+}
+
 .p-imagecompare-slider {
-  @apply relative -ml-2 h-full w-[calc(100%+1rem)] appearance-none bg-transparent outline-none transition-all duration-200 hover:-ml-4 hover:w-[calc(100%+2rem)];
+  @apply relative -ms-2 h-full w-[calc(100%+1rem)] appearance-none bg-transparent outline-none transition-all duration-200 hover:-ms-4 hover:w-[calc(100%+2rem)];
 }
 
 .p-imagecompare-slider::-webkit-slider-thumb {

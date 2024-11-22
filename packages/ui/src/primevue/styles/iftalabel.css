@@ -3,7 +3,7 @@
 }
 
 .p-iftalabel label {
-  @apply pointer-events-none absolute left-3 top-2 text-xs font-medium leading-none text-surface-500 transition-all duration-200 ease-out dark:text-surface-400;
+  @apply pointer-events-none absolute start-3 top-2 text-xs font-medium leading-none text-surface-500 transition-all duration-200 ease-out dark:text-surface-400;
 }
 
 .p-iftalabel .p-inputtext,

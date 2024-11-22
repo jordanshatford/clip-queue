@@ -12,7 +12,7 @@
 }
 
 .p-tree-node-children {
-  @apply pb-0 pl-4 pr-0 pt-[2px];
+  @apply pb-0 pe-0 ps-4 pt-[2px];
 }
 
 .p-tree-node {

@@ -63,7 +63,7 @@
 }
 
 .p-drawer-right .p-drawer {
-  @apply h-full w-80 border-l;
+  @apply h-full w-80 border-s;
 }
 
 .p-drawer-top .p-drawer {
@@ -83,4 +83,8 @@
 
 .p-drawer-open {
   @apply flex;
+}
+
+.p-overlay-mask:dir(rtl) {
+  @apply flex-row-reverse;
 }

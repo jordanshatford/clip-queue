@@ -3,7 +3,7 @@
 }
 
 .p-scrollpanel-content {
-  @apply relative h-[calc(100%+18px)] w-[calc(100%+18px)] overflow-auto pb-[18px] pl-0 pr-[18px] pt-0 [scrollbar-width:none];
+  @apply relative h-[calc(100%+18px)] w-[calc(100%+18px)] overflow-auto pb-[18px] pr-[18px] ps-0 pt-0 [scrollbar-width:none];
 }
 
 .p-scrollpanel-content::-webkit-scrollbar {
