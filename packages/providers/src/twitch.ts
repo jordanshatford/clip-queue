@@ -58,7 +58,7 @@ export class TwitchProvider implements IClipProvider {
     if (id in this.clipsCache) {
       clip = this.clipsCache[id]
     } else {
-      const clips = await twitch.getClips(this.ctx(), [id])
+      const clips = await twitch.getClips(await this.ctx(), [id])
       clip = clips[0]
     }
     if (!clip) {
@@ -68,7 +68,7 @@ export class TwitchProvider implements IClipProvider {
     if (clip.game_id in this.gamesCache) {
       game = this.gamesCache[clip.game_id]
     } else {
-      const games = await twitch.getGames(this.ctx(), [clip.game_id])
+      const games = await twitch.getGames(await this.ctx(), [clip.game_id])
       game = games[0]
     }
     this.clipsCache[id] = clip

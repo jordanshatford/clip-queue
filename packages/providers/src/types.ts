@@ -40,7 +40,7 @@ export interface ClipProviderCtx {
   token?: string
 }
 
-export type ClipProviderCtxCallback = () => ClipProviderCtx
+export type ClipProviderCtxCallback = () => ClipProviderCtx | Promise<ClipProviderCtx>
 
 export type ClipProviderMap = Partial<Record<ClipProvider, IClipProvider>>
 
