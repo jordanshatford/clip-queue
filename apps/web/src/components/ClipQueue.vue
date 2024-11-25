@@ -26,7 +26,7 @@
         {{ m.clips({ length: clips.length }) }}
       </span>
     </div>
-    <div class="mt-3 flex justify-items-start overflow-x-auto">
+    <div class="flex justify-items-start overflow-x-auto px-1 py-3">
       <ClipCard
         v-for="clip in clips"
         :key="toUUID(clip)"

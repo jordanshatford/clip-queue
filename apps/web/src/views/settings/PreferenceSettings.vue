@@ -4,6 +4,18 @@
       <template #content>
         <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">
+            <label for="language">{{ m.language() }}</label>
+            <Select
+              v-model="lang"
+              :options="[...availableLanguageTags]"
+              class="md:w-14rem w-full"
+              input-id="language"
+              :option-label="(value: AvailableLanguageTag) => availableLanguageTranslations[value]"
+            >
+            </Select>
+            <small id="language-help" class="pb-2 text-sm text-surface-400">{{
+              m.language_description()
+            }}</small>
             <label for="primaryColor">{{ m.primary_color() }}</label>
             <Select
               v-model="formTheme.primary"
@@ -48,14 +60,14 @@
               size="small"
               class="mr-2"
               type="submit"
-              :disabled="!theme.isModifiedFrom(formTheme)"
+              :disabled="!preferences.isModifiedFrom(formTheme)"
             ></Button>
             <Button
               type="reset"
               severity="danger"
               :label="m.cancel()"
               size="small"
-              :disabled="!theme.isModifiedFrom(formTheme)"
+              :disabled="!preferences.isModifiedFrom(formTheme)"
             ></Button>
           </div>
         </form>
@@ -70,23 +82,30 @@ import { ref, toRaw } from 'vue'
 import type { ColorOption } from '@cq/ui'
 import { Button, Card, colors, Select, surfaces, useToast } from '@cq/ui'
 
+import type { AvailableLanguageTag } from '@/paraglide/runtime'
 import ColorName from '@/components/ColorName.vue'
 import * as m from '@/paraglide/messages'
-import { useTheme } from '@/stores/theme'
+import { availableLanguageTags, languageTag } from '@/paraglide/runtime'
+import { usePreferences } from '@/stores/preferences'
 
 const toast = useToast()
-const theme = useTheme()
+const preferences = usePreferences()
 
 const formKey = ref(1)
-const formTheme = ref(structuredClone(toRaw(theme.preferences)))
+const formTheme = ref(structuredClone(toRaw(preferences.preferences)))
+
+const lang = languageTag()
+const availableLanguageTranslations: Record<AvailableLanguageTag, string> = {
+  en: m.english()
+}
 
 function onReset() {
-  formTheme.value = structuredClone(toRaw(theme.preferences))
+  formTheme.value = structuredClone(toRaw(preferences.preferences))
   formKey.value += 1
 }
 
 function onSubmit() {
-  theme.preferences = formTheme.value
+  preferences.preferences = formTheme.value
   toast.add({
     severity: 'success',
     summary: m.success(),

@@ -23,7 +23,7 @@
     </template>
     <template #end>
       <div class="flex items-center gap-2">
-        <ThemeToggle :is-dark-mode="theme.isDark" @toggle="theme.toggle()" />
+        <ThemeToggle :is-dark-mode="preferences.isDark" @toggle="preferences.toggleTheme()" />
         <Button
           icon="pi pi-twitch"
           :label="user.isLoggedIn ? 'Logout' : 'Login'"
@@ -43,10 +43,10 @@ import { useRouter } from 'vue-router'
 import { Button, Menubar, ThemeToggle } from '@cq/ui'
 
 import { RouteNameConstants, routes, toAllowedMenuItems } from '@/router'
-import { useTheme } from '@/stores/theme'
+import { usePreferences } from '@/stores/preferences'
 import { useUser } from '@/stores/user'
 
-const theme = useTheme()
+const preferences = usePreferences()
 const user = useUser()
 const router = useRouter()
 

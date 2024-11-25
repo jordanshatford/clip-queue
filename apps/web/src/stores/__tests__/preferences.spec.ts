@@ -3,12 +3,12 @@ import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { createApp } from 'vue'
 
-import { getInferredDefaultTheme, useTheme } from '../theme'
+import { getInferredDefaultLanguage, getInferredDefaultTheme, usePreferences } from '../preferences'
 
 const VALUE_LIGHT = '{"preferences": {"theme": "light"}}'
 const VALUE_DARK = '{"preferences": {"theme": "dark"}}'
 
-describe('theme.ts', () => {
+describe('preferences.ts', () => {
   const app = createApp({})
 
   beforeEach(() => {
@@ -36,7 +36,7 @@ describe('theme.ts', () => {
       }))
     })
     expect(getInferredDefaultTheme('dark')).toEqual('light')
-    // Match media is undefined (default to dark)
+    // Match media is undefined (default to fallback)
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: undefined
@@ -45,40 +45,62 @@ describe('theme.ts', () => {
     expect(getInferredDefaultTheme('light')).toEqual('light')
   })
 
+  it('gets the inferred default language when no language was set', () => {
+    // en
+    Object.defineProperty(window, 'navigator', {
+      writable: true,
+      value: vi.fn().mockImplementation(() => ({
+        language: 'en'
+      }))
+    })
+    expect(getInferredDefaultLanguage('en')).toEqual('en')
+    // en-US
+    Object.defineProperty(window, 'navigator', {
+      writable: true,
+      value: vi.fn().mockImplementation(() => ({
+        language: 'en-US'
+      }))
+    })
+    expect(getInferredDefaultLanguage('en')).toEqual('en')
+    // Match media is undefined (default to fallback)
+    Object.defineProperty(window, 'navigator', {})
+    expect(getInferredDefaultLanguage('en')).toEqual('en')
+  })
+
   it('gets the default value from localstorage if possible (light)', () => {
-    localStorage.setItem('cq-theme', VALUE_LIGHT)
-    const theme = useTheme()
-    expect(theme.preferences.theme).toEqual('light')
-    expect(theme.isDark).toEqual(false)
+    localStorage.setItem('cq-preferences', VALUE_LIGHT)
+    const preferences = usePreferences()
+    expect(preferences.preferences.theme).toEqual('light')
+    expect(preferences.isDark).toEqual(false)
     expect(document?.querySelector('html')?.classList.contains('app-dark')).toEqual(false)
   })
 
   it('gets the default value from localstorage if possible (dark)', () => {
-    localStorage.setItem('cq-theme', VALUE_DARK)
-    const theme = useTheme()
-    expect(theme.preferences.theme).toEqual('dark')
-    expect(theme.isDark).toEqual(true)
+    localStorage.setItem('cq-preferences', VALUE_DARK)
+    const preferences = usePreferences()
+    expect(preferences.preferences.theme).toEqual('dark')
+    expect(preferences.isDark).toEqual(true)
     expect(document?.querySelector('html')?.classList.contains('app-dark')).toEqual(true)
   })
 
   it('gets the default value from config when no value is in local storage', () => {
-    const theme = useTheme()
-    expect(theme.preferences.theme).toEqual('dark')
-    expect(theme.isDark).toEqual(true)
+    const preferences = usePreferences()
+    expect(preferences.preferences.theme).toEqual('dark')
+    expect(preferences.isDark).toEqual(true)
   })
 
   it('can toggle the theme', () => {
-    const theme = useTheme()
-    expect(theme.preferences.theme).toEqual('dark')
-    expect(theme.isDark).toEqual(true)
+    const preferences = usePreferences()
+    expect(preferences.preferences.theme).toEqual('dark')
+    expect(preferences.isDark).toEqual(true)
     expect(document?.querySelector('html')?.classList.contains('app-dark')).toBeTruthy()
-    theme.toggle()
-    expect(theme.preferences.theme).toEqual('light')
-    expect(theme.isDark).toEqual(false)
+    preferences.toggleTheme()
+    expect(preferences.preferences.theme).toEqual('light')
+    expect(preferences.isDark).toEqual(false)
     expect(document?.querySelector('html')?.classList.contains('app-dark')).toBeFalsy()
-    theme.toggle()
-    expect(theme.preferences.theme).toEqual('dark')
-    expect(theme.isDark).toEqual(true)
+    preferences.toggleTheme()
+    expect(preferences.preferences.theme).toEqual('dark')
+    expect(preferences.isDark).toEqual(true)
     expect(document?.querySelector('html')?.classList.contains('app-dark')).toBeTruthy()
   })
 })
