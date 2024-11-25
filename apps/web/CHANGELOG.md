@@ -1,5 +1,11 @@
 # @cq/web
 
+## 1.21.0
+
+### Minor Changes
+
+- feat: add ability to modify language in preference settings ([`2fa7279`](https://github.com/jordanshatford/clip-queue/commit/2fa727957750ec7850f9552615c48bc7c79f0d13))
+
 ## 1.20.0
 
 ### Minor Changes
