@@ -1,5 +1,11 @@
 # @cq/web
 
+## 1.20.0
+
+### Minor Changes
+
+- feat: add support for localization ([`8e42f28`](https://github.com/jordanshatford/clip-queue/commit/8e42f28d2165d7d69a4b449cb3123a9573740c40))
+
 ## 1.19.3
 
 ### Patch Changes
