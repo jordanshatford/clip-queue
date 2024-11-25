@@ -5,6 +5,7 @@ import type { MenuItem } from '@cq/ui'
 import twitch from '@cq/services/twitch'
 
 import { config } from '@/config'
+import * as m from '@/paraglide/messages'
 import { useUser } from '@/stores/user'
 import HistoryPage from '@/views/HistoryPage.vue'
 import HomePage from '@/views/HomePage.vue'
@@ -33,7 +34,7 @@ export const routes: RouteRecordRaw[] = [
     component: QueuePage,
     meta: {
       icon: 'pi pi-list',
-      title: 'Queue',
+      title: m.queue(),
       requiresAuth: true
     }
   },
@@ -43,7 +44,7 @@ export const routes: RouteRecordRaw[] = [
     component: HistoryPage,
     meta: {
       icon: 'pi pi-history',
-      title: 'History',
+      title: m.history(),
       requiresAuth: true
     }
   },
@@ -54,7 +55,7 @@ export const routes: RouteRecordRaw[] = [
     component: SettingsPage,
     meta: {
       icon: 'pi pi-cog',
-      title: 'Settings',
+      title: m.settings(),
       requiresAuth: true
     },
     children: [
@@ -64,7 +65,7 @@ export const routes: RouteRecordRaw[] = [
         component: ChatSettings,
         meta: {
           icon: 'pi pi-comments',
-          title: 'Chat Settings',
+          title: m.settings_chat(),
           requiresAuth: true
         }
       },
@@ -74,7 +75,7 @@ export const routes: RouteRecordRaw[] = [
         component: QueueSettings,
         meta: {
           icon: 'pi pi-list',
-          title: 'Queue Settings',
+          title: m.settings_queue(),
           requiresAuth: true
         }
       },
@@ -84,7 +85,7 @@ export const routes: RouteRecordRaw[] = [
         component: PreferenceSettings,
         meta: {
           icon: 'pi pi-palette',
-          title: 'Preferences',
+          title: m.settings_preferences(),
           requiresAuth: true
         }
       },
@@ -94,7 +95,7 @@ export const routes: RouteRecordRaw[] = [
         component: OtherSettings,
         meta: {
           icon: 'pi pi-cog',
-          title: 'Other Settings',
+          title: m.settings_other(),
           requiresAuth: true
         }
       }

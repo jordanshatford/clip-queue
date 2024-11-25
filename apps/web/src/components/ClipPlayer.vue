@@ -23,7 +23,7 @@
         <div class="flex gap-2">
           <Button
             icon="pi pi-backward"
-            label="Previous"
+            :label="m.previous()"
             severity="info"
             size="small"
             :disabled="previousDisabled"
@@ -33,7 +33,7 @@
           <Button
             icon="pi pi-forward"
             icon-pos="right"
-            label="Next"
+            :label="m.next()"
             severity="info"
             size="small"
             :disabled="nextDisabled"
@@ -46,7 +46,9 @@
         <span>
           {{ clip.channel }}
           <span v-if="clip.category"> - {{ clip.category }} </span>
-          <span v-if="clip.submitters[0]"> - Submitter: {{ clip.submitters[0] }} </span>
+          <span v-if="clip.submitters[0]">
+            - {{ m.submitter_name({ name: clip.submitters[0] }) }}</span
+          >
         </span>
         <ProviderName :provider="clip.provider" />
       </div>
@@ -61,6 +63,7 @@ import type { Clip, PlayerFormat } from '@cq/providers'
 import Player from '@cq/player'
 import { Button } from '@cq/ui'
 
+import * as m from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'
 import ProviderName from './ProviderName.vue'
 

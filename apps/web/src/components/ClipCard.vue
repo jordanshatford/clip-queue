@@ -11,24 +11,25 @@
     <template #title>
       <span class="font-normal">{{ clip.title }}</span>
     </template>
-    <template #subtitle> </template>
+    <template #subtitle>
+      <p v-if="clip.category">{{ clip.channel }} - {{ clip.category }}</p>
+      <p v-else>
+        {{ clip.channel }}
+      </p>
+    </template>
     <template #content>
       <div class="mb-4 text-xs text-surface-400">
-        <p v-if="clip.category">{{ clip.channel }} - {{ clip.category }}</p>
-        <p v-else>
-          {{ clip.channel }}
-        </p>
-        <p>Submitter: {{ clip.submitters[0] }}</p>
+        <p>{{ m.submitter_name({ name: clip.submitters[0] }) }}</p>
         <div class="flex items-center gap-1">
-          <p>Provider:</p>
+          <p>{{ m.provider_colon() }}</p>
           <ProviderName :provider="clip.provider" class="font-normal" />
         </div>
       </div>
       <div class="flex justify-around">
         <Button
           icon="pi pi-play"
-          title="Play"
-          label="Play"
+          :title="m.play()"
+          :label="m.play()"
           severity="info"
           size="small"
           @click="emit('play')"
@@ -36,8 +37,8 @@
         </Button>
         <Button
           icon="pi pi-trash"
-          title="Remove"
-          label="Remove"
+          :title="m.remove()"
+          :label="m.remove()"
           severity="danger"
           size="small"
           @click="emit('remove')"
@@ -53,6 +54,7 @@ import type { Clip } from '@cq/providers'
 import { Button, Card } from '@cq/ui'
 
 import ProviderName from '@/components/ProviderName.vue'
+import * as m from '@/paraglide/messages'
 
 export interface Props {
   clip: Clip

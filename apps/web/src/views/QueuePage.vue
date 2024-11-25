@@ -9,10 +9,10 @@
     @next="queue.next()"
   />
   <Message v-else-if="settings.queue.providers.length === 0" severity="error">
-    No clip providers enabled. Please enable one in the settings.
+    {{ m.message_no_clip_providers_enabled() }}
   </Message>
   <ClipQueue
-    title="Upcoming Clips"
+    :title="m.upcoming_clips()"
     :clips="queue.upcoming.toArray()"
     :is-open="queue.isOpen"
     @open="queue.open()"
@@ -29,6 +29,7 @@ import { Message } from '@cq/ui'
 
 import ClipPlayer from '@/components/ClipPlayer.vue'
 import ClipQueue from '@/components/ClipQueue.vue'
+import * as m from '@/paraglide/messages'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
 

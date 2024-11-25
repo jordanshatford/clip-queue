@@ -2,35 +2,33 @@
   <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
       <Button
-        label="Reset Settings"
+        :label="m.reset_settings()"
         class="w-full"
         size="small"
         severity="danger"
         :disabled="!(settings.isModified || theme.isModified)"
         @click="resetSettingsToDefault()"
       ></Button>
-      <label class="text-sm text-surface-400">Reset settings back to their initial values.</label>
+      <label class="text-sm text-surface-400">{{ m.reset_settings_description() }}</label>
     </template>
   </Card>
   <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
       <Button
-        label="Purge History"
+        :label="m.purge_history()"
         class="w-full"
         size="small"
         severity="danger"
         :disabled="queue.history.empty()"
         @click="purgeHistory()"
       ></Button>
-      <label class="text-sm text-surface-400"
-        >Purge all clips previously viewed allowing them to be resubmitted.</label
-      >
+      <label class="text-sm text-surface-400">{{ m.purge_history_description() }}</label>
     </template>
   </Card>
   <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
       <Button
-        label="Purge Cache"
+        :label="m.purge_cache()"
         class="w-full"
         size="small"
         severity="danger"
@@ -38,14 +36,14 @@
         @click="purgeCache()"
       ></Button>
       <label class="text-sm text-surface-400">
-        Clips submitted may be cached for future use. Purge all cached clips.
+        {{ m.purge_cache_description() }}
       </label>
     </template>
   </Card>
   <Card class="mx-auto max-w-lg">
     <template #content>
       <p class="text-sm text-surface-400">
-        Application version: <span>v{{ version }}</span>
+        {{ m.application_version({ version }) }}
       </p>
     </template>
   </Card>
@@ -54,6 +52,7 @@
 <script setup lang="ts">
 import { Button, Card, useConfirm, useToast } from '@cq/ui'
 
+import * as m from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
@@ -70,10 +69,10 @@ const providers = useProviders()
 
 async function resetSettingsToDefault() {
   confirm.require({
-    header: 'Reset settings',
-    message: 'Are you sure you want to reset all settings to the default values?',
-    rejectLabel: 'Cancel',
-    acceptLabel: 'Confirm',
+    header: m.reset_settings(),
+    message: m.reset_settings_confirm(),
+    rejectLabel: m.cancel(),
+    acceptLabel: m.confirm(),
     rejectClass:
       'text-white dark:text-surface-900 bg-surface-500 dark:bg-surface-400 border border-surface-500 dark:border-surface-400 hover:bg-surface-600 dark:hover:bg-surface-300 hover:border-surface-600 dark:hover:border-surface-300 focus:ring-surface-400/50 dark:focus:ring-surface-300/50',
     acceptClass:
@@ -83,8 +82,8 @@ async function resetSettingsToDefault() {
       theme.$reset()
       toast.add({
         severity: 'success',
-        summary: 'Success',
-        detail: 'Settings reset to default',
+        summary: m.success(),
+        detail: m.settings_reset(),
         life: 3000
       })
     },
@@ -94,10 +93,10 @@ async function resetSettingsToDefault() {
 
 async function purgeHistory() {
   confirm.require({
-    header: 'Purge History',
-    message: 'Are you sure you want to reset all settings to the default values?',
-    rejectLabel: 'Cancel',
-    acceptLabel: 'Confirm',
+    header: m.purge_history(),
+    message: m.purge_history_confirm(),
+    rejectLabel: m.cancel(),
+    acceptLabel: m.confirm(),
     rejectClass:
       'text-white dark:text-surface-900 bg-surface-500 dark:bg-surface-400 border border-surface-500 dark:border-surface-400 hover:bg-surface-600 dark:hover:bg-surface-300 hover:border-surface-600 dark:hover:border-surface-300 focus:ring-surface-400/50 dark:focus:ring-surface-300/50',
     acceptClass:
@@ -106,8 +105,8 @@ async function purgeHistory() {
       queue.purge()
       toast.add({
         severity: 'success',
-        summary: 'Success',
-        detail: 'Clip history cleared',
+        summary: m.success(),
+        detail: m.clip_history_purged(),
         life: 3000
       })
     },
@@ -117,10 +116,10 @@ async function purgeHistory() {
 
 async function purgeCache() {
   confirm.require({
-    header: 'Purge Cache',
-    message: 'Are you sure you want to purge all clips cached locally?',
-    rejectLabel: 'Cancel',
-    acceptLabel: 'Confirm',
+    header: m.purge_cache(),
+    message: m.purge_cache_confirm(),
+    rejectLabel: m.cancel(),
+    acceptLabel: m.confirm(),
     rejectClass:
       'text-white dark:text-surface-900 bg-surface-500 dark:bg-surface-400 border border-surface-500 dark:border-surface-400 hover:bg-surface-600 dark:hover:bg-surface-300 hover:border-surface-600 dark:hover:border-surface-300 focus:ring-surface-400/50 dark:focus:ring-surface-300/50',
     acceptClass:
@@ -129,8 +128,8 @@ async function purgeCache() {
       providers.purge()
       toast.add({
         severity: 'success',
-        summary: 'Success',
-        detail: 'Clip cache cleared',
+        summary: m.success(),
+        detail: m.clip_cache_purged(),
         life: 3000
       })
     },

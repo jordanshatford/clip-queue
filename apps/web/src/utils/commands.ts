@@ -1,5 +1,6 @@
 import { ClipProvider } from '@cq/providers'
 
+import * as m from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
@@ -28,43 +29,43 @@ export interface CommandHelp {
 }
 
 const help: Record<Command, CommandHelp> = {
-  [Command.OPEN]: { description: 'Open the queue.' },
-  [Command.CLOSE]: { description: 'Close the queue.' },
-  [Command.CLEAR]: { description: 'Remove all clips in the queue.' },
+  [Command.OPEN]: { description: m.command_open() },
+  [Command.CLOSE]: { description: m.command_close() },
+  [Command.CLEAR]: { description: m.command_clear() },
   [Command.SET_LIMIT]: {
     args: ['number'],
-    description: 'Set queue size limit.'
+    description: m.command_set_limit()
   },
-  [Command.REMOVE_LIMIT]: { description: 'Remove the queue size limit.' },
-  [Command.PREV]: { description: 'Switch to the previous clip.' },
-  [Command.NEXT]: { description: 'Switch to the next clip.' },
+  [Command.REMOVE_LIMIT]: { description: m.command_remove_limit() },
+  [Command.PREV]: { description: m.command_previous() },
+  [Command.NEXT]: { description: m.command_next() },
   [Command.REMOVE_BY_SUBMITTER]: {
     args: ['submitter'],
-    description: 'Remove clips sent by the submitter.'
+    description: m.command_remove_by_submitter()
   },
   [Command.REMOVE_BY_PROVIDER]: {
     args: ['provider'],
-    description: 'Remove clips from the provider.'
+    description: m.command_remove_by_provider()
   },
   [Command.ENABLE_PROVIDER]: {
     args: ['provider'],
-    description: 'Enable the specified provider.'
+    description: m.command_enable_provider()
   },
   [Command.DISABLE_PROVIDER]: {
     args: ['provider'],
-    description: 'Disable the specified provider.'
+    description: m.command_disable_provider()
   },
   [Command.ENABLE_AUTO_MODERATION]: {
-    description: 'Enable auto moderation.'
+    description: m.command_enable_auto_mod()
   },
   [Command.DISABLE_AUTO_MODERATION]: {
-    description: 'Disable auto moderation.'
+    description: m.command_disable_auto_mod()
   },
   [Command.PURGE_CACHE]: {
-    description: 'Purge all cached clips.'
+    description: m.command_purge_cache()
   },
   [Command.PURGE_HISTORY]: {
-    description: 'Purge all historically watched clips.'
+    description: m.command_purge_history()
   }
 }
 

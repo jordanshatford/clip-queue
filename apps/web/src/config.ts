@@ -1,3 +1,5 @@
+import * as m from '@/paraglide/messages'
+
 export const env = {
   CLIENT_ID: import.meta.env.VITE_TWITCH_CLIENT_ID as string,
   REDIRECT_URI: import.meta.env.VITE_TWITCH_REDIRECT_URI as string,
@@ -6,42 +8,37 @@ export const env = {
 
 export const config = {
   about: {
-    title: 'Clip Queue',
-    tagline: 'An enhanced clip viewing experience.',
+    title: m.title(),
+    tagline: m.tagline(),
     features: [
       {
-        title: 'Connect to Chat',
-        description:
-          'Log in to automatically connect to your Twitch chat. Clips submitted by users in chat will be queued.',
+        title: m.feature_connect_title(),
+        description: m.feature_connect_description(),
         icon: 'pi pi-comments'
       },
       {
-        title: 'Duplicate Prevention',
-        description:
-          'Duplicate clips will not make it into the queue. This includes clips watched during previous sessions.',
+        title: m.feature_duplicate_prevent_title(),
+        description: m.feature_duplicate_prevent_description(),
         icon: 'pi pi-copy'
       },
       {
-        title: 'Popular Clips Rise Up',
-        description:
-          'Clips being repeately submitted by many users will rise up in the queue allowing it to be viewed sooner.',
+        title: m.feature_popularity_title(),
+        description: m.feature_popularity_description(),
         icon: 'pi pi-chart-line'
       },
       {
-        title: 'Chat Commands',
-        description:
-          'Moderators of the channel can use chat commands to interact directly with the queue.',
+        title: m.feature_commands_title(),
+        description: m.feature_commands_description(),
         icon: 'pi pi-bolt'
       },
       {
-        title: 'Automatic Moderation',
-        description: 'Moderation performed in chat will effect the clips submitted by those users.',
+        title: m.feature_moderation_title(),
+        description: m.feature_moderation_description(),
         icon: 'pi pi-flag'
       },
       {
-        title: 'Settings Customization',
-        description:
-          'Personalize your experience through the vast choices of customizable settings.',
+        title: m.feature_settings_title(),
+        description: m.feature_settings_description(),
         icon: 'pi pi-cog'
       }
     ]

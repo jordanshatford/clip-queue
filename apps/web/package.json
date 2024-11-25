@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "pnpm typecheck && vite build",
+    "build": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide && pnpm typecheck && vite build",
     "preview": "vite preview",
     "typecheck": "vue-tsc --build --force",
-    "lint": "prettier --check . && eslint .",
+    "lint": "prettier --check . && eslint . && pnpx @inlang/cli lint --project ./project.inlang",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide"
   },
   "dependencies": {
     "@cq/player": "workspace:*",
@@ -26,6 +27,8 @@
   },
   "devDependencies": {
     "@cq/config": "workspace:*",
+    "@inlang/paraglide-js": "1.11.3",
+    "@inlang/paraglide-vite": "^1.2.77",
     "@pinia/testing": "^0.1.7",
     "@tsconfig/node20": "^20.1.4",
     "@types/jsdom": "^21.1.7",

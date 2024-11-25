@@ -2,7 +2,7 @@
   <div class="flex flex-row-reverse gap-2">
     <Button
       icon="pi pi-trash"
-      label="Delete"
+      :label="m.delete_label()"
       :disabled="!selection.length"
       severity="danger"
       size="small"
@@ -10,7 +10,7 @@
     ></Button>
     <Button
       icon="pi pi-plus"
-      label="Queue"
+      :label="m.queue()"
       :disabled="isQueueClipsDisabled"
       severity="info"
       size="small"
@@ -29,23 +29,23 @@
     :rows-per-page-options="[10, 20, 50]"
     class="my-4"
   >
-    <template #empty>No clips previously watched.</template>
+    <template #empty>{{ m.no_clips_previously_watched() }}</template>
     <template #header>
       <div class="flex items-center justify-between">
-        <span class="text-xl">History</span>
+        <span class="text-xl">{{ m.history() }}</span>
         <span class="relative">
           <i class="pi pi-search absolute left-3 top-1 text-surface-400 dark:text-surface-500"></i>
           <InputText
             v-model="filters['global'].value"
             size="small"
-            placeholder="Search"
+            :placeholder="m.search()"
             class="pl-10 font-normal"
           />
         </span>
       </div>
     </template>
     <Column selection-mode="multiple" header-style="width: 3rem"></Column>
-    <Column field="title" header="Info" sortable :sort-field="(data: Clip) => data.title">
+    <Column field="title" :header="m.info()" sortable :sort-field="(data: Clip) => data.title">
       <template #body="{ data }: { data: Clip }">
         <div class="flex items-center">
           <img
@@ -78,7 +78,7 @@
         </div>
       </template>
     </Column>
-    <Column field="provider" sortable header="Provider">
+    <Column field="provider" sortable :header="m.provider()">
       <template #body="{ data }: { data: Clip }">
         <ProviderName :provider="data.provider" />
       </template>
@@ -87,7 +87,7 @@
       :field="(data: Clip) => data.submitters?.[0]"
       sortable
       :sort-field="(data: Clip) => data.submitters?.[0]"
-      header="Submitter"
+      :header="m.submitter()"
     >
     </Column>
   </DataTable>
@@ -100,6 +100,7 @@ import type { Clip } from '@cq/providers'
 import { Button, Column, DataTable, InputText, useConfirm } from '@cq/ui'
 
 import ProviderName from '@/components/ProviderName.vue'
+import * as m from '@/paraglide/messages'
 import { useQueue } from '@/stores/queue'
 
 const filters = ref({
@@ -126,10 +127,10 @@ function queueClips() {
 function deleteClips() {
   const clips = selection.value
   confirm.require({
-    header: 'Delete History',
-    message: `Are you sure you want to delete ${clips.length} clip(s) from the history?`,
-    rejectLabel: 'Cancel',
-    acceptLabel: 'Confirm',
+    header: m.delete_history(),
+    message: m.delete_history_confirm({ length: clips.length }),
+    rejectLabel: m.cancel(),
+    acceptLabel: m.confirm(),
     rejectClass:
       'text-white dark:text-surface-900 bg-surface-500 dark:bg-surface-400 border border-surface-500 dark:border-surface-400 hover:bg-surface-600 dark:hover:bg-surface-300 hover:border-surface-600 dark:hover:border-surface-300 focus:ring-surface-400/50 dark:focus:ring-surface-300/50',
     acceptClass:

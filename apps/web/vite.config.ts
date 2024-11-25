@@ -1,11 +1,18 @@
 import { fileURLToPath, URL } from 'node:url'
 
+import { paraglide } from '@inlang/paraglide-vite'
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    paraglide({
+      project: './project.inlang',
+      outdir: './src/paraglide'
+    }),
+    vue()
+  ],
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version)
   },

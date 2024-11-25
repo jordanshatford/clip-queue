@@ -4,7 +4,7 @@
       <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
         <div class="flex flex-col gap-2 text-left">
           <div class="flex justify-between">
-            <label for="autoModeration">Auto Moderation:</label>
+            <label for="autoModeration">{{ m.auto_mod() }}</label>
             <ToggleSwitch
               v-model="formSettings.hasAutoModerationEnabled"
               input-id="autoModeration"
@@ -12,12 +12,11 @@
             />
           </div>
           <small id="autoModeration-help" class="pb-2 text-sm text-surface-400">
-            When a user has their chat message deleted, is timed out, or banned, the clips they
-            submitted will be removed.
+            {{ m.auto_mod_description() }}
           </small>
         </div>
         <div class="flex flex-col gap-2 text-left">
-          <label for="limit">Size Limit:</label>
+          <label for="limit">{{ m.size_limit() }}</label>
           <InputNumber
             v-model="formSettings.limit"
             input-id="limit"
@@ -27,17 +26,17 @@
             show-buttons
             aria-describedby="limit-help"
           />
-          <small id="limit-help" class="pb-2 text-sm text-surface-400"
-            >The number of clips allowed in the queue. Leave empty for no limit.</small
-          >
+          <small id="limit-help" class="pb-2 text-sm text-surface-400">{{
+            m.size_limit_description()
+          }}</small>
         </div>
         <div class="flex flex-col gap-2 text-left">
-          <label for="allowedProviders">Allowed Providers:</label>
+          <label for="allowedProviders">{{ m.allowed_providers() }}</label>
           <MultiSelect
             v-model="formSettings.providers"
             input-id="allowedProviders"
             :options="Object.values(ClipProvider)"
-            placeholder="None"
+            :placeholder="m.none()"
             display="chip"
             aria-describedby="allowedProviders-help"
           >
@@ -50,21 +49,23 @@
               </Chip>
             </template>
           </MultiSelect>
-          <small id="allowedProviders-help" class="pb-2 text-sm text-surface-400"
-            >Clips from these providers will be allowed in the queue.</small
-          >
+          <small id="allowedProviders-help" class="pb-2 text-sm text-surface-400">{{
+            m.allowed_providers_description()
+          }}</small>
           <Message
             v-if="selectedExperimentalProviders.length > 0"
             severity="warn"
             :closable="false"
             class="mt-0"
           >
-            Experimental providers selected: {{ selectedExperimentalProviders.join(', ') }}
+            {{
+              m.experimental_providers_selected({ names: selectedExperimentalProviders.join(', ') })
+            }}
           </Message>
         </div>
         <div class="mt-3">
           <Button
-            label="Save"
+            :label="m.save()"
             class="mr-2"
             type="submit"
             severity="info"
@@ -72,7 +73,7 @@
             :disabled="!settings.isQueueSettingsModified(formSettings)"
           ></Button>
           <Button
-            label="Cancel"
+            :label="m.cancel()"
             type="reset"
             severity="danger"
             size="small"
@@ -100,6 +101,7 @@ import {
 } from '@cq/ui'
 
 import ProviderName from '@/components/ProviderName.vue'
+import * as m from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'
 import { useSettings } from '@/stores/settings'
 
@@ -123,8 +125,8 @@ function onSubmit() {
   settings.queue = formSettings.value
   toast.add({
     severity: 'success',
-    summary: 'Success',
-    detail: 'Queue settings saved',
+    summary: m.success(),
+    detail: m.queue_settings_saved(),
     life: 3000
   })
   onReset()

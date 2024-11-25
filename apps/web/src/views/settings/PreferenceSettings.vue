@@ -4,7 +4,7 @@
       <template #content>
         <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">
-            <label for="primaryColor">Primary Color:</label>
+            <label for="primaryColor">{{ m.primary_color() }}</label>
             <Select
               v-model="formTheme.primary"
               :options="colors"
@@ -19,10 +19,10 @@
                 <ColorName :name="option.name" :color="option.palette[500]" />
               </template>
             </Select>
-            <small id="primaryColor-help" class="pb-2 text-sm text-surface-400"
-              >Primary color used throughout the UI.</small
-            >
-            <label for="surfaceColor">Surface Color:</label>
+            <small id="primaryColor-help" class="pb-2 text-sm text-surface-400">{{
+              m.primary_color_description()
+            }}</small>
+            <label for="surfaceColor">{{ m.surface_color() }}</label>
             <Select
               v-model="formTheme.surface"
               data-key="name"
@@ -37,14 +37,14 @@
                 <ColorName :name="option.name" :color="option.palette[500]" />
               </template>
             </Select>
-            <small id="surfaceColor-help" class="pb-2 text-sm text-surface-400"
-              >Surface color used throughout the UI.</small
-            >
+            <small id="surfaceColor-help" class="pb-2 text-sm text-surface-400">{{
+              m.surface_color_description()
+            }}</small>
           </div>
           <div class="mt-3">
             <Button
               severity="info"
-              label="Save"
+              :label="m.save()"
               size="small"
               class="mr-2"
               type="submit"
@@ -53,7 +53,7 @@
             <Button
               type="reset"
               severity="danger"
-              label="Cancel"
+              :label="m.cancel()"
               size="small"
               :disabled="!theme.isModifiedFrom(formTheme)"
             ></Button>
@@ -71,6 +71,7 @@ import type { ColorOption } from '@cq/ui'
 import { Button, Card, colors, Select, surfaces, useToast } from '@cq/ui'
 
 import ColorName from '@/components/ColorName.vue'
+import * as m from '@/paraglide/messages'
 import { useTheme } from '@/stores/theme'
 
 const toast = useToast()
@@ -88,8 +89,8 @@ function onSubmit() {
   theme.preferences = formTheme.value
   toast.add({
     severity: 'success',
-    summary: 'Success',
-    detail: 'Preferences saved',
+    summary: m.success(),
+    detail: m.preferences_saved(),
     life: 3000
   })
   onReset()

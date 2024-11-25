@@ -3,7 +3,7 @@
     <Card class="mx-auto mb-2 max-w-lg">
       <template #content>
         <div class="m-0 flex flex-col gap-2 p-0 text-left">
-          <label for="username">Connected Chat:</label>
+          <label for="username">{{ m.connected_chat_colon() }}</label>
           <InputText id="username" v-model="user.ctx.username" disabled />
         </div>
       </template>
@@ -12,7 +12,7 @@
       <template #content>
         <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">
-            <label for="commandPrefix">Commands Prefix:</label>
+            <label for="commandPrefix">{{ m.command_prefix() }}</label>
             <InputText
               id="commandPrefix"
               v-model="formSettings.prefix"
@@ -20,15 +20,15 @@
               maxlength="8"
               @keydown.space.prevent
             />
-            <small id="commandPrefix-help" class="pb-2 text-sm text-surface-400"
-              >Commands in chat must be prefixed by this value.</small
-            >
-            <label for="allowedCommands">Allowed Commands:</label>
+            <small id="commandPrefix-help" class="pb-2 text-sm text-surface-400">{{
+              m.command_prefix_description()
+            }}</small>
+            <label for="allowedCommands">{{ m.allowed_commands() }}</label>
             <MultiSelect
               v-model="formSettings.allowed"
               input-id="allowedCommands"
               :options="Object.values(Command)"
-              placeholder="None"
+              :placeholder="m.none()"
               display="chip"
               aria-describedby="allowedCommands-help"
             >
@@ -39,14 +39,14 @@
                 </div>
               </template>
             </MultiSelect>
-            <small id="allowedCommands-help" class="pb-2 text-sm text-surface-400"
-              >Commands allowed to be used in chat.</small
-            >
+            <small id="allowedCommands-help" class="pb-2 text-sm text-surface-400">{{
+              m.allowed_commands_description()
+            }}</small>
           </div>
           <div class="mt-3">
             <Button
               severity="info"
-              label="Save"
+              :label="m.save()"
               size="small"
               class="mr-2"
               type="submit"
@@ -55,7 +55,7 @@
             <Button
               type="reset"
               severity="danger"
-              label="Cancel"
+              :label="m.cancel()"
               size="small"
               :disabled="!settings.isCommandsSettingsModified(formSettings)"
             ></Button>
@@ -71,6 +71,7 @@ import { ref, toRaw } from 'vue'
 
 import { Button, Card, InputText, MultiSelect, useToast } from '@cq/ui'
 
+import * as m from '@/paraglide/messages'
 import { useSettings } from '@/stores/settings'
 import { useUser } from '@/stores/user'
 import commands, { Command } from '@/utils/commands'
@@ -101,8 +102,8 @@ function onSubmit() {
   settings.commands = formSettings.value
   toast.add({
     severity: 'success',
-    summary: 'Success',
-    detail: 'Chat settings saved',
+    summary: m.success(),
+    detail: m.chat_settings_saved(),
     life: 3000
   })
   onReset()
