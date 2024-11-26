@@ -1,5 +1,11 @@
 # @cq/ui
 
+## 1.4.0
+
+### Minor Changes
+
+- feat: translate primary and surface color names ([`f4ed8ba`](https://github.com/jordanshatford/clip-queue/commit/f4ed8ba09129b50f8b2bf5596f23a237cb61d461))
+
 ## 1.3.0
 
 ### Minor Changes

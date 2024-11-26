@@ -1,5 +1,17 @@
 # @cq/web
 
+## 1.22.0
+
+### Minor Changes
+
+- feat: translate primary and surface color names ([`f4ed8ba`](https://github.com/jordanshatford/clip-queue/commit/f4ed8ba09129b50f8b2bf5596f23a237cb61d461))
+
+### Patch Changes
+
+- Updated dependencies [[`22327f0`](https://github.com/jordanshatford/clip-queue/commit/22327f0a7d7ac1f46d9e53791c35a7d122a2bf60), [`f4ed8ba`](https://github.com/jordanshatford/clip-queue/commit/f4ed8ba09129b50f8b2bf5596f23a237cb61d461)]:
+  - @cq/player@1.1.0
+  - @cq/ui@1.4.0
+
 ## 1.21.0
 
 ### Minor Changes

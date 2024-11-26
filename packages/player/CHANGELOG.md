@@ -1,5 +1,11 @@
 # @cq/player
 
+## 1.1.0
+
+### Minor Changes
+
+- feat: properly translate unsupported clip message ([`22327f0`](https://github.com/jordanshatford/clip-queue/commit/22327f0a7d7ac1f46d9e53791c35a7d122a2bf60))
+
 ## 1.0.0
 
 ### Major Changes
