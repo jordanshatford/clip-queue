@@ -13,8 +13,34 @@ type ColorPalette = {
   950: string
 }
 
+export type ColorName =
+  | 'emerald'
+  | 'green'
+  | 'lime'
+  | 'orange'
+  | 'amber'
+  | 'yellow'
+  | 'teal'
+  | 'cyan'
+  | 'sky'
+  | 'blue'
+  | 'indigo'
+  | 'violet'
+  | 'purple'
+  | 'fuchsia'
+  | 'pink'
+  | 'rose'
+  | 'slate'
+  | 'gray'
+  | 'zinc'
+  | 'neutral'
+  | 'stone'
+  | 'soho'
+  | 'viva'
+  | 'ocean'
+
 export interface ColorOption {
-  name: string
+  name: ColorName
   palette: ColorPalette
 }
 

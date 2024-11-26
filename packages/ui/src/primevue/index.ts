@@ -32,4 +32,4 @@ export { useConfirm } from 'primevue/useconfirm'
 export { useToast } from 'primevue/usetoast'
 
 // Color Palettes
-export { type ColorOption, colors, surfaces, setColorPalette } from './palettes'
+export { type ColorName, type ColorOption, colors, surfaces, setColorPalette } from './palettes'
