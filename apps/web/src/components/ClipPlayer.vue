@@ -5,7 +5,9 @@
       :format="playerFormat"
       :source="playerSource"
       :thumbnail-url="clip.thumbnailUrl"
-    />
+    >
+      <template #unsupported>{{ m.unsupported_clip() }}</template>
+    </Player>
     <div class="mt-2 text-left">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2 text-2xl font-bold font-normal text-surface-400">

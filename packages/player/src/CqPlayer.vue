@@ -16,7 +16,7 @@
       v-else
       class="flex h-full items-center justify-center font-normal text-surface-600 dark:text-surface-400"
     >
-      <p>Unsupported clip. You may need to enable the provider of this clip.</p>
+      <slot name="unsupported"></slot>
     </div>
   </div>
 </template>

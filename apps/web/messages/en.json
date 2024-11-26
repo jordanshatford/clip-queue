@@ -115,6 +115,7 @@
   "tagline": "An enhanced clip viewing experience.",
   "teal": "Teal",
   "title": "Clip Queue",
+  "unsupported_clip": "Unsupported clip. You may need to enable the provider of this clip.",
   "upcoming_clips": "Upcoming Clips",
   "violet": "Violet",
   "viva": "Viva",
