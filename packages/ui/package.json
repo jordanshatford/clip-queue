@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "primeicons": "^7.0.0",
-    "primevue": "^4.2.3",
+    "primevue": "^4.2.4",
     "tailwindcss-primeui": "^0.3.4",
     "vue": "^3.5.13"
   },
@@ -26,10 +26,10 @@
   "devDependencies": {
     "@cq/config": "workspace:*",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^22.9.3",
-    "@vitejs/plugin-vue": "^5.2.0",
+    "@types/node": "^22.10.1",
+    "@vitejs/plugin-vue": "^5.2.1",
     "@vue/test-utils": "^2.4.6",
-    "@vue/tsconfig": "^0.6.0",
+    "@vue/tsconfig": "^0.7.0",
     "autoprefixer": "^10.4.20",
     "jsdom": "^25.0.1",
     "postcss": "^8.4.49",
