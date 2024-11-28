@@ -1,5 +1,19 @@
 # @cq/web
 
+## 1.24.0
+
+### Minor Changes
+
+- feat: add german language support ([`ea4b36f`](https://github.com/jordanshatford/clip-queue/commit/ea4b36f2205b575cc089988f1e24f2aa5dc0dc96))
+
+- feat: add italian language support ([`54b2f36`](https://github.com/jordanshatford/clip-queue/commit/54b2f36e850fd28c84fc2b6c2925888ae4d3374e))
+
+- feat: add spanish language support ([`974e0b3`](https://github.com/jordanshatford/clip-queue/commit/974e0b35611f4a8a35a86209a47b8544682357cf))
+
+### Patch Changes
+
+- fix: better handling of inferring language ([`c26fabe`](https://github.com/jordanshatford/clip-queue/commit/c26fabeafac2ca4c717d7a4b76056afdfe2230c3))
+
 ## 1.23.0
 
 ### Minor Changes
