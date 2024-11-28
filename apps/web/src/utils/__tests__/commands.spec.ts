@@ -114,6 +114,6 @@ describe('commands.ts', () => {
   })
 
   it('returns help information for commands', () => {
-    expect(commands.help).toBeDefined()
+    expect(commands.help.value).toBeDefined()
   })
 })

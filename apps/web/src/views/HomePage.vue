@@ -4,7 +4,7 @@
       <p
         class="mt-2 text-3xl font-bold tracking-tight text-surface-600 sm:text-4xl dark:text-surface-200"
       >
-        {{ tagline }}
+        {{ m.tagline() }}
       </p>
     </div>
     <div class="mt-12 text-left">
@@ -22,9 +22,42 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import { FeatureCard } from '@cq/ui'
 
-import config from '@/config'
+import * as m from '@/paraglide/messages'
 
-const { tagline, features } = config.about
+const features = computed(() => [
+  {
+    title: m.feature_connect_title(),
+    description: m.feature_connect_description(),
+    icon: 'pi pi-comments'
+  },
+  {
+    title: m.feature_duplicate_prevent_title(),
+    description: m.feature_duplicate_prevent_description(),
+    icon: 'pi pi-copy'
+  },
+  {
+    title: m.feature_popularity_title(),
+    description: m.feature_popularity_description(),
+    icon: 'pi pi-chart-line'
+  },
+  {
+    title: m.feature_commands_title(),
+    description: m.feature_commands_description(),
+    icon: 'pi pi-bolt'
+  },
+  {
+    title: m.feature_moderation_title(),
+    description: m.feature_moderation_description(),
+    icon: 'pi pi-flag'
+  },
+  {
+    title: m.feature_settings_title(),
+    description: m.feature_settings_description(),
+    icon: 'pi pi-cog'
+  }
+])
 </script>

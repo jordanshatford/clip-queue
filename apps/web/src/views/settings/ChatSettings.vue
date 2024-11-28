@@ -35,7 +35,7 @@
               <template #option="{ option }: { option: Command }">
                 <div class="flex flex-col gap-1">
                   <p>{{ toCommandCall(option) }}</p>
-                  <small>{{ commands.help[option].description }}</small>
+                  <small>{{ commands.help.value[option].description }}</small>
                 </div>
               </template>
             </MultiSelect>
@@ -84,7 +84,7 @@ const formKey = ref(1)
 const formSettings = ref(structuredClone(toRaw(settings.commands)))
 
 function toCommandCall(command: Command) {
-  const help = commands.help[command]
+  const help = commands.help.value[command]
   let cmd = command.toString()
   if (help.args && help.args.length > 0) {
     cmd += ' '

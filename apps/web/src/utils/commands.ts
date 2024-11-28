@@ -1,3 +1,6 @@
+import type { ComputedRef } from 'vue'
+import { computed } from 'vue'
+
 import { ClipProvider } from '@cq/providers'
 
 import * as m from '@/paraglide/messages'
@@ -28,7 +31,7 @@ export interface CommandHelp {
   args?: string[]
 }
 
-const help: Record<Command, CommandHelp> = {
+const help: ComputedRef<Record<Command, CommandHelp>> = computed(() => ({
   [Command.OPEN]: { description: m.command_open() },
   [Command.CLOSE]: { description: m.command_close() },
   [Command.CLEAR]: { description: m.command_clear() },
@@ -67,7 +70,7 @@ const help: Record<Command, CommandHelp> = {
   [Command.PURGE_HISTORY]: {
     description: m.command_purge_history()
   }
-}
+}))
 
 export function handleCommand(command: string, ...args: string[]) {
   const queue = useQueue()

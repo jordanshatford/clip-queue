@@ -16,9 +16,9 @@ export class TwitchProvider implements IClipProvider {
 
   private ctx: ClipProviderCtxCallback = () => ({ id: '' })
 
-  public constructor(cb?: ClipProviderCtxCallback) {
-    if (cb) {
-      this.ctx = cb
+  public constructor(callback?: ClipProviderCtxCallback) {
+    if (callback) {
+      this.ctx = callback
     }
   }
 

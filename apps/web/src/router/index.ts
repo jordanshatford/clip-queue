@@ -1,4 +1,6 @@
+import type { ComputedRef } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
+import { computed } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import type { MenuItem } from '@cq/ui'
@@ -34,7 +36,6 @@ export const routes: RouteRecordRaw[] = [
     component: QueuePage,
     meta: {
       icon: 'pi pi-list',
-      title: m.queue(),
       requiresAuth: true
     }
   },
@@ -44,7 +45,6 @@ export const routes: RouteRecordRaw[] = [
     component: HistoryPage,
     meta: {
       icon: 'pi pi-history',
-      title: m.history(),
       requiresAuth: true
     }
   },
@@ -55,7 +55,6 @@ export const routes: RouteRecordRaw[] = [
     component: SettingsPage,
     meta: {
       icon: 'pi pi-cog',
-      title: m.settings(),
       requiresAuth: true
     },
     children: [
@@ -65,7 +64,6 @@ export const routes: RouteRecordRaw[] = [
         component: ChatSettings,
         meta: {
           icon: 'pi pi-comments',
-          title: m.settings_chat(),
           requiresAuth: true
         }
       },
@@ -75,7 +73,6 @@ export const routes: RouteRecordRaw[] = [
         component: QueueSettings,
         meta: {
           icon: 'pi pi-list',
-          title: m.settings_queue(),
           requiresAuth: true
         }
       },
@@ -85,7 +82,6 @@ export const routes: RouteRecordRaw[] = [
         component: PreferenceSettings,
         meta: {
           icon: 'pi pi-palette',
-          title: m.settings_preferences(),
           requiresAuth: true
         }
       },
@@ -95,7 +91,6 @@ export const routes: RouteRecordRaw[] = [
         component: OtherSettings,
         meta: {
           icon: 'pi pi-cog',
-          title: m.settings_other(),
           requiresAuth: true
         }
       }
@@ -120,11 +115,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, _from, next) => {
-  if (to.name === RouteNameConstants.HOME) {
-    document.title = config.about.title
-  } else {
-    document.title = `${to.meta.title} - ${config.about.title}`
-  }
+  document.title = config.title
   const user = useUser()
   // Attempt to validate the token if not previously done so. This is
   // to ensure the refresh returns you to the same route.
@@ -149,6 +140,19 @@ router.beforeEach(async (to, _from, next) => {
 
 export default router
 
+export const routeNameTranslations: ComputedRef<Record<RouteNameConstants, string>> = computed(
+  () => ({
+    [RouteNameConstants.HOME]: '',
+    [RouteNameConstants.QUEUE]: m.queue(),
+    [RouteNameConstants.HISTORY]: m.history(),
+    [RouteNameConstants.SETTINGS]: m.settings(),
+    [RouteNameConstants.SETTINGS_CHAT]: m.settings_chat(),
+    [RouteNameConstants.SETTINGS_QUEUE]: m.settings_queue(),
+    [RouteNameConstants.SETTINGS_PREFERENCES]: m.settings_preferences(),
+    [RouteNameConstants.SETTINGS_OTHER]: m.settings_other()
+  })
+)
+
 /**
  * Convert list of routes to MenuItem used by UI. These are authorized routes only.
  * @param routes - the routes to use.
@@ -163,12 +167,9 @@ export function toAllowedMenuItems(
   return routes
     .filter((r) => (r.meta?.requiresAuth && user.isLoggedIn) || !r.meta?.requiresAuth)
     .map((r) => {
-      // If it is a settings route 'Other Settings', make the label simply 'Other'
-      const isSettingsRoute = r.name?.toString().startsWith('settings_')
-      const label = r.meta?.title ? String(r.meta.title) : ''
       return {
         icon: r.meta?.icon ? String(r.meta.icon) : undefined,
-        label: isSettingsRoute ? label.replace('Settings', '').trim() : label,
+        label: r?.name ? routeNameTranslations.value[r.name as RouteNameConstants] : '',
         route: r.children && recursive ? undefined : { name: r.name },
         items: recursive && r.children ? toAllowedMenuItems(r.children, recursive) : undefined
       }

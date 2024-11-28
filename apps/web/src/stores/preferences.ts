@@ -5,7 +5,12 @@ import type { ColorOption } from '@cq/ui'
 import { colors, setColorPalette, surfaces } from '@cq/ui'
 
 import type { AvailableLanguageTag } from '@/paraglide/runtime'
-import { availableLanguageTags, setLanguageTag } from '@/paraglide/runtime'
+import {
+  availableLanguageTags,
+  languageTag,
+  onSetLanguageTag,
+  setLanguageTag
+} from '@/paraglide/runtime'
 
 type Theme = 'dark' | 'light'
 
@@ -38,8 +43,8 @@ export interface ThemePreferences {
 }
 
 export const DEFAULTS: ThemePreferences = {
-  language: 'en',
-  theme: 'light',
+  language: getInferredDefaultLanguage(languageTag()),
+  theme: getInferredDefaultTheme('light'),
   primary: structuredClone(colors[12]), // Purple
   surface: structuredClone(surfaces[2]) // Zinc
 }
@@ -48,10 +53,12 @@ export const usePreferences = defineStore(
   'preferences',
   () => {
     const preferences = ref<ThemePreferences>(structuredClone(DEFAULTS))
-    preferences.value.language = getInferredDefaultLanguage(DEFAULTS.language)
-    preferences.value.theme = getInferredDefaultTheme(DEFAULTS.theme)
 
     watch(preferences, updatePreferences, { deep: true })
+
+    onSetLanguageTag((value) => {
+      preferences.value.language = value
+    })
 
     const isDark = computed(() => preferences.value.theme === 'dark')
 

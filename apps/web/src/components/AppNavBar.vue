@@ -26,7 +26,7 @@
         <ThemeToggle :is-dark-mode="preferences.isDark" @toggle="preferences.toggleTheme()" />
         <Button
           icon="pi pi-twitch"
-          :label="user.isLoggedIn ? 'Logout' : 'Login'"
+          :label="user.isLoggedIn ? m.logout() : m.login()"
           size="small"
           @click="() => handleAuthButtonClick()"
         >
@@ -42,6 +42,7 @@ import { useRouter } from 'vue-router'
 
 import { Button, Menubar, ThemeToggle } from '@cq/ui'
 
+import * as m from '@/paraglide/messages'
 import { RouteNameConstants, routes, toAllowedMenuItems } from '@/router'
 import { usePreferences } from '@/stores/preferences'
 import { useUser } from '@/stores/user'

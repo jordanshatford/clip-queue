@@ -6,7 +6,7 @@
           <div class="flex flex-col gap-2 text-left">
             <label for="language">{{ m.language() }}</label>
             <Select
-              v-model="lang"
+              v-model="formTheme.language"
               :options="[...availableLanguageTags]"
               class="md:w-14rem w-full"
               input-id="language"
@@ -77,7 +77,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRaw } from 'vue'
+import type { ComputedRef } from 'vue'
+import { computed, ref, toRaw } from 'vue'
 
 import type { ColorOption } from '@cq/ui'
 import { Button, Card, colors, Select, surfaces, useToast } from '@cq/ui'
@@ -85,7 +86,7 @@ import { Button, Card, colors, Select, surfaces, useToast } from '@cq/ui'
 import type { AvailableLanguageTag } from '@/paraglide/runtime'
 import ColorName from '@/components/ColorName.vue'
 import * as m from '@/paraglide/messages'
-import { availableLanguageTags, languageTag } from '@/paraglide/runtime'
+import { availableLanguageTags } from '@/paraglide/runtime'
 import { usePreferences } from '@/stores/preferences'
 
 const toast = useToast()
@@ -94,10 +95,12 @@ const preferences = usePreferences()
 const formKey = ref(1)
 const formTheme = ref(structuredClone(toRaw(preferences.preferences)))
 
-const lang = languageTag()
-const availableLanguageTranslations: Record<AvailableLanguageTag, string> = {
-  en: m.english()
-}
+const availableLanguageTranslations: ComputedRef<Record<AvailableLanguageTag, string>> = computed(
+  () => ({
+    en: m.english(),
+    fr: m.french()
+  })
+)
 
 function onReset() {
   formTheme.value = structuredClone(toRaw(preferences.preferences))
