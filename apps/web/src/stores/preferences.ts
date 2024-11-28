@@ -6,10 +6,10 @@ import { colors, setColorPalette, surfaces } from '@cq/ui'
 
 import type { AvailableLanguageTag } from '@/paraglide/runtime'
 import {
-  availableLanguageTags,
-  languageTag,
+  isAvailableLanguageTag,
   onSetLanguageTag,
-  setLanguageTag
+  setLanguageTag,
+  sourceLanguageTag
 } from '@/paraglide/runtime'
 
 type Theme = 'dark' | 'light'
@@ -29,8 +29,9 @@ export function getInferredDefaultLanguage(fallback: AvailableLanguageTag): Avai
   if (!window.navigator?.language) {
     return fallback
   }
-  if (window.navigator.language) {
-    return window.navigator.language.split('-')[0] as AvailableLanguageTag
+  const language = window.navigator.language.split('-')[0]
+  if (isAvailableLanguageTag(language)) {
+    return language
   }
   return fallback
 }
@@ -43,7 +44,7 @@ export interface ThemePreferences {
 }
 
 export const DEFAULTS: ThemePreferences = {
-  language: getInferredDefaultLanguage(languageTag()),
+  language: getInferredDefaultLanguage(sourceLanguageTag),
   theme: getInferredDefaultTheme('light'),
   primary: structuredClone(colors[12]), // Purple
   surface: structuredClone(surfaces[2]) // Zinc
@@ -78,7 +79,7 @@ export const usePreferences = defineStore(
 
     function updatePreferences(value: ThemePreferences, old?: ThemePreferences) {
       if (value.language !== old?.language) {
-        if (availableLanguageTags.includes(value.language)) {
+        if (isAvailableLanguageTag(value.language)) {
           setLanguageTag(value.language)
         } else {
           setLanguageTag(DEFAULTS.language)
