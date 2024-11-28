@@ -97,6 +97,7 @@ const formTheme = ref(structuredClone(toRaw(preferences.preferences)))
 
 const availableLanguageTranslations: ComputedRef<Record<AvailableLanguageTag, string>> = computed(
   () => ({
+    de: m.german(),
     en: m.english(),
     fr: m.french()
   })
