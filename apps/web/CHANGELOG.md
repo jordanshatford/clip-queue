@@ -1,5 +1,11 @@
 # @cq/web
 
+## 1.23.0
+
+### Minor Changes
+
+- feat: add french language support ([`feb6dfa`](https://github.com/jordanshatford/clip-queue/commit/feb6dfac885bfad856d1fe60a5233837a5ad02c9))
+
 ## 1.22.0
 
 ### Minor Changes
