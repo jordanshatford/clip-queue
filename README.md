@@ -23,6 +23,7 @@ Clip Queue integrates into a users [Twitch](https://www.twitch.tv/) chat and que
 - Automatic moderation and clip removal
 - Settings customization to personalize user experience
 - Dark and light UI themes
+- Support for many languages
 
 # Developer Guide
 

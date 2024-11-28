@@ -99,6 +99,7 @@ const availableLanguageTranslations: ComputedRef<Record<AvailableLanguageTag, st
   () => ({
     de: m.german(),
     en: m.english(),
+    es: m.spanish(),
     fr: m.french(),
     it: m.italian()
   })
