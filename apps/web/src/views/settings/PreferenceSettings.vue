@@ -10,7 +10,7 @@
               :options="[...availableLanguageTags]"
               class="md:w-14rem w-full"
               label-id="language"
-              :option-label="(value: AvailableLanguageTag) => availableLanguageTranslations[value]"
+              :option-label="(value: AvailableLanguageTag) => languageLabels[value]"
             >
             </Select>
             <small id="language-help" class="pb-2 text-sm text-surface-400">{{
@@ -77,8 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ComputedRef } from 'vue'
-import { computed, ref, toRaw } from 'vue'
+import { ref, toRaw } from 'vue'
 
 import type { ColorOption } from '@cq/ui'
 import { Button, Card, colors, Select, surfaces, useToast } from '@cq/ui'
@@ -95,15 +94,13 @@ const preferences = usePreferences()
 const formKey = ref(1)
 const formTheme = ref(structuredClone(toRaw(preferences.preferences)))
 
-const availableLanguageTranslations: ComputedRef<Record<AvailableLanguageTag, string>> = computed(
-  () => ({
-    de: m.german(),
-    en: m.english(),
-    es: m.spanish(),
-    fr: m.french(),
-    it: m.italian()
-  })
-)
+const languageLabels: Record<AvailableLanguageTag, string> = {
+  de: 'Deutsch',
+  en: 'English',
+  es: 'Español',
+  fr: 'Français',
+  it: 'Italiano'
+}
 
 function onReset() {
   formTheme.value = structuredClone(toRaw(preferences.preferences))
