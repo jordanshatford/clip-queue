@@ -9,7 +9,7 @@
               v-model="formTheme.language"
               :options="[...availableLanguageTags]"
               class="md:w-14rem w-full"
-              input-id="language"
+              label-id="language"
               :option-label="(value: AvailableLanguageTag) => availableLanguageTranslations[value]"
             >
             </Select>
@@ -22,7 +22,7 @@
               :options="colors"
               data-key="name"
               class="md:w-14rem w-full"
-              input-id="primaryColor"
+              label-id="primaryColor"
             >
               <template #value="{ value }: { value: ColorOption }">
                 <ColorName :name="value.name" :color="value.palette[500]" />
@@ -40,7 +40,7 @@
               data-key="name"
               :options="surfaces"
               class="md:w-14rem w-full"
-              input-id="surfaceColor"
+              label-id="surfaceColor"
             >
               <template #value="{ value }: { value: ColorOption }">
                 <ColorName :name="value.name" :color="value.palette[500]" />
