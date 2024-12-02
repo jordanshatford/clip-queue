@@ -1,5 +1,11 @@
 # @cq/web
 
+## 1.24.1
+
+### Patch Changes
+
+- fix: translate command argument descriptions ([`43650a1`](https://github.com/jordanshatford/clip-queue/commit/43650a10c68f38e5c820ba049a65d4def4e09cd4))
+
 ## 1.24.0
 
 ### Minor Changes
