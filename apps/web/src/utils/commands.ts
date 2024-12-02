@@ -36,26 +36,26 @@ const help: ComputedRef<Record<Command, CommandHelp>> = computed(() => ({
   [Command.CLOSE]: { description: m.command_close() },
   [Command.CLEAR]: { description: m.command_clear() },
   [Command.SET_LIMIT]: {
-    args: ['number'],
+    args: [m.number().toLocaleLowerCase()],
     description: m.command_set_limit()
   },
   [Command.REMOVE_LIMIT]: { description: m.command_remove_limit() },
   [Command.PREV]: { description: m.command_previous() },
   [Command.NEXT]: { description: m.command_next() },
   [Command.REMOVE_BY_SUBMITTER]: {
-    args: ['submitter'],
+    args: [m.submitter().toLocaleLowerCase()],
     description: m.command_remove_by_submitter()
   },
   [Command.REMOVE_BY_PROVIDER]: {
-    args: ['provider'],
+    args: [m.provider().toLocaleLowerCase()],
     description: m.command_remove_by_provider()
   },
   [Command.ENABLE_PROVIDER]: {
-    args: ['provider'],
+    args: [m.provider().toLocaleLowerCase()],
     description: m.command_enable_provider()
   },
   [Command.DISABLE_PROVIDER]: {
-    args: ['provider'],
+    args: [m.provider().toLocaleLowerCase()],
     description: m.command_disable_provider()
   },
   [Command.ENABLE_AUTO_MODERATION]: {
