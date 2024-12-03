@@ -29,9 +29,13 @@ export function getInferredDefaultLanguage(fallback: AvailableLanguageTag): Avai
   if (!window.navigator?.language) {
     return fallback
   }
-  const language = window.navigator.language.split('-')[0]
+  const language = window.navigator.language
   if (isAvailableLanguageTag(language)) {
     return language
+  }
+  const genericLanguage = language.split('-')[0]
+  if (isAvailableLanguageTag(genericLanguage)) {
+    return genericLanguage
   }
   return fallback
 }
