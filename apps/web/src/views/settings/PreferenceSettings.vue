@@ -95,11 +95,12 @@ const formKey = ref(1)
 const formTheme = ref(structuredClone(toRaw(preferences.preferences)))
 
 const languageLabels: Record<AvailableLanguageTag, string> = {
-  de: 'Deutsch',
+  de: 'Deutsch (German)',
   en: 'English',
-  es: 'Español',
-  fr: 'Français',
-  it: 'Italiano'
+  es: 'Español (Spanish)',
+  fr: 'Français (French)',
+  it: 'Italiano (Italian)',
+  ja: '日本語 (Japanese)'
 }
 
 function onReset() {
