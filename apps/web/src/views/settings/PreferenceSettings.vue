@@ -103,6 +103,7 @@ const languageLabels: Record<AvailableLanguageTag, string> = {
   it: 'Italiano (Italian)',
   ja: '日本語 (Japanese)',
   ko: '한국인 (Korean)',
+  ru: 'русский (Russian)',
   tr: 'Türkçe (Turkish)'
 }
 
