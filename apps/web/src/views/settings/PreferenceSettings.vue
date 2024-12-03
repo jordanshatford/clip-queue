@@ -95,6 +95,7 @@ const formKey = ref(1)
 const formTheme = ref(structuredClone(toRaw(preferences.preferences)))
 
 const languageLabels: Record<AvailableLanguageTag, string> = {
+  ar: 'عربي (Arabic)',
   de: 'Deutsch (German)',
   en: 'English',
   es: 'Español (Spanish)',
