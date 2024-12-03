@@ -104,7 +104,8 @@ const languageLabels: Record<AvailableLanguageTag, string> = {
   ja: '日本語 (Japanese)',
   ko: '한국인 (Korean)',
   ru: 'русский (Russian)',
-  tr: 'Türkçe (Turkish)'
+  tr: 'Türkçe (Turkish)',
+  zh: '中文 (Chinese)'
 }
 
 function onReset() {
