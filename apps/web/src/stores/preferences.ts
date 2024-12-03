@@ -62,6 +62,7 @@ export const usePreferences = defineStore(
     watch(preferences, updatePreferences, { deep: true })
 
     onSetLanguageTag((value) => {
+      document.documentElement.lang = value
       preferences.value.language = value
     })
 
