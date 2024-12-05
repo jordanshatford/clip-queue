@@ -65,8 +65,12 @@ export async function getClip(id: string): Promise<KickClip | undefined> {
   if (id.length <= 0) {
     return
   }
-  const { data } = await api.get<{ clip: KickClip }>(`clips/${id}`)
-  return data.clip
+  try {
+    const { data } = await api.get<{ clip: KickClip }>(`clips/${id}`)
+    return data.clip
+  } catch (e) {
+    console.error('Failed to fetch Kick clip: ', e)
+  }
 }
 
 export function getClipIdFromUrl(url: string): string | undefined {

@@ -68,37 +68,41 @@ export async function getClip(id: string): Promise<YouTubeClip | undefined> {
     return
   }
 
-  // Fetch video ID, start and end times from lookup server. YouTube does not provide this functionality.
-  const { data } = await operationalApi.get<YouTubeClipLookupResponse>('videos', {
-    params: {
-      part: 'id,clip',
-      clipId: id
-    }
-  })
-
-  const item = data.items[0]
-
-  if (item && item.videoId !== null && item.clip) {
-    const videoId = item.videoId
-    const videoUrl = `https://www.youtube.com/watch?v=${videoId}`
-    const { data: videoData } = await api.get<YouTubeOEmbedResponse>('oembed', {
+  try {
+    // Fetch video ID, start and end times from lookup server. YouTube does not provide this functionality.
+    const { data } = await operationalApi.get<YouTubeClipLookupResponse>('videos', {
       params: {
-        format: 'json',
-        url: videoUrl
+        part: 'id,clip',
+        clipId: id
       }
     })
 
-    return {
-      id,
-      url: `https://www.youtube.com/clip/${id}`,
-      video_id: videoId,
-      video_url: videoUrl,
-      title: item.clip.title,
-      author_name: videoData.author_name,
-      thumbnail_url: videoData.thumbnail_url,
-      start: Math.floor(item.clip.startTimeMs / 1000),
-      end: Math.ceil(item.clip.endTimeMs / 1000)
+    const item = data.items[0]
+
+    if (item && item.videoId !== null && item.clip) {
+      const videoId = item.videoId
+      const videoUrl = `https://www.youtube.com/watch?v=${videoId}`
+      const { data: videoData } = await api.get<YouTubeOEmbedResponse>('oembed', {
+        params: {
+          format: 'json',
+          url: videoUrl
+        }
+      })
+
+      return {
+        id,
+        url: `https://www.youtube.com/clip/${id}`,
+        video_id: videoId,
+        video_url: videoUrl,
+        title: item.clip.title,
+        author_name: videoData.author_name,
+        thumbnail_url: videoData.thumbnail_url,
+        start: Math.floor(item.clip.startTimeMs / 1000),
+        end: Math.ceil(item.clip.endTimeMs / 1000)
+      }
     }
+  } catch (e) {
+    console.error('Failed to fetch YouTube clip: ', e)
   }
 }
 
