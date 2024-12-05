@@ -119,7 +119,7 @@ router.beforeEach(async (to, _from, next) => {
   const user = useUser()
   // Attempt to validate the token if not previously done so. This is
   // to ensure the refresh returns you to the same route.
-  if (!user.hasValidatedToken) {
+  if (!user.hasValidatedToken && !user.isLoggedIn) {
     await user.autoLoginIfPossible()
   }
   // If the user is trying to login via twitch
