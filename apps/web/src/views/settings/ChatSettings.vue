@@ -4,7 +4,12 @@
       <template #content>
         <div class="m-0 flex flex-col gap-2 p-0 text-left">
           <label for="username">{{ m.connected_chat_colon() }}</label>
-          <InputText id="username" v-model="user.ctx.username" disabled />
+          <IconField class="w-full">
+            <InputIcon>
+              <svg class="h-5 w-5" v-html="logo"></svg>
+            </InputIcon>
+            <InputText id="username" v-model="user.ctx.username" class="w-full" disabled />
+          </IconField>
         </div>
       </template>
     </Card>
@@ -69,7 +74,8 @@
 <script setup lang="ts">
 import { ref, toRaw } from 'vue'
 
-import { Button, Card, InputText, MultiSelect, useToast } from '@cq/ui'
+import { logo } from '@cq/services/twitch'
+import { Button, Card, IconField, InputIcon, InputText, MultiSelect, useToast } from '@cq/ui'
 
 import * as m from '@/paraglide/messages'
 import { useSettings } from '@/stores/settings'
