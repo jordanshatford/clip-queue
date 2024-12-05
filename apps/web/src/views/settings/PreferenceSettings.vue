@@ -100,6 +100,7 @@ const languageLabels: Record<AvailableLanguageTag, string> = {
   en: 'English',
   es: 'Español (Spanish)',
   fr: 'Français (French)',
+  hi: 'हिंदी (Hindi)',
   it: 'Italiano (Italian)',
   ja: '日本語 (Japanese)',
   ko: '한국인 (Korean)',
