@@ -1,8 +1,8 @@
 <template>
   <Card class="p-2">
     <template #title>
-      <div class="flex flex-col gap-2">
-        <i :class="['text-xl text-primary-500 dark:text-primary-400', icon]"></i>
+      <div class="flex gap-2">
+        <i :class="['text-lg text-primary-500 dark:text-primary-400', icon]"></i>
         <span> {{ title }}</span>
       </div>
     </template>
