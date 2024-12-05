@@ -16,6 +16,18 @@
             <small id="language-help" class="pb-2 text-sm text-surface-400">{{
               m.language_description()
             }}</small>
+            <label for="theme">{{ m.theme() }}</label>
+            <Select
+              v-model="formTheme.theme"
+              :options="[...availableThemes]"
+              class="md:w-14rem w-full"
+              label-id="theme"
+              :option-label="(value: Theme) => themeLabels[value]"
+            >
+            </Select>
+            <small id="theme-help" class="pb-2 text-sm text-surface-400">{{
+              m.theme_description()
+            }}</small>
             <label for="primaryColor">{{ m.primary_color() }}</label>
             <Select
               v-model="formTheme.primary"
@@ -83,16 +95,22 @@ import type { ColorOption } from '@cq/ui'
 import { Button, Card, colors, Select, surfaces, useToast } from '@cq/ui'
 
 import type { AvailableLanguageTag } from '@/paraglide/runtime'
+import type { Theme } from '@/stores/preferences'
 import ColorName from '@/components/ColorName.vue'
 import * as m from '@/paraglide/messages'
 import { availableLanguageTags } from '@/paraglide/runtime'
-import { usePreferences } from '@/stores/preferences'
+import { availableThemes, usePreferences } from '@/stores/preferences'
 
 const toast = useToast()
 const preferences = usePreferences()
 
 const formKey = ref(1)
 const formTheme = ref(structuredClone(toRaw(preferences.preferences)))
+
+const themeLabels: Record<Theme, string> = {
+  dark: m.theme_dark(),
+  light: m.theme_light()
+}
 
 const languageLabels: Record<AvailableLanguageTag, string> = {
   ar: 'عربي (Arabic)',

@@ -12,7 +12,9 @@ import {
   sourceLanguageTag
 } from '@/paraglide/runtime'
 
-type Theme = 'dark' | 'light'
+export type Theme = 'dark' | 'light'
+
+export const availableThemes = ['dark', 'light'] as const
 
 export function getInferredDefaultTheme(fallback: Theme): Theme {
   if (!window.matchMedia) {
@@ -72,6 +74,7 @@ export const usePreferences = defineStore(
       return (p: ThemePreferences) => {
         return (
           preferences.value.language !== p.language ||
+          preferences.value.theme !== p.theme ||
           preferences.value.primary.name !== p.primary.name ||
           preferences.value.surface.name !== p.surface.name
         )
@@ -111,7 +114,7 @@ export const usePreferences = defineStore(
     }
 
     function $reset() {
-      preferences.value = { ...DEFAULTS, theme: preferences.value.theme }
+      preferences.value = DEFAULTS
     }
 
     return {
