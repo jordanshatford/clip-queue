@@ -1,5 +1,31 @@
 # @cq/web
 
+## 1.25.0
+
+### Minor Changes
+
+- feat: add hindi language support ([`7e7eaae`](https://github.com/jordanshatford/clip-queue/commit/7e7eaae788be52db9bf74f030599c0e6efbba722))
+
+- feat: add portuguese language support ([`cf21267`](https://github.com/jordanshatford/clip-queue/commit/cf21267f5a0ecefcaddc64a81f5619063d2870c2))
+
+- feat: add japanese language support ([`520842f`](https://github.com/jordanshatford/clip-queue/commit/520842f0984c83879a3551462269931c822facbe))
+
+- feat: add arabic language support ([`d9eddff`](https://github.com/jordanshatford/clip-queue/commit/d9eddff6cb4ffe535edb88f710b1c29c20d9fb6d))
+
+- feat: add turkish language support ([`afd60a2`](https://github.com/jordanshatford/clip-queue/commit/afd60a283263b56f61335b7cc98dd0b3b385f025))
+
+- feat: add korean language support ([`8b69691`](https://github.com/jordanshatford/clip-queue/commit/8b6969128e6c1ff0c056eb258c2db913c65d6c76))
+
+- feat: allow more specific languages when inferring user language ([`a1346ba`](https://github.com/jordanshatford/clip-queue/commit/a1346ba9281780eeb66cdeb4d4316987885db532))
+
+- feat: add russian language support ([`2712d7d`](https://github.com/jordanshatford/clip-queue/commit/2712d7dd4d4bf7543f95f5ff2e834609e2b67407))
+
+- feat: add chinese language support ([`3f9806b`](https://github.com/jordanshatford/clip-queue/commit/3f9806b0a9b23d44ef0c7dba4d5ecd891dc91b55))
+
+### Patch Changes
+
+- fix: update html lang attribute to match selected language ([`cf50140`](https://github.com/jordanshatford/clip-queue/commit/cf5014022a33c572de7544f5964f7d9835cbdd4d))
+
 ## 1.24.1
 
 ### Patch Changes
