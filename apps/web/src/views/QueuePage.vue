@@ -9,7 +9,10 @@
     @next="queue.next()"
   />
   <Message v-else-if="settings.queue.providers.length === 0" severity="error">
-    {{ m.message_no_clip_providers_enabled() }}
+    <template #icon>
+      <i class="pi pi-exclamation-circle"></i>
+    </template>
+    <span>{{ m.message_no_clip_providers_enabled() }}</span>
   </Message>
   <ClipQueue
     :title="m.upcoming_clips()"

@@ -58,9 +58,12 @@
             :closable="false"
             class="mt-0"
           >
-            {{
+            <template #icon>
+              <i class="pi pi-exclamation-triangle"></i>
+            </template>
+            <span>{{
               m.experimental_providers_selected({ names: selectedExperimentalProviders.join(', ') })
-            }}
+            }}</span>
           </Message>
         </div>
         <div class="mt-3">
