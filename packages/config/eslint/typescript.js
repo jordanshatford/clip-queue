@@ -3,20 +3,22 @@ import prettier from 'eslint-config-prettier'
 import globals from 'globals'
 import ts from 'typescript-eslint'
 
+export const ignores = [
+  '.DS_Store',
+  'dist/*',
+  'node_modules/*',
+  '.env',
+  '.env.*',
+  '!.env.sample',
+  'pnpm-lock.yaml',
+  'package-lock.json',
+  'yarn.lock'
+]
+
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    ignores: [
-      '.DS_Store',
-      'dist/*',
-      'node_modules/*',
-      '.env',
-      '.env.*',
-      '!.env.sample',
-      'pnpm-lock.yaml',
-      'package-lock.json',
-      'yarn.lock'
-    ]
+    ignores
   },
   js.configs.recommended,
   ...ts.configs.recommended,

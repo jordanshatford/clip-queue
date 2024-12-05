@@ -1,25 +1,17 @@
 import js from '@eslint/js'
-import vuePrettier from '@vue/eslint-config-prettier'
-import vueTs from '@vue/eslint-config-typescript'
+import prettier from '@vue/eslint-config-prettier'
+import ts from '@vue/eslint-config-typescript'
 import vue from 'eslint-plugin-vue'
+
+import { ignores } from './typescript'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    ignores: [
-      '.DS_Store',
-      'dist/*',
-      'node_modules/*',
-      '.env',
-      '.env.*',
-      '!.env.sample',
-      'pnpm-lock.yaml',
-      'package-lock.json',
-      'yarn.lock'
-    ]
+    ignores
   },
   ...vue.configs['flat/recommended'],
   js.configs.recommended,
-  ...vueTs(),
-  vuePrettier
+  ...ts(),
+  prettier
 ]
