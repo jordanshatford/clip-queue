@@ -31,17 +31,12 @@
   >
     <template #empty>{{ m.no_clips_previously_watched() }}</template>
     <template #header>
-      <div class="flex items-center justify-between">
+      <div class="mb-2 flex items-center justify-between">
         <span class="text-xl">{{ m.history() }}</span>
-        <span class="relative">
-          <i class="pi pi-search absolute left-3 top-1 text-surface-400 dark:text-surface-500"></i>
-          <InputText
-            v-model="filters['global'].value"
-            size="small"
-            :placeholder="m.search()"
-            class="pl-10 font-normal"
-          />
-        </span>
+        <IconField>
+          <InputIcon class="pi pi-search" />
+          <InputText v-model="filters['global'].value" size="small" :placeholder="m.search()" />
+        </IconField>
       </div>
     </template>
     <Column selection-mode="multiple" header-style="width: 3rem"></Column>
@@ -97,7 +92,7 @@
 import { computed, ref } from 'vue'
 
 import type { Clip } from '@cq/providers'
-import { Button, Column, DataTable, InputText, useConfirm } from '@cq/ui'
+import { Button, Column, DataTable, IconField, InputIcon, InputText, useConfirm } from '@cq/ui'
 
 import ProviderName from '@/components/ProviderName.vue'
 import * as m from '@/paraglide/messages'
