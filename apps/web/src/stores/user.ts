@@ -40,12 +40,12 @@ export const useUser = defineStore(
         isLoggedIn.value = true
         connectToChat()
       } else {
-        logout()
+        await logout()
       }
       hasValidatedToken.value = true
     }
 
-    function login(authInfo: AuthInfo): void {
+    async function login(authInfo: AuthInfo): Promise<void> {
       const { access_token, decodedIdToken } = authInfo
       const currentCtx = ctx.value
       if (
@@ -73,7 +73,11 @@ export const useUser = defineStore(
       chat.value?.disconnect()
       chat.value = undefined
       if (originalCtx.id && originalCtx.token) {
-        twitch.logout(originalCtx).catch()
+        try {
+          await twitch.logout(originalCtx)
+        } catch (e) {
+          console.error('Failed to logout of Twitch: ', e)
+        }
       }
     }
 

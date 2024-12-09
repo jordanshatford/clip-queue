@@ -25,13 +25,13 @@ describe('user.ts', () => {
     user.redirect()
   })
 
-  it('can use twitch information to login', () => {
+  it('can use twitch information to login', async () => {
     const user = useUser()
     expect(user.isLoggedIn).toEqual(false)
     expect(user.ctx.id).toEqual('testClientId')
     expect(user.ctx.token).toEqual(undefined)
     expect(user.ctx.username).toEqual(undefined)
-    user.login({
+    await user.login({
       access_token: 'aToken',
       id_token: 'idToken',
       decodedIdToken: { preferred_username: 'username' }
@@ -42,9 +42,9 @@ describe('user.ts', () => {
     expect(user.ctx).toEqual({ id: 'testClientId', token: 'aToken', username: 'username' })
   })
 
-  it('updates the login info if the username changes', () => {
+  it('updates the login info if the username changes', async () => {
     const user = useUser()
-    user.login({
+    await user.login({
       access_token: 'aToken',
       id_token: 'idToken',
       decodedIdToken: { preferred_username: 'username' }
@@ -52,7 +52,7 @@ describe('user.ts', () => {
     expect(user.isLoggedIn).toEqual(true)
     expect(user.ctx.token).toEqual('aToken')
     expect(user.ctx.username).toEqual('username')
-    user.login({
+    await user.login({
       access_token: 'aToken',
       id_token: 'idToken',
       decodedIdToken: { preferred_username: 'username2' }
@@ -65,7 +65,7 @@ describe('user.ts', () => {
 
   it('logs out the user', async () => {
     const user = useUser()
-    user.login({
+    await user.login({
       access_token: 'aToken',
       id_token: 'idToken',
       decodedIdToken: { preferred_username: 'username' }

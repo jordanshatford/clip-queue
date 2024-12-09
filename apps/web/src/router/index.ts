@@ -126,7 +126,11 @@ router.beforeEach(async (to, _from, next) => {
   if (to.hash && to.hash !== '' && !user.isLoggedIn) {
     const authInfo = twitch.login(to.hash)
     if (authInfo !== null) {
-      user.login(authInfo)
+      try {
+        await user.login(authInfo)
+      } catch (e) {
+        console.error('Failed to login to Twitch: ', e)
+      }
     }
     next({ name: RouteNameConstants.QUEUE, hash: '' })
     return

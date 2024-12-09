@@ -55,7 +55,7 @@ const items = computed(() => toAllowedMenuItems(routes, true))
 
 async function handleAuthButtonClick() {
   if (user.isLoggedIn) {
-    user.logout()
+    await user.logout()
     await router.push({ name: RouteNameConstants.HOME })
   } else {
     user.redirect()
