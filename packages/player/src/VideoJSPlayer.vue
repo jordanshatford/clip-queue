@@ -19,10 +19,7 @@ export interface Props {
   title?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  autoplay: true,
-  title: undefined
-})
+const { poster, source, autoplay = true, title = undefined } = defineProps<Props>()
 
 const videoElement = ref<HTMLVideoElement | null>(null)
 
@@ -36,11 +33,12 @@ onMounted(() => {
       videoElement.value,
       // https://videojs.com/guides/options/
       {
-        ...props,
+        autoplay,
+        title,
         controls: true,
         fluid: true,
-        poster: props.poster,
-        sources: [props.source]
+        poster: poster,
+        sources: [source]
       },
       () => {}
     )

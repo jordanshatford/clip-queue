@@ -16,7 +16,7 @@ export interface Props {
   isDarkMode: boolean
 }
 
-withDefaults(defineProps<Props>(), { isDarkMode: false })
+const { isDarkMode = false } = defineProps<Props>()
 
 const emit = defineEmits<{
   (e: 'toggle'): void

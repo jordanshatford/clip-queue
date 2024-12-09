@@ -75,10 +75,7 @@ export interface Props {
   nextDisabled?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  previousDisabled: false,
-  nextDisabled: false
-})
+const { clip, previousDisabled = false, nextDisabled = false } = defineProps<Props>()
 
 const emit = defineEmits<{
   (e: 'previous'): void
@@ -88,11 +85,11 @@ const emit = defineEmits<{
 const providers = useProviders()
 
 const playerFormat = computed<PlayerFormat | undefined>(() => {
-  return providers.getPlayerFormat(props.clip)
+  return providers.getPlayerFormat(clip)
 })
 
 const playerSource = computed<string | undefined>(() => {
-  return providers.getPlayerSource(props.clip)
+  return providers.getPlayerSource(clip)
 })
 </script>
 

@@ -18,9 +18,9 @@ export interface Props {
   provider: ClipProvider
 }
 
-const props = defineProps<Props>()
+const { provider } = defineProps<Props>()
 
 const providers = useProviders()
 
-const svg = computed(() => providers.providers?.[props.provider]?.svg)
+const svg = computed(() => providers.providers?.[provider]?.svg)
 </script>

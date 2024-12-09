@@ -31,12 +31,12 @@ export interface Props {
   thumbnailUrl?: string
 }
 
-withDefaults(defineProps<Props>(), {
-  format: 'unknown',
-  title: undefined,
-  source: undefined,
-  thumbnailUrl: undefined
-})
+const {
+  format = 'unknown',
+  title = undefined,
+  source = undefined,
+  thumbnailUrl = undefined
+} = defineProps<Props>()
 </script>
 
 <style>

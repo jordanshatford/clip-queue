@@ -53,10 +53,7 @@ export interface Props {
   isOpen?: boolean
 }
 
-withDefaults(defineProps<Props>(), {
-  title: 'Queue',
-  isOpen: false
-})
+const { title = 'Queue', isOpen = false } = defineProps<Props>()
 
 const emit = defineEmits<{
   (e: 'play', value: Clip): void
