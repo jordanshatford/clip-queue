@@ -11,6 +11,7 @@
               class="md:w-14rem w-full"
               label-id="language"
               :option-label="(value: AvailableLanguageTag) => languageLabels[value]"
+              aria-describedby="language-help"
             >
             </Select>
             <small id="language-help" class="pb-2 text-sm text-surface-400">{{
@@ -23,6 +24,7 @@
               class="md:w-14rem w-full"
               label-id="theme"
               :option-label="(value: Theme) => themeLabels[value]"
+              aria-describedby="theme-help"
             >
             </Select>
             <small id="theme-help" class="pb-2 text-sm text-surface-400">{{
@@ -35,6 +37,7 @@
               data-key="name"
               class="md:w-14rem w-full"
               label-id="primaryColor"
+              aria-describedby="primaryColor-help"
             >
               <template #value="{ value }: { value: ColorOption }">
                 <ColorName :name="value.name" :color="value.palette[500]" />
@@ -53,6 +56,7 @@
               :options="surfaces"
               class="md:w-14rem w-full"
               label-id="surfaceColor"
+              aria-describedby="surfaceColor-help"
             >
               <template #value="{ value }: { value: ColorOption }">
                 <ColorName :name="value.name" :color="value.palette[500]" />

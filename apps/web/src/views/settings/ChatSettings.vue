@@ -23,6 +23,7 @@
               v-model="formSettings.prefix"
               required
               maxlength="8"
+              aria-describedby="commandPrefix-help"
               @keydown.space.prevent
             />
             <small id="commandPrefix-help" class="pb-2 text-sm text-surface-400">{{
