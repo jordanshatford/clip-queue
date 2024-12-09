@@ -8,7 +8,7 @@
     "./eslint/vue": "./eslint/vue.js",
     "./prettier/base": "./prettier/base.js",
     "./prettier/vue": "./prettier/vue.js",
-    "./tailwind": "./tailwind/base.js",
+    "./tailwind": "./tailwind/base.ts",
     "./tsconfig/node": "./tsconfig/node.json"
   },
   "scripts": {
