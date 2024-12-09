@@ -26,9 +26,9 @@
               aria-describedby="commandPrefix-help"
               @keydown.space.prevent
             />
-            <small id="commandPrefix-help" class="pb-2 text-sm text-surface-400">{{
+            <Message id="commandPrefix-help" size="small" severity="secondary" variant="simple">{{
               m.command_prefix_description()
-            }}</small>
+            }}</Message>
             <label for="allowedCommands">{{ m.allowed_commands() }}</label>
             <MultiSelect
               v-model="formSettings.allowed"
@@ -45,9 +45,9 @@
                 </div>
               </template>
             </MultiSelect>
-            <small id="allowedCommands-help" class="pb-2 text-sm text-surface-400">{{
+            <Message id="allowedCommands-help" size="small" severity="secondary" variant="simple">{{
               m.allowed_commands_description()
-            }}</small>
+            }}</Message>
           </div>
           <div class="mt-3">
             <Button
@@ -76,7 +76,16 @@
 import { ref, toRaw } from 'vue'
 
 import { logo } from '@cq/services/twitch'
-import { Button, Card, IconField, InputIcon, InputText, MultiSelect, useToast } from '@cq/ui'
+import {
+  Button,
+  Card,
+  IconField,
+  InputIcon,
+  InputText,
+  Message,
+  MultiSelect,
+  useToast
+} from '@cq/ui'
 
 import * as m from '@/paraglide/messages'
 import { useSettings } from '@/stores/settings'

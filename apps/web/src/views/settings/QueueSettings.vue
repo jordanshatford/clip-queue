@@ -11,11 +11,9 @@
               aria-describedby="autoModeration-help"
             />
           </div>
-          <small id="autoModeration-help" class="pb-2 text-sm text-surface-400">
-            {{ m.auto_mod_description() }}
-          </small>
-        </div>
-        <div class="flex flex-col gap-2 text-left">
+          <Message id="autoModeration-help" size="small" severity="secondary" variant="simple">{{
+            m.auto_mod_description()
+          }}</Message>
           <label for="limit">{{ m.size_limit() }}</label>
           <InputNumber
             v-model="formSettings.limit"
@@ -26,11 +24,9 @@
             show-buttons
             aria-describedby="limit-help"
           />
-          <small id="limit-help" class="pb-2 text-sm text-surface-400">{{
+          <Message id="limit-help" size="small" severity="secondary" variant="simple">{{
             m.size_limit_description()
-          }}</small>
-        </div>
-        <div class="flex flex-col gap-2 text-left">
+          }}</Message>
           <label for="allowedProviders">{{ m.allowed_providers() }}</label>
           <MultiSelect
             v-model="formSettings.providers"
@@ -49,9 +45,9 @@
               </Chip>
             </template>
           </MultiSelect>
-          <small id="allowedProviders-help" class="pb-2 text-sm text-surface-400">{{
+          <Message id="allowedProviders-help" size="small" severity="secondary" variant="simple">{{
             m.allowed_providers_description()
-          }}</small>
+          }}</Message>
           <Message
             v-if="selectedExperimentalProviders.length > 0"
             severity="warn"

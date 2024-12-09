@@ -3,41 +3,45 @@
     <template #content>
       <Button
         :label="m.reset_settings()"
-        class="w-full"
+        class="mb-2 w-full"
         size="small"
         severity="danger"
         :disabled="!(settings.isModified || preferences.isModified)"
         @click="resetSettingsToDefault()"
       ></Button>
-      <label class="text-sm text-surface-400">{{ m.reset_settings_description() }}</label>
+      <Message size="small" severity="secondary" variant="simple">{{
+        m.reset_settings_description()
+      }}</Message>
     </template>
   </Card>
   <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
       <Button
         :label="m.purge_history()"
-        class="w-full"
+        class="mb-2 w-full"
         size="small"
         severity="danger"
         :disabled="queue.history.empty()"
         @click="purgeHistory()"
       ></Button>
-      <label class="text-sm text-surface-400">{{ m.purge_history_description() }}</label>
+      <Message size="small" severity="secondary" variant="simple">{{
+        m.purge_history_description()
+      }}</Message>
     </template>
   </Card>
   <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
       <Button
         :label="m.purge_cache()"
-        class="w-full"
+        class="mb-2 w-full"
         size="small"
         severity="danger"
         :disabled="!providers.hasCachedData"
         @click="purgeCache()"
       ></Button>
-      <label class="text-sm text-surface-400">
-        {{ m.purge_cache_description() }}
-      </label>
+      <Message size="small" severity="secondary" variant="simple">{{
+        m.purge_cache_description()
+      }}</Message>
     </template>
   </Card>
   <Card class="mx-auto max-w-lg">
@@ -50,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { Button, Card, useConfirm, useToast } from '@cq/ui'
+import { Button, Card, Message, useConfirm, useToast } from '@cq/ui'
 
 import * as m from '@/paraglide/messages'
 import { usePreferences } from '@/stores/preferences'

@@ -14,9 +14,9 @@
               aria-describedby="language-help"
             >
             </Select>
-            <small id="language-help" class="pb-2 text-sm text-surface-400">{{
+            <Message id="language-help" size="small" severity="secondary" variant="simple">{{
               m.language_description()
-            }}</small>
+            }}</Message>
             <label for="theme">{{ m.theme() }}</label>
             <Select
               v-model="formTheme.theme"
@@ -27,9 +27,9 @@
               aria-describedby="theme-help"
             >
             </Select>
-            <small id="theme-help" class="pb-2 text-sm text-surface-400">{{
+            <Message id="theme-help" size="small" severity="secondary" variant="simple">{{
               m.theme_description()
-            }}</small>
+            }}</Message>
             <label for="primaryColor">{{ m.primary_color() }}</label>
             <Select
               v-model="formTheme.primary"
@@ -46,9 +46,9 @@
                 <ColorName :name="option.name" :color="option.palette[500]" />
               </template>
             </Select>
-            <small id="primaryColor-help" class="pb-2 text-sm text-surface-400">{{
+            <Message id="primaryColor-help" size="small" severity="secondary" variant="simple">{{
               m.primary_color_description()
-            }}</small>
+            }}</Message>
             <label for="surfaceColor">{{ m.surface_color() }}</label>
             <Select
               v-model="formTheme.surface"
@@ -65,9 +65,9 @@
                 <ColorName :name="option.name" :color="option.palette[500]" />
               </template>
             </Select>
-            <small id="surfaceColor-help" class="pb-2 text-sm text-surface-400">{{
+            <Message id="surfaceColor-help" size="small" severity="secondary" variant="simple">{{
               m.surface_color_description()
-            }}</small>
+            }}</Message>
           </div>
           <div class="mt-3">
             <Button
@@ -96,7 +96,7 @@
 import { ref, toRaw } from 'vue'
 
 import type { ColorOption } from '@cq/ui'
-import { Button, Card, colors, Select, surfaces, useToast } from '@cq/ui'
+import { Button, Card, colors, Message, Select, surfaces, useToast } from '@cq/ui'
 
 import type { AvailableLanguageTag } from '@/paraglide/runtime'
 import type { Theme } from '@/stores/preferences'
