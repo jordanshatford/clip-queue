@@ -1,6 +1,6 @@
+import type { Config } from 'tailwindcss'
 import primevue from 'tailwindcss-primeui'
 
-/** @type {import('tailwindcss').Config} */
 export default {
   content: [
     './src/**/*.{vue,js,ts,jsx,tsx}',
@@ -9,4 +9,4 @@ export default {
   ],
   darkMode: ['selector', '[class*="app-dark"]'],
   plugins: [primevue]
-}
+} satisfies Config
