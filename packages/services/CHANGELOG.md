@@ -1,5 +1,11 @@
 # @cq/services
 
+## 1.1.1
+
+### Patch Changes
+
+- fix: better handling of request errors ([`7ccd18d`](https://github.com/jordanshatford/clip-queue/commit/7ccd18d68d31729d8b741b7a1833063a88ecb0e8))
+
 ## 1.1.0
 
 ### Minor Changes

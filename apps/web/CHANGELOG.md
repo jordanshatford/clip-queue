@@ -1,5 +1,26 @@
 # @cq/web
 
+## 1.26.0
+
+### Minor Changes
+
+- feat: display twitch logo on connected chat ([`6c6930f`](https://github.com/jordanshatford/clip-queue/commit/6c6930f031850add4fbba91e14d5a6c5ccf8cd55))
+
+- feat: add theme select in preference settings ([`fc237cf`](https://github.com/jordanshatford/clip-queue/commit/fc237cfc0db15e4df88324c6cd39bba392e29590))
+
+- feat: add icons to error and warning messages ([`a8e1f63`](https://github.com/jordanshatford/clip-queue/commit/a8e1f6314732527090c437cb40115476de6c4777))
+
+### Patch Changes
+
+- fix: buttons on clip card now take entire width ([`79d002e`](https://github.com/jordanshatford/clip-queue/commit/79d002eb9ff00591d5c6e6d3c20a99e7aa51e390))
+
+- fix: only attempt to validate token if not logged in ([`62603ae`](https://github.com/jordanshatford/clip-queue/commit/62603ae493d0593f540c621b05b4f0490c9528f5))
+
+- Updated dependencies [[`7ccd18d`](https://github.com/jordanshatford/clip-queue/commit/7ccd18d68d31729d8b741b7a1833063a88ecb0e8), [`d093b18`](https://github.com/jordanshatford/clip-queue/commit/d093b181299653ed90130646fc8c08ffc2f27202), [`da96b63`](https://github.com/jordanshatford/clip-queue/commit/da96b637d8e4edb390a54c49645368d887e57ac4)]:
+  - @cq/services@1.1.1
+  - @cq/ui@1.5.0
+  - @cq/providers@1.4.1
+
 ## 1.25.0
 
 ### Minor Changes
