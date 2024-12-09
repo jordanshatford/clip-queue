@@ -6,6 +6,7 @@ import './base.css'
 export { default as PrimeVue } from 'primevue/config'
 export { default as ConfirmationService } from 'primevue/confirmationservice'
 export { default as ToastService } from 'primevue/toastservice'
+export { default as Tooltip } from 'primevue/tooltip'
 
 // PrimeVue Components
 export { default as Button } from 'primevue/button'
