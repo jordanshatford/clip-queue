@@ -25,8 +25,9 @@
           <ProviderName :provider="clip.provider" class="font-normal" />
         </div>
       </div>
-      <div class="flex justify-around">
+      <div class="flex justify-between gap-3">
         <Button
+          class="grow"
           icon="pi pi-play"
           :title="m.play()"
           :label="m.play()"
@@ -36,6 +37,7 @@
         >
         </Button>
         <Button
+          class="grow"
           icon="pi pi-trash"
           :title="m.remove()"
           :label="m.remove()"

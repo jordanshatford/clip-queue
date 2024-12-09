@@ -25,7 +25,6 @@ app.use(ConfirmationService)
 app.use(ToastService)
 app.directive('tooltip', Tooltip)
 
-
 // Pinia
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedState)
