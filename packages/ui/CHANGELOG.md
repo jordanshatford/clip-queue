@@ -1,5 +1,13 @@
 # @cq/ui
 
+## 1.5.0
+
+### Minor Changes
+
+- feat: simplify feature card with icon and title on same line ([`d093b18`](https://github.com/jordanshatford/clip-queue/commit/d093b181299653ed90130646fc8c08ffc2f27202))
+
+- feat: add icon field and input icon components ([`da96b63`](https://github.com/jordanshatford/clip-queue/commit/da96b637d8e4edb390a54c49645368d887e57ac4))
+
 ## 1.4.0
 
 ### Minor Changes
