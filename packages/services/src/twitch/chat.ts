@@ -27,17 +27,5 @@ export default class TwitchChat extends Client {
       },
       channels: [ctx.username]
     })
-
-    this.connect()
-      .then(() => {
-        console.info(`Connected to channel ${ctx.username}.`)
-      })
-      .catch((e) => {
-        console.error('Failed to connect to twitch chat.', e)
-      })
-
-    this.on('disconnected', () => {
-      console.info('Disconnected from twitch chat.')
-    })
   }
 }

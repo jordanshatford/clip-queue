@@ -38,7 +38,7 @@ export const useUser = defineStore(
       }
       if (ctx.value.token && (await twitch.isLoginValid(ctx.value))) {
         isLoggedIn.value = true
-        connectToChat()
+        await connectToChat()
       } else {
         await logout()
       }
@@ -58,7 +58,7 @@ export const useUser = defineStore(
           username: decodedIdToken.preferred_username
         }
         isLoggedIn.value = true
-        connectToChat()
+        await connectToChat()
       }
     }
 
@@ -81,17 +81,24 @@ export const useUser = defineStore(
       }
     }
 
-    function connectToChat() {
+    async function connectToChat() {
       chat.value?.disconnect?.()
       const currentCtx = ctx.value
       if (currentCtx.username && currentCtx.token) {
         const c = new TwitchChat(currentCtx)
         // setup watching chat
+        c.on('disconnected', (reason) => console.info('Disconnected from chat: ', reason))
         c.on('message', onMessage)
         c.on('messagedeleted', onMessageDeleted)
         c.on('timeout', onTimeout)
         c.on('ban', onTimeout)
-        chat.value = c
+        try {
+          await c.connect()
+          console.info('Connect to Twitch chat of channel: ', currentCtx.username)
+          chat.value = c
+        } catch (e) {
+          console.error('Failed to connect to Twitch chat: ', e)
+        }
       }
     }
 
