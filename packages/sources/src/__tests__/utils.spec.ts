@@ -15,6 +15,10 @@ describe('utils.ts', () => {
         'http://another-example.com?v=2121314&dasdbasbd=123',
         'https://yet-another-example.com'
       ]
+    ],
+    [
+      'Here are some URLs with duplicates: https://example.com http://another-example.com?v=2121314&dasdbasbd=123 , and https://example.com',
+      ['https://example.com', 'http://another-example.com?v=2121314&dasdbasbd=123']
     ]
   ])('gets a url from a message when possible', (input: string, expected: string[]) => {
     expect(getAllURLsFromText(input)).toEqual(expected)
