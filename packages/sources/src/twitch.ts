@@ -1,7 +1,7 @@
 import twitch, { ChatUserstate, TwitchChat } from '@cq/services/twitch'
 
 import type { ClipSourceCtxCallback } from './types'
-import { BaseClipSource, ClipSource } from './types'
+import { BaseClipSource, ClipSource, ClipSourceStatus } from './types'
 
 export class TwitchChatSource extends BaseClipSource {
   public name = ClipSource.TWITCH_CHAT
@@ -30,7 +30,19 @@ export class TwitchChatSource extends BaseClipSource {
     }
 
     this.chat.on('connected', () => this.handleConnected())
-    this.chat.on('message', this.onMessage)
+    this.chat.on(
+      'message',
+      (c: string, userstate: ChatUserstate, message: string, self: boolean) => {
+        if (self || !userstate.username) {
+          return
+        }
+        this.handleMessage({
+          username: userstate.username,
+          text: message,
+          isAllowedCommands: twitch.isModerator(userstate)
+        })
+      }
+    )
     this.chat.on('messagedeleted', (c: string, username: string, message: string) =>
       this.handleMessageDeleted({ username, text: message })
     )
@@ -46,21 +58,13 @@ export class TwitchChatSource extends BaseClipSource {
   }
 
   public async disconnect() {
+    if (this.status !== ClipSourceStatus.CONNECTED) {
+      return
+    }
     try {
       await this.chat?.disconnect()
     } catch (e) {
       this.handleError(e)
     }
-  }
-
-  private onMessage(c: string, userstate: ChatUserstate, message: string, self: boolean) {
-    if (self || !userstate.username) {
-      return
-    }
-    this.handleMessage({
-      username: userstate.username,
-      text: message,
-      isAllowedCommands: twitch.isModerator(userstate)
-    })
   }
 }
