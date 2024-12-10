@@ -32,22 +32,36 @@ export interface ClipSourceCtx {
 
 export type ClipSourceCtxCallback = () => ClipSourceCtx | Promise<ClipSourceCtx>
 
-export abstract class BaseClipSource extends EventEmitter<{
+type ClipSourceEventsMap = {
   connected: (timestamp: ClipSourceEvent) => Promise<void> | void
   disconnected: (reason?: ClipSourceEvent<string>) => Promise<void> | void
   message: (message: ClipSourceEvent<ClipSourceMessage>) => Promise<void> | void
   'message-deleted': (message: ClipSourceEvent<ClipSourceMessage>) => Promise<void> | void
   'user-timeout': (username: ClipSourceEvent<string>) => Promise<void> | void
   error: (error: ClipSourceEvent<unknown>) => Promise<void> | void
-}> {
+  status: (status: ClipSourceEvent<ClipSourceStatus>) => Promise<void> | void
+}
+
+export type IBaseClipSource = {
+  name: ClipSource
+  svg: string
+  isExperimental: boolean
+  lastStatusTimestamp?: string
+  status: ClipSourceStatus
+  connect: () => Promise<void>
+  disconnect: () => Promise<void>
+} & Pick<EventEmitter<ClipSourceEventsMap>, 'on'>
+
+export abstract class BaseClipSource
+  extends EventEmitter<ClipSourceEventsMap>
+  implements IBaseClipSource
+{
   public abstract name: ClipSource
   public abstract svg: string
 
   public isExperimental = false
 
-  public lastStatusTimestamp: string | undefined = undefined
   public status = ClipSourceStatus.UNKNOWN
-  public statusMessage: string | undefined = undefined
 
   public abstract connect(): Promise<void>
   public abstract disconnect(): Promise<void>
@@ -56,41 +70,42 @@ export abstract class BaseClipSource extends EventEmitter<{
     return new Date().toISOString()
   }
 
-  private updateStatus(status: ClipSourceStatus, message?: string, timestamp?: string) {
-    this.lastStatusTimestamp = timestamp ?? this.timestamp()
-    this.status = status
-    this.statusMessage = message
-  }
-
   protected ctx: ClipSourceCtxCallback = () => ({ id: '' })
+
+  protected handleStatusUpdate(status: ClipSourceStatus, timestamp?: string) {
+    this.status = status
+    this.emit('status', {
+      timestamp: timestamp ?? this.timestamp(),
+      data: status
+    })
+  }
 
   protected handleError(error: unknown) {
     const timestamp = this.timestamp()
-    this.updateStatus(ClipSourceStatus.ERROR, String(error), timestamp)
     this.emit('error', {
       timestamp,
       data: error
     })
+    this.handleStatusUpdate(ClipSourceStatus.ERROR, timestamp)
   }
 
   protected handleConnected() {
     const timestamp = this.timestamp()
-    this.updateStatus(ClipSourceStatus.CONNECTED, 'Connected', timestamp)
     this.emit('connected', { timestamp, data: undefined })
+    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
   }
 
   protected handleDisconnected(reason: string) {
     const timestamp = this.timestamp()
-    this.updateStatus(ClipSourceStatus.DISCONNECTED, 'Disconnected', timestamp)
     this.emit('disconnected', {
       timestamp,
       data: reason
     })
+    this.handleStatusUpdate(ClipSourceStatus.DISCONNECTED, timestamp)
   }
 
   protected handleMessage(message: Omit<ClipSourceMessage, 'urls'>) {
     const timestamp = this.timestamp()
-    this.updateStatus(ClipSourceStatus.CONNECTED, 'Message', timestamp)
     this.emit('message', {
       timestamp,
       data: {
@@ -98,11 +113,11 @@ export abstract class BaseClipSource extends EventEmitter<{
         urls: getAllURLsFromText(message.text)
       }
     })
+    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
   }
 
   protected handleMessageDeleted(message: Omit<ClipSourceMessage, 'urls'>) {
     const timestamp = this.timestamp()
-    this.updateStatus(ClipSourceStatus.CONNECTED, 'Message Deleted', timestamp)
     this.emit('message-deleted', {
       timestamp,
       data: {
@@ -110,14 +125,15 @@ export abstract class BaseClipSource extends EventEmitter<{
         urls: getAllURLsFromText(message.text)
       }
     })
+    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
   }
 
   protected handleTimeout(username: string) {
     const timestamp = this.timestamp()
-    this.updateStatus(ClipSourceStatus.CONNECTED, 'Timeout', timestamp)
     this.emit('user-timeout', {
       timestamp,
       data: username
     })
+    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
   }
 }
