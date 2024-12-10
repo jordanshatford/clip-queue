@@ -10,6 +10,7 @@
     "player": "pnpm --filter @cq/player -- ",
     "providers": "pnpm --filter @cq/providers -- ",
     "services": "pnpm --filter @cq/services -- ",
+    "sources": "pnpm --filter @cq/sources -- ",
     "ui": "pnpm --filter @cq/ui -- ",
     "build": "pnpm --recursive build",
     "lint": "pnpm --recursive lint",

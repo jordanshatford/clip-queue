@@ -17,4 +17,5 @@ services:
       - /workspace/packages/player/node_modules
       - /workspace/packages/providers/node_modules
       - /workspace/packages/services/node_modules
+      - /workspace/packages/sources/node_modules
       - /workspace/packages/ui/node_modules

@@ -1,0 +1,16 @@
+{
+  "extends": "@cq/config/tsconfig/node",
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "lib": ["DOM"],
+    "module": "ES2015",
+    "moduleResolution": "Bundler",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "baseUrl": ".",
+    "types": ["node"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}

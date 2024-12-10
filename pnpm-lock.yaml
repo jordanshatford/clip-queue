@@ -251,6 +251,22 @@ importers:
         specifier: ^5.6.3
         version: 5.6.3
 
+  packages/sources:
+    dependencies:
+      '@cq/services':
+        specifier: workspace:*
+        version: link:../services
+    devDependencies:
+      '@cq/config':
+        specifier: workspace:*
+        version: link:../config
+      '@types/node':
+        specifier: ^22.9.3
+        version: 22.10.1
+      typescript:
+        specifier: ^5.6.3
+        version: 5.6.3
+
   packages/ui:
     dependencies:
       primeicons:
