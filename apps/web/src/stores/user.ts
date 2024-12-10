@@ -1,32 +1,29 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-import type { AuthInfo, ChatUserstate, TwitchUserCtx } from '@cq/services/twitch'
-import twitch, { TwitchChat } from '@cq/services/twitch'
+import type { AuthInfo, TwitchUserCtx } from '@cq/services/twitch'
+import type { IBaseClipSource } from '@cq/sources'
+import twitch from '@cq/services/twitch'
+import { TwitchChatSource } from '@cq/sources'
 
 import { env } from '@/config'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
-import { getAllURLsFromText } from '@/utils'
 import commands, { Command } from '@/utils/commands'
 
 const { CLIENT_ID, REDIRECT_URI } = env
 
-export interface User {
-  hasValidatedToken: boolean
-  isLoggedIn: boolean
-  ctx: TwitchUserCtx
-  chat?: TwitchChat
-}
-
 export const useUser = defineStore(
   'user',
   () => {
+    const queue = useQueue()
+    const settings = useSettings()
+
     const hasValidatedToken = ref<boolean>(false)
     const isLoggedIn = ref<boolean>(false)
     const ctx = ref<TwitchUserCtx>({ id: CLIENT_ID, token: undefined, username: undefined })
-    const chat = ref<TwitchChat | undefined>(undefined)
+    const source = ref<IBaseClipSource | undefined>(undefined)
 
     function redirect(): void {
       twitch.redirect(ctx.value, REDIRECT_URI, ['openid', 'chat:read'])
@@ -70,8 +67,12 @@ export const useUser = defineStore(
         username: undefined
       }
       isLoggedIn.value = false
-      chat.value?.disconnect()
-      chat.value = undefined
+      try {
+        await source.value?.disconnect()
+        source.value = undefined
+      } catch (e) {
+        console.error('Failed to disconnect from Twitch chat: ', e)
+      }
       if (originalCtx.id && originalCtx.token) {
         try {
           await twitch.logout(originalCtx)
@@ -82,86 +83,81 @@ export const useUser = defineStore(
     }
 
     async function connectToChat() {
-      chat.value?.disconnect?.()
+      await source.value?.disconnect()
       const currentCtx = ctx.value
       if (currentCtx.username && currentCtx.token) {
-        const c = new TwitchChat(currentCtx)
+        const s = new TwitchChatSource(() => currentCtx)
         // setup watching chat
-        c.on('disconnected', (reason) => console.info('Disconnected from chat: ', reason))
-        c.on('message', onMessage)
-        c.on('messagedeleted', onMessageDeleted)
-        c.on('timeout', onTimeout)
-        c.on('ban', onTimeout)
+        s.on('connected', (event) => console.info('Connected to source at: ', event.timestamp))
+        s.on('disconnected', (event) => console.info('Disconnected from source: ', event?.data))
+        s.on('message', async (event) => {
+          // Check if message is a command and perform command if proper permission to do so
+          if (event.data.text.startsWith(settings.commands.prefix)) {
+            const [command, ...args] = event.data.text
+              .substring(settings.commands.prefix.length)
+              .split(' ')
+            if (!settings.commands.allowed.includes(command as Command)) {
+              return
+            }
+            if (!event.data.isAllowedCommands) {
+              return
+            }
+            commands.handleCommand(command, ...args)
+            return
+          }
+
+          for (const url of event.data.urls) {
+            const providers = useProviders()
+            try {
+              const clip = await providers.getClip(url)
+              if (clip) {
+                queue.add({
+                  ...clip,
+                  submitters: [event.data.username]
+                })
+              }
+            } catch (e) {
+              console.error('Failed to get clip: ', e)
+            }
+          }
+        })
+        s.on('message-deleted', async (event) => {
+          if (!settings.queue.hasAutoModerationEnabled) {
+            return
+          }
+          for (const url of event.data.urls) {
+            const providers = useProviders()
+            try {
+              const clip = await providers.getClip(url)
+              if (clip) {
+                queue.remove({
+                  ...clip,
+                  submitters: [event.data.username]
+                })
+              }
+            } catch (e) {
+              console.error('Failed to get clip: ', e)
+            }
+          }
+        })
+        s.on('user-timeout', (event) => {
+          const username = event.data
+          if (!settings.queue.hasAutoModerationEnabled) {
+            return
+          }
+          queue.removeSubmitterClips(username)
+        })
+        s.on('error', (event) => {
+          console.error('Clip source error: ', event.data)
+        })
         try {
-          await c.connect()
+          await s.connect()
           console.info('Connect to Twitch chat of channel: ', currentCtx.username)
-          chat.value = c
+          source.value = s
         } catch (e) {
           console.error('Failed to connect to Twitch chat: ', e)
         }
       }
-    }
-
-    function onMessage(c: string, userstate: ChatUserstate, message: string, self: boolean) {
-      if (self) {
-        return
-      }
-      const settings = useSettings()
-      // Check if message is a command and perform command if proper permission to do so
-      if (message.startsWith(settings.commands.prefix)) {
-        const [command, ...args] = message.substring(settings.commands.prefix.length).split(' ')
-        if (!settings.commands.allowed.includes(command as Command)) {
-          return
-        }
-        if (!twitch.isModerator(userstate)) {
-          return
-        }
-        commands.handleCommand(command, ...args)
-        return
-      }
-
-      const urls = getAllURLsFromText(message)
-      for (const url of urls) {
-        const providers = useProviders()
-        providers.getClip(url).then((clip) => {
-          if (clip && userstate.username) {
-            const queue = useQueue()
-            queue.add({
-              ...clip,
-              submitters: [userstate.username]
-            })
-          }
-        })
-      }
-    }
-
-    function onMessageDeleted(c: string, username: string, deletedMessage: string) {
-      const settings = useSettings()
-      if (!settings.queue.hasAutoModerationEnabled) {
-        return
-      }
-      const urls = getAllURLsFromText(deletedMessage)
-      for (const url of urls) {
-        const providers = useProviders()
-        providers.getClip(url).then((clip) => {
-          if (clip) {
-            const queue = useQueue()
-            queue.remove({
-              ...clip,
-              submitters: [username]
-            })
-          }
-        })
-      }
-    }
-
-    function onTimeout(c: string, username: string) {
-      const settings = useSettings()
-      if (!settings.queue.hasAutoModerationEnabled) {
-        return
-      }
-      const queue = useQueue()
-      queue.removeSubmitterClips(username)
     }
 
     return {

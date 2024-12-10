@@ -17,6 +17,7 @@
     "@cq/player": "workspace:*",
     "@cq/providers": "workspace:*",
     "@cq/services": "workspace:*",
+    "@cq/sources": "workspace:*",
     "@cq/ui": "workspace:*",
     "@sentry/vue": "^8.42.0",
     "pinia": "^2.3.0",

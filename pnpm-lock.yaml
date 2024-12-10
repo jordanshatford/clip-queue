@@ -44,6 +44,9 @@ importers:
       '@cq/services':
         specifier: workspace:*
         version: link:../../packages/services
+      '@cq/sources':
+        specifier: workspace:*
+        version: link:../../packages/sources
       '@cq/ui':
         specifier: workspace:*
         version: link:../../packages/ui
