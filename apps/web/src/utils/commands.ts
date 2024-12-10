@@ -158,7 +158,6 @@ export function handleCommand(command: string, ...args: string[]) {
       break
     }
     case Command.PURGE_HISTORY: {
-      const queue = useQueue()
       queue.purge()
       break
     }
