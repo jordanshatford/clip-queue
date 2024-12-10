@@ -20,7 +20,8 @@ export default class TwitchChat extends Client {
       throw Error('No username specified in TwitchUserCtx')
     }
     super({
-      ...{ ...DEFAULT_OPTIONS, ...options },
+      ...DEFAULT_OPTIONS,
+      ...options,
       identity: {
         username: ctx.username,
         password: `oauth:${ctx.token}`
