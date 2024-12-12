@@ -1,4 +1,5 @@
-import twitch, { ChatUserstate, TwitchChat } from '@cq/services/twitch'
+import type { ChatUserstate } from '@cq/services/twitch'
+import twitch, { TwitchChat } from '@cq/services/twitch'
 
 import type { ClipSourceCtxCallback } from './types'
 import { BaseClipSource, ClipSource, ClipSourceStatus } from './types'
