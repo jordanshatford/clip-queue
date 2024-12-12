@@ -8,6 +8,8 @@ import { computed } from 'vue'
 import { ClipSourceStatus } from '@cq/sources'
 import { InputIcon } from '@cq/ui'
 
+import * as m from '@/paraglide/messages'
+
 export interface Props {
   status: ClipSourceStatus
 }
@@ -15,10 +17,10 @@ export interface Props {
 const { status } = defineProps<Props>()
 
 const statusTranslations: Record<ClipSourceStatus, string> = {
-  Error: 'Error',
-  Connected: 'Connected',
-  Disconnected: 'Disconnected',
-  Unknown: 'Unknown'
+  Error: m.error(),
+  Connected: m.connected(),
+  Disconnected: m.disconnected(),
+  Unknown: m.unknown()
 }
 
 const color = computed(() => {

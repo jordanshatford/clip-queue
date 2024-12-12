@@ -6,5 +6,5 @@ import type { Clip } from './types'
  * @returns {string} - UUID of the clip.
  */
 export function toClipUUID(clip: Clip): string {
-  return `${clip.provider.toString().toLowerCase()}:${clip.id}`
+  return `${clip.provider.toString().toLowerCase()}:${clip.id.toLowerCase()}`
 }
