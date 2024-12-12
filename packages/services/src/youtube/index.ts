@@ -102,7 +102,7 @@ export async function getClip(id: string): Promise<YouTubeClip | undefined> {
       }
     }
   } catch (e) {
-    console.error('Failed to fetch YouTube clip: ', e)
+    console.error('Failed to fetch YouTube clip: ', id, e)
   }
 }
 

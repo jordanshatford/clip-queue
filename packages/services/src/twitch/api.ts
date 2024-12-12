@@ -31,7 +31,7 @@ export async function getClips(ctx: TwitchUserCtx, ids: string[]): Promise<Twitc
     })
     return data.data
   } catch (e) {
-    console.error('Failed to fetch Twitch clips: ', e)
+    console.error('Failed to fetch Twitch clips: ', ids, e)
   }
   return []
 }
@@ -47,7 +47,7 @@ export async function getGames(ctx: TwitchUserCtx, ids: string[]): Promise<Twitc
     })
     return data.data
   } catch (e) {
-    console.error('Failed to fetch Twitch games: ', e)
+    console.error('Failed to fetch Twitch games: ', ids, e)
   }
   return []
 }
