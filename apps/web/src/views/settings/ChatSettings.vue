@@ -9,6 +9,7 @@
               <svg class="h-5 w-5" v-html="logo"></svg>
             </InputIcon>
             <InputText id="username" v-model="user.ctx.username" class="w-full" disabled />
+            <SourceIndicator :status="user.sourceStatus" />
           </IconField>
         </div>
       </template>
@@ -87,6 +88,7 @@ import {
   useToast
 } from '@cq/ui'
 
+import SourceIndicator from '@/components/SourceIndicator.vue'
 import * as m from '@/paraglide/messages'
 import { useSettings } from '@/stores/settings'
 import { useUser } from '@/stores/user'

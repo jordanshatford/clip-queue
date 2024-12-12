@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import type { AuthInfo, TwitchUserCtx } from '@cq/services/twitch'
 import type { IBaseClipSource } from '@cq/sources'
 import twitch from '@cq/services/twitch'
-import { TwitchChatSource } from '@cq/sources'
+import { ClipSourceStatus, TwitchChatSource } from '@cq/sources'
 
 import { env } from '@/config'
 import { useProviders } from '@/stores/providers'
@@ -24,6 +24,7 @@ export const useUser = defineStore(
     const isLoggedIn = ref<boolean>(false)
     const ctx = ref<TwitchUserCtx>({ id: CLIENT_ID, token: undefined, username: undefined })
     const source = ref<IBaseClipSource | undefined>(undefined)
+    const sourceStatus = ref<ClipSourceStatus>(ClipSourceStatus.UNKNOWN)
 
     function redirect(): void {
       twitch.redirect(ctx.value, REDIRECT_URI, ['openid', 'chat:read'])
@@ -88,8 +89,13 @@ export const useUser = defineStore(
       if (currentCtx.username && currentCtx.token) {
         const s = new TwitchChatSource(() => currentCtx)
         // setup watching chat
-        s.on('connected', (event) => console.info('Connected to source at: ', event.timestamp))
-        s.on('disconnected', (event) => console.info('Disconnected from source: ', event?.data))
+        s.on('status', (event) => {
+          sourceStatus.value = event.data
+        })
+        s.on('connected', (event) => console.info('Connected to Twitch Chat at: ', event.timestamp))
+        s.on('disconnected', (event) =>
+          console.info('Disconnected from Twitch chat at: ', event.timestamp, ' ', event?.data)
+        )
         s.on('message', async (event) => {
           // Check if message is a command and perform command if proper permission to do so
           if (event.data.text.startsWith(settings.commands.prefix)) {
@@ -164,6 +170,7 @@ export const useUser = defineStore(
       hasValidatedToken,
       isLoggedIn,
       ctx,
+      sourceStatus,
       autoLoginIfPossible,
       redirect,
       login,
