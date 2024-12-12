@@ -69,7 +69,7 @@ export async function getClip(id: string): Promise<KickClip | undefined> {
     const { data } = await api.get<{ clip: KickClip }>(`clips/${id}`)
     return data.clip
   } catch (e) {
-    console.error('Failed to fetch Kick clip: ', id , e)
+    console.error('Failed to fetch Kick clip: ', id, e)
   }
 }
 

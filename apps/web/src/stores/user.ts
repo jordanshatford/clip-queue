@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import type { AuthInfo, TwitchUserCtx } from '@cq/services/twitch'
 import type { IBaseClipSource } from '@cq/sources'
 import twitch from '@cq/services/twitch'
-import { ClipSourceStatus, TwitchChatSource } from '@cq/sources'
+import { ClipSource, ClipSourceStatus, TwitchChatSource } from '@cq/sources'
 
 import { env } from '@/config'
 import { useProviders } from '@/stores/providers'
@@ -88,6 +88,7 @@ export const useUser = defineStore(
       const currentCtx = ctx.value
       if (currentCtx.username && currentCtx.token) {
         const s = new TwitchChatSource(() => currentCtx)
+        sourceStatus.value = s.status
         // setup watching chat
         s.on('status', (event) => {
           sourceStatus.value = event.data
@@ -99,16 +100,17 @@ export const useUser = defineStore(
         s.on('message', async (event) => {
           // Check if message is a command and perform command if proper permission to do so
           if (event.data.text.startsWith(settings.commands.prefix)) {
+            // Ensure the user is allowed to use commands.
+            if (!event.data.isAllowedCommands) {
+              return
+            }
             const [command, ...args] = event.data.text
               .substring(settings.commands.prefix.length)
               .split(' ')
             if (!settings.commands.allowed.includes(command as Command)) {
               return
             }
-            if (!event.data.isAllowedCommands) {
-              return
-            }
-            commands.handleCommand(command, ...args)
+            commands.handleCommand(s.name, command, ...args)
             return
           }
 
