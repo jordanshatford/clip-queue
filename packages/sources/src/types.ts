@@ -34,7 +34,7 @@ export type ClipSourceCtxCallback = () => ClipSourceCtx | Promise<ClipSourceCtx>
 
 type ClipSourceEventsMap = {
   connected: (timestamp: ClipSourceEvent) => Promise<void> | void
-  disconnected: (reason?: ClipSourceEvent<string>) => Promise<void> | void
+  disconnected: (reason: ClipSourceEvent<string | undefined>) => Promise<void> | void
   message: (message: ClipSourceEvent<ClipSourceMessage>) => Promise<void> | void
   'message-deleted': (message: ClipSourceEvent<ClipSourceMessage>) => Promise<void> | void
   'user-timeout': (username: ClipSourceEvent<string>) => Promise<void> | void
