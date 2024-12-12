@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 import type { Clip } from '@cq/providers'
-import { ClipList, ClipProvider, toUUID } from '@cq/providers'
+import { ClipList, ClipProvider, toClipUUID } from '@cq/providers'
 
 import { useSettings } from '@/stores/settings'
 
@@ -43,7 +43,8 @@ export const useQueue = defineStore(
       }
       // Ignore when we have previously watched it
       const hasBeenWatched =
-        (current.value && toUUID(current.value) === toUUID(clip)) || history.value.includes(clip)
+        (current.value && toClipUUID(current.value) === toClipUUID(clip)) ||
+        history.value.includes(clip)
       if (hasBeenWatched) {
         return
       }

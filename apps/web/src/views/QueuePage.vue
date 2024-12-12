@@ -1,7 +1,7 @@
 <template>
   <ClipPlayer
     v-if="queue.current && queue.current.id"
-    :key="toUUID(queue.current)"
+    :key="toClipUUID(queue.current)"
     :clip="queue.current"
     :previous-disabled="queue.history.empty()"
     :next-disabled="queue.upcoming.empty()"
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { toUUID } from '@cq/providers'
+import { toClipUUID } from '@cq/providers'
 import { Message } from '@cq/ui'
 
 import ClipPlayer from '@/components/ClipPlayer.vue'

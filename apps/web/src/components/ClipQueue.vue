@@ -29,7 +29,7 @@
     <div class="flex justify-items-start overflow-x-auto px-1 py-3">
       <ClipCard
         v-for="clip in clips"
-        :key="toUUID(clip)"
+        :key="toClipUUID(clip)"
         :clip="clip"
         class="mr-2"
         @play="emit('play', clip)"
@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 import type { Clip } from '@cq/providers'
-import { toUUID } from '@cq/providers'
+import { toClipUUID } from '@cq/providers'
 import { Button } from '@cq/ui'
 
 import ClipCard from '@/components/ClipCard.vue'

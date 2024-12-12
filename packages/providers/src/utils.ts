@@ -1,6 +1,10 @@
 import type { Clip } from './types'
 
-// Return a UUID from a given clip.
-export function toUUID(clip: Clip): string {
-  return `${clip.provider.toString()}:${clip.id}`
+/**
+ * Get a UUID for the provided clip.
+ * @param clip - A clip.
+ * @returns {string} - UUID of the clip.
+ */
+export function toClipUUID(clip: Clip): string {
+  return `${clip.provider.toString().toLowerCase()}:${clip.id}`
 }

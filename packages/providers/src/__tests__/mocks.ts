@@ -107,3 +107,16 @@ export const clipFromTwitch: Clip = {
   embedUrl: 'https://clips.twitch.tv/testclip',
   thumbnailUrl: 'https://twitch.tv/thumbnail'
 }
+
+export const clipFromYouTube: Clip = {
+  provider: ClipProvider.YOUTUBE,
+  submitters: ['testsubmitteryoutube'],
+  id: 'testclipyoutube',
+  title: 'testclipyoutube',
+  channel: 'testchannelyoutube',
+  category: 'testcategoryyoutube',
+  createdAt: '2024-02-22T08:47:27.000Z',
+  url: 'https://www.youtube.com/clip/testclip',
+  embedUrl: 'https://www.youtube.com/clip/testclip',
+  thumbnailUrl: 'https://www.youtube.com/clip/testclip/thumbnail'
+}
