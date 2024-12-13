@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import type { AuthInfo, TwitchUserCtx } from '@cq/services/twitch'
 import type { IBaseClipSource } from '@cq/sources'
 import twitch from '@cq/services/twitch'
-import { ClipSource, ClipSourceStatus, TwitchChatSource } from '@cq/sources'
+import { ClipSourceStatus, TwitchChatSource } from '@cq/sources'
 
 import { env } from '@/config'
 import { useProviders } from '@/stores/providers'
