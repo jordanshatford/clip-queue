@@ -6,9 +6,7 @@ export class ClipList {
 
   constructor(...clips: Clip[]) {
     this._clips = []
-    if (clips.length > 0) {
-      clips.forEach((clip) => this.add(clip))
-    }
+    this.add(...clips)
   }
 
   public add(...clips: Clip[]): Clip[] {
