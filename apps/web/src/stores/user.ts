@@ -21,13 +21,13 @@ export const useUser = defineStore(
       twitch.redirect(ctx.value, REDIRECT_URI, ['openid', 'chat:read'])
     }
 
-    async function autoLoginIfPossible() {
+    async function autoLoginIfPossible(): Promise<void> {
       if (hasValidatedToken.value) {
         return
       }
       if (ctx.value.token && (await twitch.isLoginValid(ctx.value))) {
         isLoggedIn.value = true
-        await connectToChat()
+        await connectToSources()
       } else {
         await logout()
       }
@@ -47,7 +47,7 @@ export const useUser = defineStore(
           username: decodedIdToken.preferred_username
         }
         isLoggedIn.value = true
-        await connectToChat()
+        await connectToSources()
       }
     }
 
@@ -59,7 +59,7 @@ export const useUser = defineStore(
         username: undefined
       }
       isLoggedIn.value = false
-      await sources.disconnect()
+      await disconnectFromSources()
       if (originalCtx.id && originalCtx.token) {
         try {
           await twitch.logout(originalCtx)
@@ -69,10 +69,14 @@ export const useUser = defineStore(
       }
     }
 
-    async function connectToChat() {
+    async function connectToSources(): Promise<void> {
       if (ctx.value.username && ctx.value.token) {
         await sources.connect()
       }
+    }
+
+    async function disconnectFromSources(): Promise<void> {
+      await sources.disconnect()
     }
 
     return {
