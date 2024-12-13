@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import videojs from 'video.js'
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, useTemplateRef } from 'vue'
 
 import 'video.js/dist/video-js.css'
 
@@ -21,7 +21,7 @@ export interface Props {
 
 const { poster, source, autoplay = true, title = undefined } = defineProps<Props>()
 
-const videoElement = ref<HTMLVideoElement | null>(null)
+const videoElement = useTemplateRef('videoElement')
 
 // TODO: fix typing once video.js is updated.
 // ref: https://github.com/videojs/video.js/issues/8242
