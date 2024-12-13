@@ -9,7 +9,7 @@
               <svg class="h-5 w-5" v-html="logo"></svg>
             </InputIcon>
             <InputText id="username" v-model="user.ctx.username" class="w-full" disabled />
-            <SourceIndicator :status="user.sourceStatus" />
+            <SourceIndicator :status="sources.status" />
           </IconField>
         </div>
       </template>
@@ -91,12 +91,14 @@ import {
 import SourceIndicator from '@/components/SourceIndicator.vue'
 import * as m from '@/paraglide/messages'
 import { useSettings } from '@/stores/settings'
+import { useSources } from '@/stores/sources'
 import { useUser } from '@/stores/user'
 import commands, { Command } from '@/utils/commands'
 
 const toast = useToast()
 const user = useUser()
 const settings = useSettings()
+const sources = useSources()
 
 const formKey = ref(1)
 const formSettings = ref(structuredClone(toRaw(settings.commands)))
