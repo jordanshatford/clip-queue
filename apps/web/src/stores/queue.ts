@@ -6,13 +6,6 @@ import { ClipList, ClipProvider, toClipUUID } from '@cq/providers'
 
 import { useSettings } from '@/stores/settings'
 
-export interface ClipQueue {
-  isOpen: boolean
-  history: ClipList
-  current: Clip | undefined
-  upcoming: ClipList
-}
-
 export const useQueue = defineStore(
   'queue',
   () => {
