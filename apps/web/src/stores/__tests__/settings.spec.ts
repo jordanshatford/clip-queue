@@ -1,7 +1,7 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import { DEFAULTS, useSettings } from '../settings'
+import { DEFAULT_COMMAND_SETTINGS, DEFAULT_QUEUE_SETTINGS, useSettings } from '../settings'
 
 describe('settings.ts', () => {
   beforeEach(() => {
@@ -10,8 +10,8 @@ describe('settings.ts', () => {
 
   it('inits the settings with default value', () => {
     const settings = useSettings()
-    expect(settings.isCommandsSettingsModified(DEFAULTS.commands)).toEqual(false)
-    expect(settings.isQueueSettingsModified(DEFAULTS.queue)).toEqual(false)
+    expect(settings.isCommandsSettingsModified(DEFAULT_COMMAND_SETTINGS)).toEqual(false)
+    expect(settings.isQueueSettingsModified(DEFAULT_QUEUE_SETTINGS)).toEqual(false)
   })
 
   it('updates the settings in local storage', () => {
@@ -26,14 +26,14 @@ describe('settings.ts', () => {
     const settings = useSettings()
     expect(
       settings.isCommandsSettingsModified({
-        ...DEFAULTS.commands,
+        ...DEFAULT_COMMAND_SETTINGS,
         prefix: '~dsa'
       })
     ).toEqual(true)
     expect(settings.isCommandsSettingsModified(settings.$state.commands)).toEqual(false)
     expect(
       settings.isQueueSettingsModified({
-        ...DEFAULTS.queue,
+        ...DEFAULT_QUEUE_SETTINGS,
         limit: 1000
       })
     ).toEqual(true)

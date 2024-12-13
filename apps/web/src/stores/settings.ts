@@ -21,23 +21,22 @@ export interface QueueSettings {
   providers: ClipProvider[]
 }
 
-export const DEFAULTS: { commands: CommandSettings; queue: QueueSettings } = {
-  commands: {
-    prefix: '!cq',
-    allowed: Object.values(Command)
-  },
-  queue: {
-    hasAutoModerationEnabled: true,
-    limit: null,
-    providers: Object.values(ClipProvider)
-  }
+export const DEFAULT_COMMAND_SETTINGS: CommandSettings = {
+  prefix: '!cq',
+  allowed: Object.values(Command)
+}
+
+export const DEFAULT_QUEUE_SETTINGS: QueueSettings = {
+  hasAutoModerationEnabled: true,
+  limit: null,
+  providers: Object.values(ClipProvider)
 }
 
 export const useSettings = defineStore(
   'settings',
   () => {
-    const commands = ref<CommandSettings>({ ...DEFAULTS.commands })
-    const queue = ref<QueueSettings>({ ...DEFAULTS.queue })
+    const commands = ref<CommandSettings>({ ...DEFAULT_COMMAND_SETTINGS })
+    const queue = ref<QueueSettings>({ ...DEFAULT_QUEUE_SETTINGS })
 
     const isCommandsSettingsModified = computed(() => {
       return (c: CommandSettings) => {
@@ -64,14 +63,14 @@ export const useSettings = defineStore(
 
     const isModified = computed(() => {
       return (
-        isCommandsSettingsModified.value(DEFAULTS.commands) ||
-        isQueueSettingsModified.value(DEFAULTS.queue)
+        isCommandsSettingsModified.value(DEFAULT_COMMAND_SETTINGS) ||
+        isQueueSettingsModified.value(DEFAULT_QUEUE_SETTINGS)
       )
     })
 
     function $reset() {
-      commands.value = DEFAULTS.commands
-      queue.value = DEFAULTS.queue
+      commands.value = DEFAULT_COMMAND_SETTINGS
+      queue.value = DEFAULT_QUEUE_SETTINGS
     }
 
     return {
