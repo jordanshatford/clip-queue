@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-import type { AuthInfo, TwitchUserCtx } from '@cq/services/twitch'
+import type { TwitchUserCtx } from '@cq/services/twitch'
 import twitch from '@cq/services/twitch'
 
 import { env } from '@/config'
