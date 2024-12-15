@@ -4,7 +4,6 @@
     :key="toClipUUID(queue.current)"
     :clip="queue.current"
     :previous-disabled="queue.history.empty()"
-    :next-disabled="queue.upcoming.empty()"
     @previous="queue.previous()"
     @next="queue.next()"
   />

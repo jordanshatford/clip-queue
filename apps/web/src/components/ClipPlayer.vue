@@ -38,7 +38,6 @@
             :label="m.next()"
             severity="info"
             size="small"
-            :disabled="nextDisabled"
             @click="emit('next')"
           >
           </Button>
@@ -72,10 +71,9 @@ import ProviderName from './ProviderName.vue'
 export interface Props {
   clip: Clip
   previousDisabled?: boolean
-  nextDisabled?: boolean
 }
 
-const { clip, previousDisabled = false, nextDisabled = false } = defineProps<Props>()
+const { clip, previousDisabled = false } = defineProps<Props>()
 
 const emit = defineEmits<{
   (e: 'previous'): void
