@@ -70,6 +70,7 @@ export async function getClip(id: string): Promise<KickClip | undefined> {
     return data.clip
   } catch (e) {
     console.error('Failed to fetch Kick clip: ', id, e)
+    return
   }
 }
 
@@ -86,8 +87,9 @@ export function getClipIdFromUrl(url: string): string | undefined {
         return uri.pathname.slice(idStart).split('?')[0]?.slice(1)
       }
     }
+    return
   } catch {
-    return undefined
+    return
   }
 }
 

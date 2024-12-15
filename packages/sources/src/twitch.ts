@@ -9,6 +9,7 @@ export class TwitchChatSource extends BaseClipSource {
   public svg = twitch.logo
 
   private chat?: TwitchChat
+  private ctx: ClipSourceCtxCallback = () => ({ id: '' })
 
   public constructor(callback?: ClipSourceCtxCallback) {
     super()
@@ -33,7 +34,7 @@ export class TwitchChatSource extends BaseClipSource {
     this.chat.on('connected', () => this.handleConnected())
     this.chat.on(
       'message',
-      (c: string, userstate: ChatUserstate, message: string, self: boolean) => {
+      (_c: string, userstate: ChatUserstate, message: string, self: boolean) => {
         if (self || !userstate.username) {
           return
         }
@@ -44,11 +45,11 @@ export class TwitchChatSource extends BaseClipSource {
         })
       }
     )
-    this.chat.on('messagedeleted', (c: string, username: string, message: string) =>
+    this.chat.on('messagedeleted', (_c: string, username: string, message: string) =>
       this.handleMessageDeleted({ username, text: message })
     )
-    this.chat.on('timeout', (c, username) => this.handleTimeout(username))
-    this.chat.on('ban', (c, username) => this.handleTimeout(username))
+    this.chat.on('timeout', (_c, username) => this.handleTimeout(username))
+    this.chat.on('ban', (_c, username) => this.handleTimeout(username))
     this.chat.on('disconnected', (reason) => this.handleDisconnected(reason))
 
     try {

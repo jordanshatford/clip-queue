@@ -9,7 +9,7 @@
     "./prettier/base": "./prettier/base.js",
     "./prettier/vue": "./prettier/vue.js",
     "./tailwind": "./tailwind/base.js",
-    "./tsconfig/node": "./tsconfig/node.json"
+    "./tsconfig": "./tsconfig/tsconfig.json"
   },
   "scripts": {
     "format": "prettier --write .",
@@ -20,7 +20,6 @@
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.16.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.4.0",
-    "@tsconfig/node20": "^20.1.4",
     "@vue/eslint-config-prettier": "^10.1.0",
     "@vue/eslint-config-typescript": "^14.1.4",
     "eslint": "^9.16.0",

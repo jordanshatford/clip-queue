@@ -101,8 +101,10 @@ export async function getClip(id: string): Promise<YouTubeClip | undefined> {
         end: Math.ceil(item.clip.endTimeMs / 1000)
       }
     }
+    return
   } catch (e) {
     console.error('Failed to fetch YouTube clip: ', id, e)
+    return
   }
 }
 
@@ -115,8 +117,9 @@ export function getClipIdFromUrl(url: string): string | undefined {
         return uri.pathname.slice(idStart).split('?')?.[0]?.slice(1)
       }
     }
+    return
   } catch {
-    return undefined
+    return
   }
 }
 

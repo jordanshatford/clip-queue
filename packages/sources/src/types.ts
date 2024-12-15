@@ -70,8 +70,6 @@ export abstract class BaseClipSource
     return new Date().toISOString()
   }
 
-  protected ctx: ClipSourceCtxCallback = () => ({ id: '' })
-
   protected handleStatusUpdate(status: ClipSourceStatus, timestamp?: string) {
     this.status = status
     this.emit('status', {

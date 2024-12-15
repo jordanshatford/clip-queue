@@ -136,9 +136,6 @@ importers:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.4.0
         version: 4.4.0(@vue/compiler-sfc@3.5.13)(prettier@3.4.2)
-      '@tsconfig/node20':
-        specifier: ^20.1.4
-        version: 20.1.4
       '@vue/eslint-config-prettier':
         specifier: ^10.1.0
         version: 10.1.0(eslint@9.16.0(jiti@2.4.0))(prettier@3.4.2)

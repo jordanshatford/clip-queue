@@ -17,14 +17,14 @@ vi.mock('@cq/services/twitch', async (importOriginal) => {
       }),
       getClipIdFromUrl: vi.fn((url: string) => {
         if (!url.includes('twitch')) {
-          return undefined
+          return
         }
         try {
           const uri = new URL(url)
           const idStart = uri.pathname.lastIndexOf('/')
           return uri.pathname.slice(idStart).split('?')[0]?.slice(1)
         } catch {
-          return undefined
+          return
         }
       })
     }

@@ -1,5 +1,5 @@
 {
-  "extends": "@cq/config/tsconfig/node",
+  "extends": "@cq/config/tsconfig",
   "include": ["src/**/*"],
   "compilerOptions": {
     "lib": ["DOM"],
@@ -7,7 +7,6 @@
     "moduleResolution": "Bundler",
     "outDir": "./dist",
     "baseUrl": ".",
-    "types": ["node"],
     "paths": {
       "@/*": ["./src/*"]
     }

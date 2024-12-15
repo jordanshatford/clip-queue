@@ -29,14 +29,14 @@ function isClipUrl(url: string): boolean {
 
 export function getClipIdFromUrl(url: string): string | undefined {
   if (!isClipUrl(url)) {
-    return undefined
+    return
   }
   try {
     const uri = new URL(url)
     const idStart = uri.pathname.lastIndexOf('/')
     return uri.pathname.slice(idStart).split('?')[0]?.slice(1)
   } catch {
-    return undefined
+    return
   }
 }
 

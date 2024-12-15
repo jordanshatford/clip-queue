@@ -45,6 +45,7 @@ vi.mock('axios', async () => {
         }
       }
     }
+    return
   })
   return {
     default: {
