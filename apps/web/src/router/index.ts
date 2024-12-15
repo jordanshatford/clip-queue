@@ -4,7 +4,6 @@ import { computed } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import type { MenuItem } from '@cq/ui'
-import twitch from '@cq/services/twitch'
 
 import { config } from '@/config'
 import * as m from '@/paraglide/messages'
@@ -124,14 +123,7 @@ router.beforeEach(async (to, _from, next) => {
   }
   // If the user is trying to login via twitch
   if (to.hash && to.hash !== '' && !user.isLoggedIn) {
-    const authInfo = twitch.login(to.hash)
-    if (authInfo !== null) {
-      try {
-        await user.login(authInfo)
-      } catch (e) {
-        console.error('Failed to login to Twitch: ', e)
-      }
-    }
+    user.login(to.hash)
     next({ name: RouteNameConstants.QUEUE, hash: '' })
     return
     // User is not logged in trying to access auth required route

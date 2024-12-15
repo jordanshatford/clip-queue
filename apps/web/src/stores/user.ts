@@ -17,6 +17,7 @@ export const useUser = defineStore(
     const hasValidatedToken = ref<boolean>(false)
     const isLoggedIn = ref<boolean>(false)
     const ctx = ref<TwitchUserCtx>({ id: CLIENT_ID, token: undefined, username: undefined })
+
     function redirect(): void {
       twitch.redirect(ctx.value, REDIRECT_URI, ['openid', 'chat:read'])
     }
@@ -34,7 +35,11 @@ export const useUser = defineStore(
       hasValidatedToken.value = true
     }
 
-    async function login(authInfo: AuthInfo): Promise<void> {
+    async function login(hash: string): Promise<void> {
+      const authInfo = twitch.login(hash)
+      if (authInfo === null) {
+        return
+      }
       const { access_token, decodedIdToken } = authInfo
       const currentCtx = ctx.value
       if (
