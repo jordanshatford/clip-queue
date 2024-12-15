@@ -8,7 +8,6 @@
             <Select
               v-model="formTheme.language"
               :options="[...availableLanguageTags]"
-              class="md:w-14rem w-full"
               label-id="language"
               :option-label="(value: AvailableLanguageTag) => languageLabels[value]"
               aria-describedby="language-help"
@@ -21,7 +20,6 @@
             <Select
               v-model="formTheme.theme"
               :options="[...availableThemes]"
-              class="md:w-14rem w-full"
               label-id="theme"
               :option-label="(value: Theme) => themeLabels[value]"
               aria-describedby="theme-help"
@@ -35,7 +33,6 @@
               v-model="formTheme.primary"
               :options="colors"
               data-key="name"
-              class="md:w-14rem w-full"
               label-id="primaryColor"
               aria-describedby="primaryColor-help"
             >
@@ -54,7 +51,6 @@
               v-model="formTheme.surface"
               data-key="name"
               :options="surfaces"
-              class="md:w-14rem w-full"
               label-id="surfaceColor"
               aria-describedby="surfaceColor-help"
             >

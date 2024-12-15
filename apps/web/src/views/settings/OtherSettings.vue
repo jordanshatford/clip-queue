@@ -3,7 +3,8 @@
     <template #content>
       <Button
         :label="m.reset_settings()"
-        class="mb-2 w-full"
+        class="mb-2"
+        fluid
         size="small"
         severity="danger"
         :disabled="!(settings.isModified || preferences.isModified)"
@@ -18,7 +19,8 @@
     <template #content>
       <Button
         :label="m.purge_history()"
-        class="mb-2 w-full"
+        class="mb-2"
+        fluid
         size="small"
         severity="danger"
         :disabled="queue.history.empty()"
@@ -33,7 +35,8 @@
     <template #content>
       <Button
         :label="m.purge_cache()"
-        class="mb-2 w-full"
+        class="mb-2"
+        fluid
         size="small"
         severity="danger"
         :disabled="!providers.hasCachedData"

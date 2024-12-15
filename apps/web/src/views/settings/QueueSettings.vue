@@ -19,6 +19,7 @@
             v-model="formSettings.limit"
             input-id="limit"
             allow-empty
+            :locale="preferences.preferences.language"
             :min="1"
             :step="1"
             show-buttons
@@ -101,11 +102,13 @@ import {
 
 import ProviderName from '@/components/ProviderName.vue'
 import * as m from '@/paraglide/messages'
+import { usePreferences } from '@/stores/preferences'
 import { useProviders } from '@/stores/providers'
 import { useSettings } from '@/stores/settings'
 
 const toast = useToast()
 const settings = useSettings()
+const preferences = usePreferences()
 const providers = useProviders()
 
 const formKey = ref(1)

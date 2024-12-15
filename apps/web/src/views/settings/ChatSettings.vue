@@ -4,11 +4,11 @@
       <template #content>
         <div class="m-0 flex flex-col gap-2 p-0 text-left">
           <label for="username">{{ m.connected_chat_colon() }}</label>
-          <IconField class="w-full">
+          <IconField>
             <InputIcon>
               <svg class="h-5 w-5" v-html="logo"></svg>
             </InputIcon>
-            <InputText id="username" v-model="user.ctx.username" class="w-full" disabled />
+            <InputText id="username" v-model="user.ctx.username" disabled fluid />
             <SourceIndicator :status="sources.status" />
           </IconField>
         </div>
