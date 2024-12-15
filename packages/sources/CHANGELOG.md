@@ -1,5 +1,11 @@
 # @cq/sources
 
+## 1.1.0
+
+### Minor Changes
+
+- feat: pass clip source with all clip source events ([`7bf7857`](https://github.com/jordanshatford/clip-queue/commit/7bf78574b19f5fb0b2e1f70367b89a865a9eb97c))
+
 ## 1.0.0
 
 ### Major Changes

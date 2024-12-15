@@ -1,5 +1,16 @@
 # @cq/web
 
+## 1.28.0
+
+### Minor Changes
+
+- feat: allow commands to know the source ([`94feabb`](https://github.com/jordanshatford/clip-queue/commit/94feabb6348603f5d07a0502025f9593e1a782c6))
+
+### Patch Changes
+
+- Updated dependencies [[`7bf7857`](https://github.com/jordanshatford/clip-queue/commit/7bf78574b19f5fb0b2e1f70367b89a865a9eb97c)]:
+  - @cq/sources@1.1.0
+
 ## 1.27.0
 
 ### Minor Changes
