@@ -12,9 +12,9 @@ export * from './utils'
 export * from './youtube'
 
 export const providers = {
-  all: (cbs: ClipProviderCtxCallbackMap): ClipProviderMap => ({
+  all: (callbacks: ClipProviderCtxCallbackMap): ClipProviderMap => ({
     [ClipProvider.KICK]: new KickProvider(),
-    [ClipProvider.TWITCH]: new TwitchProvider(cbs[ClipProvider.TWITCH]),
+    [ClipProvider.TWITCH]: new TwitchProvider(callbacks[ClipProvider.TWITCH]),
     [ClipProvider.YOUTUBE]: new YouTubeProvider()
   })
 }

@@ -6,7 +6,7 @@
           <label for="username">{{ m.connected_chat_colon() }}</label>
           <IconField>
             <InputIcon>
-              <svg class="h-5 w-5" v-html="logo"></svg>
+              <svg class="h-5 w-5" v-html="sources.logo"></svg>
             </InputIcon>
             <InputText id="username" v-model="user.ctx.username" disabled fluid />
             <SourceIndicator :status="sources.status" />
@@ -76,7 +76,6 @@
 <script setup lang="ts">
 import { ref, toRaw } from 'vue'
 
-import { logo } from '@cq/services/twitch'
 import {
   Button,
   Card,

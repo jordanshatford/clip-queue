@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import type { IBaseClipSource } from '@cq/sources'
 import { ClipSourceStatus, TwitchChatSource } from '@cq/sources'
@@ -16,6 +16,7 @@ export const useSources = defineStore('sources', () => {
 
   const source = ref<IBaseClipSource | undefined>(undefined)
   const status = ref<ClipSourceStatus>(ClipSourceStatus.UNKNOWN)
+  const logo = computed(() => source.value?.svg)
 
   async function connect(): Promise<void> {
     await source.value?.disconnect()
@@ -112,5 +113,5 @@ export const useSources = defineStore('sources', () => {
     }
   }
 
-  return { status, connect, disconnect }
+  return { logo, status, connect, disconnect }
 })
