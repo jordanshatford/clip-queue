@@ -30,7 +30,7 @@ export class ClipList {
 
   public remove(clip: Clip): void {
     const index = this._clips.findIndex((c) => toClipUUID(c) === toClipUUID(clip))
-    const submitter = clip?.submitters[0]?.toLowerCase()
+    const submitter = clip.submitters[0]?.toLowerCase()
     if (index > -1 && submitter) {
       this.removeSubmitterFromClip(submitter, index)
       this.sort()
@@ -82,13 +82,13 @@ export class ClipList {
 
   private removeSubmitterFromClip(submitter: string, index: number): void {
     const c = this._clips[index]
-    if (c?.submitters?.includes(submitter)) {
+    if (c?.submitters.includes(submitter)) {
       if (c.submitters.length === 1) {
         // Remove the clip from the list
         this._clips.splice(index, 1)
       } else if (c.submitters.length > 1) {
         // Remove only the submitter
-        const submitters = c.submitters?.filter((s) => !(s === submitter))
+        const submitters = c.submitters.filter((s) => !(s === submitter))
         c.submitters = submitters
         this._clips[index] = c
       }
@@ -97,7 +97,7 @@ export class ClipList {
 
   private sort(): void {
     this._clips = this._clips.sort((a, b) => {
-      return (b.submitters?.length ?? 0) - (a.submitters?.length ?? 0)
+      return (b.submitters.length) - (a.submitters.length)
     })
   }
 }
