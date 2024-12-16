@@ -21,13 +21,13 @@ export const useProviders = defineStore('providers', () => {
 
   const svg = computed(() => {
     return (provider: ClipProvider) => {
-      return providers.value[provider]?.svg
+      return providers.value[provider].svg
     }
   })
 
   const isExperimental = computed(() => {
     return (provider: ClipProvider) => {
-      return providers.value[provider]?.isExperimental
+      return providers.value[provider].isExperimental
     }
   })
 
@@ -36,17 +36,17 @@ export const useProviders = defineStore('providers', () => {
   })
 
   function purge(): void {
-    for (const p of Object.values(providers.value)) {
-      p.clearCache?.()
+    for (const provider of Object.values(providers.value)) {
+      provider.clearCache()
     }
   }
 
   async function getClip(url: string): Promise<Clip | undefined> {
-    for (const ep of settings.queue.providers) {
-      const p = providers.value[ep]
-      const c = await p?.getClip(url)
-      if (c !== undefined) {
-        return c
+    for (const enabledProvider of settings.queue.providers) {
+      const provider = providers.value[enabledProvider]
+      const clip = await provider.getClip(url)
+      if (clip) {
+        return clip
       }
     }
   }
@@ -56,7 +56,7 @@ export const useProviders = defineStore('providers', () => {
       return
     }
     const provider = providers.value[clip.provider]
-    return provider?.getPlayerFormat(clip)
+    return provider.getPlayerFormat(clip)
   }
 
   function getPlayerSource(clip: Clip): string | undefined {
@@ -64,7 +64,7 @@ export const useProviders = defineStore('providers', () => {
       return
     }
     const provider = providers.value[clip.provider]
-    return provider?.getPlayerSource(clip)
+    return provider.getPlayerSource(clip)
   }
 
   return {

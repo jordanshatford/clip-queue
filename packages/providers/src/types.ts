@@ -24,10 +24,10 @@ export type IBaseClipProvider = {
   name: ClipProvider
   svg: string
   // If the provider is experimental and may not work as intended.
-  isExperimental?: boolean
+  isExperimental: boolean
   // Cache related. We may or may not want to implement caching for each provider.
-  hasCachedData?: boolean
-  clearCache?: () => void
+  hasCachedData: boolean
+  clearCache: () => void
   // Functionality used for getting clip information.
   getClip(url: string): Promise<Clip | undefined>
   // Player related. Used to determine how to show the clip.
@@ -60,7 +60,3 @@ export interface ClipProviderCtx {
 }
 
 export type ClipProviderCtxCallback = () => ClipProviderCtx | Promise<ClipProviderCtx>
-
-export type ClipProviderMap = Partial<Record<ClipProvider, IBaseClipProvider>>
-
-export type ClipProviderCtxCallbackMap = Partial<Record<ClipProvider, ClipProviderCtxCallback>>
