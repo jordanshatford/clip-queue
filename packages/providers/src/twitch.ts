@@ -1,34 +1,24 @@
-import type { TwitchClip, TwitchGame } from '@cq/services/twitch'
 import twitch from '@cq/services/twitch'
 
-import type { Clip, ClipProviderCtxCallback, IClipProvider, PlayerFormat } from './types'
-import { ClipProvider } from './types'
+import {
+  BaseClipProvider,
+  Clip,
+  ClipProvider,
+  ClipProviderCtxCallback,
+  PlayerFormat
+} from './types'
 
-export class TwitchProvider implements IClipProvider {
+export class TwitchProvider extends BaseClipProvider {
   public name = ClipProvider.TWITCH
-
   public svg = twitch.logo
-
-  public isExperimental = false
-
-  private clipsCache: Record<string, TwitchClip> = {}
-  private gamesCache: Record<string, TwitchGame> = {}
 
   private ctx: ClipProviderCtxCallback = () => ({ id: '' })
 
   public constructor(callback?: ClipProviderCtxCallback) {
+    super()
     if (callback) {
       this.ctx = callback
     }
-  }
-
-  public get hasCachedData(): boolean {
-    return Object.keys(this.clipsCache).length > 0 || Object.keys(this.gamesCache).length > 0
-  }
-
-  public clearCache(): void {
-    this.clipsCache = {}
-    this.gamesCache = {}
   }
 
   public async getClip(url: string): Promise<Clip | undefined> {
@@ -36,27 +26,16 @@ export class TwitchProvider implements IClipProvider {
     if (!id) {
       return
     }
-    let clip: TwitchClip | undefined = undefined
-    if (id in this.clipsCache) {
-      clip = this.clipsCache[id]
-    } else {
-      const clips = await twitch.getClips(await this.ctx(), [id])
-      clip = clips[0]
+    if (id in this.cache) {
+      return this.cache[id]
     }
+    const clips = await twitch.getClips(await this.ctx(), [id])
+    const clip = clips[0]
     if (!clip) {
       return
     }
-    let game: TwitchGame | undefined = undefined
-    if (clip.game_id in this.gamesCache) {
-      game = this.gamesCache[clip.game_id]
-    } else {
-      const games = await twitch.getGames(await this.ctx(), [clip.game_id])
-      game = games[0]
-    }
-    this.clipsCache[id] = clip
-    if (game) {
-      this.gamesCache[clip.game_id] = game
-    }
+    const games = await twitch.getGames(await this.ctx(), [clip.game_id])
+    const game = games[0]
     const response: Clip = {
       id: clip.id,
       title: clip.title,
@@ -69,6 +48,7 @@ export class TwitchProvider implements IClipProvider {
       provider: this.name,
       submitters: []
     }
+    this.cache[id] = response
     return response
   }
 
