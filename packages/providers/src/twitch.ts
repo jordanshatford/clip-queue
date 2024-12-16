@@ -1,12 +1,7 @@
 import twitch from '@cq/services/twitch'
 
-import {
-  BaseClipProvider,
-  Clip,
-  ClipProvider,
-  ClipProviderCtxCallback,
-  PlayerFormat
-} from './types'
+import type { Clip, ClipProviderCtxCallback, PlayerFormat } from './types'
+import { BaseClipProvider, ClipProvider } from './types'
 
 export class TwitchProvider extends BaseClipProvider {
   public name = ClipProvider.TWITCH

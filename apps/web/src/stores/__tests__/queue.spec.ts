@@ -64,7 +64,12 @@ describe('clips.ts', () => {
     const queue = useQueue()
     queue.add(clipFromTwitch)
     queue.add(clipFromKick)
-    queue.play({ id: 'not-valid', provider: ClipProvider.TWITCH, submitters: [] })
+    queue.play({
+      ...clipFromTwitch,
+      id: 'not-valid',
+      provider: ClipProvider.TWITCH,
+      submitters: []
+    })
     expect(queue.upcoming.toArray()).toContainEqual(clipFromTwitch)
     expect(queue.upcoming.toArray()).toContainEqual(clipFromKick)
     expect(queue.current).toEqual(undefined)
@@ -79,7 +84,12 @@ describe('clips.ts', () => {
     queue.remove(clipFromTwitch)
     expect(queue.upcoming.toArray()).not.toContainEqual(clipFromTwitch)
     expect(queue.upcoming.size()).toEqual(queueLength - 1)
-    queue.remove({ id: 'not-valid', provider: ClipProvider.TWITCH, submitters: [] })
+    queue.remove({
+      ...clipFromTwitch,
+      id: 'not-valid',
+      provider: ClipProvider.TWITCH,
+      submitters: []
+    })
     expect(queue.upcoming.size()).toEqual(queueLength - 1)
   })
 
@@ -173,14 +183,19 @@ describe('clips.ts', () => {
     const queue = useQueue()
     const settings = useSettings()
     settings.queue.limit = 2
-    queue.add({ id: 'test', submitters: ['s'], provider: ClipProvider.TWITCH })
-    queue.add({ id: 'test2', submitters: ['s'], provider: ClipProvider.TWITCH })
-    queue.add({ id: 'test3', submitters: ['s'], provider: ClipProvider.TWITCH })
+    queue.add({ ...clipFromTwitch, id: 'test', submitters: ['s'], provider: ClipProvider.TWITCH })
+    queue.add({ ...clipFromTwitch, id: 'test2', submitters: ['s'], provider: ClipProvider.TWITCH })
+    queue.add({ ...clipFromTwitch, id: 'test3', submitters: ['s'], provider: ClipProvider.TWITCH })
     expect(queue.upcoming.size()).toEqual(2)
   })
 
   it('adds clips that are already there (even when full) to update submitters', () => {
-    const clip: Clip = { id: 'test', submitters: ['testsubmitter'], provider: ClipProvider.TWITCH }
+    const clip: Clip = {
+      ...clipFromTwitch,
+      id: 'test',
+      submitters: ['testsubmitter'],
+      provider: ClipProvider.TWITCH
+    }
     const queue = useQueue()
     const settings = useSettings()
     settings.queue.limit = 1

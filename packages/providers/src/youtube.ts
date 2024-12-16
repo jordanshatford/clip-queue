@@ -1,6 +1,7 @@
 import youtube from '@cq/services/youtube'
 
-import { BaseClipProvider, Clip, ClipProvider, PlayerFormat } from './types'
+import type { Clip, PlayerFormat } from './types'
+import { BaseClipProvider, ClipProvider } from './types'
 
 export class YouTubeProvider extends BaseClipProvider {
   public name = ClipProvider.YOUTUBE

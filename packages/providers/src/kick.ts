@@ -1,6 +1,7 @@
 import kick from '@cq/services/kick'
 
-import { BaseClipProvider, Clip, ClipProvider, PlayerFormat } from './types'
+import type { Clip, PlayerFormat } from './types'
+import { BaseClipProvider, ClipProvider } from './types'
 
 export class KickProvider extends BaseClipProvider {
   public name = ClipProvider.KICK
