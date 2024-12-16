@@ -52,11 +52,11 @@ export class TwitchProvider extends BaseClipProvider {
     return response
   }
 
-  public getPlayerFormat(): PlayerFormat | undefined {
+  public getPlayerFormat(): PlayerFormat {
     return 'iframe'
   }
 
-  public getPlayerSource(clip: Clip): string | undefined {
+  public getPlayerSource(clip: Clip): string {
     return `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`
   }
 }

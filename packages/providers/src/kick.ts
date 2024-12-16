@@ -34,11 +34,11 @@ export class KickProvider extends BaseClipProvider {
     return response
   }
 
-  public getPlayerFormat(): PlayerFormat | undefined {
+  public getPlayerFormat(): PlayerFormat {
     return 'video'
   }
 
-  public getPlayerSource(clip: Clip): string | undefined {
+  public getPlayerSource(clip: Clip): string {
     return clip.embedUrl
   }
 }

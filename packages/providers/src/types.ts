@@ -8,15 +8,15 @@ export type PlayerFormat = 'iframe' | 'video' | 'unknown'
 
 export interface Clip {
   provider: ClipProvider
-  submitters: string[]
   id: string
-  title?: string
-  channel?: string
+  url: string
+  embedUrl: string
+  thumbnailUrl: string
+  title: string
+  channel: string
+  submitters: string[]
   category?: string
   createdAt?: string
-  url?: string
-  embedUrl?: string
-  thumbnailUrl?: string
 }
 
 export type IBaseClipProvider = {
@@ -50,8 +50,8 @@ export abstract class BaseClipProvider implements IBaseClipProvider {
   }
 
   public abstract getClip(url: string): Promise<Clip | undefined>
-  public abstract getPlayerFormat(clip: Clip): PlayerFormat | undefined
-  public abstract getPlayerSource(clip: Clip): string | undefined
+  public abstract getPlayerFormat(clip: Clip): PlayerFormat
+  public abstract getPlayerSource(clip: Clip): string
 }
 
 export interface ClipProviderCtx {

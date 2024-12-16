@@ -36,11 +36,11 @@ export class YouTubeProvider extends BaseClipProvider {
     return response
   }
 
-  public getPlayerFormat(): PlayerFormat | undefined {
+  public getPlayerFormat(): PlayerFormat {
     return 'iframe'
   }
 
-  public getPlayerSource(clip: Clip): string | undefined {
+  public getPlayerSource(clip: Clip): string {
     return `${clip.embedUrl}&autoplay=1&controls=1&loop=0&rel=0`
   }
 }
