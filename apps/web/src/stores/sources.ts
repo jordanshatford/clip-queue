@@ -14,7 +14,7 @@ export const useSources = defineStore('sources', () => {
   const queue = useQueue()
   const settings = useSettings()
 
-  const source = ref<IBaseClipSource | undefined>(undefined)
+  const source = ref<IBaseClipSource>(new TwitchChatSource())
   const status = ref<ClipSourceStatus>(ClipSourceStatus.UNKNOWN)
   const logo = computed(() => source.value?.svg)
 
@@ -24,17 +24,18 @@ export const useSources = defineStore('sources', () => {
       const user = useUser()
       return user.ctx
     }
-    const s = new TwitchChatSource(ctx)
-    status.value = s.status
+    status.value = source.value.status
     // setup watching chat
-    s.on('status', (event) => {
+    source.value.on('status', (event) => {
       status.value = event.data
     })
-    s.on('connected', (event) => console.info('Connected to Twitch Chat at: ', event.timestamp))
-    s.on('disconnected', (event) =>
+    source.value.on('connected', (event) =>
+      console.info('Connected to Twitch Chat at: ', event.timestamp)
+    )
+    source.value.on('disconnected', (event) =>
       console.info('Disconnected from Twitch chat at: ', event.timestamp, ' ', event?.data)
     )
-    s.on('message', async (event) => {
+    source.value.on('message', async (event) => {
       // Check if message is a command and perform command if proper permission to do so
       if (event.data.text.startsWith(settings.commands.prefix)) {
         // Ensure the user is allowed to use commands.
@@ -47,7 +48,7 @@ export const useSources = defineStore('sources', () => {
         if (!settings.commands.allowed.includes(command as Command)) {
           return
         }
-        commands.handleCommand(s.name, command, ...args)
+        commands.handleCommand(event.source, command, ...args)
         return
       }
 
@@ -66,7 +67,7 @@ export const useSources = defineStore('sources', () => {
         }
       }
     })
-    s.on('message-deleted', async (event) => {
+    source.value.on('message-deleted', async (event) => {
       if (!settings.queue.hasAutoModerationEnabled) {
         return
       }
@@ -85,20 +86,19 @@ export const useSources = defineStore('sources', () => {
         }
       }
     })
-    s.on('user-timeout', (event) => {
+    source.value.on('user-timeout', (event) => {
       const username = event.data
       if (!settings.queue.hasAutoModerationEnabled) {
         return
       }
       queue.removeSubmitterClips(username)
     })
-    s.on('error', (event) => {
+    source.value.on('error', (event) => {
       console.error('Clip source error: ', event.data)
     })
     try {
-      await s.connect()
+      await source.value.connect(ctx)
       console.info('Connect to Twitch chat of channel: ', ctx().username)
-      source.value = s
     } catch (e) {
       console.error('Failed to connect to Twitch chat: ', e)
     }
@@ -107,7 +107,6 @@ export const useSources = defineStore('sources', () => {
   async function disconnect(): Promise<void> {
     try {
       await source.value?.disconnect()
-      source.value = undefined
     } catch (e) {
       console.error('Failed to disconnect from ', source.value?.name, ': ', e)
     }

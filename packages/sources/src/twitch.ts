@@ -11,14 +11,10 @@ export class TwitchChatSource extends BaseClipSource {
   private chat?: TwitchChat
   private ctx: ClipSourceCtxCallback = () => ({ id: '' })
 
-  public constructor(callback?: ClipSourceCtxCallback) {
-    super()
+  public async connect(callback?: ClipSourceCtxCallback) {
     if (callback) {
       this.ctx = callback
     }
-  }
-
-  public async connect() {
     try {
       this.chat = new TwitchChat(await this.ctx())
     } catch (e) {

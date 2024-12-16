@@ -97,7 +97,7 @@ export class ClipList {
 
   private sort(): void {
     this._clips = this._clips.sort((a, b) => {
-      return (b.submitters.length) - (a.submitters.length)
+      return b.submitters.length - a.submitters.length
     })
   }
 }

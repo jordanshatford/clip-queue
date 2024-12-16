@@ -49,7 +49,7 @@ export type IBaseClipSource = {
   isExperimental: boolean
   lastStatusTimestamp?: string
   status: ClipSourceStatus
-  connect: () => Promise<void>
+  connect: (callback?: ClipSourceCtxCallback) => Promise<void>
   disconnect: () => Promise<void>
 } & Pick<EventEmitter<ClipSourceEventsMap>, 'on'>
 
@@ -64,7 +64,7 @@ export abstract class BaseClipSource
 
   public status = ClipSourceStatus.UNKNOWN
 
-  public abstract connect(): Promise<void>
+  public abstract connect(callback?: ClipSourceCtxCallback): Promise<void>
   public abstract disconnect(): Promise<void>
 
   private timestamp() {
