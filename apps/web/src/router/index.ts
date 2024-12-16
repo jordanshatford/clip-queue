@@ -17,6 +17,13 @@ import PreferenceSettings from '@/views/settings/PreferenceSettings.vue'
 import QueueSettings from '@/views/settings/QueueSettings.vue'
 import SettingsPage from '@/views/SettingsPage.vue'
 
+declare module 'vue-router' {
+  interface RouteMeta {
+    icon: string
+    requiresAuth: boolean
+  }
+}
+
 export enum RouteNameConstants {
   HOME = 'home',
   QUEUE = 'queue',
@@ -164,7 +171,7 @@ export function toAllowedMenuItems(
     .filter((r) => (r.meta?.requiresAuth && user.isLoggedIn) || !r.meta?.requiresAuth)
     .map((r) => {
       return {
-        icon: r.meta?.icon ? String(r.meta.icon) : undefined,
+        icon: r.meta?.icon ? r.meta.icon : undefined,
         label: r?.name ? routeNameTranslations.value[r.name as RouteNameConstants] : '',
         route: r.children && recursive ? undefined : { name: r.name },
         items: recursive && r.children ? toAllowedMenuItems(r.children, recursive) : undefined
