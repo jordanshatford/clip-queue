@@ -1,5 +1,11 @@
 # @cq/providers
 
+## 1.5.0
+
+### Minor Changes
+
+- feat: refactor to use base clip provider ([`6c5bd2d`](https://github.com/jordanshatford/clip-queue/commit/6c5bd2de475b24c4715a010b5a13d2d584291028))
+
 ## 1.4.1
 
 ### Patch Changes

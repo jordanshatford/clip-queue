@@ -1,5 +1,20 @@
 # @cq/web
 
+## 1.29.0
+
+### Minor Changes
+
+- feat: do not clear current clip on page refresh ([`212268f`](https://github.com/jordanshatford/clip-queue/commit/212268fccd769adc210e402f71b179c720ac703a))
+
+- feat: display icon representing if provider is experimental ([`62de84c`](https://github.com/jordanshatford/clip-queue/commit/62de84c6b5dcc6df5ac8fcca27ed5cee5e8c33df))
+
+- feat: use locale when displaying number input ([`f8f0461`](https://github.com/jordanshatford/clip-queue/commit/f8f046172df8f5468950c43bc889db3c93025bbe))
+
+### Patch Changes
+
+- Updated dependencies [[`6c5bd2d`](https://github.com/jordanshatford/clip-queue/commit/6c5bd2de475b24c4715a010b5a13d2d584291028)]:
+  - @cq/providers@1.5.0
+
 ## 1.28.0
 
 ### Minor Changes
