@@ -1,8 +1,6 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { AuthInfo } from '@cq/services/twitch'
-
 import { useUser } from '../user'
 
 // Overwrite CLIENT_ID for testing
@@ -14,6 +12,11 @@ vi.mock('@/config', async (importOriginal) => {
     }
   }
 })
+
+const USERNAME_JWT =
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE3MzQzNTY4OTYsImV4cCI6MTc2NTg5Mjg5NiwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsInByZWZlcnJlZF91c2VybmFtZSI6InVzZXJuYW1lIn0.xh0Av0EJaMtHtSMP_-S1tnaq_XDSSAeEuNdtWpIaA6k'
+const USERNAME2_JWT =
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE3MzQzNTY4OTYsImV4cCI6MTc2NTg5Mjg5NiwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsInByZWZlcnJlZF91c2VybmFtZSI6InVzZXJuYW1lMiJ9.-Vg9EiryQCeHWJFkyhrdsyKn7DKmj21UJ_GEfjCtfxI'
 
 describe('user.ts', () => {
   beforeEach(() => {
@@ -31,11 +34,8 @@ describe('user.ts', () => {
     expect(user.ctx.id).toEqual('testClientId')
     expect(user.ctx.token).toEqual(undefined)
     expect(user.ctx.username).toEqual(undefined)
-    await user.login({
-      access_token: 'aToken',
-      id_token: 'idToken',
-      decodedIdToken: { preferred_username: 'username' }
-    } as AuthInfo)
+    const hash = `#access_token=aToken&id_token=${USERNAME_JWT}`
+    await user.login(hash)
     expect(user.isLoggedIn).toEqual(true)
     expect(user.ctx.token).toEqual('aToken')
     expect(user.ctx.username).toEqual('username')
@@ -44,19 +44,11 @@ describe('user.ts', () => {
 
   it('updates the login info if the username changes', async () => {
     const user = useUser()
-    await user.login({
-      access_token: 'aToken',
-      id_token: 'idToken',
-      decodedIdToken: { preferred_username: 'username' }
-    } as AuthInfo)
+    await user.login(`#access_token=aToken&id_token=${USERNAME_JWT}`)
     expect(user.isLoggedIn).toEqual(true)
     expect(user.ctx.token).toEqual('aToken')
     expect(user.ctx.username).toEqual('username')
-    await user.login({
-      access_token: 'aToken',
-      id_token: 'idToken',
-      decodedIdToken: { preferred_username: 'username2' }
-    } as AuthInfo)
+    await user.login(`#access_token=aToken&id_token=${USERNAME2_JWT}`)
     expect(user.isLoggedIn).toEqual(true)
     expect(user.ctx.token).toEqual('aToken')
     expect(user.ctx.username).toEqual('username2')
@@ -65,11 +57,7 @@ describe('user.ts', () => {
 
   it('logs out the user', async () => {
     const user = useUser()
-    await user.login({
-      access_token: 'aToken',
-      id_token: 'idToken',
-      decodedIdToken: { preferred_username: 'username' }
-    } as AuthInfo)
+    await user.login(`#access_token=aToken&id_token=${USERNAME_JWT}`)
     expect(user.isLoggedIn).toEqual(true)
     expect(user.ctx.token).toEqual('aToken')
     expect(user.ctx.username).toEqual('username')
