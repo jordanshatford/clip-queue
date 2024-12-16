@@ -1,9 +1,14 @@
 <template>
-  <div class="flex items-center gap-1">
+  <div class="flex items-center gap-2">
     <div class="h-5">
       <svg v-if="svg" class="h-5 w-5" v-html="svg"></svg>
     </div>
     <div>{{ provider }}</div>
+    <i
+      v-if="providers.isExperimental(provider)"
+      v-tooltip="m.experimental()"
+      class="pi pi-exclamation-triangle text-yellow-600 dark:text-yellow-500"
+    ></i>
   </div>
 </template>
 
@@ -12,6 +17,7 @@ import { computed } from 'vue'
 
 import type { ClipProvider } from '@cq/providers'
 
+import * as m from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'
 
 export interface Props {
@@ -22,5 +28,5 @@ const { provider } = defineProps<Props>()
 
 const providers = useProviders()
 
-const svg = computed(() => providers.providers?.[provider]?.svg)
+const svg = computed(() => providers.svg(provider))
 </script>

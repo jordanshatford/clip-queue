@@ -49,19 +49,6 @@
           <Message id="allowedProviders-help" size="small" severity="secondary" variant="simple">{{
             m.allowed_providers_description()
           }}</Message>
-          <Message
-            v-if="selectedExperimentalProviders.length > 0"
-            severity="warn"
-            :closable="false"
-            class="mt-0"
-          >
-            <template #icon>
-              <i class="pi pi-exclamation-triangle"></i>
-            </template>
-            <span>{{
-              m.experimental_providers_selected({ names: selectedExperimentalProviders.join(', ') })
-            }}</span>
-          </Message>
         </div>
         <div class="mt-3">
           <Button
@@ -86,7 +73,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, toRaw } from 'vue'
+import { ref, toRaw } from 'vue'
 
 import { ClipProvider } from '@cq/providers'
 import {
@@ -103,20 +90,14 @@ import {
 import ProviderName from '@/components/ProviderName.vue'
 import * as m from '@/paraglide/messages'
 import { usePreferences } from '@/stores/preferences'
-import { useProviders } from '@/stores/providers'
 import { useSettings } from '@/stores/settings'
 
 const toast = useToast()
 const settings = useSettings()
 const preferences = usePreferences()
-const providers = useProviders()
 
 const formKey = ref(1)
 const formSettings = ref(structuredClone(toRaw(settings.queue)))
-
-const selectedExperimentalProviders = computed(() => {
-  return formSettings.value.providers.filter((p) => providers.providers[p]?.isExperimental)
-})
 
 function onReset() {
   formSettings.value = structuredClone(toRaw(settings.queue))

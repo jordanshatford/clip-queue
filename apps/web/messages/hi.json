@@ -43,7 +43,7 @@
   "disconnected": "डिस्कनेक्ट किया गया",
   "emerald": "पन्ना",
   "error": "गलती",
-  "experimental_providers_selected": "प्रयोगात्मक प्रदाता चुने गए: {names}",
+  "experimental": "प्रयोगात्मक",
   "feature_connect_title": "चैट से कनेक्ट करें",
   "feature_connect_description": "स्वचालित रूप से अपने Twitch चैट से कनेक्ट करने के लिए लॉगिन करें। चैट में उपयोगकर्ताओं द्वारा सबमिट किए गए क्लिप्स को कतार में जोड़ा जाएगा।",
   "feature_duplicate_prevent_title": "डुप्लिकेट रोकथाम",

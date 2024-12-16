@@ -43,7 +43,7 @@
   "disconnected": "Desconectado",
   "emerald": "Esmeralda",
   "error": "Erro",
-  "experimental_providers_selected": "Provedores experimentais selecionados: {names}",
+  "experimental": "Experimentais",
   "feature_connect_title": "Conectar ao Chat",
   "feature_connect_description": "Faça login para conectar automaticamente ao seu chat do Twitch. Clipes enviados por usuários no chat serão adicionados à fila.",
   "feature_duplicate_prevent_title": "Prevenção de Duplicatas",

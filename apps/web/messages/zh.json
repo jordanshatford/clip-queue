@@ -43,7 +43,7 @@
   "disconnected": "已断开连接",
   "emerald": "翠绿色",
   "error": "错误",
-  "experimental_providers_selected": "选择的实验性提供商：{names}",
+  "experimental": "实验性的",
   "feature_connect_title": "连接到聊天",
   "feature_connect_description": "登录后自动连接到您的 Twitch 聊天。用户在聊天中提交的剪辑将排队。",
   "feature_duplicate_prevent_title": "防止重复",

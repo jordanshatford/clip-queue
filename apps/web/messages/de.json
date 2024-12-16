@@ -43,7 +43,7 @@
   "disconnected": "Getrennt",
   "emerald": "Smaragd",
   "error": "Fehler",
-  "experimental_providers_selected": "Experimentelle Anbieter ausgewählt: {names}",
+  "experimental": "Experimentelle",
   "feature_connect_title": "Mit Chat verbinden",
   "feature_connect_description": "Melden Sie sich an, um automatisch mit Ihrem Twitch-Chat zu verbinden. Von Benutzern im Chat eingereichte Clips werden in die Warteschlange gestellt.",
   "feature_duplicate_prevent_title": "Duplikat-Vermeidung",

@@ -43,7 +43,7 @@
   "disconnected": "切断されました",
   "emerald": "エメラルド",
   "error": "エラー",
-  "experimental_providers_selected": "選択された実験的プロバイダー: {names}",
+  "experimental": "実験的",
   "feature_connect_title": "チャットに接続",
   "feature_connect_description": "ログインして自動的にTwitchチャットに接続します。ユーザーがチャットで提出したクリップがキューに追加されます。",
   "feature_duplicate_prevent_title": "重複防止",

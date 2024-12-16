@@ -43,7 +43,7 @@
   "disconnected": "Disconnected",
   "emerald": "Emerald",
   "error": "Error",
-  "experimental_providers_selected": "Experimental providers selected: {names}",
+  "experimental": "Experimental",
   "feature_connect_title": "Connect to Chat",
   "feature_connect_description": "Log in to automatically connect to your Twitch chat. Clips submitted by users in chat will be queued.",
   "feature_duplicate_prevent_title": "Duplicate Prevention",

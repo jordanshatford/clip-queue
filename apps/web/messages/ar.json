@@ -43,7 +43,7 @@
   "disconnected": "غير متصل",
   "emerald": "الزمرد",
   "error": "خطأ",
-  "experimental_providers_selected": "المزودون التجريبيون المحددون: {names}",
+  "experimental": "تجريبي",
   "feature_connect_title": "الاتصال بالدردشة",
   "feature_connect_description": "سجل الدخول للاتصال تلقائيًا بدردشة Twitch الخاصة بك. سيتم إدخال القصاصات التي يرسلها المستخدمون في قائمة الانتظار.",
   "feature_duplicate_prevent_title": "منع التكرار",

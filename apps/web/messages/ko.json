@@ -43,7 +43,7 @@
   "disconnected": "연결이 끊김",
   "emerald": "에메랄드",
   "error": "오류",
-  "experimental_providers_selected": "선택된 실험적 제공자: {names}",
+  "experimental": "실험적",
   "feature_connect_title": "채팅 연결",
   "feature_connect_description": "로그인하여 Twitch 채팅에 자동으로 연결합니다. 채팅에서 사용자가 제출한 클립이 대기열에 추가됩니다.",
   "feature_duplicate_prevent_title": "중복 방지",

@@ -19,11 +19,23 @@ export const useProviders = defineStore('providers', () => {
     })
   )
 
-  const hasCachedData = computed(() => {
-    return Object.values(providers.value).some((p) => p.hasCachedData)
+  const svg = computed(() => {
+    return (provider: ClipProvider) => {
+      return providers.value[provider]?.svg
+    }
   })
 
-  function purge() {
+  const isExperimental = computed(() => {
+    return (provider: ClipProvider) => {
+      return providers.value[provider]?.isExperimental
+    }
+  })
+
+  const hasCachedData = computed(() => {
+    return Object.values(providers.value).some((provider) => provider.hasCachedData)
+  })
+
+  function purge(): void {
     for (const p of Object.values(providers.value)) {
       p.clearCache?.()
     }
@@ -43,20 +55,21 @@ export const useProviders = defineStore('providers', () => {
     if (!settings.queue.providers.includes(clip.provider)) {
       return
     }
-    const p = providers.value[clip.provider]
-    return p?.getPlayerFormat(clip)
+    const provider = providers.value[clip.provider]
+    return provider?.getPlayerFormat(clip)
   }
 
   function getPlayerSource(clip: Clip): string | undefined {
     if (!settings.queue.providers.includes(clip.provider)) {
       return
     }
-    const p = providers.value[clip.provider]
-    return p?.getPlayerSource(clip)
+    const provider = providers.value[clip.provider]
+    return provider?.getPlayerSource(clip)
   }
 
   return {
-    providers,
+    svg,
+    isExperimental,
     hasCachedData,
     purge,
     getClip,

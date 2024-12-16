@@ -43,7 +43,7 @@
   "disconnected": "Disconnesso",
   "emerald": "Smeraldo",
   "error": "Errore",
-  "experimental_providers_selected": "Fornitori sperimentali selezionati: {names}",
+  "experimental": "Sperimentale",
   "feature_connect_title": "Connettiti alla chat",
   "feature_connect_description": "Accedi per connetterti automaticamente alla tua chat di Twitch. Le clip inviate dagli utenti in chat verranno messe in coda.",
   "feature_duplicate_prevent_title": "Prevenzione duplicati",

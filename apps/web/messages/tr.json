@@ -43,7 +43,7 @@
   "disconnected": "Bağlantı kesildi",
   "emerald": "Zümrüt",
   "error": "Hata",
-  "experimental_providers_selected": "Seçilen deneysel sağlayıcılar: {names}",
+  "experimental": "Deneysel",
   "feature_connect_title": "Sohbete Bağlan",
   "feature_connect_description": "Twitch sohbetinize otomatik olarak bağlanmak için giriş yapın. Sohbetteki kullanıcılar tarafından gönderilen klipler kuyruğa alınır.",
   "feature_duplicate_prevent_title": "Tekrarları Önleme",
