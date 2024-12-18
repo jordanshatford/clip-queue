@@ -47,7 +47,6 @@ export type IBaseClipSource = {
   name: ClipSource
   svg: string
   isExperimental: boolean
-  lastStatusTimestamp?: string
   status: ClipSourceStatus
   connect: (callback?: ClipSourceCtxCallback) => Promise<void>
   disconnect: () => Promise<void>
@@ -101,7 +100,6 @@ export abstract class BaseClipSource
     this.emit('disconnected', {
       timestamp,
       source: this.name,
-
       data: reason
     })
     this.handleStatusUpdate(ClipSourceStatus.DISCONNECTED, timestamp)
