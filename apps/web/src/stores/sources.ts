@@ -30,10 +30,17 @@ export const useSources = defineStore('sources', () => {
       status.value = event.data
     })
     source.value.on('connected', (event) =>
-      console.info('Connected to Twitch Chat at: ', event.timestamp)
+      console.info('Connected to', event.source, 'channel', event.channel, 'at', event.timestamp)
     )
     source.value.on('disconnected', (event) =>
-      console.info('Disconnected from Twitch chat at: ', event.timestamp, ' ', event?.data)
+      console.info(
+        'Disconnected from',
+        event.source,
+        'channel',
+        event.channel,
+        'at',
+        event.timestamp
+      )
     )
     source.value.on('message', async (event) => {
       // Check if message is a command and perform command if proper permission to do so
@@ -96,20 +103,12 @@ export const useSources = defineStore('sources', () => {
     source.value.on('error', (event) => {
       console.error('Clip source error: ', event.data)
     })
-    try {
-      await source.value.connect(ctx)
-      console.info('Connect to Twitch chat of channel: ', ctx().username)
-    } catch (e) {
-      console.error('Failed to connect to Twitch chat: ', e)
-    }
+
+    await source.value.connect(ctx)
   }
 
   async function disconnect(): Promise<void> {
-    try {
-      await source.value?.disconnect()
-    } catch (e) {
-      console.error('Failed to disconnect from ', source.value?.name, ': ', e)
-    }
+    await source.value?.disconnect()
   }
 
   return { logo, status, connect, disconnect }
