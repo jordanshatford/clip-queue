@@ -1,5 +1,12 @@
 # @cq/web
 
+## 1.29.1
+
+### Patch Changes
+
+- Updated dependencies [[`b31f466`](https://github.com/jordanshatford/clip-queue/commit/b31f46621bd34ea859bc9e057e36b95716530aa0)]:
+  - @cq/sources@1.2.0
+
 ## 1.29.0
 
 ### Minor Changes

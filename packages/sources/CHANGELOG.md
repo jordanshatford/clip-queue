@@ -1,5 +1,11 @@
 # @cq/sources
 
+## 1.2.0
+
+### Minor Changes
+
+- feat: include source channel in events ([`b31f466`](https://github.com/jordanshatford/clip-queue/commit/b31f46621bd34ea859bc9e057e36b95716530aa0))
+
 ## 1.1.0
 
 ### Minor Changes
