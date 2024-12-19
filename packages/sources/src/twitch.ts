@@ -15,8 +15,12 @@ export class TwitchChatSource extends BaseClipSource {
     if (callback) {
       this.ctx = callback
     }
+    const ctx = await this.ctx()
+    if (ctx.username) {
+      this.channel = ctx.username
+    }
     try {
-      this.chat = new TwitchChat(await this.ctx())
+      this.chat = new TwitchChat(ctx)
     } catch (e) {
       this.handleError(e)
       return

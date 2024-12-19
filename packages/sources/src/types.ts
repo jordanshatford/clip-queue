@@ -15,6 +15,7 @@ export enum ClipSourceStatus {
 export interface ClipSourceEvent<T = undefined> {
   timestamp: string
   source: ClipSource
+  channel: string
   data: T
 }
 
@@ -63,6 +64,8 @@ export abstract class BaseClipSource
 
   public status = ClipSourceStatus.UNKNOWN
 
+  protected channel = 'unknown'
+
   public abstract connect(callback?: ClipSourceCtxCallback): Promise<void>
   public abstract disconnect(): Promise<void>
 
@@ -75,6 +78,7 @@ export abstract class BaseClipSource
     this.emit('status', {
       timestamp: timestamp ?? this.timestamp(),
       source: this.name,
+      channel: this.channel,
       data: status
     })
   }
@@ -84,6 +88,7 @@ export abstract class BaseClipSource
     this.emit('error', {
       timestamp,
       source: this.name,
+      channel: this.channel,
       data: error
     })
     this.handleStatusUpdate(ClipSourceStatus.ERROR, timestamp)
@@ -91,7 +96,7 @@ export abstract class BaseClipSource
 
   protected handleConnected() {
     const timestamp = this.timestamp()
-    this.emit('connected', { timestamp, source: this.name, data: undefined })
+    this.emit('connected', { timestamp, source: this.name, channel: this.channel, data: undefined })
     this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
   }
 
@@ -100,6 +105,7 @@ export abstract class BaseClipSource
     this.emit('disconnected', {
       timestamp,
       source: this.name,
+      channel: this.channel,
       data: reason
     })
     this.handleStatusUpdate(ClipSourceStatus.DISCONNECTED, timestamp)
@@ -110,6 +116,7 @@ export abstract class BaseClipSource
     this.emit('message', {
       timestamp,
       source: this.name,
+      channel: this.channel,
       data: {
         ...message,
         urls: getAllURLsFromText(message.text)
@@ -123,6 +130,7 @@ export abstract class BaseClipSource
     this.emit('message-deleted', {
       timestamp,
       source: this.name,
+      channel: this.channel,
       data: {
         ...message,
         urls: getAllURLsFromText(message.text)
@@ -136,6 +144,7 @@ export abstract class BaseClipSource
     this.emit('user-timeout', {
       timestamp,
       source: this.name,
+      channel: this.channel,
       data: username
     })
     this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
