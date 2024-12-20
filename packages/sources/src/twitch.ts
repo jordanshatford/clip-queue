@@ -48,7 +48,7 @@ export class TwitchChatSource extends BaseClipSource {
       return
     }
     try {
-      await this.chat?.disconnect()
+      await this.chat.disconnect()
     } catch (e) {
       this.handleError(e)
     }

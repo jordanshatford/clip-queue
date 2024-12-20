@@ -20,10 +20,6 @@ export const useSources = defineStore('sources', () => {
 
   async function connect(): Promise<void> {
     await source.value?.disconnect()
-    const ctx = () => {
-      const user = useUser()
-      return user.ctx
-    }
     status.value = source.value.status
     // setup watching chat
     source.value.on('status', (event) => {
@@ -104,7 +100,15 @@ export const useSources = defineStore('sources', () => {
       console.error('Clip source error: ', event.data)
     })
 
-    await source.value.connect(ctx)
+    const ctx = () => {
+      const user = useUser()
+      return user.ctx
+    }
+
+    const username = ctx().username
+    if (username) {
+      await source.value.connect(username)
+    }
   }
 
   async function disconnect(): Promise<void> {

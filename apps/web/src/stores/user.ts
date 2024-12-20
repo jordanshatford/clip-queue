@@ -28,7 +28,7 @@ export const useUser = defineStore(
       }
       if (ctx.value.token && (await twitch.isLoginValid(ctx.value))) {
         isLoggedIn.value = true
-        await connectToSources()
+        await sources.connect()
       } else {
         await logout()
       }
@@ -52,7 +52,7 @@ export const useUser = defineStore(
           username: decodedIdToken.preferred_username
         }
         isLoggedIn.value = true
-        await connectToSources()
+        await sources.connect()
       }
     }
 
@@ -64,7 +64,7 @@ export const useUser = defineStore(
         username: undefined
       }
       isLoggedIn.value = false
-      await disconnectFromSources()
+      await sources.disconnect()
       if (originalCtx.id && originalCtx.token) {
         try {
           await twitch.logout(originalCtx)
@@ -72,16 +72,6 @@ export const useUser = defineStore(
           console.error('Failed to logout of Twitch: ', e)
         }
       }
-    }
-
-    async function connectToSources(): Promise<void> {
-      if (ctx.value.username && ctx.value.token) {
-        await sources.connect()
-      }
-    }
-
-    async function disconnectFromSources(): Promise<void> {
-      await sources.disconnect()
     }
 
     return {
