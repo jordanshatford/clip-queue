@@ -26,14 +26,6 @@ export interface ClipSourceMessage {
   isAllowedCommands?: boolean
 }
 
-export interface ClipSourceCtx {
-  id: string
-  token?: string
-  username?: string
-}
-
-export type ClipSourceCtxCallback = () => ClipSourceCtx | Promise<ClipSourceCtx>
-
 type ClipSourceEventsMap = {
   connected: (timestamp: ClipSourceEvent) => Promise<void> | void
   disconnected: (reason: ClipSourceEvent<string | undefined>) => Promise<void> | void
@@ -49,8 +41,8 @@ export type IBaseClipSource = {
   svg: string
   isExperimental: boolean
   status: ClipSourceStatus
-  connect: (callback?: ClipSourceCtxCallback) => Promise<void>
-  disconnect: () => Promise<void>
+  connect: (channel: string) => Promise<void>
+  disconnect: (channel?: string) => Promise<void>
 } & Pick<EventEmitter<ClipSourceEventsMap>, 'on'>
 
 export abstract class BaseClipSource
@@ -66,14 +58,14 @@ export abstract class BaseClipSource
 
   protected channel = 'unknown'
 
-  public abstract connect(callback?: ClipSourceCtxCallback): Promise<void>
-  public abstract disconnect(): Promise<void>
+  public abstract connect(channel: string): Promise<void>
+  public abstract disconnect(channel?: string): Promise<void>
 
   private timestamp() {
     return new Date().toISOString()
   }
 
-  protected handleStatusUpdate(status: ClipSourceStatus, timestamp?: string) {
+  private handleStatusUpdate(status: ClipSourceStatus, timestamp?: string) {
     this.status = status
     this.emit('status', {
       timestamp: timestamp ?? this.timestamp(),

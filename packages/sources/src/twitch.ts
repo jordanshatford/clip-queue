@@ -1,36 +1,16 @@
 import type { ChatUserstate } from '@cq/services/twitch'
 import twitch, { TwitchChat } from '@cq/services/twitch'
 
-import type { ClipSourceCtxCallback } from './types'
 import { BaseClipSource, ClipSource, ClipSourceStatus } from './types'
 
 export class TwitchChatSource extends BaseClipSource {
   public name = ClipSource.TWITCH_CHAT
   public svg = twitch.logo
 
-  private chat?: TwitchChat
-  private ctx: ClipSourceCtxCallback = () => ({ id: '' })
+  private chat = new TwitchChat()
 
-  public async connect(callback?: ClipSourceCtxCallback) {
-    if (callback) {
-      this.ctx = callback
-    }
-    const ctx = await this.ctx()
-    if (ctx.username) {
-      this.channel = ctx.username
-    }
-    try {
-      this.chat = new TwitchChat(ctx)
-    } catch (e) {
-      this.handleError(e)
-      return
-    }
-
-    if (this.chat === undefined) {
-      this.handleError('TwitchChat is not defined.')
-      return
-    }
-
+  public constructor() {
+    super()
     this.chat.on('connected', () => this.handleConnected())
     this.chat.on(
       'message',
@@ -51,9 +31,13 @@ export class TwitchChatSource extends BaseClipSource {
     this.chat.on('timeout', (_c, username) => this.handleTimeout(username))
     this.chat.on('ban', (_c, username) => this.handleTimeout(username))
     this.chat.on('disconnected', (reason) => this.handleDisconnected(reason))
+  }
 
+  public async connect(channel: string) {
+    this.channel = channel
     try {
       await this.chat.connect()
+      await this.chat.join(channel)
     } catch (e) {
       this.handleError(e)
     }
