@@ -1,8 +1,6 @@
 import type { Options } from 'tmi.js'
 import { Client } from 'tmi.js'
 
-import type { TwitchUserCtx } from './types'
-
 const DEFAULT_OPTIONS: Options = {
   options: {
     skipMembership: true,
@@ -15,18 +13,10 @@ const DEFAULT_OPTIONS: Options = {
 }
 
 export default class TwitchChat extends Client {
-  public constructor(ctx: TwitchUserCtx, options?: Partial<Options>) {
-    if (!ctx.username) {
-      throw Error('No username specified in TwitchUserCtx')
-    }
+  public constructor(options?: Partial<Options>) {
     super({
       ...DEFAULT_OPTIONS,
-      ...options,
-      identity: {
-        username: ctx.username,
-        password: `oauth:${ctx.token}`
-      },
-      channels: [ctx.username]
+      ...options
     })
   }
 }
