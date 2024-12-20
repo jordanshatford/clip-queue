@@ -1,9 +1,5 @@
 <template>
-  <video
-    ref="videoElement"
-    :title="title"
-    class="video-js vjs-default-skin vjs-big-play-centered"
-  ></video>
+  <video ref="videoElement" :title class="video-js vjs-default-skin vjs-big-play-centered"></video>
 </template>
 
 <script setup lang="ts">

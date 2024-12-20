@@ -3,14 +3,14 @@
     <iframe
       v-if="format === 'iframe'"
       :src="source"
-      :title="title"
+      :title
       class="player h-auto w-full bg-black"
       allowfullscreen
       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
       frameborder="0"
     ></iframe>
     <div v-else-if="format === 'video'" class="player">
-      <VideoJS :poster="thumbnailUrl" :source="source" :title="title" autoplay />
+      <VideoJS :poster="thumbnailUrl" :source :title autoplay />
     </div>
     <div
       v-else

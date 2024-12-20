@@ -10,7 +10,7 @@
     </template>
     <template #item="{ item, props, hasSubmenu }">
       <RouterLink v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
-        <a :href="href" v-bind="props.action" @click="navigate">
+        <a :href v-bind="props.action" @click="navigate">
           <span :class="item.icon"></span>
           <span class="ml-2">{{ item.label }}</span>
         </a>

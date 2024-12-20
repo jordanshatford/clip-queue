@@ -4,7 +4,7 @@
       <TabList>
         <Tab v-for="tab in tabs" :key="tab.label?.toString()" :value="tab.route.name">
           <RouterLink v-if="tab.route" v-slot="{ href, navigate }" :to="tab.route" custom>
-            <a :href="href" class="flex items-center gap-2 text-inherit" @click="navigate">
+            <a :href class="flex items-center gap-2 text-inherit" @click="navigate">
               <i :class="tab.icon"></i>
               <span>{{ tab.label }}</span>
             </a>

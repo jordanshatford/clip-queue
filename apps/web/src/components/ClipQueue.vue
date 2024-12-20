@@ -30,7 +30,7 @@
       <ClipCard
         v-for="clip in clips"
         :key="toClipUUID(clip)"
-        :clip="clip"
+        :clip
         class="mr-2"
         @play="emit('play', clip)"
         @remove="emit('remove', clip)"
