@@ -5,6 +5,13 @@ import { getAllURLsFromText } from './utils'
  * Enumeration of clip sources.
  */
 export enum ClipSource {
+  /**
+   * The Clip Queue Web Application itself.
+   */
+  APPLICATION = 'Clip Queue Web Application',
+  /**
+   * The Twitch Chat.
+   */
   TWITCH_CHAT = 'Twitch Chat'
 }
 

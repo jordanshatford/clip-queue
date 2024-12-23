@@ -2,8 +2,17 @@
  * Enumeration of clip providers.
  */
 export enum ClipProvider {
+  /**
+   * Kick.com clips.
+   */
   KICK = 'Kick',
+  /**
+   * Twitch.tv clips.
+   */
   TWITCH = 'Twitch',
+  /**
+   * YouTube.com clips.
+   */
   YOUTUBE = 'YouTube'
 }
 
