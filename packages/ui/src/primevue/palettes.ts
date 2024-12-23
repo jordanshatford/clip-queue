@@ -1,3 +1,6 @@
+/**
+ * PrimeVue palettes.
+ */
 type ColorPalette = {
   0?: string // undefined with primary colors
   50: string
@@ -13,6 +16,9 @@ type ColorPalette = {
   950: string
 }
 
+/**
+ * The name of a color.
+ */
 export type ColorName =
   | 'emerald'
   | 'green'
@@ -39,18 +45,34 @@ export type ColorName =
   | 'viva'
   | 'ocean'
 
+/**
+ * A color option.
+ */
 export interface ColorOption {
+  /**
+   * The name of the color.
+   */
   name: ColorName
+  /**
+   * The color palette.
+   */
   palette: ColorPalette
 }
 
-// Set color palette of primary or surface color in UI.
-export function setColorPalette(type: 'primary' | 'surface', palette: ColorPalette) {
+/**
+ * Sets the color palette of the primary or surface color.
+ * @param type - The type of the color palette.
+ * @param palette - The color palette.
+ */
+export function setColorPalette(type: 'primary' | 'surface', palette: ColorPalette): void {
   Object.entries(palette).forEach(([key, value]) => {
     document.documentElement.style.setProperty(`--p-${type}-${key}`, value)
   })
 }
 
+/**
+ * The primary color options.
+ */
 export const colors: ColorOption[] = [
   {
     name: 'emerald',
@@ -310,6 +332,9 @@ export const colors: ColorOption[] = [
   }
 ] as const
 
+/**
+ * The surface color options.
+ */
 export const surfaces: ColorOption[] = [
   {
     name: 'slate',
