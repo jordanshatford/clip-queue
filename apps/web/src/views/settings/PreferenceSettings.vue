@@ -6,7 +6,7 @@
           <div class="flex flex-col gap-2 text-left">
             <label for="language">{{ m.language() }}</label>
             <Select
-              v-model="formTheme.language"
+              v-model="formPreferences.language"
               :options="[...availableLanguageTags]"
               label-id="language"
               :option-label="(value: AvailableLanguageTag) => languageLabels[value]"
@@ -18,7 +18,7 @@
             }}</Message>
             <label for="theme">{{ m.theme() }}</label>
             <Select
-              v-model="formTheme.theme"
+              v-model="formPreferences.theme"
               :options="[...availableThemes]"
               label-id="theme"
               :option-label="(value: Theme) => themeLabels[value]"
@@ -30,7 +30,7 @@
             }}</Message>
             <label for="primaryColor">{{ m.primary_color() }}</label>
             <Select
-              v-model="formTheme.primary"
+              v-model="formPreferences.primary"
               :options="colors"
               data-key="name"
               label-id="primaryColor"
@@ -48,7 +48,7 @@
             }}</Message>
             <label for="surfaceColor">{{ m.surface_color() }}</label>
             <Select
-              v-model="formTheme.surface"
+              v-model="formPreferences.surface"
               data-key="name"
               :options="surfaces"
               label-id="surfaceColor"
@@ -72,14 +72,14 @@
               size="small"
               class="mr-2"
               type="submit"
-              :disabled="!preferences.isModifiedFrom(formTheme)"
+              :disabled="!preferences.isModifiedFrom(formPreferences)"
             ></Button>
             <Button
               type="reset"
               severity="danger"
               :label="m.cancel()"
               size="small"
-              :disabled="!preferences.isModifiedFrom(formTheme)"
+              :disabled="!preferences.isModifiedFrom(formPreferences)"
             ></Button>
           </div>
         </form>
@@ -89,7 +89,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRaw } from 'vue'
+import { ref, toRaw, watch } from 'vue'
 
 import type { ColorOption } from '@cq/ui'
 import { Button, Card, colors, Message, Select, surfaces, useToast } from '@cq/ui'
@@ -105,7 +105,7 @@ const toast = useToast()
 const preferences = usePreferences()
 
 const formKey = ref(1)
-const formTheme = ref(structuredClone(toRaw(preferences.preferences)))
+const formPreferences = ref(structuredClone(toRaw(preferences.preferences)))
 
 const themeLabels: Record<Theme, string> = {
   dark: m.theme_dark(),
@@ -128,13 +128,15 @@ const languageLabels: Record<AvailableLanguageTag, string> = {
   zh: '中文 (Chinese)'
 }
 
+watch(preferences.preferences, (v) => (formPreferences.value.theme = v.theme))
+
 function onReset() {
-  formTheme.value = structuredClone(toRaw(preferences.preferences))
+  formPreferences.value = structuredClone(toRaw(preferences.preferences))
   formKey.value += 1
 }
 
 function onSubmit() {
-  preferences.preferences = formTheme.value
+  preferences.preferences = formPreferences.value
   toast.add({
     severity: 'success',
     summary: m.success(),
