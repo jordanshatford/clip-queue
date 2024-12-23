@@ -1,5 +1,11 @@
 # @cq/ui
 
+## 1.6.0
+
+### Minor Changes
+
+- feat: add input group and input group addon components ([`7c1309a`](https://github.com/jordanshatford/clip-queue/commit/7c1309a729f550325ceaaa3296ba713305d0f08f))
+
 ## 1.5.0
 
 ### Minor Changes
