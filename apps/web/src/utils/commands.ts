@@ -9,6 +9,9 @@ import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
 
+/**
+ * Enumeration of commands.
+ */
 export enum Command {
   OPEN = 'open',
   CLOSE = 'close',
@@ -27,8 +30,17 @@ export enum Command {
   PURGE_HISTORY = 'purgehistory'
 }
 
+/**
+ * Help information for a command.
+ */
 export interface CommandHelp {
+  /**
+   * The description of the command.
+   */
   description: string
+  /**
+   * The arguments of the command.
+   */
   args?: string[]
 }
 
@@ -73,11 +85,17 @@ const help: ComputedRef<Record<Command, CommandHelp>> = computed(() => ({
   }
 }))
 
+/**
+ * Handles a command.
+ * @param event - The event.
+ * @param command - The command.
+ * @param args - The command arguments.
+ */
 export function handleCommand(
   event: ClipSourceEvent<ClipSourceMessage>,
   command: string,
   ...args: string[]
-) {
+): void {
   const queue = useQueue()
   const settings = useSettings()
   switch (command as Command) {
