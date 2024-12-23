@@ -1,5 +1,21 @@
 # @cq/web
 
+## 1.31.0
+
+### Minor Changes
+
+- feat: add ability to reconnect to twitch chat source ([`a0dfb1c`](https://github.com/jordanshatford/clip-queue/commit/a0dfb1ceb5487d9b9e2f1d801f4716a19f8c4ef2))
+
+### Patch Changes
+
+- fix: issue when changing theme while on preferences page ([`e9a79a5`](https://github.com/jordanshatford/clip-queue/commit/e9a79a51d6ab29a0196c03b6994bc1ca8511da2d))
+
+- fix: handle disconnecting and connecting source better ([`f746faa`](https://github.com/jordanshatford/clip-queue/commit/f746faae55a5a9bfab8ffdcece06b5128fb73eb2))
+
+- Updated dependencies [[`7c1309a`](https://github.com/jordanshatford/clip-queue/commit/7c1309a729f550325ceaaa3296ba713305d0f08f), [`cabddd5`](https://github.com/jordanshatford/clip-queue/commit/cabddd5d35a235178b498e284c5aa82fc4aea537), [`c06a9c1`](https://github.com/jordanshatford/clip-queue/commit/c06a9c1bdcddb3f1fa137ac69031126f123b1f70)]:
+  - @cq/ui@1.6.0
+  - @cq/sources@1.4.0
+
 ## 1.30.0
 
 ### Minor Changes

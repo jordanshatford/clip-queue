@@ -1,5 +1,15 @@
 # @cq/sources
 
+## 1.4.0
+
+### Minor Changes
+
+- feat: add source for the web application ([`cabddd5`](https://github.com/jordanshatford/clip-queue/commit/cabddd5d35a235178b498e284c5aa82fc4aea537))
+
+### Patch Changes
+
+- fix: better handling of current status when disconnect/connect ([`c06a9c1`](https://github.com/jordanshatford/clip-queue/commit/c06a9c1bdcddb3f1fa137ac69031126f123b1f70))
+
 ## 1.3.0
 
 ### Minor Changes
