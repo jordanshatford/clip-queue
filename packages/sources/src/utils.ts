@@ -3,7 +3,7 @@ import { ClipSource } from './types'
 /**
  * Get all URLS (if any) from the provided text.
  * @param text - the text containing possible URLs.
- * @returns {string[]} - Array of all URLs.
+ * @returns Array of all URLs.
  */
 export function getAllURLsFromText(text: string): string[] {
   const urlRegex = /(?:https?):\/\/[\n\S]+/gi
@@ -21,7 +21,7 @@ export function getAllURLsFromText(text: string): string[] {
  *
  * @param source - the source of the clip.
  * @param submitter - the user submitting the message.
- * @returns {string} - the UUID of the submitter.
+ * @returns the UUID of the submitter.
  */
 export function toSubmitterUUID(source: ClipSource, submitter: string): string {
   return `${source.toString().toLowerCase()}:${submitter.toLowerCase()}`
