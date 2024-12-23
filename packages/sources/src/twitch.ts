@@ -50,6 +50,7 @@ export class TwitchChatSource extends BaseClipSource {
   }
 
   public async connect() {
+    this.handleStatusUpdate(ClipSourceStatus.UNKNOWN)
     try {
       await this.chat.connect()
     } catch (e) {
@@ -61,6 +62,7 @@ export class TwitchChatSource extends BaseClipSource {
     if (this.status !== ClipSourceStatus.CONNECTED) {
       return
     }
+    this.handleStatusUpdate(ClipSourceStatus.UNKNOWN)
     try {
       await this.chat.disconnect()
     } catch (e) {

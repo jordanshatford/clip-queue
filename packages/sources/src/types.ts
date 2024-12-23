@@ -190,7 +190,7 @@ export abstract class BaseClipSource
     return new Date().toISOString()
   }
 
-  private handleStatusUpdate(status: ClipSourceStatus, timestamp?: string) {
+  protected handleStatusUpdate(status: ClipSourceStatus, timestamp?: string) {
     this.status = status
     this.emit('status', {
       timestamp: timestamp ?? this.timestamp(),
