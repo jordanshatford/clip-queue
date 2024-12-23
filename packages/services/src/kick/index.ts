@@ -1,45 +1,8 @@
 import axios from 'axios'
 
-export interface KickCategory {
-  id: number
-  name: string
-  slug: string
-  responsive: string
-  banner: string
-  parent_category: string
-}
+import { KickClip } from './types'
 
-export interface KickChannel {
-  id: number
-  username: string
-  slug: string
-  profile_picture: string | null
-}
-
-export interface KickClip {
-  id: string
-  livestream_id: string
-  category_id: string
-  channel_id: number
-  user_id: number
-  title: string
-  clip_url: string
-  thumbnail_url: string
-  privacy: string
-  likes: number
-  liked: boolean
-  views: number
-  duration: number
-  started_at: string
-  created_at: string
-  is_mature: boolean
-  video_url: string
-  view_count: number
-  likes_count: number
-  category: KickCategory
-  creator: KickChannel
-  channel: KickChannel
-}
+export * from './types'
 
 export const logo = `
   <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1539.02 1539.02">

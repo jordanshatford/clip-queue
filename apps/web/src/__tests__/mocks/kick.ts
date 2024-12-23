@@ -36,6 +36,7 @@ export const mockKickClip: KickClip = {
   video_url: 'https://kick.com/video',
   view_count: 123,
   likes_count: 1,
+  is_live: false,
   category: mockKickCategory,
   creator: mockKickChannel,
   channel: mockKickChannel
