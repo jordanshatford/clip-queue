@@ -1,52 +1,12 @@
 import axios from 'axios'
 
-interface YouTubeClipLookupResponseItem {
-  kind: string
-  etag: string
-  id: string
-  // If null, the video was not found.
-  videoId: string | null
-  clip?: {
-    title: string
-    startTimeMs: number
-    endTimeMs: number
-  }
-}
+import { YouTubeClip, YouTubeClipLookupResponse, YouTubeOEmbedResponse } from './types'
 
-interface YouTubeClipLookupResponse {
-  kind: string
-  etag: string
-  items: YouTubeClipLookupResponseItem[]
-}
+export { YouTubeClip } from './types'
 
-interface YouTubeOEmbedResponse {
-  title: string
-  author_name: string
-  author_url: string
-  type: string
-  height: number
-  width: number
-  version: string
-  provider_name: string
-  provider_url: string
-  thumbnail_height: number
-  thumbnail_width: number
-  thumbnail_url: string
-  html: string
-}
-
-export interface YouTubeClip {
-  id: string
-  url: string
-  video_id: string
-  video_url: string
-  title: string
-  author_name: string
-  thumbnail_url: string
-  start: number
-  end: number
-}
-
+/**
+ * YouTube logo SVG as a string.
+ */
 export const logo = `
   <svg viewBox="0 0 28.57 20" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
     <title>YouTube</title>
@@ -63,6 +23,11 @@ const YOUTUBE_CLIP_SUFFIX = '/clip/'
 const operationalApi = axios.create({ baseURL: 'https://yt.lemnoslife.com' })
 const api = axios.create({ baseURL: 'https://www.youtube.com' })
 
+/**
+ * Get a YouTube clip by ID.
+ * @param id - The YouTube clip ID.
+ * @returns The YouTube clip or undefined if the clip was not found.
+ */
 export async function getClip(id: string): Promise<YouTubeClip | undefined> {
   if (id.length <= 0) {
     return
@@ -108,6 +73,11 @@ export async function getClip(id: string): Promise<YouTubeClip | undefined> {
   }
 }
 
+/**
+ * Get a clip ID from a YouTube clip URL.
+ * @param url - The YouTube clip URL.
+ * @returns The clip ID or undefined if the URL is invalid.
+ */
 export function getClipIdFromUrl(url: string): string | undefined {
   try {
     const uri = new URL(url)
