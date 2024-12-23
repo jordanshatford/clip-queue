@@ -12,10 +12,21 @@ import {
   sourceLanguageTag
 } from '@/paraglide/runtime'
 
+/**
+ * The theme of the application.
+ */
 export type Theme = 'dark' | 'light'
 
+/**
+ * The available themes.
+ */
 export const availableThemes = ['dark', 'light'] as const
 
+/**
+ * Gets the inferred default theme.
+ * @param fallback - The fallback theme.
+ * @returns The inferred default theme.
+ */
 export function getInferredDefaultTheme(fallback: Theme): Theme {
   if (!window.matchMedia) {
     return fallback
@@ -27,6 +38,11 @@ export function getInferredDefaultTheme(fallback: Theme): Theme {
   }
 }
 
+/**
+ * Gets the inferred default language.
+ * @param fallback - The fallback language.
+ * @returns The inferred default language.
+ */
 export function getInferredDefaultLanguage(fallback: AvailableLanguageTag): AvailableLanguageTag {
   if (!window.navigator?.language) {
     return fallback
@@ -42,14 +58,29 @@ export function getInferredDefaultLanguage(fallback: AvailableLanguageTag): Avai
   return fallback
 }
 
-export interface ThemePreferences {
+/**
+ * The user preferences.
+ */
+export interface UserPreferences {
+  /**
+   * The language.
+   */
   language: AvailableLanguageTag
+  /**
+   * The theme.
+   */
   theme: Theme
+  /**
+   * The primary color.
+   */
   primary: ColorOption
+  /**
+   * The surface color.
+   */
   surface: ColorOption
 }
 
-export const DEFAULTS: ThemePreferences = {
+export const DEFAULTS: UserPreferences = {
   language: getInferredDefaultLanguage(sourceLanguageTag),
   theme: getInferredDefaultTheme('light'),
   primary: structuredClone(colors[12]), // Purple
@@ -59,7 +90,7 @@ export const DEFAULTS: ThemePreferences = {
 export const usePreferences = defineStore(
   'preferences',
   () => {
-    const preferences = ref<ThemePreferences>(structuredClone(DEFAULTS))
+    const preferences = ref<UserPreferences>(structuredClone(DEFAULTS))
 
     watch(preferences, updatePreferences, { deep: true })
 
@@ -71,7 +102,7 @@ export const usePreferences = defineStore(
     const isDark = computed(() => preferences.value.theme === 'dark')
 
     const isModifiedFrom = computed(() => {
-      return (p: ThemePreferences) => {
+      return (p: UserPreferences) => {
         return (
           preferences.value.language !== p.language ||
           preferences.value.theme !== p.theme ||
@@ -85,7 +116,7 @@ export const usePreferences = defineStore(
       return isModifiedFrom.value({ ...DEFAULTS })
     })
 
-    function updatePreferences(value: ThemePreferences, old?: ThemePreferences) {
+    function updatePreferences(value: UserPreferences, old?: UserPreferences) {
       if (value.language !== old?.language) {
         if (isAvailableLanguageTag(value.language)) {
           setLanguageTag(value.language)
