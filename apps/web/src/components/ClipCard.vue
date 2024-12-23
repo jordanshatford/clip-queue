@@ -27,9 +27,9 @@
       </div>
       <div class="flex justify-between gap-3">
         <Button
+          v-tooltip="m.play()"
           class="grow"
           icon="pi pi-play"
-          :title="m.play()"
           :label="m.play()"
           severity="info"
           size="small"
@@ -37,9 +37,9 @@
         >
         </Button>
         <Button
+          v-tooltip="m.remove()"
           class="grow"
           icon="pi pi-trash"
-          :title="m.remove()"
           :label="m.remove()"
           severity="danger"
           size="small"
