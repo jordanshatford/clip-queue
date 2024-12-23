@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { KickClip } from './types'
+import type { KickClip } from './types'
 
 export * from './types'
 

@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-import { YouTubeClip, YouTubeClipLookupResponse, YouTubeOEmbedResponse } from './types'
+import type { YouTubeClip, YouTubeClipLookupResponse, YouTubeOEmbedResponse } from './types'
 
-export { YouTubeClip } from './types'
+export type { YouTubeClip } from './types'
 
 /**
  * YouTube logo SVG as a string.
