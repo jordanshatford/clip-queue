@@ -24,8 +24,8 @@ vi.mock('@cq/services/kick', async (importOriginal) => {
 
 vi.mock('@cq/services/twitch', async (importOriginal) => {
   return {
+    ...(await importOriginal<typeof import('@cq/services/twitch')>()),
     default: {
-      ...(await importOriginal<typeof import('@cq/services/twitch')>()),
       getClips: vi.fn((_: TwitchUserCtx, ids: string[]) => {
         return ids.map((id) => ({ ...mockTwitchClip, id }))
       }),

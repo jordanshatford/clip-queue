@@ -50,7 +50,7 @@ export const useSources = defineStore('sources', () => {
         if (!settings.commands.allowed.includes(command as Command)) {
           return
         }
-        commands.handleCommand(event.source, command, ...args)
+        commands.handleCommand(event, command, ...args)
         return
       }
 

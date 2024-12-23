@@ -1,7 +1,7 @@
 import type { ComputedRef } from 'vue'
 import { computed } from 'vue'
 
-import type { ClipSource } from '@cq/sources'
+import type { ClipSourceEvent, ClipSourceMessage } from '@cq/sources'
 import { ClipProvider } from '@cq/providers'
 
 import * as m from '@/paraglide/messages'
@@ -73,7 +73,11 @@ const help: ComputedRef<Record<Command, CommandHelp>> = computed(() => ({
   }
 }))
 
-export function handleCommand(source: ClipSource, command: string, ...args: string[]) {
+export function handleCommand(
+  event: ClipSourceEvent<ClipSourceMessage>,
+  command: string,
+  ...args: string[]
+) {
   const queue = useQueue()
   const settings = useSettings()
   switch (command as Command) {

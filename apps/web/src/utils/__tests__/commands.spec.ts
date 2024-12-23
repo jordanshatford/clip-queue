@@ -1,6 +1,7 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
+import type { ClipSourceEvent, ClipSourceMessage } from '@cq/sources'
 import { ClipProvider } from '@cq/providers'
 import { ClipSource } from '@cq/sources'
 
@@ -8,6 +9,17 @@ import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
 import commands, { Command } from '../commands'
+
+const MOCK_EVENT: ClipSourceEvent<ClipSourceMessage> = {
+  source: ClipSource.TWITCH_CHAT,
+  timestamp: '2021-01-01T00:00:00Z',
+  data: {
+    channel: 'testchannel',
+    username: 'testuser',
+    text: 'testtext',
+    urls: []
+  }
+}
 
 describe('commands.ts', () => {
   beforeEach(() => {
@@ -27,7 +39,7 @@ describe('commands.ts', () => {
       const queue = useQueue()
       // @ts-expect-error function with unknown type
       const spy = vi.spyOn(queue, expectedFunctionCall)
-      commands.handleCommand(ClipSource.TWITCH_CHAT, commandName.toString())
+      commands.handleCommand(MOCK_EVENT, commandName.toString())
       expect(spy).toHaveBeenCalledTimes(1)
     }
   )
@@ -38,7 +50,7 @@ describe('commands.ts', () => {
       const providers = useProviders()
       // @ts-expect-error function with unknown type
       const spy = vi.spyOn(providers, expectedFunctionCall)
-      commands.handleCommand(ClipSource.TWITCH_CHAT, commandName.toString())
+      commands.handleCommand(MOCK_EVENT, commandName.toString())
       expect(spy).toHaveBeenCalledTimes(1)
     }
   )
@@ -57,7 +69,7 @@ describe('commands.ts', () => {
       const queue = useQueue()
       // @ts-expect-error function with unknown type
       const spy = vi.spyOn(queue, expectedFunctionCall)
-      commands.handleCommand(ClipSource.TWITCH_CHAT, commandName.toString(), ...args)
+      commands.handleCommand(MOCK_EVENT, commandName.toString(), ...args)
       expect(spy).toHaveBeenCalledTimes(1)
       expect(spy).toHaveBeenCalledWith(...expectedFunctionArgs)
     }
@@ -68,7 +80,7 @@ describe('commands.ts', () => {
     (commandName: string) => {
       const queue = useQueue()
       const queueCommandFunctions = ['previous', 'next', 'open', 'close', 'clear']
-      commands.handleCommand(ClipSource.TWITCH_CHAT, commandName)
+      commands.handleCommand(MOCK_EVENT, commandName)
       for (const f of queueCommandFunctions) {
         // @ts-expect-error function with unknown type
         expect(vi.spyOn(queue, f)).toHaveBeenCalledTimes(0)
@@ -79,26 +91,26 @@ describe('commands.ts', () => {
   it('can set the queue limit and clear it', () => {
     const settings = useSettings()
     expect(settings.queue.limit).toEqual(null)
-    commands.handleCommand(ClipSource.TWITCH_CHAT, Command.SET_LIMIT.toString(), '0') // Invalid
+    commands.handleCommand(MOCK_EVENT, Command.SET_LIMIT.toString(), '0') // Invalid
     expect(settings.queue.limit).toEqual(null)
-    commands.handleCommand(ClipSource.TWITCH_CHAT, Command.SET_LIMIT.toString(), '100')
+    commands.handleCommand(MOCK_EVENT, Command.SET_LIMIT.toString(), '100')
     expect(settings.queue.limit).toEqual(100)
-    commands.handleCommand(ClipSource.TWITCH_CHAT, Command.SET_LIMIT.toString(), 'some_non_number') // Invalid
+    commands.handleCommand(MOCK_EVENT, Command.SET_LIMIT.toString(), 'some_non_number') // Invalid
     expect(settings.queue.limit).toEqual(100)
-    commands.handleCommand(ClipSource.TWITCH_CHAT, Command.REMOVE_LIMIT.toString())
+    commands.handleCommand(MOCK_EVENT, Command.REMOVE_LIMIT.toString())
     expect(settings.queue.limit).toEqual(null)
   })
 
   it('can enable and disable providers', () => {
     const settings = useSettings()
     expect(settings.queue.providers).toEqual(Object.values(ClipProvider))
-    commands.handleCommand(ClipSource.TWITCH_CHAT, Command.DISABLE_PROVIDER.toString(), 'test') // Invalid provider
+    commands.handleCommand(MOCK_EVENT, Command.DISABLE_PROVIDER.toString(), 'test') // Invalid provider
     expect(settings.queue.providers).toEqual(Object.values(ClipProvider))
-    commands.handleCommand(ClipSource.TWITCH_CHAT, Command.DISABLE_PROVIDER.toString(), 'kick')
+    commands.handleCommand(MOCK_EVENT, Command.DISABLE_PROVIDER.toString(), 'kick')
     expect(settings.queue.providers).not.toContain(ClipProvider.KICK)
-    commands.handleCommand(ClipSource.TWITCH_CHAT, Command.ENABLE_PROVIDER.toString(), 'test') // Invalid provider
+    commands.handleCommand(MOCK_EVENT, Command.ENABLE_PROVIDER.toString(), 'test') // Invalid provider
     expect(settings.queue.providers).not.toContain(ClipProvider.KICK)
-    commands.handleCommand(ClipSource.TWITCH_CHAT, Command.ENABLE_PROVIDER.toString(), 'kick')
+    commands.handleCommand(MOCK_EVENT, Command.ENABLE_PROVIDER.toString(), 'kick')
     expect(settings.queue.providers).toContain(ClipProvider.KICK)
     for (const p of Object.values(ClipProvider)) {
       expect(settings.queue.providers).toContain(p)
@@ -108,9 +120,9 @@ describe('commands.ts', () => {
   it('can enable and disable auto moderation', () => {
     const settings = useSettings()
     expect(settings.queue.hasAutoModerationEnabled).toEqual(true)
-    commands.handleCommand(ClipSource.TWITCH_CHAT, Command.DISABLE_AUTO_MODERATION)
+    commands.handleCommand(MOCK_EVENT, Command.DISABLE_AUTO_MODERATION)
     expect(settings.queue.hasAutoModerationEnabled).toEqual(false)
-    commands.handleCommand(ClipSource.TWITCH_CHAT, Command.ENABLE_AUTO_MODERATION)
+    commands.handleCommand(MOCK_EVENT, Command.ENABLE_AUTO_MODERATION)
     expect(settings.queue.hasAutoModerationEnabled).toEqual(true)
   })
 
