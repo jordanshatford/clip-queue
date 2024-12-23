@@ -1,12 +1,11 @@
 <template>
-  <InputIcon v-tooltip="statusTranslations[status]" :class="`pi pi-circle-fill ${color}`" />
+  <i v-tooltip="statusTranslations[status]" :class="`pi pi-circle-fill ${color}`" />
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 
 import { ClipSourceStatus } from '@cq/sources'
-import { InputIcon } from '@cq/ui'
 
 import * as m from '@/paraglide/messages'
 

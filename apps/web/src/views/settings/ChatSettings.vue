@@ -4,13 +4,22 @@
       <template #content>
         <div class="m-0 flex flex-col gap-2 p-0 text-left">
           <label for="username">{{ m.connected_chat_colon() }}</label>
-          <IconField>
-            <InputIcon>
+          <InputGroup>
+            <InputGroupAddon>
               <svg class="h-5 w-5" v-html="sources.logo"></svg>
-            </InputIcon>
-            <InputText id="username" v-model="user.ctx.username" disabled fluid />
-            <SourceIndicator :status="sources.status" />
-          </IconField>
+            </InputGroupAddon>
+            <InputText id="username" v-model="user.ctx.username" readonly fluid />
+            <InputGroupAddon>
+              <SourceIndicator :status="sources.status" />
+            </InputGroupAddon>
+            <InputGroupAddon>
+              <i
+                v-tooltip="m.reconnect()"
+                class="pi pi-refresh hover:cursor-pointer"
+                @click="sources.reconnect()"
+              ></i>
+            </InputGroupAddon>
+          </InputGroup>
         </div>
       </template>
     </Card>
@@ -79,8 +88,8 @@ import { ref, toRaw } from 'vue'
 import {
   Button,
   Card,
-  IconField,
-  InputIcon,
+  InputGroup,
+  InputGroupAddon,
   InputText,
   Message,
   MultiSelect,

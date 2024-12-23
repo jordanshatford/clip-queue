@@ -117,5 +117,10 @@ export const useSources = defineStore('sources', () => {
     await source.value?.disconnect()
   }
 
-  return { logo, status, connect, disconnect }
+  async function reconnect(): Promise<void> {
+    await disconnect()
+    await connect()
+  }
+
+  return { logo, status, connect, disconnect, reconnect }
 })
