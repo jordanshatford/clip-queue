@@ -4,6 +4,9 @@ import { KickClip } from './types'
 
 export * from './types'
 
+/**
+ * Kick logo SVG as a string.
+ */
 export const logo = `
   <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1539.02 1539.02">
     <title>Kick</title>
@@ -24,6 +27,11 @@ const api = axios.create({
   baseURL: 'https://kick.com/api/v2'
 })
 
+/**
+ * Get a Kick clip by ID.
+ * @param id - The Kick clip ID.
+ * @returns The Kick clip or undefined if the clip was not found.
+ */
 export async function getClip(id: string): Promise<KickClip | undefined> {
   if (id.length <= 0) {
     return
@@ -37,6 +45,11 @@ export async function getClip(id: string): Promise<KickClip | undefined> {
   }
 }
 
+/**
+ * Get a clip ID from a Kick clip URL.
+ * @param url - The Kick clip URL.
+ * @returns The clip ID or undefined if the URL is invalid.
+ */
 export function getClipIdFromUrl(url: string): string | undefined {
   try {
     const uri = new URL(url)
