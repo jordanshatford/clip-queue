@@ -1,37 +1,104 @@
+/**
+ * Enumeration of clip providers.
+ */
 export enum ClipProvider {
   KICK = 'Kick',
   TWITCH = 'Twitch',
   YOUTUBE = 'YouTube'
 }
 
+/**
+ * The format of the player.
+ */
 export type PlayerFormat = 'iframe' | 'video' | 'unknown'
 
+/**
+ * A clip.
+ */
 export interface Clip {
+  /**
+   * The provider of the clip.
+   */
   provider: ClipProvider
+  /**
+   * The ID of the clip.
+   */
   id: string
+  /**
+   * The URL of the clip.
+   */
   url: string
+  /**
+   * The embed URL of the clip.
+   */
   embedUrl: string
+  /**
+   * The thumbnail URL of the clip.
+   */
   thumbnailUrl: string
+  /**
+   * The title of the clip.
+   */
   title: string
+  /**
+   * The channel of the clip.
+   */
   channel: string
+  /**
+   * The submitters of the clip.
+   */
   submitters: string[]
+  /**
+   * The category of the clip.
+   */
   category?: string
+  /**
+   * The created at time of the clip.
+   */
   createdAt?: string
 }
 
+/**
+ * The base clip provider.
+ */
 export type IBaseClipProvider = {
-  // Name and svg for display in the UI.
+  /**
+   * The name of the provider.
+   */
   name: ClipProvider
+  /**
+   * The SVG of the provider.
+   */
   svg: string
-  // If the provider is experimental and may not work as intended.
+  /**
+   * Whether the provider is experimental.
+   */
   isExperimental: boolean
-  // Cache related. We may or may not want to implement caching for each provider.
+  /**
+   * Whether the provider has cached data.
+   */
   hasCachedData: boolean
+  /**
+   * Clear the cache.
+   */
   clearCache: () => void
-  // Functionality used for getting clip information.
+  /**
+   * Get a clip.
+   * @param url - The URL of the clip.
+   * @returns The clip or undefined.
+   */
   getClip(url: string): Promise<Clip | undefined>
-  // Player related. Used to determine how to show the clip.
+  /**
+   * Get the player format.
+   * @param clip - The clip.
+   * @returns
+   */
   getPlayerFormat: (clip: Clip) => PlayerFormat | undefined
+  /**
+   * Get the player source.
+   * @param clip - The clip.
+   * @returns The player source.
+   */
   getPlayerSource: (clip: Clip) => string | undefined
 }
 
@@ -54,9 +121,21 @@ export abstract class BaseClipProvider implements IBaseClipProvider {
   public abstract getPlayerSource(clip: Clip): string
 }
 
+/**
+ * Clip provider context.
+ */
 export interface ClipProviderCtx {
+  /**
+   * The ID of the user.
+   */
   id: string
+  /**
+   * The token of the user.
+   */
   token?: string
 }
 
+/**
+ * Clip provider context callback.
+ */
 export type ClipProviderCtxCallback = () => ClipProviderCtx | Promise<ClipProviderCtx>

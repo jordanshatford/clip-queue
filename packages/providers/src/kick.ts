@@ -3,6 +3,9 @@ import kick from '@cq/services/kick'
 import type { Clip, PlayerFormat } from './types'
 import { BaseClipProvider, ClipProvider } from './types'
 
+/**
+ * The Kick provider.
+ */
 export class KickProvider extends BaseClipProvider {
   public name = ClipProvider.KICK
   public svg = kick.logo

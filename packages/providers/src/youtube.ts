@@ -3,6 +3,9 @@ import youtube from '@cq/services/youtube'
 import type { Clip, PlayerFormat } from './types'
 import { BaseClipProvider, ClipProvider } from './types'
 
+/**
+ * The YouTube provider.
+ */
 export class YouTubeProvider extends BaseClipProvider {
   public name = ClipProvider.YOUTUBE
   public svg = youtube.logo

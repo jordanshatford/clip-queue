@@ -11,7 +11,15 @@ export * from './types'
 export * from './utils'
 export * from './youtube'
 
+/**
+ * The providers.
+ */
 export const providers = {
+  /**
+   * Get all providers.
+   * @param callbacks - The callbacks.
+   * @returns The providers.
+   */
   all: (
     callbacks: Partial<Record<ClipProvider, ClipProviderCtxCallback>>
   ): Record<ClipProvider, IBaseClipProvider> => ({
