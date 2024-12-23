@@ -5,19 +5,42 @@ import { ClipProvider } from '@cq/providers'
 
 import { Command } from '@/utils/commands'
 
+/**
+ * Settings for commands.
+ */
 export interface CommandSettings {
-  // Prefix for chat commands.
+  /**
+   * The prefix for commands.
+   *
+   * @example !cq
+   */
   prefix: string
-  // Commands allowed to be used in chat.
+  /**
+   * The commands allowed to be used.
+   */
   allowed: Command[]
 }
 
+/**
+ * Settings for the queue.
+ */
 export interface QueueSettings {
-  // Auto remove clips when the submitter has there message deleted, or is timed out / banned.
+  /**
+   * Whether auto moderation is enabled.
+   *
+   * @note This will remove clips when the submitter has their message deleted, or is timed out / banned.
+   */
   hasAutoModerationEnabled: boolean
-  // Limit of clips allowed in queue at one time.
+  /**
+   * The limit of clips in the queue.
+   *
+   * @example 10
+   * @note null means no limit.
+   */
   limit: number | null
-  // Allowed clip providers (Kick, Twitch, Etc.)
+  /**
+   * The providers allowed to be used for clips.
+   */
   providers: ClipProvider[]
 }
 
