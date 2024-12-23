@@ -1,6 +1,9 @@
 import type { Options } from 'tmi.js'
 import { Client } from 'tmi.js'
 
+/**
+ * The default options for the Twitch chat client.
+ */
 const DEFAULT_OPTIONS: Options = {
   options: {
     skipMembership: true,
@@ -12,6 +15,9 @@ const DEFAULT_OPTIONS: Options = {
   }
 }
 
+/**
+ * A Twitch chat client.
+ */
 export default class TwitchChat extends Client {
   public constructor(options?: Partial<Options>) {
     super({

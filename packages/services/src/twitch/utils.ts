@@ -4,12 +4,22 @@ const CLIP_HOSTNAMES = ['clips.twitch.tv']
 const TWITCH_HOSTNAME = 'twitch.tv'
 const CLIP_SUFFIX = '/clip/'
 
+/**
+ * Check if a user is a moderator.
+ * @param userstate - The userstate to check.
+ * @returns True if the user is a moderator.
+ */
 export function isModerator(userstate: ChatUserstate): boolean {
   const isMod = userstate.mod
   const isBroadcaster = userstate.badges?.['broadcaster'] === '1'
   return isMod || isBroadcaster
 }
 
+/**
+ * Check if a URL is a Twitch clip URL.
+ * @param url - The URL to check.
+ * @returns True if the URL is a Twitch clip URL.
+ */
 function isClipUrl(url: string): boolean {
   try {
     const uri = new URL(url)
@@ -27,6 +37,11 @@ function isClipUrl(url: string): boolean {
   }
 }
 
+/**
+ * Get a clip ID from a Twitch clip URL.
+ * @param url - The Twitch clip URL.
+ * @returns The clip ID or undefined if the URL is invalid.
+ */
 export function getClipIdFromUrl(url: string): string | undefined {
   if (!isClipUrl(url)) {
     return
@@ -40,6 +55,12 @@ export function getClipIdFromUrl(url: string): string | undefined {
   }
 }
 
+/**
+ * Convert a key and values to URLSearchParams.
+ * @param key - The key to use in the URLSearchParams.
+ * @param values - The values to append to the URLSearchParams.
+ * @returns The URLSearchParams.
+ */
 export function toURLParams(key: string, values: string[]): URLSearchParams {
   const params = new URLSearchParams()
   values.forEach((v) => params.append(key, v))

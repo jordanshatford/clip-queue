@@ -4,6 +4,11 @@ import type { AuthInfo, IDToken, TokenInfo, TwitchUserCtx } from './types'
 
 const BASE_URL = 'https://id.twitch.tv/oauth2'
 
+/**
+ * Get AuthInfo from Twitch login hash.
+ * @param hash - The hash from the URL.
+ * @returns The AuthInfo or null if the hash is invalid.
+ */
 export function login(hash: string): AuthInfo | null {
   const authInfo = processAuthHash(hash)
   if (authInfo.access_token && authInfo.id_token) {
@@ -13,11 +18,21 @@ export function login(hash: string): AuthInfo | null {
   return null
 }
 
+/**
+ * Logout of Twitch.
+ * @param ctx - The Twitch user context.
+ */
 export async function logout(ctx: TwitchUserCtx): Promise<void> {
   // Revoke the token
   await axios.post(`${BASE_URL}/revoke?client_id=${ctx.id}&token=${ctx.token}`)
 }
 
+/**
+ * Redirect to Twitch login.
+ * @param ctx - The Twitch user context.
+ * @param redirectUri - The URI to redirect to after login.
+ * @param scopes - The scopes to request.
+ */
 export function redirect(ctx: Partial<TwitchUserCtx>, redirectUri: string, scopes: string[]): void {
   const loginUrl = encodeURI(
     `${BASE_URL}/authorize?client_id=${ctx.id}` +
@@ -29,6 +44,11 @@ export function redirect(ctx: Partial<TwitchUserCtx>, redirectUri: string, scope
   window.location.assign(loginUrl)
 }
 
+/**
+ * Check if a Twitch login is valid.
+ * @param ctx - The Twitch user context.
+ * @returns True if the login is valid.
+ */
 export async function isLoginValid(ctx: TwitchUserCtx) {
   try {
     const { status } = await axios.get<TokenInfo>(`${BASE_URL}/validate`, {
@@ -42,6 +62,11 @@ export async function isLoginValid(ctx: TwitchUserCtx) {
   }
 }
 
+/**
+ * Process the auth hash from the URL.
+ * @param hash - The hash from the URL.
+ * @returns The AuthInfo.
+ */
 function processAuthHash(hash: string): AuthInfo {
   const authInfo = hash
     .substring(1)
@@ -62,6 +87,11 @@ function processAuthHash(hash: string): AuthInfo {
   return authInfo
 }
 
+/**
+ * Parse a JWT token.
+ * @param token - The JWT token.
+ * @returns The decoded JWT token.
+ */
 function parseJWT(token: string) {
   const base64Url = token.split('.')[1]
   if (base64Url !== undefined) {

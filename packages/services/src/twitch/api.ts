@@ -13,6 +13,11 @@ const api = axios.create({
   baseURL: 'https://api.twitch.tv/helix'
 })
 
+/**
+ * Convert a Twitch user context to common headers.
+ * @param ctx - The Twitch user context.
+ * @returns The common headers.
+ */
 export function toCommonHeaders(ctx: TwitchUserCtx) {
   return {
     'Client-ID': ctx.id,
@@ -20,6 +25,12 @@ export function toCommonHeaders(ctx: TwitchUserCtx) {
   }
 }
 
+/**
+ * Get clips from Twitch.
+ * @param ctx - The Twitch user context.
+ * @param ids - The clip IDs to fetch.
+ * @returns The clips.
+ */
 export async function getClips(ctx: TwitchUserCtx, ids: string[]): Promise<TwitchClip[]> {
   if (ids.length <= 0) {
     return []
@@ -36,6 +47,12 @@ export async function getClips(ctx: TwitchUserCtx, ids: string[]): Promise<Twitc
   return []
 }
 
+/**
+ * Get games from Twitch.
+ * @param ctx - The Twitch user context.
+ * @param ids - The game IDs to fetch.
+ * @returns The games.
+ */
 export async function getGames(ctx: TwitchUserCtx, ids: string[]): Promise<TwitchGame[]> {
   if (ids.length <= 0) {
     return []
