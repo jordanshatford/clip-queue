@@ -1,5 +1,18 @@
 # @cq/web
 
+## 1.30.0
+
+### Minor Changes
+
+- feat: make command aware of source, channel, and username ([`9325ec9`](https://github.com/jordanshatford/clip-queue/commit/9325ec9c5ed25ae45cbba4bf835ad398d1aeda8e))
+
+### Patch Changes
+
+- Updated dependencies [[`c936e2e`](https://github.com/jordanshatford/clip-queue/commit/c936e2e60781057922b6d42e21f1b38214ce84a6), [`8ed501e`](https://github.com/jordanshatford/clip-queue/commit/8ed501e9c197e39ef761c2a80e5711be809b3eac), [`00f8452`](https://github.com/jordanshatford/clip-queue/commit/00f8452d22dbcc303a7593eb6659f4dd0ac94fd9), [`ad204a1`](https://github.com/jordanshatford/clip-queue/commit/ad204a1f4de8a0e6557dd333914533b37c5432da)]:
+  - @cq/sources@1.3.0
+  - @cq/services@1.2.0
+  - @cq/providers@1.5.1
+
 ## 1.29.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @cq/services
 
+## 1.2.0
+
+### Minor Changes
+
+- feat: simplify twitch chat class with default config ([`ad204a1`](https://github.com/jordanshatford/clip-queue/commit/ad204a1f4de8a0e6557dd333914533b37c5432da))
+
 ## 1.1.1
 
 ### Patch Changes

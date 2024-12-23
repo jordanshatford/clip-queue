@@ -1,5 +1,20 @@
 # @cq/sources
 
+## 1.3.0
+
+### Minor Changes
+
+- feat: add method to get uuid for a submitter ([`c936e2e`](https://github.com/jordanshatford/clip-queue/commit/c936e2e60781057922b6d42e21f1b38214ce84a6))
+
+- feat: add ability to connect to multiple channels ([`8ed501e`](https://github.com/jordanshatford/clip-queue/commit/8ed501e9c197e39ef761c2a80e5711be809b3eac))
+
+- feat: simplify clip source class and do not require context ([`00f8452`](https://github.com/jordanshatford/clip-queue/commit/00f8452d22dbcc303a7593eb6659f4dd0ac94fd9))
+
+### Patch Changes
+
+- Updated dependencies [[`ad204a1`](https://github.com/jordanshatford/clip-queue/commit/ad204a1f4de8a0e6557dd333914533b37c5432da)]:
+  - @cq/services@1.2.0
+
 ## 1.2.0
 
 ### Minor Changes
