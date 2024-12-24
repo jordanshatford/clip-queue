@@ -1,6 +1,7 @@
 <template>
   <div class="flex items-center gap-2">
     <div class="h-5">
+      <!-- eslint-disable-next-line vue/no-v-html -->
       <svg v-if="svg" class="h-5 w-5" v-html="svg"></svg>
     </div>
     <div>{{ provider }}</div>

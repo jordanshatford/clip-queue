@@ -6,6 +6,7 @@
           <label for="username">{{ m.connected_chat_colon() }}</label>
           <InputGroup>
             <InputGroupAddon>
+              <!-- eslint-disable-next-line vue/no-v-html -->
               <svg class="h-5 w-5" v-html="sources.logo"></svg>
             </InputGroupAddon>
             <InputText id="username" v-model="user.ctx.username" readonly fluid />
