@@ -13,20 +13,65 @@ import { useSettings } from '@/stores/settings'
  * Enumeration of commands.
  */
 export enum Command {
+  /**
+   * Open the queue.
+   */
   OPEN = 'open',
+  /**
+   * Close the queue.
+   */
   CLOSE = 'close',
+  /**
+   * Clear the queue.
+   */
   CLEAR = 'clear',
+  /**
+   * Set the queue limit.
+   */
   SET_LIMIT = 'setlimit',
+  /**
+   * Remove the queue limit.
+   */
   REMOVE_LIMIT = 'removelimit',
+  /**
+   * Go to the previous clip.
+   */
   PREV = 'prev',
+  /**
+   * Go to the next clip.
+   */
   NEXT = 'next',
+  /**
+   * Remove clips in the queue by submitter.
+   */
   REMOVE_BY_SUBMITTER = 'removebysubmitter',
+  /**
+   * Remove clips in the queue by provider.
+   */
   REMOVE_BY_PROVIDER = 'removebyprovider',
+  /**
+   * Enable a provider.
+   */
   ENABLE_PROVIDER = 'enableprovider',
+  /**
+   * Disable a provider.
+   */
   DISABLE_PROVIDER = 'disableprovider',
+  /**
+   * Enable auto moderation.
+   */
   ENABLE_AUTO_MODERATION = 'enableautomod',
+  /**
+   * Disable auto moderation.
+   */
   DISABLE_AUTO_MODERATION = 'disableautomod',
+  /**
+   * Purge the cache.
+   */
   PURGE_CACHE = 'purgecache',
+  /**
+   * Purge the history.
+   */
   PURGE_HISTORY = 'purgehistory'
 }
 
