@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
-import { getAllURLsFromText } from '../utils'
+import { getAllURLsFromText, toSubmitterUUID } from '../utils'
+import { ClipSource } from '../types'
 
 describe('utils.ts', () => {
   it.each([
@@ -22,5 +23,12 @@ describe('utils.ts', () => {
     ]
   ])('gets a url from a message when possible', (input: string, expected: string[]) => {
     expect(getAllURLsFromText(input)).toEqual(expected)
+  })
+
+  it.each([
+    [ClipSource.APPLICATION, 'testuser', 'clip queue application:testuser'],
+    [ClipSource.TWITCH_CHAT, 'testuser', 'twitch chat:testuser'],
+  ])('returns a uuid for a given clip', (source: ClipSource, submitter: string, expected: string) => {
+    expect(toSubmitterUUID(source, submitter)).toEqual(expected)
   })
 })

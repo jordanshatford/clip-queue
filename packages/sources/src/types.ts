@@ -8,7 +8,7 @@ export enum ClipSource {
   /**
    * The Clip Queue Web Application itself.
    */
-  APPLICATION = 'Clip Queue Web Application',
+  APPLICATION = 'Clip Queue Application',
   /**
    * The Twitch Chat.
    */

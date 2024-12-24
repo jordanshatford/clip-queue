@@ -10,7 +10,7 @@ describe('utils.ts', () => {
     [clipFromKick, 'kick:testclipkick'],
     [clipFromTwitch, 'twitch:testcliptwitch'],
     [clipFromYouTube, 'youtube:testclipyoutube']
-  ])('returns a uuid for a given clip', async (clip: Clip, expected: string) => {
+  ])('returns a uuid for a given clip', (clip: Clip, expected: string) => {
     expect(toClipUUID(clip)).toEqual(expected)
   })
 })
