@@ -21,14 +21,14 @@
     "@eslint/js": "^9.17.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.4.0",
     "@vue/eslint-config-prettier": "^10.1.0",
-    "@vue/eslint-config-typescript": "^14.1.4",
+    "@vue/eslint-config-typescript": "^14.2.0",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.14.0",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^3.4.17",
-    "typescript-eslint": "^8.18.1"
+    "typescript-eslint": "^8.18.2"
   },
   "dependencies": {
     "tailwindcss-primeui": "^0.3.4"
