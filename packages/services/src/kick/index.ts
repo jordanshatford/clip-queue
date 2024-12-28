@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 import type { KickClip } from './types'
 
 export * from './types'
@@ -23,10 +21,6 @@ export const logo = `
 const ALLOWED_KICK_CLIP_HOSTS = ['kick.com', 'www.kick.com']
 const KICK_CLIP_PARAM_NAME = 'clip'
 
-const api = axios.create({
-  baseURL: 'https://kick.com/api/v2'
-})
-
 /**
  * Get a Kick clip by ID.
  * @param id - The Kick clip ID.
@@ -37,7 +31,8 @@ export async function getClip(id: string): Promise<KickClip | undefined> {
     return
   }
   try {
-    const { data } = await api.get<{ clip: KickClip }>(`clips/${id}`)
+    const response = await fetch(`https://kick.com/api/v2/clips/${id}`)
+    const data: { clip: KickClip } = await response.json()
     return data.clip
   } catch (e) {
     console.error('Failed to fetch Kick clip: ', id, e)

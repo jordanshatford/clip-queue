@@ -1,42 +1,32 @@
-import axios from 'axios'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { getClip, getClipIdFromUrl } from '..'
 import { mockKickClip } from '../../__tests__/mocks'
 
-vi.mock('axios', async () => {
-  const mockGet = vi.fn().mockImplementation((url: string) => {
-    return {
-      data: {
-        clip: {
-          ...mockKickClip,
-          clip_url: url
-        }
-      }
-    }
-  })
-  return {
-    default: {
-      create: vi.fn(() => {
-        return {
-          get: mockGet
-        }
-      })
-    }
-  }
-})
-
 describe('kick.ts', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    global.fetch = vi.fn().mockImplementation((url: string) =>
+      Promise.resolve({
+        ok: true,
+        json: () =>
+          Promise.resolve({
+            clip: {
+              ...mockKickClip,
+              clip_url: url
+            }
+          })
+      })
+    )
   })
 
   it('gets a kick clip from kick api', async () => {
     const clip = await getClip('testclip')
+    expect(clip).toBeDefined()
     expect(clip?.id).toEqual('testclip')
     expect(clip?.title).toEqual('testtitle')
     expect(clip?.channel.username).toEqual('testchannel')
-    expect(axios.create().get).toHaveBeenCalledTimes(1)
+    expect(fetch).toHaveBeenCalledTimes(1)
   })
 
   it('returns undefined if no clip is passed', async () => {
