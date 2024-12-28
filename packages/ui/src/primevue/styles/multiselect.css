@@ -31,6 +31,10 @@
   @apply flex w-10 shrink-0 items-center justify-center rounded-e-md bg-transparent text-surface-500 dark:text-surface-400;
 }
 
+.p-multiselect-clear-icon {
+  @apply absolute end-10 top-1/2 -mt-2 text-surface-500 dark:text-surface-400;
+}
+
 .p-multiselect-label-container {
   @apply flex-auto overflow-hidden;
 }

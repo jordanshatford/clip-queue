@@ -26,16 +26,16 @@
   @apply flex w-10 shrink-0 items-center justify-center rounded-e-md bg-transparent text-surface-500 dark:text-surface-400;
 }
 
+.p-cascadeselect-clear-icon {
+  @apply absolute end-10 top-1/2 -mt-2 text-surface-500 dark:text-surface-400;
+}
+
 .p-cascadeselect-label {
   @apply block w-[1%] flex-auto overflow-hidden overflow-ellipsis whitespace-nowrap border-none bg-transparent px-3 py-2 text-surface-700 outline-none dark:text-surface-0;
 }
 
 .p-cascadeselect-label.p-placeholder {
   @apply text-surface-500 dark:text-surface-400;
-}
-
-.p-cascadeselect-clearable .p-cascadeselect-label {
-  @apply pe-7;
 }
 
 .p-cascadeselect.p-disabled .p-cascadeselect-label {
