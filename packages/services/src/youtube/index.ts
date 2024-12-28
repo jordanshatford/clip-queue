@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 import type { YouTubeClip, YouTubeClipLookupResponse, YouTubeOEmbedResponse } from './types'
 
 export type { YouTubeClip } from './types'
@@ -20,9 +18,6 @@ export const logo = `
 const ALLOWED_YOUTUBE_CLIP_HOSTS = ['youtube.com', 'www.youtube.com']
 const YOUTUBE_CLIP_SUFFIX = '/clip/'
 
-const operationalApi = axios.create({ baseURL: 'https://yt.lemnoslife.com' })
-const api = axios.create({ baseURL: 'https://www.youtube.com' })
-
 /**
  * Get a YouTube clip by ID.
  * @param id - The YouTube clip ID.
@@ -35,25 +30,17 @@ export async function getClip(id: string): Promise<YouTubeClip | undefined> {
 
   try {
     // Fetch video ID, start and end times from lookup server. YouTube does not provide this functionality.
-    const { data } = await operationalApi.get<YouTubeClipLookupResponse>('videos', {
-      params: {
-        part: 'id,clip',
-        clipId: id
-      }
-    })
-
+    const response = await fetch(`https://yt.lemnoslife.com/videos?part=id,clip&clipId=${id}`)
+    const data: YouTubeClipLookupResponse = await response.json()
     const item = data.items[0]
 
     if (item && item.videoId !== null && item.clip) {
       const videoId = item.videoId
       const videoUrl = `https://www.youtube.com/watch?v=${videoId}`
-      const { data: videoData } = await api.get<YouTubeOEmbedResponse>('oembed', {
-        params: {
-          format: 'json',
-          url: videoUrl
-        }
-      })
-
+      const videoDataResponse = await fetch(
+        `https://www.youtube.com/oembed?url=${videoUrl}&format=json`
+      )
+      const videoData: YouTubeOEmbedResponse = await videoDataResponse.json()
       return {
         id,
         url: `https://www.youtube.com/clip/${id}`,
