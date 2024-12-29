@@ -49,7 +49,7 @@
             :alt="data.title"
             @error="queue.history.remove(data)"
           />
-          <div class="ml-3 text-left text-sm">
+          <div class="text-left text-sm sm:ml-3">
             <p class="font-normal">
               {{ data.title }}
               <span v-if="data.url">
