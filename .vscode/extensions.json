@@ -1,5 +1,7 @@
 {
   "recommendations": [
+    "ms-azuretools.vscode-docker",
+    "EditorConfig.EditorConfig",
     "vue.volar",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
