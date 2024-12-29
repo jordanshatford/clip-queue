@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 import type {
   TwitchClip,
   TwitchGame,
@@ -9,9 +7,7 @@ import type {
 } from './types'
 import { toURLParams } from './utils'
 
-const api = axios.create({
-  baseURL: 'https://api.twitch.tv/helix'
-})
+const BASE_URL = 'https://api.twitch.tv/helix'
 
 /**
  * Convert a Twitch user context to common headers.
@@ -36,10 +32,10 @@ export async function getClips(ctx: TwitchUserCtx, ids: string[]): Promise<Twitc
     return []
   }
   try {
-    const { data } = await api.get<TwitchPagedResponse<TwitchClip[]>>('clips', {
-      headers: toCommonHeaders(ctx),
-      params: toURLParams('id', ids)
+    const response = await fetch(`${BASE_URL}/clips?${toURLParams('id', ids)}`, {
+      headers: toCommonHeaders(ctx)
     })
+    const data: TwitchPagedResponse<TwitchClip[]> = await response.json()
     return data.data
   } catch (e) {
     console.error('Failed to fetch Twitch clips: ', ids, e)
@@ -58,10 +54,10 @@ export async function getGames(ctx: TwitchUserCtx, ids: string[]): Promise<Twitc
     return []
   }
   try {
-    const { data } = await api.get<TwitchResponse<TwitchGame[]>>('games', {
-      headers: toCommonHeaders(ctx),
-      params: toURLParams('id', ids)
+    const response = await fetch(`${BASE_URL}/games?${toURLParams('id', ids)}`, {
+      headers: toCommonHeaders(ctx)
     })
+    const data: TwitchResponse<TwitchGame[]> = await response.json()
     return data.data
   } catch (e) {
     console.error('Failed to fetch Twitch games: ', ids, e)

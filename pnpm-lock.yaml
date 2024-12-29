@@ -219,9 +219,6 @@ importers:
 
   packages/services:
     dependencies:
-      axios:
-        specifier: ^1.7.9
-        version: 1.7.9
       tmi.js:
         specifier: npm:@coldino/tmi.js-clientonly-fork@1.8.5-clientonly
         version: '@coldino/tmi.js-clientonly-fork@1.8.5-clientonly'

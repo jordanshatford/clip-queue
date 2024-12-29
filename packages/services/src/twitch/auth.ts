@@ -1,6 +1,4 @@
-import axios from 'axios'
-
-import type { AuthInfo, IDToken, TokenInfo, TwitchUserCtx } from './types'
+import type { AuthInfo, IDToken, TwitchUserCtx } from './types'
 
 const BASE_URL = 'https://id.twitch.tv/oauth2'
 
@@ -24,7 +22,12 @@ export function login(hash: string): AuthInfo | null {
  */
 export async function logout(ctx: TwitchUserCtx): Promise<void> {
   // Revoke the token
-  await axios.post(`${BASE_URL}/revoke?client_id=${ctx.id}&token=${ctx.token}`)
+  const response = await fetch(`${BASE_URL}/revoke?client_id=${ctx.id}&token=${ctx.token}`, {
+    method: 'POST'
+  })
+  if (!response.ok) {
+    throw new Error('Failed to revoke token')
+  }
 }
 
 /**
@@ -51,12 +54,12 @@ export function redirect(ctx: Partial<TwitchUserCtx>, redirectUri: string, scope
  */
 export async function isLoginValid(ctx: TwitchUserCtx) {
   try {
-    const { status } = await axios.get<TokenInfo>(`${BASE_URL}/validate`, {
+    const response = await fetch(`${BASE_URL}/validate`, {
       headers: {
         Authorization: `Bearer ${ctx.token}`
       }
     })
-    return status === 200
+    return response.ok
   } catch {
     return false
   }
