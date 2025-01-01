@@ -9,7 +9,7 @@ export const config = {
   github: 'https://github.com/jordanshatford/clip-queue',
   copyright: {
     owner: 'Jordan Shatford',
-    year: new Date().getFullYear()
+    year: 2021
   }
 }
 
