@@ -5,7 +5,7 @@
 Setting up the project for local development will require all of the following the be installed:
 
 - [git](https://git-scm.com/) (version `2.39` or higher)
-- [node](https://nodejs.org/en) (version `18.0` or higher)
+- [node](https://nodejs.org/en) (version `20.0` or higher)
 - *optionally* [docker](https://www.docker.com/) (version `24.0` or higher)
 > NOTE: docker is an alternative way to develop. If you are using docker, all other dependencies above will not be required except for git.
 
