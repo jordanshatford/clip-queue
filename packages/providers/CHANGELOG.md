@@ -1,5 +1,11 @@
 # @cq/providers
 
+## 1.6.0
+
+### Minor Changes
+
+- feat: add basic clip list which does not have complex handling based on number of submitters ([`11201b3`](https://github.com/jordanshatford/clip-queue/commit/11201b3a0e5230780b69221e1fb55e59daca5f52))
+
 ## 1.5.2
 
 ### Patch Changes
