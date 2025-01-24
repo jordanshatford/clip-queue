@@ -1,5 +1,14 @@
 # @cq/web
 
+## 1.31.2
+
+### Patch Changes
+
+- fix: properly add and remove clips from history (do not care about the number of submitters) ([`11201b3`](https://github.com/jordanshatford/clip-queue/commit/11201b3a0e5230780b69221e1fb55e59daca5f52))
+
+- Updated dependencies [[`11201b3`](https://github.com/jordanshatford/clip-queue/commit/11201b3a0e5230780b69221e1fb55e59daca5f52)]:
+  - @cq/providers@1.6.0
+
 ## 1.31.1
 
 ### Patch Changes
