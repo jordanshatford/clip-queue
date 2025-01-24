@@ -2,10 +2,10 @@ import type { Clip, ClipProvider } from './types'
 import { toClipUUID } from './utils'
 
 /**
- * A list of clips. Clips are sorted by the number of submitters.
+ * A basic list of clips. Clips are not sorted.
  */
-export class ClipList {
-  private _clips: Clip[]
+export class BasicClipList {
+  protected _clips: Clip[]
 
   constructor(...clips: Clip[]) {
     this._clips = []
@@ -32,7 +32,6 @@ export class ClipList {
         this._clips.push(clip)
       }
     })
-    this.sort()
     return this._clips
   }
 
@@ -42,30 +41,9 @@ export class ClipList {
    */
   public remove(clip: Clip): void {
     const index = this._clips.findIndex((c) => toClipUUID(c) === toClipUUID(clip))
-    const submitter = clip.submitters[0]?.toLowerCase()
-    if (index > -1 && submitter) {
-      this.removeSubmitterFromClip(submitter, index)
-      this.sort()
+    if (index > -1) {
+      this._clips.splice(index, 1)
     }
-  }
-
-  /**
-   * Remove all clips submitted by a submitter.
-   * @param submitter - The submitter to remove.
-   */
-  public removeBySubmitter(submitter: string): void {
-    for (let i = this._clips.length - 1; i >= 0; i--) {
-      this.removeSubmitterFromClip(submitter.toLowerCase(), i)
-    }
-    this.sort()
-  }
-
-  /**
-   * Remove all clips by a provider.
-   * @param provider - The provider to remove.
-   */
-  public removeByProvider(provider: ClipProvider): void {
-    this._clips = this._clips.filter((c) => c.provider.toLowerCase() !== provider.toLowerCase())
   }
 
   /**
@@ -131,6 +109,55 @@ export class ClipList {
    */
   public toArray(): Clip[] {
     return this._clips
+  }
+}
+
+/**
+ * A list of clips. Clips are sorted by the number of submitters.
+ */
+export class ClipList extends BasicClipList {
+  /**
+   * Add clips to the list.
+   * @param clips - The clips to add.
+   * @returns The clips.
+   */
+  public override add(...clips: Clip[]): Clip[] {
+    super.add(...clips)
+    this.sort()
+    return this._clips
+  }
+
+  /**
+   * Remove submitters from a clip. If the clip has no other submitters it will be
+   * removed completely.
+   * @param clip - The clip to remove.
+   */
+  public override remove(clip: Clip): void {
+    const index = this._clips.findIndex((c) => toClipUUID(c) === toClipUUID(clip))
+    const submitter = clip.submitters[0]?.toLowerCase()
+    if (index > -1 && submitter) {
+      this.removeSubmitterFromClip(submitter, index)
+      this.sort()
+    }
+  }
+
+  /**
+   * Remove all clips submitted by a submitter.
+   * @param submitter - The submitter to remove.
+   */
+  public removeBySubmitter(submitter: string): void {
+    for (let i = this._clips.length - 1; i >= 0; i--) {
+      this.removeSubmitterFromClip(submitter.toLowerCase(), i)
+    }
+    this.sort()
+  }
+
+  /**
+   * Remove all clips by a provider.
+   * @param provider - The provider to remove.
+   */
+  public removeByProvider(provider: ClipProvider): void {
+    this._clips = this._clips.filter((c) => c.provider.toLowerCase() !== provider.toLowerCase())
   }
 
   /**

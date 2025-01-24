@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 import type { Clip } from '@cq/providers'
-import { ClipList, ClipProvider, toClipUUID } from '@cq/providers'
+import { BasicClipList, ClipList, ClipProvider, toClipUUID } from '@cq/providers'
 
 import { useSettings } from '@/stores/settings'
 
@@ -12,7 +12,7 @@ export const useQueue = defineStore(
     const settings = useSettings()
 
     const isOpen = ref<boolean>(true)
-    const history = ref<ClipList>(new ClipList())
+    const history = ref<BasicClipList>(new BasicClipList())
     const current = ref<Clip | undefined>(undefined)
     const upcoming = ref<ClipList>(new ClipList())
 

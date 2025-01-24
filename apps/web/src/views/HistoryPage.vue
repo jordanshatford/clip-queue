@@ -47,7 +47,7 @@
             class="hidden aspect-video w-24 rounded-lg sm:block"
             :src="data.thumbnailUrl"
             :alt="data.title"
-            @error="queue.history.remove(data)"
+            @error="queue.removeFromHistory(data)"
           />
           <div class="text-left text-sm sm:ml-3">
             <p class="font-normal">
