@@ -8,7 +8,6 @@
     "./eslint/vue": "./eslint/vue.js",
     "./prettier/base": "./prettier/base.js",
     "./prettier/vue": "./prettier/vue.js",
-    "./tailwind": "./tailwind/base.js",
     "./tsconfig": "./tsconfig/tsconfig.json"
   },
   "scripts": {
@@ -18,19 +17,17 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
-    "@eslint/js": "^9.18.0",
+    "@eslint/js": "^9.19.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.3.0",
-    "eslint": "^9.18.0",
+    "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "globals": "^15.14.0",
     "prettier": "^3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.10",
-    "tailwindcss": "^3.4.17",
-    "typescript-eslint": "^8.21.0"
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tailwindcss": "^4.0.0",
+    "typescript-eslint": "^8.22.0"
   },
-  "dependencies": {
-    "tailwindcss-primeui": "^0.4.0"
-  }
+  "dependencies": {}
 }

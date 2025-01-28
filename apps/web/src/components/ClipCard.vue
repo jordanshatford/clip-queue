@@ -1,5 +1,5 @@
 <template>
-  <Card class="max-w-[16rem] flex-shrink-0 overflow-hidden text-left">
+  <Card class="max-w-[16rem] shrink-0 overflow-hidden text-left">
     <template #header>
       <img
         class="aspect-video w-full"
@@ -18,7 +18,7 @@
       </p>
     </template>
     <template #content>
-      <div class="mb-4 text-xs text-surface-400">
+      <div class="text-surface-400 mb-4 text-xs">
         <p>{{ m.submitter_name({ name: clip.submitters[0] }) }}</p>
         <div class="flex items-center gap-1">
           <p>{{ m.provider_colon() }}</p>

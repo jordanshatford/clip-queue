@@ -57,13 +57,13 @@
                   :href="data.url"
                   target="_blank"
                   rel="noreferrer"
-                  class="text-surface-400 no-underline hover:text-surface-600 dark:text-surface-600 dark:hover:text-surface-200"
+                  class="text-surface-400 hover:text-surface-600 dark:text-surface-600 dark:hover:text-surface-200 no-underline"
                 >
                   <i class="pi pi-external-link"></i>
                 </a>
               </span>
             </p>
-            <div class="text-xs text-surface-400">
+            <div class="text-surface-400 text-xs">
               <p v-if="data.category">{{ data.channel }} - {{ data.category }}</p>
               <p v-else>
                 {{ data.channel }}

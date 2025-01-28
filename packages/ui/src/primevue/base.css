@@ -1,28 +1,28 @@
 /* Primary and Surface Palettes */
 :root {
-  --p-primary-50: var(--p-surface-50);
-  --p-primary-100: var(--p-surface-100);
-  --p-primary-200: var(--p-surface-200);
-  --p-primary-300: var(--p-surface-300);
-  --p-primary-400: var(--p-surface-400);
-  --p-primary-500: var(--p-surface-500);
-  --p-primary-600: var(--p-surface-600);
-  --p-primary-700: var(--p-surface-700);
-  --p-primary-800: var(--p-surface-800);
-  --p-primary-900: var(--p-surface-900);
-  --p-primary-950: var(--p-surface-950);
+  --p-primary-50: var(--color-purple-50);
+  --p-primary-100: var(--color-purple-100);
+  --p-primary-200: var(--color-purple-200);
+  --p-primary-300: var(--color-purple-300);
+  --p-primary-400: var(--color-purple-400);
+  --p-primary-500: var(--color-purple-500);
+  --p-primary-600: var(--color-purple-600);
+  --p-primary-700: var(--color-purple-700);
+  --p-primary-800: var(--color-purple-800);
+  --p-primary-900: var(--color-purple-900);
+  --p-primary-950: var(--color-purple-950);
   --p-surface-0: #ffffff;
-  --p-surface-50: #f8fafc;
-  --p-surface-100: #f1f5f9;
-  --p-surface-200: #e2e8f0;
-  --p-surface-300: #cbd5e1;
-  --p-surface-400: #94a3b8;
-  --p-surface-500: #64748b;
-  --p-surface-600: #475569;
-  --p-surface-700: #334155;
-  --p-surface-800: #1e293b;
-  --p-surface-900: #0f172a;
-  --p-surface-950: #020617;
+  --p-surface-50: var(--color-zinc-50);
+  --p-surface-100: var(--color-zinc-100);
+  --p-surface-200: var(--color-zinc-200);
+  --p-surface-300: var(--color-zinc-300);
+  --p-surface-400: var(--color-zinc-400);
+  --p-surface-500: var(--color-zinc-500);
+  --p-surface-600: var(--color-zinc-600);
+  --p-surface-700: var(--color-zinc-700);
+  --p-surface-800: var(--color-zinc-800);
+  --p-surface-900: var(--color-zinc-900);
+  --p-surface-950: var(--color-zinc-950);
   --p-content-border-radius: 6px;
 }
 
@@ -54,7 +54,7 @@
  * :root[class="app-dark"] {
 */
 @media (prefers-color-scheme: dark) {
-  :root[class='app-dark'] {
+  :root[class*='app-dark'] {
     --p-primary-color: var(--p-primary-400);
     --p-primary-contrast-color: var(--p-surface-900);
     --p-primary-hover-color: var(--p-primary-300);

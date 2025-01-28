@@ -1,6 +1,6 @@
 <template>
   <div class="mx-0 mt-4">
-    <div class="mb-2 mt-1 w-full border-t border-surface-300 dark:border-surface-700"></div>
+    <div class="border-surface-300 dark:border-surface-700 mt-1 mb-2 w-full border-t"></div>
     <div class="float-right">
       <Button
         severity="info"
@@ -21,8 +21,8 @@
       </Button>
     </div>
     <div class="text-left">
-      <p class="text-lg font-normal text-surface-600 dark:text-surface-400">{{ title }}</p>
-      <span class="mt-3 text-sm font-normal text-surface-400 dark:text-surface-600">
+      <p class="text-surface-600 dark:text-surface-400 text-lg font-normal">{{ title }}</p>
+      <span class="text-surface-400 dark:text-surface-600 mt-3 text-sm font-normal">
         {{ m.clips({ length: clips.length }) }}
       </span>
     </div>

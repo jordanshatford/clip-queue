@@ -49,7 +49,7 @@
   </Card>
   <Card class="mx-auto max-w-lg">
     <template #content>
-      <p class="text-sm text-surface-400">
+      <p class="text-surface-400 text-sm">
         {{ m.application_version({ version }) }}
       </p>
     </template>

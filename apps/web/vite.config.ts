@@ -1,6 +1,7 @@
 import { fileURLToPath, URL } from 'node:url'
 
 import { paraglide } from '@inlang/paraglide-vite'
+import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 
@@ -11,6 +12,7 @@ export default defineConfig({
       project: './project.inlang',
       outdir: './src/paraglide'
     }),
+    tailwindcss(),
     vue()
   ],
   define: {

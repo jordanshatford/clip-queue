@@ -1,10 +1,7 @@
 <template>
   <Menubar :model="items" class="sticky top-0 z-40 mx-auto sm:px-16 md:px-20 lg:px-32">
     <template #start>
-      <RouterLink
-        :to="{ name: RouteNameConstants.HOME }"
-        class="mr-2 flex flex-shrink-0 items-center"
-      >
+      <RouterLink :to="{ name: RouteNameConstants.HOME }" class="mr-2 flex shrink-0 items-center">
         <img class="aspect-square w-10" src="/icon.png" />
       </RouterLink>
     </template>

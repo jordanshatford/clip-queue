@@ -2,12 +2,12 @@
   <Card class="p-2">
     <template #title>
       <div class="flex gap-2">
-        <i :class="['text-lg text-primary-500 dark:text-primary-400', icon]"></i>
+        <i :class="['text-primary-500 dark:text-primary-400 text-lg', icon]"></i>
         <span> {{ title }}</span>
       </div>
     </template>
     <template #content>
-      <p class="text-sm text-surface-400">{{ description }}</p>
+      <p class="text-surface-400 text-sm">{{ description }}</p>
     </template>
   </Card>
 </template>
