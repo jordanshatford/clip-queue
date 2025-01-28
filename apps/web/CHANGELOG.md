@@ -1,5 +1,18 @@
 # @cq/web
 
+## 1.31.3
+
+### Patch Changes
+
+- feat: update to use tailwindcss v4 ([`608fdea`](https://github.com/jordanshatford/clip-queue/commit/608fdea009a4db479ebea073fef449b8d35dc0e2))
+
+- Updated dependencies [[`608fdea`](https://github.com/jordanshatford/clip-queue/commit/608fdea009a4db479ebea073fef449b8d35dc0e2)]:
+  - @cq/player@1.1.1
+  - @cq/ui@1.6.1
+  - @cq/providers@1.6.0
+  - @cq/services@1.3.0
+  - @cq/sources@1.4.1
+
 ## 1.31.2
 
 ### Patch Changes

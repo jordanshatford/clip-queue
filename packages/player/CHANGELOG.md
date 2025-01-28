@@ -1,5 +1,11 @@
 # @cq/player
 
+## 1.1.1
+
+### Patch Changes
+
+- feat: update to use tailwindcss v4 ([`608fdea`](https://github.com/jordanshatford/clip-queue/commit/608fdea009a4db479ebea073fef449b8d35dc0e2))
+
 ## 1.1.0
 
 ### Minor Changes
