@@ -25,14 +25,14 @@
   },
   "devDependencies": {
     "@cq/config": "workspace:*",
-    "@tailwindcss/vite": "^4.0.5",
+    "@tailwindcss/vite": "^4.0.6",
     "@types/jsdom": "^21.1.7",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "jsdom": "^26.0.0",
-    "tailwindcss": "^4.0.5",
+    "tailwindcss": "^4.0.6",
     "vite": "^6.1.0",
-    "vue-tsc": "^2.2.0"
+    "vue-tsc": "^2.2.2"
   }
 }
