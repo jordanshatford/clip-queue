@@ -61,7 +61,7 @@
 import { computed } from 'vue'
 
 import type { Clip, PlayerFormat } from '@cq/providers'
-import Player from '@cq/player'
+import { Player } from '@cq/player'
 import { Button } from '@cq/ui'
 
 import * as m from '@/paraglide/messages'
