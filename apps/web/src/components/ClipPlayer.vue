@@ -10,7 +10,7 @@
     </Player>
     <div class="mt-2 text-left">
       <div class="flex items-center justify-between">
-        <div class="text-surface-400 flex items-center gap-2 text-2xl font-bold font-normal">
+        <div class="text-surface-500 flex items-center gap-2 text-2xl font-bold">
           <span>{{ clip.title }}</span>
           <a
             v-if="clip.url"

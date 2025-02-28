@@ -233,8 +233,8 @@ importers:
         specifier: ^4.2.5
         version: 4.2.5(vue@3.5.13(typescript@5.7.3))
       tailwindcss-primeui:
-        specifier: ^0.4.0
-        version: 0.4.0(tailwindcss@4.0.8)
+        specifier: ^0.5.1
+        version: 0.5.1(tailwindcss@4.0.8)
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.7.3)
@@ -3179,8 +3179,8 @@ packages:
     resolution: {integrity: sha512-vrozgXDQwYO72vHjUb/HnFbQx1exDjoKzqx23aXEg2a9VIg2TSFZ8FmeZpTjUCFMYw7mpX4BE2SFu8wI7asYsw==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
-  tailwindcss-primeui@0.4.0:
-    resolution: {integrity: sha512-YYC7B7Yyzm1/4pEGgpf1ABAhbrKY++LuPoUamnKE7fTPO5Ct/Qr/dT+Uq2yiVhQnaW1zHQpYnThxfksaxhlDfQ==}
+  tailwindcss-primeui@0.5.1:
+    resolution: {integrity: sha512-zNqp62N4c+pwBVkVJd8ByvujepVKAMxZBdYy5MzIDi/Zb2p8wTGo4RrQaqLQazm3teOWVmttzZYPH/GlOB3lgw==}
     peerDependencies:
       tailwindcss: '>=3.1.0'
 
@@ -6690,7 +6690,7 @@ snapshots:
       '@pkgr/core': 0.1.1
       tslib: 2.8.1
 
-  tailwindcss-primeui@0.4.0(tailwindcss@4.0.8):
+  tailwindcss-primeui@0.5.1(tailwindcss@4.0.8):
     dependencies:
       tailwindcss: 4.0.8
 

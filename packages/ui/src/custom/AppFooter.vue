@@ -9,7 +9,7 @@
           <a
             v-if="github"
             :href="github"
-            class="hover:text-primary-700 dark:hover:text-primary-700 text-3xl"
+            class="hover:text-primary-700 dark:hover:text-primary-700"
             target="_blank"
           >
             <i class="pi pi-github"></i>
