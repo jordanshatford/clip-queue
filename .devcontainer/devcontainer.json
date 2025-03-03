@@ -1,0 +1,20 @@
+{
+  "name": "Development Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+  "features": {},
+  "forwardPorts": [5173, 24678],
+  "postCreateCommand": "sudo corepack enable && pnpm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "EditorConfig.EditorConfig",
+        "vue.volar",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "inlang.vs-code-extension"
+      ]
+    }
+  }
+}
