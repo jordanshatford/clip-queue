@@ -57,8 +57,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       '@sentry/vue':
-        specifier: ^9.1.0
-        version: 9.1.0(pinia@3.0.1(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3)))(vue@3.5.13(typescript@5.7.3))
+        specifier: ^9.3.0
+        version: 9.3.0(pinia@3.0.1(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3)))(vue@3.5.13(typescript@5.7.3))
       pinia:
         specifier: ^3.0.1
         version: 3.0.1(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
@@ -230,8 +230,8 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0
       primevue:
-        specifier: ^4.2.5
-        version: 4.2.5(vue@3.5.13(typescript@5.7.3))
+        specifier: ^4.3.1
+        version: 4.3.1(vue@3.5.13(typescript@5.7.3))
       tailwindcss-primeui:
         specifier: ^0.5.1
         version: 0.5.1(tailwindcss@4.0.8)
@@ -982,22 +982,25 @@ packages:
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  '@primeuix/styled@0.3.2':
-    resolution: {integrity: sha512-ColZes0+/WKqH4ob2x8DyNYf1NENpe5ZguOvx5yCLxaP8EIMVhLjWLO/3umJiDnQU4XXMLkn2mMHHw+fhTX/mw==}
+  '@primeuix/styled@0.5.0':
+    resolution: {integrity: sha512-k5CTQ+10cXIXxZTep7sktmYe8lJkjmUaFVDAc1OCsWTJR+bhBy/s6zWIatGljVtuf3RmTSxtlrHQeFLjPmdUNQ==}
     engines: {node: '>=12.11.0'}
 
-  '@primeuix/utils@0.3.2':
-    resolution: {integrity: sha512-B+nphqTQeq+i6JuICLdVWnDMjONome2sNz0xI65qIOyeB4EF12CoKRiCsxuZ5uKAkHi/0d1LqlQ9mIWRSdkavw==}
+  '@primeuix/styles@1.0.0':
+    resolution: {integrity: sha512-j/TlbqihLNMP37zFNjxac5dTRaQEf5Ldrv0P7NwKigCCc/+MI5j4MddxDw1LnxkGhWCJ1Gjbt9uwyQteWtSv7A==}
+
+  '@primeuix/utils@0.5.1':
+    resolution: {integrity: sha512-/bYirtF3gJOGrRQfQ5tUyQOLEria7wg/UCqvpIydTAxLmj/UWgWwh2kAjYVp49eldm1+2sk4+TDkbAz8XcPpew==}
     engines: {node: '>=12.11.0'}
 
-  '@primevue/core@4.2.5':
-    resolution: {integrity: sha512-+oWBIQs5dLd2Ini4KEVOlvPILk989EHAskiFS3R/dz3jeOllJDMZFcSp8V9ddV0R3yDaPdLVkfHm2Q5t42kU2Q==}
+  '@primevue/core@4.3.1':
+    resolution: {integrity: sha512-Z2JfYk7I477qdlWHH5yiqUK0cwNe5joZJLwFtSEFkmBi/ocXvkGNAYk8XYNCz6UTDePUQSHKseKJxMkFHlfRtw==}
     engines: {node: '>=12.11.0'}
     peerDependencies:
-      vue: ^3.3.0
+      vue: ^3.5.0
 
-  '@primevue/icons@4.2.5':
-    resolution: {integrity: sha512-WFbUMZhQkXf/KmwcytkjGVeJ9aGEDXjP3uweOjQZMmRdEIxFnqYYpd90wE90JE1teZn3+TVnT4ZT7ejGyEXnFQ==}
+  '@primevue/icons@4.3.1':
+    resolution: {integrity: sha512-67GFk/NdbVDuPx4tlbO01BBWujLiZTJJJSce63dvLr7082YukPfrQq4Kru+y5Qmrfkq0uaP1I3+Ut9Skr6ATfQ==}
     engines: {node: '>=12.11.0'}
 
   '@rollup/rollup-android-arm-eabi@4.34.8':
@@ -1095,32 +1098,32 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@sentry-internal/browser-utils@9.1.0':
-    resolution: {integrity: sha512-S1uT+kkFlstWpwnaBTIJSwwAID8PS3aA0fIidOjNezeoUE5gOvpsjDATo9q+sl6FbGWynxMz6EnYSrq/5tuaBQ==}
+  '@sentry-internal/browser-utils@9.3.0':
+    resolution: {integrity: sha512-G3z4HCUyb5nJe03EPUhWjnaHqMDt4mOTFJDNha3DGoB51lMYojpQI1Qo1u6bY4qkWVSO1c+HqOU0RVsXoAchtQ==}
     engines: {node: '>=18'}
 
-  '@sentry-internal/feedback@9.1.0':
-    resolution: {integrity: sha512-jTDCqkqH3QDC8m9WO4mB06hqnBRsl3p7ozoh0E774UvNB6blOEZjShhSGMMEy5jbbJajPWsOivCofUtFAwbfGw==}
+  '@sentry-internal/feedback@9.3.0':
+    resolution: {integrity: sha512-LQmIbQaATlN5QEwCD2Xt+7VKfwfR5W3dbn0jdF1x4hQFE/srdnOj60xMz/mj3tP5BxV552xJniGsyZ8lXHDb2A==}
     engines: {node: '>=18'}
 
-  '@sentry-internal/replay-canvas@9.1.0':
-    resolution: {integrity: sha512-gxredVe+mOgfNqDJ3dTLiRON3FK1rZ8d0LHp7TICK/umLkWFkuso0DbNeyKU+3XCEjCr9VM7ZRqTDMzmY6zyVg==}
+  '@sentry-internal/replay-canvas@9.3.0':
+    resolution: {integrity: sha512-MhDMJeRGa55a0D541+OzTFMWwbabthhDGbAL90/NpappfyeBbAiktmCNl0BFTZuRbCGrC2m1LLCqHegCVKW4fQ==}
     engines: {node: '>=18'}
 
-  '@sentry-internal/replay@9.1.0':
-    resolution: {integrity: sha512-E2xrUoms90qvm0BVOuaZ8QfkMoTUEgoIW/35uOeaqNcL7uOIj8c5cSEQQKit2Dr7CL6W+Ci5c6Khdyd5C0NL5w==}
+  '@sentry-internal/replay@9.3.0':
+    resolution: {integrity: sha512-ZkH+Gahn89JygpuiFn26ZgAqJXHtnr+HjfQ2ONOFoWQHNH6X5wk75UTma55aYk1d8VcBPFoU6WjFhZoQ55SV1g==}
     engines: {node: '>=18'}
 
-  '@sentry/browser@9.1.0':
-    resolution: {integrity: sha512-G55e5j77DqRW3LkalJLAjRRfuyKrjHaKTnwIYXa6ycO+Q1+l14pEUxu+eK5Abu2rtSdViwRSb5/G6a/miSUlYA==}
+  '@sentry/browser@9.3.0':
+    resolution: {integrity: sha512-yPwWWQo/hpN63p0NGmk/Dd1Fx5CQRWNMfuV7dtfPBtg3vRjDecA9OLyK29AqK5h3Fl8FuJOyOqB87CvtXUqh5g==}
     engines: {node: '>=18'}
 
-  '@sentry/core@9.1.0':
-    resolution: {integrity: sha512-djWEzSBpMgqdF3GQuxO+kXCUX+Mgq42G4Uah/HSUBvPDHKipMmyWlutGRoFyVPPOnCDgpHu3wCt83wbpEyVmDw==}
+  '@sentry/core@9.3.0':
+    resolution: {integrity: sha512-SxQ4z7wTkfguvYb2ctNEMU9kVAbhl9ymfjhLnrvtygTwL5soLqAKdco/lX/4P9K9Osgb2Dl6urQWRl+AhzKVbQ==}
     engines: {node: '>=18'}
 
-  '@sentry/vue@9.1.0':
-    resolution: {integrity: sha512-BxOcpaxRrmj2yKKzwxpvRb/phbh55gkV7KP9sQ8LXWoSNsNlz5eckHV+riIjCNqlXA/QX29ta33xjB7sj8Dvwg==}
+  '@sentry/vue@9.3.0':
+    resolution: {integrity: sha512-KBHivxOPpgZPmM0CTaFs41bPK7nRyE3pbJVPaSEdSzv5WGTq0PSxUOhiVWaiQ5w51/rGpassE3nj7DgSCBIDtQ==}
     engines: {node: '>=18'}
     peerDependencies:
       pinia: 2.x || 3.x
@@ -2988,8 +2991,8 @@ packages:
   primeicons@7.0.0:
     resolution: {integrity: sha512-jK3Et9UzwzTsd6tzl2RmwrVY/b8raJ3QZLzoDACj+oTJ0oX7L9Hy+XnVwgo4QVKlKpnP/Ur13SXV/pVh4LzaDw==}
 
-  primevue@4.2.5:
-    resolution: {integrity: sha512-7UMOIJvdFz4jQyhC76yhNdSlHtXvVpmE2JSo2ndUTBWjWJOkYyT562rQ4ayO+bMdJLtzBGqgY64I9ZfEvNd7vQ==}
+  primevue@4.3.1:
+    resolution: {integrity: sha512-NSUpcWf2WpXgqOvjgXu5zQM3E5UEXoA2iXLi6xV+h1SBZ1TmgNfrjme96KRzfUY2RBsI0rTSUuPv0I+fXvtcmA==}
     engines: {node: '>=12.11.0'}
 
   process@0.11.10:
@@ -4585,22 +4588,26 @@ snapshots:
 
   '@pkgr/core@0.1.1': {}
 
-  '@primeuix/styled@0.3.2':
+  '@primeuix/styled@0.5.0':
     dependencies:
-      '@primeuix/utils': 0.3.2
+      '@primeuix/utils': 0.5.1
 
-  '@primeuix/utils@0.3.2': {}
-
-  '@primevue/core@4.2.5(vue@3.5.13(typescript@5.7.3))':
+  '@primeuix/styles@1.0.0':
     dependencies:
-      '@primeuix/styled': 0.3.2
-      '@primeuix/utils': 0.3.2
+      '@primeuix/styled': 0.5.0
+
+  '@primeuix/utils@0.5.1': {}
+
+  '@primevue/core@4.3.1(vue@3.5.13(typescript@5.7.3))':
+    dependencies:
+      '@primeuix/styled': 0.5.0
+      '@primeuix/utils': 0.5.1
       vue: 3.5.13(typescript@5.7.3)
 
-  '@primevue/icons@4.2.5(vue@3.5.13(typescript@5.7.3))':
+  '@primevue/icons@4.3.1(vue@3.5.13(typescript@5.7.3))':
     dependencies:
-      '@primeuix/utils': 0.3.2
-      '@primevue/core': 4.2.5(vue@3.5.13(typescript@5.7.3))
+      '@primeuix/utils': 0.5.1
+      '@primevue/core': 4.3.1(vue@3.5.13(typescript@5.7.3))
     transitivePeerDependencies:
       - vue
 
@@ -4661,38 +4668,38 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.34.8':
     optional: true
 
-  '@sentry-internal/browser-utils@9.1.0':
+  '@sentry-internal/browser-utils@9.3.0':
     dependencies:
-      '@sentry/core': 9.1.0
+      '@sentry/core': 9.3.0
 
-  '@sentry-internal/feedback@9.1.0':
+  '@sentry-internal/feedback@9.3.0':
     dependencies:
-      '@sentry/core': 9.1.0
+      '@sentry/core': 9.3.0
 
-  '@sentry-internal/replay-canvas@9.1.0':
+  '@sentry-internal/replay-canvas@9.3.0':
     dependencies:
-      '@sentry-internal/replay': 9.1.0
-      '@sentry/core': 9.1.0
+      '@sentry-internal/replay': 9.3.0
+      '@sentry/core': 9.3.0
 
-  '@sentry-internal/replay@9.1.0':
+  '@sentry-internal/replay@9.3.0':
     dependencies:
-      '@sentry-internal/browser-utils': 9.1.0
-      '@sentry/core': 9.1.0
+      '@sentry-internal/browser-utils': 9.3.0
+      '@sentry/core': 9.3.0
 
-  '@sentry/browser@9.1.0':
+  '@sentry/browser@9.3.0':
     dependencies:
-      '@sentry-internal/browser-utils': 9.1.0
-      '@sentry-internal/feedback': 9.1.0
-      '@sentry-internal/replay': 9.1.0
-      '@sentry-internal/replay-canvas': 9.1.0
-      '@sentry/core': 9.1.0
+      '@sentry-internal/browser-utils': 9.3.0
+      '@sentry-internal/feedback': 9.3.0
+      '@sentry-internal/replay': 9.3.0
+      '@sentry-internal/replay-canvas': 9.3.0
+      '@sentry/core': 9.3.0
 
-  '@sentry/core@9.1.0': {}
+  '@sentry/core@9.3.0': {}
 
-  '@sentry/vue@9.1.0(pinia@3.0.1(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3)))(vue@3.5.13(typescript@5.7.3))':
+  '@sentry/vue@9.3.0(pinia@3.0.1(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3)))(vue@3.5.13(typescript@5.7.3))':
     dependencies:
-      '@sentry/browser': 9.1.0
-      '@sentry/core': 9.1.0
+      '@sentry/browser': 9.3.0
+      '@sentry/core': 9.3.0
       vue: 3.5.13(typescript@5.7.3)
     optionalDependencies:
       pinia: 3.0.1(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
@@ -6513,12 +6520,13 @@ snapshots:
 
   primeicons@7.0.0: {}
 
-  primevue@4.2.5(vue@3.5.13(typescript@5.7.3)):
+  primevue@4.3.1(vue@3.5.13(typescript@5.7.3)):
     dependencies:
-      '@primeuix/styled': 0.3.2
-      '@primeuix/utils': 0.3.2
-      '@primevue/core': 4.2.5(vue@3.5.13(typescript@5.7.3))
-      '@primevue/icons': 4.2.5(vue@3.5.13(typescript@5.7.3))
+      '@primeuix/styled': 0.5.0
+      '@primeuix/styles': 1.0.0
+      '@primeuix/utils': 0.5.1
+      '@primevue/core': 4.3.1(vue@3.5.13(typescript@5.7.3))
+      '@primevue/icons': 4.3.1(vue@3.5.13(typescript@5.7.3))
     transitivePeerDependencies:
       - vue
 
