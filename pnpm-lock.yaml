@@ -4,6 +4,45 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@tailwindcss/vite':
+      specifier: ^4.0.9
+      version: 4.0.9
+    '@types/jsdom':
+      specifier: ^21.1.7
+      version: 21.1.7
+    '@types/node':
+      specifier: ^22.13.8
+      version: 22.13.8
+    '@vitejs/plugin-vue':
+      specifier: ^5.2.1
+      version: 5.2.1
+    '@vue/test-utils':
+      specifier: ^2.4.6
+      version: 2.4.6
+    '@vue/tsconfig':
+      specifier: ^0.7.0
+      version: 0.7.0
+    jsdom:
+      specifier: ^26.0.0
+      version: 26.0.0
+    tailwindcss:
+      specifier: ^4.0.9
+      version: 4.0.9
+    typescript:
+      specifier: ^5.8.2
+      version: 5.8.2
+    vite:
+      specifier: ^6.2.0
+      version: 6.2.0
+    vue:
+      specifier: ^3.5.13
+      version: 3.5.13
+    vue-tsc:
+      specifier: ^2.2.8
+      version: 2.2.8
+
 importers:
 
   .:
@@ -24,7 +63,7 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@types/node':
-        specifier: ^22.13.8
+        specifier: 'catalog:'
         version: 22.13.8
       '@vitest/coverage-v8':
         specifier: ^3.0.7
@@ -33,7 +72,7 @@ importers:
         specifier: ^9.1.7
         version: 9.1.7
       typescript:
-        specifier: ^5.8.2
+        specifier: 'catalog:'
         version: 5.8.2
       vitest:
         specifier: ^3.0.7
@@ -66,7 +105,7 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0(magicast@0.3.5)(pinia@3.0.1(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2)))
       vue:
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13(typescript@5.8.2)
       vue-router:
         specifier: ^4.5.0
@@ -85,34 +124,40 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(pinia@3.0.1(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2)))
       '@tailwindcss/vite':
-        specifier: ^4.0.9
+        specifier: 'catalog:'
         version: 4.0.9(vite@6.2.0(@types/node@22.13.8)(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0))
       '@tsconfig/node20':
         specifier: ^20.1.4
         version: 20.1.4
       '@types/jsdom':
-        specifier: ^21.1.7
+        specifier: 'catalog:'
         version: 21.1.7
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.13.8
       '@vitejs/plugin-vue':
-        specifier: ^5.2.1
+        specifier: 'catalog:'
         version: 5.2.1(vite@6.2.0(@types/node@22.13.8)(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.2))
       '@vue/test-utils':
-        specifier: ^2.4.6
+        specifier: 'catalog:'
         version: 2.4.6
       '@vue/tsconfig':
-        specifier: ^0.7.0
+        specifier: 'catalog:'
         version: 0.7.0(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))
       jsdom:
-        specifier: ^26.0.0
+        specifier: 'catalog:'
         version: 26.0.0
       tailwindcss:
-        specifier: ^4.0.9
+        specifier: 'catalog:'
         version: 4.0.9
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.2
       vite:
-        specifier: ^6.2.0
+        specifier: 'catalog:'
         version: 6.2.0(@types/node@22.13.8)(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0)
       vue-tsc:
-        specifier: ^2.2.8
+        specifier: 'catalog:'
         version: 2.2.8(typescript@5.8.2)
 
   packages/config:
@@ -126,6 +171,9 @@ importers:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.4.1
         version: 4.4.1(@vue/compiler-sfc@3.5.13)(prettier@3.5.3)
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.13.8
       '@vue/eslint-config-prettier':
         specifier: ^10.2.0
         version: 10.2.0(eslint@9.21.0(jiti@2.4.2))(prettier@3.5.3)
@@ -147,6 +195,9 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.6.11
         version: 0.6.11(@ianvs/prettier-plugin-sort-imports@4.4.1(@vue/compiler-sfc@3.5.13)(prettier@3.5.3))(prettier@3.5.3)
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.2
       typescript-eslint:
         specifier: ^8.25.0
         version: 8.25.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.8.2)
@@ -157,38 +208,44 @@ importers:
         specifier: ^8.21.0
         version: 8.21.0
       vue:
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13(typescript@5.8.2)
     devDependencies:
       '@cq/config':
         specifier: workspace:*
         version: link:../config
       '@tailwindcss/vite':
-        specifier: ^4.0.9
+        specifier: 'catalog:'
         version: 4.0.9(vite@6.2.0(@types/node@22.13.8)(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0))
       '@types/jsdom':
-        specifier: ^21.1.7
+        specifier: 'catalog:'
         version: 21.1.7
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.13.8
       '@vitejs/plugin-vue':
-        specifier: ^5.2.1
+        specifier: 'catalog:'
         version: 5.2.1(vite@6.2.0(@types/node@22.13.8)(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.2))
       '@vue/test-utils':
-        specifier: ^2.4.6
+        specifier: 'catalog:'
         version: 2.4.6
       '@vue/tsconfig':
-        specifier: ^0.7.0
+        specifier: 'catalog:'
         version: 0.7.0(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))
       jsdom:
-        specifier: ^26.0.0
+        specifier: 'catalog:'
         version: 26.0.0
       tailwindcss:
-        specifier: ^4.0.9
+        specifier: 'catalog:'
         version: 4.0.9
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.2
       vite:
-        specifier: ^6.2.0
+        specifier: 'catalog:'
         version: 6.2.0(@types/node@22.13.8)(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0)
       vue-tsc:
-        specifier: ^2.2.8
+        specifier: 'catalog:'
         version: 2.2.8(typescript@5.8.2)
 
   packages/providers:
@@ -200,6 +257,12 @@ importers:
       '@cq/config':
         specifier: workspace:*
         version: link:../config
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.13.8
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.2
 
   packages/services:
     dependencies:
@@ -210,9 +273,15 @@ importers:
       '@cq/config':
         specifier: workspace:*
         version: link:../config
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.13.8
       '@types/tmi.js':
         specifier: ^1.8.6
         version: 1.8.6
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.2
 
   packages/sources:
     dependencies:
@@ -223,6 +292,12 @@ importers:
       '@cq/config':
         specifier: workspace:*
         version: link:../config
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.13.8
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.2
 
   packages/ui:
     dependencies:
@@ -236,38 +311,44 @@ importers:
         specifier: ^0.5.1
         version: 0.5.1(tailwindcss@4.0.9)
       vue:
-        specifier: ^3.5.13
+        specifier: 'catalog:'
         version: 3.5.13(typescript@5.8.2)
     devDependencies:
       '@cq/config':
         specifier: workspace:*
         version: link:../config
       '@tailwindcss/vite':
-        specifier: ^4.0.9
+        specifier: 'catalog:'
         version: 4.0.9(vite@6.2.0(@types/node@22.13.8)(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0))
       '@types/jsdom':
-        specifier: ^21.1.7
+        specifier: 'catalog:'
         version: 21.1.7
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.13.8
       '@vitejs/plugin-vue':
-        specifier: ^5.2.1
+        specifier: 'catalog:'
         version: 5.2.1(vite@6.2.0(@types/node@22.13.8)(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.2))
       '@vue/test-utils':
-        specifier: ^2.4.6
+        specifier: 'catalog:'
         version: 2.4.6
       '@vue/tsconfig':
-        specifier: ^0.7.0
+        specifier: 'catalog:'
         version: 0.7.0(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))
       jsdom:
-        specifier: ^26.0.0
+        specifier: 'catalog:'
         version: 26.0.0
       tailwindcss:
-        specifier: ^4.0.9
+        specifier: 'catalog:'
         version: 4.0.9
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.2
       vite:
-        specifier: ^6.2.0
+        specifier: 'catalog:'
         version: 6.2.0(@types/node@22.13.8)(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0)
       vue-tsc:
-        specifier: ^2.2.8
+        specifier: 'catalog:'
         version: 2.2.8(typescript@5.8.2)
 
 packages:

@@ -22,7 +22,7 @@
     "@sentry/vue": "^9.3.0",
     "pinia": "^3.0.1",
     "pinia-plugin-persistedstate": "^4.2.0",
-    "vue": "^3.5.13",
+    "vue": "catalog:",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
@@ -30,15 +30,17 @@
     "@inlang/paraglide-js": "1.11.8",
     "@inlang/paraglide-vite": "^1.4.0",
     "@pinia/testing": "^1.0.0",
-    "@tailwindcss/vite": "^4.0.9",
+    "@tailwindcss/vite": "catalog:",
     "@tsconfig/node20": "^20.1.4",
-    "@types/jsdom": "^21.1.7",
-    "@vitejs/plugin-vue": "^5.2.1",
-    "@vue/test-utils": "^2.4.6",
-    "@vue/tsconfig": "^0.7.0",
-    "jsdom": "^26.0.0",
-    "tailwindcss": "^4.0.9",
-    "vite": "^6.2.0",
-    "vue-tsc": "^2.2.8"
+    "@types/jsdom": "catalog:",
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue/test-utils": "catalog:",
+    "@vue/tsconfig": "catalog:",
+    "jsdom": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vue-tsc": "catalog:"
   }
 }

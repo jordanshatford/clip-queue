@@ -17,6 +17,8 @@
     "@cq/services": "workspace:*"
   },
   "devDependencies": {
-    "@cq/config": "workspace:*"
+    "@cq/config": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
   }
 }
