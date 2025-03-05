@@ -3,8 +3,20 @@
   "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
   "features": {},
   "forwardPorts": [5173, 24678],
-  "postCreateCommand": "sudo corepack enable && pnpm install",
+  "portsAttributes": {
+    "5173": {
+      "label": "Application",
+      "onAutoForward": "notify"
+    },
+    "24678": {
+      "label": "HMR Server"
+    }
+  },
+  "postCreateCommand": "sudo corepack enable && corepack install && pnpm install",
   "customizations": {
+    "codespaces": {
+      "openFiles": ["CONTRIBUTING.md", "README.md"]
+    },
     "vscode": {
       "extensions": [
         "ms-azuretools.vscode-docker",
