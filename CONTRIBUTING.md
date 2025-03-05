@@ -30,8 +30,8 @@ Setting up the project will require that the above dependencies are all installe
 ```sh
 # Enable corepack, it is disabled by default in the supported versions of NodeJS
 corepack enable
-# Prepare corepack based on the packageManager specified in the projects package.json
-corepack prepare
+# Install corepack based on the packageManager specified in the projects package.json
+corepack install
 # Install all dependencies
 pnpm install
 # Run the projects web app in development mode
