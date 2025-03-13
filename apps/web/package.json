@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@cq/config": "workspace:*",
-    "@inlang/paraglide-js": "1.11.8",
+    "@inlang/paraglide-js": "2.0.0-beta.30",
     "@inlang/paraglide-vite": "^1.4.0",
     "@pinia/testing": "^1.0.0",
     "@tailwindcss/vite": "catalog:",
