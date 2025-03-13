@@ -19,7 +19,7 @@ const { poster, source, autoplay = true, title = undefined } = defineProps<Props
 
 const videoElement = useTemplateRef('videoElement')
 
-// TODO: fix typing once video.js is updated.
+// TODO(jordan): fix typing once video.js is updated.
 // ref: https://github.com/videojs/video.js/issues/8242
 let player: ReturnType<typeof videojs> | undefined = undefined
 
