@@ -27,11 +27,11 @@
   },
   "devDependencies": {
     "@cq/config": "workspace:*",
-    "@inlang/paraglide-js": "1.11.8",
+    "@inlang/paraglide-js": "2.0.4",
     "@inlang/paraglide-vite": "^1.4.0",
     "@pinia/testing": "^1.0.0",
     "@tailwindcss/vite": "catalog:",
-    "@tsconfig/node20": "^20.1.4",
+    "@tsconfig/node20": "^20.1.5",
     "@types/jsdom": "catalog:",
     "@types/node": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
