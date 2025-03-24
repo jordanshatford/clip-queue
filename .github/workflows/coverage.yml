@@ -23,6 +23,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install
+      - name: Run build
+        run: pnpm build
       - name: Run test coverage
         run: pnpm test:coverage
       - name: Upload code coverage to codecov.io
