@@ -7,9 +7,9 @@
             <label for="language">{{ m.language() }}</label>
             <Select
               v-model="formPreferences.language"
-              :options="[...availableLanguageTags]"
+              :options="[...locales]"
               label-id="language"
-              :option-label="(value: AvailableLanguageTag) => languageLabels[value]"
+              :option-label="(value: Locale) => languageLabels[value]"
               aria-describedby="language-help"
             >
             </Select>
@@ -94,11 +94,11 @@ import { ref, toRaw, watch } from 'vue'
 import type { ColorOption } from '@cq/ui'
 import { Button, Card, colors, Message, Select, surfaces, useToast } from '@cq/ui'
 
-import type { AvailableLanguageTag } from '@/paraglide/runtime'
+import type { Locale } from '@/paraglide/runtime'
 import type { Theme } from '@/stores/preferences'
 import ColorName from '@/components/ColorName.vue'
 import * as m from '@/paraglide/messages'
-import { availableLanguageTags } from '@/paraglide/runtime'
+import { locales } from '@/paraglide/runtime'
 import { availableThemes, usePreferences } from '@/stores/preferences'
 
 const toast = useToast()
@@ -112,7 +112,7 @@ const themeLabels: Record<Theme, string> = {
   light: m.theme_light()
 }
 
-const languageLabels: Record<AvailableLanguageTag, string> = {
+const languageLabels: Record<Locale, string> = {
   ar: 'عربي (Arabic)',
   de: 'Deutsch (German)',
   en: 'English',

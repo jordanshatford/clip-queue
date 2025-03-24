@@ -4,13 +4,8 @@ import { computed, ref, watch } from 'vue'
 import type { ColorOption } from '@cq/ui'
 import { colors, setColorPalette, surfaces } from '@cq/ui'
 
-import type { AvailableLanguageTag } from '@/paraglide/runtime'
-import {
-  isAvailableLanguageTag,
-  onSetLanguageTag,
-  setLanguageTag,
-  sourceLanguageTag
-} from '@/paraglide/runtime'
+import type { Locale } from '@/paraglide/runtime'
+import { baseLocale, isLocale, setLocale } from '@/paraglide/runtime'
 
 /**
  * The theme of the application.
@@ -43,16 +38,16 @@ export function getInferredDefaultTheme(fallback: Theme): Theme {
  * @param fallback - The fallback language.
  * @returns The inferred default language.
  */
-export function getInferredDefaultLanguage(fallback: AvailableLanguageTag): AvailableLanguageTag {
+export function getInferredDefaultLanguage(fallback: Locale): Locale {
   if (!window.navigator?.language) {
     return fallback
   }
   const language = window.navigator.language
-  if (isAvailableLanguageTag(language)) {
+  if (isLocale(language)) {
     return language
   }
   const genericLanguage = language.split('-')[0]
-  if (isAvailableLanguageTag(genericLanguage)) {
+  if (isLocale(genericLanguage)) {
     return genericLanguage
   }
   return fallback
@@ -65,7 +60,7 @@ export interface UserPreferences {
   /**
    * The language.
    */
-  language: AvailableLanguageTag
+  language: Locale
   /**
    * The theme.
    */
@@ -81,7 +76,7 @@ export interface UserPreferences {
 }
 
 export const DEFAULTS: UserPreferences = {
-  language: getInferredDefaultLanguage(sourceLanguageTag),
+  language: getInferredDefaultLanguage(baseLocale),
   theme: getInferredDefaultTheme('light'),
   primary: structuredClone(colors[12]), // Purple
   surface: structuredClone(surfaces[2]) // Zinc
@@ -93,11 +88,6 @@ export const usePreferences = defineStore(
     const preferences = ref<UserPreferences>(structuredClone(DEFAULTS))
 
     watch(preferences, updatePreferences, { deep: true })
-
-    onSetLanguageTag((value) => {
-      document.documentElement.lang = value
-      preferences.value.language = value
-    })
 
     const isDark = computed(() => preferences.value.theme === 'dark')
 
@@ -118,10 +108,14 @@ export const usePreferences = defineStore(
 
     function updatePreferences(value: UserPreferences, old?: UserPreferences) {
       if (value.language !== old?.language) {
-        if (isAvailableLanguageTag(value.language)) {
-          setLanguageTag(value.language)
+        if (isLocale(value.language)) {
+          document.documentElement.lang = value.language
+          preferences.value.language = value.language
+          setLocale(value.language, { reload: false })
         } else {
-          setLanguageTag(DEFAULTS.language)
+          document.documentElement.lang = value.language
+          preferences.value.language = value.language
+          setLocale(DEFAULTS.language, { reload: false })
         }
       }
       if (value.primary.name !== old?.primary.name) {
