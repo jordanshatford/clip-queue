@@ -183,9 +183,24 @@ describe('clips.ts', () => {
     const queue = useQueue()
     const settings = useSettings()
     settings.queue.limit = 2
-    queue.add({ ...clipFromTwitch, id: 'test', submitters: ['s'], provider: ClipProvider.TWITCH })
-    queue.add({ ...clipFromTwitch, id: 'test2', submitters: ['s'], provider: ClipProvider.TWITCH })
-    queue.add({ ...clipFromTwitch, id: 'test3', submitters: ['s'], provider: ClipProvider.TWITCH })
+    queue.add({
+      ...clipFromTwitch,
+      id: 'test',
+      submitters: ['s'],
+      provider: ClipProvider.TWITCH
+    })
+    queue.add({
+      ...clipFromTwitch,
+      id: 'test2',
+      submitters: ['s'],
+      provider: ClipProvider.TWITCH
+    })
+    queue.add({
+      ...clipFromTwitch,
+      id: 'test3',
+      submitters: ['s'],
+      provider: ClipProvider.TWITCH
+    })
     expect(queue.upcoming.size()).toEqual(2)
   })
 

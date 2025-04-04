@@ -191,7 +191,10 @@ describe('clip-list.ts', () => {
     clipList2.add(clipFromTwitch)
     clipList2.add({ ...clipFromTwitch, submitters: ['testsubmitter2'] })
     expect(clipList2.size()).toEqual(1)
-    clipList2.remove({ ...clipFromTwitch, submitters: ['testsubmittertwitch'] })
+    clipList2.remove({
+      ...clipFromTwitch,
+      submitters: ['testsubmittertwitch']
+    })
     expect(clipList2.size()).toEqual(1)
     const queuedClip = clipList2.pop()
     expect(queuedClip?.submitters[0]).toEqual('testsubmitter2')
@@ -203,13 +206,25 @@ describe('clip-list.ts', () => {
   it('sorts the list of clips based on number of submitters', () => {
     const clipList2 = new ClipList()
     for (let i = 1; i <= 8; i++) {
-      clipList2.add({ ...clipFromTwitch, id: 'test', submitters: [`submitter${i}`] })
+      clipList2.add({
+        ...clipFromTwitch,
+        id: 'test',
+        submitters: [`submitter${i}`]
+      })
     }
     for (let i = 1; i <= 10; i++) {
-      clipList2.add({ ...clipFromTwitch, id: 'test2', submitters: [`submitter${i}`] })
+      clipList2.add({
+        ...clipFromTwitch,
+        id: 'test2',
+        submitters: [`submitter${i}`]
+      })
     }
     for (let i = 1; i <= 3; i++) {
-      clipList2.add({ ...clipFromTwitch, id: 'test3', submitters: [`submitter${i}`] })
+      clipList2.add({
+        ...clipFromTwitch,
+        id: 'test3',
+        submitters: [`submitter${i}`]
+      })
     }
     const clipListArray2 = clipList2.toArray()
     expect(clipListArray2[0]?.id).toEqual('test2')
@@ -220,13 +235,25 @@ describe('clip-list.ts', () => {
   it('sorts the list of clips based on number of submitters then the time submitted', () => {
     const clipList2 = new ClipList()
     for (let i = 1; i <= 10; i++) {
-      clipList2.add({ ...clipFromTwitch, id: 'test', submitters: [`submitter${i}`] })
+      clipList2.add({
+        ...clipFromTwitch,
+        id: 'test',
+        submitters: [`submitter${i}`]
+      })
     }
     for (let i = 1; i <= 10; i++) {
-      clipList2.add({ ...clipFromTwitch, id: 'test2', submitters: [`submitter${i}`] })
+      clipList2.add({
+        ...clipFromTwitch,
+        id: 'test2',
+        submitters: [`submitter${i}`]
+      })
     }
     for (let i = 1; i <= 10; i++) {
-      clipList2.add({ ...clipFromTwitch, id: 'test3', submitters: [`submitter${i}`] })
+      clipList2.add({
+        ...clipFromTwitch,
+        id: 'test3',
+        submitters: [`submitter${i}`]
+      })
     }
     const clipListArray2 = clipList2.toArray()
     expect(clipListArray2[0]?.id).toEqual('test')

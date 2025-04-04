@@ -241,7 +241,7 @@
 
 ### Minor Changes
 
-- feat: redesign navbar using primvue menubar ([`464b48fe65f554853090e822aa64565b77d2cd7b`](https://github.com/jordanshatford/clip-queue/commit/464b48fe65f554853090e822aa64565b77d2cd7b))
+- feat: redesign navbar using primevue menubar ([`464b48fe65f554853090e822aa64565b77d2cd7b`](https://github.com/jordanshatford/clip-queue/commit/464b48fe65f554853090e822aa64565b77d2cd7b))
 
 ### Patch Changes
 

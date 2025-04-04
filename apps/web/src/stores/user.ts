@@ -16,7 +16,11 @@ export const useUser = defineStore(
 
     const hasValidatedToken = ref<boolean>(false)
     const isLoggedIn = ref<boolean>(false)
-    const ctx = ref<TwitchUserCtx>({ id: CLIENT_ID, token: undefined, username: undefined })
+    const ctx = ref<TwitchUserCtx>({
+      id: CLIENT_ID,
+      token: undefined,
+      username: undefined
+    })
 
     function redirect(): void {
       twitch.redirect(ctx.value, REDIRECT_URI, ['openid', 'chat:read'])

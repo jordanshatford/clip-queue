@@ -39,7 +39,11 @@ describe('user.ts', () => {
     expect(user.isLoggedIn).toEqual(true)
     expect(user.ctx.token).toEqual('aToken')
     expect(user.ctx.username).toEqual('username')
-    expect(user.ctx).toEqual({ id: 'testClientId', token: 'aToken', username: 'username' })
+    expect(user.ctx).toEqual({
+      id: 'testClientId',
+      token: 'aToken',
+      username: 'username'
+    })
   })
 
   it('updates the login info if the username changes', async () => {
@@ -52,7 +56,11 @@ describe('user.ts', () => {
     expect(user.isLoggedIn).toEqual(true)
     expect(user.ctx.token).toEqual('aToken')
     expect(user.ctx.username).toEqual('username2')
-    expect(user.ctx).toEqual({ id: 'testClientId', token: 'aToken', username: 'username2' })
+    expect(user.ctx).toEqual({
+      id: 'testClientId',
+      token: 'aToken',
+      username: 'username2'
+    })
   })
 
   it('logs out the user', async () => {
@@ -65,6 +73,10 @@ describe('user.ts', () => {
     expect(user.isLoggedIn).toEqual(false)
     expect(user.ctx.token).toEqual(undefined)
     expect(user.ctx.username).toEqual(undefined)
-    expect(user.ctx).toEqual({ id: 'testClientId', token: undefined, username: undefined })
+    expect(user.ctx).toEqual({
+      id: 'testClientId',
+      token: undefined,
+      username: undefined
+    })
   })
 })

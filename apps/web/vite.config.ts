@@ -8,7 +8,10 @@ import { defineConfig } from 'vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    paraglideVitePlugin({ project: './project.inlang', outdir: './src/paraglide' }),
+    paraglideVitePlugin({
+      project: './project.inlang',
+      outdir: './src/paraglide'
+    }),
     tailwindcss(),
     vue()
   ],
