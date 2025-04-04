@@ -6,13 +6,13 @@ import { getAllURLsFromText } from './utils'
  */
 export enum ClipSource {
   /**
-   * The Clip Queue Web Application itself.
+   * Unknown source.
    */
-  APPLICATION = 'Clip Queue Application',
+  UNKNOWN = 'Unknown',
   /**
    * The Twitch Chat.
    */
-  TWITCH_CHAT = 'Twitch Chat'
+  TWITCH = 'Twitch'
 }
 
 /**

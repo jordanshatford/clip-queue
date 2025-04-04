@@ -26,8 +26,8 @@ describe('utils.ts', () => {
   })
 
   it.each([
-    [ClipSource.APPLICATION, 'testuser', 'clip queue application:testuser'],
-    [ClipSource.TWITCH_CHAT, 'testuser', 'twitch chat:testuser']
+    [ClipSource.UNKNOWN, 'testuser', 'unknown:testuser'],
+    [ClipSource.TWITCH, 'testuser', 'twitch:testuser']
   ])(
     'returns a uuid for a given clip',
     (source: ClipSource, submitter: string, expected: string) => {

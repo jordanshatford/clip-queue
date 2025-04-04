@@ -11,7 +11,7 @@ import { useSettings } from '@/stores/settings'
 import commands, { Command } from '../commands'
 
 const MOCK_EVENT: ClipSourceEvent<ClipSourceMessage> = {
-  source: ClipSource.TWITCH_CHAT,
+  source: ClipSource.TWITCH,
   timestamp: '2021-01-01T00:00:00Z',
   data: {
     channel: 'testchannel',

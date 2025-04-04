@@ -6,7 +6,7 @@ import { BaseClipSource, ClipSource, ClipSourceStatus } from './types'
  * Twitch Chat Source.
  */
 export class TwitchChatSource extends BaseClipSource {
-  public name = ClipSource.TWITCH_CHAT
+  public name = ClipSource.TWITCH
   public svg = twitch.logo
 
   private chat = new TwitchChat()
@@ -37,7 +37,11 @@ export class TwitchChatSource extends BaseClipSource {
       })
     })
     this.chat.on('messagedeleted', (channel, username, message) =>
-      this.handleMessageDeleted({ channel: this.toChannel(channel), username, text: message })
+      this.handleMessageDeleted({
+        channel: this.toChannel(channel),
+        username,
+        text: message
+      })
     )
     this.chat.on('timeout', (channel, username) =>
       this.handleModeration({ channel: this.toChannel(channel), username })
