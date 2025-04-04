@@ -1,5 +1,11 @@
 # @cq/sources
 
+## 1.5.0
+
+### Minor Changes
+
+- feat: simplify clip sources enumeration ([`68bef43`](https://github.com/jordanshatford/clip-queue/commit/68bef43fb6346fb90ca7098daf7edb5fc308f173))
+
 ## 1.4.1
 
 ### Patch Changes
