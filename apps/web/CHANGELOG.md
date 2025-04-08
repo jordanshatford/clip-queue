@@ -1,5 +1,16 @@
 # @cq/web
 
+## 1.32.0
+
+### Minor Changes
+
+- feat: update to use primevue volt instead of tailwind styles ([`966600a`](https://github.com/jordanshatford/clip-queue/commit/966600ad4dfcedf5d38b33c4864cd72b301ac11c))
+
+### Patch Changes
+
+- Updated dependencies [[`966600a`](https://github.com/jordanshatford/clip-queue/commit/966600ad4dfcedf5d38b33c4864cd72b301ac11c)]:
+  - @cq/ui@1.7.0
+
 ## 1.31.4
 
 ### Patch Changes
