@@ -1,5 +1,13 @@
 # @cq/web
 
+## 1.32.1
+
+### Patch Changes
+
+- fix: confirm modals in other settings not working ([`a886a87`](https://github.com/jordanshatford/clip-queue/commit/a886a87a74d3b7b3201cf91342902e9b0f1d4081))
+
+- fix: navigation bar items in dark theme ([`2b92f25`](https://github.com/jordanshatford/clip-queue/commit/2b92f259460f5361c5c8dfb9ad96d7dbf5de0886))
+
 ## 1.32.0
 
 ### Minor Changes
