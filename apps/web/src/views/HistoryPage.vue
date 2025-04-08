@@ -127,14 +127,10 @@ function deleteClips() {
     header: m.delete_history(),
     message: m.delete_history_confirm({ length: clips.length }),
     rejectProps: {
-      label: m.cancel(),
-      class:
-        'text-white dark:text-surface-900 bg-surface-500 dark:bg-surface-400 border border-surface-500 dark:border-surface-400 hover:bg-surface-600 dark:hover:bg-surface-300 hover:border-surface-600 dark:hover:border-surface-300 focus:ring-surface-400/50 dark:focus:ring-surface-300/50'
+      label: m.cancel()
     },
     acceptProps: {
-      label: m.confirm(),
-      class:
-        'text-white dark:text-surface-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-300 hover:border-red-600 dark:hover:border-red-300 focus:ring-red-400/50 dark:focus:ring-red-300/50'
+      label: m.confirm()
     },
     accept: () => {
       for (const clip of clips) {

@@ -75,12 +75,12 @@ async function resetSettingsToDefault() {
   confirm.require({
     header: m.reset_settings(),
     message: m.reset_settings_confirm(),
-    rejectLabel: m.cancel(),
-    acceptLabel: m.confirm(),
-    rejectClass:
-      'text-white dark:text-surface-900 bg-surface-500 dark:bg-surface-400 border border-surface-500 dark:border-surface-400 hover:bg-surface-600 dark:hover:bg-surface-300 hover:border-surface-600 dark:hover:border-surface-300 focus:ring-surface-400/50 dark:focus:ring-surface-300/50',
-    acceptClass:
-      'text-white dark:text-surface-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-300 hover:border-red-600 dark:hover:border-red-300 focus:ring-red-400/50 dark:focus:ring-red-300/50',
+    acceptProps: {
+      label: m.confirm()
+    },
+    rejectProps: {
+      label: m.cancel()
+    },
     accept: () => {
       settings.$reset()
       preferences.$reset()
@@ -99,12 +99,12 @@ async function purgeHistory() {
   confirm.require({
     header: m.purge_history(),
     message: m.purge_history_confirm(),
-    rejectLabel: m.cancel(),
-    acceptLabel: m.confirm(),
-    rejectClass:
-      'text-white dark:text-surface-900 bg-surface-500 dark:bg-surface-400 border border-surface-500 dark:border-surface-400 hover:bg-surface-600 dark:hover:bg-surface-300 hover:border-surface-600 dark:hover:border-surface-300 focus:ring-surface-400/50 dark:focus:ring-surface-300/50',
-    acceptClass:
-      'text-white dark:text-surface-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-300 hover:border-red-600 dark:hover:border-red-300 focus:ring-red-400/50 dark:focus:ring-red-300/50',
+    acceptProps: {
+      label: m.confirm()
+    },
+    rejectProps: {
+      label: m.cancel()
+    },
     accept: () => {
       queue.purge()
       toast.add({
@@ -122,12 +122,12 @@ async function purgeCache() {
   confirm.require({
     header: m.purge_cache(),
     message: m.purge_cache_confirm(),
-    rejectLabel: m.cancel(),
-    acceptLabel: m.confirm(),
-    rejectClass:
-      'text-white dark:text-surface-900 bg-surface-500 dark:bg-surface-400 border border-surface-500 dark:border-surface-400 hover:bg-surface-600 dark:hover:bg-surface-300 hover:border-surface-600 dark:hover:border-surface-300 focus:ring-surface-400/50 dark:focus:ring-surface-300/50',
-    acceptClass:
-      'text-white dark:text-surface-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-300 hover:border-red-600 dark:hover:border-red-300 focus:ring-red-400/50 dark:focus:ring-red-300/50',
+    acceptProps: {
+      label: m.confirm()
+    },
+    rejectProps: {
+      label: m.cancel()
+    },
     accept: () => {
       providers.purge()
       toast.add({
