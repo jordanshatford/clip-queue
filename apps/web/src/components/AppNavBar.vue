@@ -10,7 +10,7 @@
         <div v-for="route in allowedRoutes" :key="route.name">
           <RouterLink
             :to="{ name: route.name }"
-            class="bg-surface hover:bg-surface-100 active:bg-surface-100 text-surface-contrast focus-visible:outline-surface jusitfy-center flex items-center gap-1 rounded-md px-3 py-2 font-medium focus-visible:outline focus-visible:outline-offset-2"
+            class="bg-surface hover:bg-surface-100 dark:hover:bg-surface-800 dark:active:bg-surface-800 active:bg-surface-100 text-surface-800 dark:text-surface-100 jusitfy-center flex items-center gap-1 rounded-md px-3 py-2 font-medium"
           >
             <span :class="route.meta?.icon"></span>
             <span class="ml-2">{{ routeTranslations[route.name as RouteNameConstants]() }}</span>
