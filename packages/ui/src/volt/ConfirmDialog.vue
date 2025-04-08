@@ -45,6 +45,7 @@ const theme = ref<ConfirmDialogPassThroughOptions>({
         bg-surface-0 dark:bg-surface-900
         text-surface-700 dark:text-surface-0 shadow-lg`,
     mask: `bg-black/50 fixed top-0 start-0 w-full h-full`,
+    // @ts-ignore
     transition: {
         enterFromClass: 'opacity-0 scale-75',
         enterActiveClass: 'transition-all duration-150 ease-[cubic-bezier(0,0,0.2,1)]',

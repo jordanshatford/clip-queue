@@ -1,4 +1,5 @@
 <template>
+    <!-- @vue-ignore -->
     <Tabs
         unstyled
         :pt="theme"
