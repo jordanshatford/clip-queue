@@ -23,24 +23,22 @@
           </a>
         </div>
         <div class="flex gap-2">
-          <Button
+          <SecondaryButton
             icon="pi pi-backward"
             :label="m.previous()"
-            severity="info"
             size="small"
             :disabled="previousDisabled"
             @click="emit('previous')"
           >
-          </Button>
-          <Button
+          </SecondaryButton>
+          <SecondaryButton
             icon="pi pi-forward"
             icon-pos="right"
             :label="m.next()"
-            severity="info"
             size="small"
             @click="emit('next')"
           >
-          </Button>
+          </SecondaryButton>
         </div>
       </div>
       <div class="text-surface-400 flex flex-col gap-1 text-sm font-normal">
@@ -62,7 +60,7 @@ import { computed } from 'vue'
 
 import type { Clip, PlayerFormat } from '@cq/providers'
 import { Player } from '@cq/player'
-import { Button } from '@cq/ui'
+import { SecondaryButton } from '@cq/ui'
 
 import * as m from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'

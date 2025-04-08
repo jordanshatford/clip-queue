@@ -51,21 +51,19 @@
           }}</Message>
         </div>
         <div class="mt-3">
-          <Button
+          <SecondaryButton
             :label="m.save()"
             class="mr-2"
             type="submit"
-            severity="info"
             size="small"
             :disabled="!settings.isQueueSettingsModified(formSettings)"
-          ></Button>
-          <Button
+          ></SecondaryButton>
+          <DangerButton
             :label="m.cancel()"
             type="reset"
-            severity="danger"
             size="small"
             :disabled="!settings.isQueueSettingsModified(formSettings)"
-          ></Button>
+          ></DangerButton>
         </div>
       </form>
     </template>
@@ -77,12 +75,13 @@ import { ref, toRaw } from 'vue'
 
 import { ClipProvider } from '@cq/providers'
 import {
-  Button,
   Card,
   Chip,
+  DangerButton,
   InputNumber,
   Message,
   MultiSelect,
+  SecondaryButton,
   ToggleSwitch,
   useToast
 } from '@cq/ui'

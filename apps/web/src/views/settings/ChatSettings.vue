@@ -4,23 +4,34 @@
       <template #content>
         <div class="m-0 flex flex-col gap-2 p-0 text-left">
           <label for="username">{{ m.connected_chat_colon() }}</label>
-          <InputGroup>
-            <InputGroupAddon>
-              <!-- eslint-disable-next-line vue/no-v-html -->
+          <div class="flex w-full items-stretch">
+            <span
+              class="border-surface-300 dark:border-surface-700 bg-surface-0 dark:bg-surface-950 text-surface-400 flex min-w-10 items-center justify-center rounded-s-md border-y border-s"
+            >
               <svg class="h-5 w-5" v-html="sources.logo"></svg>
-            </InputGroupAddon>
-            <InputText id="username" v-model="user.ctx.username" readonly fluid />
-            <InputGroupAddon>
+            </span>
+            <InputText
+              id="username"
+              v-model="user.ctx.username"
+              readonly
+              fluid
+              pt:root="flex-1 rounded-none"
+            />
+            <span
+              class="border-surface-300 dark:border-surface-700 bg-surface-0 dark:bg-surface-950 text-surface-400 flex min-w-10 items-center justify-center gap-2 rounded-none border-y border-e px-2"
+            >
               <SourceIndicator :status="sources.status" />
-            </InputGroupAddon>
-            <InputGroupAddon>
+            </span>
+            <span
+              class="border-surface-300 dark:border-surface-700 bg-surface-0 dark:bg-surface-950 text-surface-400 flex min-w-10 items-center justify-center gap-2 rounded-e-md border-y border-e px-2"
+            >
               <i
                 v-tooltip="m.reconnect()"
                 class="pi pi-refresh hover:cursor-pointer"
                 @click="sources.reconnect()"
               ></i>
-            </InputGroupAddon>
-          </InputGroup>
+            </span>
+          </div>
         </div>
       </template>
     </Card>
@@ -61,21 +72,19 @@
             }}</Message>
           </div>
           <div class="mt-3">
-            <Button
-              severity="info"
+            <SecondaryButton
               :label="m.save()"
               size="small"
               class="mr-2"
               type="submit"
               :disabled="!settings.isCommandsSettingsModified(formSettings)"
-            ></Button>
-            <Button
+            ></SecondaryButton>
+            <DangerButton
               type="reset"
-              severity="danger"
               :label="m.cancel()"
               size="small"
               :disabled="!settings.isCommandsSettingsModified(formSettings)"
-            ></Button>
+            ></DangerButton>
           </div>
         </form>
       </template>
@@ -87,13 +96,12 @@
 import { ref, toRaw } from 'vue'
 
 import {
-  Button,
   Card,
-  InputGroup,
-  InputGroupAddon,
+  DangerButton,
   InputText,
   Message,
   MultiSelect,
+  SecondaryButton,
   useToast
 } from '@cq/ui'
 

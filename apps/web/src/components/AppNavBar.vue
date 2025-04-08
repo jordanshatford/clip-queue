@@ -1,24 +1,22 @@
 <template>
-  <Menubar :model="items" class="sticky top-0 z-40 mx-auto sm:px-16 md:px-20 lg:px-32">
-    <template #start>
-      <RouterLink :to="{ name: RouteNameConstants.HOME }" class="mr-2 flex shrink-0 items-center">
-        <img class="aspect-square w-10" src="/icon.png" />
-      </RouterLink>
-    </template>
-    <template #item="{ item, props, hasSubmenu }">
-      <RouterLink v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
-        <a :href v-bind="props.action" @click="navigate">
-          <span :class="item.icon"></span>
-          <span class="ml-2">{{ item.label }}</span>
-        </a>
-      </RouterLink>
-      <a v-else :href="item.url" :target="item.target" v-bind="props.action">
-        <span :class="item.icon"></span>
-        <span class="ml-2">{{ item.label }}</span>
-        <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down ml-2"></span>
-      </a>
-    </template>
-    <template #end>
+  <div
+    class="bg-surface-0 dark:bg-surface-900 border-surface-200 dark:border-surface-700 mx-auto w-full border p-2 sm:px-16 md:px-20 lg:px-32"
+  >
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <RouterLink :to="{ name: RouteNameConstants.HOME }" class="mr-2 flex shrink-0 items-center">
+          <img class="aspect-square w-10" src="/icon.png" />
+        </RouterLink>
+        <div v-for="route in allowedRoutes" :key="route.name">
+          <RouterLink
+            :to="{ name: route.name }"
+            class="bg-surface hover:bg-surface-100 active:bg-surface-100 text-surface-contrast focus-visible:outline-surface jusitfy-center flex items-center gap-1 rounded-md px-3 py-2 font-medium focus-visible:outline focus-visible:outline-offset-2"
+          >
+            <span :class="route.meta?.icon"></span>
+            <span class="ml-2">{{ routeTranslations[route.name as RouteNameConstants]() }}</span>
+          </RouterLink>
+        </div>
+      </div>
       <div class="flex items-center gap-2">
         <ThemeToggle :is-dark-mode="preferences.isDark" @toggle="preferences.toggleTheme()" />
         <Button
@@ -29,26 +27,23 @@
         >
         </Button>
       </div>
-    </template>
-  </Menubar>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { Button, Menubar, ThemeToggle } from '@cq/ui'
+import { Button, ThemeToggle } from '@cq/ui'
 
 import * as m from '@/paraglide/messages'
-import { RouteNameConstants, routes, toAllowedMenuItems } from '@/router'
+import { allowedRoutes, RouteNameConstants, routeTranslations } from '@/router'
 import { usePreferences } from '@/stores/preferences'
 import { useUser } from '@/stores/user'
 
 const preferences = usePreferences()
 const user = useUser()
 const router = useRouter()
-
-const items = computed(() => toAllowedMenuItems(routes, true))
 
 async function handleAuthButtonClick() {
   if (user.isLoggedIn) {

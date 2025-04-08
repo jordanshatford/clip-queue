@@ -1,9 +1,6 @@
-import type { ComputedRef } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { computed } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-
-import type { MenuItem } from '@cq/ui'
 
 import { config } from '@/config'
 import * as m from '@/paraglide/messages'
@@ -143,38 +140,22 @@ router.beforeEach(async (to, _from, next) => {
 
 export default router
 
-export const routeNameTranslations: ComputedRef<Record<RouteNameConstants, string>> = computed(
-  () => ({
-    [RouteNameConstants.HOME]: '',
-    [RouteNameConstants.QUEUE]: m.queue(),
-    [RouteNameConstants.HISTORY]: m.history(),
-    [RouteNameConstants.SETTINGS]: m.settings(),
-    [RouteNameConstants.SETTINGS_CHAT]: m.settings_chat(),
-    [RouteNameConstants.SETTINGS_QUEUE]: m.settings_queue(),
-    [RouteNameConstants.SETTINGS_PREFERENCES]: m.settings_preferences(),
-    [RouteNameConstants.SETTINGS_OTHER]: m.settings_other()
-  })
-)
+// Translations for each of the routes.
+export const routeTranslations = {
+  [RouteNameConstants.HOME]: () => '',
+  [RouteNameConstants.QUEUE]: m.queue,
+  [RouteNameConstants.HISTORY]: m.history,
+  [RouteNameConstants.SETTINGS]: m.settings,
+  [RouteNameConstants.SETTINGS_CHAT]: m.settings_chat,
+  [RouteNameConstants.SETTINGS_QUEUE]: m.settings_queue,
+  [RouteNameConstants.SETTINGS_PREFERENCES]: m.settings_preferences,
+  [RouteNameConstants.SETTINGS_OTHER]: m.settings_other
+}
 
 /**
- * Convert list of routes to MenuItem used by UI. These are authorized routes only.
- * @param routes - the routes to use.
- * @param recursive - if children routes should be included.
- * @returns MenuItem[]
+ * Returns list of allowed routes for the current user.
  */
-export function toAllowedMenuItems(
-  routes: RouteRecordRaw[],
-  recursive: boolean = false
-): MenuItem[] {
+export const allowedRoutes = computed(() => {
   const user = useUser()
-  return routes
-    .filter((r) => (r.meta?.requiresAuth && user.isLoggedIn) || !r.meta?.requiresAuth)
-    .map((r) => {
-      return {
-        icon: r.meta?.icon ? r.meta.icon : undefined,
-        label: r?.name ? routeNameTranslations.value[r.name as RouteNameConstants] : '',
-        route: r.children && recursive ? undefined : { name: r.name },
-        items: recursive && r.children ? toAllowedMenuItems(r.children, recursive) : undefined
-      }
-    })
-}
+  return routes.filter((r) => (r.meta?.requiresAuth && user.isLoggedIn) || !r.meta?.requiresAuth)
+})

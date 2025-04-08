@@ -1,21 +1,21 @@
 <template>
   <div class="flex flex-row-reverse gap-2">
-    <Button
+    <DangerButton
       icon="pi pi-trash"
       :label="m.delete_label()"
       :disabled="!selection.length"
       severity="danger"
       size="small"
       @click="deleteClips()"
-    ></Button>
-    <Button
+    ></DangerButton>
+    <SecondaryButton
       icon="pi pi-plus"
       :label="m.queue()"
       :disabled="isQueueClipsDisabled"
       severity="info"
       size="small"
       @click="queueClips()"
-    ></Button>
+    ></SecondaryButton>
   </div>
   <DataTable
     v-model:selection="selection"
@@ -27,16 +27,18 @@
     removable-sort
     :rows="10"
     :rows-per-page-options="[10, 20, 50]"
-    class="my-4"
+    class="my-2"
   >
     <template #empty>{{ m.no_clips_previously_watched() }}</template>
     <template #header>
       <div class="mb-2 flex items-center justify-between">
         <span class="text-xl">{{ m.history() }}</span>
-        <IconField>
-          <InputIcon class="pi pi-search" />
-          <InputText v-model="filters['global'].value" size="small" :placeholder="m.search()" />
-        </IconField>
+        <div class="relative">
+          <i
+            class="pi pi-search text-surface-400 absolute start-3 top-1/2 z-1 -mt-2 leading-none"
+          />
+          <InputText v-model="filters['global'].value" :placeholder="m.search()" pt:root="ps-10" />
+        </div>
       </div>
     </template>
     <Column selection-mode="multiple" header-style="width: 3rem"></Column>
@@ -92,7 +94,7 @@
 import { computed, ref } from 'vue'
 
 import type { Clip } from '@cq/providers'
-import { Button, Column, DataTable, IconField, InputIcon, InputText, useConfirm } from '@cq/ui'
+import { Column, DangerButton, DataTable, InputText, SecondaryButton, useConfirm } from '@cq/ui'
 
 import ProviderName from '@/components/ProviderName.vue'
 import * as m from '@/paraglide/messages'
@@ -124,12 +126,16 @@ function deleteClips() {
   confirm.require({
     header: m.delete_history(),
     message: m.delete_history_confirm({ length: clips.length }),
-    rejectLabel: m.cancel(),
-    acceptLabel: m.confirm(),
-    rejectClass:
-      'text-white dark:text-surface-900 bg-surface-500 dark:bg-surface-400 border border-surface-500 dark:border-surface-400 hover:bg-surface-600 dark:hover:bg-surface-300 hover:border-surface-600 dark:hover:border-surface-300 focus:ring-surface-400/50 dark:focus:ring-surface-300/50',
-    acceptClass:
-      'text-white dark:text-surface-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-300 hover:border-red-600 dark:hover:border-red-300 focus:ring-red-400/50 dark:focus:ring-red-300/50',
+    rejectProps: {
+      label: m.cancel(),
+      class:
+        'text-white dark:text-surface-900 bg-surface-500 dark:bg-surface-400 border border-surface-500 dark:border-surface-400 hover:bg-surface-600 dark:hover:bg-surface-300 hover:border-surface-600 dark:hover:border-surface-300 focus:ring-surface-400/50 dark:focus:ring-surface-300/50'
+    },
+    acceptProps: {
+      label: m.confirm(),
+      class:
+        'text-white dark:text-surface-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-300 hover:border-red-600 dark:hover:border-red-300 focus:ring-red-400/50 dark:focus:ring-red-300/50'
+    },
     accept: () => {
       for (const clip of clips) {
         queue.removeFromHistory(clip)

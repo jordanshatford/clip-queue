@@ -26,26 +26,22 @@
         </div>
       </div>
       <div class="flex justify-between gap-3">
-        <Button
-          v-tooltip="m.play()"
+        <SecondaryButton
           class="grow"
           icon="pi pi-play"
           :label="m.play()"
-          severity="info"
           size="small"
           @click="emit('play')"
         >
-        </Button>
-        <Button
-          v-tooltip="m.remove()"
+        </SecondaryButton>
+        <DangerButton
           class="grow"
           icon="pi pi-trash"
           :label="m.remove()"
-          severity="danger"
           size="small"
           @click="emit('remove')"
         >
-        </Button>
+        </DangerButton>
       </div>
     </template>
   </Card>
@@ -53,7 +49,7 @@
 
 <script setup lang="ts">
 import type { Clip } from '@cq/providers'
-import { Button, Card } from '@cq/ui'
+import { Card, DangerButton, SecondaryButton } from '@cq/ui'
 
 import ProviderName from '@/components/ProviderName.vue'
 import * as m from '@/paraglide/messages'

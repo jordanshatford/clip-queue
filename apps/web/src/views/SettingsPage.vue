@@ -2,11 +2,20 @@
   <div class="mx-auto mb-3 max-w-xl">
     <Tabs :value="active">
       <TabList>
-        <Tab v-for="tab in tabs" :key="tab.label?.toString()" :value="tab.route.name">
-          <RouterLink v-if="tab.route" v-slot="{ href, navigate }" :to="tab.route" custom>
+        <Tab
+          v-for="setting in settingsRoutes"
+          :key="setting.name"
+          :value="setting?.name?.toString() ?? ''"
+        >
+          <RouterLink
+            v-if="setting.name"
+            v-slot="{ href, navigate }"
+            :to="{ name: setting.name }"
+            custom
+          >
             <a :href class="flex items-center gap-2 text-inherit" @click="navigate">
-              <i :class="tab.icon"></i>
-              <span>{{ tab.label }}</span>
+              <i :class="setting.meta?.icon"></i>
+              <span>{{ routeTranslations[setting.name as RouteNameConstants]() }}</span>
             </a>
           </RouterLink>
         </Tab>
@@ -22,12 +31,12 @@ import { useRoute } from 'vue-router'
 
 import { Tab, TabList, Tabs } from '@cq/ui'
 
-import { RouteNameConstants, routes, toAllowedMenuItems } from '@/router'
+import { allowedRoutes, RouteNameConstants, routeTranslations } from '@/router'
 
 const route = useRoute()
 
-const settingChildren = routes.find((r) => r.name === RouteNameConstants.SETTINGS)?.children ?? []
-const tabs = toAllowedMenuItems(settingChildren)
+const settingsRoutes =
+  allowedRoutes.value.find((r) => r.name === RouteNameConstants.SETTINGS)?.children ?? []
 
 const active = computed(() => route?.name?.toString() ?? '')
 </script>

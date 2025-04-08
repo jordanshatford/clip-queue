@@ -1,15 +1,14 @@
 <template>
   <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
-      <Button
+      <DangerButton
         :label="m.reset_settings()"
         class="mb-2"
         fluid
         size="small"
-        severity="danger"
         :disabled="!(settings.isModified || preferences.isModified)"
         @click="resetSettingsToDefault()"
-      ></Button>
+      ></DangerButton>
       <Message size="small" severity="secondary" variant="simple">{{
         m.reset_settings_description()
       }}</Message>
@@ -17,15 +16,14 @@
   </Card>
   <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
-      <Button
+      <DangerButton
         :label="m.purge_history()"
         class="mb-2"
         fluid
         size="small"
-        severity="danger"
         :disabled="queue.history.empty()"
         @click="purgeHistory()"
-      ></Button>
+      ></DangerButton>
       <Message size="small" severity="secondary" variant="simple">{{
         m.purge_history_description()
       }}</Message>
@@ -33,15 +31,14 @@
   </Card>
   <Card class="mx-auto mb-2 max-w-lg text-left">
     <template #content>
-      <Button
+      <DangerButton
         :label="m.purge_cache()"
         class="mb-2"
         fluid
         size="small"
-        severity="danger"
         :disabled="!providers.hasCachedData"
         @click="purgeCache()"
-      ></Button>
+      ></DangerButton>
       <Message size="small" severity="secondary" variant="simple">{{
         m.purge_cache_description()
       }}</Message>
@@ -57,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { Button, Card, Message, useConfirm, useToast } from '@cq/ui'
+import { Card, DangerButton, Message, useConfirm, useToast } from '@cq/ui'
 
 import * as m from '@/paraglide/messages'
 import { usePreferences } from '@/stores/preferences'

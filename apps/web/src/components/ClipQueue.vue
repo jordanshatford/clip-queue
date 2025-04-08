@@ -2,26 +2,27 @@
   <div class="mx-0 mt-4">
     <div class="border-surface-300 dark:border-surface-700 mt-1 mb-2 w-full border-t"></div>
     <div class="float-right">
-      <Button
-        severity="info"
+      <SecondaryButton
         :label="m.clear()"
         size="small"
         :disabled="clips.length === 0"
         class="ml-2"
         @click="emit('clear')"
       >
-      </Button>
-      <Button
-        :severity="isOpen ? 'danger' : 'info'"
+      </SecondaryButton>
+      <component
+        :is="isOpen ? DangerButton : SecondaryButton"
         :label="isOpen ? m.close() : m.open()"
         size="small"
         class="ml-2"
         @click="isOpen ? emit('close') : emit('open')"
       >
-      </Button>
+      </component>
     </div>
     <div class="text-left">
-      <p class="text-surface-600 dark:text-surface-400 text-lg font-normal">{{ title }}</p>
+      <p class="text-surface-600 dark:text-surface-400 text-lg font-normal">
+        {{ title }}
+      </p>
       <span class="text-surface-400 dark:text-surface-600 mt-3 text-sm font-normal">
         {{ m.clips({ length: clips.length }) }}
       </span>
@@ -42,7 +43,7 @@
 <script setup lang="ts">
 import type { Clip } from '@cq/providers'
 import { toClipUUID } from '@cq/providers'
-import { Button } from '@cq/ui'
+import { DangerButton, SecondaryButton } from '@cq/ui'
 
 import ClipCard from '@/components/ClipCard.vue'
 import * as m from '@/paraglide/messages'

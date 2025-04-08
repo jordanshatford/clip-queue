@@ -66,21 +66,19 @@
             }}</Message>
           </div>
           <div class="mt-3">
-            <Button
-              severity="info"
+            <SecondaryButton
               :label="m.save()"
               size="small"
               class="mr-2"
               type="submit"
               :disabled="!preferences.isModifiedFrom(formPreferences)"
-            ></Button>
-            <Button
+            ></SecondaryButton>
+            <DangerButton
               type="reset"
-              severity="danger"
               :label="m.cancel()"
               size="small"
               :disabled="!preferences.isModifiedFrom(formPreferences)"
-            ></Button>
+            ></DangerButton>
           </div>
         </form>
       </template>
@@ -92,7 +90,16 @@
 import { ref, toRaw, watch } from 'vue'
 
 import type { ColorOption } from '@cq/ui'
-import { Button, Card, colors, Message, Select, surfaces, useToast } from '@cq/ui'
+import {
+  Card,
+  colors,
+  DangerButton,
+  Message,
+  SecondaryButton,
+  Select,
+  surfaces,
+  useToast
+} from '@cq/ui'
 
 import type { Locale } from '@/paraglide/runtime'
 import type { Theme } from '@/stores/preferences'

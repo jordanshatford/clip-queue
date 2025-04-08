@@ -19,8 +19,8 @@ Sentry.init({
   dsn: env.SENTRY_DSN
 })
 
-// Prime vue
-app.use(PrimeVue, { theme: 'none' })
+// PrimeVue
+app.use(PrimeVue, { unstyled: true })
 app.use(ConfirmationService)
 app.use(ToastService)
 app.directive('tooltip', Tooltip)
