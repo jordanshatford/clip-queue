@@ -1,5 +1,16 @@
 # @cq/web
 
+## 1.33.0
+
+### Minor Changes
+
+- feat: display clip creator in queue and history ([`4d09041`](https://github.com/jordanshatford/clip-queue/commit/4d09041ca3059c039be08c2d7217d29c7cde5560))
+
+### Patch Changes
+
+- Updated dependencies [[`4d09041`](https://github.com/jordanshatford/clip-queue/commit/4d09041ca3059c039be08c2d7217d29c7cde5560)]:
+  - @cq/providers@1.7.0
+
 ## 1.32.1
 
 ### Patch Changes
