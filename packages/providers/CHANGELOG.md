@@ -1,5 +1,11 @@
 # @cq/providers
 
+## 1.7.0
+
+### Minor Changes
+
+- feat: include creator of a given clip ([`4d09041`](https://github.com/jordanshatford/clip-queue/commit/4d09041ca3059c039be08c2d7217d29c7cde5560))
+
 ## 1.6.0
 
 ### Minor Changes
