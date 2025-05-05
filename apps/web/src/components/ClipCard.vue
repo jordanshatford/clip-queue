@@ -20,7 +20,7 @@
     <template #content>
       <div class="text-surface-400 mb-4 text-xs">
         <p>{{ m.submitter_name({ name: clip.submitters[0] }) }}</p>
-        <p>{{ m.creator_name({ name: clip.creator }) }}</p>
+        <p>{{ m.creator_name({ name: clip.creator ?? m.unknown() }) }}</p>
         <div class="flex items-center gap-1">
           <p>{{ m.provider_colon() }}</p>
           <ProviderName :provider="clip.provider" class="font-normal" />

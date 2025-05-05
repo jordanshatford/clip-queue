@@ -81,7 +81,7 @@
       </template>
     </Column>
     <Column
-      :field="(data: Clip) => data.creator"
+      :field="(data: Clip) => data.creator ?? m.unknown()"
       sortable
       :sort-field="(data: Clip) => data.creator"
       :header="m.creator()"

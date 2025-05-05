@@ -25,7 +25,8 @@
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "bradlc.vscode-tailwindcss",
-        "inlang.vs-code-extension"
+        "inlang.vs-code-extension",
+        "vitest.explorer"
       ]
     }
   }
