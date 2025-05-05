@@ -26,6 +26,7 @@ export class KickProvider extends BaseClipProvider {
       id: clip.id,
       title: clip.title,
       channel: clip.channel.username,
+      creator: clip.creator.username,
       category: clip.category.name,
       createdAt: clip.created_at,
       url,

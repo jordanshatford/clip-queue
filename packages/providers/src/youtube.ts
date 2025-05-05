@@ -28,6 +28,7 @@ export class YouTubeProvider extends BaseClipProvider {
       id: clip.id,
       title: clip.title,
       channel: clip.author_name,
+      creator: clip.author_name,
       category: undefined,
       createdAt: undefined,
       url: clip.url,

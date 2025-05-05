@@ -130,5 +130,7 @@
   "violet": "紫罗兰色",
   "viva": "活力色",
   "yellow": "黄色",
-  "zinc": "锌灰色"
+  "zinc": "锌灰色",
+  "creator_name": "创作者: {name}",
+  "creator": "创作者"
 }

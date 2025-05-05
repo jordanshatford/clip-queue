@@ -12,7 +12,6 @@ import ChatSettings from '@/views/settings/ChatSettings.vue'
 import OtherSettings from '@/views/settings/OtherSettings.vue'
 import PreferenceSettings from '@/views/settings/PreferenceSettings.vue'
 import QueueSettings from '@/views/settings/QueueSettings.vue'
-import SettingsPage from '@/views/SettingsPage.vue'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -55,7 +54,7 @@ export const routes: RouteRecordRaw[] = [
     path: '/settings',
     name: RouteNameConstants.SETTINGS,
     redirect: { name: RouteNameConstants.SETTINGS_CHAT },
-    component: SettingsPage,
+    component: () => import('@/views/SettingsPage.vue'),
     meta: {
       icon: 'pi pi-cog',
       requiresAuth: true

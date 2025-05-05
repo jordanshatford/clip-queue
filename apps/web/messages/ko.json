@@ -130,5 +130,7 @@
   "violet": "보라색",
   "viva": "비바색",
   "yellow": "노란색",
-  "zinc": "아연색"
+  "zinc": "아연색",
+  "creator_name": "창조자: {name}",
+  "creator": "창조자"
 }

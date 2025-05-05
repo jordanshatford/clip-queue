@@ -130,5 +130,7 @@
   "violet": "البنفسجي",
   "viva": "فيفا",
   "yellow": "الأصفر",
-  "zinc": "الزنك"
+  "zinc": "الزنك",
+  "creator_name": "الخالق: {name}",
+  "creator": "الخالق"
 }

@@ -130,5 +130,7 @@
   "violet": "बैंगनी",
   "viva": "वाइवा",
   "yellow": "पीला",
-  "zinc": "जिंक"
+  "zinc": "जिंक",
+  "creator_name": "निर्माता: {name}",
+  "creator": "निर्माता"
 }

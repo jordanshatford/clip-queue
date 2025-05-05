@@ -54,6 +54,10 @@ export interface Clip {
    */
   channel: string
   /**
+   * The creator of the clip.
+   */
+  creator: string
+  /**
    * The submitters of the clip.
    */
   submitters: string[]

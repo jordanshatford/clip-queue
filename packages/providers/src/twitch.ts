@@ -38,6 +38,7 @@ export class TwitchProvider extends BaseClipProvider {
       id: clip.id,
       title: clip.title,
       channel: clip.broadcaster_name,
+      creator: clip.creator_name,
       category: game?.name,
       createdAt: clip.created_at,
       url,

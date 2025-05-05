@@ -130,5 +130,7 @@
   "violet": "バイオレット",
   "viva": "ビバ",
   "yellow": "イエロー",
-  "zinc": "ジンク"
+  "zinc": "ジンク",
+  "creator_name": "クリエイター: {name}",
+  "creator": "クリエイター"
 }

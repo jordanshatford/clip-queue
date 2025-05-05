@@ -130,5 +130,7 @@
   "violet": "Menekşe",
   "viva": "Viva",
   "yellow": "Sarı",
-  "zinc": "Çinko"
+  "zinc": "Çinko",
+  "creator_name": "Yaratıcı: {name}",
+  "creator": "Yaratıcı"
 }

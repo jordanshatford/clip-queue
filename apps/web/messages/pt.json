@@ -130,5 +130,7 @@
   "violet": "Violeta",
   "viva": "Viva",
   "yellow": "Amarelo",
-  "zinc": "Zinco"
+  "zinc": "Zinco",
+  "creator_name": "Criador: {name}",
+  "creator": "Criador"
 }
