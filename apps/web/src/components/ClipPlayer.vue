@@ -45,6 +45,7 @@
         <span>
           {{ clip.channel }}
           <span v-if="clip.category"> - {{ clip.category }} </span>
+          <span v-if="clip.creator"> - {{ m.creator_name({ name: clip.creator }) }}</span>
           <span v-if="clip.submitters[0]">
             - {{ m.submitter_name({ name: clip.submitters[0] }) }}</span
           >
