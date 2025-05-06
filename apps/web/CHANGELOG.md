@@ -1,5 +1,19 @@
 # @cq/web
 
+## 1.34.0
+
+### Minor Changes
+
+- feat: display clip creator in clip player ([`47dfd43`](https://github.com/jordanshatford/clip-queue/commit/47dfd43c778b4656c328db00f86dd50806402c57))
+
+### Patch Changes
+
+- fix: delete clips from history deleting all but last clip ([`48582cb`](https://github.com/jordanshatford/clip-queue/commit/48582cbfe1a3a4450f675512de45c9a5bc87f906))
+
+- fix: switching settings tab only detected when clicking text ([`5757fe8`](https://github.com/jordanshatford/clip-queue/commit/5757fe807dd981fc152fed44482cca0df4d299cd))
+
+- fix: hard to read text in empty history table in dark mode ([`f07e5de`](https://github.com/jordanshatford/clip-queue/commit/f07e5de04b63464d12980f7c194d8fb07dd11a9d))
+
 ## 1.33.0
 
 ### Minor Changes
