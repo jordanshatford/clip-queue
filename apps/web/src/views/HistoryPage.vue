@@ -129,7 +129,7 @@ function queueClips() {
 }
 
 function deleteClips() {
-  const clips = selection.value
+  const clips = [...selection.value]
   confirm.require({
     header: m.delete_history(),
     message: m.delete_history_confirm({ length: clips.length }),
