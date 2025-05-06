@@ -6,18 +6,13 @@
           v-for="setting in settingsRoutes"
           :key="setting.name"
           :value="setting?.name?.toString() ?? ''"
+          :as="'router-link'"
+          :to="{ name: setting.name }"
         >
-          <RouterLink
-            v-if="setting.name"
-            v-slot="{ href, navigate }"
-            :to="{ name: setting.name }"
-            custom
-          >
-            <a :href class="flex items-center gap-2 text-inherit" @click="navigate">
-              <i :class="setting.meta?.icon"></i>
-              <span>{{ routeTranslations[setting.name as RouteNameConstants]() }}</span>
-            </a>
-          </RouterLink>
+          <div class="flex items-center gap-2 text-inherit">
+            <i :class="setting.meta?.icon"></i>
+            <span>{{ routeTranslations[setting.name as RouteNameConstants]() }}</span>
+          </div>
         </Tab>
       </TabList>
     </Tabs>
