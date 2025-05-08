@@ -3,6 +3,7 @@ import type {
   TwitchGame,
   TwitchPagedResponse,
   TwitchResponse,
+  TwitchUser,
   TwitchUserCtx
 } from './types'
 import { toURLParams } from './utils'
@@ -65,7 +66,27 @@ export async function getGames(ctx: TwitchUserCtx, ids: string[]): Promise<Twitc
   return []
 }
 
+/**
+ * Get users from Twitch.
+ * @param ctx - The Twitch user context.
+ * @param ids - The user IDs to fetch.
+ * @returns The users.
+ */
+export async function getUsers(ctx: TwitchUserCtx, ids: string[]): Promise<TwitchUser[]> {
+  try {
+    const response = await fetch(`${BASE_URL}/users?${toURLParams('id', ids)}`, {
+      headers: toCommonHeaders(ctx)
+    })
+    const data: TwitchResponse<TwitchUser[]> = await response.json()
+    return data.data
+  } catch (e) {
+    console.error('Failed to fetch Twitch users: ', ids, e)
+  }
+  return []
+}
+
 export default {
   getClips,
-  getGames
+  getGames,
+  getUsers
 }

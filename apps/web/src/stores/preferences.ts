@@ -15,7 +15,7 @@ export type Theme = 'dark' | 'light'
 /**
  * The available themes.
  */
-export const availableThemes = ['dark', 'light'] as const
+export const availableThemes: Theme[] = ['dark', 'light'] as const
 
 /**
  * Gets the inferred default theme.

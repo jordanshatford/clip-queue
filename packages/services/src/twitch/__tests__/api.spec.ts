@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { TwitchUserCtx } from '..'
-import { mockTwitchClip, mockTwitchGame } from '../../__tests__/mocks'
+import { mockTwitchClip, mockTwitchGame, mockTwitchUser } from '../../__tests__/mocks'
 import TwitchAPI, { toCommonHeaders } from '../api'
 
 describe('twitch-api.ts', () => {
@@ -16,6 +16,8 @@ describe('twitch-api.ts', () => {
             data = [mockTwitchClip]
           } else if (url.includes('games')) {
             data = [mockTwitchGame]
+          } else if (url.includes('users')) {
+            data = [mockTwitchUser]
           }
           return Promise.resolve({ data })
         }
@@ -39,6 +41,16 @@ describe('twitch-api.ts', () => {
     expect(gameInfo).toBeDefined()
     expect(gameInfo?.id).toEqual('testgame')
     expect(gameInfo?.name).toEqual('testgame')
+    expect(fetch).toHaveBeenCalledTimes(1)
+  })
+
+  it('gets a twitch user from twitch api', async () => {
+    const users = await TwitchAPI.getUsers({ id: '', token: '', username: '' }, ['testuser'])
+    const userInfo = users[0]
+    expect(userInfo).toBeDefined()
+    expect(userInfo?.id).toEqual('testuser')
+    expect(userInfo?.login).toEqual('testuser')
+    expect(userInfo?.display_name).toEqual('Test User')
     expect(fetch).toHaveBeenCalledTimes(1)
   })
 

@@ -87,6 +87,56 @@ export interface AuthInfo {
 }
 
 /**
+ * A Twitch user.
+ */
+export interface TwitchUser {
+  /**
+   * The ID of the user.
+   */
+  id: string
+  /**
+   * The login of the user.
+   */
+  login: string
+  /**
+   * The type of the user.
+   */
+  type: string
+  /**
+   * The broadcaster type of the user.
+   */
+  broadcaster_type: string
+  /**
+   * The date the user was created.
+   */
+  created_at: string
+  /**
+   * The email of the user.
+   */
+  email: string
+  /**
+   * The description of the user.
+   */
+  description: string
+  /**
+   * The display name of the user.
+   */
+  display_name: string
+  /**
+   * The offline image URL of the user.
+   */
+  offline_image_url: string
+  /**
+   * The profile image URL of the user.
+   */
+  profile_image_url: string
+  /**
+   * The view count of the user.
+   */
+  view_count: number
+}
+
+/**
  * A Twitch game.
  */
 export interface TwitchGame {

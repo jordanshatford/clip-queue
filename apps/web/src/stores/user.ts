@@ -55,6 +55,15 @@ export const useUser = defineStore(
           token: access_token,
           username: decodedIdToken.preferred_username
         }
+        // Attempt to get the username from Twitch API as the preferred username may not be set
+        // or the user may have a preferred username that is different from their Twitch username.
+        // For example, if the user has simplified chinese characters in their preferred username.
+        const users = await twitch.getUsers(ctx.value, [])
+        if (users.length > 0) {
+          ctx.value.username = users[0].login
+        } else {
+          ctx.value.username = decodedIdToken.preferred_username
+        }
         isLoggedIn.value = true
         await sources.connect()
       }
