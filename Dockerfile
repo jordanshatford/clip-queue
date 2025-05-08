@@ -5,18 +5,12 @@ WORKDIR /workspace
 # Setup corepack with version of pnpm specified in package.json
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /workspace/
 RUN corepack enable && \
-    corepack install && \
-    pnpm config set store-dir /tmp/cache/pnpm
-
-# Fetch build and runtime dependencies
-RUN --mount=type=cache,target=/tmp/cache \
-    pnpm fetch --workspace-root
+    corepack install
 
 COPY . /workspace/
 
-# Install dependencies cached above
-RUN --mount=type=cache,target=/tmp/cache \
-    pnpm install -r --offline
+# Install dependencies
+RUN pnpm install
 
 EXPOSE 5173
 
