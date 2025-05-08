@@ -1,5 +1,12 @@
 # @cq/providers
 
+## 1.7.1
+
+### Patch Changes
+
+- Updated dependencies [[`51d69d6`](https://github.com/jordanshatford/clip-queue/commit/51d69d6411f6eb77b0e858928ec36c9006424548)]:
+  - @cq/services@1.4.0
+
 ## 1.7.0
 
 ### Minor Changes
