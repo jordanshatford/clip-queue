@@ -18,7 +18,7 @@
       </p>
     </template>
     <template #content>
-      <div class="text-surface-400 mb-4 text-xs">
+      <div class="text-surface-400 text-xs">
         <p>{{ m.submitter_name({ name: clip.submitters[0] }) }}</p>
         <p>{{ m.creator_name({ name: clip.creator ?? m.unknown() }) }}</p>
         <div class="flex items-center gap-1">
@@ -26,6 +26,8 @@
           <ProviderName :provider="clip.provider" class="font-normal" />
         </div>
       </div>
+    </template>
+    <template #footer>
       <div class="flex justify-between gap-3">
         <SecondaryButton
           class="grow"
