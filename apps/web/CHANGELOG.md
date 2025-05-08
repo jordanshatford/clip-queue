@@ -1,5 +1,16 @@
 # @cq/web
 
+## 1.34.1
+
+### Patch Changes
+
+- fix: use Twitch login instead of preferred username when possible ([`51d69d6`](https://github.com/jordanshatford/clip-queue/commit/51d69d6411f6eb77b0e858928ec36c9006424548))
+
+- Updated dependencies [[`51d69d6`](https://github.com/jordanshatford/clip-queue/commit/51d69d6411f6eb77b0e858928ec36c9006424548)]:
+  - @cq/services@1.4.0
+  - @cq/providers@1.7.1
+  - @cq/sources@1.5.1
+
 ## 1.34.0
 
 ### Minor Changes
