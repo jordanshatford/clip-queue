@@ -1,5 +1,5 @@
 <template>
-  <Card class="mx-auto mb-2 max-w-lg text-left">
+  <Card class="mx-auto mb-2 max-w-xl text-left">
     <template #content>
       <DangerButton
         :label="m.reset_settings()"
@@ -14,7 +14,7 @@
       }}</Message>
     </template>
   </Card>
-  <Card class="mx-auto mb-2 max-w-lg text-left">
+  <Card class="mx-auto mb-2 max-w-xl text-left">
     <template #content>
       <DangerButton
         :label="m.purge_history()"
@@ -29,7 +29,7 @@
       }}</Message>
     </template>
   </Card>
-  <Card class="mx-auto mb-2 max-w-lg text-left">
+  <Card class="mx-auto mb-2 max-w-xl text-left">
     <template #content>
       <DangerButton
         :label="m.purge_cache()"
@@ -44,7 +44,7 @@
       }}</Message>
     </template>
   </Card>
-  <Card class="mx-auto max-w-lg">
+  <Card class="mx-auto max-w-xl">
     <template #content>
       <p class="text-surface-400 text-sm">
         {{ m.application_version({ version }) }}

@@ -1,7 +1,7 @@
 <template>
-  <div class="mx-auto mb-3 max-w-xl">
+  <div class="mx-auto mb-3 max-w-3xl">
     <Tabs :value="active">
-      <TabList>
+      <TabList class="mx-auto">
         <Tab
           v-for="setting in settingsRoutes"
           :key="setting.name"

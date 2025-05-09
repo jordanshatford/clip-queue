@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Card class="mx-auto max-w-lg">
+    <Card class="mx-auto max-w-xl">
       <template #content>
         <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">

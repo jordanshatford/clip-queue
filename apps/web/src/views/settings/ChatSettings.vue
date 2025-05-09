@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Card class="mx-auto mb-2 max-w-lg">
+    <Card class="mx-auto mb-2 max-w-xl">
       <template #content>
         <div class="m-0 flex flex-col gap-2 p-0 text-left">
           <label for="username">{{ m.connected_chat_colon() }}</label>
@@ -35,7 +35,7 @@
         </div>
       </template>
     </Card>
-    <Card class="mx-auto max-w-lg">
+    <Card class="mx-auto max-w-xl">
       <template #content>
         <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">
