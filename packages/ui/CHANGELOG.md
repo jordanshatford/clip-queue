@@ -1,5 +1,15 @@
 # @cq/ui
 
+## 1.8.0
+
+### Minor Changes
+
+- feat: add primevue volt tag component ([`005dcf3`](https://github.com/jordanshatford/clip-queue/commit/005dcf3971f5a658d8d3d2774ad43e29795e8d74))
+
+### Patch Changes
+
+- fix: unify styling in dark mode table and tabs ([`ee84746`](https://github.com/jordanshatford/clip-queue/commit/ee847467ee315dd55378afb96801f70abf220ceb))
+
 ## 1.7.0
 
 ### Minor Changes
