@@ -5,6 +5,7 @@ import type { TwitchUserCtx } from '@cq/services/twitch'
 import twitch from '@cq/services/twitch'
 
 import { env } from '@/config'
+import { useLogger } from './logger'
 import { useSources } from './sources'
 
 const { CLIENT_ID, REDIRECT_URI } = env
@@ -13,6 +14,7 @@ export const useUser = defineStore(
   'user',
   () => {
     const sources = useSources()
+    const logger = useLogger()
 
     const hasValidatedToken = ref<boolean>(false)
     const isLoggedIn = ref<boolean>(false)
@@ -62,6 +64,9 @@ export const useUser = defineStore(
         if (users.length > 0) {
           ctx.value.username = users[0].login
         } else {
+          logger.warn(
+            `[Twitch]: Failed to get user from Twitch API. Using preferred username: ${decodedIdToken.preferred_username}.`
+          )
           ctx.value.username = decodedIdToken.preferred_username
         }
         isLoggedIn.value = true
@@ -82,7 +87,7 @@ export const useUser = defineStore(
         try {
           await twitch.logout(originalCtx)
         } catch (e) {
-          console.error('Failed to logout of Twitch: ', e)
+          logger.error(`[Twitch]: Failed to logout: ${e}.`)
         }
       }
     }

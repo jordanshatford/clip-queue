@@ -132,5 +132,21 @@
   "yellow": "Jaune",
   "zinc": "Zinc",
   "creator_name": "Créateur: {name}",
-  "creator": "Créateur"
+  "creator": "Créateur",
+  "logs_colon": "Journaux:",
+  "clear_logs": "Effacer les journaux",
+  "clear_logs_confirm": "Êtes-vous sûr de vouloir effacer {length} journaux?",
+  "logs": "Journaux",
+  "download": "Télécharger",
+  "view": "Voir",
+  "level": "Niveau",
+  "level_colon": "Niveau:",
+  "timestamp": "Horodatage",
+  "message": "Message",
+  "off": "Désactivé",
+  "debug": "Déboguer",
+  "warning": "Avertissement",
+  "logger_settings_saved": "Paramètres de l'enregistreur enregistrés.",
+  "logger_level_description": "Niveau de journalisation le plus bas à capturer. Tout niveau de journalisation supérieur au niveau sélectionné sera également enregistré.",
+  "logger_size_limit_description": "Nombre maximal de journaux à conserver. Une fois la limite atteinte, les journaux les plus anciens seront supprimés."
 }

@@ -132,5 +132,21 @@
   "yellow": "노란색",
   "zinc": "아연색",
   "creator_name": "창조자: {name}",
-  "creator": "창조자"
+  "creator": "창조자",
+  "logs": "로그",
+  "logs_colon": "로그:",
+  "clear_logs": "로그 지우기",
+  "clear_logs_confirm": "{length}개의 로그를 지우시겠습니까?",
+  "download": "다운로드",
+  "view": "보다",
+  "level": "수준",
+  "level_colon": "수준:",
+  "timestamp": "타임스탬프",
+  "message": "메시지",
+  "off": "끄다",
+  "debug": "디버그",
+  "warning": "경고",
+  "logger_settings_saved": "로거 설정이 저장되었습니다.",
+  "logger_level_description": "캡처할 로그의 최저 수준입니다. 선택한 수준보다 높은 로그 수준도 모두 기록됩니다.",
+  "logger_size_limit_description": "보관할 로그의 최대 개수입니다. 제한에 도달하면 가장 오래된 로그부터 삭제됩니다."
 }

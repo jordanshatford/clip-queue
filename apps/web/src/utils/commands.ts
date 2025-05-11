@@ -5,6 +5,7 @@ import type { ClipSourceEvent, ClipSourceMessage } from '@cq/sources'
 import { ClipProvider } from '@cq/providers'
 
 import * as m from '@/paraglide/messages'
+import { useLogger } from '@/stores/logger'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
@@ -141,8 +142,14 @@ export function handleCommand(
   command: string,
   ...args: string[]
 ): void {
+  const logger = useLogger()
   const queue = useQueue()
   const settings = useSettings()
+
+  logger.info(
+    `[${event.source}]: ${event.data.username} executed command: ${command} ${args.join(' ')}`
+  )
+
   switch (command as Command) {
     case Command.OPEN: {
       queue.open()

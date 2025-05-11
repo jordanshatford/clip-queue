@@ -132,5 +132,21 @@
   "yellow": "Amarelo",
   "zinc": "Zinco",
   "creator_name": "Criador: {name}",
-  "creator": "Criador"
+  "creator": "Criador",
+  "logs": "Registros",
+  "logs_colon": "Registros:",
+  "clear_logs": "Limpar registros",
+  "clear_logs_confirm": "Tem certeza de que deseja limpar {length} log(s)?",
+  "download": "Transferir",
+  "view": "Visualizar",
+  "level": "Nível",
+  "level_colon": "Nível:",
+  "timestamp": "Carimbo de data e hora",
+  "message": "Mensagem",
+  "off": "Desligado",
+  "debug": "Depurar",
+  "warning": "Aviso",
+  "logger_settings_saved": "Configurações do registrador salvas.",
+  "logger_level_description": "O nível mais baixo de logs a serem capturados. Quaisquer níveis de log acima do nível selecionado também serão registrados.",
+  "logger_size_limit_description": "O número máximo de logs a serem mantidos. Quando o limite for atingido, os logs mais antigos serão removidos."
 }

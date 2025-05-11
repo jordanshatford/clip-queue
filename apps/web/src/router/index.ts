@@ -7,8 +7,10 @@ import * as m from '@/paraglide/messages'
 import { useUser } from '@/stores/user'
 import HistoryPage from '@/views/HistoryPage.vue'
 import HomePage from '@/views/HomePage.vue'
+import LogsPage from '@/views/LogsPage.vue'
 import QueuePage from '@/views/QueuePage.vue'
 import ChatSettings from '@/views/settings/ChatSettings.vue'
+import LoggerSettings from '@/views/settings/LoggerSettings.vue'
 import OtherSettings from '@/views/settings/OtherSettings.vue'
 import PreferenceSettings from '@/views/settings/PreferenceSettings.vue'
 import QueueSettings from '@/views/settings/QueueSettings.vue'
@@ -24,10 +26,12 @@ export enum RouteNameConstants {
   HOME = 'home',
   QUEUE = 'queue',
   HISTORY = 'history',
+  LOGS = 'logs',
   SETTINGS = 'settings',
   SETTINGS_CHAT = 'settings_chat',
   SETTINGS_QUEUE = 'settings_queue',
   SETTINGS_PREFERENCES = 'settings_preferences',
+  SETTINGS_LOGS = 'settings_logs',
   SETTINGS_OTHER = 'settings_other'
 }
 
@@ -88,6 +92,15 @@ export const routes: RouteRecordRaw[] = [
         }
       },
       {
+        path: 'logs',
+        name: RouteNameConstants.SETTINGS_LOGS,
+        component: LoggerSettings,
+        meta: {
+          icon: 'pi pi-book',
+          requiresAuth: true
+        }
+      },
+      {
         path: 'other',
         name: RouteNameConstants.SETTINGS_OTHER,
         component: OtherSettings,
@@ -107,6 +120,15 @@ const router = createRouter({
       path: '/',
       name: RouteNameConstants.HOME,
       component: HomePage
+    },
+    {
+      path: '/logs',
+      name: RouteNameConstants.LOGS,
+      component: LogsPage,
+      meta: {
+        icon: 'pi pi-book',
+        requiresAuth: true
+      }
     },
     ...routes,
     {
@@ -144,10 +166,12 @@ export const routeTranslations = {
   [RouteNameConstants.HOME]: () => '',
   [RouteNameConstants.QUEUE]: m.queue,
   [RouteNameConstants.HISTORY]: m.history,
+  [RouteNameConstants.LOGS]: m.logs,
   [RouteNameConstants.SETTINGS]: m.settings,
   [RouteNameConstants.SETTINGS_CHAT]: m.settings_chat,
   [RouteNameConstants.SETTINGS_QUEUE]: m.settings_queue,
   [RouteNameConstants.SETTINGS_PREFERENCES]: m.settings_preferences,
+  [RouteNameConstants.SETTINGS_LOGS]: m.logs,
   [RouteNameConstants.SETTINGS_OTHER]: m.settings_other
 }
 

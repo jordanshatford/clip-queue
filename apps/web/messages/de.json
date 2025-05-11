@@ -132,5 +132,21 @@
   "yellow": "Gelb",
   "zinc": "Zink",
   "creator_name": "Ersteller: {name}",
-  "creator": "Ersteller"
+  "creator": "Ersteller",
+  "logs_colon": "Protokolle:",
+  "clear_logs": "Protokolle löschen",
+  "clear_logs_confirm": "Möchten Sie {length} Protokoll(e) wirklich löschen?",
+  "logs": "Protokolle",
+  "download": "Herunterladen",
+  "view": "Sicht",
+  "level": "Ebene",
+  "level_colon": "Ebene:",
+  "timestamp": "Zeitstempel",
+  "message": "Nachricht",
+  "off": "Aus",
+  "debug": "Debuggen",
+  "warning": "Warnung",
+  "logger_settings_saved": "Loggereinstellungen gespeichert.",
+  "logger_level_description": "Die niedrigste Ebene der zu erfassenden Protokolle. Alle Protokollebenen über der ausgewählten Ebene werden ebenfalls protokolliert.",
+  "logger_size_limit_description": "Die maximale Anzahl der aufzubewahrenden Protokolle. Wenn das Limit erreicht ist, werden die ältesten Protokolle gelöscht."
 }

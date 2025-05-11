@@ -132,5 +132,21 @@
   "yellow": "Yellow",
   "zinc": "Zinc",
   "creator_name": "Creator: {name}",
-  "creator": "Creator"
+  "creator": "Creator",
+  "logs_colon": "Logs:",
+  "clear_logs": "Clear Logs",
+  "clear_logs_confirm": "Are you sure you want to clear {length} logs(s)?",
+  "logs": "Logs",
+  "download": "Download ",
+  "view": "View",
+  "level": "Level",
+  "level_colon": "Level:",
+  "timestamp": "Timestamp",
+  "message": "Message",
+  "off": "Off",
+  "debug": "Debug",
+  "warning": "Warning",
+  "logger_settings_saved": "Logger settings saved.",
+  "logger_level_description": "The lowest level of logs to capture. Any log levels above the selected level will also be logged.",
+  "logger_size_limit_description": "The maximum number of logs to keep. When the limit is reached, the oldest logs will be removed."
 }

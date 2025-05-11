@@ -8,7 +8,7 @@ import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
 import { useQueue } from '../queue'
 import { useSettings } from '../settings'
 
-describe('clips.ts', () => {
+describe('queue.ts', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
   })

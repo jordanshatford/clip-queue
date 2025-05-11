@@ -132,5 +132,21 @@
   "yellow": "イエロー",
   "zinc": "ジンク",
   "creator_name": "クリエイター: {name}",
-  "creator": "クリエイター"
+  "creator": "クリエイター",
+  "logs": "ログ",
+  "logs_colon": "ログ:",
+  "clear_logs": "ログをクリアする",
+  "clear_logs_confirm": "{length} 個のログをクリアしてもよろしいですか?",
+  "download": "ダウンロード",
+  "view": "ビュー",
+  "level": "レベル",
+  "level_colon": "レベル：",
+  "timestamp": "タイムスタンプ",
+  "message": "メッセージ",
+  "off": "オフ",
+  "debug": "デバッグ",
+  "warning": "警告",
+  "logger_settings_saved": "ロガー設定が保存されました。",
+  "logger_level_description": "取得するログの最低レベル。選択したレベルより上のログレベルも記録されます。",
+  "logger_size_limit_description": "保存するログの最大数。上限に達すると、最も古いログが削除されます。"
 }

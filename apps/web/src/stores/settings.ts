@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 
 import { ClipProvider } from '@cq/providers'
 
+import type { LogLevel } from '@/stores/logger'
 import { Command } from '@/utils/commands'
 
 /**
@@ -44,6 +45,20 @@ export interface QueueSettings {
   providers: ClipProvider[]
 }
 
+/**
+ * Settings for the logger.
+ */
+export interface LoggerSettings {
+  /**
+   * The log level of the application.
+   */
+  level: LogLevel
+  /**
+   * The maximum number of logs to keep.
+   */
+  limit: number
+}
+
 export const DEFAULT_COMMAND_SETTINGS: CommandSettings = {
   prefix: '!cq',
   allowed: Object.values(Command)
@@ -55,11 +70,17 @@ export const DEFAULT_QUEUE_SETTINGS: QueueSettings = {
   providers: Object.values(ClipProvider)
 }
 
+export const DEFAULT_LOGGER_SETTINGS: LoggerSettings = {
+  level: 'WARN',
+  limit: 100
+}
+
 export const useSettings = defineStore(
   'settings',
   () => {
     const commands = ref<CommandSettings>({ ...DEFAULT_COMMAND_SETTINGS })
     const queue = ref<QueueSettings>({ ...DEFAULT_QUEUE_SETTINGS })
+    const logger = ref<LoggerSettings>({ ...DEFAULT_LOGGER_SETTINGS })
 
     const isCommandsSettingsModified = computed(() => {
       return (c: CommandSettings) => {
@@ -84,24 +105,34 @@ export const useSettings = defineStore(
       }
     })
 
+    const isLoggerSettingsModified = computed(() => {
+      return (l: LoggerSettings) => {
+        return logger.value.level !== l.level || logger.value.limit !== l.limit
+      }
+    })
+
     const isModified = computed(() => {
       return (
         isCommandsSettingsModified.value(DEFAULT_COMMAND_SETTINGS) ||
-        isQueueSettingsModified.value(DEFAULT_QUEUE_SETTINGS)
+        isQueueSettingsModified.value(DEFAULT_QUEUE_SETTINGS) ||
+        isLoggerSettingsModified.value(DEFAULT_LOGGER_SETTINGS)
       )
     })
 
     function $reset() {
       commands.value = DEFAULT_COMMAND_SETTINGS
       queue.value = DEFAULT_QUEUE_SETTINGS
+      logger.value = DEFAULT_LOGGER_SETTINGS
     }
 
     return {
       commands,
       queue,
+      logger,
       isModified,
       isCommandsSettingsModified,
       isQueueSettingsModified,
+      isLoggerSettingsModified,
       $reset
     }
   },

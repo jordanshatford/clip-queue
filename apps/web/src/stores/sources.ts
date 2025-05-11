@@ -7,6 +7,7 @@ import { ClipSourceStatus, TwitchChatSource } from '@cq/sources'
 import { useProviders } from '@/stores/providers'
 import { useUser } from '@/stores/user'
 import commands, { Command } from '@/utils/commands'
+import { useLogger } from './logger'
 import { useQueue } from './queue'
 import { useSettings } from './settings'
 
@@ -18,6 +19,7 @@ const ctx = () => {
 export const useSources = defineStore('sources', () => {
   const queue = useQueue()
   const settings = useSettings()
+  const logger = useLogger()
 
   const source = ref<IBaseClipSource>(new TwitchChatSource())
   const status = ref<ClipSourceStatus>(source.value.status)
@@ -27,17 +29,13 @@ export const useSources = defineStore('sources', () => {
   source.value.on('status', (event) => {
     status.value = event.data
   })
-  source.value.on('connected', (event) =>
-    console.info('Connected to', event.source, 'at', event.timestamp)
-  )
-  source.value.on('disconnected', (event) =>
-    console.info('Disconnected from', event.source, 'at', event.timestamp)
-  )
+  source.value.on('connected', (event) => logger.debug(`[${event.source}]: Connected.`))
+  source.value.on('disconnected', (event) => logger.debug(`[${event.source}]: Disconnected.`))
   source.value.on('join', (event) => {
-    console.info('Joined channel', event.data, 'on', event.source, 'at', event.timestamp)
+    logger.info(`[${event.source}]: Joined channel ${event.data}.`)
   })
   source.value.on('leave', (event) => {
-    console.info('Left channel', event.data, 'on', event.source, 'at', event.timestamp)
+    logger.info(`[${event.source}]: Left channel ${event.data}.`)
   })
   source.value.on('message', async (event) => {
     // Check if message is a command and perform command if proper permission to do so
@@ -55,7 +53,6 @@ export const useSources = defineStore('sources', () => {
       commands.handleCommand(event, command, ...args)
       return
     }
-
     for (const url of event.data.urls) {
       const providers = useProviders()
       try {
@@ -67,7 +64,7 @@ export const useSources = defineStore('sources', () => {
           })
         }
       } catch (e) {
-        console.error('Failed to get clip: ', e)
+        logger.error(`[${event.source}]: Failed to get clip: ${e}.`)
       }
     }
   })
@@ -86,7 +83,7 @@ export const useSources = defineStore('sources', () => {
           })
         }
       } catch (e) {
-        console.error('Failed to get clip: ', e)
+        logger.error(`[${event.source}]: Failed to get clip: ${e}.`)
       }
     }
   })
@@ -98,7 +95,7 @@ export const useSources = defineStore('sources', () => {
     queue.removeSubmitterClips(username)
   })
   source.value.on('error', (event) => {
-    console.error('Clip source error: ', event.data)
+    logger.error(`[${event.source}]: ${event.data}.`)
   })
 
   async function connect(): Promise<void> {

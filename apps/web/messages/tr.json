@@ -132,5 +132,21 @@
   "yellow": "Sarı",
   "zinc": "Çinko",
   "creator_name": "Yaratıcı: {name}",
-  "creator": "Yaratıcı"
+  "creator": "Yaratıcı",
+  "logs": "Günlükler",
+  "logs_colon": "Günlükler:",
+  "clear_logs": "Günlükleri Temizle",
+  "clear_logs_confirm": "{length} günlük kaydını temizlemek istediğinizden emin misiniz?",
+  "download": "İndirmek",
+  "view": "Görüş",
+  "level": "Seviye",
+  "level_colon": "Seviye:",
+  "timestamp": "Zaman damgası",
+  "message": "Mesaj",
+  "off": "Kapalı",
+  "debug": "Hata ayıklama",
+  "warning": "Uyarı",
+  "logger_settings_saved": "Kaydedilen kayıt cihazı ayarları.",
+  "logger_level_description": "Yakalanacak en düşük günlük seviyesi. Seçilen seviyenin üzerindeki tüm günlük seviyeleri de kaydedilecektir.",
+  "logger_size_limit_description": "Tutulacak maksimum günlük sayısı. Sınıra ulaşıldığında, en eski günlükler kaldırılacaktır."
 }

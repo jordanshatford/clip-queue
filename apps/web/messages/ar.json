@@ -132,5 +132,21 @@
   "yellow": "الأصفر",
   "zinc": "الزنك",
   "creator_name": "الخالق: {name}",
-  "creator": "الخالق"
+  "creator": "الخالق",
+  "logs_colon": "سجلات:",
+  "clear_logs": "مسح السجلات",
+  "clear_logs_confirm": "هل أنت متأكد أنك تريد مسح {length} سجل؟",
+  "logs": "سجلات",
+  "download": "تحميل",
+  "view": "منظر",
+  "level": "مستوى",
+  "level_colon": "مستوى:",
+  "timestamp": "الطابع الزمني",
+  "message": "رسالة",
+  "off": "عن",
+  "debug": "تصحيح",
+  "warning": "تحذير",
+  "logger_settings_saved": "تم حفظ إعدادات المسجل.",
+  "logger_level_description": "أدنى مستوى من السجلات المطلوب التقاطه. سيتم أيضًا تسجيل أي مستويات سجلات أعلى من المستوى المحدد.",
+  "logger_size_limit_description": "الحد الأقصى لعدد السجلات المسموح بالاحتفاظ بها. عند بلوغ هذا الحد، سيتم حذف أقدم السجلات."
 }

@@ -132,5 +132,21 @@
   "yellow": "黄色",
   "zinc": "锌灰色",
   "creator_name": "创作者: {name}",
-  "creator": "创作者"
+  "creator": "创作者",
+  "logs": "日志",
+  "logs_colon": "日志:",
+  "clear_logs": "清除日志",
+  "clear_logs_confirm": "您确定要清除 {length} 个日志吗？",
+  "download": "下载",
+  "view": "看法",
+  "level": "等级",
+  "level_colon": "等级：",
+  "timestamp": "时间戳",
+  "message": "信息",
+  "off": "离开",
+  "debug": "调试",
+  "warning": "警告",
+  "logger_settings_saved": "",
+  "logger_level_description": "要捕获的最低日志级别。高于所选级别的任何日志级别也将被记录。",
+  "logger_size_limit_description": "可保留的最大日志数量。达到限制时，最旧的日志将被删除。"
 }
