@@ -1,5 +1,5 @@
 <template>
-  <i v-tooltip="statusTranslations[status]" :class="`pi pi-circle-fill ${color}`" />
+  <i v-tooltip="statusTranslations[status]()" :class="`pi pi-circle-fill ${color}`" />
 </template>
 
 <script setup lang="ts">
@@ -15,11 +15,11 @@ export interface Props {
 
 const { status } = defineProps<Props>()
 
-const statusTranslations: Record<ClipSourceStatus, string> = {
-  Error: m.error(),
-  Connected: m.connected(),
-  Disconnected: m.disconnected(),
-  Unknown: m.unknown()
+const statusTranslations: Record<ClipSourceStatus, () => string> = {
+  Error: m.error,
+  Connected: m.connected,
+  Disconnected: m.disconnected,
+  Unknown: m.unknown
 }
 
 const color = computed(() => {

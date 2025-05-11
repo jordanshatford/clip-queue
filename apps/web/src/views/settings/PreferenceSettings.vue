@@ -21,7 +21,7 @@
               v-model="formPreferences.theme"
               :options="[...availableThemes]"
               label-id="theme"
-              :option-label="(value: Theme) => themeLabels[value]"
+              :option-label="(value: Theme) => themeTranslations[value]()"
               aria-describedby="theme-help"
             >
             </Select>
@@ -114,9 +114,9 @@ const preferences = usePreferences()
 const formKey = ref(1)
 const formPreferences = ref(structuredClone(toRaw(preferences.preferences)))
 
-const themeLabels: Record<Theme, string> = {
-  dark: m.theme_dark(),
-  light: m.theme_light()
+const themeTranslations: Record<Theme, () => string> = {
+  dark: m.theme_dark,
+  light: m.theme_light
 }
 
 const languageLabels: Record<Locale, string> = {
