@@ -148,5 +148,6 @@
   "warning": "警告",
   "logger_settings_saved": "",
   "logger_level_description": "要捕获的最低日志级别。高于所选级别的任何日志级别也将被记录。",
-  "logger_size_limit_description": "可保留的最大日志数量。达到限制时，最旧的日志将被删除。"
+  "logger_size_limit_description": "可保留的最大日志数量。达到限制时，最旧的日志将被删除。",
+  "no_logs_captured": "没有捕获日志。"
 }

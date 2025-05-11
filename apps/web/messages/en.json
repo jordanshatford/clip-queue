@@ -148,5 +148,6 @@
   "warning": "Warning",
   "logger_settings_saved": "Logger settings saved.",
   "logger_level_description": "The lowest level of logs to capture. Any log levels above the selected level will also be logged.",
-  "logger_size_limit_description": "The maximum number of logs to keep. When the limit is reached, the oldest logs will be removed."
+  "logger_size_limit_description": "The maximum number of logs to keep. When the limit is reached, the oldest logs will be removed.",
+  "no_logs_captured": "No logs captured."
 }

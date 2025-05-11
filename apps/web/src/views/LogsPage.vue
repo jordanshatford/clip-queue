@@ -9,7 +9,7 @@
     :rows-per-page-options="[10, 20, 50]"
   >
     <template #empty>
-      <div class="text-surface-500 p-4">{{ m.no_clips_previously_watched() }}</div>
+      <div class="text-surface-500 p-4">{{ m.no_logs_captured() }}</div>
     </template>
     <template #header>
       <div class="mb-2 flex items-center justify-between">

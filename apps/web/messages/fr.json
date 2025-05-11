@@ -148,5 +148,6 @@
   "warning": "Avertissement",
   "logger_settings_saved": "Paramètres de l'enregistreur enregistrés.",
   "logger_level_description": "Niveau de journalisation le plus bas à capturer. Tout niveau de journalisation supérieur au niveau sélectionné sera également enregistré.",
-  "logger_size_limit_description": "Nombre maximal de journaux à conserver. Une fois la limite atteinte, les journaux les plus anciens seront supprimés."
+  "logger_size_limit_description": "Nombre maximal de journaux à conserver. Une fois la limite atteinte, les journaux les plus anciens seront supprimés.",
+  "no_logs_captured": "Aucun journal capturé."
 }

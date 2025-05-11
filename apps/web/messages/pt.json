@@ -148,5 +148,6 @@
   "warning": "Aviso",
   "logger_settings_saved": "Configurações do registrador salvas.",
   "logger_level_description": "O nível mais baixo de logs a serem capturados. Quaisquer níveis de log acima do nível selecionado também serão registrados.",
-  "logger_size_limit_description": "O número máximo de logs a serem mantidos. Quando o limite for atingido, os logs mais antigos serão removidos."
+  "logger_size_limit_description": "O número máximo de logs a serem mantidos. Quando o limite for atingido, os logs mais antigos serão removidos.",
+  "no_logs_captured": "Nenhum registro capturado."
 }

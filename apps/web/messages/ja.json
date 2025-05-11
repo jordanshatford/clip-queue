@@ -148,5 +148,6 @@
   "warning": "警告",
   "logger_settings_saved": "ロガー設定が保存されました。",
   "logger_level_description": "取得するログの最低レベル。選択したレベルより上のログレベルも記録されます。",
-  "logger_size_limit_description": "保存するログの最大数。上限に達すると、最も古いログが削除されます。"
+  "logger_size_limit_description": "保存するログの最大数。上限に達すると、最も古いログが削除されます。",
+  "no_logs_captured": "ログはキャプチャされません。"
 }
