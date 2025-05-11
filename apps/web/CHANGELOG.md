@@ -1,5 +1,16 @@
 # @cq/web
 
+## 1.35.0
+
+### Minor Changes
+
+- feat: add support for capturing logs ([`e173bc8`](https://github.com/jordanshatford/clip-queue/commit/e173bc81d3f013af9ed36705cbfee7c858d27ce5))
+
+### Patch Changes
+
+- Updated dependencies [[`005dcf3`](https://github.com/jordanshatford/clip-queue/commit/005dcf3971f5a658d8d3d2774ad43e29795e8d74), [`ee84746`](https://github.com/jordanshatford/clip-queue/commit/ee847467ee315dd55378afb96801f70abf220ceb)]:
+  - @cq/ui@1.8.0
+
 ## 1.34.1
 
 ### Patch Changes
