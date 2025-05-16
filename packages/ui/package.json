@@ -15,10 +15,10 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@primevue/icons": "^4.3.3",
+    "@primevue/icons": "^4.3.4",
     "primeicons": "^7.0.0",
-    "primevue": "^4.3.3",
-    "tailwind-merge": "^3.2.0",
+    "primevue": "^4.3.4",
+    "tailwind-merge": "^3.3.0",
     "tailwindcss-primeui": "^0.6.1",
     "vue": "catalog:"
   },
