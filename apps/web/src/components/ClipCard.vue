@@ -1,5 +1,5 @@
 <template>
-  <Card class="max-w-[16rem] shrink-0 overflow-hidden text-left">
+  <Card class="max-w-2xs shrink-0 overflow-hidden text-left">
     <template #header>
       <img
         class="aspect-video w-full"
@@ -9,18 +9,15 @@
       />
     </template>
     <template #title>
-      <span class="font-normal">{{ clip.title }}</span>
+      <span :title="clip.title" class="line-clamp-1 font-normal">{{ clip.title }}</span>
     </template>
     <template #subtitle>
-      <p v-if="clip.category">{{ clip.channel }} - {{ clip.category }}</p>
-      <p v-else>
-        {{ clip.channel }}
-      </p>
+      <span :title="subtitle" class="line-clamp-1">{{ subtitle }}</span>
     </template>
     <template #content>
       <div class="text-surface-400 text-xs">
-        <p>{{ m.submitter_name({ name: clip.submitters[0] }) }}</p>
-        <p>{{ m.creator_name({ name: clip.creator ?? m.unknown() }) }}</p>
+        <p class="line-clamp-1">{{ m.submitter_name({ name: clip.submitters[0] }) }}</p>
+        <p class="line-clamp-1">{{ m.creator_name({ name: clip.creator ?? m.unknown() }) }}</p>
         <div class="flex items-center gap-1">
           <p>{{ m.provider_colon() }}</p>
           <ProviderName :provider="clip.provider" class="font-normal" />
@@ -28,7 +25,7 @@
       </div>
     </template>
     <template #footer>
-      <div class="flex justify-between gap-3">
+      <div class="flex justify-between gap-2">
         <SecondaryButton
           class="grow"
           icon="pi pi-play"
@@ -51,6 +48,8 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import type { Clip } from '@cq/providers'
 import { Card, DangerButton, SecondaryButton } from '@cq/ui'
 
@@ -61,7 +60,14 @@ export interface Props {
   clip: Clip
 }
 
-defineProps<Props>()
+const { clip } = defineProps<Props>()
+
+const subtitle = computed(() => {
+  if (clip.category) {
+    return `${clip.channel} - ${clip.category}`
+  }
+  return clip.channel
+})
 
 const emit = defineEmits<{
   (e: 'play'): void
