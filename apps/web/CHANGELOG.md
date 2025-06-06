@@ -1,5 +1,11 @@
 # @cq/web
 
+## 1.36.0
+
+### Minor Changes
+
+- feat: add debug logging for route changes ([`2564e0d`](https://github.com/jordanshatford/clip-queue/commit/2564e0d6811d270171f157885c8f44b0e3435b6d))
+
 ## 1.35.0
 
 ### Minor Changes
