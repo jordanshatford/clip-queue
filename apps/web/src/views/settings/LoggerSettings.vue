@@ -81,8 +81,6 @@ import { availableLogLevels, logLevelTranslations } from '@/stores/logger'
 import { usePreferences } from '@/stores/preferences'
 import { useSettings } from '@/stores/settings'
 
-// TODO: do I need to make sure when limit/level is updated, we update current logs? Probably not. Add note in description.
-
 const toast = useToast()
 const preferences = usePreferences()
 const settings = useSettings()
