@@ -1,5 +1,16 @@
 # @cq/providers
 
+## 2.0.0
+
+### Major Changes
+
+- refactor: remove support for youtube clips ([`4e739dc`](https://github.com/jordanshatford/clip-queue/commit/4e739dc70b2402189aa94fa7c917cb6c6a0bb3a8))
+
+### Patch Changes
+
+- Updated dependencies [[`4e739dc`](https://github.com/jordanshatford/clip-queue/commit/4e739dc70b2402189aa94fa7c917cb6c6a0bb3a8)]:
+  - @cq/services@2.0.0
+
 ## 1.7.1
 
 ### Patch Changes
