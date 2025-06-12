@@ -119,7 +119,7 @@ export const useSettings = defineStore(
       )
     })
 
-    function $reset() {
+    function $reset(): void {
       commands.value = DEFAULT_COMMAND_SETTINGS
       queue.value = DEFAULT_QUEUE_SETTINGS
       logger.value = DEFAULT_LOGGER_SETTINGS
@@ -138,7 +138,21 @@ export const useSettings = defineStore(
   },
   {
     persist: {
-      key: 'cq-settings'
+      key: 'cq-settings',
+      afterHydrate(context) {
+        // Ensure that the providers in the settings are valid.
+        const providers = context.store.queue.providers
+        const availableProviders = Object.values(ClipProvider)
+        context.store.queue.providers = providers.filter((p: ClipProvider) => {
+          return availableProviders.includes(p)
+        })
+        // Ensure that the commands allowed are valid.
+        const commands = context.store.commands.allowed
+        const availableCommands = Object.values(Command)
+        context.store.commands.allowed = commands.filter((c: Command) => {
+          return availableCommands.includes(c)
+        })
+      }
     }
   }
 )

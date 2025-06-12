@@ -3,7 +3,6 @@ import { ClipProvider } from '@cq/providers'
 
 export * from './kick'
 export * from './twitch'
-export * from './youtube'
 
 export const clipFromKick: Clip = {
   provider: ClipProvider.KICK,
@@ -31,18 +30,4 @@ export const clipFromTwitch: Clip = {
   url: 'https://clips.twitch.tv/testclip',
   embedUrl: 'https://clips.twitch.tv/testclip',
   thumbnailUrl: 'https://twitch.tv/thumbnail'
-}
-
-export const clipFromYouTube: Clip = {
-  provider: ClipProvider.YOUTUBE,
-  submitters: ['testsubmitteryoutube'],
-  id: 'testclipyoutube',
-  title: 'testclipyoutube',
-  channel: 'testchannelyoutube',
-  creator: 'testcreatoryoutube',
-  category: undefined,
-  createdAt: undefined,
-  url: 'https://www.youtube.com/clip/testclip',
-  embedUrl: 'https://www.youtube.com/embed/testclip?start=0&end=100',
-  thumbnailUrl: 'https://www.youtube.com/thumbnail'
 }

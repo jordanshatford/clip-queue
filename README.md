@@ -18,8 +18,11 @@ Clip Queue integrates into a users chat and queues clips submitted in chat by th
 - Automatically connect to users chat to detect clips submitted by viewers.
 - Duplicate clip prevention.
 - Popular clips rise up in the queue.
-- Support for multiple clip providers ([Twitch](https://www.twitch.tv/), [Kick](https://kick.com/), [YouTube](https://www.youtube.com/)).
-- Support for multiple clip sources ([Twitch Chat](https://www.twitch.tv/)).
+- Support for multiple clip providers:
+  - [Twitch](https://www.twitch.tv/)
+  - [Kick](https://kick.com/)
+- Support for multiple clip sources:
+  - [Twitch Chat](https://www.twitch.tv/)
 - Chat commands available to moderators and broadcasters.
 - Automatic moderation and clip removal.
 - Settings customization to personalize for your needs.

@@ -6,8 +6,7 @@
   "description": "Clients to interact with various external services.",
   "exports": {
     "./kick": "./src/kick/index.ts",
-    "./twitch": "./src/twitch/index.ts",
-    "./youtube": "./src/youtube/index.ts"
+    "./twitch": "./src/twitch/index.ts"
   },
   "scripts": {
     "build": "tsc",

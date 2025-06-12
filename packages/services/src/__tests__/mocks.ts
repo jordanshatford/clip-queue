@@ -1,6 +1,5 @@
 import type { KickCategory, KickChannel, KickClip } from '../kick'
 import type { TwitchClip, TwitchGame, TwitchUser } from '../twitch'
-import type { YouTubeClip } from '../youtube'
 
 export const mockKickCategory: KickCategory = {
   id: 123,
@@ -80,16 +79,4 @@ export const mockTwitchUser: TwitchUser = {
   email: 'testuser@twitch.com',
   created_at: '2024-02-22T08:47:27.000Z',
   view_count: 1000
-}
-
-export const mockYouTubeClip: YouTubeClip = {
-  id: 'testclip',
-  url: 'https://www.youtube.com/clip/testclip',
-  video_id: 'testvideo',
-  video_url: 'https://www.youtube.com/watch?v=testvideo',
-  title: 'testtitle',
-  author_name: 'testauthor',
-  thumbnail_url: 'https://www.youtube.com/thumbnail',
-  start: 0,
-  end: 100
 }

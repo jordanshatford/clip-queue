@@ -1,6 +1,5 @@
 import type { KickCategory, KickChannel, KickClip } from '@cq/services/kick'
 import type { TwitchClip, TwitchGame } from '@cq/services/twitch'
-import type { YouTubeClip } from '@cq/services/youtube'
 
 import type { Clip } from '..'
 import { ClipProvider } from '..'
@@ -71,18 +70,6 @@ export const mockTwitchClip: TwitchClip = {
   duration: 50
 }
 
-export const mockYouTubeClip: YouTubeClip = {
-  id: 'testclip',
-  url: 'https://www.youtube.com/clip/testclip',
-  video_id: 'testvideo',
-  video_url: 'https://www.youtube.com/watch?v=testvideo',
-  title: 'testtitle',
-  author_name: 'testauthor',
-  thumbnail_url: 'https://www.youtube.com/thumbnail',
-  start: 0,
-  end: 100
-}
-
 export const clipFromKick: Clip = {
   provider: ClipProvider.KICK,
   submitters: ['testsubmitterkick'],
@@ -109,18 +96,4 @@ export const clipFromTwitch: Clip = {
   url: 'https://clips.twitch.tv/testclip',
   embedUrl: 'https://clips.twitch.tv/testclip',
   thumbnailUrl: 'https://twitch.tv/thumbnail'
-}
-
-export const clipFromYouTube: Clip = {
-  provider: ClipProvider.YOUTUBE,
-  submitters: ['testsubmitteryoutube'],
-  id: 'testclipyoutube',
-  title: 'testclipyoutube',
-  channel: 'testchannelyoutube',
-  creator: 'testcreatoryoutube',
-  category: 'testcategoryyoutube',
-  createdAt: '2024-02-22T08:47:27.000Z',
-  url: 'https://www.youtube.com/clip/testclip',
-  embedUrl: 'https://www.youtube.com/clip/testclip',
-  thumbnailUrl: 'https://www.youtube.com/clip/testclip/thumbnail'
 }
