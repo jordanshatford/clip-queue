@@ -4,12 +4,14 @@ import { ref } from 'vue'
 import type { Clip } from '@cq/providers'
 import { BasicClipList, ClipList, ClipProvider, toClipUUID } from '@cq/providers'
 
+import { useLogger } from '@/stores/logger'
 import { useSettings } from '@/stores/settings'
 
 export const useQueue = defineStore(
   'queue',
   () => {
     const settings = useSettings()
+    const logger = useLogger()
 
     const isOpen = ref<boolean>(true)
     const history = ref<BasicClipList>(new BasicClipList())
@@ -17,10 +19,12 @@ export const useQueue = defineStore(
     const upcoming = ref<ClipList>(new ClipList())
 
     function clear() {
+      logger.info('[Queue]: Clearing upcoming queue.')
       upcoming.value.clear()
     }
 
     function purge() {
+      logger.info('[Queue]: Purging queue history.')
       history.value.clear()
     }
 

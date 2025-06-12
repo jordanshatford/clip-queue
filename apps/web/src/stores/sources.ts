@@ -100,6 +100,7 @@ export const useSources = defineStore('sources', () => {
 
   async function connect(): Promise<void> {
     const username = ctx().username
+    logger.info(`[Sources]: Connecting to source for user: ${username}.`)
     if (username) {
       await source.value.connect()
       await source.value.join(username)
@@ -108,6 +109,7 @@ export const useSources = defineStore('sources', () => {
 
   async function disconnect(): Promise<void> {
     const username = ctx().username
+    logger.info(`[Sources]: Disconnecting from source for user: ${username}.`)
     if (username) {
       await source.value.leave(username)
     }
