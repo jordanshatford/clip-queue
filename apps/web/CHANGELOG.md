@@ -1,5 +1,14 @@
 # @cq/web
 
+## 1.36.1
+
+### Patch Changes
+
+- Updated dependencies [[`4e739dc`](https://github.com/jordanshatford/clip-queue/commit/4e739dc70b2402189aa94fa7c917cb6c6a0bb3a8)]:
+  - @cq/providers@2.0.0
+  - @cq/services@2.0.0
+  - @cq/sources@1.5.2
+
 ## 1.36.0
 
 ### Minor Changes
