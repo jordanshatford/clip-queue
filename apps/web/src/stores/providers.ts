@@ -47,16 +47,13 @@ export const useProviders = defineStore('providers', () => {
   async function getClip(url: string): Promise<Clip | undefined> {
     for (const enabledProvider of settings.queue.providers) {
       const provider = providers.value[enabledProvider]
-      const clip = await provider.getClip(url)
-      if (clip) {
-        logger.debug(
-          `[Providers]: Successfully retrieved clip from provider '${provider.name}' for URL: ${url}.`
-        )
+      try {
+        const clip = await provider.getClip(url)
+        logger.debug(`[${provider.name}]: Successfully retrieved clip for URL: ${url}.`)
         return clip
-      } else {
-        logger.warn(
-          `[Providers]: Failed to get clip from provider '${provider.name}' for URL: ${url}.`
-        )
+      } catch (error) {
+        logger.error(`${error}`)
+        continue
       }
     }
   }

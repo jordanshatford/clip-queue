@@ -32,10 +32,10 @@ export const useSources = defineStore('sources', () => {
   source.value.on('connected', (event) => logger.debug(`[${event.source}]: Connected.`))
   source.value.on('disconnected', (event) => logger.debug(`[${event.source}]: Disconnected.`))
   source.value.on('join', (event) => {
-    logger.info(`[${event.source}]: Joined channel ${event.data}.`)
+    logger.debug(`[${event.source}]: Joined channel ${event.data}.`)
   })
   source.value.on('leave', (event) => {
-    logger.info(`[${event.source}]: Left channel ${event.data}.`)
+    logger.debug(`[${event.source}]: Left channel ${event.data}.`)
   })
   source.value.on('message', async (event) => {
     // Check if message is a command and perform command if proper permission to do so
@@ -100,7 +100,7 @@ export const useSources = defineStore('sources', () => {
 
   async function connect(): Promise<void> {
     const username = ctx().username
-    logger.info(`[Sources]: Connecting to source for user: ${username}.`)
+    logger.debug(`[Sources]: Connecting to source for user: ${username}.`)
     if (username) {
       await source.value.connect()
       await source.value.join(username)
@@ -109,7 +109,7 @@ export const useSources = defineStore('sources', () => {
 
   async function disconnect(): Promise<void> {
     const username = ctx().username
-    logger.info(`[Sources]: Disconnecting from source for user: ${username}.`)
+    logger.debug(`[Sources]: Disconnecting from source for user: ${username}.`)
     if (username) {
       await source.value.leave(username)
     }

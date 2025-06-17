@@ -58,19 +58,22 @@ describe('providers.ts', () => {
   it.each([
     [mockKickClip.clip_url, mockKickClip.id],
     [mockTwitchClip.url, mockTwitchClip.id]
-  ])('returns a clip for valid clip urls', async (input: string, expected: string) => {
-    const providers = useProviders()
-    const c = await providers.getClip(input)
-    expect(c).toBeDefined()
-    expect(c?.id).toEqual(expected)
-  })
+  ])(
+    'returns a clip ID for valid clip url: (url: %s) -> %s',
+    async (input: string, expected: string) => {
+      const providers = useProviders()
+      const clip = await providers.getClip(input)
+      expect(clip).toBeDefined()
+      expect(clip?.id).toEqual(expected)
+    }
+  )
 
   it.each([
     ['', undefined],
     ['abc', undefined],
     ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', undefined]
   ])(
-    'returns undefined for invalid clip urls',
+    'returns undefined for invalid clip urls: (url: %s) -> %s',
     async (input: string, expected: Clip | undefined) => {
       const providers = useProviders()
       expect(await providers.getClip(input)).toEqual(expected)
@@ -82,7 +85,7 @@ describe('providers.ts', () => {
     [clipFromTwitch, 'iframe' as PlayerFormat],
     [{} as Clip, undefined]
   ])(
-    'returns the correct player format based on clip',
+    'returns the correct player format based on clip: (clip: %o) -> %s',
     async (input: Clip, expected: PlayerFormat | undefined) => {
       const providers = useProviders()
       expect(await providers.getPlayerFormat(input)).toEqual(expected)
@@ -94,7 +97,7 @@ describe('providers.ts', () => {
     [clipFromTwitch, `${clipFromTwitch.embedUrl}&autoplay=true&parent=${window.location.hostname}`],
     [{} as Clip, undefined]
   ])(
-    'returns the correct player source based on clip',
+    'returns the correct player source based on clip: (clip: %o) -> %s',
     async (input: Clip, expected: string | undefined) => {
       const providers = useProviders()
       expect(await providers.getPlayerSource(input)).toEqual(expected)

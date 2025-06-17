@@ -60,10 +60,19 @@ export const useUser = defineStore(
         // Attempt to get the username from Twitch API as the preferred username may not be set
         // or the user may have a preferred username that is different from their Twitch username.
         // For example, if the user has simplified chinese characters in their preferred username.
-        const users = await twitch.getUsers(ctx.value, [])
-        if (users.length > 0) {
-          ctx.value.username = users[0].login
-        } else {
+        let failed = false
+        try {
+          const users = await twitch.getUsers(ctx.value, [])
+          if (users.length > 0) {
+            ctx.value.username = users[0].login
+          } else {
+            failed = true
+          }
+        } catch (error) {
+          logger.error(`[Twitch]: ${error}`)
+          failed = true
+        }
+        if (failed) {
           logger.warn(
             `[Twitch]: Failed to get user from Twitch API. Using preferred username: ${decodedIdToken.preferred_username}.`
           )

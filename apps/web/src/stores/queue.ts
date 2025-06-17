@@ -19,12 +19,12 @@ export const useQueue = defineStore(
     const upcoming = ref<ClipList>(new ClipList())
 
     function clear() {
-      logger.info('[Queue]: Clearing upcoming queue.')
+      logger.debug('[Queue]: Clearing upcoming queue.')
       upcoming.value.clear()
     }
 
     function purge() {
-      logger.info('[Queue]: Purging queue history.')
+      logger.debug('[Queue]: Purging queue history.')
       history.value.clear()
     }
 
