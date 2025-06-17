@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
 import { ClipSource } from '../types'
-import { getAllURLsFromText, toSubmitterUUID } from '../utils'
+import { fromSubmitterUUID, getAllURLsFromText, toSubmitterUUID } from '../utils'
 
 describe('utils.ts', () => {
   it.each([
     ['', []],
+    ['https://example.com', ['https://example.com']],
     ['https://next.vue-test-utils.vuejs.org/', ['https://next.vue-test-utils.vuejs.org/']],
     ['Some test message with a url https://www.twitch.tv/', ['https://www.twitch.tv/']],
     ['Some test message with a url https://www.x.y/ then text after.', ['https://www.x.y/']],
@@ -21,17 +22,29 @@ describe('utils.ts', () => {
       'Here are some URLs with duplicates: https://example.com http://another-example.com?v=2121314&dasdbasbd=123 , and https://example.com',
       ['https://example.com', 'http://another-example.com?v=2121314&dasdbasbd=123']
     ]
-  ])('gets a url from a message when possible', (input: string, expected: string[]) => {
-    expect(getAllURLsFromText(input)).toEqual(expected)
+  ])('gets all urls from text: (text: %s) -> %o', (text: string, urls: string[]) => {
+    expect(getAllURLsFromText(text)).toEqual(urls)
   })
 
   it.each([
-    [ClipSource.UNKNOWN, 'testuser', 'unknown:testuser'],
-    [ClipSource.TWITCH, 'testuser', 'twitch:testuser']
+    [ClipSource.UNKNOWN, 'testuser', 'Unknown:testuser'],
+    [ClipSource.TWITCH, 'testuser', 'Twitch:testuser']
   ])(
-    'returns a uuid for a given clip',
+    'converts a source and subitter to a uuid (source: %s, submitter: %s) -> %s',
     (source: ClipSource, submitter: string, expected: string) => {
       expect(toSubmitterUUID(source, submitter)).toEqual(expected)
+    }
+  )
+
+  it.each([
+    ['Unknown:testuser', ClipSource.UNKNOWN, 'testuser'],
+    ['Twitch:testuser', ClipSource.TWITCH, 'testuser'],
+    ['testuser', ClipSource.UNKNOWN, 'testuser'],
+    ['', ClipSource.UNKNOWN, '']
+  ])(
+    'converts a submitter uuid to a source and submitter (uuid: %s) -> (%s, %s)',
+    (uuid: string, expectedSource: ClipSource, expectedSubmitter: string) => {
+      expect(fromSubmitterUUID(uuid)).toEqual([expectedSource, expectedSubmitter])
     }
   )
 })
