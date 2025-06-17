@@ -1,5 +1,16 @@
 # @cq/web
 
+## 1.36.2
+
+### Patch Changes
+
+- fix: unify logging messages and levels ([`a893da1`](https://github.com/jordanshatford/clip-queue/commit/a893da1e2461b33ce85010ed65fbe7c65d7996a4))
+
+- Updated dependencies [[`b38ae1e`](https://github.com/jordanshatford/clip-queue/commit/b38ae1e7e98dfc8a54a1a5b5982c22ad98442d6e), [`58c4045`](https://github.com/jordanshatford/clip-queue/commit/58c4045c758f3a4c57e1aab9cd200f82ebaec2b4), [`23a6dfb`](https://github.com/jordanshatford/clip-queue/commit/23a6dfb80785118b58ab7f9b99bedab590d4542d)]:
+  - @cq/providers@2.1.0
+  - @cq/services@2.1.0
+  - @cq/sources@1.6.0
+
 ## 1.36.1
 
 ### Patch Changes
