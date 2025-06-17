@@ -12,7 +12,16 @@
   "cancel": "إلغاء",
   "chat_settings_saved": "تم حفظ إعدادات الدردشة.",
   "clear": "مسح",
-  "clips": "{length} قصاصة",
+  "clips": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} مقطع",
+        "lengthPlural=other": "{length} مقاطع"
+      }
+    }
+  ],
   "clip_cache_purged": "تم مسح ذاكرة التخزين المؤقت للقصاصات.",
   "clip_history_purged": "تم مسح سجل القصاصات.",
   "close": "إغلاق",
@@ -38,7 +47,16 @@
   "connected_chat_colon": "الدردشة متصل:",
   "cyan": "السماوي",
   "delete_history": "حذف السجل",
-  "delete_history_confirm": "هل أنت متأكد أنك تريد حذف {length} قصاصة من السجل؟",
+  "delete_history_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "هل أنت متأكد أنك تريد حذف المقطع {length} من السجل؟",
+        "lengthPlural=other": "هل أنت متأكد أنك تريد حذف {length} مقطع من السجل؟"
+      }
+    }
+  ],
   "delete_label": "حذف",
   "disconnected": "غير متصل",
   "emerald": "الزمرد",
@@ -135,7 +153,16 @@
   "creator": "الخالق",
   "logs_colon": "سجلات:",
   "clear_logs": "مسح السجلات",
-  "clear_logs_confirm": "هل أنت متأكد أنك تريد مسح {length} سجل؟",
+  "clear_logs_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "هل أنت متأكد أنك تريد مسح سجل {length}؟",
+        "lengthPlural=other": "هل أنت متأكد أنك تريد مسح سجلات {length}؟"
+      }
+    }
+  ],
   "logs": "سجلات",
   "download": "تحميل",
   "view": "منظر",

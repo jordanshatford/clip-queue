@@ -12,7 +12,16 @@
   "cancel": "キャンセル",
   "chat_settings_saved": "チャット設定が保存されました。",
   "clear": "クリア",
-  "clips": "{length} クリップ",
+  "clips": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} クリップ",
+        "lengthPlural=other": "{length} クリップ"
+      }
+    }
+  ],
   "clip_cache_purged": "クリップキャッシュが消去されました。",
   "clip_history_purged": "クリップ履歴が消去されました。",
   "close": "閉じる",
@@ -38,7 +47,16 @@
   "connected_chat_colon": "接続されたチャット:",
   "cyan": "シアン",
   "delete_history": "履歴を削除",
-  "delete_history_confirm": "履歴から{length}クリップを削除しますか？",
+  "delete_history_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "履歴から {length} クリップを削除してもよろしいですか?",
+        "lengthPlural=other": "履歴から {length} 個のクリップを削除してもよろしいですか?"
+      }
+    }
+  ],
   "delete_label": "削除",
   "disconnected": "切断されました",
   "emerald": "エメラルド",
@@ -136,7 +154,16 @@
   "logs": "ログ",
   "logs_colon": "ログ:",
   "clear_logs": "ログをクリアする",
-  "clear_logs_confirm": "{length} 個のログをクリアしてもよろしいですか?",
+  "clear_logs_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} ログをクリアしてもよろしいですか?",
+        "lengthPlural=other": "{length} 個のログをクリアしてもよろしいですか?"
+      }
+    }
+  ],
   "download": "ダウンロード",
   "view": "ビュー",
   "level": "レベル",

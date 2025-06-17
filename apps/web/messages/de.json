@@ -12,7 +12,16 @@
   "cancel": "Abbrechen",
   "chat_settings_saved": "Chat-Einstellungen gespeichert.",
   "clear": "Leeren",
-  "clips": "{length} Clip(s)",
+  "clips": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} Clip",
+        "lengthPlural=other": "{length} Clips"
+      }
+    }
+  ],
   "clip_cache_purged": "Clip-Cache geleert.",
   "clip_history_purged": "Clip-Verlauf gelöscht.",
   "close": "Schließen",
@@ -38,7 +47,16 @@
   "connected_chat_colon": "Verbunden mit Chat:",
   "cyan": "Cyan",
   "delete_history": "Verlauf löschen",
-  "delete_history_confirm": "Möchten Sie wirklich {length} Clip(s) aus dem Verlauf löschen?",
+  "delete_history_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "Möchten Sie den Clip {length} wirklich aus dem Verlauf löschen?",
+        "lengthPlural=other": "Möchten Sie wirklich {length} Clips aus dem Verlauf löschen?"
+      }
+    }
+  ],
   "delete_label": "Löschen",
   "disconnected": "Getrennt",
   "emerald": "Smaragd",
@@ -135,7 +153,16 @@
   "creator": "Ersteller",
   "logs_colon": "Protokolle:",
   "clear_logs": "Protokolle löschen",
-  "clear_logs_confirm": "Möchten Sie {length} Protokoll(e) wirklich löschen?",
+  "clear_logs_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "Möchten Sie das {length}-Protokoll wirklich löschen?",
+        "lengthPlural=other": "Möchten Sie {length}-Protokolle wirklich löschen?"
+      }
+    }
+  ],
   "logs": "Protokolle",
   "download": "Herunterladen",
   "view": "Sicht",

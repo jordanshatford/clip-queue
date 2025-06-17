@@ -12,7 +12,16 @@
   "cancel": "Cancelar",
   "chat_settings_saved": "Configuración del chat guardada.",
   "clear": "Limpiar",
-  "clips": "{length} clip(s)",
+  "clips": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} clip",
+        "lengthPlural=other": "{length} clips"
+      }
+    }
+  ],
   "clip_cache_purged": "Caché de clips purgada.",
   "clip_history_purged": "Historial de clips purgado.",
   "close": "Cerrar",
@@ -38,7 +47,16 @@
   "connected_chat_colon": "Chat conectado:",
   "cyan": "Cian",
   "delete_history": "Eliminar historial",
-  "delete_history_confirm": "¿Estás seguro de que quieres eliminar {length} clip(s) del historial?",
+  "delete_history_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "¿Estás seguro de que quieres borrar el registro de {length}?",
+        "lengthPlural=other": "¿Estás seguro de que quieres borrar los registros de {length}?"
+      }
+    }
+  ],
   "delete_label": "Eliminar",
   "disconnected": "Desconectado",
   "emerald": "Esmeralda",
@@ -135,7 +153,16 @@
   "creator": "Creador",
   "logs_colon": "Registros:",
   "clear_logs": "Borrar registros",
-  "clear_logs_confirm": "¿Está seguro de que desea borrar {length} registros?",
+  "clear_logs_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "Are you sure you want to clear {length} log?",
+        "lengthPlural=other": "Are you sure you want to clear {length} logs?"
+      }
+    }
+  ],
   "logs": "Registros",
   "download": "Descargar",
   "view": "Vista",

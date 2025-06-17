@@ -12,7 +12,16 @@
   "cancel": "Annulla",
   "chat_settings_saved": "Impostazioni chat salvate.",
   "clear": "Pulisci",
-  "clips": "{length} clip",
+  "clips": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} clip",
+        "lengthPlural=other": "{length} clip"
+      }
+    }
+  ],
   "clip_cache_purged": "Cache delle clip svuotata.",
   "clip_history_purged": "Cronologia delle clip svuotata.",
   "close": "Chiudi",
@@ -38,7 +47,16 @@
   "connected_chat_colon": "Chat connessa:",
   "cyan": "Ciano",
   "delete_history": "Elimina cronologia",
-  "delete_history_confirm": "Sei sicuro di voler eliminare {length} clip dalla cronologia?",
+  "delete_history_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "Vuoi davvero eliminare la clip {length} dalla cronologia?",
+        "lengthPlural=other": "Vuoi davvero eliminare {length} clip dalla cronologia?"
+      }
+    }
+  ],
   "delete_label": "Elimina",
   "disconnected": "Disconnesso",
   "emerald": "Smeraldo",
@@ -136,7 +154,16 @@
   "logs": "Registri",
   "logs_colon": "Registri:",
   "clear_logs": "Cancella registri",
-  "clear_logs_confirm": "Vuoi davvero cancellare {length} log?",
+  "clear_logs_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "Vuoi davvero cancellare il registro {length}?",
+        "lengthPlural=other": "Vuoi davvero cancellare {length} log?"
+      }
+    }
+  ],
   "download": "Scaricamento",
   "view": "Visualizzazione",
   "level": "Livello",

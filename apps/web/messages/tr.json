@@ -12,7 +12,16 @@
   "cancel": "İptal",
   "chat_settings_saved": "Sohbet ayarları kaydedildi.",
   "clear": "Temizle",
-  "clips": "{length} klip",
+  "clips": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} klip",
+        "lengthPlural=other": "{length} klipler"
+      }
+    }
+  ],
   "clip_cache_purged": "Klip önbelleği temizlendi.",
   "clip_history_purged": "Klip geçmişi temizlendi.",
   "close": "Kapat",
@@ -38,7 +47,16 @@
   "connected_chat_colon": "Bağlı Sohbet:",
   "cyan": "Camgöbeği",
   "delete_history": "Geçmişi Sil",
-  "delete_history_confirm": "{length} klip geçmişten silinsin mi?",
+  "delete_history_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} uzunluğundaki klibi geçmişten silmek istediğinizden emin misiniz?",
+        "lengthPlural=other": "{length} uzunluğundaki klipleri geçmişten silmek istediğinizden emin misiniz?"
+      }
+    }
+  ],
   "delete_label": "Sil",
   "disconnected": "Bağlantı kesildi",
   "emerald": "Zümrüt",
@@ -136,7 +154,16 @@
   "logs": "Günlükler",
   "logs_colon": "Günlükler:",
   "clear_logs": "Günlükleri Temizle",
-  "clear_logs_confirm": "{length} günlük kaydını temizlemek istediğinizden emin misiniz?",
+  "clear_logs_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} uzunluğundaki günlüğü temizlemek istediğinizden emin misiniz?",
+        "lengthPlural=other": "{length} uzunluğundaki günlükleri temizlemek istediğinizden emin misiniz?"
+      }
+    }
+  ],
   "download": "İndirmek",
   "view": "Görüş",
   "level": "Seviye",

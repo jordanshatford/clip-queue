@@ -12,7 +12,16 @@
   "cancel": "Cancel",
   "chat_settings_saved": "Chat settings saved.",
   "clear": "Clear",
-  "clips": "{length} clip(s)",
+  "clips": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} clip",
+        "lengthPlural=other": "{length} clips"
+      }
+    }
+  ],
   "clip_cache_purged": "Clip cache purged.",
   "clip_history_purged": "Clip history purged.",
   "close": "Close",
@@ -38,7 +47,16 @@
   "connected_chat_colon": "Connected Chat:",
   "cyan": "Cyan",
   "delete_history": "Delete History",
-  "delete_history_confirm": "Are you sure you want to delete {length} clip(s) from the history?",
+  "delete_history_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "Are you sure you want to delete {length} clip from the history?",
+        "lengthPlural=other": "Are you sure you want to delete {length} clips from the history?"
+      }
+    }
+  ],
   "delete_label": "Delete",
   "disconnected": "Disconnected",
   "emerald": "Emerald",
@@ -135,7 +153,16 @@
   "creator": "Creator",
   "logs_colon": "Logs:",
   "clear_logs": "Clear Logs",
-  "clear_logs_confirm": "Are you sure you want to clear {length} logs(s)?",
+  "clear_logs_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "Are you sure you want to clear {length} log?",
+        "lengthPlural=other": "Are you sure you want to clear {length} logs?"
+      }
+    }
+  ],
   "logs": "Logs",
   "download": "Download ",
   "view": "View",

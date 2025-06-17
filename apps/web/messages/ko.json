@@ -12,7 +12,16 @@
   "cancel": "취소",
   "chat_settings_saved": "채팅 설정이 저장되었습니다.",
   "clear": "초기화",
-  "clips": "{length} 클립",
+  "clips": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} 클립",
+        "lengthPlural=other": "{length} 클립"
+      }
+    }
+  ],
   "clip_cache_purged": "클립 캐시가 삭제되었습니다.",
   "clip_history_purged": "클립 기록이 삭제되었습니다.",
   "close": "닫기",
@@ -38,7 +47,16 @@
   "connected_chat_colon": "연결된 채팅:",
   "cyan": "청록색",
   "delete_history": "기록 삭제",
-  "delete_history_confirm": "기록에서 {length}개의 클립을 삭제하시겠습니까?",
+  "delete_history_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length}개의 클립을 기록에서 삭제하시겠습니까?",
+        "lengthPlural=other": "{length}개의 클립을 기록에서 삭제하시겠습니까?"
+      }
+    }
+  ],
   "delete_label": "삭제",
   "disconnected": "연결이 끊김",
   "emerald": "에메랄드",
@@ -136,7 +154,16 @@
   "logs": "로그",
   "logs_colon": "로그:",
   "clear_logs": "로그 지우기",
-  "clear_logs_confirm": "{length}개의 로그를 지우시겠습니까?",
+  "clear_logs_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} 로그를 지우시겠습니까?",
+        "lengthPlural=other": "{length}개의 로그를 지우시겠습니까?"
+      }
+    }
+  ],
   "download": "다운로드",
   "view": "보다",
   "level": "수준",

@@ -12,7 +12,16 @@
   "cancel": "Cancelar",
   "chat_settings_saved": "Configurações de chat salvas.",
   "clear": "Limpar",
-  "clips": "{length} clipe(s)",
+  "clips": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} grampo",
+        "lengthPlural=other": "{length} clipes"
+      }
+    }
+  ],
   "clip_cache_purged": "Cache de clipes limpo.",
   "clip_history_purged": "Histórico de clipes limpo.",
   "close": "Fechar",
@@ -38,7 +47,16 @@
   "connected_chat_colon": "Chat Conectado:",
   "cyan": "Ciano",
   "delete_history": "Excluir Histórico",
-  "delete_history_confirm": "Tem certeza de que deseja excluir {length} clipe(s) do histórico?",
+  "delete_history_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "Tem certeza de que deseja excluir o clipe {length} do histórico?",
+        "lengthPlural=other": "Tem certeza de que deseja excluir clipes {length} do histórico?"
+      }
+    }
+  ],
   "delete_label": "Excluir",
   "disconnected": "Desconectado",
   "emerald": "Esmeralda",
@@ -136,7 +154,16 @@
   "logs": "Registros",
   "logs_colon": "Registros:",
   "clear_logs": "Limpar registros",
-  "clear_logs_confirm": "Tem certeza de que deseja limpar {length} log(s)?",
+  "clear_logs_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "Tem certeza de que deseja limpar o log {length}?",
+        "lengthPlural=other": "Tem certeza de que deseja limpar os logs {length}?"
+      }
+    }
+  ],
   "download": "Transferir",
   "view": "Visualizar",
   "level": "Nível",

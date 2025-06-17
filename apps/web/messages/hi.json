@@ -12,7 +12,16 @@
   "cancel": "रद्द करें",
   "chat_settings_saved": "चैट सेटिंग्स सहेजी गईं।",
   "clear": "साफ़ करें",
-  "clips": "{length} क्लिप(s)",
+  "clips": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} क्लिप",
+        "lengthPlural=other": "{length} क्लिप्स"
+      }
+    }
+  ],
   "clip_cache_purged": "क्लिप कैश साफ़ कर दिया गया।",
   "clip_history_purged": "क्लिप इतिहास साफ़ कर दिया गया।",
   "close": "बंद करें",
@@ -38,7 +47,16 @@
   "connected_chat_colon": "कनेक्टेड चैट:",
   "cyan": "सियान",
   "delete_history": "इतिहास हटाएं",
-  "delete_history_confirm": "क्या आप सुनिश्चित हैं कि आप इतिहास से {length} क्लिप(s) हटाना चाहते हैं?",
+  "delete_history_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "क्या आप वाकई इतिहास से {length} क्लिप हटाना चाहते हैं?",
+        "lengthPlural=other": "क्या आप वाकई इतिहास से {length} क्लिप हटाना चाहते हैं?"
+      }
+    }
+  ],
   "delete_label": "हटाएं",
   "disconnected": "डिस्कनेक्ट किया गया",
   "emerald": "पन्ना",
@@ -136,7 +154,16 @@
   "logs": "लॉग्स",
   "logs_colon": "लॉग्स:",
   "clear_logs": "लॉग साफ़ करें",
-  "clear_logs_confirm": "क्या आप वाकई {length} लॉग साफ़ करना चाहते हैं?",
+  "clear_logs_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "क्या आप वाकई {length} लॉग साफ़ करना चाहते हैं?",
+        "lengthPlural=other": "क्या आप वाकई {length} लॉग साफ़ करना चाहते हैं?"
+      }
+    }
+  ],
   "download": "डाउनलोड करना",
   "view": "देखना",
   "level": "स्तर",

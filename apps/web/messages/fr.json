@@ -12,7 +12,16 @@
   "cancel": "Annuler",
   "chat_settings_saved": "Paramètres du chat enregistrés.",
   "clear": "Effacer",
-  "clips": "{length} clip(s)",
+  "clips": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} agrafe",
+        "lengthPlural=other": "{length} extraits"
+      }
+    }
+  ],
   "clip_cache_purged": "Cache des clips vidé.",
   "clip_history_purged": "Historique des clips vidé.",
   "close": "Fermer",
@@ -38,7 +47,16 @@
   "connected_chat_colon": "Chat connecté:",
   "cyan": "Cyan",
   "delete_history": "Supprimer l'historique",
-  "delete_history_confirm": "Êtes-vous sûr de vouloir supprimer {length} clip(s) de l'historique ?",
+  "delete_history_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "Êtes-vous sûr de vouloir supprimer le clip {length} de l'historique ?",
+        "lengthPlural=other": "Êtes-vous sûr de vouloir supprimer {length} clips de l'historique ?"
+      }
+    }
+  ],
   "delete_label": "Supprimer",
   "disconnected": "Déconnecté",
   "emerald": "Émeraude",
@@ -135,7 +153,16 @@
   "creator": "Créateur",
   "logs_colon": "Journaux:",
   "clear_logs": "Effacer les journaux",
-  "clear_logs_confirm": "Êtes-vous sûr de vouloir effacer {length} journaux?",
+  "clear_logs_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "Êtes-vous sûr de vouloir effacer le journal {length} ?",
+        "lengthPlural=other": "Êtes-vous sûr de vouloir effacer les journaux {length} ?"
+      }
+    }
+  ],
   "logs": "Journaux",
   "download": "Télécharger",
   "view": "Voir",

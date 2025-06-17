@@ -12,7 +12,16 @@
   "cancel": "Отмена",
   "chat_settings_saved": "Настройки чата сохранены.",
   "clear": "Очистить",
-  "clips": "{length} клипов",
+  "clips": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "{length} клип",
+        "lengthPlural=other": "{length} клипы"
+      }
+    }
+  ],
   "clip_cache_purged": "Кэш клипов очищен.",
   "clip_history_purged": "История клипов очищена.",
   "close": "Закрыть",
@@ -38,7 +47,16 @@
   "connected_chat_colon": "Подключенный чат:",
   "cyan": "Голубой",
   "delete_history": "Удалить историю",
-  "delete_history_confirm": "Вы уверены, что хотите удалить {length} клипов из истории?",
+  "delete_history_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "Вы уверены, что хотите удалить клип {length} из истории?",
+        "lengthPlural=other": "Вы уверены, что хотите удалить {length} клипов из истории?"
+      }
+    }
+  ],
   "delete_label": "Удалить",
   "disconnected": "Отключено",
   "emerald": "Изумрудный",
@@ -136,7 +154,16 @@
   "logs": "Журналы",
   "logs_colon": "Журналы:",
   "clear_logs": "Очистить журналы",
-  "clear_logs_confirm": "Вы уверены, что хотите очистить {length} журналов?",
+  "clear_logs_confirm": [
+    {
+      "declarations": ["input length", "local lengthPlural = length: plural"],
+      "selectors": ["lengthPlural"],
+      "match": {
+        "lengthPlural=one": "Вы уверены, что хотите очистить журнал {length}?",
+        "lengthPlural=other": "Вы уверены, что хотите очистить {length} журналов?"
+      }
+    }
+  ],
   "download": "Скачать",
   "view": "Вид",
   "level": "Уровень",
