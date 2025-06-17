@@ -1,5 +1,11 @@
 # @cq/web
 
+## 1.36.3
+
+### Patch Changes
+
+- fix: use proper pluralization for all locale messages ([`8f1c459`](https://github.com/jordanshatford/clip-queue/commit/8f1c459a8e95b6fe48d043ea5d5242d0f889d5b5))
+
 ## 1.36.2
 
 ### Patch Changes
