@@ -30,7 +30,7 @@ describe('utils.ts', () => {
     [ClipSource.UNKNOWN, 'testuser', 'Unknown:testuser'],
     [ClipSource.TWITCH, 'testuser', 'Twitch:testuser']
   ])(
-    'converts a source and subitter to a uuid (source: %s, submitter: %s) -> %s',
+    'converts a source and subitter to a uuid: (source: %s, submitter: %s) -> %s',
     (source: ClipSource, submitter: string, expected: string) => {
       expect(toSubmitterUUID(source, submitter)).toEqual(expected)
     }
@@ -42,7 +42,7 @@ describe('utils.ts', () => {
     ['testuser', ClipSource.UNKNOWN, 'testuser'],
     ['', ClipSource.UNKNOWN, '']
   ])(
-    'converts a submitter uuid to a source and submitter (uuid: %s) -> (%s, %s)',
+    'converts a submitter uuid to a source and submitter: (uuid: %s) -> (%s, %s)',
     (uuid: string, expectedSource: ClipSource, expectedSubmitter: string) => {
       expect(fromSubmitterUUID(uuid)).toEqual([expectedSource, expectedSubmitter])
     }

@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import TwitchAuth from '../auth'
 
 describe('twitch-auth.ts', () => {
-  it('can login the user given an auth hash string', () => {
+  it('parses twitch authorization hash into login details', () => {
     const authHash =
       '#access_token=token&id_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI&scope=openid+chat%3Aread&token_type=bearer'
     const authInfo = TwitchAuth.login(authHash)
@@ -20,7 +20,7 @@ describe('twitch-auth.ts', () => {
     })
   })
 
-  it('will return null when invalid auth hash is given', () => {
+  it('returns null when invalid authorization hash is provided', () => {
     const authHash = ''
     const authInfo = TwitchAuth.login(authHash)
     expect(authInfo).toEqual(null)

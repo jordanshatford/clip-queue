@@ -15,11 +15,11 @@ describe('emitter.ts', () => {
     emitter = new EventEmitter<TestEvents>()
   })
 
-  it('should be defined', () => {
+  it('is defined', () => {
     expect(emitter).toBeDefined()
   })
 
-  it('can handle listening to events with no arguments', () => {
+  it('can listen and emit events without arguments', () => {
     let hasBeenCalled = false
     emitter?.on('test', () => {
       hasBeenCalled = true
@@ -28,7 +28,7 @@ describe('emitter.ts', () => {
     expect(hasBeenCalled).toEqual(true)
   })
 
-  it('can handle listening to events with a single argument', () => {
+  it('can listen and emit events with a single argument', () => {
     let hasBeenCalled = false
     emitter?.on('test2', (t) => {
       hasBeenCalled = true
@@ -38,7 +38,7 @@ describe('emitter.ts', () => {
     expect(hasBeenCalled).toEqual(true)
   })
 
-  it('can handle listening to events with multiple argument', () => {
+  it('can listen and emit events with a multiple arguments', () => {
     let hasBeenCalled = false
     emitter?.on('test3', (t, t2) => {
       hasBeenCalled = true
@@ -49,7 +49,7 @@ describe('emitter.ts', () => {
     expect(hasBeenCalled).toEqual(true)
   })
 
-  it('can handle being called multiple times', () => {
+  it('can listen for multiple calls to the same event', () => {
     let totalCalls = 0
     emitter?.on('test', () => {
       totalCalls++
@@ -61,7 +61,7 @@ describe('emitter.ts', () => {
     expect(totalCalls).toEqual(n)
   })
 
-  it('can handle multiple listeners', () => {
+  it('can listen with multiple listeners', () => {
     let hasBeenCalled = false
     let hasBeenCalled2 = false
     emitter?.on('test', () => {

@@ -18,7 +18,7 @@ describe('AppFooter.vue', () => {
     expect(wrapper.exists()).toEqual(true)
   })
 
-  it('has the proper copyright and github from config', () => {
+  it('has values for copyright and github', () => {
     expect(wrapper.vm.copyright).toEqual({ owner: 'testowner', year: 2024 })
     expect(wrapper.vm.github).toEqual('testgithub')
   })

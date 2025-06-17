@@ -9,9 +9,12 @@ describe('utils.ts', () => {
     [{ mod: false } as ChatUserstate, false],
     [{ mod: false, badges: { broadcaster: '1' } } as ChatUserstate, true],
     [{ mod: false, badges: { broadcaster: '0' } } as ChatUserstate, false]
-  ])('checks if a user is a moderator', (user: ChatUserstate, expected: boolean) => {
-    expect(isModerator(user)).toEqual(expected)
-  })
+  ])(
+    'can detect if a user is a moderator: (user: %o) -> %o',
+    (user: ChatUserstate, expected: boolean) => {
+      expect(isModerator(user)).toEqual(expected)
+    }
+  )
 
   it.each([
     [
@@ -29,18 +32,49 @@ describe('utils.ts', () => {
     ['', undefined],
     ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', undefined],
     ['https://m.twitch.tv/c/RockySteamyWalrusMoreCowbell-ZBrnUiZwQsENj3pi', undefined]
-  ])('gets an id from a clip url', (input: string, expected: string | undefined) => {
-    expect(getClipIdFromUrl(input)).toEqual(expected)
-  })
+  ])(
+    'can get a clip ID from a url: (url: %s) -> %s',
+    (input: string, expected: string | undefined) => {
+      expect(getClipIdFromUrl(input)).toEqual(expected)
+    }
+  )
 
   it.each([
-    ['id', ['test1', 'test2', 'test3']],
-    ['game_id', ['duplicate', 'duplicate', 'duplicate', 'new']],
-    ['broadcaster_id', ['user', 'user1', 'user2']]
-  ])('gets url search params for values passed (%s, %s)', (key: string, values: string[]) => {
-    const p = toURLParams(key, values)
-    expect(p.has(key)).toEqual(true)
-    expect(p.getAll(key).length).toEqual(values.length)
-    expect(p.toString()).toEqual(`${key}=${values.join(`&${key}=`)}`)
-  })
+    [
+      'id',
+      ['test1', 'test2', 'test3'],
+      new URLSearchParams([
+        ['id', 'test1'],
+        ['id', 'test2'],
+        ['id', 'test3']
+      ])
+    ],
+    [
+      'game_id',
+      ['duplicate', 'duplicate', 'duplicate', 'new'],
+      new URLSearchParams([
+        ['game_id', 'duplicate'],
+        ['game_id', 'duplicate'],
+        ['game_id', 'duplicate'],
+        ['game_id', 'new']
+      ])
+    ],
+    [
+      'broadcaster_id',
+      ['user', 'user1', 'user2'],
+      new URLSearchParams([
+        ['broadcaster_id', 'user'],
+        ['broadcaster_id', 'user1'],
+        ['broadcaster_id', 'user2']
+      ])
+    ]
+  ])(
+    'creates url search params: (key: %s, values: %o) -> %o',
+    (key: string, values: string[], expected: URLSearchParams) => {
+      const p = toURLParams(key, values)
+      expect(p.has(key)).toEqual(true)
+      expect(p.getAll(key).length).toEqual(values.length)
+      expect(p.toString()).toEqual(expected.toString())
+    }
+  )
 })

@@ -34,7 +34,7 @@ describe('commands.ts', () => {
     [Command.CLEAR, 'clear'],
     [Command.PURGE_HISTORY, 'purge']
   ])(
-    'calls the proper clip queue function when a command is issued (%s, %s)',
+    'calls the proper clip queue function when a command is issued: (command: %s) -> %s',
     (commandName: Command, expectedFunctionCall: unknown) => {
       const queue = useQueue()
       // @ts-expect-error function with unknown type
@@ -45,7 +45,7 @@ describe('commands.ts', () => {
   )
 
   it.each([[Command.PURGE_CACHE, 'purge']])(
-    'calls the proper clip queue function when a command is issued (%s, %s)',
+    'calls the proper clip queue function when a command is issued: (command: %s) -> %s',
     (commandName: Command, expectedFunctionCall: unknown) => {
       const providers = useProviders()
       // @ts-expect-error function with unknown type
@@ -59,7 +59,7 @@ describe('commands.ts', () => {
     [Command.REMOVE_BY_SUBMITTER, ['testsubmitter'], 'removeSubmitterClips', ['testsubmitter']],
     [Command.REMOVE_BY_PROVIDER, ['testprovider'], 'removeProviderClips', ['testprovider']]
   ])(
-    'calls the proper clip queue function with params when issued (%s, %s)',
+    'calls the proper clip queue function with params when issued: (command: %s, args: %o) -> %s(%o)',
     (
       commandName: Command,
       args: string[],
@@ -76,7 +76,7 @@ describe('commands.ts', () => {
   )
 
   it.each([['unknown'], ['']])(
-    'calls nothing when an invalid command is issued (%s, %s)',
+    'calls nothing when an invalid command is issued: (%s) -> %s',
     (commandName: string) => {
       const queue = useQueue()
       const queueCommandFunctions = ['previous', 'next', 'open', 'close', 'clear']

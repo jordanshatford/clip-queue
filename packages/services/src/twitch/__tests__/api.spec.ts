@@ -54,7 +54,7 @@ describe('twitch-api.ts', () => {
     expect(fetch).toHaveBeenCalledTimes(1)
   })
 
-  it('gets the common headers based on come ctx', () => {
+  it('gets authorization headers based on a twitch users context', () => {
     const ctx: TwitchUserCtx = { id: 'test', token: 'testToken' }
     expect(toCommonHeaders(ctx)).toEqual({
       'Client-ID': 'test',

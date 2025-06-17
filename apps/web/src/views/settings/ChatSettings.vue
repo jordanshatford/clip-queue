@@ -8,6 +8,7 @@
             <span
               class="border-surface-300 dark:border-surface-700 bg-surface-0 dark:bg-surface-950 text-surface-400 flex min-w-10 items-center justify-center rounded-s-md border-y border-s"
             >
+              <!-- eslint-disable-next-line vue/no-v-html -->
               <svg class="h-5 w-5" v-html="sources.logo"></svg>
             </span>
             <InputText

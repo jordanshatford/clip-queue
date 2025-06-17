@@ -46,7 +46,10 @@ describe('kick.ts', () => {
       'clip_01JBKJJC162V3P5TBT8EAY6Z13'
     ],
     ['', undefined]
-  ])('gets an id from a clip url', (input: string, expected: string | undefined) => {
-    expect(getClipIdFromUrl(input)).toEqual(expected)
-  })
+  ])(
+    'can get a clip ID from a url: (url: %s) -> %s',
+    (input: string, expected: string | undefined) => {
+      expect(getClipIdFromUrl(input)).toEqual(expected)
+    }
+  )
 })
