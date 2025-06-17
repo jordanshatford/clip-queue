@@ -70,63 +70,49 @@ export interface Clip {
 /**
  * The base clip provider.
  */
-export type IBaseClipProvider = {
+export abstract class BaseClipProvider {
   /**
    * The name of the provider.
    */
-  name: ClipProvider
+  public abstract name: ClipProvider
   /**
    * The SVG of the provider.
    */
-  svg: string
+  public abstract svg: string
   /**
    * Whether the provider is experimental.
    */
-  isExperimental: boolean
+  public isExperimental = false
+  protected cache: Record<string, Clip> = {}
   /**
    * Whether the provider has cached data.
    */
-  hasCachedData: boolean
+  public get hasCachedData(): boolean {
+    return Object.keys(this.cache).length > 0
+  }
   /**
    * Clear the cache.
    */
-  clearCache: () => void
+  public clearCache(): void {
+    this.cache = {}
+  }
   /**
    * Get a clip.
    * @param url - The URL of the clip.
    * @returns The clip or undefined.
    */
-  getClip(url: string): Promise<Clip | undefined>
+  public abstract getClip(url: string): Promise<Clip>
   /**
    * Get the player format.
    * @param clip - The clip.
    * @returns
    */
-  getPlayerFormat: (clip: Clip) => PlayerFormat | undefined
+  public abstract getPlayerFormat(clip: Clip): PlayerFormat
   /**
    * Get the player source.
    * @param clip - The clip.
    * @returns The player source.
    */
-  getPlayerSource: (clip: Clip) => string | undefined
-}
-
-export abstract class BaseClipProvider implements IBaseClipProvider {
-  public abstract name: ClipProvider
-  public abstract svg: string
-
-  public isExperimental = false
-
-  protected cache: Record<string, Clip> = {}
-  public get hasCachedData(): boolean {
-    return Object.keys(this.cache).length > 0
-  }
-  public clearCache(): void {
-    this.cache = {}
-  }
-
-  public abstract getClip(url: string): Promise<Clip | undefined>
-  public abstract getPlayerFormat(clip: Clip): PlayerFormat
   public abstract getPlayerSource(clip: Clip): string
 }
 

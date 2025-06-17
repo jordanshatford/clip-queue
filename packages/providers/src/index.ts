@@ -1,4 +1,4 @@
-import type { ClipProviderCtxCallback, IBaseClipProvider } from './types'
+import type { BaseClipProvider, ClipProviderCtxCallback } from './types'
 import { KickProvider } from './kick'
 import { TwitchProvider } from './twitch'
 import { ClipProvider } from './types'
@@ -20,7 +20,7 @@ export const providers = {
    */
   all: (
     callbacks: Partial<Record<ClipProvider, ClipProviderCtxCallback>>
-  ): Record<ClipProvider, IBaseClipProvider> => ({
+  ): Record<ClipProvider, BaseClipProvider> => ({
     [ClipProvider.KICK]: new KickProvider(),
     [ClipProvider.TWITCH]: new TwitchProvider(callbacks[ClipProvider.TWITCH])
   })

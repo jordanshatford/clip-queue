@@ -37,55 +37,53 @@ describe('twitch.ts', () => {
   })
 
   it('knows if it is an experimental provider', () => {
-    const twitchProvider = new TwitchProvider()
-    expect(twitchProvider.isExperimental).toEqual(false)
+    const provider = new TwitchProvider()
+    expect(provider.isExperimental).toEqual(false)
   })
 
   it('gets the player format of the clip', () => {
-    const twitchProvider = new TwitchProvider()
-    expect(twitchProvider.getPlayerFormat()).toEqual('iframe')
+    const provider = new TwitchProvider()
+    expect(provider.getPlayerFormat()).toEqual('iframe')
   })
 
   it('gets the player source of the clip', async () => {
-    const twitchProvider = new TwitchProvider()
-    const c = await twitchProvider.getClip(mockTwitchClip.url)
-    expect(c).toBeDefined()
-    if (c) {
-      expect(twitchProvider.getPlayerSource(c)).toEqual(
-        `${mockTwitchClip.embed_url}&autoplay=true&parent=${window.location.hostname}`
-      )
-    }
+    const provider = new TwitchProvider()
+    const clip = await provider.getClip(mockTwitchClip.url)
+    expect(clip).toBeDefined()
+    expect(provider.getPlayerSource(clip)).toEqual(
+      `${mockTwitchClip.embed_url}&autoplay=true&parent=${window.location.hostname}`
+    )
   })
 
   it('can get a clip from a twitch url', async () => {
-    const twitchProvider = new TwitchProvider()
-    const c = await twitchProvider.getClip(mockTwitchClip.url)
-    expect(c).toBeDefined()
-    expect(c?.id).toEqual(mockTwitchClip.id)
+    const provider = new TwitchProvider()
+    const clip = await provider.getClip(mockTwitchClip.url)
+    expect(clip).toBeDefined()
+    expect(clip.id).toEqual(mockTwitchClip.id)
   })
 
   it.each([
     ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL'],
     [''],
     [mockKickClip.clip_url]
-  ])('returns undefined for unknown clip urls', async (url: string) => {
-    const twitchProvider = new TwitchProvider()
-    expect(await twitchProvider.getClip(url)).toBeUndefined()
+  ])('throws an error for unknown clip urls: (url: %s)', async (url: string) => {
+    const provider = new TwitchProvider()
+    expect(provider.getClip(url)).rejects.toThrowError()
   })
 
   it('caches clip data that it fetchs', async () => {
-    const twitchProvider = new TwitchProvider()
-    expect(twitchProvider.hasCachedData).toEqual(false)
-    expect(await twitchProvider.getClip(mockTwitchClip.url)).toBeDefined()
-    expect(twitchProvider.hasCachedData).toEqual(true)
+    const provider = new TwitchProvider()
+    expect(provider.hasCachedData).toEqual(false)
+    expect(await provider.getClip(mockTwitchClip.url)).toBeDefined()
+    expect(provider.hasCachedData).toEqual(true)
   })
 
   it('can have the cached data cleared', async () => {
-    const twitchProvider = new TwitchProvider()
-    expect(twitchProvider.hasCachedData).toEqual(false)
-    expect(await twitchProvider.getClip(mockTwitchClip.url)).toBeDefined()
-    expect(twitchProvider.hasCachedData).toEqual(true)
-    twitchProvider.clearCache()
-    expect(twitchProvider.hasCachedData).toEqual(false)
+    const provider = new TwitchProvider()
+    expect(provider.hasCachedData).toEqual(false)
+    expect(await provider.getClip(mockTwitchClip.url)).toBeDefined()
+    expect(provider.hasCachedData).toEqual(true)
+    provider.clearCache()
+    expect(provider.hasCachedData).toEqual(false)
   })
 })

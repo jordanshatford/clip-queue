@@ -10,33 +10,35 @@ export class KickProvider extends BaseClipProvider {
   public name = ClipProvider.KICK
   public svg = kick.logo
 
-  public async getClip(url: string): Promise<Clip | undefined> {
+  public async getClip(url: string): Promise<Clip> {
     const id = kick.getClipIdFromUrl(url)
+    console.error(id)
     if (!id) {
-      return
+      throw new Error(`[${this.name}]: Invalid clip URL.`)
     }
-    if (id in this.cache) {
+    if (this.cache[id]) {
       return this.cache[id]
     }
-    const clip = await kick.getClip(id)
-    if (!clip) {
-      return
+    try {
+      const clip = await kick.getClip(id)
+      const response: Clip = {
+        id: clip.id,
+        title: clip.title,
+        channel: clip.channel.username,
+        creator: clip.creator.username,
+        category: clip.category.name,
+        createdAt: clip.created_at,
+        url,
+        embedUrl: clip.clip_url,
+        thumbnailUrl: clip.thumbnail_url,
+        provider: this.name,
+        submitters: []
+      }
+      this.cache[id] = response
+      return response
+    } catch (error) {
+      throw new Error(`[${this.name}]: ${error}`)
     }
-    const response: Clip = {
-      id: clip.id,
-      title: clip.title,
-      channel: clip.channel.username,
-      creator: clip.creator.username,
-      category: clip.category.name,
-      createdAt: clip.created_at,
-      url,
-      embedUrl: clip.clip_url,
-      thumbnailUrl: clip.thumbnail_url,
-      provider: this.name,
-      submitters: []
-    }
-    this.cache[id] = response
-    return response
   }
 
   public getPlayerFormat(): PlayerFormat {

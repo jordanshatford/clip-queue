@@ -19,36 +19,39 @@ export class TwitchProvider extends BaseClipProvider {
     }
   }
 
-  public async getClip(url: string): Promise<Clip | undefined> {
+  public async getClip(url: string): Promise<Clip> {
     const id = twitch.getClipIdFromUrl(url)
     if (!id) {
-      return
+      throw new Error(`[${this.name}]: Invalid clip URL.`)
     }
-    if (id in this.cache) {
+    if (this.cache[id]) {
       return this.cache[id]
     }
-    const clips = await twitch.getClips(await this.ctx(), [id])
-    const clip = clips[0]
-    if (!clip) {
-      return
+    try {
+      const clips = await twitch.getClips(await this.ctx(), [id])
+      const clip = clips[0]
+      if (!clip) {
+        throw new Error(`[${this.name}]: Clip not found for ID ${id}.`)
+      }
+      const games = await twitch.getGames(await this.ctx(), [clip.game_id])
+      const response: Clip = {
+        id: clip.id,
+        title: clip.title,
+        channel: clip.broadcaster_name,
+        creator: clip.creator_name,
+        category: games[0]?.name,
+        createdAt: clip.created_at,
+        url,
+        embedUrl: clip.embed_url,
+        thumbnailUrl: clip.thumbnail_url,
+        provider: this.name,
+        submitters: []
+      }
+      this.cache[id] = response
+      return response
+    } catch (error) {
+      throw new Error(`[${this.name}]: ${error}`)
     }
-    const games = await twitch.getGames(await this.ctx(), [clip.game_id])
-    const game = games[0]
-    const response: Clip = {
-      id: clip.id,
-      title: clip.title,
-      channel: clip.broadcaster_name,
-      creator: clip.creator_name,
-      category: game?.name,
-      createdAt: clip.created_at,
-      url,
-      embedUrl: clip.embed_url,
-      thumbnailUrl: clip.thumbnail_url,
-      provider: this.name,
-      submitters: []
-    }
-    this.cache[id] = response
-    return response
   }
 
   public getPlayerFormat(): PlayerFormat {
