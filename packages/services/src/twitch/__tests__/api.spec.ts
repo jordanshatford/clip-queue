@@ -35,6 +35,10 @@ describe('twitch-api.ts', () => {
     expect(fetch).toHaveBeenCalledTimes(1)
   })
 
+  it('throws if no clip IDs are passed', async () => {
+    expect(TwitchAPI.getClips({ id: '', token: '', username: '' }, [])).rejects.toThrowError()
+  })
+
   it('gets a twitch games from twitch api', async () => {
     const games = await TwitchAPI.getGames({ id: '', token: '', username: '' }, ['testgame'])
     const gameInfo = games[0]
@@ -42,6 +46,10 @@ describe('twitch-api.ts', () => {
     expect(gameInfo?.id).toEqual('testgame')
     expect(gameInfo?.name).toEqual('testgame')
     expect(fetch).toHaveBeenCalledTimes(1)
+  })
+
+  it('throws if no game IDs are passed', async () => {
+    expect(TwitchAPI.getGames({ id: '', token: '', username: '' }, [])).rejects.toThrowError()
   })
 
   it('gets a twitch user from twitch api', async () => {

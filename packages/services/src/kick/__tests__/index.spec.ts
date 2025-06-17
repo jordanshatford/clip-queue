@@ -29,8 +29,8 @@ describe('kick.ts', () => {
     expect(fetch).toHaveBeenCalledTimes(1)
   })
 
-  it('returns undefined if no clip is passed', async () => {
-    expect(await getClip('')).toBeUndefined()
+  it('throws if no clip ID is passed', async () => {
+    expect(getClip('')).rejects.toThrowError()
   })
 
   it.each([

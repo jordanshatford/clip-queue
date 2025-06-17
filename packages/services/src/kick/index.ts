@@ -24,20 +24,19 @@ const KICK_CLIP_PARAM_NAME = 'clip'
 /**
  * Get a Kick clip by ID.
  * @param id - The Kick clip ID.
- * @returns The Kick clip or undefined if the clip was not found.
+ * @returns The Kick clip.
+ * @throws Will throw an error if no clip ID is provided or the fetch fails.
  */
-export async function getClip(id: string): Promise<KickClip | undefined> {
+export async function getClip(id: string): Promise<KickClip> {
   if (id.length <= 0) {
-    return
+    throw new Error('Clip ID was not provided.')
   }
-  try {
-    const response = await fetch(`https://kick.com/api/v2/clips/${id}`)
-    const data: { clip: KickClip } = await response.json()
-    return data.clip
-  } catch (e) {
-    console.error('Failed to fetch Kick clip: ', id, e)
-    return
+  const response = await fetch(`https://kick.com/api/v2/clips/${id}`)
+  if (!response.ok) {
+    throw new Error(`Failed to fetch clip with ID ${id}: ${response.statusText}.`)
   }
+  const data: { clip: KickClip } = await response.json()
+  return data.clip
 }
 
 /**
