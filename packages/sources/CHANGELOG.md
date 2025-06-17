@@ -1,5 +1,16 @@
 # @cq/sources
 
+## 1.6.0
+
+### Minor Changes
+
+- feat: add method to get source and submitter from submitter uuid ([`23a6dfb`](https://github.com/jordanshatford/clip-queue/commit/23a6dfb80785118b58ab7f9b99bedab590d4542d))
+
+### Patch Changes
+
+- Updated dependencies [[`58c4045`](https://github.com/jordanshatford/clip-queue/commit/58c4045c758f3a4c57e1aab9cd200f82ebaec2b4)]:
+  - @cq/services@2.1.0
+
 ## 1.5.2
 
 ### Patch Changes

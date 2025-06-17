@@ -1,5 +1,11 @@
 # @cq/services
 
+## 2.1.0
+
+### Minor Changes
+
+- feat: throw error in endpoints instead of returning undefined ([`58c4045`](https://github.com/jordanshatford/clip-queue/commit/58c4045c758f3a4c57e1aab9cd200f82ebaec2b4))
+
 ## 2.0.0
 
 ### Major Changes

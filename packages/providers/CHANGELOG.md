@@ -1,5 +1,16 @@
 # @cq/providers
 
+## 2.1.0
+
+### Minor Changes
+
+- feat: throw error when getting clip instead of returning undefined ([`b38ae1e`](https://github.com/jordanshatford/clip-queue/commit/b38ae1e7e98dfc8a54a1a5b5982c22ad98442d6e))
+
+### Patch Changes
+
+- Updated dependencies [[`58c4045`](https://github.com/jordanshatford/clip-queue/commit/58c4045c758f3a4c57e1aab9cd200f82ebaec2b4)]:
+  - @cq/services@2.1.0
+
 ## 2.0.0
 
 ### Major Changes

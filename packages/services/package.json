@@ -1,6 +1,6 @@
 {
   "name": "@cq/services",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "type": "module",
   "description": "Clients to interact with various external services.",
