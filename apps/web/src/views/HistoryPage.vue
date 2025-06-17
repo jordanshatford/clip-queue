@@ -109,6 +109,7 @@ import { Column, DangerButton, DataTable, InputText, SecondaryButton, useConfirm
 
 import ProviderName from '@/components/ProviderName.vue'
 import * as m from '@/paraglide/messages'
+import { useLogger } from '@/stores/logger'
 import { useQueue } from '@/stores/queue'
 
 const filters = ref({
@@ -117,6 +118,7 @@ const filters = ref({
 
 const confirm = useConfirm()
 const queue = useQueue()
+const logger = useLogger()
 
 const selection = ref<Clip[]>([])
 
@@ -127,6 +129,7 @@ const isQueueClipsDisabled = computed(() => {
 function queueClips() {
   const clips = selection.value
   selection.value = []
+  logger.debug(`[History]: queuing ${clips.length} clip(s).`)
   for (const clip of clips) {
     queue.add(clip, true)
   }
@@ -134,6 +137,7 @@ function queueClips() {
 
 function deleteClips() {
   const clips = [...selection.value]
+  logger.debug(`[History]: attempting to delete ${clips.length} clip(s).`)
   confirm.require({
     header: m.delete_history(),
     message: m.delete_history_confirm({ length: clips.length }),
@@ -144,11 +148,14 @@ function deleteClips() {
       label: m.confirm()
     },
     accept: () => {
+      logger.debug(`[History]: deleting ${clips.length} clip(s).`)
       for (const clip of clips) {
         queue.removeFromHistory(clip)
       }
     },
-    reject: () => {}
+    reject: () => {
+      logger.debug(`[History]: deletion of ${clips.length} clip(s) was cancelled.`)
+    }
   })
 }
 </script>

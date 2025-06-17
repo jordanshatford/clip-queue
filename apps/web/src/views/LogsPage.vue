@@ -57,6 +57,7 @@ import { Column, DangerButton, DataTable, SecondaryButton, Tag, useConfirm } fro
 
 import type { Log } from '@/stores/logger'
 import * as m from '@/paraglide/messages'
+import { datetime } from '@/paraglide/registry'
 import { logLevelIcons, logLevelSeverities, logLevelTranslations, useLogger } from '@/stores/logger'
 import { usePreferences } from '@/stores/preferences'
 
@@ -72,7 +73,7 @@ const logs = computed(() => {
 })
 
 function formatTimestamp(timestamp: string) {
-  return new Date(timestamp).toLocaleString(preferences.preferences.language, {
+  return datetime(preferences.preferences.language, timestamp, {
     dateStyle: 'short',
     timeStyle: 'medium',
     hour12: false
@@ -80,10 +81,12 @@ function formatTimestamp(timestamp: string) {
 }
 
 function exportCSV() {
+  logger.debug('[Logs]: exporting logs as CSV.')
   table.value?.exportCSV()
 }
 
 function deleteAllLogs() {
+  logger.debug('[Logs]: attempting to delete all logs.')
   confirm.require({
     header: m.clear_logs(),
     message: m.clear_logs_confirm({ length: logs.value.length }),
@@ -94,9 +97,12 @@ function deleteAllLogs() {
       label: m.confirm()
     },
     accept: () => {
-      logger.logs = []
+      logger.debug('[Logs]: deleting all logs.')
+      logger.$reset()
     },
-    reject: () => {}
+    reject: () => {
+      logger.debug('[Logs]: deletion of logs was cancelled.')
+    }
   })
 }
 </script>
