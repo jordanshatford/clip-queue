@@ -63,7 +63,7 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@types/node':
-        specifier: 'catalog:'
+        specifier: 24.0.4
         version: 24.0.4
       '@vitest/coverage-v8':
         specifier: ^3.2.4
