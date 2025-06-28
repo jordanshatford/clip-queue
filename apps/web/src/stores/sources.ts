@@ -42,12 +42,16 @@ export const useSources = defineStore('sources', () => {
     if (event.data.text.startsWith(settings.commands.prefix)) {
       // Ensure the user is allowed to use commands.
       if (!event.data.isAllowedCommands) {
+        logger.debug(
+          `[${event.source}]: User ${event.data.username} is not allowed to use commands.`
+        )
         return
       }
       const [command, ...args] = event.data.text
         .substring(settings.commands.prefix.length)
         .split(' ')
       if (!settings.commands.allowed.includes(command as Command)) {
+        logger.debug(`[${event.source}]: Command ${command} is not enabled or does not exist.`)
         return
       }
       commands.handleCommand(event, command, ...args)
