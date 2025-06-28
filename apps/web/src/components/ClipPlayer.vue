@@ -63,9 +63,11 @@ import type { Clip, PlayerFormat } from '@cq/providers'
 import { Player } from '@cq/player'
 import { SecondaryButton } from '@cq/ui'
 
+import ProviderName from '@/components/ProviderName.vue'
+import { useKeydown } from '@/composables/keydown'
 import * as m from '@/paraglide/messages'
+import { useLogger } from '@/stores/logger'
 import { useProviders } from '@/stores/providers'
-import ProviderName from './ProviderName.vue'
 
 export interface Props {
   clip: Clip
@@ -73,6 +75,18 @@ export interface Props {
 }
 
 const { clip, previousDisabled = false } = defineProps<Props>()
+
+const logger = useLogger()
+
+useKeydown((event) => {
+  if (event.key === 'ArrowLeft') {
+    logger.debug('[Player]: left arrow pressed.')
+    emit('previous')
+  } else if (event.key === 'ArrowRight') {
+    logger.debug('[Player]: right arrow pressed.')
+    emit('next')
+  }
+})
 
 const emit = defineEmits<{
   (e: 'previous'): void
