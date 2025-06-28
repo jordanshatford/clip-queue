@@ -1,5 +1,13 @@
 # @cq/web
 
+## 1.37.0
+
+### Minor Changes
+
+- feat: arrow right and arrow left are next and previous in queue ([`2de5a4e`](https://github.com/jordanshatford/clip-queue/commit/2de5a4e6bbffcb2164a552d71a72cf2e390d67fc))
+
+- feat: allow using arrow keys to navigate settings tabs ([`b84d607`](https://github.com/jordanshatford/clip-queue/commit/b84d607f8f62958f666efe90d0f6fbb841c5d4d1))
+
 ## 1.36.3
 
 ### Patch Changes
