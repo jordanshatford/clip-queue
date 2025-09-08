@@ -78,8 +78,8 @@ export interface UserPreferences {
 export const DEFAULTS: UserPreferences = {
   language: getInferredDefaultLanguage(baseLocale),
   theme: getInferredDefaultTheme('light'),
-  primary: structuredClone(colors[12]), // Purple
-  surface: structuredClone(surfaces[2]) // Zinc
+  primary: structuredClone(colors[12]!), // Purple
+  surface: structuredClone(surfaces[2]!) // Zinc
 }
 
 export const usePreferences = defineStore(

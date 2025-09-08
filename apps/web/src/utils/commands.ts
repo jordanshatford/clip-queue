@@ -200,7 +200,7 @@ export function handleCommand(
     case Command.ENABLE_PROVIDER: {
       if (args[0]) {
         const provider = Object.values(ClipProvider).find(
-          (p) => p.toLowerCase() === args[0].toLowerCase()
+          (p) => p.toLowerCase() === args[0]?.toLowerCase()
         )
         if (provider && !settings.queue.providers.includes(provider)) {
           settings.queue.providers = [...settings.queue.providers, provider]
@@ -211,7 +211,7 @@ export function handleCommand(
     case Command.DISABLE_PROVIDER: {
       if (args[0]) {
         const provider = Object.values(ClipProvider).find(
-          (p) => p.toLowerCase() === args[0].toLowerCase()
+          (p) => p.toLowerCase() === args[0]?.toLowerCase()
         )
         if (provider && settings.queue.providers.includes(provider)) {
           settings.queue.providers = settings.queue.providers.filter((p) => p !== provider)

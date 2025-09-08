@@ -17,7 +17,7 @@
     <template #content>
       <div class="text-surface-400 text-xs">
         <p class="line-clamp-1">
-          {{ m.submitter_name({ name: clip.submitters[0] }) }}
+          {{ m.submitter_name({ name: clip.submitters[0] ?? '' }) }}
         </p>
         <p class="line-clamp-1">
           {{ m.creator_name({ name: clip.creator ?? m.unknown() }) }}

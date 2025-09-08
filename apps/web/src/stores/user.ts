@@ -64,7 +64,7 @@ export const useUser = defineStore(
         try {
           const users = await twitch.getUsers(ctx.value, [])
           if (users.length > 0) {
-            ctx.value.username = users[0].login
+            ctx.value.username = users[0]?.login
           } else {
             failed = true
           }

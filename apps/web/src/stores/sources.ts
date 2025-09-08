@@ -54,7 +54,7 @@ export const useSources = defineStore('sources', () => {
         logger.debug(`[${event.source}]: Command ${command} is not enabled or does not exist.`)
         return
       }
-      commands.handleCommand(event, command, ...args)
+      commands.handleCommand(event, command!, ...args)
       return
     }
     for (const url of event.data.urls) {

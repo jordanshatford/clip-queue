@@ -92,9 +92,9 @@
     >
     </Column>
     <Column
-      :field="(data: Clip) => data.submitters[0]"
+      :field="(data: Clip) => data.submitters[0] ?? ''"
       sortable
-      :sort-field="(data: Clip) => data.submitters[0]"
+      :sort-field="(data: Clip) => data.submitters[0] ?? ''"
       :header="m.submitter()"
     >
     </Column>

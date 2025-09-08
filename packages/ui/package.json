@@ -15,9 +15,9 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@primevue/icons": "^4.3.7",
+    "@primevue/icons": "^4.3.9",
     "primeicons": "^7.0.0",
-    "primevue": "^4.3.7",
+    "primevue": "^4.3.9",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-primeui": "^0.6.1",
     "vue": "catalog:"
