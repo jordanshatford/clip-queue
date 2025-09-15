@@ -18,7 +18,7 @@
     "@cq/services": "workspace:*",
     "@cq/sources": "workspace:*",
     "@cq/ui": "workspace:*",
-    "@sentry/vue": "^10.10.0",
+    "@sentry/vue": "^10.11.0",
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.5.0",
     "vue": "catalog:",
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@cq/config": "workspace:*",
-    "@inlang/paraglide-js": "2.2.0",
+    "@inlang/paraglide-js": "2.3.2",
     "@pinia/testing": "^1.0.2",
     "@tailwindcss/vite": "catalog:",
     "@tsconfig/node24": "^24.0.1",
