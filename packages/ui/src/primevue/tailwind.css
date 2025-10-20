@@ -3,6 +3,6 @@
 
 @custom-variant dark (&:where(.app-dark, .app-dark *));
 
-@source "../**/*.{vue,js,ts,jsx,tsx}";
-@source "../../../../apps/*/src/**/*.{vue,js,ts,jsx,tsx}";
-@source "../../../../packages/*/src/**/*.{vue,js,ts,jsx,tsx}";
+@source '../**/*.{vue,js,ts,jsx,tsx}';
+@source '../../../../apps/*/src/**/*.{vue,js,ts,jsx,tsx}';
+@source '../../../../packages/*/src/**/*.{vue,js,ts,jsx,tsx}';
