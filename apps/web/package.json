@@ -20,7 +20,7 @@
     "@cq/ui": "workspace:*",
     "@sentry/vue": "^10.22.0",
     "pinia": "^3.0.3",
-    "pinia-plugin-persistedstate": "^4.5.0",
+    "pinia-plugin-persistedstate": "^4.7.1",
     "vue": "catalog:",
     "vue-router": "^4.6.3"
   },
