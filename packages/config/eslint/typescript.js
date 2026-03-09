@@ -1,5 +1,6 @@
 import js from '@eslint/js'
 import prettier from 'eslint-config-prettier'
+import { defineConfig } from 'eslint/config'
 import globals from 'globals'
 import ts from 'typescript-eslint'
 
@@ -15,8 +16,7 @@ export const ignores = [
   'yarn.lock'
 ]
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
+export default defineConfig([
   {
     ignores
   },
@@ -36,4 +36,4 @@ export default [
     }
   },
   prettier
-]
+])

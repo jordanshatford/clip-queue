@@ -1,4 +1,5 @@
+import { defineConfig } from 'eslint/config'
+
 import typescript from './eslint/typescript.js'
 
-/** @type {import('eslint').Linter.Config[]} */
-export default typescript
+export default defineConfig(typescript)

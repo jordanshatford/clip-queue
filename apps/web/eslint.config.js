@@ -1,9 +1,10 @@
+import { defineConfig } from 'eslint/config'
+
 import vue from '@cq/config/eslint/vue'
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
+export default defineConfig([
   {
     ignores: ['src/paraglide/*']
   },
   ...vue
-]
+])
