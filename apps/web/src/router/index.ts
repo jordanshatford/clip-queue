@@ -151,7 +151,7 @@ router.beforeEach(async (to, from, next) => {
   }
   // If the user is trying to login via twitch
   if (to.hash && to.hash !== '' && !user.isLoggedIn) {
-    user.login(to.hash)
+    await user.login(to.hash)
     logger.debug(`[Router]: User is logging in via Twitch ${user.ctx.username}.`)
     next({ name: RouteNameConstants.QUEUE, hash: '' })
     return

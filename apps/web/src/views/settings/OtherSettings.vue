@@ -71,7 +71,7 @@ const queue = useQueue()
 const settings = useSettings()
 const providers = useProviders()
 
-async function resetSettingsToDefault() {
+function resetSettingsToDefault() {
   confirm.require({
     header: m.reset_settings(),
     message: m.reset_settings_confirm(),
@@ -95,7 +95,7 @@ async function resetSettingsToDefault() {
   })
 }
 
-async function purgeHistory() {
+function purgeHistory() {
   confirm.require({
     header: m.purge_history(),
     message: m.purge_history_confirm(),
@@ -118,7 +118,7 @@ async function purgeHistory() {
   })
 }
 
-async function purgeCache() {
+function purgeCache() {
   confirm.require({
     header: m.purge_cache(),
     message: m.purge_cache_confirm(),

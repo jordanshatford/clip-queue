@@ -13,7 +13,7 @@
 import Button from '../volt/Button.vue'
 
 export interface Props {
-  isDarkMode: boolean
+  isDarkMode?: boolean
 }
 
 const { isDarkMode = false } = defineProps<Props>()

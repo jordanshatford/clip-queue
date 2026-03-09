@@ -86,9 +86,9 @@ describe('providers.ts', () => {
     [{} as Clip, undefined]
   ])(
     'returns the correct player format based on clip: (clip: %o) -> %s',
-    async (input: Clip, expected: PlayerFormat | undefined) => {
+    (input: Clip, expected: PlayerFormat | undefined) => {
       const providers = useProviders()
-      expect(await providers.getPlayerFormat(input)).toEqual(expected)
+      expect(providers.getPlayerFormat(input)).toEqual(expected)
     }
   )
 
@@ -98,9 +98,9 @@ describe('providers.ts', () => {
     [{} as Clip, undefined]
   ])(
     'returns the correct player source based on clip: (clip: %o) -> %s',
-    async (input: Clip, expected: string | undefined) => {
+    (input: Clip, expected: string | undefined) => {
       const providers = useProviders()
-      expect(await providers.getPlayerSource(input)).toEqual(expected)
+      expect(providers.getPlayerSource(input)).toEqual(expected)
     }
   )
 
