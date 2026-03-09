@@ -24,10 +24,10 @@
     "changeset": "changeset"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.8",
-    "@commitlint/cli": "^20.4.1",
-    "@commitlint/config-conventional": "^20.4.1",
-    "@commitlint/types": "^20.4.0",
+    "@changesets/cli": "^2.30.0",
+    "@commitlint/cli": "^20.4.3",
+    "@commitlint/config-conventional": "^20.4.3",
+    "@commitlint/types": "^20.4.3",
     "@svitejs/changesets-changelog-github-compact": "^1.2.0",
     "@types/node": "catalog:",
     "@vitest/coverage-v8": "^4.0.18",
@@ -35,7 +35,7 @@
     "typescript": "catalog:",
     "vitest": "^4.0.18"
   },
-  "packageManager": "pnpm@10.28.2+sha512.41872f037ad22f7348e3b1debbaf7e867cfd448f2726d9cf74c08f19507c31d2c8e7a11525b983febc2df640b5438dee6023ebb1f84ed43cc2d654d2bc326264",
+  "packageManager": "pnpm@10.31.0+sha512.e3927388bfaa8078ceb79b748ffc1e8274e84d75163e67bc22e06c0d3aed43dd153151cbf11d7f8301ff4acb98c68bdc5cadf6989532801ffafe3b3e4a63c268",
   "engines": {
     "pnpm": ">=10",
     "node": ">=20"
