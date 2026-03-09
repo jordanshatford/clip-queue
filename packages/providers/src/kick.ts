@@ -12,7 +12,6 @@ export class KickProvider extends BaseClipProvider {
 
   public async getClip(url: string): Promise<Clip> {
     const id = kick.getClipIdFromUrl(url)
-    console.error(id)
     if (!id) {
       throw new Error(`[${this.name}]: Invalid clip URL.`)
     }
