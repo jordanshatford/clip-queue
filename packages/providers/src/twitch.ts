@@ -50,6 +50,7 @@ export class TwitchProvider extends BaseClipProvider {
       this.cache[id] = response
       return response
     } catch (error) {
+      // eslint-disable-next-line preserve-caught-error
       throw new Error(`[${this.name}]: ${error}`)
     }
   }
