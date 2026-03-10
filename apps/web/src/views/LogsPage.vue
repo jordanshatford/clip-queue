@@ -56,7 +56,7 @@ import { computed, useTemplateRef } from 'vue'
 import { Column, DangerButton, DataTable, SecondaryButton, Tag, useConfirm } from '@cq/ui'
 
 import type { Log } from '@/stores/logger'
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 import { datetime } from '@/paraglide/registry'
 import { logLevelIcons, logLevelSeverities, logLevelTranslations, useLogger } from '@/stores/logger'
 import { usePreferences } from '@/stores/preferences'
@@ -76,7 +76,7 @@ function formatTimestamp(timestamp: string) {
   return datetime(preferences.preferences.language, timestamp, {
     dateStyle: 'short',
     timeStyle: 'medium',
-    hour12: false
+    hour12: false,
   })
 }
 
@@ -91,10 +91,10 @@ function deleteAllLogs() {
     header: m.clear_logs(),
     message: m.clear_logs_confirm({ length: logs.value.length }),
     rejectProps: {
-      label: m.cancel()
+      label: m.cancel(),
     },
     acceptProps: {
-      label: m.confirm()
+      label: m.confirm(),
     },
     accept: () => {
       logger.debug('[Logs]: deleting all logs.')
@@ -102,7 +102,7 @@ function deleteAllLogs() {
     },
     reject: () => {
       logger.debug('[Logs]: deletion of logs was cancelled.')
-    }
+    },
   })
 }
 </script>

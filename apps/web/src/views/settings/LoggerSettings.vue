@@ -75,7 +75,7 @@ import { ref, toRaw } from 'vue'
 import { Card, DangerButton, InputNumber, Message, SecondaryButton, Select, useToast } from '@cq/ui'
 
 import type { LogLevel } from '@/stores/logger'
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 import { RouteNameConstants } from '@/router'
 import { availableLogLevels, logLevelTranslations } from '@/stores/logger'
 import { usePreferences } from '@/stores/preferences'
@@ -99,7 +99,7 @@ function onSubmit() {
     severity: 'success',
     summary: m.success(),
     detail: m.logger_settings_saved(),
-    life: 3000
+    life: 3000,
   })
   onReset()
 }

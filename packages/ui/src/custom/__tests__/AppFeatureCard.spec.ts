@@ -8,8 +8,8 @@ describe('AppFeatureCard.vue', () => {
     props: {
       title: 'test',
       description: 'test description',
-      icon: 'test-icon'
-    }
+      icon: 'test-icon',
+    },
   })
 
   it('mounts successfully', () => {

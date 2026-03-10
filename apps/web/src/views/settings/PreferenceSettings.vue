@@ -98,13 +98,13 @@ import {
   SecondaryButton,
   Select,
   surfaces,
-  useToast
+  useToast,
 } from '@cq/ui'
 
 import type { Locale } from '@/paraglide/runtime'
 import type { Theme } from '@/stores/preferences'
 import ColorName from '@/components/ColorName.vue'
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 import { locales } from '@/paraglide/runtime'
 import { availableThemes, usePreferences } from '@/stores/preferences'
 
@@ -116,7 +116,7 @@ const formPreferences = ref(structuredClone(toRaw(preferences.preferences)))
 
 const themeTranslations: Record<Theme, () => string> = {
   dark: m.theme_dark,
-  light: m.theme_light
+  light: m.theme_light,
 }
 
 const languageLabels: Record<Locale, string> = {
@@ -132,7 +132,7 @@ const languageLabels: Record<Locale, string> = {
   pt: 'Português (Portuguese)',
   ru: 'русский (Russian)',
   tr: 'Türkçe (Turkish)',
-  zh: '中文 (Chinese)'
+  zh: '中文 (Chinese)',
 }
 
 watch(preferences.preferences, (v) => (formPreferences.value.theme = v.theme))
@@ -148,7 +148,7 @@ function onSubmit() {
     severity: 'success',
     summary: m.success(),
     detail: m.preferences_saved(),
-    life: 3000
+    life: 3000,
   })
   onReset()
 }

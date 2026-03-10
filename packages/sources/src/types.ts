@@ -12,7 +12,7 @@ export enum ClipSource {
   /**
    * The Twitch Chat.
    */
-  TWITCH = 'Twitch'
+  TWITCH = 'Twitch',
 }
 
 /**
@@ -22,7 +22,7 @@ export enum ClipSourceStatus {
   CONNECTED = 'Connected',
   DISCONNECTED = 'Disconnected',
   ERROR = 'Error',
-  UNKNOWN = 'Unknown'
+  UNKNOWN = 'Unknown',
 }
 
 /**
@@ -202,7 +202,7 @@ export abstract class BaseClipSource
     this.emit('status', {
       timestamp: timestamp ?? this.timestamp(),
       source: this.name,
-      data: status
+      data: status,
     })
   }
 
@@ -211,7 +211,7 @@ export abstract class BaseClipSource
     this.emit('error', {
       timestamp,
       source: this.name,
-      data: error
+      data: error,
     })
     this.handleStatusUpdate(ClipSourceStatus.ERROR, timestamp)
   }
@@ -227,7 +227,7 @@ export abstract class BaseClipSource
     this.emit('disconnected', {
       timestamp,
       source: this.name,
-      data: reason
+      data: reason,
     })
     this.handleStatusUpdate(ClipSourceStatus.DISCONNECTED, timestamp)
   }
@@ -237,7 +237,7 @@ export abstract class BaseClipSource
     this.emit('join', {
       timestamp,
       source: this.name,
-      data: channel
+      data: channel,
     })
     this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
   }
@@ -247,7 +247,7 @@ export abstract class BaseClipSource
     this.emit('leave', {
       timestamp,
       source: this.name,
-      data: channel
+      data: channel,
     })
     this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
   }
@@ -259,8 +259,8 @@ export abstract class BaseClipSource
       source: this.name,
       data: {
         ...message,
-        urls: getAllURLsFromText(message.text)
-      }
+        urls: getAllURLsFromText(message.text),
+      },
     })
     this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
   }
@@ -272,8 +272,8 @@ export abstract class BaseClipSource
       source: this.name,
       data: {
         ...message,
-        urls: getAllURLsFromText(message.text)
-      }
+        urls: getAllURLsFromText(message.text),
+      },
     })
     this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
   }
@@ -283,7 +283,7 @@ export abstract class BaseClipSource
     this.emit('user-timeout', {
       timestamp,
       source: this.name,
-      data: moderation
+      data: moderation,
     })
     this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
   }

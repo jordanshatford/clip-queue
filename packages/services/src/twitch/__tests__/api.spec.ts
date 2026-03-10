@@ -20,8 +20,8 @@ describe('twitch-api.ts', () => {
             data = [mockTwitchUser]
           }
           return Promise.resolve({ data })
-        }
-      })
+        },
+      }),
     )
   })
 
@@ -66,7 +66,7 @@ describe('twitch-api.ts', () => {
     const ctx: TwitchUserCtx = { id: 'test', token: 'testToken' }
     expect(toCommonHeaders(ctx)).toEqual({
       'Client-ID': 'test',
-      Authorization: `Bearer testToken`
+      Authorization: `Bearer testToken`,
     })
   })
 })

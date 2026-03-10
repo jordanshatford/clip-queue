@@ -15,7 +15,7 @@ export const clipFromKick: Clip = {
   createdAt: '2024-02-22T08:47:27.000Z',
   url: 'https://kick.com/channel?clip=testclip',
   embedUrl: 'https://kick.com/channel?clip=testclip',
-  thumbnailUrl: 'https://kick.com/thumbnail'
+  thumbnailUrl: 'https://kick.com/thumbnail',
 }
 
 export const clipFromTwitch: Clip = {
@@ -29,5 +29,5 @@ export const clipFromTwitch: Clip = {
   createdAt: '2024-02-22T08:47:27.000Z',
   url: 'https://clips.twitch.tv/testclip',
   embedUrl: 'https://clips.twitch.tv/testclip',
-  thumbnailUrl: 'https://twitch.tv/thumbnail'
+  thumbnailUrl: 'https://twitch.tv/thumbnail',
 }

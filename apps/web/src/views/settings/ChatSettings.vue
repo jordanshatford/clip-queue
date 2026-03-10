@@ -103,11 +103,11 @@ import {
   Message,
   MultiSelect,
   SecondaryButton,
-  useToast
+  useToast,
 } from '@cq/ui'
 
 import SourceIndicator from '@/components/SourceIndicator.vue'
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 import { useSettings } from '@/stores/settings'
 import { useSources } from '@/stores/sources'
 import { useUser } from '@/stores/user'
@@ -142,7 +142,7 @@ function onSubmit() {
     severity: 'success',
     summary: m.success(),
     detail: m.chat_settings_saved(),
-    life: 3000
+    life: 3000,
   })
   onReset()
 }

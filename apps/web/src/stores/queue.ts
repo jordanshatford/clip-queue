@@ -120,13 +120,13 @@ export const useQueue = defineStore(
       open,
       close,
       previous,
-      next
+      next,
     }
   },
   {
     persist: {
       key: 'cq-queue',
-      pick: ['history', 'current', 'upcoming']
-    }
-  }
+      pick: ['history', 'current', 'upcoming'],
+    },
+  },
 )

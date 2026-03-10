@@ -6,14 +6,14 @@ export const mockKickCategory: KickCategory = {
   slug: 'testcategory',
   responsive: 'https://files.kick.com/images/subcategories/15/banner/testcategory',
   banner: 'https://files.kick.com/images/subcategories/15/banner/testcategory',
-  parent_category: 'testparentcategory'
+  parent_category: 'testparentcategory',
 }
 
 export const mockKickChannel: KickChannel = {
   id: 456,
   username: 'testchannel',
   slug: 'testchannel',
-  profile_picture: null
+  profile_picture: null,
 }
 
 export const mockKickClip: KickClip = {
@@ -39,5 +39,5 @@ export const mockKickClip: KickClip = {
   is_live: false,
   category: mockKickCategory,
   creator: mockKickChannel,
-  channel: mockKickChannel
+  channel: mockKickChannel,
 }

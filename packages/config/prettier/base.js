@@ -4,7 +4,6 @@ export default {
   tabWidth: 2,
   singleQuote: true,
   printWidth: 100,
-  trailingComma: 'none',
   plugins: ['@ianvs/prettier-plugin-sort-imports'],
   importOrder: [
     '<TYPES>^(node:)',
@@ -19,7 +18,7 @@ export default {
     '<TYPES>^@/(.*)$',
     '^@/(.*)$',
     '<TYPES>^[.]',
-    '^[.]'
+    '^[.]',
   ],
-  importOrderTypeScriptVersion: '5.0.0'
+  importOrderTypeScriptVersion: '5.0.0',
 }

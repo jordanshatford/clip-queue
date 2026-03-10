@@ -7,8 +7,8 @@ import ClipCard from '../ClipCard.vue'
 describe('ClipCard.vue', () => {
   const wrapper = shallowMount(ClipCard, {
     props: {
-      clip: clipFromTwitch
-    }
+      clip: clipFromTwitch,
+    },
   })
 
   it('mounts successfully', () => {

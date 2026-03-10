@@ -45,7 +45,7 @@ export class TwitchProvider extends BaseClipProvider {
         embedUrl: clip.embed_url,
         thumbnailUrl: clip.thumbnail_url,
         provider: this.name,
-        submitters: []
+        submitters: [],
       }
       this.cache[id] = response
       return response

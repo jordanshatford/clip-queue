@@ -5,7 +5,7 @@ export class EventEmitter<
   Events extends {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: (...args: any[]) => void | Promise<void>
-  }
+  },
 > {
   private listeners: Partial<Record<keyof Events, Array<Events[keyof Events]>>>
 

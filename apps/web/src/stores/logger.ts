@@ -23,7 +23,7 @@ export const logLevelIcons: Record<LogLevel, string> = {
   DEBUG: 'pi pi-code',
   INFO: 'pi pi-info-circle',
   WARN: 'pi pi-exclamation-triangle',
-  ERROR: 'pi pi-times-circle'
+  ERROR: 'pi pi-times-circle',
 }
 
 /**
@@ -34,7 +34,7 @@ export const logLevelSeverities: Record<LogLevel, string> = {
   DEBUG: 'secondary',
   INFO: 'info',
   WARN: 'warn',
-  ERROR: 'danger'
+  ERROR: 'danger',
 }
 
 /**
@@ -45,7 +45,7 @@ export const logLevelTranslations: Record<LogLevel, () => string> = {
   DEBUG: m.debug,
   INFO: m.info,
   WARN: m.warning,
-  ERROR: m.error
+  ERROR: m.error,
 }
 
 /**
@@ -56,7 +56,7 @@ export const logLevelConsole: Record<LogLevel, (message: string) => void> = {
   DEBUG: console.debug,
   INFO: console.info,
   WARN: console.warn,
-  ERROR: console.error
+  ERROR: console.error,
 }
 
 /**
@@ -116,12 +116,12 @@ export const useLogger = defineStore(
       info: (message: string) => handle('INFO', message),
       warn: (message: string) => handle('WARN', message),
       error: (message: string) => handle('ERROR', message),
-      $reset
+      $reset,
     }
   },
   {
     persist: {
-      key: 'cq-logger'
-    }
-  }
+      key: 'cq-logger',
+    },
+  },
 )

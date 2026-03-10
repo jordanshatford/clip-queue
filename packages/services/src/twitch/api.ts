@@ -4,7 +4,7 @@ import type {
   TwitchPagedResponse,
   TwitchResponse,
   TwitchUser,
-  TwitchUserCtx
+  TwitchUserCtx,
 } from './types'
 import { toURLParams } from './utils'
 
@@ -18,7 +18,7 @@ const BASE_URL = 'https://api.twitch.tv/helix'
 export function toCommonHeaders(ctx: TwitchUserCtx) {
   return {
     'Client-ID': ctx.id,
-    Authorization: `Bearer ${ctx.token}`
+    Authorization: `Bearer ${ctx.token}`,
   }
 }
 
@@ -34,7 +34,7 @@ export async function getClips(ctx: TwitchUserCtx, ids: string[]): Promise<Twitc
     throw new Error('Clip IDs were not provided.')
   }
   const response = await fetch(`${BASE_URL}/clips?${toURLParams('id', ids)}`, {
-    headers: toCommonHeaders(ctx)
+    headers: toCommonHeaders(ctx),
   })
   if (!response.ok) {
     throw new Error(`Failed to fetch clips with IDs ${ids.join(' ')}: ${response.statusText}`)
@@ -54,7 +54,7 @@ export async function getGames(ctx: TwitchUserCtx, ids: string[]): Promise<Twitc
     throw new Error('Game IDs were not provided.')
   }
   const response = await fetch(`${BASE_URL}/games?${toURLParams('id', ids)}`, {
-    headers: toCommonHeaders(ctx)
+    headers: toCommonHeaders(ctx),
   })
   if (!response.ok) {
     throw new Error(`Failed to fetch games with IDs ${ids.join(' ')}: ${response.statusText}`)
@@ -71,7 +71,7 @@ export async function getGames(ctx: TwitchUserCtx, ids: string[]): Promise<Twitc
  */
 export async function getUsers(ctx: TwitchUserCtx, ids: string[]): Promise<TwitchUser[]> {
   const response = await fetch(`${BASE_URL}/users?${toURLParams('id', ids)}`, {
-    headers: toCommonHeaders(ctx)
+    headers: toCommonHeaders(ctx),
   })
   if (!response.ok) {
     throw new Error(`Failed to users with IDs ${ids.join(' ')}: ${response.statusText}`)
@@ -83,5 +83,5 @@ export async function getUsers(ctx: TwitchUserCtx, ids: string[]): Promise<Twitc
 export default {
   getClips,
   getGames,
-  getUsers
+  getUsers,
 }

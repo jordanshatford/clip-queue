@@ -9,7 +9,7 @@ export enum ClipProvider {
   /**
    * Twitch.tv clips.
    */
-  TWITCH = 'Twitch'
+  TWITCH = 'Twitch',
 }
 
 /**

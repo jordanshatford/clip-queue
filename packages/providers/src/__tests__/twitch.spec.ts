@@ -26,8 +26,8 @@ vi.mock('@cq/services/twitch', async (importOriginal) => {
         } catch {
           return
         }
-      })
-    }
+      }),
+    },
   }
 })
 
@@ -51,7 +51,7 @@ describe('twitch.ts', () => {
     const clip = await provider.getClip(mockTwitchClip.url)
     expect(clip).toBeDefined()
     expect(provider.getPlayerSource(clip)).toEqual(
-      `${mockTwitchClip.embed_url}&autoplay=true&parent=${window.location.hostname}`
+      `${mockTwitchClip.embed_url}&autoplay=true&parent=${window.location.hostname}`,
     )
   })
 
@@ -65,7 +65,7 @@ describe('twitch.ts', () => {
   it.each([
     ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL'],
     [''],
-    [mockKickClip.clip_url]
+    [mockKickClip.clip_url],
   ])('throws an error for unknown clip urls: (url: %s)', async (url: string) => {
     const provider = new TwitchProvider()
     expect(provider.getClip(url)).rejects.toThrowError()

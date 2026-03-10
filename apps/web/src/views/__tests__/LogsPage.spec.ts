@@ -9,8 +9,8 @@ import LogsPage from '../LogsPage.vue'
 describe('LogsPage.vue', () => {
   const wrapper = shallowMount(LogsPage, {
     global: {
-      plugins: [createTestingPinia(), ConfirmationService]
-    }
+      plugins: [createTestingPinia(), ConfirmationService],
+    },
   })
 
   it('mounts successfully', () => {

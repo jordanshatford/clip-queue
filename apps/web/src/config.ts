@@ -1,7 +1,7 @@
 export const env = {
   CLIENT_ID: import.meta.env.VITE_TWITCH_CLIENT_ID as string,
   REDIRECT_URI: import.meta.env.VITE_TWITCH_REDIRECT_URI as string,
-  SENTRY_DSN: import.meta.env.VITE_SENTRY_DSN as string
+  SENTRY_DSN: import.meta.env.VITE_SENTRY_DSN as string,
 }
 
 export const config = {
@@ -9,8 +9,8 @@ export const config = {
   github: 'https://github.com/jordanshatford/clip-queue',
   copyright: {
     owner: 'Jordan Shatford',
-    year: 2021
-  }
+    year: 2021,
+  },
 }
 
 export default config

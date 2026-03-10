@@ -19,9 +19,9 @@ export const providers = {
    * @returns The providers.
    */
   all: (
-    callbacks: Partial<Record<ClipProvider, ClipProviderCtxCallback>>
+    callbacks: Partial<Record<ClipProvider, ClipProviderCtxCallback>>,
   ): Record<ClipProvider, BaseClipProvider> => ({
     [ClipProvider.KICK]: new KickProvider(),
-    [ClipProvider.TWITCH]: new TwitchProvider(callbacks[ClipProvider.TWITCH])
-  })
+    [ClipProvider.TWITCH]: new TwitchProvider(callbacks[ClipProvider.TWITCH]),
+  }),
 }

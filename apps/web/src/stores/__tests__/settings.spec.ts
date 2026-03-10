@@ -5,7 +5,7 @@ import {
   DEFAULT_COMMAND_SETTINGS,
   DEFAULT_LOGGER_SETTINGS,
   DEFAULT_QUEUE_SETTINGS,
-  useSettings
+  useSettings,
 } from '../settings'
 
 describe('settings.ts', () => {
@@ -33,22 +33,22 @@ describe('settings.ts', () => {
     expect(
       settings.isCommandsSettingsModified({
         ...DEFAULT_COMMAND_SETTINGS,
-        prefix: '~dsa'
-      })
+        prefix: '~dsa',
+      }),
     ).toEqual(true)
     expect(settings.isCommandsSettingsModified(settings.$state.commands)).toEqual(false)
     expect(
       settings.isQueueSettingsModified({
         ...DEFAULT_QUEUE_SETTINGS,
-        limit: 1000
-      })
+        limit: 1000,
+      }),
     ).toEqual(true)
     expect(settings.isQueueSettingsModified(settings.$state.queue)).toEqual(false)
     expect(
       settings.isLoggerSettingsModified({
         ...DEFAULT_LOGGER_SETTINGS,
-        limit: -100
-      })
+        limit: -100,
+      }),
     ).toEqual(true)
     expect(settings.isLoggerSettingsModified(settings.$state.logger)).toEqual(false)
   })

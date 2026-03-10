@@ -6,8 +6,8 @@ import AppThemeToggle from '../AppThemeToggle.vue'
 describe('AppThemeToggle.vue', () => {
   const wrapper = shallowMount(AppThemeToggle, {
     props: {
-      isDarkMode: false
-    }
+      isDarkMode: false,
+    },
   })
 
   it('mounts successfully', () => {

@@ -36,7 +36,7 @@ import { useRouter } from 'vue-router'
 
 import { Button, ThemeToggle } from '@cq/ui'
 
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 import { allowedRoutes, RouteNameConstants, routeTranslations } from '@/router'
 import { usePreferences } from '@/stores/preferences'
 import { useUser } from '@/stores/user'

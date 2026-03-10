@@ -7,8 +7,8 @@ vi.mock('@cq/services/kick', async (importOriginal) => {
   return {
     default: {
       ...(await importOriginal<typeof import('@cq/services/kick')>()),
-      getClip: vi.fn((id: string) => ({ ...mockKickClip, id }))
-    }
+      getClip: vi.fn((id: string) => ({ ...mockKickClip, id })),
+    },
   }
 })
 
@@ -44,7 +44,7 @@ describe('kick.ts', () => {
   it.each([
     ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL'],
     [''],
-    [mockTwitchClip.url]
+    [mockTwitchClip.url],
   ])('throws an error for unknown clip urls: (url: %s)', async (url: string) => {
     const provider = new KickProvider()
     expect(provider.getClip(url)).rejects.toThrowError()

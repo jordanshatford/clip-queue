@@ -9,8 +9,8 @@ import LoggerSettings from '../LoggerSettings.vue'
 describe('LoggerSettings.vue', () => {
   const wrapper = shallowMount(LoggerSettings, {
     global: {
-      plugins: [createTestingPinia(), ConfirmationService, ToastService]
-    }
+      plugins: [createTestingPinia(), ConfirmationService, ToastService],
+    },
   })
 
   it('mounts successfully', () => {

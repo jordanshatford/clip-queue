@@ -31,7 +31,7 @@ import { Message } from '@cq/ui'
 
 import ClipPlayer from '@/components/ClipPlayer.vue'
 import ClipQueue from '@/components/ClipQueue.vue'
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
 

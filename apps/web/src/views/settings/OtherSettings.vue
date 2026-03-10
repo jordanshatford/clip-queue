@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { Card, DangerButton, Message, useConfirm, useToast } from '@cq/ui'
 
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 import { usePreferences } from '@/stores/preferences'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
@@ -76,10 +76,10 @@ function resetSettingsToDefault() {
     header: m.reset_settings(),
     message: m.reset_settings_confirm(),
     acceptProps: {
-      label: m.confirm()
+      label: m.confirm(),
     },
     rejectProps: {
-      label: m.cancel()
+      label: m.cancel(),
     },
     accept: () => {
       settings.$reset()
@@ -88,10 +88,10 @@ function resetSettingsToDefault() {
         severity: 'success',
         summary: m.success(),
         detail: m.settings_reset(),
-        life: 3000
+        life: 3000,
       })
     },
-    reject: () => {}
+    reject: () => {},
   })
 }
 
@@ -100,10 +100,10 @@ function purgeHistory() {
     header: m.purge_history(),
     message: m.purge_history_confirm(),
     acceptProps: {
-      label: m.confirm()
+      label: m.confirm(),
     },
     rejectProps: {
-      label: m.cancel()
+      label: m.cancel(),
     },
     accept: () => {
       queue.purge()
@@ -111,10 +111,10 @@ function purgeHistory() {
         severity: 'success',
         summary: m.success(),
         detail: m.clip_history_purged(),
-        life: 3000
+        life: 3000,
       })
     },
-    reject: () => {}
+    reject: () => {},
   })
 }
 
@@ -123,10 +123,10 @@ function purgeCache() {
     header: m.purge_cache(),
     message: m.purge_cache_confirm(),
     acceptProps: {
-      label: m.confirm()
+      label: m.confirm(),
     },
     rejectProps: {
-      label: m.cancel()
+      label: m.cancel(),
     },
     accept: () => {
       providers.purge()
@@ -134,10 +134,10 @@ function purgeCache() {
         severity: 'success',
         summary: m.success(),
         detail: m.clip_cache_purged(),
-        life: 3000
+        life: 3000,
       })
     },
-    reject: () => {}
+    reject: () => {},
   })
 }
 </script>

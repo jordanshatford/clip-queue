@@ -9,7 +9,7 @@ import {
   clipFromTwitch,
   mockKickClip,
   mockTwitchClip,
-  mockTwitchGame
+  mockTwitchGame,
 } from '@/__tests__/mocks'
 import { useProviders } from '../providers'
 
@@ -17,8 +17,8 @@ vi.mock('@cq/services/kick', async (importOriginal) => {
   return {
     default: {
       ...(await importOriginal<typeof import('@cq/services/kick')>()),
-      getClip: vi.fn((id: string) => ({ ...mockKickClip, id }))
-    }
+      getClip: vi.fn((id: string) => ({ ...mockKickClip, id })),
+    },
   }
 })
 
@@ -43,8 +43,8 @@ vi.mock('@cq/services/twitch', async (importOriginal) => {
         } catch {
           return
         }
-      })
-    }
+      }),
+    },
   }
 })
 
@@ -57,7 +57,7 @@ describe('providers.ts', () => {
 
   it.each([
     [mockKickClip.clip_url, mockKickClip.id],
-    [mockTwitchClip.url, mockTwitchClip.id]
+    [mockTwitchClip.url, mockTwitchClip.id],
   ])(
     'returns a clip ID for valid clip url: (url: %s) -> %s',
     async (input: string, expected: string) => {
@@ -65,43 +65,43 @@ describe('providers.ts', () => {
       const clip = await providers.getClip(input)
       expect(clip).toBeDefined()
       expect(clip?.id).toEqual(expected)
-    }
+    },
   )
 
   it.each([
     ['', undefined],
     ['abc', undefined],
-    ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', undefined]
+    ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', undefined],
   ])(
     'returns undefined for invalid clip urls: (url: %s) -> %s',
     async (input: string, expected: Clip | undefined) => {
       const providers = useProviders()
       expect(await providers.getClip(input)).toEqual(expected)
-    }
+    },
   )
 
   it.each([
     [clipFromKick, 'video' as PlayerFormat],
     [clipFromTwitch, 'iframe' as PlayerFormat],
-    [{} as Clip, undefined]
+    [{} as Clip, undefined],
   ])(
     'returns the correct player format based on clip: (clip: %o) -> %s',
     (input: Clip, expected: PlayerFormat | undefined) => {
       const providers = useProviders()
       expect(providers.getPlayerFormat(input)).toEqual(expected)
-    }
+    },
   )
 
   it.each([
     [clipFromKick, clipFromKick.embedUrl],
     [clipFromTwitch, `${clipFromTwitch.embedUrl}&autoplay=true&parent=${window.location.hostname}`],
-    [{} as Clip, undefined]
+    [{} as Clip, undefined],
   ])(
     'returns the correct player source based on clip: (clip: %o) -> %s',
     (input: Clip, expected: string | undefined) => {
       const providers = useProviders()
       expect(providers.getPlayerSource(input)).toEqual(expected)
-    }
+    },
   )
 
   it('caches clip data that it fetchs', async () => {

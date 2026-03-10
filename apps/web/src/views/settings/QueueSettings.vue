@@ -83,11 +83,11 @@ import {
   MultiSelect,
   SecondaryButton,
   ToggleSwitch,
-  useToast
+  useToast,
 } from '@cq/ui'
 
 import ProviderName from '@/components/ProviderName.vue'
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 import { usePreferences } from '@/stores/preferences'
 import { useSettings } from '@/stores/settings'
 
@@ -109,7 +109,7 @@ function onSubmit() {
     severity: 'success',
     summary: m.success(),
     detail: m.queue_settings_saved(),
-    life: 3000
+    life: 3000,
   })
   onReset()
 }

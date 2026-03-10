@@ -7,8 +7,8 @@ import SettingsPage from '../SettingsPage.vue'
 describe('SettingsPage.vue', () => {
   const wrapper = shallowMount(SettingsPage, {
     global: {
-      plugins: [createTestingPinia()]
-    }
+      plugins: [createTestingPinia()],
+    },
   })
 
   it('mounts successfully', () => {

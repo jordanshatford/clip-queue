@@ -8,8 +8,8 @@ describe('VideoJSPlayer.vue', () => {
     props: {
       title: '',
       poster: '',
-      source: ''
-    }
+      source: '',
+    },
   })
 
   it('mounts successfully', () => {

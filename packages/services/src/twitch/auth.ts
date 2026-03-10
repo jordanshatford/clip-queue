@@ -23,7 +23,7 @@ export function login(hash: string): AuthInfo | null {
 export async function logout(ctx: TwitchUserCtx): Promise<void> {
   // Revoke the token
   const response = await fetch(`${BASE_URL}/revoke?client_id=${ctx.id}&token=${ctx.token}`, {
-    method: 'POST'
+    method: 'POST',
   })
   if (!response.ok) {
     throw new Error('Failed to revoke token')
@@ -42,7 +42,7 @@ export function redirect(ctx: Partial<TwitchUserCtx>, redirectUri: string, scope
       `&redirect_uri=${redirectUri}` +
       `&response_type=token id_token` +
       `&scope=${scopes.join(' ')}` +
-      `&claims={"id_token":{"preferred_username":null}}`
+      `&claims={"id_token":{"preferred_username":null}}`,
   )
   window.location.assign(loginUrl)
 }
@@ -56,8 +56,8 @@ export async function isLoginValid(ctx: TwitchUserCtx) {
   try {
     const response = await fetch(`${BASE_URL}/validate`, {
       headers: {
-        Authorization: `Bearer ${ctx.token}`
-      }
+        Authorization: `Bearer ${ctx.token}`,
+      },
     })
     return response.ok
   } catch {
@@ -85,7 +85,7 @@ function processAuthHash(hash: string): AuthInfo {
         return authInfo
         /* eslint-disable @typescript-eslint/no-explicit-any*/
       },
-      {} as Record<string, any>
+      {} as Record<string, any>,
     ) as AuthInfo
   return authInfo
 }
@@ -105,7 +105,7 @@ function parseJWT(token: string) {
         .map(function (c) {
           return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
         })
-        .join('')
+        .join(''),
     )
     return JSON.parse(jsonPayload)
   }
@@ -115,5 +115,5 @@ export default {
   login,
   logout,
   isLoginValid,
-  redirect
+  redirect,
 }

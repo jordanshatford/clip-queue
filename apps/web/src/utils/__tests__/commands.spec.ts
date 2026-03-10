@@ -17,8 +17,8 @@ const MOCK_EVENT: ClipSourceEvent<ClipSourceMessage> = {
     channel: 'testchannel',
     username: 'testuser',
     text: 'testtext',
-    urls: []
-  }
+    urls: [],
+  },
 }
 
 describe('commands.ts', () => {
@@ -32,7 +32,7 @@ describe('commands.ts', () => {
     [Command.OPEN, 'open'],
     [Command.CLOSE, 'close'],
     [Command.CLEAR, 'clear'],
-    [Command.PURGE_HISTORY, 'purge']
+    [Command.PURGE_HISTORY, 'purge'],
   ])(
     'calls the proper clip queue function when a command is issued: (command: %s) -> %s',
     (commandName: Command, expectedFunctionCall: unknown) => {
@@ -41,7 +41,7 @@ describe('commands.ts', () => {
       const spy = vi.spyOn(queue, expectedFunctionCall)
       commands.handleCommand(MOCK_EVENT, commandName.toString())
       expect(spy).toHaveBeenCalledTimes(1)
-    }
+    },
   )
 
   it.each([[Command.PURGE_CACHE, 'purge']])(
@@ -52,19 +52,19 @@ describe('commands.ts', () => {
       const spy = vi.spyOn(providers, expectedFunctionCall)
       commands.handleCommand(MOCK_EVENT, commandName.toString())
       expect(spy).toHaveBeenCalledTimes(1)
-    }
+    },
   )
 
   it.each([
     [Command.REMOVE_BY_SUBMITTER, ['testsubmitter'], 'removeSubmitterClips', ['testsubmitter']],
-    [Command.REMOVE_BY_PROVIDER, ['testprovider'], 'removeProviderClips', ['testprovider']]
+    [Command.REMOVE_BY_PROVIDER, ['testprovider'], 'removeProviderClips', ['testprovider']],
   ])(
     'calls the proper clip queue function with params when issued: (command: %s, args: %o) -> %s(%o)',
     (
       commandName: Command,
       args: string[],
       expectedFunctionCall: unknown,
-      expectedFunctionArgs: unknown[]
+      expectedFunctionArgs: unknown[],
     ) => {
       const queue = useQueue()
       // @ts-expect-error function with unknown type
@@ -72,7 +72,7 @@ describe('commands.ts', () => {
       commands.handleCommand(MOCK_EVENT, commandName.toString(), ...args)
       expect(spy).toHaveBeenCalledTimes(1)
       expect(spy).toHaveBeenCalledWith(...expectedFunctionArgs)
-    }
+    },
   )
 
   it.each([['unknown'], ['']])(
@@ -85,7 +85,7 @@ describe('commands.ts', () => {
         // @ts-expect-error function with unknown type
         expect(vi.spyOn(queue, f)).toHaveBeenCalledTimes(0)
       }
-    }
+    },
   )
 
   it('can set the queue limit and clear it', () => {

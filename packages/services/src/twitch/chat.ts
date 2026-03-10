@@ -7,12 +7,12 @@ import { Client } from 'tmi.js'
 const DEFAULT_OPTIONS: Options = {
   options: {
     skipMembership: true,
-    skipUpdatingEmotesets: true
+    skipUpdatingEmotesets: true,
   },
   connection: {
     reconnect: true,
-    secure: true
-  }
+    secure: true,
+  },
 }
 
 /**
@@ -22,7 +22,7 @@ export default class TwitchChat extends Client {
   public constructor(options?: Partial<Options>) {
     super({
       ...DEFAULT_OPTIONS,
-      ...options
+      ...options,
     })
   }
 }

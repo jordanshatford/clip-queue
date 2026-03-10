@@ -34,9 +34,9 @@ onMounted(() => {
         controls: true,
         fluid: true,
         poster,
-        sources: [source]
+        sources: [source],
       },
-      () => {}
+      () => {},
     )
   }
 })

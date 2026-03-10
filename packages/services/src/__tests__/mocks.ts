@@ -7,14 +7,14 @@ export const mockKickCategory: KickCategory = {
   slug: 'testcategory',
   responsive: 'https://files.kick.com/images/subcategories/15/banner/testcategory',
   banner: 'https://files.kick.com/images/subcategories/15/banner/testcategory',
-  parent_category: 'testparentcategory'
+  parent_category: 'testparentcategory',
 }
 
 export const mockKickChannel: KickChannel = {
   id: 456,
   username: 'testchannel',
   slug: 'testchannel',
-  profile_picture: null
+  profile_picture: null,
 }
 
 export const mockKickClip: KickClip = {
@@ -40,13 +40,13 @@ export const mockKickClip: KickClip = {
   is_live: false,
   category: mockKickCategory,
   creator: mockKickChannel,
-  channel: mockKickChannel
+  channel: mockKickChannel,
 }
 
 export const mockTwitchGame: TwitchGame = {
   id: 'testgame',
   name: 'testgame',
-  box_art_url: 'https://twitch.tv/testgame/boxart'
+  box_art_url: 'https://twitch.tv/testgame/boxart',
 }
 
 export const mockTwitchClip: TwitchClip = {
@@ -64,7 +64,7 @@ export const mockTwitchClip: TwitchClip = {
   view_count: 777,
   created_at: '2024-02-22T08:47:27.000Z',
   thumbnail_url: 'https://twitch.tv/testclip/thumbnail',
-  duration: 50
+  duration: 50,
 }
 
 export const mockTwitchUser: TwitchUser = {
@@ -78,5 +78,5 @@ export const mockTwitchUser: TwitchUser = {
   offline_image_url: 'https://twitch.tv/testuser/offline_image',
   email: 'testuser@twitch.com',
   created_at: '2024-02-22T08:47:27.000Z',
-  view_count: 1000
+  view_count: 1000,
 }

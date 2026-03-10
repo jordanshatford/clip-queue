@@ -16,7 +16,7 @@ const app = createApp(App)
 // Initialize sentry as early as possible.
 Sentry.init({
   app,
-  dsn: env.SENTRY_DSN
+  dsn: env.SENTRY_DSN,
 })
 
 // PrimeVue

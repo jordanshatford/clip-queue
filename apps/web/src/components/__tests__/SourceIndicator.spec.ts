@@ -9,11 +9,11 @@ import SourceIndicator from '../SourceIndicator.vue'
 describe('SourceIndicator.vue', () => {
   const wrapper = shallowMount(SourceIndicator, {
     props: {
-      status: ClipSourceStatus.CONNECTED
+      status: ClipSourceStatus.CONNECTED,
     },
     global: {
-      plugins: [createTestingPinia()]
-    }
+      plugins: [createTestingPinia()],
+    },
   })
 
   it('mounts successfully', () => {

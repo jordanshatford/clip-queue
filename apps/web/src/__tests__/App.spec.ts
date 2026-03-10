@@ -7,8 +7,8 @@ import App from '@/App.vue'
 describe('App.vue', () => {
   const wrapper = shallowMount(App, {
     global: {
-      plugins: [createTestingPinia()]
-    }
+      plugins: [createTestingPinia()],
+    },
   })
 
   it('mounts successfully', () => {

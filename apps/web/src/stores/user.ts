@@ -21,7 +21,7 @@ export const useUser = defineStore(
     const ctx = ref<TwitchUserCtx>({
       id: CLIENT_ID,
       token: undefined,
-      username: undefined
+      username: undefined,
     })
 
     function redirect(): void {
@@ -55,7 +55,7 @@ export const useUser = defineStore(
         ctx.value = {
           ...currentCtx,
           token: access_token,
-          username: decodedIdToken.preferred_username
+          username: decodedIdToken.preferred_username,
         }
         // Attempt to get the username from Twitch API as the preferred username may not be set
         // or the user may have a preferred username that is different from their Twitch username.
@@ -74,7 +74,7 @@ export const useUser = defineStore(
         }
         if (failed) {
           logger.warn(
-            `[Twitch]: Failed to get user from Twitch API. Using preferred username: ${decodedIdToken.preferred_username}.`
+            `[Twitch]: Failed to get user from Twitch API. Using preferred username: ${decodedIdToken.preferred_username}.`,
           )
           ctx.value.username = decodedIdToken.preferred_username
         }
@@ -88,7 +88,7 @@ export const useUser = defineStore(
       ctx.value = {
         ...originalCtx,
         token: undefined,
-        username: undefined
+        username: undefined,
       }
       isLoggedIn.value = false
       await sources.disconnect()
@@ -108,13 +108,13 @@ export const useUser = defineStore(
       autoLoginIfPossible,
       redirect,
       login,
-      logout
+      logout,
     }
   },
   {
     persist: {
       key: 'cq-user',
-      pick: ['ctx.token', 'ctx.username']
-    }
-  }
+      pick: ['ctx.token', 'ctx.username'],
+    },
+  },
 )

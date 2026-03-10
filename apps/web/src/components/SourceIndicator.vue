@@ -7,7 +7,7 @@ import { computed } from 'vue'
 
 import { ClipSourceStatus } from '@cq/sources'
 
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 
 export interface Props {
   status: ClipSourceStatus
@@ -19,7 +19,7 @@ const statusTranslations: Record<ClipSourceStatus, () => string> = {
   Error: m.error,
   Connected: m.connected,
   Disconnected: m.disconnected,
-  Unknown: m.unknown
+  Unknown: m.unknown,
 }
 
 const color = computed(() => {

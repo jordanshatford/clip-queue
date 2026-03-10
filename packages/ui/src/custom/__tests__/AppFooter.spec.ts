@@ -9,9 +9,9 @@ describe('AppFooter.vue', () => {
       github: 'testgithub',
       copyright: {
         owner: 'testowner',
-        year: 2024
-      }
-    }
+        year: 2024,
+      },
+    },
   })
 
   it('mounts successfully', () => {

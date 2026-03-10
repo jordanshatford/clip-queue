@@ -8,11 +8,11 @@ import ClipPlayer from '../ClipPlayer.vue'
 describe('ClipPlayer.vue', () => {
   const wrapper = shallowMount(ClipPlayer, {
     props: {
-      clip: clipFromTwitch
+      clip: clipFromTwitch,
     },
     global: {
-      plugins: [createTestingPinia()]
-    }
+      plugins: [createTestingPinia()],
+    },
   })
 
   it('mounts successfully', () => {

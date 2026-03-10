@@ -17,8 +17,8 @@ export const useProviders = defineStore('providers', () => {
       [ClipProvider.TWITCH]: () => {
         const user = useUser()
         return user.ctx
-      }
-    })
+      },
+    }),
   )
 
   const svg = computed(() => {
@@ -61,7 +61,7 @@ export const useProviders = defineStore('providers', () => {
   function getPlayerFormat(clip: Clip): PlayerFormat | undefined {
     if (!settings.queue.providers.includes(clip.provider)) {
       logger.warn(
-        `[Providers]: Attempted to get player format for clip from disabled provider: ${clip.provider}.`
+        `[Providers]: Attempted to get player format for clip from disabled provider: ${clip.provider}.`,
       )
       return
     }
@@ -72,7 +72,7 @@ export const useProviders = defineStore('providers', () => {
   function getPlayerSource(clip: Clip): string | undefined {
     if (!settings.queue.providers.includes(clip.provider)) {
       logger.warn(
-        `[Providers]: Attempted to get player source for clip from disabled provider: ${clip.provider}.`
+        `[Providers]: Attempted to get player source for clip from disabled provider: ${clip.provider}.`,
       )
       return
     }
@@ -87,6 +87,6 @@ export const useProviders = defineStore('providers', () => {
     purge,
     getClip,
     getPlayerFormat,
-    getPlayerSource
+    getPlayerSource,
   }
 })

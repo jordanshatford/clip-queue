@@ -78,8 +78,8 @@ export interface UserPreferences {
 export const DEFAULTS: UserPreferences = {
   language: getInferredDefaultLanguage(baseLocale),
   theme: getInferredDefaultTheme('light'),
-  primary: structuredClone(colors[12]), // Purple
-  surface: structuredClone(surfaces[2]) // Zinc
+  primary: structuredClone(colors[12]!), // Purple
+  surface: structuredClone(surfaces[2]!), // Zinc
 }
 
 export const usePreferences = defineStore(
@@ -149,7 +149,7 @@ export const usePreferences = defineStore(
       isModifiedFrom,
       updatePreferences,
       toggleTheme,
-      $reset
+      $reset,
     }
   },
   {
@@ -157,7 +157,7 @@ export const usePreferences = defineStore(
       key: 'cq-preferences',
       afterHydrate: (ctx) => {
         ctx.store.updatePreferences(ctx.store.preferences)
-      }
-    }
-  }
+      },
+    },
+  },
 )

@@ -13,10 +13,10 @@ describe('kick.ts', () => {
           Promise.resolve({
             clip: {
               ...mockKickClip,
-              clip_url: url
-            }
-          })
-      })
+              clip_url: url,
+            },
+          }),
+      }),
     )
   })
 
@@ -37,19 +37,19 @@ describe('kick.ts', () => {
     ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', undefined],
     [
       'https://kick.com/test?clip=clip_01HQ7ZWTEKKJP16Y34SDFF2SBC',
-      'clip_01HQ7ZWTEKKJP16Y34SDFF2SBC'
+      'clip_01HQ7ZWTEKKJP16Y34SDFF2SBC',
     ],
     ['https://kick.com/test?clip=123', '123'],
     ['https://kick.com/test?somenonclipparam=123', undefined],
     [
       'https://kick.com/test/clips/clip_01JBKJJC162V3P5TBT8EAY6Z13',
-      'clip_01JBKJJC162V3P5TBT8EAY6Z13'
+      'clip_01JBKJJC162V3P5TBT8EAY6Z13',
     ],
-    ['', undefined]
+    ['', undefined],
   ])(
     'can get a clip ID from a url: (url: %s) -> %s',
     (input: string, expected: string | undefined) => {
       expect(getClipIdFromUrl(input)).toEqual(expected)
-    }
+    },
   )
 })

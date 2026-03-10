@@ -4,7 +4,7 @@ import { computed } from 'vue'
 import type { ClipSourceEvent, ClipSourceMessage } from '@cq/sources'
 import { ClipProvider } from '@cq/providers'
 
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
@@ -73,7 +73,7 @@ export enum Command {
   /**
    * Purge the history.
    */
-  PURGE_HISTORY = 'purgehistory'
+  PURGE_HISTORY = 'purgehistory',
 }
 
 /**
@@ -96,39 +96,39 @@ const help: ComputedRef<Record<Command, CommandHelp>> = computed(() => ({
   [Command.CLEAR]: { description: m.command_clear() },
   [Command.SET_LIMIT]: {
     args: [m.number().toLocaleLowerCase()],
-    description: m.command_set_limit()
+    description: m.command_set_limit(),
   },
   [Command.REMOVE_LIMIT]: { description: m.command_remove_limit() },
   [Command.PREV]: { description: m.command_previous() },
   [Command.NEXT]: { description: m.command_next() },
   [Command.REMOVE_BY_SUBMITTER]: {
     args: [m.submitter().toLocaleLowerCase()],
-    description: m.command_remove_by_submitter()
+    description: m.command_remove_by_submitter(),
   },
   [Command.REMOVE_BY_PROVIDER]: {
     args: [m.provider().toLocaleLowerCase()],
-    description: m.command_remove_by_provider()
+    description: m.command_remove_by_provider(),
   },
   [Command.ENABLE_PROVIDER]: {
     args: [m.provider().toLocaleLowerCase()],
-    description: m.command_enable_provider()
+    description: m.command_enable_provider(),
   },
   [Command.DISABLE_PROVIDER]: {
     args: [m.provider().toLocaleLowerCase()],
-    description: m.command_disable_provider()
+    description: m.command_disable_provider(),
   },
   [Command.ENABLE_AUTO_MODERATION]: {
-    description: m.command_enable_auto_mod()
+    description: m.command_enable_auto_mod(),
   },
   [Command.DISABLE_AUTO_MODERATION]: {
-    description: m.command_disable_auto_mod()
+    description: m.command_disable_auto_mod(),
   },
   [Command.PURGE_CACHE]: {
-    description: m.command_purge_cache()
+    description: m.command_purge_cache(),
   },
   [Command.PURGE_HISTORY]: {
-    description: m.command_purge_history()
-  }
+    description: m.command_purge_history(),
+  },
 }))
 
 /**
@@ -147,7 +147,7 @@ export function handleCommand(
   const settings = useSettings()
 
   logger.info(
-    `[${event.source}]: ${event.data.username} executed command: ${command} ${args.join(' ')}`
+    `[${event.source}]: ${event.data.username} executed command: ${command} ${args.join(' ')}`,
   )
 
   switch (command as Command) {
@@ -200,7 +200,7 @@ export function handleCommand(
     case Command.ENABLE_PROVIDER: {
       if (args[0]) {
         const provider = Object.values(ClipProvider).find(
-          (p) => p.toLowerCase() === args[0]?.toLowerCase()
+          (p) => p.toLowerCase() === args[0]?.toLowerCase(),
         )
         if (provider && !settings.queue.providers.includes(provider)) {
           settings.queue.providers = [...settings.queue.providers, provider]
@@ -211,7 +211,7 @@ export function handleCommand(
     case Command.DISABLE_PROVIDER: {
       if (args[0]) {
         const provider = Object.values(ClipProvider).find(
-          (p) => p.toLowerCase() === args[0]?.toLowerCase()
+          (p) => p.toLowerCase() === args[0]?.toLowerCase(),
         )
         if (provider && settings.queue.providers.includes(provider)) {
           settings.queue.providers = settings.queue.providers.filter((p) => p !== provider)
@@ -244,5 +244,5 @@ export function handleCommand(
 
 export default {
   help,
-  handleCommand
+  handleCommand,
 }

@@ -8,7 +8,7 @@ import { clipFromKick, clipFromTwitch } from './mocks'
 describe('utils.ts', () => {
   it.each([
     [clipFromKick, 'kick:testclipkick'],
-    [clipFromTwitch, 'twitch:testcliptwitch']
+    [clipFromTwitch, 'twitch:testcliptwitch'],
   ])('creates a uuid for a given clip: (clip: %o) -> %s', (clip: Clip, expected: string) => {
     expect(toClipUUID(clip)).toEqual(expected)
   })

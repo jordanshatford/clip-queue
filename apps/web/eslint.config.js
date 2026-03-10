@@ -4,7 +4,7 @@ import vue from '@cq/config/eslint/vue'
 
 export default defineConfig([
   {
-    ignores: ['src/paraglide/*']
+    ignores: ['src/paraglide/*'],
   },
-  ...vue
+  ...vue,
 ])

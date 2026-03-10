@@ -35,7 +35,7 @@ const {
   format = 'unknown',
   title = undefined,
   source = undefined,
-  thumbnailUrl = undefined
+  thumbnailUrl = undefined,
 } = defineProps<Props>()
 </script>
 

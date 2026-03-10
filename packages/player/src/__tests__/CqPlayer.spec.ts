@@ -9,8 +9,8 @@ describe('CqPlayer.vue', () => {
       playerFormat: 'unknown',
       title: '',
       source: '',
-      thumbnailUrl: ''
-    }
+      thumbnailUrl: '',
+    },
   })
 
   it('mounts successfully', () => {

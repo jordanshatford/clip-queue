@@ -58,7 +58,7 @@ import type { Clip } from '@cq/providers'
 import { Card, DangerButton, SecondaryButton } from '@cq/ui'
 
 import ProviderName from '@/components/ProviderName.vue'
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 
 export interface Props {
   clip: Clip

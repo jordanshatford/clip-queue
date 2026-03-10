@@ -13,12 +13,12 @@ export const ignores = [
   '!.env.sample',
   'pnpm-lock.yaml',
   'package-lock.json',
-  'yarn.lock'
+  'yarn.lock',
 ]
 
 export default defineConfig([
   {
-    ignores
+    ignores,
   },
   js.configs.recommended,
   ...ts.configs.recommended,
@@ -27,13 +27,13 @@ export default defineConfig([
       globals: {
         ...globals.browser,
         ...globals.es2017,
-        ...globals.node
+        ...globals.node,
       },
       parserOptions: {
         ecmaVersion: 2020,
-        sourceType: 'module'
-      }
-    }
+        sourceType: 'module',
+      },
+    },
   },
-  prettier
+  prettier,
 ])

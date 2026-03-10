@@ -65,7 +65,7 @@ import { SecondaryButton } from '@cq/ui'
 
 import ProviderName from '@/components/ProviderName.vue'
 import { useKeydown } from '@/composables/keydown'
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useProviders } from '@/stores/providers'
 

@@ -61,18 +61,18 @@ export interface LoggerSettings {
 
 export const DEFAULT_COMMAND_SETTINGS: CommandSettings = {
   prefix: '!cq',
-  allowed: Object.values(Command)
+  allowed: Object.values(Command),
 }
 
 export const DEFAULT_QUEUE_SETTINGS: QueueSettings = {
   hasAutoModerationEnabled: true,
   limit: null,
-  providers: Object.values(ClipProvider)
+  providers: Object.values(ClipProvider),
 }
 
 export const DEFAULT_LOGGER_SETTINGS: LoggerSettings = {
   level: 'WARN',
-  limit: 100
+  limit: 100,
 }
 
 export const useSettings = defineStore(
@@ -87,7 +87,7 @@ export const useSettings = defineStore(
         return (
           commands.value.prefix !== c.prefix ||
           Object.values(Command).some(
-            (cmd) => commands.value.allowed.includes(cmd) !== c.allowed.includes(cmd)
+            (cmd) => commands.value.allowed.includes(cmd) !== c.allowed.includes(cmd),
           )
         )
       }
@@ -99,7 +99,7 @@ export const useSettings = defineStore(
           queue.value.hasAutoModerationEnabled !== q.hasAutoModerationEnabled ||
           queue.value.limit !== q.limit ||
           Object.values(ClipProvider).some(
-            (p) => queue.value.providers.includes(p) !== q.providers.includes(p)
+            (p) => queue.value.providers.includes(p) !== q.providers.includes(p),
           )
         )
       }
@@ -133,7 +133,7 @@ export const useSettings = defineStore(
       isCommandsSettingsModified,
       isQueueSettingsModified,
       isLoggerSettingsModified,
-      $reset
+      $reset,
     }
   },
   {
@@ -152,7 +152,7 @@ export const useSettings = defineStore(
         context.store.commands.allowed = commands.filter((c: Command) => {
           return availableCommands.includes(c)
         })
-      }
-    }
-  }
+      },
+    },
+  },
 )

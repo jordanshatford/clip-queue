@@ -33,5 +33,5 @@ export default {
   logo,
   ...api,
   ...auth,
-  ...utils
+  ...utils,
 }

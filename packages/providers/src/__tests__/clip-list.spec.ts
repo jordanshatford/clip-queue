@@ -53,18 +53,18 @@ describe('clip-list.ts', () => {
     expect(
       clipList.includes({
         ...clipFromTwitch,
-        id: `test-id-${startNumber}`
-      })
+        id: `test-id-${startNumber}`,
+      }),
     ).toEqual(true)
     clipList.remove({
       ...clipFromTwitch,
-      id: `test-id-${startNumber}`
+      id: `test-id-${startNumber}`,
     })
     expect(
       clipList.includes({
         ...clipFromTwitch,
-        id: `test-id-${startNumber}`
-      })
+        id: `test-id-${startNumber}`,
+      }),
     ).toEqual(false)
   })
 
@@ -72,8 +72,8 @@ describe('clip-list.ts', () => {
     expect(
       clipList.includes({
         ...clipFromTwitch,
-        id: `test-id-${startNumber}`
-      })
+        id: `test-id-${startNumber}`,
+      }),
     ).toEqual(true)
   })
 
@@ -122,7 +122,7 @@ describe('clip-list.ts', () => {
   it('can have clips removed from it based on submitter when the clip has one submitter', () => {
     const clipWithSubmitter = {
       ...clipFromTwitch,
-      submitters: ['jordan']
+      submitters: ['jordan'],
     }
     expect(clipList.includes(clipWithSubmitter)).toEqual(false)
     clipList.add(clipWithSubmitter)
@@ -193,7 +193,7 @@ describe('clip-list.ts', () => {
     expect(clipList2.size()).toEqual(1)
     clipList2.remove({
       ...clipFromTwitch,
-      submitters: ['testsubmittertwitch']
+      submitters: ['testsubmittertwitch'],
     })
     expect(clipList2.size()).toEqual(1)
     const queuedClip = clipList2.pop()
@@ -209,21 +209,21 @@ describe('clip-list.ts', () => {
       clipList2.add({
         ...clipFromTwitch,
         id: 'test',
-        submitters: [`submitter${i}`]
+        submitters: [`submitter${i}`],
       })
     }
     for (let i = 1; i <= 10; i++) {
       clipList2.add({
         ...clipFromTwitch,
         id: 'test2',
-        submitters: [`submitter${i}`]
+        submitters: [`submitter${i}`],
       })
     }
     for (let i = 1; i <= 3; i++) {
       clipList2.add({
         ...clipFromTwitch,
         id: 'test3',
-        submitters: [`submitter${i}`]
+        submitters: [`submitter${i}`],
       })
     }
     const clipListArray2 = clipList2.toArray()
@@ -238,21 +238,21 @@ describe('clip-list.ts', () => {
       clipList2.add({
         ...clipFromTwitch,
         id: 'test',
-        submitters: [`submitter${i}`]
+        submitters: [`submitter${i}`],
       })
     }
     for (let i = 1; i <= 10; i++) {
       clipList2.add({
         ...clipFromTwitch,
         id: 'test2',
-        submitters: [`submitter${i}`]
+        submitters: [`submitter${i}`],
       })
     }
     for (let i = 1; i <= 10; i++) {
       clipList2.add({
         ...clipFromTwitch,
         id: 'test3',
-        submitters: [`submitter${i}`]
+        submitters: [`submitter${i}`],
       })
     }
     const clipListArray2 = clipList2.toArray()

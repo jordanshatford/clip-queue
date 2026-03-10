@@ -45,7 +45,7 @@ import { toClipUUID } from '@cq/providers'
 import { DangerButton, SecondaryButton } from '@cq/ui'
 
 import ClipCard from '@/components/ClipCard.vue'
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 
 export interface Props {
   title?: string

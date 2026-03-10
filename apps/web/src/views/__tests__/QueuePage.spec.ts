@@ -7,8 +7,8 @@ import QueuePage from '../QueuePage.vue'
 describe('QueuePage.vue', () => {
   const wrapper = shallowMount(QueuePage, {
     global: {
-      plugins: [createTestingPinia()]
-    }
+      plugins: [createTestingPinia()],
+    },
   })
 
   it('mounts successfully', () => {

@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import type { ColorName } from '@cq/ui'
 
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 
 export interface Props {
   name: ColorName
@@ -41,6 +41,6 @@ const colorNameTranslations: Record<ColorName, () => string> = {
   stone: m.stone,
   soho: m.soho,
   viva: m.viva,
-  ocean: m.ocean
+  ocean: m.ocean,
 }
 </script>

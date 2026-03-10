@@ -9,8 +9,8 @@ import ChatSettings from '../ChatSettings.vue'
 describe('ChatSettings.vue', () => {
   const wrapper = shallowMount(ChatSettings, {
     global: {
-      plugins: [createTestingPinia(), ToastService]
-    }
+      plugins: [createTestingPinia(), ToastService],
+    },
   })
 
   it('mounts successfully', () => {

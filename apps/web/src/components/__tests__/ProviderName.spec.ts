@@ -9,11 +9,11 @@ import ProviderName from '../ProviderName.vue'
 describe('ProviderName.vue', () => {
   const wrapper = shallowMount(ProviderName, {
     props: {
-      provider: ClipProvider.TWITCH
+      provider: ClipProvider.TWITCH,
     },
     global: {
-      plugins: [createTestingPinia()]
-    }
+      plugins: [createTestingPinia()],
+    },
   })
 
   it('mounts successfully', () => {

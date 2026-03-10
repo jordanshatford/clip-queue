@@ -9,8 +9,8 @@ import PreferenceSettings from '../PreferenceSettings.vue'
 describe('PreferenceSettings.vue', () => {
   const wrapper = shallowMount(PreferenceSettings, {
     global: {
-      plugins: [createTestingPinia(), ConfirmationService, ToastService]
-    }
+      plugins: [createTestingPinia(), ConfirmationService, ToastService],
+    },
   })
 
   it('mounts successfully', () => {

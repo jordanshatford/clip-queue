@@ -9,8 +9,8 @@ import OtherSettings from '../OtherSettings.vue'
 describe('OtherSettings.vue', () => {
   const wrapper = shallowMount(OtherSettings, {
     global: {
-      plugins: [createTestingPinia(), ConfirmationService, ToastService]
-    }
+      plugins: [createTestingPinia(), ConfirmationService, ToastService],
+    },
   })
 
   it('mounts successfully', () => {

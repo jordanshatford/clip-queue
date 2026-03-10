@@ -6,8 +6,8 @@ import ClipQueue from '../ClipQueue.vue'
 describe('ClipQueue.vue', () => {
   const wrapper = shallowMount(ClipQueue, {
     props: {
-      clips: []
-    }
+      clips: [],
+    },
   })
 
   it('mounts successfully', () => {

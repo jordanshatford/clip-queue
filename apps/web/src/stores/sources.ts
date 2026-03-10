@@ -43,7 +43,7 @@ export const useSources = defineStore('sources', () => {
       // Ensure the user is allowed to use commands.
       if (!event.data.isAllowedCommands) {
         logger.debug(
-          `[${event.source}]: User ${event.data.username} is not allowed to use commands.`
+          `[${event.source}]: User ${event.data.username} is not allowed to use commands.`,
         )
         return
       }
@@ -54,7 +54,7 @@ export const useSources = defineStore('sources', () => {
         logger.debug(`[${event.source}]: Command ${command} is not enabled or does not exist.`)
         return
       }
-      commands.handleCommand(event, command, ...args)
+      commands.handleCommand(event, command!, ...args)
       return
     }
     for (const url of event.data.urls) {
@@ -64,7 +64,7 @@ export const useSources = defineStore('sources', () => {
         if (clip) {
           queue.add({
             ...clip,
-            submitters: [event.data.username]
+            submitters: [event.data.username],
           })
         }
       } catch (e) {
@@ -83,7 +83,7 @@ export const useSources = defineStore('sources', () => {
         if (clip) {
           queue.remove({
             ...clip,
-            submitters: [event.data.username]
+            submitters: [event.data.username],
           })
         }
       } catch (e) {

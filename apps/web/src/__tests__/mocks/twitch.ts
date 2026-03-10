@@ -3,7 +3,7 @@ import type { TwitchClip, TwitchGame } from '@cq/services/twitch'
 export const mockTwitchGame: TwitchGame = {
   id: 'testgame',
   name: 'testgame',
-  box_art_url: 'https://twitch.tv/testgame/boxart'
+  box_art_url: 'https://twitch.tv/testgame/boxart',
 }
 
 export const mockTwitchClip: TwitchClip = {
@@ -21,5 +21,5 @@ export const mockTwitchClip: TwitchClip = {
   view_count: 777,
   created_at: '2024-02-22T08:47:27.000Z',
   thumbnail_url: 'https://twitch.tv/testclip/thumbnail',
-  duration: 50
+  duration: 50,
 }

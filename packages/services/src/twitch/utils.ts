@@ -69,5 +69,5 @@ export function toURLParams(key: string, values: string[]): URLSearchParams {
 
 export default {
   isModerator,
-  getClipIdFromUrl
+  getClipIdFromUrl,
 }

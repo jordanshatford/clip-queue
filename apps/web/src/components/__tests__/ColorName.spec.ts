@@ -8,11 +8,11 @@ describe('ColorName.vue', () => {
   const wrapper = shallowMount(ColorName, {
     props: {
       name: 'amber',
-      color: '#FFC107'
+      color: '#FFC107',
     },
     global: {
-      plugins: [createTestingPinia()]
-    }
+      plugins: [createTestingPinia()],
+    },
   })
 
   it('mounts successfully', () => {

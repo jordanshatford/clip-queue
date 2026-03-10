@@ -33,21 +33,21 @@ export class TwitchChatSource extends BaseClipSource {
         channel: this.toChannel(channel),
         username: userstate.username,
         text: message,
-        isAllowedCommands: twitch.isModerator(userstate)
+        isAllowedCommands: twitch.isModerator(userstate),
       })
     })
     this.chat.on('messagedeleted', (channel, username, message) =>
       this.handleMessageDeleted({
         channel: this.toChannel(channel),
         username,
-        text: message
-      })
+        text: message,
+      }),
     )
     this.chat.on('timeout', (channel, username) =>
-      this.handleModeration({ channel: this.toChannel(channel), username })
+      this.handleModeration({ channel: this.toChannel(channel), username }),
     )
     this.chat.on('ban', (channel, username) =>
-      this.handleModeration({ channel: this.toChannel(channel), username })
+      this.handleModeration({ channel: this.toChannel(channel), username }),
     )
     this.chat.on('part', (channel) => this.handleLeave(this.toChannel(channel)))
     this.chat.on('disconnected', (reason) => this.handleDisconnected(reason))

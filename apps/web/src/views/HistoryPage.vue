@@ -108,12 +108,12 @@ import type { Clip } from '@cq/providers'
 import { Column, DangerButton, DataTable, InputText, SecondaryButton, useConfirm } from '@cq/ui'
 
 import ProviderName from '@/components/ProviderName.vue'
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useQueue } from '@/stores/queue'
 
 const filters = ref({
-  global: { value: null, matchMode: 'contains' }
+  global: { value: null, matchMode: 'contains' },
 })
 
 const confirm = useConfirm()
@@ -142,10 +142,10 @@ function deleteClips() {
     header: m.delete_history(),
     message: m.delete_history_confirm({ length: clips.length }),
     rejectProps: {
-      label: m.cancel()
+      label: m.cancel(),
     },
     acceptProps: {
-      label: m.confirm()
+      label: m.confirm(),
     },
     accept: () => {
       logger.debug(`[History]: deleting ${clips.length} clip(s).`)
@@ -155,7 +155,7 @@ function deleteClips() {
     },
     reject: () => {
       logger.debug(`[History]: deletion of ${clips.length} clip(s) was cancelled.`)
-    }
+    },
   })
 }
 </script>

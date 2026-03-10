@@ -13,7 +13,7 @@ describe('queue.ts', () => {
     setActivePinia(createPinia())
   })
 
-  beforeEach(() => {
+  it('initializes with the expected values', () => {
     const queue = useQueue()
     expect(queue.isOpen).toEqual(true)
     expect(queue.current).toEqual(undefined)
@@ -68,7 +68,7 @@ describe('queue.ts', () => {
       ...clipFromTwitch,
       id: 'not-valid',
       provider: ClipProvider.TWITCH,
-      submitters: []
+      submitters: [],
     })
     expect(queue.upcoming.toArray()).toContainEqual(clipFromTwitch)
     expect(queue.upcoming.toArray()).toContainEqual(clipFromKick)
@@ -88,7 +88,7 @@ describe('queue.ts', () => {
       ...clipFromTwitch,
       id: 'not-valid',
       provider: ClipProvider.TWITCH,
-      submitters: []
+      submitters: [],
     })
     expect(queue.upcoming.size()).toEqual(queueLength - 1)
   })
@@ -187,19 +187,19 @@ describe('queue.ts', () => {
       ...clipFromTwitch,
       id: 'test',
       submitters: ['s'],
-      provider: ClipProvider.TWITCH
+      provider: ClipProvider.TWITCH,
     })
     queue.add({
       ...clipFromTwitch,
       id: 'test2',
       submitters: ['s'],
-      provider: ClipProvider.TWITCH
+      provider: ClipProvider.TWITCH,
     })
     queue.add({
       ...clipFromTwitch,
       id: 'test3',
       submitters: ['s'],
-      provider: ClipProvider.TWITCH
+      provider: ClipProvider.TWITCH,
     })
     expect(queue.upcoming.size()).toEqual(2)
   })
@@ -209,7 +209,7 @@ describe('queue.ts', () => {
       ...clipFromTwitch,
       id: 'test',
       submitters: ['testsubmitter'],
-      provider: ClipProvider.TWITCH
+      provider: ClipProvider.TWITCH,
     }
     const queue = useQueue()
     const settings = useSettings()

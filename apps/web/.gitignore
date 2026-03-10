@@ -13,10 +13,6 @@ dist
 dist-ssr
 coverage
 *.local
-.env
-
-/cypress/videos/
-/cypress/screenshots/
 
 # Editor directories and files
 .vscode/*
@@ -30,5 +26,20 @@ coverage
 
 *.tsbuildinfo
 
+.eslintcache
+
+# Cypress
+/cypress/videos/
+/cypress/screenshots/
+
+# Vitest
+__screenshots__/
+
+# Vite
+*.timestamp-*-*.mjs
+
 # Sentry Config File
 .env.sentry-build-plugin
+
+# Env file
+.env

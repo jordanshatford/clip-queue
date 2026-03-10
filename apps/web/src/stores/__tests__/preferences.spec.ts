@@ -23,8 +23,8 @@ describe('preferences.ts', () => {
       writable: true,
       value: vi.fn().mockImplementation((query) => ({
         matches: true,
-        media: query
-      }))
+        media: query,
+      })),
     })
     expect(getInferredDefaultTheme('light')).toEqual('dark')
     // Dark match media returns false
@@ -32,14 +32,14 @@ describe('preferences.ts', () => {
       writable: true,
       value: vi.fn().mockImplementation((query) => ({
         matches: false,
-        media: query
-      }))
+        media: query,
+      })),
     })
     expect(getInferredDefaultTheme('dark')).toEqual('light')
     // Match media is undefined (default to fallback)
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: undefined
+      value: undefined,
     })
     expect(getInferredDefaultTheme('dark')).toEqual('dark')
     expect(getInferredDefaultTheme('light')).toEqual('light')
@@ -50,16 +50,16 @@ describe('preferences.ts', () => {
     Object.defineProperty(window, 'navigator', {
       writable: true,
       value: vi.fn().mockImplementation(() => ({
-        language: 'en'
-      }))
+        language: 'en',
+      })),
     })
     expect(getInferredDefaultLanguage('en')).toEqual('en')
     // en-US
     Object.defineProperty(window, 'navigator', {
       writable: true,
       value: vi.fn().mockImplementation(() => ({
-        language: 'en-US'
-      }))
+        language: 'en-US',
+      })),
     })
     expect(getInferredDefaultLanguage('en')).toEqual('en')
     // Match media is undefined (default to fallback)

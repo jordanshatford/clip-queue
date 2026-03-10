@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import { config } from '@/config'
-import * as m from '@/paraglide/messages'
+import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useUser } from '@/stores/user'
 import HistoryPage from '@/views/HistoryPage.vue'
@@ -33,7 +33,7 @@ export enum RouteNameConstants {
   SETTINGS_QUEUE = 'settings_queue',
   SETTINGS_PREFERENCES = 'settings_preferences',
   SETTINGS_LOGS = 'settings_logs',
-  SETTINGS_OTHER = 'settings_other'
+  SETTINGS_OTHER = 'settings_other',
 }
 
 export const routes: RouteRecordRaw[] = [
@@ -43,8 +43,8 @@ export const routes: RouteRecordRaw[] = [
     component: QueuePage,
     meta: {
       icon: 'pi pi-list',
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
     path: '/history',
@@ -52,8 +52,8 @@ export const routes: RouteRecordRaw[] = [
     component: HistoryPage,
     meta: {
       icon: 'pi pi-history',
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
     path: '/settings',
@@ -62,7 +62,7 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('@/views/SettingsPage.vue'),
     meta: {
       icon: 'pi pi-cog',
-      requiresAuth: true
+      requiresAuth: true,
     },
     children: [
       {
@@ -71,8 +71,8 @@ export const routes: RouteRecordRaw[] = [
         component: ChatSettings,
         meta: {
           icon: 'pi pi-comments',
-          requiresAuth: true
-        }
+          requiresAuth: true,
+        },
       },
       {
         path: 'queue',
@@ -80,8 +80,8 @@ export const routes: RouteRecordRaw[] = [
         component: QueueSettings,
         meta: {
           icon: 'pi pi-list',
-          requiresAuth: true
-        }
+          requiresAuth: true,
+        },
       },
       {
         path: 'preferences',
@@ -89,8 +89,8 @@ export const routes: RouteRecordRaw[] = [
         component: PreferenceSettings,
         meta: {
           icon: 'pi pi-palette',
-          requiresAuth: true
-        }
+          requiresAuth: true,
+        },
       },
       {
         path: 'logs',
@@ -98,8 +98,8 @@ export const routes: RouteRecordRaw[] = [
         component: LoggerSettings,
         meta: {
           icon: 'pi pi-book',
-          requiresAuth: true
-        }
+          requiresAuth: true,
+        },
       },
       {
         path: 'other',
@@ -107,20 +107,20 @@ export const routes: RouteRecordRaw[] = [
         component: OtherSettings,
         meta: {
           icon: 'pi pi-cog',
-          requiresAuth: true
-        }
-      }
-    ]
-  }
+          requiresAuth: true,
+        },
+      },
+    ],
+  },
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
       name: RouteNameConstants.HOME,
-      component: HomePage
+      component: HomePage,
     },
     {
       path: '/logs',
@@ -128,15 +128,15 @@ const router = createRouter({
       component: LogsPage,
       meta: {
         icon: 'pi pi-book',
-        requiresAuth: true
-      }
+        requiresAuth: true,
+      },
     },
     ...routes,
     {
       path: '/:pathMatch(.*)*',
-      redirect: { name: RouteNameConstants.HOME }
-    }
-  ]
+      redirect: { name: RouteNameConstants.HOME },
+    },
+  ],
 })
 
 router.beforeEach(async (to, from, next) => {
@@ -178,7 +178,7 @@ export const routeTranslations = {
   [RouteNameConstants.SETTINGS_QUEUE]: m.settings_queue,
   [RouteNameConstants.SETTINGS_PREFERENCES]: m.settings_preferences,
   [RouteNameConstants.SETTINGS_LOGS]: m.logs,
-  [RouteNameConstants.SETTINGS_OTHER]: m.settings_other
+  [RouteNameConstants.SETTINGS_OTHER]: m.settings_other,
 }
 
 /**

@@ -9,8 +9,8 @@ import HistoryPage from '../HistoryPage.vue'
 describe('HistoryPage.vue', () => {
   const wrapper = shallowMount(HistoryPage, {
     global: {
-      plugins: [createTestingPinia(), ConfirmationService]
-    }
+      plugins: [createTestingPinia(), ConfirmationService],
+    },
   })
 
   it('mounts successfully', () => {

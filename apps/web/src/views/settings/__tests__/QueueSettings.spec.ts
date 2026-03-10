@@ -9,8 +9,8 @@ import QueueSettings from '../QueueSettings.vue'
 describe('QueueSettings.vue', () => {
   const wrapper = shallowMount(QueueSettings, {
     global: {
-      plugins: [createTestingPinia(), ToastService]
-    }
+      plugins: [createTestingPinia(), ToastService],
+    },
   })
 
   it('mounts successfully', () => {
