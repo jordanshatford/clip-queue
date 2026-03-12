@@ -17,7 +17,7 @@ export interface Props {
 
 const { poster, source, autoplay = true, title = undefined } = defineProps<Props>()
 
-const videoElement = useTemplateRef('videoElement')
+const videoElement = useTemplateRef<HTMLVideoElement>('videoElement')
 
 // TODO(jordan): fix typing once video.js is updated.
 // ref: https://github.com/videojs/video.js/issues/8242
