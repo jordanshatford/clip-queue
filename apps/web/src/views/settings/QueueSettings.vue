@@ -1,7 +1,7 @@
 <template>
   <Card class="mx-auto max-w-xl">
     <template #content>
-      <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
+      <form ref="formElement" @submit.prevent="onSubmit" @reset="onReset">
         <div class="flex flex-col gap-2 text-left">
           <div class="flex justify-between">
             <label for="autoModeration">{{ m.auto_mod() }}</label>
@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRaw } from 'vue'
+import { ref, toRaw, useTemplateRef } from 'vue'
 
 import { ClipProvider } from '@cq/providers'
 import {
@@ -95,12 +95,12 @@ const toast = useToast()
 const settings = useSettings()
 const preferences = usePreferences()
 
-const formKey = ref(1)
+const formElement = useTemplateRef<HTMLFormElement>('formElement')
 const formSettings = ref(structuredClone(toRaw(settings.queue)))
 
 function onReset() {
   formSettings.value = structuredClone(toRaw(settings.queue))
-  formKey.value += 1
+  formElement.value?.reset()
 }
 
 function onSubmit() {

@@ -2,7 +2,7 @@
   <div>
     <Card class="mx-auto max-w-xl">
       <template #content>
-        <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
+        <form ref="formElement" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">
             <label for="language">{{ m.language() }}</label>
             <Select
@@ -87,7 +87,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRaw, watch } from 'vue'
+import { ref, toRaw, useTemplateRef, watch } from 'vue'
 
 import type { ColorOption } from '@cq/ui'
 import {
@@ -111,7 +111,7 @@ import { availableThemes, usePreferences } from '@/stores/preferences'
 const toast = useToast()
 const preferences = usePreferences()
 
-const formKey = ref(1)
+const formElement = useTemplateRef<HTMLFormElement>('formElement')
 const formPreferences = ref(structuredClone(toRaw(preferences.preferences)))
 
 const themeTranslations: Record<Theme, () => string> = {
@@ -139,7 +139,7 @@ watch(preferences.preferences, (v) => (formPreferences.value.theme = v.theme))
 
 function onReset() {
   formPreferences.value = structuredClone(toRaw(preferences.preferences))
-  formKey.value += 1
+  formElement.value?.reset()
 }
 
 function onSubmit() {

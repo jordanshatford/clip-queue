@@ -38,7 +38,7 @@
     </Card>
     <Card class="mx-auto max-w-xl">
       <template #content>
-        <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
+        <form ref="formElement" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">
             <label for="commandPrefix">{{ m.command_prefix() }}</label>
             <InputText
@@ -94,7 +94,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRaw } from 'vue'
+import { ref, toRaw, useTemplateRef } from 'vue'
 
 import {
   Card,
@@ -118,7 +118,7 @@ const user = useUser()
 const settings = useSettings()
 const sources = useSources()
 
-const formKey = ref(1)
+const formElement = useTemplateRef<HTMLFormElement>('formElement')
 const formSettings = ref(structuredClone(toRaw(settings.commands)))
 
 function toCommandCall(command: Command) {
@@ -133,7 +133,7 @@ function toCommandCall(command: Command) {
 
 function onReset() {
   formSettings.value = structuredClone(toRaw(settings.commands))
-  formKey.value += 1
+  formElement.value?.reset()
 }
 
 function onSubmit() {

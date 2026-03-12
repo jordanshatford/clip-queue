@@ -18,7 +18,7 @@
     </Card>
     <Card class="mx-auto max-w-xl">
       <template #content>
-        <form :key="formKey" @submit.prevent="onSubmit" @reset="onReset">
+        <form ref="formElement" @submit.prevent="onSubmit" @reset="onReset">
           <div class="flex flex-col gap-2 text-left">
             <label for="loggerLevel">{{ m.level_colon() }}</label>
             <Select
@@ -70,7 +70,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRaw } from 'vue'
+import { ref, toRaw, useTemplateRef } from 'vue'
 
 import { Card, DangerButton, InputNumber, Message, SecondaryButton, Select, useToast } from '@cq/ui'
 
@@ -85,12 +85,12 @@ const toast = useToast()
 const preferences = usePreferences()
 const settings = useSettings()
 
-const formKey = ref(1)
+const formElement = useTemplateRef<HTMLFormElement>('formElement')
 const formSettings = ref(structuredClone(toRaw(settings.logger)))
 
 function onReset() {
   formSettings.value = structuredClone(toRaw(settings.logger))
-  formKey.value += 1
+  formElement.value?.reset()
 }
 
 function onSubmit() {
