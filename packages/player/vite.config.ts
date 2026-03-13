@@ -12,7 +12,7 @@ export default defineConfig({
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: '@cq/player',
     },
-    rollupOptions: {
+    rolldownOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
       external: ['vue'],
