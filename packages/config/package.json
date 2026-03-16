@@ -20,7 +20,7 @@
     "@eslint/js": "^10.0.1",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
     "@types/node": "catalog:",
-    "@vitest/eslint-plugin": "^1.6.11",
+    "@vitest/eslint-plugin": "^1.6.12",
     "@vue/eslint-config-typescript": "^14.7.0",
     "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.8",
