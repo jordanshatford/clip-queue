@@ -1,5 +1,11 @@
 # @cq/player
 
+## 1.1.2
+
+### Patch Changes
+
+- fix: use proper template refs typing ([`ef153aa`](https://github.com/jordanshatford/clip-queue/commit/ef153aa762c9d32179284b50d13dc8e3d34dfbc2))
+
 ## 1.1.1
 
 ### Patch Changes

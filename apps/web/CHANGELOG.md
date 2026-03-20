@@ -1,5 +1,14 @@
 # @cq/web
 
+## 1.37.1
+
+### Patch Changes
+
+- fix: use template refs for forms and resetting ([`ce3515e`](https://github.com/jordanshatford/clip-queue/commit/ce3515e7eddf56733fb0a9d7297fa85afb79041a))
+
+- Updated dependencies [[`ef153aa`](https://github.com/jordanshatford/clip-queue/commit/ef153aa762c9d32179284b50d13dc8e3d34dfbc2)]:
+  - @cq/player@1.1.2
+
 ## 1.37.0
 
 ### Minor Changes
