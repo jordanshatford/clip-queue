@@ -8,6 +8,9 @@ describe('AppNavBar.vue', () => {
   const wrapper = shallowMount(AppNavBar, {
     global: {
       plugins: [createTestingPinia()],
+      stubs: {
+        img: true,
+      },
     },
   })
 

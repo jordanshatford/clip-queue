@@ -8,6 +8,9 @@ describe('App.vue', () => {
   const wrapper = shallowMount(App, {
     global: {
       plugins: [createTestingPinia()],
+      stubs: {
+        img: true,
+      },
     },
   })
 
