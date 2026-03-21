@@ -63,7 +63,7 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@types/node':
-        specifier: 'catalog:'
+        specifier: 25.5.0
         version: 25.5.0
       '@vitest/coverage-v8':
         specifier: ^4.1.0
@@ -115,8 +115,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/config
       '@inlang/paraglide-js':
-        specifier: 2.15.0
-        version: 2.15.0
+        specifier: 2.15.1
+        version: 2.15.1
       '@pinia/testing':
         specifier: ^1.0.3
         version: 1.0.3(pinia@3.0.4(typescript@5.9.3)(vue@3.5.30(typescript@5.9.3)))
@@ -955,16 +955,16 @@ packages:
       prettier-plugin-ember-template-tag:
         optional: true
 
-  '@inlang/paraglide-js@2.15.0':
-    resolution: {integrity: sha512-2ZOa9nssVn4tjkKskqb88KP5A7cTIjo8AiM9xnPvH+vBhRIRenO+ftAbVOHhHcHjcFxy2QFcOfBAH/Cw1LIsUg==}
+  '@inlang/paraglide-js@2.15.1':
+    resolution: {integrity: sha512-7wWKbLWwLx1dkkYz55TnVp+39atKXf7rnlHnL8adSmM73UaAdB9fXDzo24GHSY/6FPGFKSkgHdT2qyJv2whWsA==}
     hasBin: true
 
   '@inlang/recommend-sherlock@0.2.1':
     resolution: {integrity: sha512-ckv8HvHy/iTqaVAEKrr+gnl+p3XFNwe5D2+6w6wJk2ORV2XkcRkKOJ/XsTUJbPSiyi4PI+p+T3bqbmNx/rDUlg==}
 
-  '@inlang/sdk@2.8.0':
-    resolution: {integrity: sha512-w1jysvUDTMgCaONklIgOJAp9dUDl0UhLbsdqfWEwY/GIqoc9IwpuHsrP3pzC+h3DfOpkMMDnDkTpPv8kIZ98iA==}
-    engines: {node: '>=18.0.0'}
+  '@inlang/sdk@2.9.1':
+    resolution: {integrity: sha512-y0C3xaKo6pSGDr3p5OdreRVT3THJpgKVe1lLvG3BE4v9lskp3UfI9cPCbN8X2dpfLt/4ljtehMb5SykpMfJrMg==}
+    engines: {node: '>=20.0.0'}
 
   '@inquirer/external-editor@1.0.3':
     resolution: {integrity: sha512-RWbSrDiYmO4LbejWY7ttpxczuwQyZLBUyygsA9Nsv95hpzUWwnNTVQmAq3xuh7vNwCp07UTmE5i11XAEExx4RA==}
@@ -995,8 +995,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@lix-js/sdk@0.4.7':
-    resolution: {integrity: sha512-pRbW+joG12L0ULfMiWYosIW0plmW4AsUdiPCp+Z8rAsElJ+wJ6in58zhD3UwUcd4BNcpldEGjg6PdA7e0RgsDQ==}
+  '@lix-js/sdk@0.4.9':
+    resolution: {integrity: sha512-30mDkXpx704359oRrJI42bjfCspCiaMItngVBbPkiTGypS7xX4jYbHWQkXI8XuJ7VDB69D0MsVU6xfrBAIrM4A==}
     engines: {node: '>=18'}
 
   '@lix-js/server-protocol-schema@0.1.1':
@@ -2429,9 +2429,9 @@ packages:
   kolorist@1.8.0:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
 
-  kysely@0.27.6:
-    resolution: {integrity: sha512-FIyV/64EkKhJmjgC0g2hygpBv5RNWVPyNCqSAD7eTCv6eFWNIi4PN1UvdSJGicN/o35bnevgis4Y0UDC0qi8jQ==}
-    engines: {node: '>=14.0.0'}
+  kysely@0.28.14:
+    resolution: {integrity: sha512-SU3lgh0rPvq7upc6vvdVrCsSMUG1h3ChvHVOY7wJ2fw4C9QEB7X3d5eyYEyULUX7UQtxZJtZXGuT6U2US72UYA==}
+    engines: {node: '>=20.0.0'}
 
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
@@ -4152,10 +4152,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@inlang/paraglide-js@2.15.0':
+  '@inlang/paraglide-js@2.15.1':
     dependencies:
       '@inlang/recommend-sherlock': 0.2.1
-      '@inlang/sdk': 2.8.0
+      '@inlang/sdk': 2.9.1
       commander: 11.1.0
       consola: 3.4.0
       json5: 2.2.3
@@ -4168,12 +4168,12 @@ snapshots:
     dependencies:
       comment-json: 4.6.2
 
-  '@inlang/sdk@2.8.0':
+  '@inlang/sdk@2.9.1':
     dependencies:
-      '@lix-js/sdk': 0.4.7
+      '@lix-js/sdk': 0.4.9
       '@sinclair/typebox': 0.31.28
-      kysely: 0.27.6
-      sqlite-wasm-kysely: 0.3.0(kysely@0.27.6)
+      kysely: 0.28.14
+      sqlite-wasm-kysely: 0.3.0(kysely@0.28.14)
       uuid: 13.0.0
     transitivePeerDependencies:
       - babel-plugin-macros
@@ -4213,14 +4213,14 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@lix-js/sdk@0.4.7':
+  '@lix-js/sdk@0.4.9':
     dependencies:
       '@lix-js/server-protocol-schema': 0.1.1
       dedent: 1.5.1
       human-id: 4.1.3
       js-sha256: 0.11.1
-      kysely: 0.27.6
-      sqlite-wasm-kysely: 0.3.0(kysely@0.27.6)
+      kysely: 0.28.14
+      sqlite-wasm-kysely: 0.3.0(kysely@0.28.14)
       uuid: 10.0.0
     transitivePeerDependencies:
       - babel-plugin-macros
@@ -5701,7 +5701,7 @@ snapshots:
 
   kolorist@1.8.0: {}
 
-  kysely@0.27.6: {}
+  kysely@0.28.14: {}
 
   levn@0.4.1:
     dependencies:
@@ -6173,10 +6173,10 @@ snapshots:
 
   sprintf-js@1.0.3: {}
 
-  sqlite-wasm-kysely@0.3.0(kysely@0.27.6):
+  sqlite-wasm-kysely@0.3.0(kysely@0.28.14):
     dependencies:
       '@sqlite.org/sqlite-wasm': 3.48.0-build4
-      kysely: 0.27.6
+      kysely: 0.28.14
 
   stackback@0.0.2: {}
 
