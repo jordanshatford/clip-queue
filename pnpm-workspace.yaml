@@ -12,7 +12,7 @@ catalog:
   jsdom: ^29.0.1
   tailwindcss: ^4.2.2
   typescript: ^6.0.2
-  vite: ^8.0.3
+  vite: ^8.0.5
   vue: ^3.5.32
   vue-tsc: ^3.2.6
 
