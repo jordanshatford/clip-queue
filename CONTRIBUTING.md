@@ -5,7 +5,7 @@
 Setting up the project for local development will require all of the following the be installed:
 
 - [git](https://git-scm.com/) (version `2.39` or higher)
-- [node](https://nodejs.org/en) (version `20.0` or higher)
+- [node](https://nodejs.org/en) (version `22.0` or higher)
 - [pnpm](https://pnpm.io/) (version `10.0` or higher)
   > NOTE: `pnpm` will use the version specified in the root `package.json` file.
 - *optionally* [docker](https://www.docker.com/) (version `24.0` or higher)
