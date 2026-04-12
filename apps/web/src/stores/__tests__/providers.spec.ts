@@ -50,7 +50,7 @@ vi.mock('@cq/services/twitch', async (importOriginal) => {
 
 describe('providers.ts', () => {
   beforeEach(() => {
-    localStorage.clear()
+    localStorage?.clear()
     vi.clearAllMocks()
     setActivePinia(createPinia())
   })

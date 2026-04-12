@@ -22,7 +22,7 @@ describe('settings.ts', () => {
 
   it('updates the settings in local storage', () => {
     const settings = useSettings()
-    localStorage.clear()
+    localStorage?.clear()
     expect(settings.commands.prefix).toEqual('!cq')
     settings.commands.prefix = '~'
     expect(settings.commands.prefix).toEqual('~')

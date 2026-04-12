@@ -66,9 +66,9 @@ describe('twitch.ts', () => {
     ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL'],
     [''],
     [mockKickClip.clip_url],
-  ])('throws an error for unknown clip urls: (url: %s)', async (url: string) => {
+])('throws an error for unknown clip urls: (url: %s)', async (url: string) => {
     const provider = new TwitchProvider()
-    expect(provider.getClip(url)).rejects.toThrowError()
+    await expect(provider.getClip(url)).rejects.toThrow()
   })
 
   it('caches clip data that it fetchs', async () => {

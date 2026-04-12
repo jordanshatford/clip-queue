@@ -9,6 +9,7 @@ export default mergeConfig(
   defineProject({
     test: {
       environment: 'jsdom',
+      isolate: true,
       setupFiles: ['src/__tests__/setup.js'],
       exclude: [...configDefaults.exclude, 'e2e/*'],
       root: fileURLToPath(new URL('./', import.meta.url)),

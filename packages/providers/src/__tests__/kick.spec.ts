@@ -47,7 +47,7 @@ describe('kick.ts', () => {
     [mockTwitchClip.url],
   ])('throws an error for unknown clip urls: (url: %s)', async (url: string) => {
     const provider = new KickProvider()
-    expect(provider.getClip(url)).rejects.toThrowError()
+    await expect(provider.getClip(url)).rejects.toThrow()
   })
 
   it('caches clip data that it fetchs', async () => {

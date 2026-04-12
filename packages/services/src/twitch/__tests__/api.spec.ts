@@ -36,7 +36,7 @@ describe('twitch-api.ts', () => {
   })
 
   it('throws if no clip IDs are passed', async () => {
-    expect(TwitchAPI.getClips({ id: '', token: '', username: '' }, [])).rejects.toThrowError()
+    await expect(TwitchAPI.getClips({ id: '', token: '', username: '' }, [])).rejects.toThrow()
   })
 
   it('gets a twitch games from twitch api', async () => {
@@ -49,7 +49,7 @@ describe('twitch-api.ts', () => {
   })
 
   it('throws if no game IDs are passed', async () => {
-    expect(TwitchAPI.getGames({ id: '', token: '', username: '' }, [])).rejects.toThrowError()
+    await expect(TwitchAPI.getGames({ id: '', token: '', username: '' }, [])).rejects.toThrow()
   })
 
   it('gets a twitch user from twitch api', async () => {

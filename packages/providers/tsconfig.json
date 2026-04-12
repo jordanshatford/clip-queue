@@ -2,12 +2,12 @@
   "extends": "@cq/config/tsconfig",
   "include": ["src/**/*"],
   "compilerOptions": {
-    "lib": ["DOM"],
-    "module": "ES2015",
+    "lib": ["ESNext", "DOM"],
+    "types": ["node"],
+    "module": "es2020",
     "moduleResolution": "Bundler",
     "outDir": "./dist",
     "rootDir": "./",
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }

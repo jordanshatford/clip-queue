@@ -30,7 +30,7 @@ describe('kick.ts', () => {
   })
 
   it('throws if no clip ID is passed', async () => {
-    expect(getClip('')).rejects.toThrowError()
+    await expect(getClip('')).rejects.toThrow()
   })
 
   it.each([
