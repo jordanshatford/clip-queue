@@ -5,7 +5,7 @@
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-3">
         <RouterLink :to="{ name: RouteNameConstants.HOME }" class="mr-2 flex shrink-0 items-center">
-          <img class="aspect-square w-10" src="/icon.png" />
+          <img class="aspect-square w-10" src="@/assets/icon.png" />
         </RouterLink>
         <div v-for="route in allowedRoutes" :key="route.name">
           <RouterLink
