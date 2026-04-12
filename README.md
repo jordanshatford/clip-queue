@@ -33,9 +33,9 @@ Clip Queue integrates into a users chat and queues clips submitted in chat by th
 
 Please refer to the [contributing guide](CONTRIBUTING.md) for how to install the project for development purposes.
 
-## Monorepo structure:
+## Monorepo structure
 
-### Apps:
+### Apps
 
 - `web`: A web application. Developed with [Vue.js](https://vuejs.org/).
 

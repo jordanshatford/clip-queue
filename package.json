@@ -19,7 +19,7 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "typecheck": "pnpm --recursive typecheck",
-    "deps:update": "corepack use pnpm@latest && pnpm up --latest && pnpm --recursive up --latest",
+    "deps:update": "pnpm self-update && pnpm up --latest && pnpm --recursive up --latest",
     "commitlint": "commitlint --edit",
     "changeset": "changeset"
   },
@@ -35,7 +35,7 @@
     "typescript": "catalog:",
     "vitest": "^4.1.4"
   },
-  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
+  "packageManager": "pnpm@10.33.0",
   "engines": {
     "pnpm": ">=10",
     "node": ">=20"
