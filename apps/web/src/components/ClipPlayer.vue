@@ -60,9 +60,9 @@
 import { computed } from 'vue'
 
 import type { Clip, PlayerFormat } from '@cq/providers'
-import { Player } from '@cq/player'
 import { SecondaryButton } from '@cq/ui'
 
+import { Player } from '@/components/player'
 import ProviderName from '@/components/ProviderName.vue'
 import { useKeydown } from '@/composables/keydown'
 import { m } from '@/paraglide/messages'
