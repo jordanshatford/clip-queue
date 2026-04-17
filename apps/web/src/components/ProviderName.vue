@@ -16,8 +16,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import type { ClipProvider } from '@cq/providers'
-
+import type { ClipProvider } from '@/providers'
 import { m } from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'
 

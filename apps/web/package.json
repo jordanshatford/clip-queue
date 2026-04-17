@@ -13,7 +13,6 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@cq/providers": "workspace:*",
     "@cq/ui": "workspace:*",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",

@@ -40,12 +40,12 @@
 </template>
 
 <script setup lang="ts">
-import type { Clip } from '@cq/providers'
-import { toClipUUID } from '@cq/providers'
 import { DangerButton, SecondaryButton } from '@cq/ui'
 
+import type { Clip } from '@/providers'
 import ClipCard from '@/components/ClipCard.vue'
 import { m } from '@/paraglide/messages'
+import { toClipUUID } from '@/providers'
 
 export interface Props {
   title?: string

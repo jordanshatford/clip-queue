@@ -57,11 +57,10 @@
 </template>
 
 <script setup lang="ts">
+import { SecondaryButton } from '@cq/ui'
 import { computed } from 'vue'
 
-import type { Clip, PlayerFormat } from '@cq/providers'
-import { SecondaryButton } from '@cq/ui'
-
+import type { Clip, PlayerFormat } from '@/providers'
 import { Player } from '@/components/player'
 import ProviderName from '@/components/ProviderName.vue'
 import { useKeydown } from '@/composables/keydown'

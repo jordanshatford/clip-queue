@@ -42,5 +42,4 @@ Please refer to the [contributing guide](CONTRIBUTING.md) for how to install the
 #### Packages
 
 - `config`: Common configurations shared between other apps and packages in the monorepo.
-- `providers`: Various clip providers used to get clips based on its URL. Developed with [TypeScript](https://www.typescriptlang.org/).
 - `ui`: A UI library. Developed with [Vue.js](https://vuejs.org/), [TailwindCSS](https://tailwindcss.com/), and [PrimeVue](https://primevue.org/).

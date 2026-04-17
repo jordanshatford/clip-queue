@@ -1,5 +1,4 @@
-import twitch, { TwitchChat } from '@cq/services/twitch'
-
+import twitch, { TwitchChat } from '@/services/twitch'
 import { BaseClipSource, ClipSource, ClipSourceStatus } from './types'
 
 /**

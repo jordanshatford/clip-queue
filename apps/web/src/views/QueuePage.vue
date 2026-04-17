@@ -26,12 +26,12 @@
 </template>
 
 <script setup lang="ts">
-import { toClipUUID } from '@cq/providers'
 import { Message } from '@cq/ui'
 
 import ClipPlayer from '@/components/ClipPlayer.vue'
 import ClipQueue from '@/components/ClipQueue.vue'
 import { m } from '@/paraglide/messages'
+import { toClipUUID } from '@/providers'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
 

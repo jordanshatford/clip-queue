@@ -1,9 +1,8 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-import { ClipProvider } from '@cq/providers'
-
 import type { LogLevel } from '@/stores/logger'
+import { ClipProvider } from '@/providers'
 import { Command } from '@/utils/commands'
 
 /**

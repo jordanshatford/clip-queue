@@ -1,8 +1,7 @@
+import { ToastService } from '@cq/ui'
 import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-
-import { ToastService } from '@cq/ui'
 
 import QueueSettings from '../QueueSettings.vue'
 

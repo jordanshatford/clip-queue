@@ -1,6 +1,5 @@
-import { defineConfig } from 'eslint/config'
-
 import vue from '@cq/config/eslint/vue'
+import { defineConfig } from 'eslint/config'
 
 export default defineConfig([
   {

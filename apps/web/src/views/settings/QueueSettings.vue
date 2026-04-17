@@ -71,9 +71,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRaw, useTemplateRef } from 'vue'
-
-import { ClipProvider } from '@cq/providers'
 import {
   Card,
   Chip,
@@ -85,9 +82,11 @@ import {
   ToggleSwitch,
   useToast,
 } from '@cq/ui'
+import { ref, toRaw, useTemplateRef } from 'vue'
 
 import ProviderName from '@/components/ProviderName.vue'
 import { m } from '@/paraglide/messages'
+import { ClipProvider } from '@/providers'
 import { usePreferences } from '@/stores/preferences'
 import { useSettings } from '@/stores/settings'
 

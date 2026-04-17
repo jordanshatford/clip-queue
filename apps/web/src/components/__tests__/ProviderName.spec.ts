@@ -2,8 +2,7 @@ import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 
-import { ClipProvider } from '@cq/providers'
-
+import { ClipProvider } from '@/providers'
 import ProviderName from '../ProviderName.vue'
 
 describe('ProviderName.vue', () => {

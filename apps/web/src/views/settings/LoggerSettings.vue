@@ -70,9 +70,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRaw, useTemplateRef } from 'vue'
-
 import { Card, DangerButton, InputNumber, Message, SecondaryButton, Select, useToast } from '@cq/ui'
+import { ref, toRaw, useTemplateRef } from 'vue'
 
 import type { LogLevel } from '@/stores/logger'
 import { m } from '@/paraglide/messages'

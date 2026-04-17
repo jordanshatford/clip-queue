@@ -32,9 +32,8 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-
 import { Button, ThemeToggle } from '@cq/ui'
+import { useRouter } from 'vue-router'
 
 import { m } from '@/paraglide/messages'
 import { allowedRoutes, RouteNameConstants, routeTranslations } from '@/router'

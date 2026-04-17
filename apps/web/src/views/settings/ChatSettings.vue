@@ -94,8 +94,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRaw, useTemplateRef } from 'vue'
-
 import {
   Card,
   DangerButton,
@@ -105,6 +103,7 @@ import {
   SecondaryButton,
   useToast,
 } from '@cq/ui'
+import { ref, toRaw, useTemplateRef } from 'vue'
 
 import SourceIndicator from '@/components/SourceIndicator.vue'
 import { m } from '@/paraglide/messages'

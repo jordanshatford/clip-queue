@@ -1,8 +1,7 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { Clip, PlayerFormat } from '@cq/providers'
-
+import type { Clip, PlayerFormat } from '@/providers'
 import type { TwitchUserCtx } from '@/services/twitch'
 import {
   clipFromKick,

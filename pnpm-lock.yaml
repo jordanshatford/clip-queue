@@ -80,12 +80,6 @@ importers:
 
   apps/web:
     dependencies:
-      '@cq/providers':
-        specifier: workspace:*
-        version: link:../../packages/providers
-      '@cq/sources':
-        specifier: workspace:*
-        version: link:../../packages/sources
       '@cq/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -204,57 +198,6 @@ importers:
       typescript-eslint:
         specifier: ^8.58.2
         version: 8.58.2(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)
-
-  packages/providers:
-    dependencies:
-      '@cq/services':
-        specifier: workspace:*
-        version: link:../services
-    devDependencies:
-      '@cq/config':
-        specifier: workspace:*
-        version: link:../config
-      '@types/node':
-        specifier: 'catalog:'
-        version: 25.6.0
-      typescript:
-        specifier: 'catalog:'
-        version: 6.0.3
-
-  packages/services:
-    dependencies:
-      tmi.js:
-        specifier: npm:@coldino/tmi.js-clientonly-fork@1.8.5-clientonly
-        version: '@coldino/tmi.js-clientonly-fork@1.8.5-clientonly'
-    devDependencies:
-      '@cq/config':
-        specifier: workspace:*
-        version: link:../config
-      '@types/node':
-        specifier: 'catalog:'
-        version: 25.6.0
-      '@types/tmi.js':
-        specifier: ^1.8.6
-        version: 1.8.6
-      typescript:
-        specifier: 'catalog:'
-        version: 6.0.3
-
-  packages/sources:
-    dependencies:
-      '@cq/services':
-        specifier: workspace:*
-        version: link:../services
-    devDependencies:
-      '@cq/config':
-        specifier: workspace:*
-        version: link:../config
-      '@types/node':
-        specifier: 'catalog:'
-        version: 25.6.0
-      typescript:
-        specifier: 'catalog:'
-        version: 6.0.3
 
   packages/ui:
     dependencies:

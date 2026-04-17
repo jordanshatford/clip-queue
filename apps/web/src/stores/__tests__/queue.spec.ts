@@ -1,10 +1,9 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import type { Clip } from '@cq/providers'
-import { ClipProvider } from '@cq/providers'
-
+import type { Clip } from '@/providers'
 import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
+import { ClipProvider } from '@/providers'
 import { useQueue } from '../queue'
 import { useSettings } from '../settings'
 

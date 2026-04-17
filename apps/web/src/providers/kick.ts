@@ -1,5 +1,4 @@
-import kick from '@cq/services/kick'
-
+import kick from '@/services/kick'
 import type { Clip, PlayerFormat } from './types'
 import { BaseClipProvider, ClipProvider } from './types'
 

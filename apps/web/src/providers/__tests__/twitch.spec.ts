@@ -1,14 +1,13 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { TwitchUserCtx } from '@cq/services/twitch'
-
+import type { TwitchUserCtx } from '@/services/twitch'
 import { TwitchProvider } from '../twitch'
 import { mockKickClip, mockTwitchClip, mockTwitchGame } from './mocks'
 
-vi.mock('@cq/services/twitch', async (importOriginal) => {
+vi.mock('@/services/twitch', async (importOriginal) => {
   return {
     default: {
-      ...(await importOriginal<typeof import('@cq/services/twitch')>()),
+      ...(await importOriginal<typeof import('@/services/twitch')>()),
       getClips: vi.fn((_: TwitchUserCtx, ids: string[]) => {
         return ids.map((id) => ({ ...mockTwitchClip, id }))
       }),

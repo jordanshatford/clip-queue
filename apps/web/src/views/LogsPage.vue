@@ -51,9 +51,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue'
-
 import { Column, DangerButton, DataTable, SecondaryButton, Tag, useConfirm } from '@cq/ui'
+import { computed, useTemplateRef } from 'vue'
 
 import type { Log } from '@/stores/logger'
 import { m } from '@/paraglide/messages'

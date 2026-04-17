@@ -1,6 +1,5 @@
-import type { KickCategory, KickChannel, KickClip } from '@cq/services/kick'
-import type { TwitchClip, TwitchGame } from '@cq/services/twitch'
-
+import type { KickCategory, KickChannel, KickClip } from '@/services/kick'
+import type { TwitchClip, TwitchGame } from '@/services/twitch'
 import type { Clip } from '..'
 import { ClipProvider } from '..'
 
