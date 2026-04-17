@@ -9,9 +9,6 @@
       "path": "packages/providers"
     },
     {
-      "path": "packages/services"
-    },
-    {
       "path": "packages/sources"
     },
     {

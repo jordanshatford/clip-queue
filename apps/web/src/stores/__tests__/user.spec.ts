@@ -1,8 +1,7 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { TwitchUser } from '@cq/services/twitch'
-
+import type { TwitchUser } from '@/services/twitch'
 import { useUser } from '../user'
 
 const mockTwitchUser: TwitchUser = {

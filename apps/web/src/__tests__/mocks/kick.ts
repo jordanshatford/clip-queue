@@ -1,4 +1,4 @@
-import type { KickCategory, KickChannel, KickClip } from '@cq/services/kick'
+import type { KickCategory, KickChannel, KickClip } from '@/services/kick'
 
 export const mockKickCategory: KickCategory = {
   id: 123,

@@ -14,11 +14,11 @@
   },
   "dependencies": {
     "@cq/providers": "workspace:*",
-    "@cq/services": "workspace:*",
     "@cq/sources": "workspace:*",
     "@cq/ui": "workspace:*",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
+    "tmi.js": "npm:@coldino/tmi.js-clientonly-fork@1.8.5-clientonly",
     "video.js": "^8.23.7",
     "vue": "catalog:",
     "vue-router": "^5.0.4"
@@ -31,6 +31,7 @@
     "@tsconfig/node24": "^24.0.4",
     "@types/jsdom": "catalog:",
     "@types/node": "catalog:",
+    "@types/tmi.js": "^1.8.6",
     "@vitejs/plugin-vue": "catalog:",
     "@vue/test-utils": "catalog:",
     "@vue/tsconfig": "catalog:",

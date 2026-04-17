@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-import type { TwitchUserCtx } from '@cq/services/twitch'
-import twitch from '@cq/services/twitch'
-
+import type { TwitchUserCtx } from '@/services/twitch'
 import { env } from '@/config'
+import twitch from '@/services/twitch'
 import { useLogger } from './logger'
 import { useSources } from './sources'
 

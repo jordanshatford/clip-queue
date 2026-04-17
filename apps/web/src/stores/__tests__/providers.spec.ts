@@ -2,8 +2,8 @@ import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { Clip, PlayerFormat } from '@cq/providers'
-import type { TwitchUserCtx } from '@cq/services/twitch'
 
+import type { TwitchUserCtx } from '@/services/twitch'
 import {
   clipFromKick,
   clipFromTwitch,
@@ -13,18 +13,18 @@ import {
 } from '@/__tests__/mocks'
 import { useProviders } from '../providers'
 
-vi.mock('@cq/services/kick', async (importOriginal) => {
+vi.mock('@/services/kick', async (importOriginal) => {
   return {
     default: {
-      ...(await importOriginal<typeof import('@cq/services/kick')>()),
+      ...(await importOriginal<typeof import('@/services/kick')>()),
       getClip: vi.fn((id: string) => ({ ...mockKickClip, id })),
     },
   }
 })
 
-vi.mock('@cq/services/twitch', async (importOriginal) => {
+vi.mock('@/services/twitch', async (importOriginal) => {
   return {
-    ...(await importOriginal<typeof import('@cq/services/twitch')>()),
+    ...(await importOriginal<typeof import('@/services/twitch')>()),
     default: {
       getClips: vi.fn((_: TwitchUserCtx, ids: string[]) => {
         return ids.map((id) => ({ ...mockTwitchClip, id }))
