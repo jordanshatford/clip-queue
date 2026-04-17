@@ -1,6 +1,6 @@
 import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { ToastService } from '@/components/ui'
 import ChatSettings from '../ChatSettings.vue'
@@ -8,7 +8,12 @@ import ChatSettings from '../ChatSettings.vue'
 describe('ChatSettings.vue', () => {
   const wrapper = shallowMount(ChatSettings, {
     global: {
-      plugins: [createTestingPinia(), ToastService],
+      plugins: [
+        createTestingPinia({
+          createSpy: vi.fn,
+        }),
+        ToastService,
+      ],
     },
   })
 

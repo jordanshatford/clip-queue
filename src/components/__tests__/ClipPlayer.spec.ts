@@ -1,6 +1,6 @@
 import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
 import ClipPlayer from '../ClipPlayer.vue'
@@ -11,7 +11,11 @@ describe('ClipPlayer.vue', () => {
       clip: clipFromTwitch,
     },
     global: {
-      plugins: [createTestingPinia()],
+      plugins: [
+        createTestingPinia({
+          createSpy: vi.fn,
+        }),
+      ],
     },
   })
 

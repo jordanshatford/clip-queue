@@ -1,6 +1,6 @@
 import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { ClipProvider } from '@/providers'
 import ProviderName from '../ProviderName.vue'
@@ -11,7 +11,11 @@ describe('ProviderName.vue', () => {
       provider: ClipProvider.TWITCH,
     },
     global: {
-      plugins: [createTestingPinia()],
+      plugins: [
+        createTestingPinia({
+          createSpy: vi.fn,
+        }),
+      ],
     },
   })
 
