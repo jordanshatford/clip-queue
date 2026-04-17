@@ -3,6 +3,7 @@ import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
 import { ToastService } from '@/components/ui'
+
 import ChatSettings from '../ChatSettings.vue'
 
 describe('ChatSettings.vue', () => {

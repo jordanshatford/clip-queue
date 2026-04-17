@@ -2,7 +2,9 @@ import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { Clip, PlayerFormat } from '@/providers'
-import type { TwitchUserCtx } from '@/services/twitch'
+import type { KickClip } from '@/services/kick'
+import type { TwitchClip, TwitchGame, TwitchUserCtx } from '@/services/twitch'
+
 import {
   clipFromKick,
   clipFromTwitch,
@@ -10,13 +12,14 @@ import {
   mockTwitchClip,
   mockTwitchGame,
 } from '@/__tests__/mocks'
+
 import { useProviders } from '../providers'
 
 vi.mock('@/services/kick', async (importOriginal) => {
   return {
     default: {
       ...(await importOriginal<typeof import('@/services/kick')>()),
-      getClip: vi.fn((id: string) => ({ ...mockKickClip, id })),
+      getClip: vi.fn<(id: string) => KickClip>((id: string) => ({ ...mockKickClip, id })),
     },
   }
 })
@@ -25,13 +28,17 @@ vi.mock('@/services/twitch', async (importOriginal) => {
   return {
     ...(await importOriginal<typeof import('@/services/twitch')>()),
     default: {
-      getClips: vi.fn((_: TwitchUserCtx, ids: string[]) => {
-        return ids.map((id) => ({ ...mockTwitchClip, id }))
-      }),
-      getGames: vi.fn((_: TwitchUserCtx, ids: string[]) => {
-        return ids.map((id) => ({ ...mockTwitchGame, id }))
-      }),
-      getClipIdFromUrl: vi.fn((url: string) => {
+      getClips: vi.fn<(_: TwitchUserCtx, ids: string[]) => TwitchClip[]>(
+        (_: TwitchUserCtx, ids: string[]) => {
+          return ids.map((id) => ({ ...mockTwitchClip, id }))
+        },
+      ),
+      getGames: vi.fn<(_: TwitchUserCtx, ids: string[]) => TwitchGame[]>(
+        (_: TwitchUserCtx, ids: string[]) => {
+          return ids.map((id) => ({ ...mockTwitchGame, id }))
+        },
+      ),
+      getClipIdFromUrl: vi.fn<(url: string) => string | undefined>((url: string) => {
         if (!url.includes('twitch')) {
           return
         }

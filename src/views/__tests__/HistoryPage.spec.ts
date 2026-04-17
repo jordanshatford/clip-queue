@@ -3,6 +3,7 @@ import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
 import { ConfirmationService } from '@/components/ui'
+
 import HistoryPage from '../HistoryPage.vue'
 
 describe('HistoryPage.vue', () => {

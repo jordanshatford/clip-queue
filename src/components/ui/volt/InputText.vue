@@ -10,6 +10,7 @@
 
 <script setup lang="ts">
 import type { InputTextPassThroughOptions, InputTextProps } from 'primevue/inputtext'
+
 import InputText from 'primevue/inputtext'
 import { ref } from 'vue'
 

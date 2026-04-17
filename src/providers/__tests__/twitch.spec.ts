@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { TwitchUserCtx } from '@/services/twitch'
+import type { TwitchClip, TwitchGame, TwitchUserCtx } from '@/services/twitch'
+
 import { TwitchProvider } from '../twitch'
 import { mockKickClip, mockTwitchClip, mockTwitchGame } from './mocks'
 
@@ -8,13 +9,17 @@ vi.mock('@/services/twitch', async (importOriginal) => {
   return {
     default: {
       ...(await importOriginal<typeof import('@/services/twitch')>()),
-      getClips: vi.fn((_: TwitchUserCtx, ids: string[]) => {
-        return ids.map((id) => ({ ...mockTwitchClip, id }))
-      }),
-      getGames: vi.fn((_: TwitchUserCtx, ids: string[]) => {
-        return ids.map((id) => ({ ...mockTwitchGame, id }))
-      }),
-      getClipIdFromUrl: vi.fn((url: string) => {
+      getClips: vi.fn<(ctx: TwitchUserCtx, ids: string[]) => TwitchClip[]>(
+        (_: TwitchUserCtx, ids: string[]) => {
+          return ids.map((id) => ({ ...mockTwitchClip, id }))
+        },
+      ),
+      getGames: vi.fn<(ctx: TwitchUserCtx, ids: string[]) => TwitchGame[]>(
+        (_: TwitchUserCtx, ids: string[]) => {
+          return ids.map((id) => ({ ...mockTwitchGame, id }))
+        },
+      ),
+      getClipIdFromUrl: vi.fn<(url: string) => string | undefined>((url: string) => {
         if (!url.includes('twitch')) {
           return
         }
@@ -67,7 +72,7 @@ describe('twitch.ts', () => {
     [mockKickClip.clip_url],
   ])('throws an error for unknown clip urls: (url: %s)', async (url: string) => {
     const provider = new TwitchProvider()
-    await expect(provider.getClip(url)).rejects.toThrow()
+    await expect(provider.getClip(url)).rejects.toThrow('[Twitch]: Invalid clip URL.')
   })
 
   it('caches clip data that it fetchs', async () => {

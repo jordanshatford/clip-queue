@@ -8,7 +8,7 @@
   >
     <template #removeicon="{ removeCallback, keydownCallback }">
       <TimesCircleIcon
-        class="text-surface-800 dark:text-surface-0 focus-visible:outline-primary h-4 w-4 cursor-pointer rounded-full text-base focus-visible:outline focus-visible:outline-offset-2"
+        class="h-4 w-4 cursor-pointer rounded-full text-base text-surface-800 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-primary dark:text-surface-0"
         @click="removeCallback"
         @keydown="keydownCallback"
       />
@@ -21,6 +21,7 @@
 
 <script setup lang="ts">
 import type { ChipPassThroughOptions, ChipProps } from 'primevue/chip'
+
 import TimesCircleIcon from '@primevue/icons/timescircle'
 import Chip from 'primevue/chip'
 import { ref } from 'vue'

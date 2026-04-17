@@ -17,6 +17,7 @@
 
 <script setup lang="ts">
 import type { ToastPassThroughOptions, ToastProps } from 'primevue/toast'
+
 import TimesIcon from '@primevue/icons/times'
 import Toast from 'primevue/toast'
 import { ref } from 'vue'

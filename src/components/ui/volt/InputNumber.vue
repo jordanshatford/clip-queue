@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import type { InputNumberPassThroughOptions, InputNumberProps } from 'primevue/inputnumber'
+
 import AngleDownIcon from '@primevue/icons/angledown'
 import AngleUpIcon from '@primevue/icons/angleup'
 import InputNumber from 'primevue/inputnumber'

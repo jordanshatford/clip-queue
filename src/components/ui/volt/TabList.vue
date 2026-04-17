@@ -12,6 +12,7 @@
 
 <script setup lang="ts">
 import type { TabListPassThroughOptions, TabListProps } from 'primevue/tablist'
+
 import TabList from 'primevue/tablist'
 import { ref } from 'vue'
 

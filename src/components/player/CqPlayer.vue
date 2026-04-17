@@ -14,7 +14,7 @@
     </div>
     <div
       v-else
-      class="text-surface-600 dark:text-surface-400 flex h-full items-center justify-center font-normal"
+      class="flex h-full items-center justify-center font-normal text-surface-600 dark:text-surface-400"
     >
       <slot name="unsupported"></slot>
     </div>

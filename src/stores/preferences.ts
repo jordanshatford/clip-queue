@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue'
 
 import type { ColorOption } from '@/components/ui'
 import type { Locale } from '@/paraglide/runtime'
+
 import { colors, setColorPalette, surfaces } from '@/components/ui'
 import { baseLocale, isLocale, setLocale } from '@/paraglide/runtime'
 

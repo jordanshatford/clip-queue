@@ -73,6 +73,7 @@
 import { ref, toRaw, useTemplateRef } from 'vue'
 
 import type { LogLevel } from '@/stores/logger'
+
 import {
   Card,
   DangerButton,

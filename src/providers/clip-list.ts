@@ -1,4 +1,5 @@
 import type { Clip, ClipProvider } from './types'
+
 import { toClipUUID } from './utils'
 
 /**

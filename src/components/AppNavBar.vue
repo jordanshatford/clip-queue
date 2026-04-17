@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-surface-0 dark:bg-surface-900 border-surface-200 dark:border-surface-700 mx-auto w-full border p-2 sm:px-16 md:px-20 lg:px-32"
+    class="mx-auto w-full border border-surface-200 bg-surface-0 p-2 sm:px-16 md:px-20 lg:px-32 dark:border-surface-700 dark:bg-surface-900"
   >
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -10,7 +10,7 @@
         <div v-for="route in allowedRoutes" :key="route.name">
           <RouterLink
             :to="{ name: route.name }"
-            class="bg-surface hover:bg-surface-100 dark:hover:bg-surface-800 dark:active:bg-surface-800 active:bg-surface-100 text-surface-800 dark:text-surface-100 jusitfy-center flex items-center gap-1 rounded-md px-3 py-2 font-medium"
+            class="bg-surface jusitfy-center flex items-center gap-1 rounded-md px-3 py-2 font-medium text-surface-800 hover:bg-surface-100 active:bg-surface-100 dark:text-surface-100 dark:hover:bg-surface-800 dark:active:bg-surface-800"
           >
             <span :class="route.meta?.icon"></span>
             <span class="ml-2">{{ routeTranslations[route.name as RouteNameConstants]() }}</span>

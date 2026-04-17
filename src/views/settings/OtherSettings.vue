@@ -46,7 +46,7 @@
   </Card>
   <Card class="mx-auto max-w-xl">
     <template #content>
-      <p class="text-surface-400 text-sm">
+      <p class="text-sm text-surface-400">
         {{ m.application_version({ version }) }}
       </p>
     </template>

@@ -29,6 +29,7 @@
 
 <script setup lang="ts">
 import type { ConfirmDialogPassThroughOptions, ConfirmDialogProps } from 'primevue/confirmdialog'
+
 import ExclamationTriangeIcon from '@primevue/icons/exclamationtriangle'
 import TimesIcon from '@primevue/icons/times'
 import ConfirmDialog from 'primevue/confirmdialog'

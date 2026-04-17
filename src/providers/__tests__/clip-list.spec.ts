@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { ClipProvider } from '@/providers'
+
 import { ClipList } from '../clip-list'
 import { clipFromKick, clipFromTwitch } from './mocks'
 

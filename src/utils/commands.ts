@@ -1,7 +1,9 @@
 import type { ComputedRef } from 'vue'
+
 import { computed } from 'vue'
 
 import type { ClipSourceEvent, ClipSourceMessage } from '@/sources'
+
 import { m } from '@/paraglide/messages'
 import { ClipProvider } from '@/providers'
 import { useLogger } from '@/stores/logger'

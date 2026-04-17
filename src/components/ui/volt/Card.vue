@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 import type { CardPassThroughOptions, CardProps } from 'primevue/card'
+
 import Card from 'primevue/card'
 import { ref } from 'vue'
 

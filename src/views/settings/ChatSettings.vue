@@ -6,7 +6,7 @@
           <label for="username">{{ m.connected_chat_colon() }}</label>
           <div class="flex w-full items-stretch">
             <span
-              class="border-surface-300 dark:border-surface-700 bg-surface-0 dark:bg-surface-950 text-surface-400 flex min-w-10 items-center justify-center rounded-s-md border-y border-s"
+              class="flex min-w-10 items-center justify-center rounded-s-md border-y border-s border-surface-300 bg-surface-0 text-surface-400 dark:border-surface-700 dark:bg-surface-950"
             >
               <!-- eslint-disable-next-line vue/no-v-html -->
               <svg class="h-5 w-5" v-html="sources.logo"></svg>
@@ -19,12 +19,12 @@
               pt:root="flex-1 rounded-none"
             />
             <span
-              class="border-surface-300 dark:border-surface-700 bg-surface-0 dark:bg-surface-950 text-surface-400 flex min-w-10 items-center justify-center gap-2 rounded-none border-y border-e px-2"
+              class="flex min-w-10 items-center justify-center gap-2 rounded-none border-y border-e border-surface-300 bg-surface-0 px-2 text-surface-400 dark:border-surface-700 dark:bg-surface-950"
             >
               <SourceIndicator :status="sources.status" />
             </span>
             <span
-              class="border-surface-300 dark:border-surface-700 bg-surface-0 dark:bg-surface-950 text-surface-400 flex min-w-10 items-center justify-center gap-2 rounded-e-md border-y border-e px-2"
+              class="flex min-w-10 items-center justify-center gap-2 rounded-e-md border-y border-e border-surface-300 bg-surface-0 px-2 text-surface-400 dark:border-surface-700 dark:bg-surface-950"
             >
               <i
                 v-tooltip="m.reconnect()"

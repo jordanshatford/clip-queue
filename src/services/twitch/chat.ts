@@ -1,4 +1,5 @@
 import type { Options } from 'tmi.js'
+
 import { Client } from 'tmi.js'
 
 /**

@@ -1,4 +1,5 @@
 import type { Clip } from '@/providers'
+
 import { ClipProvider } from '@/providers'
 
 export * from './kick'

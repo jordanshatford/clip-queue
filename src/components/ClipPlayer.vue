@@ -10,14 +10,14 @@
     </Player>
     <div class="mt-2 text-left">
       <div class="flex items-center justify-between">
-        <div class="text-surface-500 flex items-center gap-2 text-2xl font-bold">
+        <div class="flex items-center gap-2 text-2xl font-bold text-surface-500">
           <span>{{ clip.title }}</span>
           <a
             v-if="clip.url"
             :href="clip.url"
             target="_blank"
             rel="noreferrer"
-            class="hover:text-surface-600 dark:hover:text-surface-200 text-base no-underline"
+            class="text-base no-underline hover:text-surface-600 dark:hover:text-surface-200"
           >
             <i class="pi pi-external-link"></i>
           </a>
@@ -41,7 +41,7 @@
           </SecondaryButton>
         </div>
       </div>
-      <div class="text-surface-400 flex flex-col gap-1 text-sm font-normal">
+      <div class="flex flex-col gap-1 text-sm font-normal text-surface-400">
         <span>
           {{ clip.channel }}
           <span v-if="clip.category"> - {{ clip.category }} </span>
@@ -60,6 +60,7 @@
 import { computed } from 'vue'
 
 import type { Clip, PlayerFormat } from '@/providers'
+
 import { Player } from '@/components/player'
 import ProviderName from '@/components/ProviderName.vue'
 import { SecondaryButton } from '@/components/ui'

@@ -15,7 +15,7 @@
       <span :title="subtitle" class="line-clamp-1">{{ subtitle }}</span>
     </template>
     <template #content>
-      <div class="text-surface-400 text-xs">
+      <div class="text-xs text-surface-400">
         <p class="line-clamp-1">
           {{ m.submitter_name({ name: clip.submitters[0] ?? '' }) }}
         </p>
@@ -55,6 +55,7 @@
 import { computed } from 'vue'
 
 import type { Clip } from '@/providers'
+
 import ProviderName from '@/components/ProviderName.vue'
 import { Card, DangerButton, SecondaryButton } from '@/components/ui'
 import { m } from '@/paraglide/messages'

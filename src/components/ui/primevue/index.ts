@@ -1,6 +1,5 @@
 // PrimeVue styles
 import './tailwind.css'
-import './base.css'
 
 // PrimeVue Plugins
 export { default as PrimeVue } from 'primevue/config'

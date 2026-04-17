@@ -1,5 +1,7 @@
 import kick from '@/services/kick'
+
 import type { Clip, PlayerFormat } from './types'
+
 import { BaseClipProvider, ClipProvider } from './types'
 
 /**
@@ -35,7 +37,6 @@ export class KickProvider extends BaseClipProvider {
       this.cache[id] = response
       return response
     } catch (error) {
-      // eslint-disable-next-line preserve-caught-error
       throw new Error(`[${this.name}]: ${error}`)
     }
   }

@@ -2,6 +2,7 @@ import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 
 import { clipFromTwitch } from '@/__tests__/mocks'
+
 import ClipCard from '../ClipCard.vue'
 
 describe('ClipCard.vue', () => {

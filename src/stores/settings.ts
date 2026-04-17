@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
 import type { LogLevel } from '@/stores/logger'
+
 import { ClipProvider } from '@/providers'
 import { Command } from '@/utils/commands'
 

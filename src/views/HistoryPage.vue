@@ -30,7 +30,7 @@
     class="my-2"
   >
     <template #empty>
-      <div class="text-surface-500 p-4">
+      <div class="p-4 text-surface-500">
         {{ m.no_clips_previously_watched() }}
       </div>
     </template>
@@ -39,7 +39,7 @@
         <span class="text-xl">{{ m.history() }}</span>
         <div class="relative">
           <i
-            class="pi pi-search text-surface-400 absolute start-3 top-1/2 z-1 -mt-2 leading-none"
+            class="pi pi-search absolute start-3 top-1/2 z-1 -mt-2 leading-none text-surface-400"
           />
           <InputText v-model="filters['global'].value" :placeholder="m.search()" pt:root="ps-10" />
         </div>
@@ -63,13 +63,13 @@
                   :href="data.url"
                   target="_blank"
                   rel="noreferrer"
-                  class="text-surface-400 hover:text-surface-600 dark:text-surface-600 dark:hover:text-surface-200 no-underline"
+                  class="text-surface-400 no-underline hover:text-surface-600 dark:text-surface-600 dark:hover:text-surface-200"
                 >
                   <i class="pi pi-external-link"></i>
                 </a>
               </span>
             </p>
-            <div class="text-surface-400 text-xs">
+            <div class="text-xs text-surface-400">
               <p v-if="data.category">{{ data.channel }} - {{ data.category }}</p>
               <p v-else>
                 {{ data.channel }}
@@ -105,6 +105,7 @@
 import { computed, ref } from 'vue'
 
 import type { Clip } from '@/providers'
+
 import ProviderName from '@/components/ProviderName.vue'
 import {
   Column,

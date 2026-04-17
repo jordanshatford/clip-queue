@@ -1,6 +1,6 @@
 <template>
   <div class="mx-0 mt-4">
-    <div class="border-surface-300 dark:border-surface-700 mt-1 mb-2 w-full border-t"></div>
+    <div class="mt-1 mb-2 w-full border-t border-surface-300 dark:border-surface-700"></div>
     <div class="float-right">
       <SecondaryButton
         :label="m.clear()"
@@ -20,10 +20,10 @@
       </component>
     </div>
     <div class="text-left">
-      <p class="text-surface-600 dark:text-surface-400 text-lg font-normal">
+      <p class="text-lg font-normal text-surface-600 dark:text-surface-400">
         {{ title }}
       </p>
-      <span class="text-surface-400 dark:text-surface-600 mt-3 text-sm font-normal">
+      <span class="mt-3 text-sm font-normal text-surface-400 dark:text-surface-600">
         {{ m.clips({ length: clips.length }) }}
       </span>
     </div>
@@ -41,6 +41,7 @@
 
 <script setup lang="ts">
 import type { Clip } from '@/providers'
+
 import ClipCard from '@/components/ClipCard.vue'
 import { DangerButton, SecondaryButton } from '@/components/ui'
 import { m } from '@/paraglide/messages'

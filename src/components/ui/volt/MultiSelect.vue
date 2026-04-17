@@ -16,7 +16,7 @@
       <SearchIcon class="text-surface-400" />
     </template>
     <template #clearicon>
-      <TimesIcon class="text-surface-400 absolute end-10 top-1/2 -mt-2" />
+      <TimesIcon class="absolute end-10 top-1/2 -mt-2 text-surface-400" />
     </template>
     <template v-for="(_, slotName) in $slots" v-slot:[slotName]="slotProps">
       <slot :name="slotName" v-bind="slotProps ?? {}" />
@@ -26,6 +26,7 @@
 
 <script setup lang="ts">
 import type { MultiSelectPassThroughOptions, MultiSelectProps } from 'primevue/multiselect'
+
 import ChevronDownIcon from '@primevue/icons/chevrondown'
 import SearchIcon from '@primevue/icons/search'
 import SpinnerIcon from '@primevue/icons/spinner'

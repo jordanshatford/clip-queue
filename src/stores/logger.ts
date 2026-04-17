@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 import { m } from '@/paraglide/messages'
+
 import { useSettings } from './settings'
 
 /**

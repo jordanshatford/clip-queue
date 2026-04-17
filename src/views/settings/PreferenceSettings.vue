@@ -92,6 +92,7 @@ import { ref, toRaw, useTemplateRef, watch } from 'vue'
 import type { ColorOption } from '@/components/ui'
 import type { Locale } from '@/paraglide/runtime'
 import type { Theme } from '@/stores/preferences'
+
 import ColorName from '@/components/ColorName.vue'
 import {
   Card,

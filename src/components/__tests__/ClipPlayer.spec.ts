@@ -3,6 +3,7 @@ import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
 import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
+
 import ClipPlayer from '../ClipPlayer.vue'
 
 describe('ClipPlayer.vue', () => {

@@ -17,6 +17,7 @@
 import { computed } from 'vue'
 
 import type { ClipProvider } from '@/providers'
+
 import { m } from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'
 

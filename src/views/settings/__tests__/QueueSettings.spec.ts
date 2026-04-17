@@ -3,6 +3,7 @@ import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
 import { ToastService } from '@/components/ui'
+
 import QueueSettings from '../QueueSettings.vue'
 
 describe('QueueSettings.vue', () => {

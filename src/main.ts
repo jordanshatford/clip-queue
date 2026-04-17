@@ -1,5 +1,4 @@
 import '@/components/ui/primevue/icons'
-
 import { createPinia } from 'pinia'
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'

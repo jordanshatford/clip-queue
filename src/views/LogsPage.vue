@@ -9,7 +9,7 @@
     :rows-per-page-options="[10, 20, 50]"
   >
     <template #empty>
-      <div class="text-surface-500 p-4">{{ m.no_logs_captured() }}</div>
+      <div class="p-4 text-surface-500">{{ m.no_logs_captured() }}</div>
     </template>
     <template #header>
       <div class="mb-2 flex items-center justify-between">
@@ -54,6 +54,7 @@
 import { computed, useTemplateRef } from 'vue'
 
 import type { Log } from '@/stores/logger'
+
 import { Column, DangerButton, DataTable, SecondaryButton, Tag, useConfirm } from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { datetime } from '@/paraglide/registry'

@@ -3,6 +3,7 @@ import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
 import { ClipProvider } from '@/providers'
+
 import ProviderName from '../ProviderName.vue'
 
 describe('ProviderName.vue', () => {

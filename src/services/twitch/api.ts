@@ -6,6 +6,7 @@ import type {
   TwitchUser,
   TwitchUserCtx,
 } from './types'
+
 import { toURLParams } from './utils'
 
 const BASE_URL = 'https://api.twitch.tv/helix'

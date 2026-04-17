@@ -1,27 +1,28 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { TwitchUserCtx } from '..'
+
 import { mockTwitchClip, mockTwitchGame, mockTwitchUser } from '../../__tests__/mocks'
 import TwitchAPI, { toCommonHeaders } from '../api'
 
 describe('twitch-api.ts', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    global.fetch = vi.fn().mockImplementation((url: string) =>
+    global.fetch = vi.fn<typeof fetch>().mockImplementation((url) =>
       Promise.resolve({
         ok: true,
         json: () => {
           let data = {}
-          if (url.includes('clips')) {
+          if (url.toString().includes('clips')) {
             data = [mockTwitchClip]
-          } else if (url.includes('games')) {
+          } else if (url.toString().includes('games')) {
             data = [mockTwitchGame]
-          } else if (url.includes('users')) {
+          } else if (url.toString().includes('users')) {
             data = [mockTwitchUser]
           }
           return Promise.resolve({ data })
         },
-      }),
+      } as Response),
     )
   })
 
@@ -36,7 +37,9 @@ describe('twitch-api.ts', () => {
   })
 
   it('throws if no clip IDs are passed', async () => {
-    await expect(TwitchAPI.getClips({ id: '', token: '', username: '' }, [])).rejects.toThrow()
+    await expect(TwitchAPI.getClips({ id: '', token: '', username: '' }, [])).rejects.toThrow(
+      'Clip IDs were not provided.',
+    )
   })
 
   it('gets a twitch games from twitch api', async () => {
@@ -49,7 +52,9 @@ describe('twitch-api.ts', () => {
   })
 
   it('throws if no game IDs are passed', async () => {
-    await expect(TwitchAPI.getGames({ id: '', token: '', username: '' }, [])).rejects.toThrow()
+    await expect(TwitchAPI.getGames({ id: '', token: '', username: '' }, [])).rejects.toThrow(
+      'Game IDs were not provided.',
+    )
   })
 
   it('gets a twitch user from twitch api', async () => {

@@ -6,7 +6,7 @@ import { mockKickClip } from '../../__tests__/mocks'
 describe('kick.ts', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    global.fetch = vi.fn().mockImplementation((url: string) =>
+    global.fetch = vi.fn<typeof fetch>().mockImplementation((url) =>
       Promise.resolve({
         ok: true,
         json: () =>
@@ -16,7 +16,7 @@ describe('kick.ts', () => {
               clip_url: url,
             },
           }),
-      }),
+      } as Response),
     )
   })
 
@@ -30,7 +30,7 @@ describe('kick.ts', () => {
   })
 
   it('throws if no clip ID is passed', async () => {
-    await expect(getClip('')).rejects.toThrow()
+    await expect(getClip('')).rejects.toThrow('Clip ID was not provided.')
   })
 
   it.each([

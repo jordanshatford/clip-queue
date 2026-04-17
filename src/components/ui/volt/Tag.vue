@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 import type { TagPassThroughOptions, TagProps } from 'primevue/tag'
+
 import Tag from 'primevue/tag'
 import { ref } from 'vue'
 

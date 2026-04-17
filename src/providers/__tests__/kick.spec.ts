@@ -1,5 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
+import type { KickClip } from '@/services/kick'
+
 import { KickProvider } from '../kick'
 import { mockKickClip, mockTwitchClip } from './mocks'
 
@@ -7,7 +9,7 @@ vi.mock('@/services/kick', async (importOriginal) => {
   return {
     default: {
       ...(await importOriginal<typeof import('@/services/kick')>()),
-      getClip: vi.fn((id: string) => ({ ...mockKickClip, id })),
+      getClip: vi.fn<(id: string) => KickClip>((id: string) => ({ ...mockKickClip, id })),
     },
   }
 })
@@ -47,7 +49,7 @@ describe('kick.ts', () => {
     [mockTwitchClip.url],
   ])('throws an error for unknown clip urls: (url: %s)', async (url: string) => {
     const provider = new KickProvider()
-    await expect(provider.getClip(url)).rejects.toThrow()
+    await expect(provider.getClip(url)).rejects.toThrow('I')
   })
 
   it('caches clip data that it fetchs', async () => {

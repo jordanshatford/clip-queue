@@ -64,6 +64,7 @@
 
 <script setup lang="ts">
 import type { DataTablePassThroughOptions, DataTableProps } from 'primevue/datatable'
+
 import AngleDoubleLeftIcon from '@primevue/icons/angledoubleleft'
 import AngleDoubleRightIcon from '@primevue/icons/angledoubleright'
 import AngleLeftIcon from '@primevue/icons/angleleft'

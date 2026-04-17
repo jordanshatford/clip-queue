@@ -2,10 +2,12 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
 import type { IBaseClipSource } from '@/sources'
+
 import { ClipSourceStatus, TwitchChatSource } from '@/sources'
 import { useProviders } from '@/stores/providers'
 import { useUser } from '@/stores/user'
 import commands, { Command } from '@/utils/commands'
+
 import { useLogger } from './logger'
 import { useQueue } from './queue'
 import { useSettings } from './settings'

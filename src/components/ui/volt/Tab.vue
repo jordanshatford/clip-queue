@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 import type { TabPassThroughOptions, TabProps } from 'primevue/tab'
+
 import Tab from 'primevue/tab'
 import { ref } from 'vue'
 

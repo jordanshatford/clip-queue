@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
 import type { Clip, PlayerFormat } from '@/providers'
+
 import { ClipProvider, providers as ps } from '@/providers'
 import { useLogger } from '@/stores/logger'
 import { useSettings } from '@/stores/settings'

@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 import type { ButtonPassThroughOptions, ButtonProps } from 'primevue/button'
+
 import Button from 'primevue/button'
 import { ref } from 'vue'
 

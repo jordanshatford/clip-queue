@@ -1,4 +1,5 @@
 import type { ChatUserstate } from 'tmi.js'
+
 import { describe, expect, it } from 'vitest'
 
 import { getClipIdFromUrl, isModerator, toURLParams } from '../utils'

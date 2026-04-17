@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 import type { ToggleSwitchPassThroughOptions, ToggleSwitchProps } from 'primevue/toggleswitch'
+
 import ToggleSwitch from 'primevue/toggleswitch'
 import { ref } from 'vue'
 
