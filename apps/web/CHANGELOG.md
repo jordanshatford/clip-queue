@@ -1,5 +1,21 @@
 # @cq/web
 
+## 1.38.0
+
+### Minor Changes
+
+- feat: add ui components to application and remove package ([`07a1c2b`](https://github.com/jordanshatford/clip-queue/commit/07a1c2b460f1992fdce71132e20a1ee77623f745))
+
+- feat: add player component that uses video.js and embedding ([`7355d81`](https://github.com/jordanshatford/clip-queue/commit/7355d813b0dbb0e38e2d5818fa414cb788ef3eb6))
+
+- feat: add providers to handle clip providers ([`7c64515`](https://github.com/jordanshatford/clip-queue/commit/7c64515b670a7ff4b73fd0c64f1c90890af21bd0))
+
+- feat: move configurations out of there own package ([`2672624`](https://github.com/jordanshatford/clip-queue/commit/2672624a5fdd6c60bdd325b1c0089bac67e55045))
+
+- feat: add sources to handle clip sources ([`e726577`](https://github.com/jordanshatford/clip-queue/commit/e7265777316ce2a53b0199b0b29176db5eae6c67))
+
+- feat: add services to handle third party communication ([`72d445e`](https://github.com/jordanshatford/clip-queue/commit/72d445e012da38e29e577cb4bef016014cdc08db))
+
 ## 1.37.1
 
 ### Patch Changes
