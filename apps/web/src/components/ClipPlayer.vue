@@ -57,12 +57,12 @@
 </template>
 
 <script setup lang="ts">
-import { SecondaryButton } from '@cq/ui'
 import { computed } from 'vue'
 
 import type { Clip, PlayerFormat } from '@/providers'
 import { Player } from '@/components/player'
 import ProviderName from '@/components/ProviderName.vue'
+import { SecondaryButton } from '@/components/ui'
 import { useKeydown } from '@/composables/keydown'
 import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'

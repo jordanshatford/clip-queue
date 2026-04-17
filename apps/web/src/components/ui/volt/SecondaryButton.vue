@@ -1,27 +1,29 @@
 <template>
-    <Button
-        unstyled
-        :pt="theme"
-        :ptOptions="{
-            mergeProps: ptViewMerge
-        }"
-    >
-        <template v-for="(_, slotName) in $slots" v-slot:[slotName]="slotProps">
-            <slot :name="slotName" v-bind="slotProps ?? {}" />
-        </template>
-    </Button>
+  <Button
+    unstyled
+    :pt="theme"
+    :ptOptions="{
+      mergeProps: ptViewMerge,
+    }"
+  >
+    <template v-for="(_, slotName) in $slots" v-slot:[slotName]="slotProps">
+      <slot :name="slotName" v-bind="slotProps ?? {}" />
+    </template>
+  </Button>
 </template>
 
 <script setup lang="ts">
-import Button, { type ButtonPassThroughOptions, type ButtonProps } from 'primevue/button';
-import { ref } from 'vue';
-import { ptViewMerge } from './utils';
+import type { ButtonPassThroughOptions, ButtonProps } from 'primevue/button'
+import Button from 'primevue/button'
+import { ref } from 'vue'
+
+import { ptViewMerge } from './utils'
 
 interface Props extends /* @vue-ignore */ ButtonProps {}
-defineProps<Props>();
+defineProps<Props>()
 
 const theme = ref<ButtonPassThroughOptions>({
-    root: `inline-flex cursor-pointer select-none items-center justify-center overflow-hidden relative
+  root: `inline-flex cursor-pointer select-none items-center justify-center overflow-hidden relative
         px-3 py-2 gap-2 rounded-md disabled:pointer-events-none disabled:opacity-60 transition-colors duration-200
         bg-surface-100 enabled:hover:bg-surface-200 enabled:active:bg-surface-300
         border border-surface-100 enabled:hover:border-surface-200 enabled:active:border-surface-300
@@ -50,12 +52,12 @@ const theme = ref<ButtonPassThroughOptions>({
         dark:p-text:border-transparent dark:enabled:hover:p-text:border-transparent dark:enabled:active:p-text:border-transparent
         dark:p-text:text-surface-400 dark:enabled:hover:p-text:text-surface-400 dark:enabled:active:p-text:text-surface-400
     `,
-    loadingIcon: `animate-spin`,
-    icon: `p-right:order-1 p-bottom:order-2`,
-    label: `font-medium p-icon-only:invisible p-icon-only:w-0
+  loadingIcon: `animate-spin`,
+  icon: `p-right:order-1 p-bottom:order-2`,
+  label: `font-medium p-icon-only:invisible p-icon-only:w-0
         p-small:text-sm p-large:text-[1.125rem]`,
-    pcBadge: {
-        root: `min-w-4 h-4 leading-4`
-    }
-});
+  pcBadge: {
+    root: `min-w-4 h-4 leading-4`,
+  },
+})
 </script>

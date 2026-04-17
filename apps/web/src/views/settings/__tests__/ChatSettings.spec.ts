@@ -1,8 +1,8 @@
-import { ToastService } from '@cq/ui'
 import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 
+import { ToastService } from '@/components/ui'
 import ChatSettings from '../ChatSettings.vue'
 
 describe('ChatSettings.vue', () => {

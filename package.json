@@ -7,7 +7,6 @@
     "prepare": "husky",
     "web": "pnpm --filter @cq/web -- ",
     "cfg": "pnpm --filter @cq/config -- ",
-    "ui": "pnpm --filter @cq/ui -- ",
     "build": "pnpm --recursive build",
     "lint": "pnpm --recursive lint",
     "lint:fix": "pnpm --recursive lint:fix",

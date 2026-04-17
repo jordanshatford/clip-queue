@@ -87,7 +87,12 @@
 </template>
 
 <script setup lang="ts">
-import type { ColorOption } from '@cq/ui'
+import { ref, toRaw, useTemplateRef, watch } from 'vue'
+
+import type { ColorOption } from '@/components/ui'
+import type { Locale } from '@/paraglide/runtime'
+import type { Theme } from '@/stores/preferences'
+import ColorName from '@/components/ColorName.vue'
 import {
   Card,
   colors,
@@ -97,12 +102,7 @@ import {
   Select,
   surfaces,
   useToast,
-} from '@cq/ui'
-import { ref, toRaw, useTemplateRef, watch } from 'vue'
-
-import type { Locale } from '@/paraglide/runtime'
-import type { Theme } from '@/stores/preferences'
-import ColorName from '@/components/ColorName.vue'
+} from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { locales } from '@/paraglide/runtime'
 import { availableThemes, usePreferences } from '@/stores/preferences'

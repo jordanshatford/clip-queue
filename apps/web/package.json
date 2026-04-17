@@ -13,9 +13,13 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@cq/ui": "workspace:*",
+    "@primevue/icons": "^4.5.5",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.5.5",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss-primeui": "^0.6.1",
     "tmi.js": "npm:@coldino/tmi.js-clientonly-fork@1.8.5-clientonly",
     "video.js": "^8.23.7",
     "vue": "catalog:",

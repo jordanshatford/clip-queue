@@ -6,8 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ColorName } from '@cq/ui'
-
+import type { ColorName } from '@/components/ui'
 import { m } from '@/paraglide/messages'
 
 export interface Props {

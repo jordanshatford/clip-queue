@@ -21,10 +21,10 @@
 </template>
 
 <script setup lang="ts">
-import { Tab, TabList, Tabs } from '@cq/ui'
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
+import { Tab, TabList, Tabs } from '@/components/ui'
 import { useKeydown } from '@/composables/keydown'
 import { allowedRoutes, RouteNameConstants, routeTranslations } from '@/router'
 

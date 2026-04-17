@@ -4,9 +4,6 @@
 	"references": [
 		{
 			"path": "apps/web"
-		},
-    {
-      "path": "packages/ui"
-    }
+		}
 	]
 }

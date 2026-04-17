@@ -52,11 +52,11 @@
 </template>
 
 <script setup lang="ts">
-import { Card, DangerButton, SecondaryButton } from '@cq/ui'
 import { computed } from 'vue'
 
 import type { Clip } from '@/providers'
 import ProviderName from '@/components/ProviderName.vue'
+import { Card, DangerButton, SecondaryButton } from '@/components/ui'
 import { m } from '@/paraglide/messages'
 
 export interface Props {

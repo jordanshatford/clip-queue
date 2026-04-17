@@ -13,8 +13,7 @@ export default defineConfig({
       exclude: [
         '**/*.config.js',
         '**/*.d.ts',
-        'packages/config/**',
-        'packages/ui/src/primevue/presets/**'
+        'packages/config/**'
       ]
     }
   }

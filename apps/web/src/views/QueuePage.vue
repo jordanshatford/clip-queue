@@ -26,10 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import { Message } from '@cq/ui'
-
 import ClipPlayer from '@/components/ClipPlayer.vue'
 import ClipQueue from '@/components/ClipQueue.vue'
+import { Message } from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { toClipUUID } from '@/providers'
 import { useQueue } from '@/stores/queue'

@@ -51,10 +51,10 @@
 </template>
 
 <script setup lang="ts">
-import { Column, DangerButton, DataTable, SecondaryButton, Tag, useConfirm } from '@cq/ui'
 import { computed, useTemplateRef } from 'vue'
 
 import type { Log } from '@/stores/logger'
+import { Column, DangerButton, DataTable, SecondaryButton, Tag, useConfirm } from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { datetime } from '@/paraglide/registry'
 import { logLevelIcons, logLevelSeverities, logLevelTranslations, useLogger } from '@/stores/logger'

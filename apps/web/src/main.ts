@@ -1,11 +1,11 @@
-import '@cq/ui/primeicons'
+import '@/components/ui/primevue/icons'
 
-import { ConfirmationService, PrimeVue, ToastService, Tooltip } from '@cq/ui'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'
 
 import App from '@/App.vue'
+import { ConfirmationService, PrimeVue, ToastService, Tooltip } from '@/components/ui'
 import router from '@/router'
 
 const app = createApp(App)

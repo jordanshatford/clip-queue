@@ -102,11 +102,18 @@
 </template>
 
 <script setup lang="ts">
-import { Column, DangerButton, DataTable, InputText, SecondaryButton, useConfirm } from '@cq/ui'
 import { computed, ref } from 'vue'
 
 import type { Clip } from '@/providers'
 import ProviderName from '@/components/ProviderName.vue'
+import {
+  Column,
+  DangerButton,
+  DataTable,
+  InputText,
+  SecondaryButton,
+  useConfirm,
+} from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useQueue } from '@/stores/queue'

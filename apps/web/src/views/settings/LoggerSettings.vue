@@ -70,10 +70,18 @@
 </template>
 
 <script setup lang="ts">
-import { Card, DangerButton, InputNumber, Message, SecondaryButton, Select, useToast } from '@cq/ui'
 import { ref, toRaw, useTemplateRef } from 'vue'
 
 import type { LogLevel } from '@/stores/logger'
+import {
+  Card,
+  DangerButton,
+  InputNumber,
+  Message,
+  SecondaryButton,
+  Select,
+  useToast,
+} from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { RouteNameConstants } from '@/router'
 import { availableLogLevels, logLevelTranslations } from '@/stores/logger'

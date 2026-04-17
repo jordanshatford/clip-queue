@@ -13,9 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import { ConfirmDialog, Footer, Toast } from '@cq/ui'
-
 import AppNavBar from '@/components/AppNavBar.vue'
+import { ConfirmDialog, Footer, Toast } from '@/components/ui'
 import { config } from '@/config'
 import { usePreferences } from './stores/preferences'
 

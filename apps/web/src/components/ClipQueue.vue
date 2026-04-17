@@ -40,10 +40,9 @@
 </template>
 
 <script setup lang="ts">
-import { DangerButton, SecondaryButton } from '@cq/ui'
-
 import type { Clip } from '@/providers'
 import ClipCard from '@/components/ClipCard.vue'
+import { DangerButton, SecondaryButton } from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { toClipUUID } from '@/providers'
 

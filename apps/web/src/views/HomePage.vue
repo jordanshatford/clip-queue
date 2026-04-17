@@ -22,9 +22,9 @@
 </template>
 
 <script setup lang="ts">
-import { FeatureCard } from '@cq/ui'
 import { computed } from 'vue'
 
+import { FeatureCard } from '@/components/ui'
 import { m } from '@/paraglide/messages'
 
 const features = computed(() => [

@@ -54,8 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { Card, DangerButton, Message, useConfirm, useToast } from '@cq/ui'
-
+import { Card, DangerButton, Message, useConfirm, useToast } from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { usePreferences } from '@/stores/preferences'
 import { useProviders } from '@/stores/providers'

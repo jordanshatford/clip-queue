@@ -80,15 +80,27 @@ importers:
 
   apps/web:
     dependencies:
-      '@cq/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
+      '@primevue/icons':
+        specifier: ^4.5.5
+        version: 4.5.5(vue@3.5.32(typescript@6.0.3))
       pinia:
         specifier: ^3.0.4
         version: 3.0.4(typescript@6.0.3)(vue@3.5.32(typescript@6.0.3))
       pinia-plugin-persistedstate:
         specifier: ^4.7.1
         version: 4.7.1(@nuxt/kit@3.17.5(magicast@0.5.2))(pinia@3.0.4(typescript@6.0.3)(vue@3.5.32(typescript@6.0.3)))
+      primeicons:
+        specifier: ^7.0.0
+        version: 7.0.0
+      primevue:
+        specifier: ^4.5.5
+        version: 4.5.5(vue@3.5.32(typescript@6.0.3))
+      tailwind-merge:
+        specifier: ^3.5.0
+        version: 3.5.0
+      tailwindcss-primeui:
+        specifier: ^0.6.1
+        version: 0.6.1(tailwindcss@4.2.2)
       tmi.js:
         specifier: npm:@coldino/tmi.js-clientonly-fork@1.8.5-clientonly
         version: '@coldino/tmi.js-clientonly-fork@1.8.5-clientonly'
