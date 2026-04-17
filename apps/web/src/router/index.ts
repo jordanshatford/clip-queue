@@ -139,7 +139,7 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, from) => {
   document.title = config.title
   const logger = useLogger()
   const user = useUser()
@@ -153,16 +153,15 @@ router.beforeEach(async (to, from, next) => {
   if (to.hash && to.hash !== '' && !user.isLoggedIn) {
     await user.login(to.hash)
     logger.debug(`[Router]: User is logging in via Twitch ${user.ctx.username}.`)
-    next({ name: RouteNameConstants.QUEUE, hash: '' })
+    return { name: RouteNameConstants.QUEUE, hash: '' }
     return
     // User is not logged in trying to access auth required route
   } else if (!user.isLoggedIn && to.meta.requiresAuth) {
     logger.debug(`[Router]: User is not logged in, redirecting to home page from ${to.fullPath}.`)
-    next({ name: RouteNameConstants.HOME })
+    return { name: RouteNameConstants.HOME }
     return
   }
   logger.debug(`[Router]: Navigating from ${from.fullPath} to ${to.fullPath}.`)
-  next()
 })
 
 export default router
