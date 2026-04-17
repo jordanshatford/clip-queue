@@ -1,6 +1,6 @@
 <p align="center">
   <br />
-  <img width="150" height="150" src="./apps/web/public/icon.png" alt="Logo">
+  <img width="150" height="150" src="./public/icon.png" alt="Logo">
   <h1 align="center"><b>Clip Queue</b></h1>
   <p align="center">
     An enhanced clip viewing experience.
@@ -32,9 +32,3 @@ Clip Queue integrates into a users chat and queues clips submitted in chat by th
 ## Developer Guide
 
 Please refer to the [contributing guide](CONTRIBUTING.md) for how to install the project for development purposes.
-
-### Monorepo structure
-
-#### Apps
-
-- `web`: A web application. Developed with [Vue.js](https://vuejs.org/).

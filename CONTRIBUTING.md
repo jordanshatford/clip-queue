@@ -8,7 +8,7 @@ Setting up the project for local development will require all of the following t
 - [node](https://nodejs.org/en) (version `22.0` or higher)
 - [pnpm](https://pnpm.io/) (version `10.0` or higher)
   > NOTE: `pnpm` will use the version specified in the root `package.json` file.
-- *optionally* [docker](https://www.docker.com/) (version `24.0` or higher)
+- _optionally_ [docker](https://www.docker.com/) (version `24.0` or higher)
 
 > NOTE: docker is an alternative way to develop. If you are using docker, all other dependencies above will not be required except for git.
 
@@ -34,8 +34,8 @@ Setting up the project will require that the above dependencies are all installe
 ```sh
 # Install all dependencies
 pnpm install
-# Run the projects web app in development mode
-pnpm web dev
+# Run the projects in development mode
+pnpm dev
 ```
 
 #### Running formatting, linting, and checking

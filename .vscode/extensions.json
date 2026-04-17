@@ -3,8 +3,7 @@
     "ms-azuretools.vscode-docker",
     "EditorConfig.EditorConfig",
     "Vue.volar",
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
+    "oxc.oxc-vscode",
     "bradlc.vscode-tailwindcss",
     "inlang.vs-code-extension",
     "vitest.explorer"

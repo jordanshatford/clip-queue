@@ -3,47 +3,46 @@
 
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     assignees:
-      - "jordanshatford"
+      - 'jordanshatford'
     groups:
       github-actions:
         patterns:
-          - "*"
+          - '*'
 
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     assignees:
-      - "jordanshatford"
+      - 'jordanshatford'
     groups:
       npm:
         patterns:
-          - "*"
+          - '*'
 
-
-  - package-ecosystem: "docker"
-    directory: "/"
+  - package-ecosystem: 'docker'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     assignees:
-      - "jordanshatford"
+      - 'jordanshatford'
     groups:
       docker:
         patterns:
-          - "*"
+          - '*'
 
-  - package-ecosystem: "docker-compose"
-    directory: "/"
+  - package-ecosystem: 'docker-compose'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     assignees:
-      - "jordanshatford"
+      - 'jordanshatford'
     groups:
       docker:
         patterns:
-          - "*"
+          - '*'

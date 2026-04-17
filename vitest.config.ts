@@ -1,18 +1,21 @@
-import { defineConfig } from 'vitest/config'
+import { fileURLToPath } from 'node:url'
 
-export default defineConfig({
-  test: {
-    environment: 'jsdom',
-    projects: [
-      'apps/*',
-    ],
-    coverage: {
-      provider: 'v8',
-      include: ['apps/**'],
-      exclude: [
-        '**/*.config.js',
-        '**/*.d.ts'
-      ]
-    }
-  }
-});
+import { configDefaults, defineConfig, mergeConfig } from 'vitest/config'
+
+import viteConfig from './vite.config'
+
+export default mergeConfig(
+  viteConfig,
+  defineConfig({
+    test: {
+      environment: 'jsdom',
+      isolate: true,
+      setupFiles: ['src/__tests__/setup.js'],
+      exclude: [...configDefaults.exclude, 'e2e/*'],
+      root: fileURLToPath(new URL('./', import.meta.url)),
+      coverage: {
+        provider: 'v8',
+      },
+    },
+  }),
+)

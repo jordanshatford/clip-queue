@@ -8,6 +8,6 @@ services:
     image: cq/web:latest
     restart: always
     env_file:
-      - apps/web/.env
+      - .env
     ports:
       - 5173:5173
