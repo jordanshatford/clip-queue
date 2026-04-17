@@ -1,10 +1,10 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { ClipSourceEvent, ClipSourceMessage } from '@cq/sources'
 import { ClipProvider } from '@cq/providers'
-import { ClipSource } from '@cq/sources'
 
+import type { ClipSourceEvent, ClipSourceMessage } from '@/sources'
+import { ClipSource } from '@/sources'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'

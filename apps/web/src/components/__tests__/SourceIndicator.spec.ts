@@ -2,8 +2,7 @@ import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 
-import { ClipSourceStatus } from '@cq/sources'
-
+import { ClipSourceStatus } from '@/sources'
 import SourceIndicator from '../SourceIndicator.vue'
 
 describe('SourceIndicator.vue', () => {

@@ -1,9 +1,8 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-import type { IBaseClipSource } from '@cq/sources'
-import { ClipSourceStatus, TwitchChatSource } from '@cq/sources'
-
+import type { IBaseClipSource } from '@/sources'
+import { ClipSourceStatus, TwitchChatSource } from '@/sources'
 import { useProviders } from '@/stores/providers'
 import { useUser } from '@/stores/user'
 import commands, { Command } from '@/utils/commands'

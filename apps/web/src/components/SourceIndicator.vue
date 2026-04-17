@@ -5,9 +5,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import { ClipSourceStatus } from '@cq/sources'
-
 import { m } from '@/paraglide/messages'
+import { ClipSourceStatus } from '@/sources'
 
 export interface Props {
   status: ClipSourceStatus
