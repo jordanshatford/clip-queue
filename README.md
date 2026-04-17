@@ -38,7 +38,3 @@ Please refer to the [contributing guide](CONTRIBUTING.md) for how to install the
 #### Apps
 
 - `web`: A web application. Developed with [Vue.js](https://vuejs.org/).
-
-#### Packages
-
-- `config`: Common configurations shared between other apps and packages in the monorepo.

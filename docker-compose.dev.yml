@@ -11,4 +11,3 @@ services:
       - .:/workspace
       - /workspace/node_modules
       - /workspace/apps/web/node_modules
-      - /workspace/packages/config/node_modules

@@ -5,15 +5,13 @@ export default defineConfig({
     environment: 'jsdom',
     projects: [
       'apps/*',
-      'packages/*'
     ],
     coverage: {
       provider: 'v8',
-      include: ['apps/**', 'packages/**'],
+      include: ['apps/**'],
       exclude: [
         '**/*.config.js',
-        '**/*.d.ts',
-        'packages/config/**'
+        '**/*.d.ts'
       ]
     }
   }

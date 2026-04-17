@@ -1,6 +1,5 @@
 packages:
   - apps/*
-  - packages/*
 
 catalog:
   '@tailwindcss/vite': ^4.2.2

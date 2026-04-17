@@ -114,9 +114,15 @@ importers:
         specifier: ^5.0.4
         version: 5.0.4(@vue/compiler-sfc@3.5.32)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.32(typescript@6.0.3)))(vue@3.5.32(typescript@6.0.3))
     devDependencies:
-      '@cq/config':
-        specifier: workspace:*
-        version: link:../../packages/config
+      '@eslint/eslintrc':
+        specifier: ^3.3.5
+        version: 3.3.5
+      '@eslint/js':
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@10.2.0(jiti@2.6.1))
+      '@ianvs/prettier-plugin-sort-imports':
+        specifier: ^4.7.1
+        version: 4.7.1(@vue/compiler-sfc@3.5.32)(prettier@3.8.3)
       '@inlang/paraglide-js':
         specifier: 2.16.0
         version: 2.16.0
@@ -141,51 +147,18 @@ importers:
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
         version: 6.0.6(vite@8.0.8(@types/node@25.6.0)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.3))(vue@3.5.32(typescript@6.0.3))
-      '@vue/test-utils':
-        specifier: 'catalog:'
-        version: 2.4.6
-      '@vue/tsconfig':
-        specifier: 'catalog:'
-        version: 0.9.1(typescript@6.0.3)(vue@3.5.32(typescript@6.0.3))
-      jsdom:
-        specifier: 'catalog:'
-        version: 29.0.2
-      tailwindcss:
-        specifier: 'catalog:'
-        version: 4.2.2
-      typescript:
-        specifier: 'catalog:'
-        version: 6.0.3
-      vite:
-        specifier: 'catalog:'
-        version: 8.0.8(@types/node@25.6.0)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.3)
-      vite-plugin-vue-devtools:
-        specifier: ^8.1.1
-        version: 8.1.1(@nuxt/kit@3.17.5(magicast@0.5.2))(vite@8.0.8(@types/node@25.6.0)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.3))(vue@3.5.32(typescript@6.0.3))
-      vue-tsc:
-        specifier: 'catalog:'
-        version: 3.2.6(typescript@6.0.3)
-
-  packages/config:
-    devDependencies:
-      '@eslint/eslintrc':
-        specifier: ^3.3.5
-        version: 3.3.5
-      '@eslint/js':
-        specifier: ^10.0.1
-        version: 10.0.1(eslint@10.2.0(jiti@2.6.1))
-      '@ianvs/prettier-plugin-sort-imports':
-        specifier: ^4.7.1
-        version: 4.7.1(@vue/compiler-sfc@3.5.32)(prettier@3.8.3)
-      '@types/node':
-        specifier: 'catalog:'
-        version: 25.6.0
       '@vitest/eslint-plugin':
         specifier: ^1.6.16
         version: 1.6.16(@typescript-eslint/eslint-plugin@8.58.2(@typescript-eslint/parser@8.58.2(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3))(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3))(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)(vitest@4.1.4)
       '@vue/eslint-config-typescript':
         specifier: ^14.7.0
         version: 14.7.0(eslint-plugin-vue@10.8.0(@typescript-eslint/parser@8.58.2(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3))(eslint@10.2.0(jiti@2.6.1))(vue-eslint-parser@10.4.0(eslint@10.2.0(jiti@2.6.1))))(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)
+      '@vue/test-utils':
+        specifier: 'catalog:'
+        version: 2.4.6
+      '@vue/tsconfig':
+        specifier: 'catalog:'
+        version: 0.9.1(typescript@6.0.3)(vue@3.5.32(typescript@6.0.3))
       eslint:
         specifier: ^10.2.0
         version: 10.2.0(jiti@2.6.1)
@@ -198,73 +171,30 @@ importers:
       globals:
         specifier: ^17.5.0
         version: 17.5.0
+      jsdom:
+        specifier: 'catalog:'
+        version: 29.0.2
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
       prettier-plugin-tailwindcss:
         specifier: ^0.7.2
         version: 0.7.2(@ianvs/prettier-plugin-sort-imports@4.7.1(@vue/compiler-sfc@3.5.32)(prettier@3.8.3))(prettier@3.8.3)
-      typescript:
-        specifier: 'catalog:'
-        version: 6.0.3
-      typescript-eslint:
-        specifier: ^8.58.2
-        version: 8.58.2(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)
-
-  packages/ui:
-    dependencies:
-      '@primevue/icons':
-        specifier: ^4.5.5
-        version: 4.5.5(vue@3.5.32(typescript@6.0.3))
-      primeicons:
-        specifier: ^7.0.0
-        version: 7.0.0
-      primevue:
-        specifier: ^4.5.5
-        version: 4.5.5(vue@3.5.32(typescript@6.0.3))
-      tailwind-merge:
-        specifier: ^3.5.0
-        version: 3.5.0
-      tailwindcss-primeui:
-        specifier: ^0.6.1
-        version: 0.6.1(tailwindcss@4.2.2)
-      vue:
-        specifier: 'catalog:'
-        version: 3.5.32(typescript@6.0.3)
-    devDependencies:
-      '@cq/config':
-        specifier: workspace:*
-        version: link:../config
-      '@tailwindcss/vite':
-        specifier: 'catalog:'
-        version: 4.2.2(vite@8.0.8(@types/node@25.6.0)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.3))
-      '@types/jsdom':
-        specifier: 'catalog:'
-        version: 28.0.1
-      '@types/node':
-        specifier: 'catalog:'
-        version: 25.6.0
-      '@vitejs/plugin-vue':
-        specifier: 'catalog:'
-        version: 6.0.6(vite@8.0.8(@types/node@25.6.0)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.3))(vue@3.5.32(typescript@6.0.3))
-      '@vue/test-utils':
-        specifier: 'catalog:'
-        version: 2.4.6
-      '@vue/tsconfig':
-        specifier: 'catalog:'
-        version: 0.9.1(typescript@6.0.3)(vue@3.5.32(typescript@6.0.3))
-      jsdom:
-        specifier: 'catalog:'
-        version: 29.0.2
       tailwindcss:
         specifier: 'catalog:'
         version: 4.2.2
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
+      typescript-eslint:
+        specifier: ^8.58.2
+        version: 8.58.2(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)
       vite:
         specifier: 'catalog:'
         version: 8.0.8(@types/node@25.6.0)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.3)
+      vite-plugin-vue-devtools:
+        specifier: ^8.1.1
+        version: 8.1.1(@nuxt/kit@3.17.5(magicast@0.5.2))(vite@8.0.8(@types/node@25.6.0)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.3))(vue@3.5.32(typescript@6.0.3))
       vue-tsc:
         specifier: 'catalog:'
         version: 3.2.6(typescript@6.0.3)
