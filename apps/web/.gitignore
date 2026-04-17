@@ -38,8 +38,8 @@ __screenshots__/
 # Vite
 *.timestamp-*-*.mjs
 
-# Sentry Config File
-.env.sentry-build-plugin
-
-# Env file
+# Env
 .env
+.env.*
+!.env.example
+!.env.test
