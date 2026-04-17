@@ -1,6 +1,5 @@
 import '@cq/ui/primeicons'
 
-import * as Sentry from '@sentry/vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'
@@ -8,16 +7,9 @@ import { createApp } from 'vue'
 import { ConfirmationService, PrimeVue, ToastService, Tooltip } from '@cq/ui'
 
 import App from '@/App.vue'
-import { env } from '@/config'
 import router from '@/router'
 
 const app = createApp(App)
-
-// Initialize sentry as early as possible.
-Sentry.init({
-  app,
-  dsn: env.SENTRY_DSN,
-})
 
 // PrimeVue
 app.use(PrimeVue, { unstyled: true })

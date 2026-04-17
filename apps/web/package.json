@@ -18,7 +18,6 @@
     "@cq/services": "workspace:*",
     "@cq/sources": "workspace:*",
     "@cq/ui": "workspace:*",
-    "@sentry/vue": "^10.49.0",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
     "vue": "catalog:",
