@@ -13,7 +13,7 @@
 
 Clip Queue integrates into a users chat and queues clips submitted in chat by their viewers. Clips can be easily viewed through the web interface.
 
-# Features
+## Features
 
 - Automatically connect to users chat to detect clips submitted by viewers.
 - Duplicate clip prevention.
@@ -29,17 +29,17 @@ Clip Queue integrates into a users chat and queues clips submitted in chat by th
 - UI customization to personalize your experience.
 - Multilingual support.
 
-# Developer Guide
+## Developer Guide
 
 Please refer to the [contributing guide](CONTRIBUTING.md) for how to install the project for development purposes.
 
-## Monorepo structure
+### Monorepo structure
 
-### Apps
+#### Apps
 
 - `web`: A web application. Developed with [Vue.js](https://vuejs.org/).
 
-### Packages
+#### Packages
 
 - `config`: Common configurations shared between other apps and packages in the monorepo.
 - `player`: A clip player used for displaying a variety of clip types. Developed with [Video JS](https://videojs.com/) and [Vue.js](https://vuejs.org/).
