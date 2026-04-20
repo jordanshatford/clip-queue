@@ -85,6 +85,7 @@ export const useUser = defineStore(
     }
 
     async function logout(): Promise<void> {
+      await sources.disconnect()
       const originalCtx = ctx.value
       ctx.value = {
         ...originalCtx,
@@ -92,7 +93,6 @@ export const useUser = defineStore(
         username: undefined,
       }
       isLoggedIn.value = false
-      await sources.disconnect()
       if (originalCtx.id && originalCtx.token) {
         try {
           await twitch.logout(originalCtx)
