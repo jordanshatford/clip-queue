@@ -1,5 +1,21 @@
 # clip-queue
 
+## 1.14.0
+
+### Minor Changes
+
+- feat: use new @tmi.js/chat instead of outdated tmi.js ([`971da8b`](https://github.com/jordanshatford/clip-queue/commit/971da8b603111b35b6a9b9838e1dc779f009ee0e))
+
+- feat: add reconnect function to base clip source ([`971da8b`](https://github.com/jordanshatford/clip-queue/commit/971da8b603111b35b6a9b9838e1dc779f009ee0e))
+
+### Patch Changes
+
+- fix: properly disconnect sources before logging out ([`d448203`](https://github.com/jordanshatford/clip-queue/commit/d4482038c79d0e0c59b408259d1451db958aaa5e))
+
+- fix: rename user-timeout event to moderation event ([`971da8b`](https://github.com/jordanshatford/clip-queue/commit/971da8b603111b35b6a9b9838e1dc779f009ee0e))
+
+- fix: simply base clip source to no longer have join and leave ([`971da8b`](https://github.com/jordanshatford/clip-queue/commit/971da8b603111b35b6a9b9838e1dc779f009ee0e))
+
 ## 1.38.0
 
 ### Minor Changes
