@@ -37,14 +37,13 @@ export async function logout(ctx: TwitchUserCtx): Promise<void> {
  * @param scopes - The scopes to request.
  */
 export function redirect(ctx: Partial<TwitchUserCtx>, redirectUri: string, scopes: string[]): void {
-  const loginUrl = encodeURI(
-    `${BASE_URL}/authorize?client_id=${ctx.id}` +
-      `&redirect_uri=${redirectUri}` +
-      `&response_type=token id_token` +
-      `&scope=${scopes.join(' ')}` +
-      `&claims={"id_token":{"preferred_username":null}}`,
-  )
-  window.location.assign(loginUrl)
+  const loginURL = new URL(`${BASE_URL}/authorize`)
+  loginURL.searchParams.set('client_id', ctx.id ?? '')
+  loginURL.searchParams.set('redirect_uri', redirectUri)
+  loginURL.searchParams.set('response_type', 'token id_token')
+  loginURL.searchParams.set('scope', scopes.join(' '))
+  loginURL.searchParams.set('claims', JSON.stringify({ id_token: { preferred_username: null } }))
+  window.location.assign(loginURL)
 }
 
 /**
