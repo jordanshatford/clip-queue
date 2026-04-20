@@ -1,22 +1,8 @@
-import type { ChatUserstate } from 'tmi.js'
-
 import { describe, expect, it } from 'vitest'
 
-import { getClipIdFromUrl, isModerator, toURLParams } from '../utils'
+import { getClipIdFromUrl, toURLParams } from '../utils'
 
 describe('utils.ts', () => {
-  it.each([
-    [{ mod: true } as ChatUserstate, true],
-    [{ mod: false } as ChatUserstate, false],
-    [{ mod: false, badges: { broadcaster: '1' } } as ChatUserstate, true],
-    [{ mod: false, badges: { broadcaster: '0' } } as ChatUserstate, false],
-  ])(
-    'can detect if a user is a moderator: (user: %o) -> %o',
-    (user: ChatUserstate, expected: boolean) => {
-      expect(isModerator(user)).toEqual(expected)
-    },
-  )
-
   it.each([
     [
       'https://clips.twitch.tv/TangibleFreezingPheasantPartyTime-jBBRudZqr_7KehsW',

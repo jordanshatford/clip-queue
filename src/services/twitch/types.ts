@@ -1,5 +1,3 @@
-export type { ChatUserstate } from 'tmi.js'
-
 /**
  * Twitch user context.
  */

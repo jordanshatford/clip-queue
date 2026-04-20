@@ -118,10 +118,10 @@ type ClipSourceEventsMap = {
    */
   'message-deleted': (event: ClipSourceEvent<ClipSourceMessage>) => Promise<void> | void
   /**
-   * Event emitted when a user is timed out or banned.
+   * Event emitted when a user is handled via moderation (timeout or ban).
    * @param event.data - The moderation event.
    */
-  'user-timeout': (event: ClipSourceEvent<ClipSourceModeration>) => Promise<void> | void
+  moderation: (event: ClipSourceEvent<ClipSourceModeration>) => Promise<void> | void
   /**
    * Event emitted when the status of the source changes.
    * @param event.data - The new status of the source.
@@ -155,27 +155,21 @@ export type IBaseClipSource = {
    */
   status: ClipSourceStatus
   /**
-   * Connect to the source.
+   * Connect to a source with the provided channel.
+   * @param channel - The channel to join.
    * @returns A promise that resolves when the source is connected.
    */
-  connect: () => Promise<void>
+  connect: (channel: string) => Promise<void>
   /**
    * Disconnect from the source.
    * @returns A promise that resolves when the source is disconnected.
    */
   disconnect: () => Promise<void>
   /**
-   * Join a channel on the source.
-   * @param channel - The channel to join.
-   * @returns A promise that resolves when the channel is joined.
+   * Reconnect the source.
+   * @returns A promise that resolves when the source is reconnected.
    */
-  join: (channel: string) => Promise<void>
-  /**
-   * Leave a channel on the source.
-   * @param channel - The channel to leave.
-   * @returns A promise that resolves when the channel is left.
-   */
-  leave: (channel: string) => Promise<void>
+  reconnect: () => Promise<void>
 } & Pick<EventEmitter<ClipSourceEventsMap>, 'on'>
 
 export abstract class BaseClipSource
@@ -188,10 +182,9 @@ export abstract class BaseClipSource
   public isExperimental = false
   public status = ClipSourceStatus.UNKNOWN
 
-  public abstract connect(): Promise<void>
+  public abstract connect(channel: string): Promise<void>
   public abstract disconnect(): Promise<void>
-  public abstract join(channel: string): Promise<void>
-  public abstract leave(channel: string): Promise<void>
+  public abstract reconnect(): Promise<void>
 
   private timestamp() {
     return new Date().toISOString()
@@ -280,7 +273,7 @@ export abstract class BaseClipSource
 
   protected handleModeration(moderation: ClipSourceModeration) {
     const timestamp = this.timestamp()
-    this.emit('user-timeout', {
+    this.emit('moderation', {
       timestamp,
       source: this.name,
       data: moderation,

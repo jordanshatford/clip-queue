@@ -1,19 +1,6 @@
-import type { ChatUserstate } from 'tmi.js'
-
 const CLIP_HOSTNAMES = ['clips.twitch.tv']
 const TWITCH_HOSTNAME = 'twitch.tv'
 const CLIP_SUFFIX = '/clip/'
-
-/**
- * Check if a user is a moderator.
- * @param userstate - The userstate to check.
- * @returns True if the user is a moderator.
- */
-export function isModerator(userstate: ChatUserstate): boolean {
-  const isMod = userstate.mod
-  const isBroadcaster = userstate.badges?.['broadcaster'] === '1'
-  return isMod || isBroadcaster
-}
 
 /**
  * Check if a URL is a Twitch clip URL.
@@ -68,6 +55,5 @@ export function toURLParams(key: string, values: string[]): URLSearchParams {
 }
 
 export default {
-  isModerator,
   getClipIdFromUrl,
 }

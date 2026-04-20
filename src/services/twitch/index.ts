@@ -4,8 +4,6 @@ import utils from './utils'
 
 export * from './types'
 
-export { default as TwitchChat } from './chat'
-
 /**
  * Twitch logo SVG as a string.
  */

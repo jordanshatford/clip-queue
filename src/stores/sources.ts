@@ -92,7 +92,7 @@ export const useSources = defineStore('sources', () => {
       }
     }
   })
-  source.value.on('user-timeout', (event) => {
+  source.value.on('moderation', (event) => {
     const username = event.data.username
     if (!settings.queue.hasAutoModerationEnabled) {
       return
@@ -107,23 +107,18 @@ export const useSources = defineStore('sources', () => {
     const username = ctx().username
     logger.debug(`[Sources]: Connecting to source for user: ${username}.`)
     if (username) {
-      await source.value.connect()
-      await source.value.join(username)
+      await source.value.connect(username)
     }
   }
 
   async function disconnect(): Promise<void> {
     const username = ctx().username
     logger.debug(`[Sources]: Disconnecting from source for user: ${username}.`)
-    if (username) {
-      await source.value.leave(username)
-    }
-    await source.value?.disconnect()
+    await source.value.disconnect()
   }
 
   async function reconnect(): Promise<void> {
-    await disconnect()
-    await connect()
+    await source.value.reconnect()
   }
 
   return { logo, status, connect, disconnect, reconnect }

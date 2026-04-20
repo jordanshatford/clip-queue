@@ -1,6 +1,7 @@
 import { defineConfig } from 'oxfmt'
 
 export default defineConfig({
+  ignorePatterns: ['**/.changeset/**', '**/dist/**', '**/node_modules/**'],
   semi: false,
   singleQuote: true,
   sortImports: {

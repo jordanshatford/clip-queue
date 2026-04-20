@@ -1,4 +1,6 @@
-import twitch, { TwitchChat } from '@/services/twitch'
+import { Client } from '@tmi.js/chat'
+
+import twitch from '@/services/twitch'
 
 import { BaseClipSource, ClipSource, ClipSourceStatus } from './types'
 
@@ -9,54 +11,65 @@ export class TwitchChatSource extends BaseClipSource {
   public name = ClipSource.TWITCH
   public svg = twitch.logo
 
-  private chat = new TwitchChat()
-
-  /**
-   * Convert channel string to channel name.
-   * @param channel - The channel string.
-   * @returns The channel name.
-   */
-  private toChannel(channel: string) {
-    // Remove initial # at start of the channel string.
-    return channel.substring(1)
-  }
+  private channel?: string
+  private chat = new Client({ token: undefined, channels: [] })
 
   public constructor() {
     super()
-    this.chat.on('connected', () => this.handleConnected())
-    this.chat.on('join', (channel) => this.handleJoin(this.toChannel(channel)))
-    this.chat.on('message', (channel, userstate, message, self) => {
-      if (self || !userstate.username) {
+    this.chat.on('connect', async () => {
+      this.handleConnected()
+      if (this.channel) {
+        try {
+          await this.chat.join(this.channel)
+        } catch (e) {
+          this.handleError(e)
+        }
+      }
+    })
+    this.chat.on('join', (event) => this.handleJoin(event.channel.login))
+    this.chat.on('message', (event) => {
+      if (event.user.isBot) {
         return
       }
       this.handleMessage({
-        channel: this.toChannel(channel),
-        username: userstate.username,
-        text: message,
-        isAllowedCommands: twitch.isModerator(userstate),
+        channel: event.channel.login,
+        username: event.user.login,
+        text: event.message.text,
+        isAllowedCommands: event.user.isMod || event.user.isBroadcaster,
       })
     })
-    this.chat.on('messagedeleted', (channel, username, message) =>
-      this.handleMessageDeleted({
-        channel: this.toChannel(channel),
-        username,
-        text: message,
-      }),
-    )
-    this.chat.on('timeout', (channel, username) =>
-      this.handleModeration({ channel: this.toChannel(channel), username }),
-    )
-    this.chat.on('ban', (channel, username) =>
-      this.handleModeration({ channel: this.toChannel(channel), username }),
-    )
-    this.chat.on('part', (channel) => this.handleLeave(this.toChannel(channel)))
-    this.chat.on('disconnected', (reason) => this.handleDisconnected(reason))
+    this.chat.on('moderation', (event) => {
+      switch (event.type) {
+        case 'deleteMessage': {
+          this.handleMessageDeleted({
+            channel: event.channel.login,
+            username: event.user.login,
+            text: event.message.text,
+          })
+          break
+        }
+        case 'ban':
+        case 'timeout': {
+          this.handleModeration({
+            channel: event.channel.login,
+            username: event.user.login,
+          })
+          break
+        }
+        default: {
+          break
+        }
+      }
+    })
+    this.chat.on('part', (event) => this.handleLeave(event.channel.login))
+    this.chat.on('close', (event) => this.handleDisconnected(event.reason))
   }
 
-  public async connect() {
+  public async connect(channel: string) {
     this.handleStatusUpdate(ClipSourceStatus.UNKNOWN)
     try {
-      await this.chat.connect()
+      this.channel = channel
+      this.chat.connect()
     } catch (e) {
       this.handleError(e)
     }
@@ -68,23 +81,19 @@ export class TwitchChatSource extends BaseClipSource {
     }
     this.handleStatusUpdate(ClipSourceStatus.UNKNOWN)
     try {
-      await this.chat.disconnect()
+      if (this.channel) {
+        await this.chat.part(this.channel)
+      }
+      this.chat.close()
     } catch (e) {
       this.handleError(e)
     }
   }
 
-  public async join(channel: string) {
+  public async reconnect() {
+    this.handleStatusUpdate(ClipSourceStatus.UNKNOWN)
     try {
-      await this.chat.join(channel)
-    } catch (e) {
-      this.handleError(e)
-    }
-  }
-
-  public async leave(channel: string) {
-    try {
-      await this.chat.part(channel)
+      await this.chat.reconnect()
     } catch (e) {
       this.handleError(e)
     }
