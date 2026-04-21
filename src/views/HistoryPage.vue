@@ -37,12 +37,10 @@
     <template #header>
       <div class="mb-2 flex items-center justify-between">
         <span class="text-xl">{{ m.history() }}</span>
-        <div class="relative">
-          <i
-            class="pi pi-search absolute start-3 top-1/2 z-1 -mt-2 leading-none text-surface-400"
-          />
-          <InputText v-model="filters['global'].value" :placeholder="m.search()" pt:root="ps-10" />
-        </div>
+        <IconField>
+          <InputIcon class="pi pi-search" />
+          <InputText size="small" v-model="filters['global'].value" :placeholder="m.search()" />
+        </IconField>
       </div>
     </template>
     <Column selection-mode="multiple" header-style="width: 3rem"></Column>
@@ -105,6 +103,8 @@
 import Button from 'primevue/button'
 import Column from 'primevue/column'
 import DataTable from 'primevue/datatable'
+import IconField from 'primevue/iconfield'
+import InputIcon from 'primevue/inputicon'
 import InputText from 'primevue/inputtext'
 import { useConfirm } from 'primevue/useconfirm'
 import { computed, ref } from 'vue'
