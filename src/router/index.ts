@@ -7,16 +7,6 @@ import { config } from '@/config'
 import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useUser } from '@/stores/user'
-import HistoryPage from '@/views/HistoryPage.vue'
-import HomePage from '@/views/HomePage.vue'
-import LogsPage from '@/views/LogsPage.vue'
-import QueuePage from '@/views/QueuePage.vue'
-import ChatSettings from '@/views/settings/ChatSettings.vue'
-import LoggerSettings from '@/views/settings/LoggerSettings.vue'
-import OtherSettings from '@/views/settings/OtherSettings.vue'
-import PreferenceSettings from '@/views/settings/PreferenceSettings.vue'
-import QueueSettings from '@/views/settings/QueueSettings.vue'
-
 declare module 'vue-router' {
   interface RouteMeta {
     icon: string
@@ -41,7 +31,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/queue',
     name: RouteNameConstants.QUEUE,
-    component: QueuePage,
+    component: () => import('@/views/QueuePage.vue'),
     meta: {
       icon: 'pi pi-list',
       requiresAuth: true,
@@ -50,7 +40,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/history',
     name: RouteNameConstants.HISTORY,
-    component: HistoryPage,
+    component: () => import('@/views/HistoryPage.vue'),
     meta: {
       icon: 'pi pi-history',
       requiresAuth: true,
@@ -69,7 +59,7 @@ export const routes: RouteRecordRaw[] = [
       {
         path: 'chat',
         name: RouteNameConstants.SETTINGS_CHAT,
-        component: ChatSettings,
+        component: () => import('@/views/settings/ChatSettings.vue'),
         meta: {
           icon: 'pi pi-comments',
           requiresAuth: true,
@@ -78,7 +68,7 @@ export const routes: RouteRecordRaw[] = [
       {
         path: 'queue',
         name: RouteNameConstants.SETTINGS_QUEUE,
-        component: QueueSettings,
+        component: () => import('@/views/settings/QueueSettings.vue'),
         meta: {
           icon: 'pi pi-list',
           requiresAuth: true,
@@ -87,7 +77,7 @@ export const routes: RouteRecordRaw[] = [
       {
         path: 'preferences',
         name: RouteNameConstants.SETTINGS_PREFERENCES,
-        component: PreferenceSettings,
+        component: () => import('@/views/settings/PreferenceSettings.vue') ,
         meta: {
           icon: 'pi pi-palette',
           requiresAuth: true,
@@ -96,7 +86,7 @@ export const routes: RouteRecordRaw[] = [
       {
         path: 'logs',
         name: RouteNameConstants.SETTINGS_LOGS,
-        component: LoggerSettings,
+        component: () => import('@/views/settings/LoggerSettings.vue'),
         meta: {
           icon: 'pi pi-book',
           requiresAuth: true,
@@ -105,7 +95,7 @@ export const routes: RouteRecordRaw[] = [
       {
         path: 'other',
         name: RouteNameConstants.SETTINGS_OTHER,
-        component: OtherSettings,
+        component: () => import('@/views/settings/OtherSettings.vue'),
         meta: {
           icon: 'pi pi-cog',
           requiresAuth: true,
@@ -121,12 +111,12 @@ const router = createRouter({
     {
       path: '/',
       name: RouteNameConstants.HOME,
-      component: HomePage,
+      component: () => import('@/views/HomePage.vue'),
     },
     {
       path: '/logs',
       name: RouteNameConstants.LOGS,
-      component: LogsPage,
+      component: () => import('@/views/LogsPage.vue'),
       meta: {
         icon: 'pi pi-book',
         requiresAuth: true,
