@@ -77,7 +77,7 @@ export const routes: RouteRecordRaw[] = [
       {
         path: 'preferences',
         name: RouteNameConstants.SETTINGS_PREFERENCES,
-        component: () => import('@/views/settings/PreferenceSettings.vue') ,
+        component: () => import('@/views/settings/PreferenceSettings.vue'),
         meta: {
           icon: 'pi pi-palette',
           requiresAuth: true,

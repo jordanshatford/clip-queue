@@ -66,19 +66,21 @@
             }}</Message>
           </div>
           <div class="mt-3">
-            <SecondaryButton
+            <Button
               :label="m.save()"
               size="small"
               class="mr-2"
               type="submit"
+              severity="secondary"
               :disabled="!preferences.isModifiedFrom(formPreferences)"
-            ></SecondaryButton>
-            <DangerButton
+            ></Button>
+            <Button
               type="reset"
               :label="m.cancel()"
               size="small"
+              severity="danger"
               :disabled="!preferences.isModifiedFrom(formPreferences)"
-            ></DangerButton>
+            ></Button>
           </div>
         </form>
       </template>
@@ -87,6 +89,11 @@
 </template>
 
 <script setup lang="ts">
+import Button from 'primevue/button'
+import Card from 'primevue/card'
+import Message from 'primevue/message'
+import Select from 'primevue/select'
+import { useToast } from 'primevue/usetoast'
 import { ref, toRaw, useTemplateRef, watch } from 'vue'
 
 import type { ColorOption } from '@/components/ui'
@@ -94,16 +101,7 @@ import type { Locale } from '@/paraglide/runtime'
 import type { Theme } from '@/stores/preferences'
 
 import ColorName from '@/components/ColorName.vue'
-import {
-  Card,
-  colors,
-  DangerButton,
-  Message,
-  SecondaryButton,
-  Select,
-  surfaces,
-  useToast,
-} from '@/components/ui'
+import { colors, surfaces } from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { locales } from '@/paraglide/runtime'
 import { availableThemes, usePreferences } from '@/stores/preferences'

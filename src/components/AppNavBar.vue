@@ -32,9 +32,10 @@
 </template>
 
 <script setup lang="ts">
+import Button from 'primevue/button'
 import { useRouter } from 'vue-router'
 
-import { Button, ThemeToggle } from '@/components/ui'
+import { ThemeToggle } from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { allowedRoutes, RouteNameConstants, routeTranslations } from '@/router'
 import { usePreferences } from '@/stores/preferences'

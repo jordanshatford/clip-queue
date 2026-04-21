@@ -23,22 +23,24 @@
           </a>
         </div>
         <div class="flex gap-2">
-          <SecondaryButton
+          <Button
             icon="pi pi-backward"
             :label="m.previous()"
             size="small"
+            severity="secondary"
             :disabled="previousDisabled"
             @click="emit('previous')"
           >
-          </SecondaryButton>
-          <SecondaryButton
+          </Button>
+          <Button
             icon="pi pi-forward"
             icon-pos="right"
             :label="m.next()"
             size="small"
+            severity="secondary"
             @click="emit('next')"
           >
-          </SecondaryButton>
+          </Button>
         </div>
       </div>
       <div class="flex flex-col gap-1 text-sm font-normal text-surface-400">
@@ -57,13 +59,13 @@
 </template>
 
 <script setup lang="ts">
+import Button from 'primevue/button'
 import { computed } from 'vue'
 
 import type { Clip, PlayerFormat } from '@/providers'
 
 import { Player } from '@/components/player'
 import ProviderName from '@/components/ProviderName.vue'
-import { SecondaryButton } from '@/components/ui'
 import { useKeydown } from '@/composables/keydown'
 import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'

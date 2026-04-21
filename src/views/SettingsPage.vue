@@ -21,10 +21,12 @@
 </template>
 
 <script setup lang="ts">
+import Tab from 'primevue/tab'
+import TabList from 'primevue/tablist'
+import Tabs from 'primevue/tabs'
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-import { Tab, TabList, Tabs } from '@/components/ui'
 import { useKeydown } from '@/composables/keydown'
 import { allowedRoutes, RouteNameConstants, routeTranslations } from '@/router'
 

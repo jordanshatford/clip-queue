@@ -4,15 +4,16 @@
       <template #content>
         <div class="m-0 flex flex-col gap-2 p-0 text-left">
           <p>{{ m.logs_colon() }}</p>
-          <SecondaryButton
+          <Button
             :label="m.view()"
             icon="pi pi-book"
             size="small"
             fluid
+            severity="secondary"
             as="router-link"
             :to="{ name: RouteNameConstants.LOGS }"
           >
-          </SecondaryButton>
+          </Button>
         </div>
       </template>
     </Card>
@@ -49,19 +50,21 @@
             }}</Message>
           </div>
           <div class="mt-3">
-            <SecondaryButton
+            <Button
               :label="m.save()"
               size="small"
               class="mr-2"
               type="submit"
+              severity="secondary"
               :disabled="!settings.isLoggerSettingsModified(formSettings)"
-            ></SecondaryButton>
-            <DangerButton
+            ></Button>
+            <Button
               type="reset"
               :label="m.cancel()"
               size="small"
+              severity="danger"
               :disabled="!settings.isLoggerSettingsModified(formSettings)"
-            ></DangerButton>
+            ></Button>
           </div>
         </form>
       </template>
@@ -70,19 +73,16 @@
 </template>
 
 <script setup lang="ts">
+import Button from 'primevue/button'
+import Card from 'primevue/card'
+import InputNumber from 'primevue/inputnumber'
+import Message from 'primevue/message'
+import Select from 'primevue/select'
+import { useToast } from 'primevue/usetoast'
 import { ref, toRaw, useTemplateRef } from 'vue'
 
 import type { LogLevel } from '@/stores/logger'
 
-import {
-  Card,
-  DangerButton,
-  InputNumber,
-  Message,
-  SecondaryButton,
-  Select,
-  useToast,
-} from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { RouteNameConstants } from '@/router'
 import { availableLogLevels, logLevelTranslations } from '@/stores/logger'

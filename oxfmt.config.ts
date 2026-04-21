@@ -21,7 +21,7 @@ export default defineConfig({
     sortScripts: false,
   },
   sortTailwindcss: {
-    stylesheet: './src/components/ui/primevue/tailwind.css',
+    stylesheet: './src/app.css',
     functions: ['clsx', 'cn'],
     preserveWhitespace: true,
   },

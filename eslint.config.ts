@@ -17,13 +17,7 @@ export default defineConfigWithVueTs(
     name: 'app/files-to-lint',
     files: ['**/*.{vue,ts,mts,tsx}'],
   },
-  globalIgnores([
-    '**/dist/**',
-    '**/dist-ssr/**',
-    '**/coverage/**',
-    './src/components/ui/volt/**',
-    './src/paraglide/**',
-  ]),
+  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**', './src/paraglide/**']),
   ...pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
   {

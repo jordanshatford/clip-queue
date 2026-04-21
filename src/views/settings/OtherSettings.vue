@@ -1,14 +1,15 @@
 <template>
   <Card class="mx-auto mb-2 max-w-xl text-left">
     <template #content>
-      <DangerButton
+      <Button
         :label="m.reset_settings()"
         class="mb-2"
         fluid
         size="small"
+        severity="danger"
         :disabled="!(settings.isModified || preferences.isModified)"
         @click="resetSettingsToDefault()"
-      ></DangerButton>
+      ></Button>
       <Message size="small" severity="secondary" variant="simple">{{
         m.reset_settings_description()
       }}</Message>
@@ -16,14 +17,15 @@
   </Card>
   <Card class="mx-auto mb-2 max-w-xl text-left">
     <template #content>
-      <DangerButton
+      <Button
         :label="m.purge_history()"
         class="mb-2"
         fluid
         size="small"
+        severity="danger"
         :disabled="queue.history.empty()"
         @click="purgeHistory()"
-      ></DangerButton>
+      ></Button>
       <Message size="small" severity="secondary" variant="simple">{{
         m.purge_history_description()
       }}</Message>
@@ -31,14 +33,15 @@
   </Card>
   <Card class="mx-auto mb-2 max-w-xl text-left">
     <template #content>
-      <DangerButton
+      <Button
         :label="m.purge_cache()"
         class="mb-2"
         fluid
         size="small"
+        severity="danger"
         :disabled="!providers.hasCachedData"
         @click="purgeCache()"
-      ></DangerButton>
+      ></Button>
       <Message size="small" severity="secondary" variant="simple">{{
         m.purge_cache_description()
       }}</Message>
@@ -54,7 +57,12 @@
 </template>
 
 <script setup lang="ts">
-import { Card, DangerButton, Message, useConfirm, useToast } from '@/components/ui'
+import Button from 'primevue/button'
+import Card from 'primevue/card'
+import Message from 'primevue/message'
+import { useConfirm } from 'primevue/useconfirm'
+import { useToast } from 'primevue/usetoast'
+
 import { m } from '@/paraglide/messages'
 import { usePreferences } from '@/stores/preferences'
 import { useProviders } from '@/stores/providers'
@@ -74,11 +82,14 @@ function resetSettingsToDefault() {
   confirm.require({
     header: m.reset_settings(),
     message: m.reset_settings_confirm(),
+    icon: 'pi pi-exclamation-triangle',
     acceptProps: {
       label: m.confirm(),
+      severity: 'danger',
     },
     rejectProps: {
       label: m.cancel(),
+      severity: 'secondary',
     },
     accept: () => {
       settings.$reset()
@@ -98,11 +109,14 @@ function purgeHistory() {
   confirm.require({
     header: m.purge_history(),
     message: m.purge_history_confirm(),
+    icon: 'pi pi-exclamation-triangle',
     acceptProps: {
       label: m.confirm(),
+      severity: 'danger',
     },
     rejectProps: {
       label: m.cancel(),
+      severity: 'secondary',
     },
     accept: () => {
       queue.purge()
@@ -121,11 +135,14 @@ function purgeCache() {
   confirm.require({
     header: m.purge_cache(),
     message: m.purge_cache_confirm(),
+    icon: 'pi pi-exclamation-triangle',
     acceptProps: {
       label: m.confirm(),
+      severity: 'danger',
     },
     rejectProps: {
       label: m.cancel(),
+      severity: 'secondary',
     },
     accept: () => {
       providers.purge()

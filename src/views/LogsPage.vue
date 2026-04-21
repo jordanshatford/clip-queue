@@ -16,20 +16,21 @@
         <span class="text-xl">{{ m.logs() }}</span>
         <div class="text-end">
           <div class="flex flex-row-reverse gap-2">
-            <DangerButton
+            <Button
               :label="m.clear()"
               :disabled="logs.length === 0"
               severity="danger"
               size="small"
               @click="deleteAllLogs()"
-            ></DangerButton>
-            <SecondaryButton
+            ></Button>
+            <Button
               icon="pi pi-download"
               :label="m.download()"
               :disabled="logs.length === 0"
               size="small"
+              severity="secondary"
               @click="exportCSV()"
-            />
+            ></Button>
           </div>
         </div>
       </div>
@@ -51,11 +52,15 @@
 </template>
 
 <script setup lang="ts">
+import Button from 'primevue/button'
+import Column from 'primevue/column'
+import DataTable from 'primevue/datatable'
+import Tag from 'primevue/tag'
+import { useConfirm } from 'primevue/useconfirm'
 import { computed, useTemplateRef } from 'vue'
 
 import type { Log } from '@/stores/logger'
 
-import { Column, DangerButton, DataTable, SecondaryButton, Tag, useConfirm } from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { datetime } from '@/paraglide/registry'
 import { logLevelIcons, logLevelSeverities, logLevelTranslations, useLogger } from '@/stores/logger'
@@ -90,11 +95,14 @@ function deleteAllLogs() {
   confirm.require({
     header: m.clear_logs(),
     message: m.clear_logs_confirm({ length: logs.value.length }),
-    rejectProps: {
-      label: m.cancel(),
-    },
+    icon: 'pi pi-exclamation-triangle',
     acceptProps: {
       label: m.confirm(),
+      severity: 'danger',
+    },
+    rejectProps: {
+      label: m.cancel(),
+      severity: 'secondary',
     },
     accept: () => {
       logger.debug('[Logs]: deleting all logs.')

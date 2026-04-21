@@ -1,21 +1,21 @@
 <template>
   <div class="flex flex-row-reverse gap-2">
-    <DangerButton
+    <Button
       icon="pi pi-trash"
       :label="m.delete_label()"
       :disabled="!selection.length"
       severity="danger"
       size="small"
       @click="deleteClips()"
-    ></DangerButton>
-    <SecondaryButton
+    ></Button>
+    <Button
       icon="pi pi-plus"
       :label="m.queue()"
       :disabled="isQueueClipsDisabled"
-      severity="info"
+      severity="secondary"
       size="small"
       @click="queueClips()"
-    ></SecondaryButton>
+    ></Button>
   </div>
   <DataTable
     v-model:selection="selection"
@@ -102,19 +102,16 @@
 </template>
 
 <script setup lang="ts">
+import Button from 'primevue/button'
+import Column from 'primevue/column'
+import DataTable from 'primevue/datatable'
+import InputText from 'primevue/inputtext'
+import { useConfirm } from 'primevue/useconfirm'
 import { computed, ref } from 'vue'
 
 import type { Clip } from '@/providers'
 
 import ProviderName from '@/components/ProviderName.vue'
-import {
-  Column,
-  DangerButton,
-  DataTable,
-  InputText,
-  SecondaryButton,
-  useConfirm,
-} from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useQueue } from '@/stores/queue'
@@ -148,11 +145,14 @@ function deleteClips() {
   confirm.require({
     header: m.delete_history(),
     message: m.delete_history_confirm({ length: clips.length }),
-    rejectProps: {
-      label: m.cancel(),
-    },
+    icon: 'pi pi-exclamation-triangle',
     acceptProps: {
       label: m.confirm(),
+      severity: 'danger',
+    },
+    rejectProps: {
+      label: m.cancel(),
+      severity: 'secondary',
     },
     accept: () => {
       logger.debug(`[History]: deleting ${clips.length} clip(s).`)

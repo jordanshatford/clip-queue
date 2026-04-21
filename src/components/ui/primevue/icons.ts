@@ -1,1 +1,0 @@
-import 'primeicons/primeicons.css'

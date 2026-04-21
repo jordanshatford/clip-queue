@@ -51,19 +51,21 @@
           }}</Message>
         </div>
         <div class="mt-3">
-          <SecondaryButton
+          <Button
             :label="m.save()"
             class="mr-2"
             type="submit"
             size="small"
+            severity="secondary"
             :disabled="!settings.isQueueSettingsModified(formSettings)"
-          ></SecondaryButton>
-          <DangerButton
+          ></Button>
+          <Button
             :label="m.cancel()"
             type="reset"
             size="small"
+            severity="danger"
             :disabled="!settings.isQueueSettingsModified(formSettings)"
-          ></DangerButton>
+          ></Button>
         </div>
       </form>
     </template>
@@ -71,20 +73,17 @@
 </template>
 
 <script setup lang="ts">
+import Button from 'primevue/button'
+import Card from 'primevue/card'
+import Chip from 'primevue/chip'
+import InputNumber from 'primevue/inputnumber'
+import Message from 'primevue/message'
+import MultiSelect from 'primevue/multiselect'
+import ToggleSwitch from 'primevue/toggleswitch'
+import { useToast } from 'primevue/usetoast'
 import { ref, toRaw, useTemplateRef } from 'vue'
 
 import ProviderName from '@/components/ProviderName.vue'
-import {
-  Card,
-  Chip,
-  DangerButton,
-  InputNumber,
-  Message,
-  MultiSelect,
-  SecondaryButton,
-  ToggleSwitch,
-  useToast,
-} from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { ClipProvider } from '@/providers'
 import { usePreferences } from '@/stores/preferences'

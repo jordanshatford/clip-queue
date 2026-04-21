@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import Button from '../volt/Button.vue'
+import Button from 'primevue/button'
 
 export interface Props {
   isDarkMode?: boolean

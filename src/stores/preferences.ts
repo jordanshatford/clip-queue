@@ -126,16 +126,16 @@ export const usePreferences = defineStore(
       }
       if (value.theme !== old?.theme) {
         if (value.theme === 'dark') {
-          document?.querySelector('html')?.classList.add('app-dark')
+          document?.querySelector('html')?.classList.add('dark')
         } else {
-          document.querySelector('html')?.classList.remove('app-dark')
+          document.querySelector('html')?.classList.remove('dark')
         }
       }
     }
 
     function toggleTheme() {
       preferences.value.theme = preferences.value.theme === 'dark' ? 'light' : 'dark'
-      document.querySelector('html')?.classList.toggle('app-dark')
+      document.querySelector('html')?.classList.toggle('dark')
     }
 
     function $reset() {

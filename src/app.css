@@ -1,0 +1,6 @@
+@import 'primeicons/primeicons.css';
+
+@import 'tailwindcss';
+@import 'tailwindcss-primeui';
+
+@custom-variant dark (&:where(.dark, .dark *));

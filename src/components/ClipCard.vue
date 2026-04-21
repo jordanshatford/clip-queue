@@ -30,34 +30,36 @@
     </template>
     <template #footer>
       <div class="flex justify-between gap-2">
-        <SecondaryButton
+        <Button
           class="grow"
           icon="pi pi-play"
           :label="m.play()"
           size="small"
+          severity="secondary"
           @click="emit('play')"
         >
-        </SecondaryButton>
-        <DangerButton
+        </Button>
+        <Button
           class="grow"
           icon="pi pi-trash"
           :label="m.remove()"
           size="small"
+          severity="danger"
           @click="emit('remove')"
         >
-        </DangerButton>
+        </Button>
       </div>
     </template>
   </Card>
 </template>
 
 <script setup lang="ts">
+import Button from 'primevue/button'
+import Card from 'primevue/card'
 import { computed } from 'vue'
 
 import type { Clip } from '@/providers'
 
-import ProviderName from '@/components/ProviderName.vue'
-import { Card, DangerButton, SecondaryButton } from '@/components/ui'
 import { m } from '@/paraglide/messages'
 
 export interface Props {

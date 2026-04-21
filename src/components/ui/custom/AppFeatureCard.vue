@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import Card from '../volt/Card.vue'
+import Card from 'primevue/card'
 
 export interface Props {
   title: string

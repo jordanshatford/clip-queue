@@ -73,19 +73,21 @@
             }}</Message>
           </div>
           <div class="mt-3">
-            <SecondaryButton
+            <Button
               :label="m.save()"
               size="small"
               class="mr-2"
               type="submit"
+              severity="secondary"
               :disabled="!settings.isCommandsSettingsModified(formSettings)"
-            ></SecondaryButton>
-            <DangerButton
+            ></Button>
+            <Button
               type="reset"
               :label="m.cancel()"
               size="small"
+              severity="danger"
               :disabled="!settings.isCommandsSettingsModified(formSettings)"
-            ></DangerButton>
+            ></Button>
           </div>
         </form>
       </template>
@@ -94,18 +96,15 @@
 </template>
 
 <script setup lang="ts">
+import Button from 'primevue/button'
+import Card from 'primevue/card'
+import InputText from 'primevue/inputtext'
+import Message from 'primevue/message'
+import MultiSelect from 'primevue/multiselect'
+import { useToast } from 'primevue/usetoast'
 import { ref, toRaw, useTemplateRef } from 'vue'
 
 import SourceIndicator from '@/components/SourceIndicator.vue'
-import {
-  Card,
-  DangerButton,
-  InputText,
-  Message,
-  MultiSelect,
-  SecondaryButton,
-  useToast,
-} from '@/components/ui'
 import { m } from '@/paraglide/messages'
 import { useSettings } from '@/stores/settings'
 import { useSources } from '@/stores/sources'
