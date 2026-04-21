@@ -4,13 +4,11 @@
       <template #content>
         <div class="m-0 flex flex-col gap-2 p-0 text-left">
           <label for="username">{{ m.connected_chat_colon() }}</label>
-          <div class="flex w-full items-stretch">
-            <span
-              class="flex min-w-10 items-center justify-center rounded-s-md border-y border-s border-surface-300 bg-surface-0 text-surface-400 dark:border-surface-700 dark:bg-surface-950"
-            >
+          <InputGroup>
+            <InputGroupAddon>
               <!-- eslint-disable-next-line vue/no-v-html -->
               <svg class="h-5 w-5" v-html="sources.logo"></svg>
-            </span>
+            </InputGroupAddon>
             <InputText
               id="username"
               v-model="user.ctx.username"
@@ -18,21 +16,17 @@
               fluid
               pt:root="flex-1 rounded-none"
             />
-            <span
-              class="flex min-w-10 items-center justify-center gap-2 rounded-none border-y border-e border-surface-300 bg-surface-0 px-2 text-surface-400 dark:border-surface-700 dark:bg-surface-950"
-            >
+            <InputGroupAddon>
               <SourceIndicator :status="sources.status" />
-            </span>
-            <span
-              class="flex min-w-10 items-center justify-center gap-2 rounded-e-md border-y border-e border-surface-300 bg-surface-0 px-2 text-surface-400 dark:border-surface-700 dark:bg-surface-950"
-            >
+            </InputGroupAddon>
+            <InputGroupAddon>
               <i
                 v-tooltip="m.reconnect()"
                 class="pi pi-refresh hover:cursor-pointer"
                 @click="sources.reconnect()"
-              ></i>
-            </span>
-          </div>
+              ></i
+            ></InputGroupAddon>
+          </InputGroup>
         </div>
       </template>
     </Card>
@@ -98,6 +92,8 @@
 <script setup lang="ts">
 import Button from 'primevue/button'
 import Card from 'primevue/card'
+import InputGroup from 'primevue/inputgroup'
+import InputGroupAddon from 'primevue/inputgroupaddon'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
 import MultiSelect from 'primevue/multiselect'
