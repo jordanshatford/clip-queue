@@ -1,12 +1,18 @@
 <template>
   <Card class="max-w-2xs shrink-0 overflow-hidden text-left">
     <template #header>
-      <img
-        class="aspect-video w-full"
-        :alt="clip.title"
-        :src="clip.thumbnailUrl"
-        @error="emit('remove')"
-      />
+      <div class="relative">
+        <img
+          class="aspect-video w-full"
+          :alt="clip.title"
+          :src="clip.thumbnailUrl"
+          @error="emit('remove')"
+        />
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div v-if="svg" class="absolute top-2 right-2 rounded bg-black/50 p-1.5">
+          <svg class="h-5 w-5" v-html="svg"></svg>
+        </div>
+      </div>
     </template>
     <template #title>
       <span :title="clip.title" class="line-clamp-1 font-normal">{{ clip.title }}</span>
@@ -22,10 +28,6 @@
         <p class="line-clamp-1">
           {{ m.creator_name({ name: clip.creator ?? m.unknown() }) }}
         </p>
-        <div class="flex items-center gap-1">
-          <p>{{ m.provider_colon() }}</p>
-          <ProviderName :provider="clip.provider" class="font-normal" />
-        </div>
       </div>
     </template>
     <template #footer>
@@ -61,6 +63,7 @@ import { computed } from 'vue'
 import type { Clip } from '@/providers'
 
 import { m } from '@/paraglide/messages'
+import { useProviders } from '@/stores/providers'
 
 export interface Props {
   clip: Clip
@@ -68,12 +71,16 @@ export interface Props {
 
 const { clip } = defineProps<Props>()
 
+const providers = useProviders()
+
 const subtitle = computed(() => {
   if (clip.category) {
     return `${clip.channel} - ${clip.category}`
   }
   return clip.channel
 })
+
+const svg = computed(() => providers.svg(clip.provider))
 
 const emit = defineEmits<{
   (e: 'play'): void
