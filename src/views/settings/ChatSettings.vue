@@ -14,6 +14,7 @@
               v-model="user.ctx.username"
               readonly
               fluid
+              size="small"
               pt:root="flex-1 rounded-none"
             />
             <InputGroupAddon>
@@ -40,6 +41,7 @@
               v-model="formSettings.prefix"
               required
               maxlength="8"
+              size="small"
               aria-describedby="commandPrefix-help"
               @keydown.space.prevent
             />
@@ -53,6 +55,7 @@
               :options="Object.values(Command)"
               :placeholder="m.none()"
               display="chip"
+              size="small"
               aria-describedby="allowedCommands-help"
             >
               <template #option="{ option }: { option: Command }">

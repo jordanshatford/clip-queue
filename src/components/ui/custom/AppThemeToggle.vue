@@ -2,8 +2,7 @@
   <Button
     :icon="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'"
     size="small"
-    text
-    rounded
+    variant="text"
     aria-label="Theme"
     @click="() => emit('toggle')"
   ></Button>

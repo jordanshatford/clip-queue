@@ -8,6 +8,7 @@
             <ToggleSwitch
               v-model="formSettings.hasAutoModerationEnabled"
               input-id="autoModeration"
+              size="small"
               aria-describedby="autoModeration-help"
             />
           </div>
@@ -22,6 +23,7 @@
             :locale="preferences.preferences.language"
             :min="1"
             :step="1"
+            size="small"
             show-buttons
             aria-describedby="limit-help"
           />
@@ -34,6 +36,7 @@
             input-id="allowedProviders"
             :options="Object.values(ClipProvider)"
             :placeholder="m.none()"
+            size="small"
             display="chip"
             aria-describedby="allowedProviders-help"
           >

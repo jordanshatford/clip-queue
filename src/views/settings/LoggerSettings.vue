@@ -26,6 +26,7 @@
               v-model="formSettings.level"
               :options="availableLogLevels"
               label-id="loggerLevel"
+              size="small"
               :option-label="(value: LogLevel) => logLevelTranslations[value]()"
               aria-describedby="loggerLevel-help"
             >
@@ -42,6 +43,7 @@
               :min="1"
               :max="100000"
               :step="1"
+              size="small"
               show-buttons
               aria-describedby="loggerLimit-help"
             />

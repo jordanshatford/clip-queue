@@ -9,6 +9,7 @@
               v-model="formPreferences.language"
               :options="[...locales]"
               label-id="language"
+              size="small"
               :option-label="(value: Locale) => languageLabels[value]"
               aria-describedby="language-help"
             >
@@ -21,6 +22,7 @@
               v-model="formPreferences.theme"
               :options="[...availableThemes]"
               label-id="theme"
+              size="small"
               :option-label="(value: Theme) => themeTranslations[value]()"
               aria-describedby="theme-help"
             >
@@ -34,6 +36,7 @@
               :options="colors"
               data-key="name"
               label-id="primaryColor"
+              size="small"
               aria-describedby="primaryColor-help"
             >
               <template #value="{ value }: { value: ColorOption }">
@@ -52,6 +55,7 @@
               data-key="name"
               :options="surfaces"
               label-id="surfaceColor"
+              size="small"
               aria-describedby="surfaceColor-help"
             >
               <template #value="{ value }: { value: ColorOption }">
