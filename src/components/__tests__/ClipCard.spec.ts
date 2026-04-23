@@ -1,5 +1,6 @@
+import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { clipFromTwitch } from '@/__tests__/mocks'
 
@@ -9,6 +10,13 @@ describe('ClipCard.vue', () => {
   const wrapper = shallowMount(ClipCard, {
     props: {
       clip: clipFromTwitch,
+    },
+    global: {
+      plugins: [
+        createTestingPinia({
+          createSpy: vi.fn,
+        }),
+      ],
     },
   })
 

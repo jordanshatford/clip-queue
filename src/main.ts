@@ -1,5 +1,5 @@
 import './app.css'
-import Aura from '@primeuix/themes/lara'
+import Aura from '@primeuix/themes/aura'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
 import PrimeVue from 'primevue/config'
