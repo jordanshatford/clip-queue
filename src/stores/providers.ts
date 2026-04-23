@@ -39,7 +39,7 @@ export const useProviders = defineStore('providers', () => {
 
   function purge(): void {
     for (const provider of Object.values(providers.value)) {
-      logger.debug(`[Providers]: Purging cache for provider: ${provider.name}.`)
+      logger.info(`[Providers]: Purging cache for provider: ${provider.name}.`)
       provider.clearCache()
     }
   }
