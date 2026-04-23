@@ -1,5 +1,19 @@
 # clip-queue
 
+## 1.15.0
+
+### Minor Changes
+
+- feat: use primevue components directly instead of volt ([`a9ae596`](https://github.com/jordanshatford/clip-queue/commit/a9ae5968f337dd6f1c6de51ae40de7c310b374d9))
+
+- feat: improve clip card provider indicator ([`24d8a60`](https://github.com/jordanshatford/clip-queue/commit/24d8a60ef74928ea2ddbabf72a2ba9d5c69f753f))
+
+### Patch Changes
+
+- fix: dynamic import all routes to improve chunking ([`e52f8a2`](https://github.com/jordanshatford/clip-queue/commit/e52f8a28aca476f43dfac0d274fcbf1c5cfaa1a2))
+
+- fix: update logging levels for some relevant logs ([`f77b42c`](https://github.com/jordanshatford/clip-queue/commit/f77b42c1b27dfd73eff73f8e4868d8200b98f59f))
+
 ## 1.14.0
 
 ### Minor Changes
