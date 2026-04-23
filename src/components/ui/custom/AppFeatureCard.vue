@@ -1,7 +1,7 @@
 <template>
   <Card class="p-2">
     <template #title>
-      <div class="flex gap-2">
+      <div class="flex items-center gap-2">
         <i :class="['text-lg text-primary-500 dark:text-primary-400', icon]"></i>
         <span> {{ title }}</span>
       </div>
