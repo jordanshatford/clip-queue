@@ -1,6 +1,17 @@
+@import '@fontsource-variable/inter';
 @import 'primeicons/primeicons.css';
 
 @import 'tailwindcss';
 @import 'tailwindcss-primeui';
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: 'Inter Variable', sans-serif;
+}
+
+html,
+body,
+#app {
+  @apply font-sans;
+}

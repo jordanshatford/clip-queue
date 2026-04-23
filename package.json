@@ -23,6 +23,7 @@
     "changeset": "changeset"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
     "@primeuix/themes": "^2.0.3",
     "@primevue/icons": "^4.5.5",
     "@tmi.js/chat": "^0.7.5",
