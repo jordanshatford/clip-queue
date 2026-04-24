@@ -15,10 +15,10 @@ export interface Props {
 const { status } = defineProps<Props>()
 
 const statusTranslations: Record<ClipSourceStatus, () => string> = {
-  Error: m.error,
-  Connected: m.connected,
-  Disconnected: m.disconnected,
-  Unknown: m.unknown,
+  [ClipSourceStatus.ERROR]: m.error,
+  [ClipSourceStatus.CONNECTED]: m.connected,
+  [ClipSourceStatus.DISCONNECTED]: m.disconnected,
+  [ClipSourceStatus.UNKNOWN]: m.unknown,
 }
 
 const color = computed(() => {
