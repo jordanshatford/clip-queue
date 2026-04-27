@@ -59,6 +59,7 @@
 </template>
 
 <script setup lang="ts">
+import { onKeyDown } from '@vueuse/core'
 import Button from 'primevue/button'
 import { computed } from 'vue'
 
@@ -66,7 +67,6 @@ import type { Clip, PlayerFormat } from '@/integrations'
 
 import { Player } from '@/components/player'
 import ProviderName from '@/components/ProviderName.vue'
-import { useKeydown } from '@/composables/keydown'
 import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useProviders } from '@/stores/providers'
@@ -80,14 +80,14 @@ const { clip, previousDisabled = false } = defineProps<Props>()
 
 const logger = useLogger()
 
-useKeydown((event) => {
-  if (event.key === 'ArrowLeft') {
-    logger.debug('[Player]: left arrow pressed.')
-    emit('previous')
-  } else if (event.key === 'ArrowRight') {
-    logger.debug('[Player]: right arrow pressed.')
-    emit('next')
-  }
+onKeyDown('ArrowLeft', () => {
+  logger.debug('[Player]: left arrow pressed.')
+  emit('previous')
+})
+
+onKeyDown('ArrowRight', () => {
+  logger.debug('[Player]: right arrow pressed.')
+  emit('next')
 })
 
 const emit = defineEmits<{

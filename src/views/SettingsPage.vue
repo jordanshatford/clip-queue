@@ -21,13 +21,13 @@
 </template>
 
 <script setup lang="ts">
+import { onKeyDown } from '@vueuse/core'
 import Tab from 'primevue/tab'
 import TabList from 'primevue/tablist'
 import Tabs from 'primevue/tabs'
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-import { useKeydown } from '@/composables/keydown'
 import { allowedRoutes, RouteNameConstants, routeTranslations } from '@/router'
 
 const router = useRouter()
@@ -39,20 +39,20 @@ const settingsRoutes =
 const active = computed(() => route?.name?.toString() ?? '')
 const current = computed(() => settingsRoutes.findIndex((r) => r.name === route.name))
 
-useKeydown((event) => {
-  if (event.key === 'ArrowLeft') {
-    if (current.value > 0) {
-      const previous = settingsRoutes[current.value - 1]
-      if (previous) {
-        router.push({ name: previous.name })
-      }
+onKeyDown('ArrowLeft', () => {
+  if (current.value > 0) {
+    const previous = settingsRoutes[current.value - 1]
+    if (previous) {
+      router.push({ name: previous.name })
     }
-  } else if (event.key === 'ArrowRight') {
-    if (current.value < settingsRoutes.length - 1) {
-      const next = settingsRoutes[current.value + 1]
-      if (next) {
-        router.push({ name: next.name })
-      }
+  }
+})
+
+onKeyDown('ArrowRight', () => {
+  if (current.value < settingsRoutes.length - 1) {
+    const next = settingsRoutes[current.value + 1]
+    if (next) {
+      router.push({ name: next.name })
     }
   }
 })
