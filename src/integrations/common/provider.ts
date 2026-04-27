@@ -69,20 +69,30 @@ export interface Clip {
   createdAt?: string
 }
 
-export interface IClipProvider extends Cacheable<Clip> {
+export interface IntegrationProvider extends Cacheable<Clip> {
   /**
-   * The name of the provider.
+   * The unique identifier for the authentication integration. This is used to identify the integration in the system and should be unique across all integrations.
    */
-  readonly name: ClipProvider
+  readonly id: string
   /**
-   * The SVG of the provider.
+   * The display name of the authentication integration. This is used in the UI to represent the integration.
    */
-  readonly svg: string
+  readonly name: string
+  /**
+   * The icon representing the authentication integration. This can be a URL to an image or an SVG string.
+   */
+  readonly icon: string
   /**
    * Whether the provider is experimental.
    * Experimental providers are providers that are not fully tested and may be unstable.
    */
   readonly isExperimental: boolean
+  /**
+   * Check if this providers supports that URL as a clip URL.
+   * @param url - The URL of the clip.
+   * @returns true if the provider supports the clip URL, false otherwise.
+   */
+  hasClipSupport(url: string): boolean
   /**
    * Get a clip from a URL.
    * @param url - The URL of the clip.
@@ -105,45 +115,14 @@ export interface IClipProvider extends Cacheable<Clip> {
   getPlayerSource(clip: Clip): string
 }
 
-/**
- * The base clip provider.
- */
-export abstract class BaseClipProvider extends Cacheable<Clip> {
-  /**
-   * The name of the provider.
-   */
+export abstract class BaseClipProvider extends Cacheable<Clip> implements IntegrationProvider {
+  public abstract readonly id: string
   public abstract readonly name: ClipProvider
-  /**
-   * The SVG of the provider.
-   */
-  public abstract readonly svg: string
-  /**
-   * Whether the provider is experimental.
-   */
-  public get isExperimental(): boolean {
-    return false
-  }
-  /**
-   * Get a clip.
-   * @param url - The URL of the clip.
-   * @returns The clip or undefined.
-   */
+  public abstract readonly icon: string
+  public readonly isExperimental: boolean = false
+
+  public abstract hasClipSupport(url: string): boolean
   public abstract getClip(url: string): Promise<Clip>
-  /**
-   * Get the player format.
-   * @param clip - The clip.
-   * @returns
-   */
   public abstract getPlayerFormat(clip: Clip): PlayerFormat
-  /**
-   * Get the player source.
-   * @param clip - The clip.
-   * @returns The player source.
-   */
   public abstract getPlayerSource(clip: Clip): string
 }
-
-/**
- * Clip provider context callback.
- */
-export type ClipProviderCtxCallback = () => string | Promise<string>

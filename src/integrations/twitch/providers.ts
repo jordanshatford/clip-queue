@@ -1,10 +1,10 @@
 import { env } from '@/config'
-import { getClips, getGames } from '@/integrations/twitch/core/api'
-import { logo, getClipIdFromUrl } from '@/integrations/twitch/core/utils'
 
-import type { Clip, ClipProviderCtxCallback, PlayerFormat } from './types'
+import type { Clip, PlayerFormat } from '../common/provider'
 
-import { BaseClipProvider, ClipProvider } from './types'
+import { BaseClipProvider, ClipProvider } from '../common/provider'
+import { getClips, getGames } from './core/api'
+import { logo, getClipIdFromUrl } from './core/utils'
 
 const { CLIENT_ID } = env
 
@@ -12,16 +12,22 @@ const { CLIENT_ID } = env
  * The Twitch provider.
  */
 export class TwitchProvider extends BaseClipProvider {
+  public readonly id = 'ttv-clips'
   public readonly name: ClipProvider = ClipProvider.TWITCH
-  public readonly svg: string = logo
+  public readonly icon: string = logo
 
-  private ctx: ClipProviderCtxCallback = () => ''
+  private ctx: () => string | Promise<string> = () => ''
 
-  public constructor(callback?: ClipProviderCtxCallback) {
+  public constructor(callback?: () => string | Promise<string>) {
     super()
     if (callback) {
       this.ctx = callback
     }
+  }
+
+  public hasClipSupport(url: string): boolean {
+    const id = getClipIdFromUrl(url)
+    return id !== undefined
   }
 
   public async getClip(url: string): Promise<Clip> {

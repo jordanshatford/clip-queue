@@ -43,7 +43,7 @@
 <script setup lang="ts">
 import Button from 'primevue/button'
 
-import type { Clip } from '@/providers'
+import type { Clip } from '@/integrations'
 
 import ClipCard from '@/components/ClipCard.vue'
 import { m } from '@/paraglide/messages'

@@ -60,7 +60,7 @@ import Button from 'primevue/button'
 import Card from 'primevue/card'
 import { computed } from 'vue'
 
-import type { Clip } from '@/providers'
+import type { Clip } from '@/integrations'
 
 import { m } from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'

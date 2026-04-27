@@ -1,4 +1,4 @@
-import type { Clip } from './types'
+import type { Clip } from '@/integrations'
 
 /**
  * Get a UUID for the provided clip.

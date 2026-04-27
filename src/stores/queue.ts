@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-import type { Clip } from '@/providers'
+import type { Clip } from '@/integrations'
 
-import { BasicClipList, ClipList, ClipProvider, toClipUUID } from '@/providers'
+import { ClipProvider } from '@/integrations'
+import { BasicClipList, ClipList, toClipUUID } from '@/providers'
 import { useLogger } from '@/stores/logger'
 import { useSettings } from '@/stores/settings'
 

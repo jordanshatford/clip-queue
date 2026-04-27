@@ -87,8 +87,8 @@ import { useToast } from 'primevue/usetoast'
 import { ref, toRaw, useTemplateRef } from 'vue'
 
 import ProviderName from '@/components/ProviderName.vue'
+import { ClipProvider } from '@/integrations'
 import { m } from '@/paraglide/messages'
-import { ClipProvider } from '@/providers'
 import { usePreferences } from '@/stores/preferences'
 import { useSettings } from '@/stores/settings'
 

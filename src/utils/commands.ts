@@ -4,8 +4,8 @@ import { computed } from 'vue'
 
 import type { ClipSourceEvent, ClipSourceMessage } from '@/sources'
 
+import { ClipProvider } from '@/integrations'
 import { m } from '@/paraglide/messages'
-import { ClipProvider } from '@/providers'
 import { useLogger } from '@/stores/logger'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'

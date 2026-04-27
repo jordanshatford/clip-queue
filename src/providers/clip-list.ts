@@ -1,4 +1,4 @@
-import type { Clip, ClipProvider } from './types'
+import type { Clip, ClipProvider } from '@/integrations/common/provider'
 
 import { toClipUUID } from './utils'
 

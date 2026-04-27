@@ -62,7 +62,7 @@
 import Button from 'primevue/button'
 import { computed } from 'vue'
 
-import type { Clip, PlayerFormat } from '@/providers'
+import type { Clip, PlayerFormat } from '@/integrations'
 
 import { Player } from '@/components/player'
 import ProviderName from '@/components/ProviderName.vue'

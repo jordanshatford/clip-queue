@@ -1,29 +1,21 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-import type { Clip, PlayerFormat } from '@/providers'
+import type { Clip, PlayerFormat, ClipProvider } from '@/integrations'
 
-import { ClipProvider, providers as ps } from '@/providers'
+import { providers as ps } from '@/providers'
 import { useLogger } from '@/stores/logger'
 import { useSettings } from '@/stores/settings'
-import { useUser } from '@/stores/user'
 
 export const useProviders = defineStore('providers', () => {
   const settings = useSettings()
   const logger = useLogger()
 
-  const providers = ref(
-    ps.all({
-      [ClipProvider.TWITCH]: () => {
-        const user = useUser()
-        return user.token
-      },
-    }),
-  )
+  const providers = ref(ps.all())
 
   const svg = computed(() => {
     return (provider: ClipProvider) => {
-      return providers.value[provider].svg
+      return providers.value[provider].icon
     }
   })
 
@@ -47,6 +39,9 @@ export const useProviders = defineStore('providers', () => {
   async function getClip(url: string): Promise<Clip | undefined> {
     for (const enabledProvider of settings.queue.providers) {
       const provider = providers.value[enabledProvider]
+      if (!provider.hasClipSupport(url)) {
+        continue
+      }
       try {
         const clip = await provider.getClip(url)
         logger.debug(`[${provider.name}]: Successfully retrieved clip for URL: ${url}.`)

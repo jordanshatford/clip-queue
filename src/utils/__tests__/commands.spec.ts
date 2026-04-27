@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { ClipSourceEvent, ClipSourceMessage } from '@/sources'
 
-import { ClipProvider } from '@/providers'
+import { ClipProvider } from '@/integrations'
 import { ClipSource } from '@/sources'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'

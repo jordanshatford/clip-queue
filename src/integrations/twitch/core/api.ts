@@ -4,9 +4,9 @@ import type {
   TwitchPagedResponse,
   TwitchResponse,
   TwitchUser,
-} from '@/integrations/twitch/core/types'
+} from './types'
 
-import { toURLParams } from '@/integrations/twitch/core/utils'
+import { toURLParams } from './utils'
 
 const BASE_URL = 'https://api.twitch.tv/helix'
 

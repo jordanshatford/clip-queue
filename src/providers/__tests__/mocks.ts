@@ -1,9 +1,8 @@
-import type { TwitchClip, TwitchGame } from '@/integrations/twitch/core/types'
+import type { Clip } from '@/integrations'
+import type { TwitchClip, TwitchGame } from '@/integrations/twitch'
 import type { KickCategory, KickChannel, KickClip } from '@/services/kick'
 
-import type { Clip } from '..'
-
-import { ClipProvider } from '..'
+import { ClipProvider } from '@/integrations'
 
 export const mockKickCategory: KickCategory = {
   id: 123,

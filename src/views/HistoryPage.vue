@@ -109,7 +109,7 @@ import InputText from 'primevue/inputtext'
 import { useConfirm } from 'primevue/useconfirm'
 import { computed, ref } from 'vue'
 
-import type { Clip } from '@/providers'
+import type { Clip } from '@/integrations'
 
 import ProviderName from '@/components/ProviderName.vue'
 import { m } from '@/paraglide/messages'

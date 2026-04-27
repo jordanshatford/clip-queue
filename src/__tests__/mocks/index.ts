@@ -1,6 +1,6 @@
-import type { Clip } from '@/providers'
+import type { Clip } from '@/integrations'
 
-import { ClipProvider } from '@/providers'
+import { ClipProvider } from '@/integrations'
 
 export * from './kick'
 export * from './twitch'

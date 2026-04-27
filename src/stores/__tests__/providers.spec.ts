@@ -1,8 +1,8 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
+import type { Clip, PlayerFormat } from '@/integrations/common/provider'
 import type { TwitchClip, TwitchGame } from '@/integrations/twitch/core/types'
-import type { Clip, PlayerFormat } from '@/providers'
 import type { KickClip } from '@/services/kick'
 
 import {
@@ -63,6 +63,8 @@ describe('providers.ts', () => {
     localStorage?.clear()
     vi.clearAllMocks()
     setActivePinia(createPinia())
+    const providers = useProviders()
+    providers.purge()
   })
 
   it.each([

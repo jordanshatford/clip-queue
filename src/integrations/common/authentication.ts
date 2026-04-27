@@ -28,14 +28,6 @@ export interface IntegrationAuthentication {
    */
   readonly id: string
   /**
-   * The display name of the authentication integration. This is used in the UI to represent the integration.
-   */
-  readonly name: string
-  /**
-   * The icon representing the authentication integration. This can be a URL to an image or an SVG string.
-   */
-  readonly icon: string
-  /**
    * A boolean indicating whether the user is currently logged in with this integration.
    */
   readonly isLoggedIn?: Ref<boolean>

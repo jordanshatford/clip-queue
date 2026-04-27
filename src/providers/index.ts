@@ -1,13 +1,12 @@
-import type { BaseClipProvider, ClipProviderCtxCallback } from './types'
+import type { BaseClipProvider } from '@/integrations'
+
+import { ClipProvider } from '@/integrations'
+import { clips as twitchClips } from '@/integrations/twitch'
 
 import { KickProvider } from './kick'
-import { TwitchProvider } from './twitch'
-import { ClipProvider } from './types'
 
 export * from './clip-list'
 export * from './kick'
-export * from './twitch'
-export * from './types'
 export * from './utils'
 
 /**
@@ -19,10 +18,8 @@ export const providers = {
    * @param callbacks - The callbacks.
    * @returns The providers.
    */
-  all: (
-    callbacks: Partial<Record<ClipProvider, ClipProviderCtxCallback>>,
-  ): Record<ClipProvider, BaseClipProvider> => ({
+  all: (): Record<ClipProvider, BaseClipProvider> => ({
     [ClipProvider.KICK]: new KickProvider(),
-    [ClipProvider.TWITCH]: new TwitchProvider(callbacks[ClipProvider.TWITCH]),
+    [ClipProvider.TWITCH]: twitchClips,
   }),
 }

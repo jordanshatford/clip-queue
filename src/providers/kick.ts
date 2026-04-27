@@ -1,15 +1,20 @@
+import type { Clip, PlayerFormat } from '@/integrations'
+
+import { BaseClipProvider, ClipProvider } from '@/integrations'
 import kick from '@/services/kick'
-
-import type { Clip, PlayerFormat } from './types'
-
-import { BaseClipProvider, ClipProvider } from './types'
 
 /**
  * The Kick provider.
  */
 export class KickProvider extends BaseClipProvider {
+  public readonly id = 'kick-clips'
   public readonly name: ClipProvider = ClipProvider.KICK
-  public readonly svg: string = kick.logo
+  public readonly icon: string = kick.logo
+
+  public hasClipSupport(url: string): boolean {
+    const id = kick.getClipIdFromUrl(url)
+    return id !== undefined
+  }
 
   public async getClip(url: string): Promise<Clip> {
     const id = kick.getClipIdFromUrl(url)

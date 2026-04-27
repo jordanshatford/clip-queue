@@ -8,14 +8,11 @@ import type { UserDetails, IntegrationAuthentication } from '../common'
 import { key } from '../common'
 import { getUsers } from './core/api'
 import auth from './core/auth'
-import { logo } from './core/utils'
 
 const { CLIENT_ID, REDIRECT_URI } = env
 
 export class TwitchAuthentication implements IntegrationAuthentication {
   public readonly id: string = 'ttv-auth'
-  public readonly name: string = 'Twitch'
-  public readonly icon: string = logo
   public isLoggedIn = ref<boolean>(false)
   public user = useStorage<UserDetails>(key(this, 'user'), {
     id: '',
@@ -34,7 +31,7 @@ export class TwitchAuthentication implements IntegrationAuthentication {
     } else {
       // Cleanup any details about a previous session as it has expired or does not exist.
       await this.logout()
-      throw new Error(`[${this.name}]: Failed to auto-login user.`)
+      throw new Error('Failed to auto-login user.')
     }
     return this.user.value
   }
