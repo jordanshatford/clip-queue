@@ -1,4 +1,4 @@
-import type { AuthInfo, IDToken, TwitchUserCtx } from './types'
+import type { AuthInfo, IDToken } from './types'
 
 const BASE_URL = 'https://id.twitch.tv/oauth2'
 
@@ -18,11 +18,12 @@ export function login(hash: string): AuthInfo | null {
 
 /**
  * Logout of Twitch.
- * @param ctx - The Twitch user context.
+ * @param clientID - The client ID to use.
+ * @param token - The users Twitch token.
  */
-export async function logout(ctx: TwitchUserCtx): Promise<void> {
+export async function logout(clientID: string, token: string): Promise<void> {
   // Revoke the token
-  const response = await fetch(`${BASE_URL}/revoke?client_id=${ctx.id}&token=${ctx.token}`, {
+  const response = await fetch(`${BASE_URL}/revoke?client_id=${clientID}&token=${token}`, {
     method: 'POST',
   })
   if (!response.ok) {
@@ -32,13 +33,13 @@ export async function logout(ctx: TwitchUserCtx): Promise<void> {
 
 /**
  * Redirect to Twitch login.
- * @param ctx - The Twitch user context.
+ * @param clientID - The client ID to use.
  * @param redirectUri - The URI to redirect to after login.
  * @param scopes - The scopes to request.
  */
-export function redirect(ctx: Partial<TwitchUserCtx>, redirectUri: string, scopes: string[]): void {
+export function redirect(clientID: string, redirectUri: string, scopes: string[]): void {
   const loginURL = new URL(`${BASE_URL}/authorize`)
-  loginURL.searchParams.set('client_id', ctx.id ?? '')
+  loginURL.searchParams.set('client_id', clientID)
   loginURL.searchParams.set('redirect_uri', redirectUri)
   loginURL.searchParams.set('response_type', 'token id_token')
   loginURL.searchParams.set('scope', scopes.join(' '))
@@ -48,14 +49,14 @@ export function redirect(ctx: Partial<TwitchUserCtx>, redirectUri: string, scope
 
 /**
  * Check if a Twitch login is valid.
- * @param ctx - The Twitch user context.
+ * @param token - the users Twitch access token.
  * @returns True if the login is valid.
  */
-export async function isLoginValid(ctx: TwitchUserCtx) {
+export async function isLoginValid(token: string) {
   try {
     const response = await fetch(`${BASE_URL}/validate`, {
       headers: {
-        Authorization: `Bearer ${ctx.token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
     return response.ok

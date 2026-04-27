@@ -1,22 +1,4 @@
 /**
- * Twitch user context.
- */
-export interface TwitchUserCtx {
-  /**
-   * The ID of the user.
-   */
-  id: string
-  /**
-   * The token of the user.
-   */
-  token?: string
-  /**
-   * The username of the user.
-   */
-  username?: string
-}
-
-/**
  * Twitch ID token.
  */
 export interface IDToken {

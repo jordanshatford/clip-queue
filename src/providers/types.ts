@@ -1,3 +1,5 @@
+import { Cacheable } from '@/types/cacheable'
+
 /**
  * Enumeration of clip providers.
  */
@@ -67,34 +69,59 @@ export interface Clip {
   createdAt?: string
 }
 
-/**
- * The base clip provider.
- */
-export abstract class BaseClipProvider {
+export interface IClipProvider extends Cacheable<Clip> {
   /**
    * The name of the provider.
    */
-  public abstract name: ClipProvider
+  readonly name: ClipProvider
   /**
    * The SVG of the provider.
    */
-  public abstract svg: string
+  readonly svg: string
+  /**
+   * Whether the provider is experimental.
+   * Experimental providers are providers that are not fully tested and may be unstable.
+   */
+  readonly isExperimental: boolean
+  /**
+   * Get a clip from a URL.
+   * @param url - The URL of the clip.
+   * @returns The clip.
+   * @throws An error if the URL is invalid or the clip cannot be retrieved.
+   */
+  getClip(url: string): Promise<Clip>
+  /**
+   * Get the player format for a clip.
+   * @param clip - The clip to get the player format for.
+   * @returns The player format.
+   */
+  getPlayerFormat(clip: Clip): PlayerFormat
+  /**
+   * Get the player source for a clip.
+   * @param clip - The clip to get the player source for.
+   * @returns The player source.
+   * @throws An error if the player source cannot be retrieved.
+   */
+  getPlayerSource(clip: Clip): string
+}
+
+/**
+ * The base clip provider.
+ */
+export abstract class BaseClipProvider extends Cacheable<Clip> {
+  /**
+   * The name of the provider.
+   */
+  public abstract readonly name: ClipProvider
+  /**
+   * The SVG of the provider.
+   */
+  public abstract readonly svg: string
   /**
    * Whether the provider is experimental.
    */
-  public isExperimental = false
-  protected cache: Record<string, Clip> = {}
-  /**
-   * Whether the provider has cached data.
-   */
-  public get hasCachedData(): boolean {
-    return Object.keys(this.cache).length > 0
-  }
-  /**
-   * Clear the cache.
-   */
-  public clearCache(): void {
-    this.cache = {}
+  public get isExperimental(): boolean {
+    return false
   }
   /**
    * Get a clip.
@@ -117,20 +144,6 @@ export abstract class BaseClipProvider {
 }
 
 /**
- * Clip provider context.
- */
-export interface ClipProviderCtx {
-  /**
-   * The ID of the user.
-   */
-  id: string
-  /**
-   * The token of the user.
-   */
-  token?: string
-}
-
-/**
  * Clip provider context callback.
  */
-export type ClipProviderCtxCallback = () => ClipProviderCtx | Promise<ClipProviderCtx>
+export type ClipProviderCtxCallback = () => string | Promise<string>

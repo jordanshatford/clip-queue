@@ -8,8 +8,8 @@ import { BaseClipProvider, ClipProvider } from './types'
  * The Kick provider.
  */
 export class KickProvider extends BaseClipProvider {
-  public name = ClipProvider.KICK
-  public svg = kick.logo
+  public readonly name: ClipProvider = ClipProvider.KICK
+  public readonly svg: string = kick.logo
 
   public async getClip(url: string): Promise<Clip> {
     const id = kick.getClipIdFromUrl(url)

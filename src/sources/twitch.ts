@@ -1,6 +1,6 @@
 import { Client } from '@tmi.js/chat'
 
-import twitch from '@/services/twitch'
+import { logo } from '@/integrations/twitch/core/utils'
 
 import { BaseClipSource, ClipSource, ClipSourceStatus } from './types'
 
@@ -9,7 +9,7 @@ import { BaseClipSource, ClipSource, ClipSourceStatus } from './types'
  */
 export class TwitchChatSource extends BaseClipSource {
   public name = ClipSource.TWITCH
-  public svg = twitch.logo
+  public svg = logo
 
   private channel?: string
   private chat = new Client({ token: undefined, channels: [] })

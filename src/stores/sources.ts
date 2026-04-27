@@ -14,7 +14,7 @@ import { useSettings } from './settings'
 
 const ctx = () => {
   const user = useUser()
-  return user.ctx
+  return { username: user.details.name }
 }
 
 export const useSources = defineStore('sources', () => {

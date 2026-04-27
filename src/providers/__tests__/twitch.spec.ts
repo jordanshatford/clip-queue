@@ -1,37 +1,41 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { TwitchClip, TwitchGame, TwitchUserCtx } from '@/services/twitch'
+import type { TwitchClip, TwitchGame } from '@/integrations/twitch/core/types'
 
 import { TwitchProvider } from '../twitch'
 import { mockKickClip, mockTwitchClip, mockTwitchGame } from './mocks'
 
-vi.mock('@/services/twitch', async (importOriginal) => {
+vi.mock('@/integrations/twitch/core/api', async (importOriginal) => {
   return {
-    default: {
-      ...(await importOriginal<typeof import('@/services/twitch')>()),
-      getClips: vi.fn<(ctx: TwitchUserCtx, ids: string[]) => TwitchClip[]>(
-        (_: TwitchUserCtx, ids: string[]) => {
-          return ids.map((id) => ({ ...mockTwitchClip, id }))
-        },
-      ),
-      getGames: vi.fn<(ctx: TwitchUserCtx, ids: string[]) => TwitchGame[]>(
-        (_: TwitchUserCtx, ids: string[]) => {
-          return ids.map((id) => ({ ...mockTwitchGame, id }))
-        },
-      ),
-      getClipIdFromUrl: vi.fn<(url: string) => string | undefined>((url: string) => {
-        if (!url.includes('twitch')) {
-          return
-        }
-        try {
-          const uri = new URL(url)
-          const idStart = uri.pathname.lastIndexOf('/')
-          return uri.pathname.slice(idStart).split('?')[0]?.slice(1)
-        } catch {
-          return
-        }
-      }),
-    },
+    ...(await importOriginal<typeof import('@/integrations/twitch/core/api')>()),
+    getClips: vi.fn<(_cId: string, _token: string, ids: string[]) => TwitchClip[]>(
+      (_cId: string, _token: string, ids: string[]) => {
+        return ids.map((id) => ({ ...mockTwitchClip, id }))
+      },
+    ),
+    getGames: vi.fn<(_cId: string, _token: string, ids: string[]) => TwitchGame[]>(
+      (_cId: string, _token: string, ids: string[]) => {
+        return ids.map((id) => ({ ...mockTwitchGame, id }))
+      },
+    ),
+  }
+})
+
+vi.mock('@/integrations/twitch/core/utils', async (importOriginal) => {
+  return {
+    ...(await importOriginal<typeof import('@/integrations/twitch/core/utils')>()),
+    getClipIdFromUrl: vi.fn<(url: string) => string | undefined>((url: string) => {
+      if (!url.includes('twitch')) {
+        return
+      }
+      try {
+        const uri = new URL(url)
+        const idStart = uri.pathname.lastIndexOf('/')
+        return uri.pathname.slice(idStart).split('?')[0]?.slice(1)
+      } catch {
+        return
+      }
+    }),
   }
 })
 

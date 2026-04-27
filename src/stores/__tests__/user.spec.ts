@@ -1,7 +1,7 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { TwitchUser } from '@/services/twitch'
+import type { TwitchUser } from '@/integrations/twitch/core/types'
 
 import { useUser } from '../user'
 

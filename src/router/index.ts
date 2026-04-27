@@ -136,21 +136,19 @@ router.beforeEach(async (to, from) => {
   const user = useUser()
   // Attempt to validate the token if not previously done so. This is
   // to ensure the refresh returns you to the same route.
-  if (!user.hasValidatedToken && !user.isLoggedIn) {
+  if (!user.hasAttemptedAutoLogin && !user.isLoggedIn && !(to.hash && to.hash !== '')) {
     logger.debug('[Router]: Attempting to auto-login user.')
     await user.autoLoginIfPossible()
   }
   // If the user is trying to login via twitch
   if (to.hash && to.hash !== '' && !user.isLoggedIn) {
     await user.login(to.hash)
-    logger.debug(`[Router]: User is logging in via Twitch ${user.ctx.username}.`)
+    logger.debug(`[Router]: User is logging in via Twitch ${user.details.name}.`)
     return { name: RouteNameConstants.QUEUE, hash: '' }
-    return
     // User is not logged in trying to access auth required route
   } else if (!user.isLoggedIn && to.meta.requiresAuth) {
     logger.debug(`[Router]: User is not logged in, redirecting to home page from ${to.fullPath}.`)
     return { name: RouteNameConstants.HOME }
-    return
   }
   logger.debug(`[Router]: Navigating from ${from.fullPath} to ${to.fullPath}.`)
 })

@@ -16,7 +16,7 @@ export const useProviders = defineStore('providers', () => {
     ps.all({
       [ClipProvider.TWITCH]: () => {
         const user = useUser()
-        return user.ctx
+        return user.token
       },
     }),
   )

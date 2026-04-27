@@ -1,5 +1,5 @@
+import type { TwitchClip, TwitchGame } from '@/integrations/twitch/core/types'
 import type { KickCategory, KickChannel, KickClip } from '@/services/kick'
-import type { TwitchClip, TwitchGame } from '@/services/twitch'
 
 import type { Clip } from '..'
 

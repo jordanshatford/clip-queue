@@ -4,38 +4,43 @@ import type {
   TwitchPagedResponse,
   TwitchResponse,
   TwitchUser,
-  TwitchUserCtx,
-} from './types'
+} from '@/integrations/twitch/core/types'
 
-import { toURLParams } from './utils'
+import { toURLParams } from '@/integrations/twitch/core/utils'
 
 const BASE_URL = 'https://api.twitch.tv/helix'
 
 /**
- * Convert a Twitch user context to common headers.
- * @param ctx - The Twitch user context.
+ * Convert common details to the headers expected by Twitch.
+ * @param clientID - The client ID to use.
+ * @param token - The users Twitch token.
  * @returns The common headers.
  */
-export function toCommonHeaders(ctx: TwitchUserCtx) {
+export function toCommonHeaders(clientID: string, token: string): Record<string, string> {
   return {
-    'Client-ID': ctx.id,
-    Authorization: `Bearer ${ctx.token}`,
+    'Client-ID': clientID,
+    Authorization: `Bearer ${token}`,
   }
 }
 
 /**
  * Get clips from Twitch.
- * @param ctx - The Twitch user context.
+ * @param clientID - The client ID to use.
+ * @param token - The users Twitch token.
  * @param ids - The clip IDs to fetch.
  * @returns The clips.
  * @throws Will throw an error if no clip IDs are provided or the fetch fails.
  */
-export async function getClips(ctx: TwitchUserCtx, ids: string[]): Promise<TwitchClip[]> {
+export async function getClips(
+  clientID: string,
+  token: string,
+  ids: string[],
+): Promise<TwitchClip[]> {
   if (ids.length <= 0) {
     throw new Error('Clip IDs were not provided.')
   }
   const response = await fetch(`${BASE_URL}/clips?${toURLParams('id', ids)}`, {
-    headers: toCommonHeaders(ctx),
+    headers: toCommonHeaders(clientID, token),
   })
   if (!response.ok) {
     throw new Error(`Failed to fetch clips with IDs ${ids.join(' ')}: ${response.statusText}`)
@@ -46,16 +51,21 @@ export async function getClips(ctx: TwitchUserCtx, ids: string[]): Promise<Twitc
 
 /**
  * Get games from Twitch.
- * @param ctx - The Twitch user context.
+ * @param clientID - The client ID to use.
+ * @param token - The users Twitch token.
  * @param ids - The game IDs to fetch.
  * @returns The games.
  */
-export async function getGames(ctx: TwitchUserCtx, ids: string[]): Promise<TwitchGame[]> {
+export async function getGames(
+  clientID: string,
+  token: string,
+  ids: string[],
+): Promise<TwitchGame[]> {
   if (ids.length <= 0) {
     throw new Error('Game IDs were not provided.')
   }
   const response = await fetch(`${BASE_URL}/games?${toURLParams('id', ids)}`, {
-    headers: toCommonHeaders(ctx),
+    headers: toCommonHeaders(clientID, token),
   })
   if (!response.ok) {
     throw new Error(`Failed to fetch games with IDs ${ids.join(' ')}: ${response.statusText}`)
@@ -66,23 +76,22 @@ export async function getGames(ctx: TwitchUserCtx, ids: string[]): Promise<Twitc
 
 /**
  * Get users from Twitch.
- * @param ctx - The Twitch user context.
+ * @param clientID - The client ID to use.
+ * @param token - The users Twitch token.
  * @param ids - The user IDs to fetch.
  * @returns The users.
  */
-export async function getUsers(ctx: TwitchUserCtx, ids: string[]): Promise<TwitchUser[]> {
+export async function getUsers(
+  clientID: string,
+  token: string,
+  ids: string[],
+): Promise<TwitchUser[]> {
   const response = await fetch(`${BASE_URL}/users?${toURLParams('id', ids)}`, {
-    headers: toCommonHeaders(ctx),
+    headers: toCommonHeaders(clientID, token),
   })
   if (!response.ok) {
     throw new Error(`Failed to users with IDs ${ids.join(' ')}: ${response.statusText}`)
   }
   const data: TwitchResponse<TwitchUser[]> = await response.json()
   return data.data
-}
-
-export default {
-  getClips,
-  getGames,
-  getUsers,
 }

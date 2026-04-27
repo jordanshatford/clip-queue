@@ -9,9 +9,17 @@
               <!-- eslint-disable-next-line vue/no-v-html -->
               <svg class="h-5 w-5" v-html="sources.logo"></svg>
             </InputGroupAddon>
+            <InputGroupAddon v-if="user.details.profileImageURL">
+              <Avatar
+                :image="user.details.profileImageURL"
+                shape="circle"
+                size="small"
+                class="size-7"
+              />
+            </InputGroupAddon>
             <InputText
               id="username"
-              v-model="user.ctx.username"
+              v-model="user.details.name"
               readonly
               fluid
               size="small"
@@ -93,6 +101,7 @@
 </template>
 
 <script setup lang="ts">
+import Avatar from 'primevue/avatar'
 import Button from 'primevue/button'
 import Card from 'primevue/card'
 import InputGroup from 'primevue/inputgroup'
