@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-import type { Clip, PlayerFormat, ClipProvider } from '@/integrations'
-
-import { providers as ps } from '@/providers'
+import { type Clip, type PlayerFormat, ClipProvider } from '@/integrations'
+import { clips as kickClips } from '@/integrations/kick'
+import { clips as twitchClips } from '@/integrations/twitch'
 import { useLogger } from '@/stores/logger'
 import { useSettings } from '@/stores/settings'
 
@@ -11,7 +11,10 @@ export const useProviders = defineStore('providers', () => {
   const settings = useSettings()
   const logger = useLogger()
 
-  const providers = ref(ps.all())
+  const providers = ref({
+    [ClipProvider.KICK]: kickClips,
+    [ClipProvider.TWITCH]: twitchClips,
+  })
 
   const svg = computed(() => {
     return (provider: ClipProvider) => {
@@ -61,7 +64,7 @@ export const useProviders = defineStore('providers', () => {
       return
     }
     const provider = providers.value[clip.provider]
-    return provider.getPlayerFormat(clip)
+    return provider.getPlayerFormat()
   }
 
   function getPlayerSource(clip: Clip): string | undefined {
