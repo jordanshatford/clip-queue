@@ -2,7 +2,7 @@ import type { Clip } from '@/integrations'
 import type { KickCategory, KickChannel, KickClip } from '@/integrations/kick'
 import type { TwitchClip, TwitchGame, TwitchUser } from '@/integrations/twitch'
 
-import { ClipProvider } from '@/integrations'
+import { IntegrationProviderID } from '@/integrations'
 
 export const mockKickCategory: KickCategory = {
   id: 123,
@@ -85,7 +85,7 @@ export const mockTwitchUser: TwitchUser = {
 }
 
 export const clipFromKick: Clip = {
-  provider: ClipProvider.KICK,
+  provider: IntegrationProviderID.KICK_CLIPS,
   submitters: ['testsubmitterkick'],
   id: 'testclipkick',
   title: 'testclipkick',
@@ -99,7 +99,7 @@ export const clipFromKick: Clip = {
 }
 
 export const clipFromTwitch: Clip = {
-  provider: ClipProvider.TWITCH,
+  provider: IntegrationProviderID.TWITCH_CLIPS,
   submitters: ['testsubmittertwitch'],
   id: 'testcliptwitch',
   title: 'testcliptwitch',

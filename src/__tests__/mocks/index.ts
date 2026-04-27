@@ -1,12 +1,12 @@
 import type { Clip } from '@/integrations'
 
-import { ClipProvider } from '@/integrations'
+import { IntegrationProviderID } from '@/integrations'
 
 export * from './kick'
 export * from './twitch'
 
 export const clipFromKick: Clip = {
-  provider: ClipProvider.KICK,
+  provider: IntegrationProviderID.KICK_CLIPS,
   submitters: ['testsubmitterkick'],
   id: 'testclipkick',
   title: 'testclipkick',
@@ -20,7 +20,7 @@ export const clipFromKick: Clip = {
 }
 
 export const clipFromTwitch: Clip = {
-  provider: ClipProvider.TWITCH,
+  provider: IntegrationProviderID.TWITCH_CLIPS,
   submitters: ['testsubmittertwitch'],
   id: 'testcliptwitch',
   title: 'testcliptwitch',

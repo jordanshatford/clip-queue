@@ -16,13 +16,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import type { ClipProvider } from '@/integrations'
+import type { IntegrationProviderID } from '@/integrations'
 
 import { m } from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'
 
 export interface Props {
-  provider: ClipProvider
+  provider: IntegrationProviderID
 }
 
 const { provider } = defineProps<Props>()

@@ -1,17 +1,19 @@
+import type { Ref } from 'vue'
+
 import { Cacheable } from '@/types/cacheable'
 
 /**
  * Enumeration of clip providers.
  */
-export enum ClipProvider {
+export enum IntegrationProviderID {
   /**
    * Kick.com clips.
    */
-  KICK = 'Kick',
+  KICK_CLIPS = 'kick-clips',
   /**
    * Twitch.tv clips.
    */
-  TWITCH = 'Twitch',
+  TWITCH_CLIPS = 'twitch-clips',
 }
 
 /**
@@ -26,7 +28,7 @@ export interface Clip {
   /**
    * The provider of the clip.
    */
-  provider: ClipProvider
+  provider: IntegrationProviderID
   /**
    * The ID of the clip.
    */
@@ -73,20 +75,20 @@ export interface IntegrationProvider extends Cacheable<Clip> {
   /**
    * The unique identifier for the authentication integration. This is used to identify the integration in the system and should be unique across all integrations.
    */
-  readonly id: string
+  readonly id: IntegrationProviderID
   /**
    * The display name of the authentication integration. This is used in the UI to represent the integration.
    */
-  readonly name: ClipProvider
-  /**
-   * The icon representing the authentication integration. This can be a URL to an image or an SVG string.
-   */
-  readonly icon: string
+  readonly name: string
   /**
    * Whether the provider is experimental.
    * Experimental providers are providers that are not fully tested and may be unstable.
    */
   readonly isExperimental: boolean
+  /**
+   * Whether the provider is enabled.
+   */
+  isEnabled: Ref<boolean>
   /**
    * Check if this providers supports that URL as a clip URL.
    * @param url - The URL of the clip.

@@ -1,5 +1,4 @@
 import { IntegrationID, type Integration } from '../common'
-import { default as k } from './core'
 import { KickProvider } from './providers'
 
 export * from './core/types'
@@ -9,7 +8,19 @@ export const clips = new KickProvider()
 export const kick: Integration = {
   id: IntegrationID.KICK,
   name: 'Kick',
-  icon: k.logo,
+  url: 'https://kick.com/',
+  icon: `
+    <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1539.02 1539.02">
+      <title>Kick</title>
+      <defs>
+        <style>
+          .cls-1{fill:#53fc19;fill-rule:evenodd;}
+        </style>
+      </defs>
+      <rect width="1539.02" height="1539.02"/>
+      <polygon class="cls-1" points="278.26 216.86 646.7 216.86 646.7 462.48 769.51 462.48 769.51 339.67 892.32 339.67 892.32 216.86 1260.75 216.86 1260.75 585.29 1137.94 585.29 1137.94 708.1 1015.13 708.1 1015.13 830.91 1137.94 830.91 1137.94 953.72 1260.75 953.72 1260.75 1322.16 892.32 1322.16 892.32 1199.35 769.51 1199.35 769.51 1076.54 646.7 1076.54 646.7 1322.16 278.26 1322.16 278.26 216.86"/>
+    </svg>
+  `,
   isExperimental: false,
   providers: [clips],
 }

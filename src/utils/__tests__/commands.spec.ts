@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { ClipSourceEvent, ClipSourceMessage } from '@/sources'
 
-import { ClipProvider } from '@/integrations'
+import { IntegrationProviderID } from '@/integrations'
 import { ClipSource } from '@/sources'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
@@ -104,16 +104,16 @@ describe('commands.ts', () => {
 
   it('can enable and disable providers', () => {
     const settings = useSettings()
-    expect(settings.queue.providers).toEqual(Object.values(ClipProvider))
+    expect(settings.queue.providers).toEqual(Object.values(IntegrationProviderID))
     commands.handleCommand(MOCK_EVENT, Command.DISABLE_PROVIDER.toString(), 'test') // Invalid provider
-    expect(settings.queue.providers).toEqual(Object.values(ClipProvider))
+    expect(settings.queue.providers).toEqual(Object.values(IntegrationProviderID))
     commands.handleCommand(MOCK_EVENT, Command.DISABLE_PROVIDER.toString(), 'kick')
-    expect(settings.queue.providers).not.toContain(ClipProvider.KICK)
+    expect(settings.queue.providers).not.toContain(IntegrationProviderID.KICK_CLIPS)
     commands.handleCommand(MOCK_EVENT, Command.ENABLE_PROVIDER.toString(), 'test') // Invalid provider
-    expect(settings.queue.providers).not.toContain(ClipProvider.KICK)
+    expect(settings.queue.providers).not.toContain(IntegrationProviderID.KICK_CLIPS)
     commands.handleCommand(MOCK_EVENT, Command.ENABLE_PROVIDER.toString(), 'kick')
-    expect(settings.queue.providers).toContain(ClipProvider.KICK)
-    for (const p of Object.values(ClipProvider)) {
+    expect(settings.queue.providers).toContain(IntegrationProviderID.KICK_CLIPS)
+    for (const p of Object.values(IntegrationProviderID)) {
       expect(settings.queue.providers).toContain(p)
     }
   })

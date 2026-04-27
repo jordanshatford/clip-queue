@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 import type { Clip } from '@/integrations'
 
-import { ClipProvider } from '@/integrations'
+import { IntegrationProviderID } from '@/integrations'
 import { BasicClipList, ClipList, toClipUUID } from '@/integrations/common'
 import { useLogger } from '@/stores/logger'
 import { useSettings } from '@/stores/settings'
@@ -64,7 +64,7 @@ export const useQueue = defineStore(
       upcoming.value.removeBySubmitter(submitter)
     }
 
-    function removeProviderClips(provider: ClipProvider) {
+    function removeProviderClips(provider: IntegrationProviderID) {
       upcoming.value.removeByProvider(provider)
     }
 

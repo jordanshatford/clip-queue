@@ -2,14 +2,14 @@ import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
-import { ClipProvider } from '@/integrations'
+import { IntegrationProviderID } from '@/integrations'
 
 import ProviderName from '../ProviderName.vue'
 
 describe('ProviderName.vue', () => {
   const wrapper = shallowMount(ProviderName, {
     props: {
-      provider: ClipProvider.TWITCH,
+      provider: IntegrationProviderID.TWITCH_CLIPS,
     },
     global: {
       plugins: [

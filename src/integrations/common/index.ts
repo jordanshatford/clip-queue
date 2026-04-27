@@ -21,6 +21,10 @@ export interface Integration {
    */
   readonly name: string
   /**
+   * A URL to the integration. This is used to provide linking in the UI for the integration.
+   */
+  readonly url: string
+  /**
    * The icon representing the integration as a string SVG.
    */
   readonly icon: string

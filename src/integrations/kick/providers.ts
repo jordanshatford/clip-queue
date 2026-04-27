@@ -1,19 +1,22 @@
-import type { Clip, PlayerFormat } from '@/integrations'
-import type { IntegrationProvider } from '@/integrations/common/provider'
+import { useStorage } from '@vueuse/core'
 
-import { ClipProvider } from '@/integrations'
+import type { Clip, PlayerFormat } from '@/integrations'
+
+import { IntegrationProviderID, type IntegrationProvider } from '@/integrations/common/provider'
 import { Cacheable } from '@/types/cacheable'
 
+import { key } from '../common'
 import kick from './core'
 
 /**
  * The Kick provider.
  */
 export class KickProvider extends Cacheable<Clip> implements IntegrationProvider {
-  public readonly id = 'kick-clips'
-  public readonly name: ClipProvider = ClipProvider.KICK
-  public readonly icon: string = kick.logo
+  public readonly id: IntegrationProviderID = IntegrationProviderID.KICK_CLIPS
+  public readonly name: string = 'Kick Clips'
   public readonly isExperimental: boolean = false
+
+  public isEnabled = useStorage<boolean>(key(this, 'enabled'), true)
 
   public hasClipSupport(url: string): boolean {
     const id = kick.getClipIdFromUrl(url)
@@ -23,7 +26,7 @@ export class KickProvider extends Cacheable<Clip> implements IntegrationProvider
   public async getClip(url: string): Promise<Clip> {
     const id = kick.getClipIdFromUrl(url)
     if (!id) {
-      throw new Error(`[${this.name}]: Invalid clip URL.`)
+      throw new Error(`[${this.name}]: Invalid clip URL (${url}).`)
     }
     if (this.cache[id]) {
       return this.cache[id]
@@ -40,7 +43,7 @@ export class KickProvider extends Cacheable<Clip> implements IntegrationProvider
         url,
         embedUrl: clip.clip_url,
         thumbnailUrl: clip.thumbnail_url,
-        provider: this.name,
+        provider: this.id,
         submitters: [],
       }
       this.cache[id] = response

@@ -1,11 +1,17 @@
+import { useStorage } from '@vueuse/core'
+
 import { env } from '@/config'
 import { Cacheable } from '@/types/cacheable'
 
-import type { Clip, PlayerFormat, IntegrationProvider } from '../common/provider'
-
-import { ClipProvider } from '../common/provider'
+import { key } from '../common'
+import {
+  type Clip,
+  type PlayerFormat,
+  type IntegrationProvider,
+  IntegrationProviderID,
+} from '../common/provider'
 import { getClips, getGames } from './core/api'
-import { logo, getClipIdFromUrl } from './core/utils'
+import { getClipIdFromUrl } from './core/utils'
 
 const { CLIENT_ID } = env
 
@@ -13,10 +19,11 @@ const { CLIENT_ID } = env
  * The Twitch provider.
  */
 export class TwitchProvider extends Cacheable<Clip> implements IntegrationProvider {
-  public readonly id = 'ttv-clips'
-  public readonly name: ClipProvider = ClipProvider.TWITCH
-  public readonly icon: string = logo
+  public readonly id: IntegrationProviderID = IntegrationProviderID.TWITCH_CLIPS
+  public readonly name: string = 'Twitch Clips'
   public readonly isExperimental: boolean = false
+
+  public isEnabled = useStorage<boolean>(key(this, 'enabled'), true)
 
   private ctx: () => string | Promise<string> = () => ''
 
@@ -35,7 +42,7 @@ export class TwitchProvider extends Cacheable<Clip> implements IntegrationProvid
   public async getClip(url: string): Promise<Clip> {
     const id = getClipIdFromUrl(url)
     if (!id) {
-      throw new Error(`[${this.name}]: Invalid clip URL.`)
+      throw new Error(`[${this.name}]: Invalid clip URL (${url}).`)
     }
     if (this.cache[id]) {
       return this.cache[id]
@@ -57,7 +64,7 @@ export class TwitchProvider extends Cacheable<Clip> implements IntegrationProvid
         url,
         embedUrl: clip.embed_url,
         thumbnailUrl: clip.thumbnail_url,
-        provider: this.name,
+        provider: this.id,
         submitters: [],
       }
       this.cache[id] = response

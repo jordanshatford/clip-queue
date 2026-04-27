@@ -34,16 +34,16 @@
           <MultiSelect
             v-model="formSettings.providers"
             input-id="allowedProviders"
-            :options="Object.values(ClipProvider)"
+            :options="Object.values(IntegrationProviderID)"
             :placeholder="m.none()"
             size="small"
             display="chip"
             aria-describedby="allowedProviders-help"
           >
-            <template #option="{ option }: { option: ClipProvider }">
+            <template #option="{ option }: { option: IntegrationProviderID }">
               <ProviderName :provider="option" />
             </template>
-            <template #chip="{ value }: { value: ClipProvider }">
+            <template #chip="{ value }: { value: IntegrationProviderID }">
               <Chip>
                 <ProviderName :provider="value" />
               </Chip>
@@ -87,7 +87,7 @@ import { useToast } from 'primevue/usetoast'
 import { ref, toRaw, useTemplateRef } from 'vue'
 
 import ProviderName from '@/components/ProviderName.vue'
-import { ClipProvider } from '@/integrations'
+import { IntegrationProviderID } from '@/integrations'
 import { m } from '@/paraglide/messages'
 import { usePreferences } from '@/stores/preferences'
 import { useSettings } from '@/stores/settings'

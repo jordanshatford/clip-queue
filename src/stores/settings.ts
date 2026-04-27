@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 
 import type { LogLevel } from '@/stores/logger'
 
-import { ClipProvider } from '@/integrations'
+import { IntegrationProviderID } from '@/integrations'
 import { Command } from '@/utils/commands'
 
 /**
@@ -42,7 +42,7 @@ export interface QueueSettings {
   /**
    * The providers allowed to be used for clips.
    */
-  providers: ClipProvider[]
+  providers: IntegrationProviderID[]
 }
 
 /**
@@ -67,7 +67,7 @@ export const DEFAULT_COMMAND_SETTINGS: CommandSettings = {
 export const DEFAULT_QUEUE_SETTINGS: QueueSettings = {
   hasAutoModerationEnabled: true,
   limit: null,
-  providers: Object.values(ClipProvider),
+  providers: Object.values(IntegrationProviderID),
 }
 
 export const DEFAULT_LOGGER_SETTINGS: LoggerSettings = {
@@ -98,7 +98,7 @@ export const useSettings = defineStore(
         return (
           queue.value.hasAutoModerationEnabled !== q.hasAutoModerationEnabled ||
           queue.value.limit !== q.limit ||
-          Object.values(ClipProvider).some(
+          Object.values(IntegrationProviderID).some(
             (p) => queue.value.providers.includes(p) !== q.providers.includes(p),
           )
         )
@@ -142,8 +142,8 @@ export const useSettings = defineStore(
       afterHydrate(context) {
         // Ensure that the providers in the settings are valid.
         const providers = context.store.queue.providers
-        const availableProviders = Object.values(ClipProvider)
-        context.store.queue.providers = providers.filter((p: ClipProvider) => {
+        const availableProviders = Object.values(IntegrationProviderID)
+        context.store.queue.providers = providers.filter((p: IntegrationProviderID) => {
           return availableProviders.includes(p)
         })
         // Ensure that the commands allowed are valid.

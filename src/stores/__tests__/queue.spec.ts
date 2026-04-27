@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import type { Clip } from '@/integrations'
 
 import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
-import { ClipProvider } from '@/integrations'
+import { IntegrationProviderID } from '@/integrations'
 
 import { useQueue } from '../queue'
 import { useSettings } from '../settings'
@@ -68,7 +68,7 @@ describe('queue.ts', () => {
     queue.play({
       ...clipFromTwitch,
       id: 'not-valid',
-      provider: ClipProvider.TWITCH,
+      provider: IntegrationProviderID.TWITCH_CLIPS,
       submitters: [],
     })
     expect(queue.upcoming.toArray()).toContainEqual(clipFromTwitch)
@@ -88,7 +88,7 @@ describe('queue.ts', () => {
     queue.remove({
       ...clipFromTwitch,
       id: 'not-valid',
-      provider: ClipProvider.TWITCH,
+      provider: IntegrationProviderID.TWITCH_CLIPS,
       submitters: [],
     })
     expect(queue.upcoming.size()).toEqual(queueLength - 1)
@@ -111,7 +111,7 @@ describe('queue.ts', () => {
     queue.add({ ...clipFromKick, id: 'other2' })
     queue.add(clipFromTwitch)
     expect(queue.upcoming.size()).toEqual(4)
-    queue.removeProviderClips(ClipProvider.KICK)
+    queue.removeProviderClips(IntegrationProviderID.KICK_CLIPS)
     expect(queue.upcoming.size()).toEqual(1)
   })
 
@@ -188,19 +188,19 @@ describe('queue.ts', () => {
       ...clipFromTwitch,
       id: 'test',
       submitters: ['s'],
-      provider: ClipProvider.TWITCH,
+      provider: IntegrationProviderID.TWITCH_CLIPS,
     })
     queue.add({
       ...clipFromTwitch,
       id: 'test2',
       submitters: ['s'],
-      provider: ClipProvider.TWITCH,
+      provider: IntegrationProviderID.TWITCH_CLIPS,
     })
     queue.add({
       ...clipFromTwitch,
       id: 'test3',
       submitters: ['s'],
-      provider: ClipProvider.TWITCH,
+      provider: IntegrationProviderID.TWITCH_CLIPS,
     })
     expect(queue.upcoming.size()).toEqual(2)
   })
@@ -210,7 +210,7 @@ describe('queue.ts', () => {
       ...clipFromTwitch,
       id: 'test',
       submitters: ['testsubmitter'],
-      provider: ClipProvider.TWITCH,
+      provider: IntegrationProviderID.TWITCH_CLIPS,
     }
     const queue = useQueue()
     const settings = useSettings()
