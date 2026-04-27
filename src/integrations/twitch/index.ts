@@ -3,6 +3,8 @@ import { TwitchAuthentication } from './authentication'
 import { logo } from './core/utils'
 import { TwitchProvider } from './providers'
 
+export * from './core/types'
+
 export const authentication = new TwitchAuthentication()
 export const clips = new TwitchProvider(() => authentication.token.value)
 

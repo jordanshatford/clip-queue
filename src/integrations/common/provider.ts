@@ -77,7 +77,7 @@ export interface IntegrationProvider extends Cacheable<Clip> {
   /**
    * The display name of the authentication integration. This is used in the UI to represent the integration.
    */
-  readonly name: string
+  readonly name: ClipProvider
   /**
    * The icon representing the authentication integration. This can be a URL to an image or an SVG string.
    */
@@ -113,16 +113,4 @@ export interface IntegrationProvider extends Cacheable<Clip> {
    * @throws An error if the player source cannot be retrieved.
    */
   getPlayerSource(clip: Clip): string
-}
-
-export abstract class BaseClipProvider extends Cacheable<Clip> implements IntegrationProvider {
-  public abstract readonly id: string
-  public abstract readonly name: ClipProvider
-  public abstract readonly icon: string
-  public readonly isExperimental: boolean = false
-
-  public abstract hasClipSupport(url: string): boolean
-  public abstract getClip(url: string): Promise<Clip>
-  public abstract getPlayerFormat(clip: Clip): PlayerFormat
-  public abstract getPlayerSource(clip: Clip): string
 }

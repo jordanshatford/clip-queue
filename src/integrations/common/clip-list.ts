@@ -1,6 +1,6 @@
 import type { Clip, ClipProvider } from '@/integrations/common/provider'
 
-import { toClipUUID } from './utils'
+import { toClipUUID } from '@/integrations/common'
 
 /**
  * A basic list of clips. Clips are not sorted.

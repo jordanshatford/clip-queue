@@ -1,13 +1,8 @@
-import type { BaseClipProvider } from '@/integrations'
+import type { IntegrationProvider } from '@/integrations'
 
 import { ClipProvider } from '@/integrations'
+import { clips as kickClips } from '@/integrations/kick'
 import { clips as twitchClips } from '@/integrations/twitch'
-
-import { KickProvider } from './kick'
-
-export * from './clip-list'
-export * from './kick'
-export * from './utils'
 
 /**
  * The providers.
@@ -18,8 +13,8 @@ export const providers = {
    * @param callbacks - The callbacks.
    * @returns The providers.
    */
-  all: (): Record<ClipProvider, BaseClipProvider> => ({
-    [ClipProvider.KICK]: new KickProvider(),
+  all: (): Record<ClipProvider, IntegrationProvider> => ({
+    [ClipProvider.KICK]: kickClips,
     [ClipProvider.TWITCH]: twitchClips,
   }),
 }

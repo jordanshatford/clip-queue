@@ -1,15 +1,19 @@
 import type { Clip, PlayerFormat } from '@/integrations'
+import type { IntegrationProvider } from '@/integrations/common/provider'
 
-import { BaseClipProvider, ClipProvider } from '@/integrations'
-import kick from '@/services/kick'
+import { ClipProvider } from '@/integrations'
+import { Cacheable } from '@/types/cacheable'
+
+import kick from './core'
 
 /**
  * The Kick provider.
  */
-export class KickProvider extends BaseClipProvider {
+export class KickProvider extends Cacheable<Clip> implements IntegrationProvider {
   public readonly id = 'kick-clips'
   public readonly name: ClipProvider = ClipProvider.KICK
   public readonly icon: string = kick.logo
+  public readonly isExperimental: boolean = false
 
   public hasClipSupport(url: string): boolean {
     const id = kick.getClipIdFromUrl(url)

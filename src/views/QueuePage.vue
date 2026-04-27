@@ -30,8 +30,8 @@ import Message from 'primevue/message'
 
 import ClipPlayer from '@/components/ClipPlayer.vue'
 import ClipQueue from '@/components/ClipQueue.vue'
+import { toClipUUID } from '@/integrations/common'
 import { m } from '@/paraglide/messages'
-import { toClipUUID } from '@/providers'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
 

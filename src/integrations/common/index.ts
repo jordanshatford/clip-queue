@@ -2,9 +2,11 @@ import type { IntegrationAuthentication } from './authentication'
 import type { IntegrationProvider } from './provider'
 
 export * from './authentication'
+export * from './clip-list'
 export * from './utils'
 
 export enum IntegrationID {
+  KICK = 'kick',
   TWITCH = 'twitch',
 }
 
@@ -37,5 +39,5 @@ export interface Integration {
    * Clip providers for the integration. Many can be defined, for example, if you wanted
    * to have a separate provider for Twitch clips and Twitch VODs.
    */
-  readonly providers?: IntegrationProvider[]
+  readonly providers: IntegrationProvider[]
 }

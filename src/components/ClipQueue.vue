@@ -46,8 +46,8 @@ import Button from 'primevue/button'
 import type { Clip } from '@/integrations'
 
 import ClipCard from '@/components/ClipCard.vue'
+import { toClipUUID } from '@/integrations/common'
 import { m } from '@/paraglide/messages'
-import { toClipUUID } from '@/providers'
 
 export interface Props {
   title?: string

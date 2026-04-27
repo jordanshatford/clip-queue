@@ -1,8 +1,9 @@
 import { env } from '@/config'
+import { Cacheable } from '@/types/cacheable'
 
-import type { Clip, PlayerFormat } from '../common/provider'
+import type { Clip, PlayerFormat, IntegrationProvider } from '../common/provider'
 
-import { BaseClipProvider, ClipProvider } from '../common/provider'
+import { ClipProvider } from '../common/provider'
 import { getClips, getGames } from './core/api'
 import { logo, getClipIdFromUrl } from './core/utils'
 
@@ -11,10 +12,11 @@ const { CLIENT_ID } = env
 /**
  * The Twitch provider.
  */
-export class TwitchProvider extends BaseClipProvider {
+export class TwitchProvider extends Cacheable<Clip> implements IntegrationProvider {
   public readonly id = 'ttv-clips'
   public readonly name: ClipProvider = ClipProvider.TWITCH
   public readonly icon: string = logo
+  public readonly isExperimental: boolean = false
 
   private ctx: () => string | Promise<string> = () => ''
 

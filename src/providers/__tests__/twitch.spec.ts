@@ -2,9 +2,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { TwitchClip, TwitchGame } from '@/integrations/twitch'
 
+import { mockKickClip, mockTwitchClip, mockTwitchGame } from '@/integrations/common/__tests__/mocks'
 import { TwitchProvider } from '@/integrations/twitch/providers'
-
-import { mockKickClip, mockTwitchClip, mockTwitchGame } from './mocks'
 
 vi.mock('@/integrations/twitch/core/api', async (importOriginal) => {
   return {
