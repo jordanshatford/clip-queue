@@ -15,6 +15,7 @@ declare module 'vue-router' {
 }
 
 export enum RouteNameConstants {
+  INTEGRATIONS = 'integrations',
   HOME = 'home',
   QUEUE = 'queue',
   HISTORY = 'history',
@@ -27,6 +28,14 @@ export enum RouteNameConstants {
   SETTINGS_LOGS = 'settings_logs',
   SETTINGS_OTHER = 'settings_other',
 }
+
+const integrationRoutes: RouteRecordRaw[] = [
+  {
+    path: '/integrations/:id',
+    name: RouteNameConstants.INTEGRATIONS,
+    component: () => import('@/views/IntegrationsPage.vue'),
+  },
+]
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -133,6 +142,7 @@ const router = createRouter({
       },
     },
     ...routes,
+    ...integrationRoutes,
     {
       path: '/:pathMatch(.*)*',
       redirect: { name: RouteNameConstants.HOME },
@@ -146,12 +156,16 @@ router.beforeEach(async (to, from) => {
   const user = useUser()
   // Attempt to validate the token if not previously done so. This is
   // to ensure the refresh returns you to the same route.
-  if (!user.hasAttemptedAutoLogin && !user.isLoggedIn && !(to.hash && to.hash !== '')) {
+  if (
+    !user.hasAttemptedAutoLogin &&
+    !user.isLoggedIn &&
+    !(to.name === RouteNameConstants.INTEGRATIONS)
+  ) {
     logger.debug('[Router]: Attempting to auto-login user.')
     await user.autoLoginIfPossible()
   }
-  // If the user is trying to login via twitch
-  if (to.hash && to.hash !== '' && !user.isLoggedIn) {
+  // If the user is trying to login via an integration
+  if (to.name === RouteNameConstants.INTEGRATIONS && to.hash !== '' && !user.isLoggedIn) {
     await user.login(to.hash)
     logger.debug(`[Router]: User is logging in via Twitch ${user.details?.name}.`)
     return { name: RouteNameConstants.QUEUE, hash: '' }
@@ -167,6 +181,7 @@ export default router
 
 // Translations for each of the routes.
 export const routeTranslations = {
+  [RouteNameConstants.INTEGRATIONS]: () => '',
   [RouteNameConstants.HOME]: () => '',
   [RouteNameConstants.QUEUE]: m.queue,
   [RouteNameConstants.HISTORY]: m.history,

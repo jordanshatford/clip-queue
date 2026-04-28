@@ -39,8 +39,6 @@ export class TwitchAuthentication implements IntegrationAuthentication {
     if (await auth.isLoginValid(this.token)) {
       this.isLoggedIn = true
     } else {
-      // Cleanup any details about a previous session as it has expired or does not exist.
-      await this.logout()
       throw new Error('Failed to auto-login user.')
     }
     return this.user

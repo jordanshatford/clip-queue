@@ -4,7 +4,7 @@
       <div class="flex items-center justify-between gap-2">
         <div class="flex items-center gap-2">
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <svg v-if="integration.icon" class="h-5 w-5" v-html="integration.icon"></svg>
+          <svg v-if="integration.icon" class="size-5" v-html="integration.icon"></svg>
           {{ integration.name }}
         </div>
         <div class="flex items-center gap-1">
