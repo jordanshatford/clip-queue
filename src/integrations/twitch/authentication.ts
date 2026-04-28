@@ -1,5 +1,4 @@
 import { useStorage } from '@vueuse/core'
-import { ref } from 'vue'
 
 import { env } from '@/config'
 
@@ -8,35 +7,44 @@ import {
   type IntegrationAuthentication,
   IntegrationAuthenticationID,
 } from '../common'
-import { key } from '../common'
 import { getUsers } from './core/api'
 import auth from './core/auth'
 
 const { CLIENT_ID, REDIRECT_URI } = env
 
+const user = useStorage<UserDetails>('__cqi_ttv-auth_user', {
+  id: '',
+  name: '',
+  profileImageURL: '',
+})
+
+const token = useStorage<string>('__cqi_ttv-auth_token', '')
+
 export class TwitchAuthentication implements IntegrationAuthentication {
   public readonly id: IntegrationAuthenticationID = IntegrationAuthenticationID.TWITCH
-  public isLoggedIn = ref<boolean>(false)
-  public user = useStorage<UserDetails>(key(this, 'user'), {
-    id: '',
-    name: '',
-    profileImageURL: '',
-  })
-  public token = useStorage<string>(key(this, 'token'), '')
+  public isLoggedIn = false
+
+  public get user(): UserDetails {
+    return user.value
+  }
+
+  public get token(): string {
+    return token.value
+  }
 
   public async redirect(): Promise<void> {
     auth.redirect(CLIENT_ID, REDIRECT_URI, ['openid', 'chat:read'])
   }
 
   public async autoLogin(): Promise<UserDetails> {
-    if (await auth.isLoginValid(this.token.value)) {
-      this.isLoggedIn.value = true
+    if (await auth.isLoginValid(this.token)) {
+      this.isLoggedIn = true
     } else {
       // Cleanup any details about a previous session as it has expired or does not exist.
       await this.logout()
       throw new Error('Failed to auto-login user.')
     }
-    return this.user.value
+    return this.user
   }
 
   public async login(hash: string): Promise<UserDetails> {
@@ -46,43 +54,40 @@ export class TwitchAuthentication implements IntegrationAuthentication {
     }
     const { access_token, decodedIdToken } = authInfo
 
-    if (
-      this.user.value?.name !== decodedIdToken.preferred_username ||
-      this.token.value !== access_token
-    ) {
-      this.user.value = {
+    if (this.user?.name !== decodedIdToken.preferred_username || this.token !== access_token) {
+      user.value = {
         id: decodedIdToken.sub,
         name: decodedIdToken.preferred_username,
         profileImageURL: undefined, // Will be populated after fetching user data from Twitch API
       }
-      this.token.value = access_token
+      token.value = access_token
 
       // Attempt to get the username from Twitch API as the preferred username may not be set
       // or the user may have a preferred username that is different from their Twitch username.
       // For example, if the user has simplified chinese characters in their preferred username.
-      const users = await getUsers(CLIENT_ID, this.token.value, [])
+      const users = await getUsers(CLIENT_ID, this.token, [])
       if (users.length > 0 && users[0]) {
-        this.user.value = {
-          ...this.user.value,
+        user.value = {
+          ...user.value,
           id: users[0].id,
           name: users[0].login,
           profileImageURL: users[0].profile_image_url,
         }
       }
-      this.isLoggedIn.value = true
-      return this.user.value
+      this.isLoggedIn = true
+      return this.user
     }
     throw new Error('User is already logged in with the same credentials.')
   }
 
   public async logout(): Promise<void> {
-    const token = this.token.value
-    this.token.value = undefined
-    this.user.value = undefined
-    this.isLoggedIn.value = false
+    const t = token.value
+    token.value = undefined
+    user.value = undefined
+    this.isLoggedIn = false
     if (token) {
       try {
-        await auth.logout(CLIENT_ID, token)
+        await auth.logout(CLIENT_ID, t)
       } catch (e) {
         throw new Error(`[Twitch]: Failed to logout, ${e}`)
       }

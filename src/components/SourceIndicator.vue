@@ -1,12 +1,12 @@
 <template>
-  <i v-tooltip="statusTranslations[status]()" :class="`pi pi-circle-fill ${color}`" />
+  <i :key="status" v-tooltip="statusTranslations[status]()" :class="`pi pi-circle-fill ${color}`" />
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 
+import { ClipSourceStatus } from '@/integrations/common/source'
 import { m } from '@/paraglide/messages'
-import { ClipSourceStatus } from '@/sources'
 
 export interface Props {
   status: ClipSourceStatus

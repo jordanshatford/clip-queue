@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed, type Reactive } from 'vue'
 
 import {
   type Clip,
@@ -15,7 +15,9 @@ export const useProviders = defineStore('providers', () => {
   const settings = useSettings()
   const logger = useLogger()
 
-  const providers = ref<IntegrationProvider[]>(integrations.flatMap((i) => i.providers))
+  const providers = computed((): Reactive<IntegrationProvider>[] =>
+    integrations.flatMap((i) => i.providers),
+  )
 
   const svg = computed(() => {
     return (provider: IntegrationProviderID) => {

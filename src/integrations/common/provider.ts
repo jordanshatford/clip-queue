@@ -1,5 +1,3 @@
-import type { Ref } from 'vue'
-
 import { Cacheable } from '@/types/cacheable'
 
 /**
@@ -88,7 +86,7 @@ export interface IntegrationProvider extends Cacheable<Clip> {
   /**
    * Whether the provider is enabled.
    */
-  isEnabled: Ref<boolean>
+  isEnabled: boolean
   /**
    * Check if this providers supports that URL as a clip URL.
    * @param url - The URL of the clip.

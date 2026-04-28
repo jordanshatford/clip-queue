@@ -1,9 +1,11 @@
+import { reactive } from 'vue'
+
 import { IntegrationID, type Integration } from '../common'
 import { KickProvider } from './providers'
 
 export * from './core/types'
 
-export const clips = new KickProvider()
+export const clips = reactive(new KickProvider())
 
 export const kick: Integration = {
   id: IntegrationID.KICK,

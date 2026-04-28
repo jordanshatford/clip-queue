@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
-import type { IBaseClipSource } from '@/sources'
+import type { IntegrationSource } from '@/integrations/common/source'
 
-import { ClipSourceStatus, TwitchChatSource } from '@/sources'
+import { source as twitchChatSource } from '@/integrations/twitch'
 import { useProviders } from '@/stores/providers'
 import { useUser } from '@/stores/user'
 import commands, { Command } from '@/utils/commands'
@@ -14,7 +14,7 @@ import { useSettings } from './settings'
 
 const ctx = () => {
   const user = useUser()
-  return { username: user.details.name }
+  return { username: user.details?.name }
 }
 
 export const useSources = defineStore('sources', () => {
@@ -22,14 +22,9 @@ export const useSources = defineStore('sources', () => {
   const settings = useSettings()
   const logger = useLogger()
 
-  const source = ref<IBaseClipSource>(new TwitchChatSource())
-  const status = ref<ClipSourceStatus>(source.value.status)
-  const logo = computed(() => source.value?.svg)
+  const source = ref<IntegrationSource>(twitchChatSource)
 
   // setup watching chat
-  source.value.on('status', (event) => {
-    status.value = event.data
-  })
   source.value.on('connected', (event) => logger.debug(`[${event.source}]: Connected.`))
   source.value.on('disconnected', (event) => logger.debug(`[${event.source}]: Disconnected.`))
   source.value.on('join', (event) => {
@@ -121,5 +116,5 @@ export const useSources = defineStore('sources', () => {
     await source.value.reconnect()
   }
 
-  return { logo, status, connect, disconnect, reconnect }
+  return { connect, disconnect, reconnect }
 })

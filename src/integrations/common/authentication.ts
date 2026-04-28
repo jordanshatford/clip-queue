@@ -1,5 +1,3 @@
-import type { Ref } from 'vue'
-
 /**
  * User details provided by an authentication integration.
  */
@@ -40,15 +38,15 @@ export interface IntegrationAuthentication {
   /**
    * A boolean indicating whether the user is currently logged in with this integration.
    */
-  readonly isLoggedIn?: Ref<boolean>
+  readonly isLoggedIn?: boolean
   /**
    * The user details.
    */
-  readonly user?: Ref<UserDetails>
+  readonly user?: UserDetails
   /**
    * An authentication token provided by the integration.
    */
-  readonly token?: Ref<string>
+  readonly token?: string
   /**
    * Redirects the user to the authentication page of the provider. This is typically called when the user initiates a login action.
    */

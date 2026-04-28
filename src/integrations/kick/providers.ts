@@ -5,8 +5,9 @@ import type { Clip, PlayerFormat } from '@/integrations'
 import { IntegrationProviderID, type IntegrationProvider } from '@/integrations/common/provider'
 import { Cacheable } from '@/types/cacheable'
 
-import { key } from '../common'
 import kick from './core'
+
+const isEnabled = useStorage<boolean>('__cqi_kick-clips_enabled', true)
 
 /**
  * The Kick provider.
@@ -16,7 +17,13 @@ export class KickProvider extends Cacheable<Clip> implements IntegrationProvider
   public readonly name: string = 'Kick Clips'
   public readonly isExperimental: boolean = false
 
-  public isEnabled = useStorage<boolean>(key(this, 'enabled'), true)
+  public get isEnabled() {
+    return isEnabled.value
+  }
+
+  public set isEnabled(value: boolean) {
+    isEnabled.value = value
+  }
 
   public hasClipSupport(url: string): boolean {
     const id = kick.getClipIdFromUrl(url)

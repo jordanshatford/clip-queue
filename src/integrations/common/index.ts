@@ -1,5 +1,8 @@
+import type { Reactive } from 'vue'
+
 import type { IntegrationAuthentication } from './authentication'
 import type { IntegrationProvider } from './provider'
+import type { IntegrationSource } from './source'
 
 export * from './authentication'
 export * from './clip-list'
@@ -38,10 +41,14 @@ export interface Integration {
    * be used to get authentication details required for other parts of the integration to
    * function.
    */
-  readonly authentication?: IntegrationAuthentication
+  readonly authentication?: Reactive<IntegrationAuthentication>
   /**
    * Clip providers for the integration. Many can be defined, for example, if you wanted
    * to have a separate provider for Twitch clips and Twitch VODs.
    */
-  readonly providers: IntegrationProvider[]
+  readonly providers: Reactive<IntegrationProvider>[]
+  /**
+   * Clip source for the integration. URLs from this source will be detected.
+   */
+  readonly source?: Reactive<IntegrationSource>
 }

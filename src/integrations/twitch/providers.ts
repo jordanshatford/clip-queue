@@ -3,7 +3,6 @@ import { useStorage } from '@vueuse/core'
 import { env } from '@/config'
 import { Cacheable } from '@/types/cacheable'
 
-import { key } from '../common'
 import {
   type Clip,
   type PlayerFormat,
@@ -15,6 +14,8 @@ import { getClipIdFromUrl } from './core/utils'
 
 const { CLIENT_ID } = env
 
+const isEnabled = useStorage<boolean>('__cqi_ttv-clips_enabled', true)
+
 /**
  * The Twitch provider.
  */
@@ -23,7 +24,13 @@ export class TwitchProvider extends Cacheable<Clip> implements IntegrationProvid
   public readonly name: string = 'Twitch Clips'
   public readonly isExperimental: boolean = false
 
-  public isEnabled = useStorage<boolean>(key(this, 'enabled'), true)
+  public get isEnabled() {
+    return isEnabled.value
+  }
+
+  public set isEnabled(value: boolean) {
+    isEnabled.value = value
+  }
 
   private ctx: () => string | Promise<string> = () => ''
 

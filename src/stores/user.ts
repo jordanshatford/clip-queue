@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed, ref, type Reactive } from 'vue'
+
+import type { IntegrationAuthentication } from '@/integrations/common'
 
 import { authentication } from '@/integrations/twitch'
 
@@ -7,14 +9,14 @@ import { useLogger } from './logger'
 import { useSources } from './sources'
 
 export const useUser = defineStore('user', () => {
-  const integration = authentication
+  const integration: Reactive<IntegrationAuthentication> = authentication
   const sources = useSources()
   const logger = useLogger()
 
   const hasAttemptedAutoLogin = ref<boolean>(false)
-  const isLoggedIn = computed(() => integration.isLoggedIn.value)
-  const details = computed(() => integration.user.value)
-  const token = computed(() => integration.token.value)
+  const isLoggedIn = computed(() => integration.isLoggedIn)
+  const details = computed(() => integration.user)
+  const token = computed(() => integration.token)
 
   function redirect(): void {
     integration.redirect()

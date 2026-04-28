@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from 'vitest'
 
-import { EventEmitter } from '../emitter'
+import { EventEmitter } from '../source'
 
 type TestEvents = {
   test: () => void

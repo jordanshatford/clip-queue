@@ -1,5 +1,47 @@
-import { EventEmitter } from './emitter'
-import { getAllURLsFromText } from './utils'
+/**
+ * A simple event emitter.
+ */
+export class EventEmitter<
+  Events extends {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: (...args: any[]) => void | Promise<void>
+  },
+> {
+  private listeners: Partial<Record<keyof Events, Array<Events[keyof Events]>>>
+
+  public constructor() {
+    this.listeners = {}
+  }
+
+  /**
+   * Add a listener for an event.
+   * @param event - The event to listen for.
+   * @param listener - The listener for the event.
+   * @returns This instance.
+   */
+  public on<E extends keyof Events>(event: E, listener: Events[E]): this {
+    if (!this.listeners[event]) {
+      this.listeners[event] = []
+    }
+    this.listeners[event].push(listener)
+    return this
+  }
+
+  /**
+   * Emit an event.
+   * @param event - The event to emit.
+   * @param args - The arguments to pass to the listeners.
+   * @returns True if the event was emitted.
+   */
+  public emit<E extends keyof Events>(event: E, ...args: Parameters<Events[E]>): boolean {
+    const listeners = this.listeners[event]
+    if (listeners && listeners.length > 0) {
+      listeners.forEach((listener) => listener(...args))
+      return true
+    }
+    return false
+  }
+}
 
 /**
  * Enumeration of clip sources.
@@ -86,7 +128,7 @@ export interface ClipSourceModeration {
 /**
  * Events emitted by a clip source.
  */
-type ClipSourceEventsMap = {
+export type ClipSourceEventsMap = {
   /**
    * Event emitted when the source is connected.
    * @param event - The event data.
@@ -137,19 +179,15 @@ type ClipSourceEventsMap = {
 /**
  * The base clip source.
  */
-export type IBaseClipSource = {
+export type IntegrationSource = {
   /**
    * The name of the source.
    */
-  name: ClipSource
-  /**
-   * The SVG of the source.
-   */
-  svg: string
+  readonly name: ClipSource
   /**
    * Whether the source is experimental.
    */
-  isExperimental: boolean
+  readonly isExperimental: boolean
   /**
    * The current status of the source.
    */
@@ -171,113 +209,3 @@ export type IBaseClipSource = {
    */
   reconnect: () => Promise<void>
 } & Pick<EventEmitter<ClipSourceEventsMap>, 'on'>
-
-export abstract class BaseClipSource
-  extends EventEmitter<ClipSourceEventsMap>
-  implements IBaseClipSource
-{
-  public abstract name: ClipSource
-  public abstract svg: string
-
-  public isExperimental = false
-  public status = ClipSourceStatus.UNKNOWN
-
-  public abstract connect(channel: string): Promise<void>
-  public abstract disconnect(): Promise<void>
-  public abstract reconnect(): Promise<void>
-
-  private timestamp() {
-    return new Date().toISOString()
-  }
-
-  protected handleStatusUpdate(status: ClipSourceStatus, timestamp?: string) {
-    this.status = status
-    this.emit('status', {
-      timestamp: timestamp ?? this.timestamp(),
-      source: this.name,
-      data: status,
-    })
-  }
-
-  protected handleError(error: unknown) {
-    const timestamp = this.timestamp()
-    this.emit('error', {
-      timestamp,
-      source: this.name,
-      data: error,
-    })
-    this.handleStatusUpdate(ClipSourceStatus.ERROR, timestamp)
-  }
-
-  protected handleConnected() {
-    const timestamp = this.timestamp()
-    this.emit('connected', { timestamp, source: this.name, data: undefined })
-    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
-  }
-
-  protected handleDisconnected(reason: string) {
-    const timestamp = this.timestamp()
-    this.emit('disconnected', {
-      timestamp,
-      source: this.name,
-      data: reason,
-    })
-    this.handleStatusUpdate(ClipSourceStatus.DISCONNECTED, timestamp)
-  }
-
-  protected handleJoin(channel: string) {
-    const timestamp = this.timestamp()
-    this.emit('join', {
-      timestamp,
-      source: this.name,
-      data: channel,
-    })
-    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
-  }
-
-  protected handleLeave(channel: string) {
-    const timestamp = this.timestamp()
-    this.emit('leave', {
-      timestamp,
-      source: this.name,
-      data: channel,
-    })
-    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
-  }
-
-  protected handleMessage(message: Omit<ClipSourceMessage, 'urls'>) {
-    const timestamp = this.timestamp()
-    this.emit('message', {
-      timestamp,
-      source: this.name,
-      data: {
-        ...message,
-        urls: getAllURLsFromText(message.text),
-      },
-    })
-    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
-  }
-
-  protected handleMessageDeleted(message: Omit<ClipSourceMessage, 'urls'>) {
-    const timestamp = this.timestamp()
-    this.emit('message-deleted', {
-      timestamp,
-      source: this.name,
-      data: {
-        ...message,
-        urls: getAllURLsFromText(message.text),
-      },
-    })
-    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
-  }
-
-  protected handleModeration(moderation: ClipSourceModeration) {
-    const timestamp = this.timestamp()
-    this.emit('moderation', {
-      timestamp,
-      source: this.name,
-      data: moderation,
-    })
-    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
-  }
-}

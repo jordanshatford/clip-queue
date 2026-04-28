@@ -2,7 +2,7 @@ import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
 
-import type { ClipSourceEvent, ClipSourceMessage } from '@/sources'
+import type { ClipSourceEvent, ClipSourceMessage } from '@/integrations/common/source'
 
 import { IntegrationProviderID } from '@/integrations'
 import { m } from '@/paraglide/messages'

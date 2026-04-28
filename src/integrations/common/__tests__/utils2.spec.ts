@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { ClipSource } from '../types'
+import { ClipSource } from '../source'
 import { fromSubmitterUUID, getAllURLsFromText, toSubmitterUUID } from '../utils'
 
 describe('utils.ts', () => {
