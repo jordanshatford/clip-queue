@@ -9,7 +9,7 @@ export * from './authentication'
 export * from './clip-list'
 export * from './provider'
 export * from './source'
-export { toClipUUID } from './utils'
+export { toClipUUID, getAllURLsFromText } from './utils'
 
 export interface Integration {
   /**

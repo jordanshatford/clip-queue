@@ -3,7 +3,8 @@ import { ref } from 'vue'
 
 import type { IntegrationSource, ClipSourceEventsMap } from '../common'
 
-import { getAllURLsFromText, ClipSourceStatus, EventEmitter } from '../common'
+import { getAllURLsFromText } from '../common'
+import { ClipSourceStatus, EventEmitter } from '../common/source'
 import { IntegrationID } from '../indentify'
 
 const status = ref<ClipSourceStatus>(ClipSourceStatus.UNKNOWN)

@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 import type { IntegrationSource } from '@/integrations/common'
 
-import { source as twitchChatSource } from '@/integrations/twitch'
+import { chat as chatSource } from '@/integrations/twitch'
 import { useProviders } from '@/stores/providers'
 import { useUser } from '@/stores/user'
 import commands, { Command } from '@/utils/commands'
@@ -22,7 +22,7 @@ export const useSources = defineStore('sources', () => {
   const settings = useSettings()
   const logger = useLogger()
 
-  const source = ref<IntegrationSource>(twitchChatSource)
+  const source = ref<IntegrationSource>(chatSource)
 
   // setup watching chat
   source.value.on('connected', (event) => logger.debug(`[${event.source}]: Connected.`))

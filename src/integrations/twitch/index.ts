@@ -11,7 +11,7 @@ export * from './core/types'
 
 export const authentication = reactive<TwitchAuthentication>(new TwitchAuthentication())
 export const clips = reactive(new TwitchProvider(() => authentication.token))
-export const source = reactive(new TwitchChatSource())
+export const chat = reactive(new TwitchChatSource())
 
 export const twitch: Integration = {
   id: IntegrationID.TWITCH,
@@ -39,5 +39,5 @@ export const twitch: Integration = {
   isExperimental: false,
   authentication,
   providers: [clips],
-  source,
+  source: chat,
 }
