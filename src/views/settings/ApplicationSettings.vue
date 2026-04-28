@@ -3,6 +3,40 @@
     <template #content>
       <form ref="formElement" @submit.prevent="onSubmit" @reset="onReset">
         <div class="flex flex-col gap-2 text-left">
+          <label for="commandPrefix">{{ m.command_prefix() }}</label>
+          <InputText
+            id="commandPrefix"
+            v-model="formSettings.prefix"
+            required
+            maxlength="8"
+            size="small"
+            aria-describedby="commandPrefix-help"
+            @keydown.space.prevent
+          />
+          <Message id="commandPrefix-help" size="small" severity="secondary" variant="simple">{{
+            m.command_prefix_description()
+          }}</Message>
+          <label for="allowedCommands">{{ m.allowed_commands() }}</label>
+          <MultiSelect
+            v-model="formSettings.allowed"
+            input-id="allowedCommands"
+            :options="Object.values(Command)"
+            :placeholder="m.none()"
+            display="chip"
+            size="small"
+            aria-describedby="allowedCommands-help"
+          >
+            <template #option="{ option }: { option: Command }">
+              <div class="flex flex-col gap-1">
+                <p>{{ toCommandCall(option) }}</p>
+                <small>{{ commands.help.value[option].description }}</small>
+              </div>
+            </template>
+          </MultiSelect>
+          <Message id="allowedCommands-help" size="small" severity="secondary" variant="simple">{{
+            m.allowed_commands_description()
+          }}</Message>
+          <Divider />
           <div class="flex justify-between">
             <label for="autoModeration">{{ m.auto_mod() }}</label>
             <ToggleSwitch
@@ -34,18 +68,18 @@
         <div class="mt-3">
           <Button
             :label="m.save()"
+            size="small"
             class="mr-2"
             type="submit"
-            size="small"
             severity="secondary"
-            :disabled="!settings.isQueueSettingsModified(formSettings)"
+            :disabled="!settings.isApplicationSettingsModified(formSettings)"
           ></Button>
           <Button
-            :label="m.cancel()"
             type="reset"
+            :label="m.cancel()"
             size="small"
             severity="danger"
-            :disabled="!settings.isQueueSettingsModified(formSettings)"
+            :disabled="!settings.isApplicationSettingsModified(formSettings)"
           ></Button>
         </div>
       </form>
@@ -56,8 +90,11 @@
 <script setup lang="ts">
 import Button from 'primevue/button'
 import Card from 'primevue/card'
+import Divider from 'primevue/divider'
 import InputNumber from 'primevue/inputnumber'
+import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
+import MultiSelect from 'primevue/multiselect'
 import ToggleSwitch from 'primevue/toggleswitch'
 import { useToast } from 'primevue/usetoast'
 import { ref, toRaw, useTemplateRef } from 'vue'
@@ -65,25 +102,36 @@ import { ref, toRaw, useTemplateRef } from 'vue'
 import { m } from '@/paraglide/messages'
 import { usePreferences } from '@/stores/preferences'
 import { useSettings } from '@/stores/settings'
+import commands, { Command } from '@/utils/commands'
 
 const toast = useToast()
 const settings = useSettings()
 const preferences = usePreferences()
 
 const formElement = useTemplateRef<HTMLFormElement>('formElement')
-const formSettings = ref(structuredClone(toRaw(settings.queue)))
+const formSettings = ref(structuredClone(toRaw(settings.application)))
+
+function toCommandCall(command: Command) {
+  const help = commands.help.value[command]
+  let cmd = command.toString()
+  if (help.args && help.args.length > 0) {
+    cmd += ' '
+    cmd += help.args.map((arg) => `<${arg}>`).join(' ')
+  }
+  return cmd
+}
 
 function onReset() {
-  formSettings.value = structuredClone(toRaw(settings.queue))
+  formSettings.value = structuredClone(toRaw(settings.application))
   formElement.value?.reset()
 }
 
 function onSubmit() {
-  settings.queue = formSettings.value
+  settings.application = formSettings.value
   toast.add({
     severity: 'success',
     summary: m.success(),
-    detail: m.queue_settings_saved(),
+    detail: m.application_settings_saved(),
     life: 3000,
   })
   onReset()

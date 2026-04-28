@@ -183,7 +183,7 @@ describe('queue.ts', () => {
   it('can have a limit set to prevent additional clips from being added', () => {
     const queue = useQueue()
     const settings = useSettings()
-    settings.queue.limit = 2
+    settings.application.limit = 2
     queue.add({
       ...clipFromTwitch,
       id: 'test',
@@ -214,7 +214,7 @@ describe('queue.ts', () => {
     }
     const queue = useQueue()
     const settings = useSettings()
-    settings.queue.limit = 1
+    settings.application.limit = 1
     queue.add(clip)
     queue.add({ ...clip, submitters: ['testsubmitter2'] })
     queue.add({ ...clip, id: 'test2' })

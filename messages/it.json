@@ -3,12 +3,12 @@
   "allowed_commands": "Comandi consentiti:",
   "allowed_commands_description": "Comandi consentiti da utilizzare nella chat.",
   "amber": "Ambra",
+  "application": "Applicazione",
   "application_version": "Versione dell'applicazione: v{version}",
   "auto_mod": "Moderazione automatica:",
   "auto_mod_description": "Quando a un utente viene cancellato un messaggio in chat, messo in timeout o bannato, le clip che ha inviato verranno rimosse.",
   "blue": "Blu",
   "cancel": "Annulla",
-  "chat_settings_saved": "Impostazioni chat salvate.",
   "clear": "Pulisci",
   "clips": [
     {
@@ -107,7 +107,6 @@
   "purge_history_confirm": "Sei sicuro di voler svuotare tutte le clip dalla cronologia?",
   "purple": "Viola",
   "queue": "Coda",
-  "queue_settings_saved": "Impostazioni coda salvate.",
   "reconnect": "Riconnetti",
   "remove": "Rimuovi",
   "reset_settings": "Ripristina impostazioni",
@@ -117,10 +116,8 @@
   "save": "Salva",
   "search": "Cerca",
   "settings": "Impostazioni",
-  "settings_chat": "Chat",
   "settings_other": "Altro",
   "settings_preferences": "Preferenze",
-  "settings_queue": "Coda",
   "settings_reset": "Impostazioni ripristinate ai valori predefiniti.",
   "size_limit": "Limite di dimensione:",
   "size_limit_description": "Il numero di clip consentite nella coda. Lascia vuoto per nessun limite.",
@@ -177,5 +174,6 @@
   "integrations": "Integrazioni",
   "authentication_for_integration": "Autenticazione effettuata per questa integrazione come segue.",
   "source_for_integration": "Fonti disponibili per questa integrazione. Una volta stabilita la connessione, i link rilevati nella fonte verranno inviati.",
-  "providers_for_integration": "Provider disponibili per questa integrazione. Quando abilitata, questa tipologia di contenuto verrà aggiunta alla coda non appena rilevata."
+  "providers_for_integration": "Provider disponibili per questa integrazione. Quando abilitata, questa tipologia di contenuto verrà aggiunta alla coda non appena rilevata.",
+  "application_settings_saved": "Impostazioni dell'applicazione salvate."
 }

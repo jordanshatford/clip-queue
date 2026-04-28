@@ -3,12 +3,12 @@
   "allowed_commands": "Comandos permitidos:",
   "allowed_commands_description": "Comandos permitidos para usar en el chat.",
   "amber": "Ámbar",
+  "application": "Solicitud",
   "application_version": "Versión de la aplicación: v{version}",
   "auto_mod": "Moderación automática:",
   "auto_mod_description": "Cuando se elimine un mensaje de chat, se suspenda temporalmente o se bloquee a un usuario, se eliminarán las clips que envió.",
   "blue": "Azul",
   "cancel": "Cancelar",
-  "chat_settings_saved": "Configuración del chat guardada.",
   "clear": "Limpiar",
   "clips": [
     {
@@ -107,7 +107,6 @@
   "purge_history_confirm": "¿Estás seguro de que quieres purgar todas las clips del historial?",
   "purple": "Púrpura",
   "queue": "Cola",
-  "queue_settings_saved": "Configuración de la cola guardada.",
   "reconnect": "Reconectar",
   "remove": "Eliminar",
   "reset_settings": "Restablecer configuración",
@@ -117,10 +116,8 @@
   "save": "Guardar",
   "search": "Buscar",
   "settings": "Configuración",
-  "settings_chat": "Chat",
   "settings_other": "Otros",
   "settings_preferences": "Preferencias",
-  "settings_queue": "Cola",
   "settings_reset": "Configuración restablecida a los valores predeterminados.",
   "size_limit": "Límite de tamaño:",
   "size_limit_description": "El número de clips permitidas en la cola. Dejar vacío para sin límite.",
@@ -177,5 +174,6 @@
   "integrations": "Integraciones",
   "authentication_for_integration": "Autenticado para esta integración de la siguiente manera.",
   "source_for_integration": "Fuentes disponibles para esta integración. Al conectarse, se enviarán los enlaces detectados en la fuente.",
-  "providers_for_integration": "Proveedores disponibles para esta integración. Cuando esté habilitada, este tipo de contenido se agregará a la cola cuando se detecte."
+  "providers_for_integration": "Proveedores disponibles para esta integración. Cuando esté habilitada, este tipo de contenido se agregará a la cola cuando se detecte.",
+  "application_settings_saved": "Configuración de la aplicación guardada."
 }

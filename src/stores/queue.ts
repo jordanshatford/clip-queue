@@ -47,7 +47,7 @@ export const useQueue = defineStore(
         return
       }
       // Queue is full based on limit
-      if (settings.queue.limit && upcoming.value.size() >= settings.queue.limit) {
+      if (settings.application.limit && upcoming.value.size() >= settings.application.limit) {
         // If the clip is already in the queue add it so submitters is updated
         if (!upcoming.value.includes(clip)) {
           return

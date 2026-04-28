@@ -3,10 +3,10 @@ import { shallowMount } from '@vue/test-utils'
 import ToastService from 'primevue/toastservice'
 import { describe, expect, it, vi } from 'vitest'
 
-import ChatSettings from '../ChatSettings.vue'
+import ApplicationSettings from '../ApplicationSettings.vue'
 
-describe('ChatSettings.vue', () => {
-  const wrapper = shallowMount(ChatSettings, {
+describe('ApplicationSettings.vue', () => {
+  const wrapper = shallowMount(ApplicationSettings, {
     global: {
       plugins: [
         createTestingPinia({

@@ -1,12 +1,7 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import {
-  DEFAULT_COMMAND_SETTINGS,
-  DEFAULT_LOGGER_SETTINGS,
-  DEFAULT_QUEUE_SETTINGS,
-  useSettings,
-} from '../settings'
+import { DEFAULT_APPLICATION_SETTINGS, DEFAULT_LOGGER_SETTINGS, useSettings } from '../settings'
 
 describe('settings.ts', () => {
   beforeEach(() => {
@@ -15,35 +10,34 @@ describe('settings.ts', () => {
 
   it('inits the settings with default value', () => {
     const settings = useSettings()
-    expect(settings.isCommandsSettingsModified(DEFAULT_COMMAND_SETTINGS)).toEqual(false)
-    expect(settings.isQueueSettingsModified(DEFAULT_QUEUE_SETTINGS)).toEqual(false)
+    expect(settings.isApplicationSettingsModified(DEFAULT_APPLICATION_SETTINGS)).toEqual(false)
     expect(settings.isLoggerSettingsModified(DEFAULT_LOGGER_SETTINGS)).toEqual(false)
   })
 
   it('updates the settings in local storage', () => {
     const settings = useSettings()
     localStorage?.clear()
-    expect(settings.commands.prefix).toEqual('!cq')
-    settings.commands.prefix = '~'
-    expect(settings.commands.prefix).toEqual('~')
+    expect(settings.application.prefix).toEqual('!cq')
+    settings.application.prefix = '~'
+    expect(settings.application.prefix).toEqual('~')
   })
 
   it('returns if the settings are different', () => {
     const settings = useSettings()
     expect(
-      settings.isCommandsSettingsModified({
-        ...DEFAULT_COMMAND_SETTINGS,
+      settings.isApplicationSettingsModified({
+        ...DEFAULT_APPLICATION_SETTINGS,
         prefix: '~dsa',
       }),
     ).toEqual(true)
-    expect(settings.isCommandsSettingsModified(settings.$state.commands)).toEqual(false)
+    expect(settings.isApplicationSettingsModified(settings.$state.application)).toEqual(false)
     expect(
-      settings.isQueueSettingsModified({
-        ...DEFAULT_QUEUE_SETTINGS,
+      settings.isApplicationSettingsModified({
+        ...DEFAULT_APPLICATION_SETTINGS,
         limit: 1000,
       }),
     ).toEqual(true)
-    expect(settings.isQueueSettingsModified(settings.$state.queue)).toEqual(false)
+    expect(settings.isApplicationSettingsModified(settings.$state.application)).toEqual(false)
     expect(
       settings.isLoggerSettingsModified({
         ...DEFAULT_LOGGER_SETTINGS,
@@ -56,17 +50,16 @@ describe('settings.ts', () => {
   it('detects when it has been modified', () => {
     const settings = useSettings()
     expect(settings.isModified).toEqual(false)
-    settings.queue.limit = 100
+    settings.application.limit = 100
     expect(settings.isModified).toEqual(true)
   })
 
   it('can reset itself to the defaults', () => {
     const settings = useSettings()
-    settings.queue.limit = 100
-    expect(settings.queue.limit).toEqual(100)
+    settings.application.limit = 100
+    expect(settings.application.limit).toEqual(100)
     settings.$reset()
-    expect(settings.queue).toEqual(DEFAULT_QUEUE_SETTINGS)
-    expect(settings.commands).toEqual(DEFAULT_COMMAND_SETTINGS)
+    expect(settings.application).toEqual(DEFAULT_APPLICATION_SETTINGS)
     expect(settings.logger).toEqual(DEFAULT_LOGGER_SETTINGS)
   })
 })

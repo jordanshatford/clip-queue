@@ -90,15 +90,15 @@ describe('commands.ts', () => {
 
   it('can set the queue limit and clear it', () => {
     const settings = useSettings()
-    expect(settings.queue.limit).toEqual(null)
+    expect(settings.application.limit).toEqual(null)
     commands.handleCommand(MOCK_EVENT, Command.SET_LIMIT.toString(), '0') // Invalid
-    expect(settings.queue.limit).toEqual(null)
+    expect(settings.application.limit).toEqual(null)
     commands.handleCommand(MOCK_EVENT, Command.SET_LIMIT.toString(), '100')
-    expect(settings.queue.limit).toEqual(100)
+    expect(settings.application.limit).toEqual(100)
     commands.handleCommand(MOCK_EVENT, Command.SET_LIMIT.toString(), 'some_non_number') // Invalid
-    expect(settings.queue.limit).toEqual(100)
+    expect(settings.application.limit).toEqual(100)
     commands.handleCommand(MOCK_EVENT, Command.REMOVE_LIMIT.toString())
-    expect(settings.queue.limit).toEqual(null)
+    expect(settings.application.limit).toEqual(null)
   })
 
   it('can enable and disable providers', () => {
@@ -123,11 +123,11 @@ describe('commands.ts', () => {
 
   it('can enable and disable auto moderation', () => {
     const settings = useSettings()
-    expect(settings.queue.hasAutoModerationEnabled).toEqual(true)
+    expect(settings.application.hasAutoModerationEnabled).toEqual(true)
     commands.handleCommand(MOCK_EVENT, Command.DISABLE_AUTO_MODERATION)
-    expect(settings.queue.hasAutoModerationEnabled).toEqual(false)
+    expect(settings.application.hasAutoModerationEnabled).toEqual(false)
     commands.handleCommand(MOCK_EVENT, Command.ENABLE_AUTO_MODERATION)
-    expect(settings.queue.hasAutoModerationEnabled).toEqual(true)
+    expect(settings.application.hasAutoModerationEnabled).toEqual(true)
   })
 
   it('returns help information for commands', () => {

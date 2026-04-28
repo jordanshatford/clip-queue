@@ -6,9 +6,9 @@ import type { LogLevel } from '@/stores/logger'
 import { Command } from '@/utils/commands'
 
 /**
- * Settings for commands.
+ * Settings for the application.
  */
-export interface CommandSettings {
+export interface ApplicationSettings {
   /**
    * The prefix for commands.
    *
@@ -19,12 +19,6 @@ export interface CommandSettings {
    * The commands allowed to be used.
    */
   allowed: Command[]
-}
-
-/**
- * Settings for the queue.
- */
-export interface QueueSettings {
   /**
    * Whether auto moderation is enabled.
    *
@@ -54,12 +48,9 @@ export interface LoggerSettings {
   limit: number
 }
 
-export const DEFAULT_COMMAND_SETTINGS: CommandSettings = {
+export const DEFAULT_APPLICATION_SETTINGS: ApplicationSettings = {
   prefix: '!cq',
   allowed: Object.values(Command),
-}
-
-export const DEFAULT_QUEUE_SETTINGS: QueueSettings = {
   hasAutoModerationEnabled: true,
   limit: null,
 }
@@ -72,26 +63,18 @@ export const DEFAULT_LOGGER_SETTINGS: LoggerSettings = {
 export const useSettings = defineStore(
   'settings',
   () => {
-    const commands = ref<CommandSettings>({ ...DEFAULT_COMMAND_SETTINGS })
-    const queue = ref<QueueSettings>({ ...DEFAULT_QUEUE_SETTINGS })
+    const application = ref<ApplicationSettings>({ ...DEFAULT_APPLICATION_SETTINGS })
     const logger = ref<LoggerSettings>({ ...DEFAULT_LOGGER_SETTINGS })
 
-    const isCommandsSettingsModified = computed(() => {
-      return (c: CommandSettings) => {
+    const isApplicationSettingsModified = computed(() => {
+      return (s: ApplicationSettings) => {
         return (
-          commands.value.prefix !== c.prefix ||
+          application.value.prefix !== s.prefix ||
           Object.values(Command).some(
-            (cmd) => commands.value.allowed.includes(cmd) !== c.allowed.includes(cmd),
-          )
-        )
-      }
-    })
-
-    const isQueueSettingsModified = computed(() => {
-      return (q: QueueSettings) => {
-        return (
-          queue.value.hasAutoModerationEnabled !== q.hasAutoModerationEnabled ||
-          queue.value.limit !== q.limit
+            (cmd) => application.value.allowed.includes(cmd) !== s.allowed.includes(cmd),
+          ) ||
+          application.value.hasAutoModerationEnabled !== s.hasAutoModerationEnabled ||
+          application.value.limit !== s.limit
         )
       }
     })
@@ -104,25 +87,21 @@ export const useSettings = defineStore(
 
     const isModified = computed(() => {
       return (
-        isCommandsSettingsModified.value(DEFAULT_COMMAND_SETTINGS) ||
-        isQueueSettingsModified.value(DEFAULT_QUEUE_SETTINGS) ||
+        isApplicationSettingsModified.value(DEFAULT_APPLICATION_SETTINGS) ||
         isLoggerSettingsModified.value(DEFAULT_LOGGER_SETTINGS)
       )
     })
 
     function $reset(): void {
-      commands.value = DEFAULT_COMMAND_SETTINGS
-      queue.value = DEFAULT_QUEUE_SETTINGS
+      application.value = DEFAULT_APPLICATION_SETTINGS
       logger.value = DEFAULT_LOGGER_SETTINGS
     }
 
     return {
-      commands,
-      queue,
+      application,
       logger,
       isModified,
-      isCommandsSettingsModified,
-      isQueueSettingsModified,
+      isApplicationSettingsModified,
       isLoggerSettingsModified,
       $reset,
     }
@@ -132,9 +111,9 @@ export const useSettings = defineStore(
       key: 'cq-settings',
       afterHydrate(context) {
         // Ensure that the commands allowed are valid.
-        const commands = context.store.commands.allowed
+        const commands = context.store.application.allowed
         const availableCommands = Object.values(Command)
-        context.store.commands.allowed = commands.filter((c: Command) => {
+        context.store.application.allowed = commands.filter((c: Command) => {
           return availableCommands.includes(c)
         })
       },

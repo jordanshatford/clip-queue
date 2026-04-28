@@ -3,12 +3,12 @@
   "allowed_commands": "허용된 명령어:",
   "allowed_commands_description": "채팅에서 사용할 수 있는 명령어.",
   "amber": "호박색",
+  "application": "애플리케이션",
   "application_version": "애플리케이션 버전: v{version}",
   "auto_mod": "자동 관리:",
   "auto_mod_description": "사용자가 채팅 메시지를 삭제당하거나, 타임아웃되거나, 차단되었을 때, 해당 사용자가 제출한 클립이 삭제됩니다.",
   "blue": "파란색",
   "cancel": "취소",
-  "chat_settings_saved": "채팅 설정이 저장되었습니다.",
   "clear": "초기화",
   "clips": [
     {
@@ -107,7 +107,6 @@
   "purge_history_confirm": "기록에서 모든 클립을 삭제하시겠습니까?",
   "purple": "보라색",
   "queue": "대기열",
-  "queue_settings_saved": "대기열 설정이 저장되었습니다.",
   "reconnect": "재연결",
   "remove": "제거",
   "reset_settings": "설정 초기화",
@@ -117,10 +116,8 @@
   "save": "저장",
   "search": "검색",
   "settings": "설정",
-  "settings_chat": "채팅",
   "settings_other": "기타",
   "settings_preferences": "환경 설정",
-  "settings_queue": "대기열",
   "settings_reset": "설정이 기본값으로 초기화되었습니다.",
   "size_limit": "크기 제한:",
   "size_limit_description": "대기열에 허용되는 클립 수. 제한이 없으면 비워 두십시오.",
@@ -177,5 +174,6 @@
   "integrations": "통합",
   "authentication_for_integration": "다음과 같이 인증되었습니다.",
   "source_for_integration": "이 통합에 사용할 수 있는 소스입니다. 연결되면 소스에서 감지된 링크가 제출됩니다.",
-  "providers_for_integration": "이 통합에 사용 가능한 제공업체입니다. 활성화되면 이 유형의 콘텐츠가 감지될 때 대기열에 추가됩니다."
+  "providers_for_integration": "이 통합에 사용 가능한 제공업체입니다. 활성화되면 이 유형의 콘텐츠가 감지될 때 대기열에 추가됩니다.",
+  "application_settings_saved": "애플리케이션 설정이 저장되었습니다."
 }

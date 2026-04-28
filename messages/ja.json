@@ -3,12 +3,12 @@
   "allowed_commands": "許可されたコマンド:",
   "allowed_commands_description": "チャットで使用できるコマンド。",
   "amber": "アンバー",
+  "application": "応用",
   "application_version": "アプリケーションバージョン: v{version}",
   "auto_mod": "自動モデレーション:",
   "auto_mod_description": "ユーザーがチャットメッセージを削除されたり、タイムアウトまたは禁止された場合、そのユーザーが提出したクリップは削除されます。",
   "blue": "ブルー",
   "cancel": "キャンセル",
-  "chat_settings_saved": "チャット設定が保存されました。",
   "clear": "クリア",
   "clips": [
     {
@@ -107,7 +107,6 @@
   "purge_history_confirm": "履歴からすべてのクリップを消去してもよろしいですか？",
   "purple": "パープル",
   "queue": "キュー",
-  "queue_settings_saved": "キュー設定が保存されました。",
   "reconnect": "再接続",
   "remove": "削除",
   "reset_settings": "設定をリセット",
@@ -117,10 +116,8 @@
   "save": "保存",
   "search": "検索",
   "settings": "設定",
-  "settings_chat": "チャット",
   "settings_other": "その他",
   "settings_preferences": "設定",
-  "settings_queue": "キュー",
   "settings_reset": "設定がデフォルトにリセットされました。",
   "size_limit": "サイズ制限:",
   "size_limit_description": "キューに許可されるクリップの数。制限なしの場合は空白のままにしてください。",
@@ -177,5 +174,6 @@
   "integrations": "統合",
   "authentication_for_integration": "この統合に関して、以下のとおり認証されました。",
   "source_for_integration": "この連携に利用可能なソース。接続が完了すると、ソース内で検出されたリンクが送信されます。",
-  "providers_for_integration": "この連携に対応しているプロバイダー。有効にすると、このタイプのコンテンツが検出されたときにキューに追加されます。"
+  "providers_for_integration": "この連携に対応しているプロバイダー。有効にすると、このタイプのコンテンツが検出されたときにキューに追加されます。",
+  "application_settings_saved": "アプリケーション設定が保存されました。"
 }

@@ -3,12 +3,12 @@
   "allowed_commands": "İzin Verilen Komutlar:",
   "allowed_commands_description": "Sohbette kullanılmasına izin verilen komutlar.",
   "amber": "Kehribar",
+  "application": "Başvuru",
   "application_version": "Uygulama sürümü: v{version}",
   "auto_mod": "Otomatik Moderasyon:",
   "auto_mod_description": "Bir kullanıcının sohbet mesajı silindiğinde, zaman aşımına uğratıldığında veya yasaklandığında, o kullanıcının gönderdiği klipler kaldırılır.",
   "blue": "Mavi",
   "cancel": "İptal",
-  "chat_settings_saved": "Sohbet ayarları kaydedildi.",
   "clear": "Temizle",
   "clips": [
     {
@@ -107,7 +107,6 @@
   "purge_history_confirm": "Geçmişteki tüm klipler silinsin mi?",
   "purple": "Mor",
   "queue": "Kuyruk",
-  "queue_settings_saved": "Kuyruk ayarları kaydedildi.",
   "reconnect": "Yeniden Bağlan",
   "remove": "Kaldır",
   "reset_settings": "Ayarları Sıfırla",
@@ -117,10 +116,8 @@
   "save": "Kaydet",
   "search": "Ara",
   "settings": "Ayarlar",
-  "settings_chat": "Sohbet",
   "settings_other": "Diğer",
   "settings_preferences": "Tercihler",
-  "settings_queue": "Kuyruk",
   "settings_reset": "Ayarlar varsayılan olarak sıfırlandı.",
   "size_limit": "Boyut Sınırı:",
   "size_limit_description": "Kuyruğa izin verilen klip sayısı. Sınırsız için boş bırakın.",
@@ -177,5 +174,6 @@
   "integrations": "Entegrasyonlar",
   "authentication_for_integration": "Bu entegrasyon için kimlik doğrulama aşağıdaki şekilde gerçekleştirilmiştir.",
   "source_for_integration": "Bu entegrasyon için mevcut kaynaklar. Bağlantı kurulduğunda, kaynakta algılanan bağlantılar gönderilecektir.",
-  "providers_for_integration": "Bu entegrasyon için kullanılabilir sağlayıcılar. Etkinleştirildiğinde, bu tür içerik algılandığında sıraya eklenecektir."
+  "providers_for_integration": "Bu entegrasyon için kullanılabilir sağlayıcılar. Etkinleştirildiğinde, bu tür içerik algılandığında sıraya eklenecektir.",
+  "application_settings_saved": "Uygulama ayarları kaydedildi."
 }

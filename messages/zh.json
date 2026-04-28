@@ -3,12 +3,12 @@
   "allowed_commands": "允许的命令：",
   "allowed_commands_description": "聊天中允许使用的命令。",
   "amber": "琥珀色",
+  "application": "应用",
   "application_version": "应用版本：v{version}",
   "auto_mod": "自动管理：",
   "auto_mod_description": "当用户的聊天消息被删除、被禁言或被封禁时，他们提交的剪辑将被移除。",
   "blue": "蓝色",
   "cancel": "取消",
-  "chat_settings_saved": "聊天设置已保存。",
   "clear": "清除",
   "clips": [
     {
@@ -107,7 +107,6 @@
   "purge_history_confirm": "您确定要清除历史记录中的所有剪辑吗？",
   "purple": "紫色",
   "queue": "队列",
-  "queue_settings_saved": "队列设置已保存。",
   "reconnect": "重新连接",
   "remove": "移除",
   "reset_settings": "重置设置",
@@ -117,10 +116,8 @@
   "save": "保存",
   "search": "搜索",
   "settings": "设置",
-  "settings_chat": "聊天",
   "settings_other": "其他",
   "settings_preferences": "偏好设置",
-  "settings_queue": "队列",
   "settings_reset": "设置已重置为默认值。",
   "size_limit": "大小限制：",
   "size_limit_description": "队列中允许的剪辑数量。留空表示无限制。",
@@ -177,5 +174,6 @@
   "integrations": "集成",
   "authentication_for_integration": "已通过以下方式验证，可用于此集成。",
   "source_for_integration": "可用于此集成的数据源。连接成功后，将提交数据源中检测到的链接。",
-  "providers_for_integration": "支持此集成的提供商。启用后，检测到此类内容时，系统会将其添加到队列中。"
+  "providers_for_integration": "支持此集成的提供商。启用后，检测到此类内容时，系统会将其添加到队列中。",
+  "application_settings_saved": "已保存应用程序设置。"
 }

@@ -3,12 +3,12 @@
   "allowed_commands": "Erlaubte Befehle:",
   "allowed_commands_description": "Befehle, die im Chat verwendet werden dürfen.",
   "amber": "Bernstein",
+  "application": "Anwendung",
   "application_version": "Anwendungsversion: v{version}",
   "auto_mod": "Automatische Moderation:",
   "auto_mod_description": "Wenn eine Nachricht eines Benutzers gelöscht, er stummgeschaltet oder gesperrt wird, werden auch die von ihm eingereichten Clips entfernt.",
   "blue": "Blau",
   "cancel": "Abbrechen",
-  "chat_settings_saved": "Chat-Einstellungen gespeichert.",
   "clear": "Leeren",
   "clips": [
     {
@@ -107,7 +107,6 @@
   "purge_history_confirm": "Möchten Sie wirklich alle Clips aus dem Verlauf löschen?",
   "purple": "Lila",
   "queue": "Warteschlange",
-  "queue_settings_saved": "Warteschlangeneinstellungen gespeichert.",
   "reconnect": "Erneut verbinden",
   "remove": "Entfernen",
   "reset_settings": "Einstellungen zurücksetzen",
@@ -117,10 +116,8 @@
   "save": "Speichern",
   "search": "Suchen",
   "settings": "Einstellungen",
-  "settings_chat": "Chat",
   "settings_other": "Sonstiges",
   "settings_preferences": "Einstellungen",
-  "settings_queue": "Warteschlange",
   "settings_reset": "Einstellungen auf Standard zurückgesetzt.",
   "size_limit": "Größenbeschränkung:",
   "size_limit_description": "Die Anzahl der Clips, die in der Warteschlange erlaubt sind. Leer lassen für kein Limit.",
@@ -177,5 +174,6 @@
   "integrations": "Integrationen",
   "authentication_for_integration": "Für diese Integration wurde ich wie folgt authentifiziert.",
   "source_for_integration": "Für diese Integration stehen Quellen zur Verfügung. Nach der Verbindung werden die in der Quelle erkannten Links übermittelt.",
-  "providers_for_integration": "Für diese Integration verfügbare Anbieter. Wenn diese Option aktiviert ist, wird dieser Inhaltstyp bei Erkennung der Warteschlange hinzugefügt."
+  "providers_for_integration": "Für diese Integration verfügbare Anbieter. Wenn diese Option aktiviert ist, wird dieser Inhaltstyp bei Erkennung der Warteschlange hinzugefügt.",
+  "application_settings_saved": "Anwendungseinstellungen gespeichert."
 }

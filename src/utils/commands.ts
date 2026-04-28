@@ -171,12 +171,12 @@ export function handleCommand(
         if (Number.isNaN(limit) || limit < 1) {
           return
         }
-        settings.queue.limit = limit
+        settings.application.limit = limit
       }
       break
     }
     case Command.REMOVE_LIMIT: {
-      settings.queue.limit = null
+      settings.application.limit = null
       break
     }
     case Command.PREV: {
@@ -227,11 +227,11 @@ export function handleCommand(
       break
     }
     case Command.ENABLE_AUTO_MODERATION: {
-      settings.queue.hasAutoModerationEnabled = true
+      settings.application.hasAutoModerationEnabled = true
       break
     }
     case Command.DISABLE_AUTO_MODERATION: {
-      settings.queue.hasAutoModerationEnabled = false
+      settings.application.hasAutoModerationEnabled = false
       break
     }
     case Command.PURGE_CACHE: {

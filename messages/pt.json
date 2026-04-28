@@ -3,12 +3,12 @@
   "allowed_commands": "Comandos Permitidos:",
   "allowed_commands_description": "Comandos permitidos para uso no chat.",
   "amber": "Âmbar",
+  "application": "Aplicação",
   "application_version": "Versão do aplicativo: v{version}",
   "auto_mod": "Moderação Automática:",
   "auto_mod_description": "Quando uma mensagem de chat de um usuário for deletada, o usuário for temporariamente silenciado ou banido, os clipes enviados por eles serão removidos.",
   "blue": "Azul",
   "cancel": "Cancelar",
-  "chat_settings_saved": "Configurações de chat salvas.",
   "clear": "Limpar",
   "clips": [
     {
@@ -107,7 +107,6 @@
   "purge_history_confirm": "Tem certeza de que deseja limpar todos os clipes do histórico?",
   "purple": "Roxo",
   "queue": "Fila",
-  "queue_settings_saved": "Configurações de fila salvas.",
   "reconnect": "Reconectar",
   "remove": "Remover",
   "reset_settings": "Redefinir Configurações",
@@ -117,10 +116,8 @@
   "save": "Salvar",
   "search": "Pesquisar",
   "settings": "Configurações",
-  "settings_chat": "Chat",
   "settings_other": "Outros",
   "settings_preferences": "Preferências",
-  "settings_queue": "Fila",
   "settings_reset": "Configurações redefinidas para o padrão.",
   "size_limit": "Limite de Tamanho:",
   "size_limit_description": "Número de clipes permitidos na fila. Deixe vazio para sem limite.",
@@ -177,5 +174,6 @@
   "integrations": "Integrações",
   "authentication_for_integration": "Autenticado para esta integração conforme abaixo.",
   "source_for_integration": "Fontes disponíveis para esta integração. Quando a ligação for estabelecida, os links detetados na fonte serão submetidos.",
-  "providers_for_integration": "Fornecedores disponíveis para esta integração. Quando ativada, este tipo de conteúdo será adicionado à fila assim que for detetado."
+  "providers_for_integration": "Fornecedores disponíveis para esta integração. Quando ativada, este tipo de conteúdo será adicionado à fila assim que for detetado.",
+  "application_settings_saved": "Configurações da aplicação guardadas."
 }

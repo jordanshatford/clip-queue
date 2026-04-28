@@ -3,12 +3,12 @@
   "allowed_commands": "Commandes autorisées:",
   "allowed_commands_description": "Commandes autorisées à être utilisées dans le chat.",
   "amber": "Ambre",
+  "application": "Application",
   "application_version": "Version de l'application: v{version}",
   "auto_mod": "Modération automatique:",
   "auto_mod_description": "Lorsque le message d'un utilisateur est supprimé, que l'utilisateur est mis en pause ou banni, les clips qu'il a soumis seront supprimés.",
   "blue": "Bleu",
   "cancel": "Annuler",
-  "chat_settings_saved": "Paramètres du chat enregistrés.",
   "clear": "Effacer",
   "clips": [
     {
@@ -107,7 +107,6 @@
   "purge_history_confirm": "Êtes-vous sûr de vouloir vider tous les clips de l'historique ?",
   "purple": "Violet",
   "queue": "File d'attente",
-  "queue_settings_saved": "Paramètres de la file d'attente enregistrés.",
   "reconnect": "Reconnecter",
   "remove": "Supprimer",
   "reset_settings": "Réinitialiser les paramètres",
@@ -117,10 +116,8 @@
   "save": "Enregistrer",
   "search": "Rechercher",
   "settings": "Paramètres",
-  "settings_chat": "Chat",
   "settings_other": "Autre",
   "settings_preferences": "Préférences",
-  "settings_queue": "File d'attente",
   "settings_reset": "Paramètres réinitialisés par défaut.",
   "size_limit": "Limite de taille:",
   "size_limit_description": "Nombre de clips autorisés dans la file d'attente. Laissez vide pour aucune limite.",
@@ -177,5 +174,6 @@
   "integrations": "Intégrations",
   "authentication_for_integration": "Authentifié pour cette intégration comme suit.",
   "source_for_integration": "Sources disponibles pour cette intégration. Une fois la connexion établie, les liens détectés dans la source seront soumis.",
-  "providers_for_integration": "Fournisseurs disponibles pour cette intégration. Lorsqu'elle est activée, ce type de contenu sera ajouté à la file d'attente dès sa détection."
+  "providers_for_integration": "Fournisseurs disponibles pour cette intégration. Lorsqu'elle est activée, ce type de contenu sera ajouté à la file d'attente dès sa détection.",
+  "application_settings_saved": "Paramètres de l'application enregistrés."
 }

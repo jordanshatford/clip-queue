@@ -21,8 +21,7 @@ export enum RouteNameConstants {
   HISTORY = 'history',
   LOGS = 'logs',
   SETTINGS = 'settings',
-  SETTINGS_CHAT = 'settings_chat',
-  SETTINGS_QUEUE = 'settings_queue',
+  SETTINGS_APPLICATION = 'settings_application',
   SETTINGS_INTEGRATIONS = 'settings_integrations',
   SETTINGS_PREFERENCES = 'settings_preferences',
   SETTINGS_LOGS = 'settings_logs',
@@ -59,7 +58,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/settings',
     name: RouteNameConstants.SETTINGS,
-    redirect: { name: RouteNameConstants.SETTINGS_CHAT },
+    redirect: { name: RouteNameConstants.SETTINGS_APPLICATION },
     component: () => import('@/views/SettingsPage.vue'),
     meta: {
       icon: 'pi pi-cog',
@@ -67,20 +66,11 @@ export const routes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: 'chat',
-        name: RouteNameConstants.SETTINGS_CHAT,
-        component: () => import('@/views/settings/ChatSettings.vue'),
+        path: 'application',
+        name: RouteNameConstants.SETTINGS_APPLICATION,
+        component: () => import('@/views/settings/ApplicationSettings.vue'),
         meta: {
-          icon: 'pi pi-comments',
-          requiresAuth: true,
-        },
-      },
-      {
-        path: 'queue',
-        name: RouteNameConstants.SETTINGS_QUEUE,
-        component: () => import('@/views/settings/QueueSettings.vue'),
-        meta: {
-          icon: 'pi pi-list',
+          icon: 'pi pi-sliders-h',
           requiresAuth: true,
         },
       },
@@ -187,8 +177,7 @@ export const routeTranslations = {
   [RouteNameConstants.HISTORY]: m.history,
   [RouteNameConstants.LOGS]: m.logs,
   [RouteNameConstants.SETTINGS]: m.settings,
-  [RouteNameConstants.SETTINGS_CHAT]: m.settings_chat,
-  [RouteNameConstants.SETTINGS_QUEUE]: m.settings_queue,
+  [RouteNameConstants.SETTINGS_APPLICATION]: m.application,
   [RouteNameConstants.SETTINGS_INTEGRATIONS]: m.integrations,
   [RouteNameConstants.SETTINGS_PREFERENCES]: m.settings_preferences,
   [RouteNameConstants.SETTINGS_LOGS]: m.logs,

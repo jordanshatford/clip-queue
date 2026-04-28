@@ -3,12 +3,12 @@
   "allowed_commands": "Allowed Commands:",
   "allowed_commands_description": "Commands allowed to be used in chat.",
   "amber": "Amber",
+  "application": "Application",
   "application_version": "Application version: v{version}",
   "auto_mod": "Auto Moderation:",
   "auto_mod_description": "When a user has their chat message deleted, is timed out, or banned, the clips they submitted will be removed.",
   "blue": "Blue",
   "cancel": "Cancel",
-  "chat_settings_saved": "Chat settings saved.",
   "clear": "Clear",
   "clips": [
     {
@@ -107,7 +107,6 @@
   "purge_history_confirm": "Are you sure you want to purge all clips from the history?",
   "purple": "Purple",
   "queue": "Queue",
-  "queue_settings_saved": "Queue settings saved.",
   "reconnect": "Reconnect",
   "remove": "Remove",
   "reset_settings": "Reset Settings",
@@ -117,10 +116,8 @@
   "save": "Save",
   "search": "Search",
   "settings": "Settings",
-  "settings_chat": "Chat",
   "settings_other": "Other",
   "settings_preferences": "Preferences",
-  "settings_queue": "Queue",
   "settings_reset": "Settings reset to default.",
   "size_limit": "Size Limit:",
   "size_limit_description": "The number of clips allowed in the queue. Leave empty for no limit.",
@@ -177,5 +174,6 @@
   "integrations": "Integrations",
   "authentication_for_integration": "Authenticated for this integration as the following.",
   "source_for_integration": "Sources available for this integration. When connected, links detected in the source will be submitted.",
-  "providers_for_integration": "Providers available for this integration. When enabled, this type of content will be added to the queue when detected."
+  "providers_for_integration": "Providers available for this integration. When enabled, this type of content will be added to the queue when detected.",
+  "application_settings_saved": "Application settings saved."
 }
