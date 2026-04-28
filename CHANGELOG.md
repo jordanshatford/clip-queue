@@ -1,5 +1,35 @@
 # clip-queue
 
+## 2.0.0
+
+### Major Changes
+
+- breaking: rework application to use integrations ([`0ee6120`](https://github.com/jordanshatford/clip-queue/commit/0ee6120dfc92c98d8be834f4d4cf82d5ba6d60cc))
+
+### Minor Changes
+
+- feat: use unique route for integration redirects ([`bee1d13`](https://github.com/jordanshatford/clip-queue/commit/bee1d1387b5e2529acdebb4aedcda7c902c7d83b))
+
+- feat: add components for handling integration info display ([`16679f4`](https://github.com/jordanshatford/clip-queue/commit/16679f46355fcb3ccdece23fa76114dcb70dc586))
+
+- feat: rework twitch authentication into an integration ([`0f341a1`](https://github.com/jordanshatford/clip-queue/commit/0f341a14aba39aa5bb67a1d36c6dcbaa18c48013))
+
+- feat: move chat and queue settings to single application tab ([`0b6786f`](https://github.com/jordanshatford/clip-queue/commit/0b6786f9c7d71b2626e13d23542eaba6060eb44a))
+
+- feat: rework twitch clip provider into integration ([`e6d9fad`](https://github.com/jordanshatford/clip-queue/commit/e6d9fad7be46b4ee4d843b5d353cd2ca55b7393a))
+
+- feat: rework twitch chat into integration ([`dd0d747`](https://github.com/jordanshatford/clip-queue/commit/dd0d74785ea8ab1408d0a9ef7ab050ee620f53f1))
+
+- feat: rework kick clip provider into integration ([`9aeb119`](https://github.com/jordanshatford/clip-queue/commit/9aeb1195cc7ea57808312660e4bf51c80763159a))
+
+### Patch Changes
+
+- fix: commands to enabled and disable providers ([`f4247b5`](https://github.com/jordanshatford/clip-queue/commit/f4247b57f1a3acf886c44c654d911420d88da430))
+
+- fix: do not attempt to get clip from provider if it does not support the url ([`e6d9fad`](https://github.com/jordanshatford/clip-queue/commit/e6d9fad7be46b4ee4d843b5d353cd2ca55b7393a))
+
+- fix: replace custom composable with one from vueuse ([`b72db3a`](https://github.com/jordanshatford/clip-queue/commit/b72db3af209d4d271fdc50bb48ec8541263a2550))
+
 ## 1.15.0
 
 ### Minor Changes
