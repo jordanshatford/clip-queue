@@ -26,4 +26,8 @@ export enum IntegrationID {
    * Twitch clips provider.
    */
   TWITCH_CLIPS = 'ttv-clips',
+  /**
+   * Unknown. This should never be used on purpose.
+   */
+  UNKNOWN = 'unknown',
 }

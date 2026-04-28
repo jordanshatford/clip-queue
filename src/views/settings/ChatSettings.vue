@@ -1,44 +1,5 @@
 <template>
   <div>
-    <Card class="mx-auto mb-2 max-w-xl">
-      <template #content>
-        <div class="m-0 flex flex-col gap-2 p-0 text-left">
-          <label for="username">{{ m.connected_chat_colon() }}</label>
-          <InputGroup>
-            <InputGroupAddon>
-              <!-- eslint-disable-next-line vue/no-v-html -->
-              <svg class="h-5 w-5" v-html="sources.logo"></svg>
-            </InputGroupAddon>
-            <InputGroupAddon v-if="user.details.profileImageURL">
-              <Avatar
-                :image="user.details.profileImageURL"
-                shape="circle"
-                size="small"
-                class="size-7"
-              />
-            </InputGroupAddon>
-            <InputText
-              id="username"
-              v-model="user.details.name"
-              readonly
-              fluid
-              size="small"
-              pt:root="flex-1 rounded-none"
-            />
-            <InputGroupAddon>
-              <SourceIndicator :status="sources.status" />
-            </InputGroupAddon>
-            <InputGroupAddon>
-              <i
-                v-tooltip="m.reconnect()"
-                class="pi pi-refresh hover:cursor-pointer"
-                @click="sources.reconnect()"
-              ></i
-            ></InputGroupAddon>
-          </InputGroup>
-        </div>
-      </template>
-    </Card>
     <Card class="mx-auto max-w-xl">
       <template #content>
         <form ref="formElement" @submit.prevent="onSubmit" @reset="onReset">
@@ -101,28 +62,20 @@
 </template>
 
 <script setup lang="ts">
-import Avatar from 'primevue/avatar'
 import Button from 'primevue/button'
 import Card from 'primevue/card'
-import InputGroup from 'primevue/inputgroup'
-import InputGroupAddon from 'primevue/inputgroupaddon'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
 import MultiSelect from 'primevue/multiselect'
 import { useToast } from 'primevue/usetoast'
 import { ref, toRaw, useTemplateRef } from 'vue'
 
-import SourceIndicator from '@/components/SourceIndicator.vue'
 import { m } from '@/paraglide/messages'
 import { useSettings } from '@/stores/settings'
-import { useSources } from '@/stores/sources'
-import { useUser } from '@/stores/user'
 import commands, { Command } from '@/utils/commands'
 
 const toast = useToast()
-const user = useUser()
 const settings = useSettings()
-const sources = useSources()
 
 const formElement = useTemplateRef<HTMLFormElement>('formElement')
 const formSettings = ref(structuredClone(toRaw(settings.commands)))

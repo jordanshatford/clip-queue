@@ -1,3 +1,5 @@
+import type { IntegrationID } from '../indentify'
+
 /**
  * A simple event emitter.
  */
@@ -44,20 +46,6 @@ export class EventEmitter<
 }
 
 /**
- * Enumeration of clip sources.
- */
-export enum ClipSource {
-  /**
-   * Unknown source.
-   */
-  UNKNOWN = 'Unknown',
-  /**
-   * The Twitch Chat.
-   */
-  TWITCH = 'Twitch',
-}
-
-/**
  * Enumeration of clip source statuses.
  */
 export enum ClipSourceStatus {
@@ -78,7 +66,7 @@ export interface ClipSourceEvent<T = undefined> {
   /**
    * The source of the event.
    */
-  source: ClipSource
+  source: IntegrationID
   /**
    * The data of the event.
    */
@@ -183,7 +171,10 @@ export type IntegrationSource = {
   /**
    * The name of the source.
    */
-  readonly name: ClipSource
+  readonly id: IntegrationID
+
+  readonly name: string
+  readonly url: string
   /**
    * Whether the source is experimental.
    */

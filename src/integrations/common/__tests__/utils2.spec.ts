@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
-import { ClipSource } from '../source'
+import { IntegrationID } from '@/integrations/indentify'
+
 import { fromSubmitterUUID, getAllURLsFromText, toSubmitterUUID } from '../utils'
 
 describe('utils.ts', () => {
@@ -27,23 +28,23 @@ describe('utils.ts', () => {
   })
 
   it.each([
-    [ClipSource.UNKNOWN, 'testuser', 'Unknown:testuser'],
-    [ClipSource.TWITCH, 'testuser', 'Twitch:testuser'],
+    [IntegrationID.UNKNOWN, 'testuser', 'unknown:testuser'],
+    [IntegrationID.TWITCH, 'testuser', 'twitch:testuser'],
   ])(
     'converts a source and subitter to a uuid: (source: %s, submitter: %s) -> %s',
-    (source: ClipSource, submitter: string, expected: string) => {
+    (source: IntegrationID, submitter: string, expected: string) => {
       expect(toSubmitterUUID(source, submitter)).toEqual(expected)
     },
   )
 
   it.each([
-    ['Unknown:testuser', ClipSource.UNKNOWN, 'testuser'],
-    ['Twitch:testuser', ClipSource.TWITCH, 'testuser'],
-    ['testuser', ClipSource.UNKNOWN, 'testuser'],
-    ['', ClipSource.UNKNOWN, ''],
+    ['unknown:testuser', IntegrationID.UNKNOWN, 'testuser'],
+    ['twitch:testuser', IntegrationID.TWITCH, 'testuser'],
+    ['testuser', IntegrationID.UNKNOWN, 'testuser'],
+    ['', IntegrationID.UNKNOWN, ''],
   ])(
     'converts a submitter uuid to a source and submitter: (uuid: %s) -> (%s, %s)',
-    (uuid: string, expectedSource: ClipSource, expectedSubmitter: string) => {
+    (uuid: string, expectedSource: IntegrationID, expectedSubmitter: string) => {
       expect(fromSubmitterUUID(uuid)).toEqual([expectedSource, expectedSubmitter])
     },
   )

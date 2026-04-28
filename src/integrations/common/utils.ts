@@ -1,6 +1,6 @@
 import type { Clip } from '@/integrations'
 
-import { ClipSource } from './source'
+import { IntegrationID } from '@/integrations'
 
 /**
  * Generate a unique key for an integration assuming that the key value is unique.
@@ -40,14 +40,14 @@ export function getAllURLsFromText(text: string): string[] {
  * @param uuid - the UUID of the submitter.
  * @returns the source and submitter from the UUID.
  */
-export function fromSubmitterUUID(uuid: string): [ClipSource, string] {
+export function fromSubmitterUUID(uuid: string): [IntegrationID, string] {
   // Format of the UUID is either `source:submitter` or just `submitter`.
   // In the latter case, the source is unknown.
   const [submitter = '', source] = uuid.split(':').reverse()
   if (!source) {
-    return [ClipSource.UNKNOWN, submitter]
+    return [IntegrationID.UNKNOWN, submitter]
   }
-  return [source as ClipSource, submitter]
+  return [source as IntegrationID, submitter]
 }
 
 /**
@@ -59,6 +59,6 @@ export function fromSubmitterUUID(uuid: string): [ClipSource, string] {
  * @param submitter - the user submitting the message.
  * @returns the UUID of the submitter.
  */
-export function toSubmitterUUID(source: ClipSource, submitter: string): string {
+export function toSubmitterUUID(source: IntegrationID, submitter: string): string {
   return `${source.toString()}:${submitter.toLowerCase()}`
 }

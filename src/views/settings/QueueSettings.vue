@@ -30,28 +30,6 @@
           <Message id="limit-help" size="small" severity="secondary" variant="simple">{{
             m.size_limit_description()
           }}</Message>
-          <label for="allowedProviders">{{ m.allowed_providers() }}</label>
-          <MultiSelect
-            v-model="formSettings.providers"
-            input-id="allowedProviders"
-            :options="Object.values(IntegrationProviderID)"
-            :placeholder="m.none()"
-            size="small"
-            display="chip"
-            aria-describedby="allowedProviders-help"
-          >
-            <template #option="{ option }: { option: IntegrationProviderID }">
-              <ProviderName :provider="option" />
-            </template>
-            <template #chip="{ value }: { value: IntegrationProviderID }">
-              <Chip>
-                <ProviderName :provider="value" />
-              </Chip>
-            </template>
-          </MultiSelect>
-          <Message id="allowedProviders-help" size="small" severity="secondary" variant="simple">{{
-            m.allowed_providers_description()
-          }}</Message>
         </div>
         <div class="mt-3">
           <Button
@@ -78,16 +56,12 @@
 <script setup lang="ts">
 import Button from 'primevue/button'
 import Card from 'primevue/card'
-import Chip from 'primevue/chip'
 import InputNumber from 'primevue/inputnumber'
 import Message from 'primevue/message'
-import MultiSelect from 'primevue/multiselect'
 import ToggleSwitch from 'primevue/toggleswitch'
 import { useToast } from 'primevue/usetoast'
 import { ref, toRaw, useTemplateRef } from 'vue'
 
-import ProviderName from '@/components/ProviderName.vue'
-import { IntegrationProviderID } from '@/integrations'
 import { m } from '@/paraglide/messages'
 import { usePreferences } from '@/stores/preferences'
 import { useSettings } from '@/stores/settings'

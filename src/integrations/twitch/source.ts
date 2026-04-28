@@ -5,12 +5,12 @@ import type { ClipSourceMessage, ClipSourceModeration } from '@/integrations/com
 
 import { getAllURLsFromText } from '../common'
 import {
-  ClipSource,
   ClipSourceStatus,
   EventEmitter,
   type IntegrationSource,
   type ClipSourceEventsMap,
 } from '../common/source'
+import { IntegrationID } from '../indentify'
 
 const _status = ref(ClipSourceStatus.UNKNOWN)
 
@@ -21,10 +21,18 @@ export class TwitchChatSource
   extends EventEmitter<ClipSourceEventsMap>
   implements IntegrationSource
 {
-  public name = ClipSource.TWITCH
+  public id = IntegrationID.TWITCH_CHAT
 
   private channel?: string
   private chat = new Client({ token: undefined, channels: [] })
+
+  public get name() {
+    return `twitch.tv/${this.channel}/chat`
+  }
+
+  public get url() {
+    return `https://www.twitch.tv/${this.channel}/chat`
+  }
 
   public isExperimental = false
   public get status() {
@@ -43,7 +51,7 @@ export class TwitchChatSource
     this.status = status
     this.emit('status', {
       timestamp: timestamp ?? this.timestamp(),
-      source: this.name,
+      source: this.id,
       data: status,
     })
   }
@@ -52,7 +60,7 @@ export class TwitchChatSource
     const timestamp = this.timestamp()
     this.emit('error', {
       timestamp,
-      source: this.name,
+      source: this.id,
       data: error,
     })
     this.handleStatusUpdate(ClipSourceStatus.ERROR, timestamp)
@@ -60,7 +68,7 @@ export class TwitchChatSource
 
   protected handleConnected() {
     const timestamp = this.timestamp()
-    this.emit('connected', { timestamp, source: this.name, data: undefined })
+    this.emit('connected', { timestamp, source: this.id, data: undefined })
     this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
   }
 
@@ -68,7 +76,7 @@ export class TwitchChatSource
     const timestamp = this.timestamp()
     this.emit('disconnected', {
       timestamp,
-      source: this.name,
+      source: this.id,
       data: reason,
     })
     this.handleStatusUpdate(ClipSourceStatus.DISCONNECTED, timestamp)
@@ -78,7 +86,7 @@ export class TwitchChatSource
     const timestamp = this.timestamp()
     this.emit('join', {
       timestamp,
-      source: this.name,
+      source: this.id,
       data: channel,
     })
     this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
@@ -88,7 +96,7 @@ export class TwitchChatSource
     const timestamp = this.timestamp()
     this.emit('leave', {
       timestamp,
-      source: this.name,
+      source: this.id,
       data: channel,
     })
     this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
@@ -98,7 +106,7 @@ export class TwitchChatSource
     const timestamp = this.timestamp()
     this.emit('message', {
       timestamp,
-      source: this.name,
+      source: this.id,
       data: {
         ...message,
         urls: getAllURLsFromText(message.text),
@@ -111,7 +119,7 @@ export class TwitchChatSource
     const timestamp = this.timestamp()
     this.emit('message-deleted', {
       timestamp,
-      source: this.name,
+      source: this.id,
       data: {
         ...message,
         urls: getAllURLsFromText(message.text),
@@ -124,7 +132,7 @@ export class TwitchChatSource
     const timestamp = this.timestamp()
     this.emit('moderation', {
       timestamp,
-      source: this.name,
+      source: this.id,
       data: moderation,
     })
     this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)

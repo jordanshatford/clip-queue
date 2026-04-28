@@ -4,7 +4,6 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type { ClipSourceEvent, ClipSourceMessage } from '@/integrations/common/source'
 
 import { IntegrationID } from '@/integrations'
-import { ClipSource } from '@/integrations/common/source'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
@@ -12,7 +11,7 @@ import { useSettings } from '@/stores/settings'
 import commands, { Command } from '../commands'
 
 const MOCK_EVENT: ClipSourceEvent<ClipSourceMessage> = {
-  source: ClipSource.TWITCH,
+  source: IntegrationID.TWITCH,
   timestamp: '2021-01-01T00:00:00Z',
   data: {
     channel: 'testchannel',
