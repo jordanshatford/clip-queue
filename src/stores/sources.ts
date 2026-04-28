@@ -35,7 +35,7 @@ export const useSources = defineStore('sources', () => {
   })
   source.value.on('message', async (event) => {
     // Check if message is a command and perform command if proper permission to do so
-    if (event.data.text.startsWith(settings.commands.prefix)) {
+    if (event.data.text.startsWith(settings.application.prefix)) {
       // Ensure the user is allowed to use commands.
       if (!event.data.isAllowedCommands) {
         logger.debug(
@@ -44,9 +44,9 @@ export const useSources = defineStore('sources', () => {
         return
       }
       const [command, ...args] = event.data.text
-        .substring(settings.commands.prefix.length)
+        .substring(settings.application.prefix.length)
         .split(' ')
-      if (!settings.commands.allowed.includes(command as Command)) {
+      if (!settings.application.allowed.includes(command as Command)) {
         logger.debug(`[${event.source}]: Command ${command} is not enabled or does not exist.`)
         return
       }
@@ -69,7 +69,7 @@ export const useSources = defineStore('sources', () => {
     }
   })
   source.value.on('message-deleted', async (event) => {
-    if (!settings.queue.hasAutoModerationEnabled) {
+    if (!settings.application.hasAutoModerationEnabled) {
       return
     }
     for (const url of event.data.urls) {
@@ -89,7 +89,7 @@ export const useSources = defineStore('sources', () => {
   })
   source.value.on('moderation', (event) => {
     const username = event.data.username
-    if (!settings.queue.hasAutoModerationEnabled) {
+    if (!settings.application.hasAutoModerationEnabled) {
       return
     }
     queue.removeSubmitterClips(username)
