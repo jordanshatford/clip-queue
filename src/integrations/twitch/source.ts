@@ -1,8 +1,6 @@
 import { Client } from '@tmi.js/chat'
 import { ref } from 'vue'
 
-import type { ClipSourceMessage, ClipSourceModeration } from '@/integrations/common/source'
-
 import { getAllURLsFromText } from '../common'
 import {
   ClipSourceStatus,
@@ -12,7 +10,7 @@ import {
 } from '../common/source'
 import { IntegrationID } from '../indentify'
 
-const _status = ref(ClipSourceStatus.UNKNOWN)
+const status = ref<ClipSourceStatus>(ClipSourceStatus.UNKNOWN)
 
 /**
  * Twitch Chat Source.
@@ -36,11 +34,11 @@ export class TwitchChatSource
 
   public isExperimental = false
   public get status() {
-    return _status.value
+    return status.value
   }
 
   public set status(value: ClipSourceStatus) {
-    _status.value = value
+    status.value = value
   }
 
   private timestamp() {
@@ -66,82 +64,12 @@ export class TwitchChatSource
     this.handleStatusUpdate(ClipSourceStatus.ERROR, timestamp)
   }
 
-  protected handleConnected() {
-    const timestamp = this.timestamp()
-    this.emit('connected', { timestamp, source: this.id, data: undefined })
-    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
-  }
-
-  protected handleDisconnected(reason: string) {
-    const timestamp = this.timestamp()
-    this.emit('disconnected', {
-      timestamp,
-      source: this.id,
-      data: reason,
-    })
-    this.handleStatusUpdate(ClipSourceStatus.DISCONNECTED, timestamp)
-  }
-
-  protected handleJoin(channel: string) {
-    const timestamp = this.timestamp()
-    this.emit('join', {
-      timestamp,
-      source: this.id,
-      data: channel,
-    })
-    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
-  }
-
-  protected handleLeave(channel: string) {
-    const timestamp = this.timestamp()
-    this.emit('leave', {
-      timestamp,
-      source: this.id,
-      data: channel,
-    })
-    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
-  }
-
-  protected handleMessage(message: Omit<ClipSourceMessage, 'urls'>) {
-    const timestamp = this.timestamp()
-    this.emit('message', {
-      timestamp,
-      source: this.id,
-      data: {
-        ...message,
-        urls: getAllURLsFromText(message.text),
-      },
-    })
-    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
-  }
-
-  protected handleMessageDeleted(message: Omit<ClipSourceMessage, 'urls'>) {
-    const timestamp = this.timestamp()
-    this.emit('message-deleted', {
-      timestamp,
-      source: this.id,
-      data: {
-        ...message,
-        urls: getAllURLsFromText(message.text),
-      },
-    })
-    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
-  }
-
-  protected handleModeration(moderation: ClipSourceModeration) {
-    const timestamp = this.timestamp()
-    this.emit('moderation', {
-      timestamp,
-      source: this.id,
-      data: moderation,
-    })
-    this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
-  }
-
   public constructor() {
     super()
     this.chat.on('connect', async () => {
-      this.handleConnected()
+      const timestamp = this.timestamp()
+      this.emit('connected', { timestamp, source: this.id, data: undefined })
+      this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
       if (this.channel) {
         try {
           await this.chat.join(this.channel)
@@ -150,34 +78,62 @@ export class TwitchChatSource
         }
       }
     })
-    this.chat.on('join', (event) => this.handleJoin(event.channel.login))
+    this.chat.on('join', (event) => {
+      const timestamp = this.timestamp()
+      this.emit('join', {
+        timestamp,
+        source: this.id,
+        data: event.channel.login,
+      })
+      this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
+    })
     this.chat.on('message', (event) => {
       if (event.user.isBot) {
         return
       }
-      this.handleMessage({
-        channel: event.channel.login,
-        username: event.user.login,
-        text: event.message.text,
-        isAllowedCommands: event.user.isMod || event.user.isBroadcaster,
+      const timestamp = this.timestamp()
+      this.emit('message', {
+        timestamp,
+        source: this.id,
+        data: {
+          channel: event.channel.login,
+          username: event.user.login,
+          text: event.message.text,
+          isAllowedCommands: event.user.isMod || event.user.isBroadcaster,
+          urls: getAllURLsFromText(event.message.text),
+        },
       })
+      this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
     })
     this.chat.on('moderation', (event) => {
       switch (event.type) {
         case 'deleteMessage': {
-          this.handleMessageDeleted({
-            channel: event.channel.login,
-            username: event.user.login,
-            text: event.message.text,
+          const timestamp = this.timestamp()
+          this.emit('message-deleted', {
+            timestamp,
+            source: this.id,
+            data: {
+              channel: event.channel.login,
+              username: event.user.login,
+              text: event.message.text,
+              urls: getAllURLsFromText(event.message.text),
+            },
           })
+          this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
           break
         }
         case 'ban':
         case 'timeout': {
-          this.handleModeration({
-            channel: event.channel.login,
-            username: event.user.login,
+          const timestamp = this.timestamp()
+          this.emit('moderation', {
+            timestamp,
+            source: this.id,
+            data: {
+              channel: event.channel.login,
+              username: event.user.login,
+            },
           })
+          this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
           break
         }
         default: {
@@ -185,8 +141,24 @@ export class TwitchChatSource
         }
       }
     })
-    this.chat.on('part', (event) => this.handleLeave(event.channel.login))
-    this.chat.on('close', (event) => this.handleDisconnected(event.reason))
+    this.chat.on('part', (event) => {
+      const timestamp = this.timestamp()
+      this.emit('leave', {
+        timestamp,
+        source: this.id,
+        data: event.channel.login,
+      })
+      this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
+    })
+    this.chat.on('close', (event) => {
+      const timestamp = this.timestamp()
+      this.emit('disconnected', {
+        timestamp,
+        source: this.id,
+        data: event.reason,
+      })
+      this.handleStatusUpdate(ClipSourceStatus.DISCONNECTED, timestamp)
+    })
   }
 
   public async connect(channel: string) {

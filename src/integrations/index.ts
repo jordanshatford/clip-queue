@@ -7,4 +7,4 @@ import type { Integration } from './common'
 import { kick } from './kick'
 import { twitch } from './twitch'
 
-export const integrations: Integration[] = [kick, twitch]
+export const integrations: Integration[] = [twitch, kick]
