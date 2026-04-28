@@ -189,7 +189,7 @@ export const routeTranslations = {
   [RouteNameConstants.SETTINGS]: m.settings,
   [RouteNameConstants.SETTINGS_CHAT]: m.settings_chat,
   [RouteNameConstants.SETTINGS_QUEUE]: m.settings_queue,
-  [RouteNameConstants.SETTINGS_INTEGRATIONS]: () => 'Integrations',
+  [RouteNameConstants.SETTINGS_INTEGRATIONS]: m.integrations,
   [RouteNameConstants.SETTINGS_PREFERENCES]: m.settings_preferences,
   [RouteNameConstants.SETTINGS_LOGS]: m.logs,
   [RouteNameConstants.SETTINGS_OTHER]: m.settings_other,
