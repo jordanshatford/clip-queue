@@ -9,21 +9,25 @@ import {
   integrations,
 } from '@/integrations'
 import { useLogger } from '@/stores/logger'
-import { useSettings } from '@/stores/settings'
 
 export const useProviders = defineStore('providers', () => {
-  const settings = useSettings()
   const logger = useLogger()
 
   const providers = computed((): Reactive<IntegrationProvider>[] =>
     integrations.flatMap((i) => i.providers),
   )
 
-  const svg = computed(() => {
-    return (provider: IntegrationID) => {
+  const provider = computed(() => {
+    return (id: IntegrationID) => {
+      return providers.value.find((p) => p.id === id)
+    }
+  })
+
+  const icon = computed(() => {
+    return (id: IntegrationID) => {
       for (const integration of integrations) {
-        for (const p of integration.providers) {
-          if (p.id === provider) {
+        for (const provider of integration.providers) {
+          if (provider.id === id) {
             return integration.icon
           }
         }
@@ -32,8 +36,8 @@ export const useProviders = defineStore('providers', () => {
   })
 
   const isExperimental = computed(() => {
-    return (provider: IntegrationID) => {
-      return providers.value.find((p) => p.id === provider)?.isExperimental
+    return (id: IntegrationID) => {
+      return provider.value(id)?.isExperimental
     }
   })
 
@@ -68,29 +72,30 @@ export const useProviders = defineStore('providers', () => {
   }
 
   function getPlayerFormat(clip: Clip): PlayerFormat | undefined {
-    if (!settings.queue.providers.includes(clip.provider)) {
+    const p = provider.value(clip.provider)
+    if (!p?.isEnabled) {
       logger.warn(
         `[Providers]: Attempted to get player format for clip from disabled provider: ${clip.provider}.`,
       )
       return
     }
-    const provider = providers.value.find((p) => p.id === clip.provider)
-    return provider?.getPlayerFormat(clip)
+    return p?.getPlayerFormat(clip)
   }
 
   function getPlayerSource(clip: Clip): string | undefined {
-    if (!settings.queue.providers.includes(clip.provider)) {
+    const p = provider.value(clip.provider)
+    if (!p?.isEnabled) {
       logger.warn(
         `[Providers]: Attempted to get player source for clip from disabled provider: ${clip.provider}.`,
       )
       return
     }
-    const provider = providers.value.find((p) => p.id === clip.provider)
-    return provider?.getPlayerSource(clip)
+    return p?.getPlayerSource(clip)
   }
 
   return {
-    svg,
+    provider,
+    icon,
     isExperimental,
     hasCachedData,
     purge,

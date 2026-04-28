@@ -4,13 +4,13 @@ import type { Integration } from '../common'
 
 import { IntegrationID } from '../indentify'
 import { TwitchAuthentication } from './authentication'
-import { TwitchProvider } from './providers'
+import { TwitchClipProvider } from './providers'
 import { TwitchChatSource } from './source'
 
 export * from './core/types'
 
 export const authentication = reactive<TwitchAuthentication>(new TwitchAuthentication())
-export const clips = reactive(new TwitchProvider(() => authentication.token))
+export const clips = reactive(new TwitchClipProvider(() => authentication.token))
 export const chat = reactive(new TwitchChatSource())
 
 export const twitch: Integration = {

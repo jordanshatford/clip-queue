@@ -3,7 +3,6 @@ import { computed, ref } from 'vue'
 
 import type { LogLevel } from '@/stores/logger'
 
-import { IntegrationID } from '@/integrations'
 import { Command } from '@/utils/commands'
 
 /**
@@ -39,10 +38,6 @@ export interface QueueSettings {
    * @note null means no limit.
    */
   limit: number | null
-  /**
-   * The providers allowed to be used for clips.
-   */
-  providers: IntegrationID[]
 }
 
 /**
@@ -67,7 +62,6 @@ export const DEFAULT_COMMAND_SETTINGS: CommandSettings = {
 export const DEFAULT_QUEUE_SETTINGS: QueueSettings = {
   hasAutoModerationEnabled: true,
   limit: null,
-  providers: Object.values(IntegrationID),
 }
 
 export const DEFAULT_LOGGER_SETTINGS: LoggerSettings = {
@@ -97,10 +91,7 @@ export const useSettings = defineStore(
       return (q: QueueSettings) => {
         return (
           queue.value.hasAutoModerationEnabled !== q.hasAutoModerationEnabled ||
-          queue.value.limit !== q.limit ||
-          Object.values(IntegrationID).some(
-            (p) => queue.value.providers.includes(p) !== q.providers.includes(p),
-          )
+          queue.value.limit !== q.limit
         )
       }
     })
@@ -140,12 +131,6 @@ export const useSettings = defineStore(
     persist: {
       key: 'cq-settings',
       afterHydrate(context) {
-        // Ensure that the providers in the settings are valid.
-        const providers = context.store.queue.providers
-        const availableProviders = Object.values(IntegrationID)
-        context.store.queue.providers = providers.filter((p: IntegrationID) => {
-          return availableProviders.includes(p)
-        })
         // Ensure that the commands allowed are valid.
         const commands = context.store.commands.allowed
         const availableCommands = Object.values(Command)

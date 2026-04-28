@@ -102,19 +102,23 @@ describe('commands.ts', () => {
   })
 
   it('can enable and disable providers', () => {
-    const settings = useSettings()
-    expect(settings.queue.providers).toEqual(Object.values(IntegrationID))
-    commands.handleCommand(MOCK_EVENT, Command.DISABLE_PROVIDER.toString(), 'test') // Invalid provider
-    expect(settings.queue.providers).toEqual(Object.values(IntegrationID))
+    const providers = useProviders()
+    expect(providers.provider(IntegrationID.KICK_CLIPS)?.isEnabled).toEqual(true)
+    expect(providers.provider(IntegrationID.TWITCH_CLIPS)?.isEnabled).toEqual(true)
+    // Attempt using an invalid provider.
+    commands.handleCommand(MOCK_EVENT, Command.DISABLE_PROVIDER.toString(), 'test')
+    expect(providers.provider(IntegrationID.KICK_CLIPS)?.isEnabled).toEqual(true)
+    expect(providers.provider(IntegrationID.TWITCH_CLIPS)?.isEnabled).toEqual(true)
     commands.handleCommand(MOCK_EVENT, Command.DISABLE_PROVIDER.toString(), 'kick-clips')
-    expect(settings.queue.providers).not.toContain(IntegrationID.KICK_CLIPS)
-    commands.handleCommand(MOCK_EVENT, Command.ENABLE_PROVIDER.toString(), 'test') // Invalid provider
-    expect(settings.queue.providers).not.toContain(IntegrationID.KICK_CLIPS)
+    expect(providers.provider(IntegrationID.KICK_CLIPS)?.isEnabled).toEqual(false)
+    expect(providers.provider(IntegrationID.TWITCH_CLIPS)?.isEnabled).toEqual(true)
+    // Attempt using an invalid provider.
+    commands.handleCommand(MOCK_EVENT, Command.ENABLE_PROVIDER.toString(), 'test')
+    expect(providers.provider(IntegrationID.KICK_CLIPS)?.isEnabled).toEqual(false)
+    expect(providers.provider(IntegrationID.TWITCH_CLIPS)?.isEnabled).toEqual(true)
     commands.handleCommand(MOCK_EVENT, Command.ENABLE_PROVIDER.toString(), 'kick-clips')
-    expect(settings.queue.providers).toContain(IntegrationID.KICK_CLIPS)
-    for (const p of Object.values(IntegrationID)) {
-      expect(settings.queue.providers).toContain(p)
-    }
+    expect(providers.provider(IntegrationID.KICK_CLIPS)?.isEnabled).toEqual(true)
+    expect(providers.provider(IntegrationID.TWITCH_CLIPS)?.isEnabled).toEqual(true)
   })
 
   it('can enable and disable auto moderation', () => {

@@ -1,8 +1,8 @@
 <template>
-  <Message size="small" severity="secondary" variant="simple"
-    >The following are sources for the integration. If one is connected, submissions can be added
-    there and will be picked up by the queue.</Message
-  >
+  <Message size="small" severity="secondary" variant="simple">
+    Sources available for this integration. When connected, URL's detected in the source will be
+    submitted.
+  </Message>
   <InputGroup>
     <InputText id="username" :value="source.name" readonly fluid size="small" />
     <InputGroupAddon>

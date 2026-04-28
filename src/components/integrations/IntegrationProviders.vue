@@ -1,17 +1,19 @@
 <template>
-  <Message size="small" severity="secondary" variant="simple"
-    >The following are providers for the integration. If one is enabled, that type of content can
-    make it into the queue.</Message
-  >
+  <Message size="small" severity="secondary" variant="simple">
+    Providers available for this integration. When enabled, this type of content will be added to
+    the queue when detected.
+  </Message>
   <div v-for="provider of providers" :key="provider.id">
     <div class="flex justify-between">
       <div class="flex items-center gap-2">
         <label :for="provider.id">{{ provider.name }}</label>
+        <Tag class="font-mono text-xs" severity="secondary" :value="provider.id"></Tag>
         <Tag
           v-if="provider.isExperimental"
           icon="pi pi-exclamation-triangle"
+          class="text-xs"
           severity="warn"
-          value="Experimental"
+          :value="m.experimental()"
         ></Tag>
       </div>
       <ToggleSwitch v-model="provider.isEnabled" :input-id="provider.id" size="small" />
@@ -27,6 +29,8 @@ import Tag from 'primevue/tag'
 import ToggleSwitch from 'primevue/toggleswitch'
 
 import type { IntegrationProvider } from '@/integrations'
+
+import { m } from '@/paraglide/messages'
 
 interface Props {
   providers: Reactive<IntegrationProvider>[]

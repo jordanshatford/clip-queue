@@ -15,9 +15,9 @@ const { CLIENT_ID } = env
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.TWITCH_CLIPS, 'enabled'), true)
 
 /**
- * The Twitch provider.
+ * Provider for Twitch.tv clips.
  */
-export class TwitchProvider extends Cacheable<Clip> implements IntegrationProvider {
+export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationProvider {
   public readonly id: IntegrationID = IntegrationID.TWITCH_CLIPS
   public readonly name: string = 'Twitch Clips'
   public readonly isExperimental: boolean = false

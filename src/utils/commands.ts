@@ -146,6 +146,7 @@ export function handleCommand(
   const logger = useLogger()
   const queue = useQueue()
   const settings = useSettings()
+  const providers = useProviders()
 
   logger.info(
     `[${event.source}]: ${event.data.username} executed command: ${command} ${args.join(' ')}`,
@@ -198,24 +199,29 @@ export function handleCommand(
       }
       break
     }
-    case Command.ENABLE_PROVIDER: {
-      if (args[0]) {
-        const provider = Object.values(IntegrationID).find(
-          (p) => p.toLowerCase() === args[0]?.toLowerCase(),
-        )
-        if (provider && !settings.queue.providers.includes(provider)) {
-          settings.queue.providers = [...settings.queue.providers, provider]
-        }
-      }
-      break
-    }
+    case Command.ENABLE_PROVIDER:
     case Command.DISABLE_PROVIDER: {
       if (args[0]) {
-        const provider = Object.values(IntegrationID).find(
+        const integration = Object.values(IntegrationID).find(
           (p) => p.toLowerCase() === args[0]?.toLowerCase(),
         )
-        if (provider && settings.queue.providers.includes(provider)) {
-          settings.queue.providers = settings.queue.providers.filter((p) => p !== provider)
+        if (integration) {
+          const provider = providers.provider(integration)
+          if (provider) {
+            switch (command as Command) {
+              case Command.ENABLE_PROVIDER: {
+                provider.isEnabled = true
+                break
+              }
+              case Command.DISABLE_PROVIDER: {
+                provider.isEnabled = false
+                break
+              }
+              default: {
+                break
+              }
+            }
+          }
         }
       }
       break
@@ -229,7 +235,6 @@ export function handleCommand(
       break
     }
     case Command.PURGE_CACHE: {
-      const providers = useProviders()
       providers.purge()
       break
     }

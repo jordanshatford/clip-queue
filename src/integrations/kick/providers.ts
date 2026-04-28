@@ -11,9 +11,9 @@ import kick from './core'
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.KICK_CLIPS, 'enabled'), true)
 
 /**
- * The Kick provider.
+ * Provider for Kick.com clips.
  */
-export class KickProvider extends Cacheable<Clip> implements IntegrationProvider {
+export class KickClipsProvider extends Cacheable<Clip> implements IntegrationProvider {
   public readonly id: IntegrationID = IntegrationID.KICK_CLIPS
   public readonly name: string = 'Kick Clips'
   public readonly isExperimental: boolean = false

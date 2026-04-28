@@ -1,7 +1,7 @@
 <template>
-  <Message size="small" severity="secondary" variant="simple"
-    >The following is the current authentication for the integration.</Message
-  >
+  <Message size="small" severity="secondary" variant="simple">
+    Authenticated for this integration as the following.
+  </Message>
   <Chip :label="authentication?.user?.name" :image="authentication?.user?.profileImageURL" />
 </template>
 

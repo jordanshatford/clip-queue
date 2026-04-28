@@ -29,5 +29,5 @@ const { provider } = defineProps<Props>()
 
 const providers = useProviders()
 
-const svg = computed(() => providers.svg(provider))
+const svg = computed(() => providers.icon(provider))
 </script>

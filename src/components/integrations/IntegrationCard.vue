@@ -11,6 +11,7 @@
           <Tag
             v-if="integration.isExperimental"
             icon="pi pi-exclamation-triangle"
+            class="text-xs"
             severity="warn"
             value="Experimental"
           >

@@ -80,7 +80,7 @@ const subtitle = computed(() => {
   return clip.channel
 })
 
-const svg = computed(() => providers.svg(clip.provider))
+const svg = computed(() => providers.icon(clip.provider))
 
 const emit = defineEmits<{
   (e: 'play'): void

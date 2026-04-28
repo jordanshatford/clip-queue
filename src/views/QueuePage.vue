@@ -7,12 +7,6 @@
     @previous="queue.previous()"
     @next="queue.next()"
   />
-  <Message v-else-if="settings.queue.providers.length === 0" severity="error">
-    <template #icon>
-      <i class="pi pi-exclamation-circle"></i>
-    </template>
-    <span>{{ m.message_no_clip_providers_enabled() }}</span>
-  </Message>
   <ClipQueue
     :title="m.upcoming_clips()"
     :clips="queue.upcoming.toArray()"
@@ -26,15 +20,11 @@
 </template>
 
 <script setup lang="ts">
-import Message from 'primevue/message'
-
 import ClipPlayer from '@/components/ClipPlayer.vue'
 import ClipQueue from '@/components/ClipQueue.vue'
 import { toClipUUID } from '@/integrations'
 import { m } from '@/paraglide/messages'
 import { useQueue } from '@/stores/queue'
-import { useSettings } from '@/stores/settings'
 
 const queue = useQueue()
-const settings = useSettings()
 </script>
