@@ -1,4 +1,5 @@
-import type { Clip, IntegrationProviderID } from '@/integrations/common/provider'
+import type { Clip } from '@/integrations/common/provider'
+import type { IntegrationID } from '../indentify'
 
 import { toClipUUID } from '@/integrations/common'
 
@@ -157,7 +158,7 @@ export class ClipList extends BasicClipList {
    * Remove all clips by a provider.
    * @param provider - The provider to remove.
    */
-  public removeByProvider(provider: IntegrationProviderID): void {
+  public removeByProvider(provider: IntegrationID): void {
     this._clips = this._clips.filter((c) => c.provider.toLowerCase() !== provider.toLowerCase())
   }
 

@@ -4,7 +4,7 @@ import { computed } from 'vue'
 
 import type { ClipSourceEvent, ClipSourceMessage } from '@/integrations/common/source'
 
-import { IntegrationProviderID } from '@/integrations'
+import { IntegrationID } from '@/integrations'
 import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useProviders } from '@/stores/providers'
@@ -194,13 +194,13 @@ export function handleCommand(
     }
     case Command.REMOVE_BY_PROVIDER: {
       if (args[0]) {
-        queue.removeProviderClips(args[0] as IntegrationProviderID)
+        queue.removeProviderClips(args[0] as IntegrationID)
       }
       break
     }
     case Command.ENABLE_PROVIDER: {
       if (args[0]) {
-        const provider = Object.values(IntegrationProviderID).find(
+        const provider = Object.values(IntegrationID).find(
           (p) => p.toLowerCase() === args[0]?.toLowerCase(),
         )
         if (provider && !settings.queue.providers.includes(provider)) {
@@ -211,7 +211,7 @@ export function handleCommand(
     }
     case Command.DISABLE_PROVIDER: {
       if (args[0]) {
-        const provider = Object.values(IntegrationProviderID).find(
+        const provider = Object.values(IntegrationID).find(
           (p) => p.toLowerCase() === args[0]?.toLowerCase(),
         )
         if (provider && settings.queue.providers.includes(provider)) {

@@ -4,7 +4,7 @@ import { computed, type Reactive } from 'vue'
 import {
   type Clip,
   type PlayerFormat,
-  IntegrationProviderID,
+  IntegrationID,
   type IntegrationProvider,
   integrations,
 } from '@/integrations'
@@ -20,7 +20,7 @@ export const useProviders = defineStore('providers', () => {
   )
 
   const svg = computed(() => {
-    return (provider: IntegrationProviderID) => {
+    return (provider: IntegrationID) => {
       for (const integration of integrations) {
         for (const p of integration.providers) {
           if (p.id === provider) {
@@ -32,7 +32,7 @@ export const useProviders = defineStore('providers', () => {
   })
 
   const isExperimental = computed(() => {
-    return (provider: IntegrationProviderID) => {
+    return (provider: IntegrationID) => {
       return providers.value.find((p) => p.id === provider)?.isExperimental
     }
   })

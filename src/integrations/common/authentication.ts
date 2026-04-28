@@ -1,3 +1,5 @@
+import type { IntegrationID } from '../indentify'
+
 /**
  * User details provided by an authentication integration.
  */
@@ -17,16 +19,6 @@ export interface UserDetails {
 }
 
 /**
- * Enumeration of clip providers.
- */
-export enum IntegrationAuthenticationID {
-  /**
-   * Twitch.tv.
-   */
-  TWITCH = 'ttv-auth',
-}
-
-/**
  * Interface representing an authentication integration. Each authentication integration must implement
  * this interface to provide a consistent way to handle authentication across different providers.
  */
@@ -34,7 +26,7 @@ export interface IntegrationAuthentication {
   /**
    * The unique identifier for the authentication integration. This is used to identify the integration in the system and should be unique across all integrations.
    */
-  readonly id: IntegrationAuthenticationID
+  readonly id: IntegrationID
   /**
    * A boolean indicating whether the user is currently logged in with this integration.
    */

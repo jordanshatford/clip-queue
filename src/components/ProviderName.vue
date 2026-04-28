@@ -16,13 +16,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import type { IntegrationProviderID } from '@/integrations'
+import type { IntegrationID } from '@/integrations'
 
 import { m } from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'
 
 export interface Props {
-  provider: IntegrationProviderID
+  provider: IntegrationID
 }
 
 const { provider } = defineProps<Props>()

@@ -1,6 +1,8 @@
 import { reactive } from 'vue'
 
-import { IntegrationID, type Integration } from '../common'
+import type { Integration } from '../common'
+
+import { IntegrationID } from '../indentify'
 import { TwitchAuthentication } from './authentication'
 import { TwitchProvider } from './providers'
 import { TwitchChatSource } from './source'

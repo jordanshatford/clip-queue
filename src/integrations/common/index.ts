@@ -1,5 +1,6 @@
 import type { Reactive } from 'vue'
 
+import type { IntegrationID } from '../indentify'
 import type { IntegrationAuthentication } from './authentication'
 import type { IntegrationProvider } from './provider'
 import type { IntegrationSource } from './source'
@@ -7,11 +8,6 @@ import type { IntegrationSource } from './source'
 export * from './authentication'
 export * from './clip-list'
 export * from './utils'
-
-export enum IntegrationID {
-  KICK = 'kick',
-  TWITCH = 'twitch',
-}
 
 export interface Integration {
   /**

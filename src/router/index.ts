@@ -22,6 +22,7 @@ export enum RouteNameConstants {
   SETTINGS = 'settings',
   SETTINGS_CHAT = 'settings_chat',
   SETTINGS_QUEUE = 'settings_queue',
+  SETTINGS_INTEGRATIONS = 'settings_integrations',
   SETTINGS_PREFERENCES = 'settings_preferences',
   SETTINGS_LOGS = 'settings_logs',
   SETTINGS_OTHER = 'settings_other',
@@ -71,6 +72,15 @@ export const routes: RouteRecordRaw[] = [
         component: () => import('@/views/settings/QueueSettings.vue'),
         meta: {
           icon: 'pi pi-list',
+          requiresAuth: true,
+        },
+      },
+      {
+        path: 'integrations',
+        name: RouteNameConstants.SETTINGS_INTEGRATIONS,
+        component: () => import('@/views/settings/IntegrationSettings.vue'),
+        meta: {
+          icon: 'pi pi-share-alt',
           requiresAuth: true,
         },
       },
@@ -143,7 +153,7 @@ router.beforeEach(async (to, from) => {
   // If the user is trying to login via twitch
   if (to.hash && to.hash !== '' && !user.isLoggedIn) {
     await user.login(to.hash)
-    logger.debug(`[Router]: User is logging in via Twitch ${user.details.name}.`)
+    logger.debug(`[Router]: User is logging in via Twitch ${user.details?.name}.`)
     return { name: RouteNameConstants.QUEUE, hash: '' }
     // User is not logged in trying to access auth required route
   } else if (!user.isLoggedIn && to.meta.requiresAuth) {
@@ -164,6 +174,7 @@ export const routeTranslations = {
   [RouteNameConstants.SETTINGS]: m.settings,
   [RouteNameConstants.SETTINGS_CHAT]: m.settings_chat,
   [RouteNameConstants.SETTINGS_QUEUE]: m.settings_queue,
+  [RouteNameConstants.SETTINGS_INTEGRATIONS]: () => 'Integrations',
   [RouteNameConstants.SETTINGS_PREFERENCES]: m.settings_preferences,
   [RouteNameConstants.SETTINGS_LOGS]: m.logs,
   [RouteNameConstants.SETTINGS_OTHER]: m.settings_other,

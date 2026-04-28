@@ -1,5 +1,6 @@
 export type { Clip, PlayerFormat, IntegrationProvider } from './common/provider'
-export { IntegrationProviderID } from './common/provider'
+export { IntegrationID } from './indentify'
+export type { Integration } from './common'
 
 import type { Integration } from './common'
 

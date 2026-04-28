@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import { IntegrationProviderID } from '@/integrations/common/provider'
+import { IntegrationID } from '@/integrations'
 
 import { ClipList } from '../clip-list'
 import { clipFromKick, clipFromTwitch } from './mocks'
@@ -302,8 +302,8 @@ describe('clip-list.ts', () => {
     clipList2.add({ ...clipFromKick, id: 'test', submitters: ['S'] })
     expect(clipList2.size()).toEqual(2)
     expect(clipList2.toArray()[0]?.id).toEqual(clipList2.toArray()[1]?.id)
-    expect(clipList2.toArray()[0]?.provider).toEqual(IntegrationProviderID.TWITCH_CLIPS)
-    expect(clipList2.toArray()[1]?.provider).toEqual(IntegrationProviderID.KICK_CLIPS)
+    expect(clipList2.toArray()[0]?.provider).toEqual(IntegrationID.TWITCH_CLIPS)
+    expect(clipList2.toArray()[1]?.provider).toEqual(IntegrationID.KICK_CLIPS)
   })
 
   it('can remove clips based on the provider of the clip', () => {
@@ -315,10 +315,8 @@ describe('clip-list.ts', () => {
     clipList2.add({ ...clipFromKick, id: 'test4' })
     clipList2.add({ ...clipFromKick, id: 'test5' })
     expect(clipList2.size()).toEqual(5)
-    clipList2.removeByProvider(IntegrationProviderID.KICK_CLIPS)
+    clipList2.removeByProvider(IntegrationID.KICK_CLIPS)
     expect(clipList2.size()).toEqual(3)
-    expect(
-      clipList2.toArray().some((c) => c.provider === IntegrationProviderID.KICK_CLIPS),
-    ).toEqual(false)
+    expect(clipList2.toArray().some((c) => c.provider === IntegrationID.KICK_CLIPS)).toEqual(false)
   })
 })

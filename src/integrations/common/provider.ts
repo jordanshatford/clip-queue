@@ -1,18 +1,6 @@
 import { Cacheable } from '@/types/cacheable'
 
-/**
- * Enumeration of clip providers.
- */
-export enum IntegrationProviderID {
-  /**
-   * Kick.com clips.
-   */
-  KICK_CLIPS = 'kick-clips',
-  /**
-   * Twitch.tv clips.
-   */
-  TWITCH_CLIPS = 'ttv-clips',
-}
+import type { IntegrationID } from '../indentify'
 
 /**
  * The format of the player.
@@ -26,7 +14,7 @@ export interface Clip {
   /**
    * The provider of the clip.
    */
-  provider: IntegrationProviderID
+  provider: IntegrationID
   /**
    * The ID of the clip.
    */
@@ -73,7 +61,7 @@ export interface IntegrationProvider extends Cacheable<Clip> {
   /**
    * The unique identifier for the authentication integration. This is used to identify the integration in the system and should be unique across all integrations.
    */
-  readonly id: IntegrationProviderID
+  readonly id: IntegrationID
   /**
    * The display name of the authentication integration. This is used in the UI to represent the integration.
    */
