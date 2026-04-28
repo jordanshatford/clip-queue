@@ -11,11 +11,11 @@ export interface UserDetails {
   /**
    * The display name of the user.
    */
-  name: string
+  readonly name: string
   /**
    * The profile image URL of the user.
    */
-  profileImageURL?: string
+  readonly profileImageURL?: string
 }
 
 /**
