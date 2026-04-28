@@ -174,5 +174,8 @@
   "logger_level_description": "El nivel más bajo de registros a capturar. Cualquier nivel de registro superior al seleccionado también se registrará.",
   "logger_size_limit_description": "El número máximo de registros que se pueden conservar. Al alcanzar el límite, se eliminarán los registros más antiguos.",
   "no_logs_captured": "No se capturaron registros.",
-  "integrations": "Integraciones"
+  "integrations": "Integraciones",
+  "authentication_for_integration": "Autenticado para esta integración de la siguiente manera.",
+  "source_for_integration": "Fuentes disponibles para esta integración. Al conectarse, se enviarán los enlaces detectados en la fuente.",
+  "providers_for_integration": "Proveedores disponibles para esta integración. Cuando esté habilitada, este tipo de contenido se agregará a la cola cuando se detecte."
 }

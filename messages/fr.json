@@ -174,5 +174,8 @@
   "logger_level_description": "Niveau de journalisation le plus bas à capturer. Tout niveau de journalisation supérieur au niveau sélectionné sera également enregistré.",
   "logger_size_limit_description": "Nombre maximal de journaux à conserver. Une fois la limite atteinte, les journaux les plus anciens seront supprimés.",
   "no_logs_captured": "Aucun journal capturé.",
-  "integrations": "Intégrations"
+  "integrations": "Intégrations",
+  "authentication_for_integration": "Authentifié pour cette intégration comme suit.",
+  "source_for_integration": "Sources disponibles pour cette intégration. Une fois la connexion établie, les liens détectés dans la source seront soumis.",
+  "providers_for_integration": "Fournisseurs disponibles pour cette intégration. Lorsqu'elle est activée, ce type de contenu sera ajouté à la file d'attente dès sa détection."
 }

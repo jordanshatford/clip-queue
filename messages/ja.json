@@ -174,5 +174,8 @@
   "logger_level_description": "取得するログの最低レベル。選択したレベルより上のログレベルも記録されます。",
   "logger_size_limit_description": "保存するログの最大数。上限に達すると、最も古いログが削除されます。",
   "no_logs_captured": "ログはキャプチャされません。",
-  "integrations": "統合"
+  "integrations": "統合",
+  "authentication_for_integration": "この統合に関して、以下のとおり認証されました。",
+  "source_for_integration": "この連携に利用可能なソース。接続が完了すると、ソース内で検出されたリンクが送信されます。",
+  "providers_for_integration": "この連携に対応しているプロバイダー。有効にすると、このタイプのコンテンツが検出されたときにキューに追加されます。"
 }

@@ -1,6 +1,6 @@
 <template>
   <Message size="small" severity="secondary" variant="simple">
-    Authenticated for this integration as the following.
+    {{ m.authentication_for_integration() }}
   </Message>
   <Chip :label="authentication?.user?.name" :image="authentication?.user?.profileImageURL" />
 </template>
@@ -10,6 +10,8 @@ import Chip from 'primevue/chip'
 import Message from 'primevue/message'
 
 import type { IntegrationAuthentication } from '@/integrations/common'
+
+import { m } from '@/paraglide/messages'
 
 interface Props {
   authentication: IntegrationAuthentication

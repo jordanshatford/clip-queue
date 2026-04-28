@@ -1,7 +1,6 @@
 <template>
   <Message size="small" severity="secondary" variant="simple">
-    Providers available for this integration. When enabled, this type of content will be added to
-    the queue when detected.
+    {{ m.providers_for_integration() }}
   </Message>
   <div v-for="provider of providers" :key="provider.id">
     <div class="flex justify-between">

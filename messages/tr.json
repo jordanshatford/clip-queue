@@ -174,5 +174,8 @@
   "logger_level_description": "Yakalanacak en düşük günlük seviyesi. Seçilen seviyenin üzerindeki tüm günlük seviyeleri de kaydedilecektir.",
   "logger_size_limit_description": "Tutulacak maksimum günlük sayısı. Sınıra ulaşıldığında, en eski günlükler kaldırılacaktır.",
   "no_logs_captured": "Hiçbir kayıt yakalanmadı.",
-  "integrations": "Entegrasyonlar"
+  "integrations": "Entegrasyonlar",
+  "authentication_for_integration": "Bu entegrasyon için kimlik doğrulama aşağıdaki şekilde gerçekleştirilmiştir.",
+  "source_for_integration": "Bu entegrasyon için mevcut kaynaklar. Bağlantı kurulduğunda, kaynakta algılanan bağlantılar gönderilecektir.",
+  "providers_for_integration": "Bu entegrasyon için kullanılabilir sağlayıcılar. Etkinleştirildiğinde, bu tür içerik algılandığında sıraya eklenecektir."
 }

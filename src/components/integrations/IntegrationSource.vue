@@ -1,7 +1,6 @@
 <template>
   <Message size="small" severity="secondary" variant="simple">
-    Sources available for this integration. When connected, URL's detected in the source will be
-    submitted.
+    {{ m.source_for_integration() }}
   </Message>
   <InputGroup>
     <InputText id="username" :value="source.name" readonly fluid size="small" />

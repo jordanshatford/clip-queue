@@ -13,7 +13,7 @@
             icon="pi pi-exclamation-triangle"
             class="text-xs"
             severity="warn"
-            value="Experimental"
+            :value="m.experimental()"
           >
           </Tag>
         </div>
@@ -43,6 +43,8 @@ import Divider from 'primevue/divider'
 import Tag from 'primevue/tag'
 
 import type { Integration } from '@/integrations'
+
+import { m } from '@/paraglide/messages'
 
 import IntegrationAuthentication from './IntegrationAuthentication.vue'
 import IntegrationProviders from './IntegrationProviders.vue'

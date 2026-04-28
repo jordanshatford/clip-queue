@@ -174,5 +174,8 @@
   "logger_level_description": "要捕获的最低日志级别。高于所选级别的任何日志级别也将被记录。",
   "logger_size_limit_description": "可保留的最大日志数量。达到限制时，最旧的日志将被删除。",
   "no_logs_captured": "没有捕获日志。",
-  "integrations": "集成"
+  "integrations": "集成",
+  "authentication_for_integration": "已通过以下方式验证，可用于此集成。",
+  "source_for_integration": "可用于此集成的数据源。连接成功后，将提交数据源中检测到的链接。",
+  "providers_for_integration": "支持此集成的提供商。启用后，检测到此类内容时，系统会将其添加到队列中。"
 }

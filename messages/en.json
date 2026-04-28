@@ -174,5 +174,8 @@
   "logger_level_description": "The lowest level of logs to capture. Any log levels above the selected level will also be logged.",
   "logger_size_limit_description": "The maximum number of logs to keep. When the limit is reached, the oldest logs will be removed.",
   "no_logs_captured": "No logs captured.",
-  "integrations": "Integrations"
+  "integrations": "Integrations",
+  "authentication_for_integration": "Authenticated for this integration as the following.",
+  "source_for_integration": "Sources available for this integration. When connected, links detected in the source will be submitted.",
+  "providers_for_integration": "Providers available for this integration. When enabled, this type of content will be added to the queue when detected."
 }

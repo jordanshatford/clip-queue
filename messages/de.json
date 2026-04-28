@@ -174,5 +174,8 @@
   "logger_level_description": "Die niedrigste Ebene der zu erfassenden Protokolle. Alle Protokollebenen über der ausgewählten Ebene werden ebenfalls protokolliert.",
   "logger_size_limit_description": "Die maximale Anzahl der aufzubewahrenden Protokolle. Wenn das Limit erreicht ist, werden die ältesten Protokolle gelöscht.",
   "no_logs_captured": "Keine Protokolle erfasst.",
-  "integrations": "Integrationen"
+  "integrations": "Integrationen",
+  "authentication_for_integration": "Für diese Integration wurde ich wie folgt authentifiziert.",
+  "source_for_integration": "Für diese Integration stehen Quellen zur Verfügung. Nach der Verbindung werden die in der Quelle erkannten Links übermittelt.",
+  "providers_for_integration": "Für diese Integration verfügbare Anbieter. Wenn diese Option aktiviert ist, wird dieser Inhaltstyp bei Erkennung der Warteschlange hinzugefügt."
 }
