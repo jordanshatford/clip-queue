@@ -2,8 +2,6 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allowed_commands": "अनुमत आदेश:",
   "allowed_commands_description": "चैट में उपयोग के लिए अनुमति प्राप्त आदेश।",
-  "allowed_providers": "अनुमत प्रदाता:",
-  "allowed_providers_description": "इन प्रदाताओं से क्लिप्स को कतार में अनुमति दी जाएगी।",
   "amber": "अंबर",
   "application_version": "ऐप्लिकेशन संस्करण: v{version}",
   "auto_mod": "स्वचालित मॉडरेशन:",
@@ -44,7 +42,6 @@
   "command_purge_cache": "सभी कैश किए गए क्लिप्स को साफ़ करें।",
   "command_purge_history": "सभी ऐतिहासिक रूप से देखे गए क्लिप्स को साफ़ करें।",
   "connected": "जुड़े हुए",
-  "connected_chat_colon": "कनेक्टेड चैट:",
   "cyan": "सियान",
   "delete_history": "इतिहास हटाएं",
   "delete_history_confirm": [

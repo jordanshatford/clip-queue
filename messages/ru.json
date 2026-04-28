@@ -2,8 +2,6 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allowed_commands": "Разрешенные команды:",
   "allowed_commands_description": "Команды, которые можно использовать в чате.",
-  "allowed_providers": "Разрешенные провайдеры:",
-  "allowed_providers_description": "Клипы от этих провайдеров будут разрешены в очереди.",
   "amber": "Янтарный",
   "application_version": "Версия приложения: v{version}",
   "auto_mod": "Авто-модерация:",
@@ -44,7 +42,6 @@
   "command_purge_cache": "Очистить весь кэш клипов.",
   "command_purge_history": "Очистить всю историю просмотренных клипов.",
   "connected": "Подключено",
-  "connected_chat_colon": "Подключенный чат:",
   "cyan": "Голубой",
   "delete_history": "Удалить историю",
   "delete_history_confirm": [

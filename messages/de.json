@@ -2,8 +2,6 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allowed_commands": "Erlaubte Befehle:",
   "allowed_commands_description": "Befehle, die im Chat verwendet werden dürfen.",
-  "allowed_providers": "Erlaubte Anbieter:",
-  "allowed_providers_description": "Clips von diesen Anbietern sind in der Warteschlange erlaubt.",
   "amber": "Bernstein",
   "application_version": "Anwendungsversion: v{version}",
   "auto_mod": "Automatische Moderation:",
@@ -44,7 +42,6 @@
   "command_purge_cache": "Leere alle zwischengespeicherten Clips.",
   "command_purge_history": "Leere alle Clips aus dem Verlauf.",
   "connected": "Verbunden",
-  "connected_chat_colon": "Verbunden mit Chat:",
   "cyan": "Cyan",
   "delete_history": "Verlauf löschen",
   "delete_history_confirm": [

@@ -2,8 +2,6 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allowed_commands": "允许的命令：",
   "allowed_commands_description": "聊天中允许使用的命令。",
-  "allowed_providers": "允许的提供商：",
-  "allowed_providers_description": "来自这些提供商的剪辑将被允许进入队列。",
   "amber": "琥珀色",
   "application_version": "应用版本：v{version}",
   "auto_mod": "自动管理：",
@@ -44,7 +42,6 @@
   "command_purge_cache": "清除所有已缓存的剪辑。",
   "command_purge_history": "清除所有历史观看的剪辑。",
   "connected": "已连接",
-  "connected_chat_colon": "已连接的聊天：",
   "cyan": "青色",
   "delete_history": "删除历史记录",
   "delete_history_confirm": [

@@ -2,8 +2,6 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allowed_commands": "Commandes autorisées:",
   "allowed_commands_description": "Commandes autorisées à être utilisées dans le chat.",
-  "allowed_providers": "Fournisseurs autorisés:",
-  "allowed_providers_description": "Les clips de ces fournisseurs seront autorisés dans la file d'attente.",
   "amber": "Ambre",
   "application_version": "Version de l'application: v{version}",
   "auto_mod": "Modération automatique:",
@@ -44,7 +42,6 @@
   "command_purge_cache": "Vider tous les clips mis en cache.",
   "command_purge_history": "Vider tous les clips vus précédemment.",
   "connected": "Connecté",
-  "connected_chat_colon": "Chat connecté:",
   "cyan": "Cyan",
   "delete_history": "Supprimer l'historique",
   "delete_history_confirm": [

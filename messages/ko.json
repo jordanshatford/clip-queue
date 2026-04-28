@@ -2,8 +2,6 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allowed_commands": "허용된 명령어:",
   "allowed_commands_description": "채팅에서 사용할 수 있는 명령어.",
-  "allowed_providers": "허용된 제공자:",
-  "allowed_providers_description": "이 제공자의 클립이 대기열에서 허용됩니다.",
   "amber": "호박색",
   "application_version": "애플리케이션 버전: v{version}",
   "auto_mod": "자동 관리:",
@@ -44,7 +42,6 @@
   "command_purge_cache": "캐시된 모든 클립을 삭제합니다.",
   "command_purge_history": "기록에 있는 모든 클립을 삭제합니다.",
   "connected": "연결됨",
-  "connected_chat_colon": "연결된 채팅:",
   "cyan": "청록색",
   "delete_history": "기록 삭제",
   "delete_history_confirm": [

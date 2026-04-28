@@ -2,8 +2,6 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allowed_commands": "الأوامر المسموح بها:",
   "allowed_commands_description": "الأوامر المسموح باستخدامها في الدردشة.",
-  "allowed_providers": "المزودون المسموح بهم:",
-  "allowed_providers_description": "سيُسمح بالقصاصات من هؤلاء المزودين في قائمة الانتظار.",
   "amber": "العنبر",
   "application_version": "إصدار التطبيق: v{version}",
   "auto_mod": "التنظيم التلقائي:",
@@ -44,7 +42,6 @@
   "command_purge_cache": "امسح جميع القصاصات المخزنة مؤقتًا.",
   "command_purge_history": "امسح جميع القصاصات التي تمت مشاهدتها سابقًا.",
   "connected": "متصل",
-  "connected_chat_colon": "الدردشة متصل:",
   "cyan": "السماوي",
   "delete_history": "حذف السجل",
   "delete_history_confirm": [

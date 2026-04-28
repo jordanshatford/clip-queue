@@ -2,8 +2,6 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allowed_commands": "İzin Verilen Komutlar:",
   "allowed_commands_description": "Sohbette kullanılmasına izin verilen komutlar.",
-  "allowed_providers": "İzin Verilen Sağlayıcılar:",
-  "allowed_providers_description": "Bu sağlayıcıların klipleri kuyruğa alınabilir.",
   "amber": "Kehribar",
   "application_version": "Uygulama sürümü: v{version}",
   "auto_mod": "Otomatik Moderasyon:",
@@ -44,7 +42,6 @@
   "command_purge_cache": "Önbellekteki tüm klipleri temizle.",
   "command_purge_history": "Daha önce izlenmiş tüm klipleri temizle.",
   "connected": "Bağlı",
-  "connected_chat_colon": "Bağlı Sohbet:",
   "cyan": "Camgöbeği",
   "delete_history": "Geçmişi Sil",
   "delete_history_confirm": [
