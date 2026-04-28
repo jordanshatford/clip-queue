@@ -1,14 +1,14 @@
 import { useStorage } from '@vueuse/core'
 
-import type { Clip, PlayerFormat } from '@/integrations'
-import type { IntegrationProvider } from '@/integrations/common/provider'
-
 import { Cacheable } from '@/types/cacheable'
 
+import type { Clip, PlayerFormat, IntegrationProvider } from '../common'
+
+import { toStorageKey } from '../common/utils'
 import { IntegrationID } from '../indentify'
 import kick from './core'
 
-const isEnabled = useStorage<boolean>('__cqi_kick-clips_enabled', true)
+const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.KICK_CLIPS, 'enabled'), true)
 
 /**
  * The Kick provider.

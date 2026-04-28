@@ -7,7 +7,9 @@ import type { IntegrationSource } from './source'
 
 export * from './authentication'
 export * from './clip-list'
-export * from './utils'
+export * from './provider'
+export * from './source'
+export { toClipUUID } from './utils'
 
 export interface Integration {
   /**

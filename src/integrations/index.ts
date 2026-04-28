@@ -1,10 +1,13 @@
-export type { Clip, PlayerFormat, IntegrationProvider } from './common/provider'
+export type { Clip, PlayerFormat, IntegrationProvider, Integration } from './common'
 export { IntegrationID } from './indentify'
-export type { Integration } from './common'
+export { BasicClipList, ClipList, toClipUUID } from './common'
 
 import type { Integration } from './common'
 
 import { kick } from './kick'
 import { twitch } from './twitch'
 
+/**
+ * A list of all supported integrations for the application.
+ */
 export const integrations: Integration[] = [twitch, kick]

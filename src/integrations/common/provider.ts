@@ -8,7 +8,7 @@ import type { IntegrationID } from '../indentify'
 export type PlayerFormat = 'iframe' | 'video' | 'unknown'
 
 /**
- * A clip.
+ * A clip. This represents some item allowed in the queue. In some cases this could be a VOD.
  */
 export interface Clip {
   /**
@@ -57,9 +57,13 @@ export interface Clip {
   createdAt?: string
 }
 
+/**
+ * The interface of an integration that provides clips. These integrations handle taking a URL and
+ * determining if there is content we know how to handle based on it.
+ */
 export interface IntegrationProvider extends Cacheable<Clip> {
   /**
-   * The unique identifier for the authentication integration. This is used to identify the integration in the system and should be unique across all integrations.
+   * Unique integration ID.
    */
   readonly id: IntegrationID
   /**
@@ -76,7 +80,7 @@ export interface IntegrationProvider extends Cacheable<Clip> {
    */
   isEnabled: boolean
   /**
-   * Check if this providers supports that URL as a clip URL.
+   * Check if this providers supports a given URL.
    * @param url - The URL of the clip.
    * @returns true if the provider supports the clip URL, false otherwise.
    */

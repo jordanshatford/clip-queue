@@ -1,15 +1,15 @@
-import type { Clip } from '@/integrations'
+import type { Clip } from './provider'
 
-import { IntegrationID } from '@/integrations'
+import { IntegrationID } from '../indentify'
 
 /**
- * Generate a unique key for an integration assuming that the key value is unique.
- * @param integration - The current integration (assumes all integrations have unique id).
- * @param key - The unique key for the integration.
- * @returns string - unique
+ * Generate a unique key for an integration assuming that the key value provided is unique.
+ * @param integration - The integration ID being used.
+ * @param key - The key for this storage item.
+ * @returns string - a unique storage key using the integration ID and key.
  */
-export function key(integration: { id: string }, key: string): string {
-  return `__cqi_${integration.id}_${key}`
+export function toStorageKey(integration: IntegrationID, key: string): string {
+  return `__cqi_${integration}_${key}`
 }
 
 /**

@@ -2,20 +2,22 @@ import { useStorage } from '@vueuse/core'
 
 import { env } from '@/config'
 
-import { type UserDetails, type IntegrationAuthentication } from '../common'
+import type { UserDetails, IntegrationAuthentication } from '../common'
+
+import { toStorageKey } from '../common/utils'
 import { IntegrationID } from '../indentify'
 import { getUsers } from './core/api'
 import auth from './core/auth'
 
 const { CLIENT_ID, REDIRECT_URI } = env
 
-const user = useStorage<UserDetails>('__cqi_ttv-auth_user', {
+const user = useStorage<UserDetails>(toStorageKey(IntegrationID.TWITCH_AUTH, 'user'), {
   id: '',
   name: '',
   profileImageURL: '',
 })
 
-const token = useStorage<string>('__cqi_ttv-auth_token', '')
+const token = useStorage<string>(toStorageKey(IntegrationID.TWITCH_AUTH, 'token'), '')
 
 export class TwitchAuthentication implements IntegrationAuthentication {
   public readonly id: IntegrationID = IntegrationID.TWITCH_AUTH

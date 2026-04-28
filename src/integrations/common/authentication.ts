@@ -24,11 +24,11 @@ export interface UserDetails {
  */
 export interface IntegrationAuthentication {
   /**
-   * The unique identifier for the authentication integration. This is used to identify the integration in the system and should be unique across all integrations.
+   * Unique integration ID.
    */
   readonly id: IntegrationID
   /**
-   * A boolean indicating whether the user is currently logged in with this integration.
+   * If the user is currently logged in to the integration.
    */
   readonly isLoggedIn?: boolean
   /**
@@ -36,7 +36,7 @@ export interface IntegrationAuthentication {
    */
   readonly user?: UserDetails
   /**
-   * An authentication token provided by the integration.
+   * The users authentication token for the integration.
    */
   readonly token?: string
   /**
@@ -44,13 +44,15 @@ export interface IntegrationAuthentication {
    */
   redirect: () => Promise<void>
   /**
-   * Attempts to automatically log in the user if possible. This can be used on app startup to check if the user has a valid session with the provider.
-   * If auto login is successful, it returns the user details. If auto login fails (e.g. no valid session), it should return a rejected promise or throw an error.
+   * Attempts to automatically log in the user if possible. This can be used on application startup to check if the user has a
+   * valid session with the provider. If auto-login is successful, it returns the user details. If auto login fails it throws
+   * an error to be handled by the caller.
    */
   autoLogin: () => Promise<UserDetails>
   /**
-   * Logs in the user using the provided hash from the authentication redirect. This is typically called after the user is redirected back to the app from the provider's authentication page.
-   * The hash parameter contains the authentication information returned by the provider, which can be used to retrieve user details and establish a session.
+   * Logs in the user using the provided hash from the authentication redirect. This is typically called after the user is redirected
+   * back to the application from the provider's authentication page. The hash parameter contains the authentication information
+   * returned by the provider, which can be used to retrieve user details and establish a session.
    */
   login: (hash: string) => Promise<UserDetails>
   /**

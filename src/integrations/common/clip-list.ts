@@ -1,6 +1,6 @@
-import type { Clip } from '@/integrations/common/provider'
+import type { Clip } from '@/integrations'
 
-import { toClipUUID } from '@/integrations/common'
+import { toClipUUID } from '@/integrations'
 
 import type { IntegrationID } from '../indentify'
 

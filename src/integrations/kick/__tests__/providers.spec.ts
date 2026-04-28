@@ -2,10 +2,11 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { KickClip } from '@/integrations/kick'
 
-import { mockKickClip, mockTwitchClip } from '@/integrations/common/__tests__/mocks'
-import { KickProvider } from '@/integrations/kick/providers'
+import { clips as clipsProvider } from '@/integrations/kick'
 
-vi.mock('@/integrations/kick/core', async (importOriginal) => {
+import { mockKickClip, mockTwitchClip } from '../../common/__tests__/mocks'
+
+vi.mock('@/integrations/kick/core/index.ts', async (importOriginal) => {
   return {
     default: {
       ...(await importOriginal<typeof import('@/integrations/kick/core')>()),
@@ -17,28 +18,25 @@ vi.mock('@/integrations/kick/core', async (importOriginal) => {
 describe('kick.ts', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    clipsProvider.clearCache()
   })
 
   it('knows if it is an experimental provider', () => {
-    const provider = new KickProvider()
-    expect(provider.isExperimental).toEqual(false)
+    expect(clipsProvider.isExperimental).toEqual(false)
   })
 
   it('gets the player format of the clip', () => {
-    const provider = new KickProvider()
-    expect(provider.getPlayerFormat()).toEqual('video')
+    expect(clipsProvider.getPlayerFormat()).toEqual('video')
   })
 
   it('gets the player source of the clip', async () => {
-    const provider = new KickProvider()
-    const clip = await provider.getClip(mockKickClip.clip_url)
+    const clip = await clipsProvider.getClip(mockKickClip.clip_url)
     expect(clip).toBeDefined()
-    expect(provider.getPlayerSource(clip)).toEqual(mockKickClip.clip_url)
+    expect(clipsProvider.getPlayerSource(clip)).toEqual(mockKickClip.clip_url)
   })
 
   it('can get a clip from a kick url', async () => {
-    const provider = new KickProvider()
-    const clip = await provider.getClip(mockKickClip.clip_url)
+    const clip = await clipsProvider.getClip(mockKickClip.clip_url)
     expect(clip).toBeDefined()
     expect(clip.id).toEqual(mockKickClip.id)
   })
@@ -48,23 +46,20 @@ describe('kick.ts', () => {
     [''],
     [mockTwitchClip.url],
   ])('throws an error for unknown clip urls: (url: %s)', async (url: string) => {
-    const provider = new KickProvider()
-    await expect(provider.getClip(url)).rejects.toThrow('I')
+    await expect(clipsProvider.getClip(url)).rejects.toThrow('I')
   })
 
   it('caches clip data that it fetchs', async () => {
-    const provider = new KickProvider()
-    expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(mockKickClip.clip_url)).toBeDefined()
-    expect(provider.hasCachedData).toEqual(true)
+    expect(clipsProvider.hasCachedData).toEqual(false)
+    expect(await clipsProvider.getClip(mockKickClip.clip_url)).toBeDefined()
+    expect(clipsProvider.hasCachedData).toEqual(true)
   })
 
   it('can have the cached data cleared', async () => {
-    const provider = new KickProvider()
-    expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(mockKickClip.clip_url)).toBeDefined()
-    expect(provider.hasCachedData).toEqual(true)
-    provider.clearCache()
-    expect(provider.hasCachedData).toEqual(false)
+    expect(clipsProvider.hasCachedData).toEqual(false)
+    expect(await clipsProvider.getClip(mockKickClip.clip_url)).toBeDefined()
+    expect(clipsProvider.hasCachedData).toEqual(true)
+    clipsProvider.clearCache()
+    expect(clipsProvider.hasCachedData).toEqual(false)
   })
 })

@@ -165,18 +165,25 @@ export type ClipSourceEventsMap = {
 }
 
 /**
- * The base clip source.
+ * The interface of an integration that is a source of clips. These integrations handle
+ * connecting to external sources and detecting URLs submitted in them.
  */
 export type IntegrationSource = {
   /**
-   * The name of the source.
+   * Unique integration ID.
    */
   readonly id: IntegrationID
-
+  /**
+   * The display name of the source. This is used in the UI to represent the integration.
+   */
   readonly name: string
-  readonly url: string
+  /**
+   * The URL to the source.
+   */
+  readonly url?: string
   /**
    * Whether the source is experimental.
+   * Experimental sources are sources that are not fully tested and may be unstable.
    */
   readonly isExperimental: boolean
   /**

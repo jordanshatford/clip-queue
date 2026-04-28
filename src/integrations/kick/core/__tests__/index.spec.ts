@@ -1,8 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { mockKickClip } from '@/integrations/common/__tests__/mocks'
-
 import { getClip, getClipIdFromUrl } from '..'
+import { mockKickClip } from '../../../common/__tests__/mocks'
 
 describe('kick.ts', () => {
   beforeEach(() => {

@@ -3,15 +3,16 @@ import { useStorage } from '@vueuse/core'
 import { env } from '@/config'
 import { Cacheable } from '@/types/cacheable'
 
-import type { Clip, PlayerFormat, IntegrationProvider } from '../common/provider'
+import type { Clip, PlayerFormat, IntegrationProvider } from '../common'
 
+import { toStorageKey } from '../common/utils'
 import { IntegrationID } from '../indentify'
 import { getClips, getGames } from './core/api'
 import { getClipIdFromUrl } from './core/utils'
 
 const { CLIENT_ID } = env
 
-const isEnabled = useStorage<boolean>('__cqi_ttv-clips_enabled', true)
+const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.TWITCH_CLIPS, 'enabled'), true)
 
 /**
  * The Twitch provider.
@@ -39,8 +40,7 @@ export class TwitchProvider extends Cacheable<Clip> implements IntegrationProvid
   }
 
   public hasClipSupport(url: string): boolean {
-    const id = getClipIdFromUrl(url)
-    return id !== undefined
+    return getClipIdFromUrl(url) !== undefined
   }
 
   public async getClip(url: string): Promise<Clip> {

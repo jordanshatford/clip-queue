@@ -1,5 +1,5 @@
 /**
- * Tracking of integration ID values. These are unique accross the application.
+ * Integration IDs used to uniquely identify different integrations supported by the application.
  */
 export enum IntegrationID {
   /**
