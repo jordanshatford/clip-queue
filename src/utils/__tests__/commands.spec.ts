@@ -107,11 +107,11 @@ describe('commands.ts', () => {
     expect(settings.queue.providers).toEqual(Object.values(IntegrationProviderID))
     commands.handleCommand(MOCK_EVENT, Command.DISABLE_PROVIDER.toString(), 'test') // Invalid provider
     expect(settings.queue.providers).toEqual(Object.values(IntegrationProviderID))
-    commands.handleCommand(MOCK_EVENT, Command.DISABLE_PROVIDER.toString(), 'kick')
+    commands.handleCommand(MOCK_EVENT, Command.DISABLE_PROVIDER.toString(), 'kick-clips')
     expect(settings.queue.providers).not.toContain(IntegrationProviderID.KICK_CLIPS)
     commands.handleCommand(MOCK_EVENT, Command.ENABLE_PROVIDER.toString(), 'test') // Invalid provider
     expect(settings.queue.providers).not.toContain(IntegrationProviderID.KICK_CLIPS)
-    commands.handleCommand(MOCK_EVENT, Command.ENABLE_PROVIDER.toString(), 'kick')
+    commands.handleCommand(MOCK_EVENT, Command.ENABLE_PROVIDER.toString(), 'kick-clips')
     expect(settings.queue.providers).toContain(IntegrationProviderID.KICK_CLIPS)
     for (const p of Object.values(IntegrationProviderID)) {
       expect(settings.queue.providers).toContain(p)

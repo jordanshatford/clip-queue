@@ -3,8 +3,11 @@ import { ref } from 'vue'
 
 import { env } from '@/config'
 
-import type { UserDetails, IntegrationAuthentication } from '../common'
-
+import {
+  type UserDetails,
+  type IntegrationAuthentication,
+  IntegrationAuthenticationID,
+} from '../common'
 import { key } from '../common'
 import { getUsers } from './core/api'
 import auth from './core/auth'
@@ -12,7 +15,7 @@ import auth from './core/auth'
 const { CLIENT_ID, REDIRECT_URI } = env
 
 export class TwitchAuthentication implements IntegrationAuthentication {
-  public readonly id: string = 'ttv-auth'
+  public readonly id: IntegrationAuthenticationID = IntegrationAuthenticationID.TWITCH
   public isLoggedIn = ref<boolean>(false)
   public user = useStorage<UserDetails>(key(this, 'user'), {
     id: '',

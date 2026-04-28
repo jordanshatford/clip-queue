@@ -76,7 +76,9 @@ describe('twitch.ts', () => {
     [mockKickClip.clip_url],
   ])('throws an error for unknown clip urls: (url: %s)', async (url: string) => {
     const provider = new TwitchProvider()
-    await expect(provider.getClip(url)).rejects.toThrow('[Twitch]: Invalid clip URL.')
+    await expect(provider.getClip(url)).rejects.toThrow(
+      `[Twitch Clips]: Invalid clip URL (${url}).`,
+    )
   })
 
   it('caches clip data that it fetchs', async () => {

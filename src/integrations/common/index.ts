@@ -32,7 +32,7 @@ export interface Integration {
    * If the integration is experimental. In most cases this will be true if one of the sub
    * integrations it has it also experimental.
    */
-  readonly isExperimental?: boolean
+  readonly isExperimental: boolean
   /**
    * The ability to authenticate with this integration. Only defined if this integration can
    * be used to get authentication details required for other parts of the integration to

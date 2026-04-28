@@ -13,7 +13,7 @@ export enum IntegrationProviderID {
   /**
    * Twitch.tv clips.
    */
-  TWITCH_CLIPS = 'twitch-clips',
+  TWITCH_CLIPS = 'ttv-clips',
 }
 
 /**
