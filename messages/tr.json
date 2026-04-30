@@ -5,7 +5,8 @@
   "amber": "Kehribar",
   "application": "Başvuru",
   "application_version": "Uygulama sürümü: v{version}",
-  "auto_mod": "Otomatik Moderasyon:",
+  "auto_mod": "Otomatik Moderasyon",
+  "auto_mod_colon": "Otomatik Moderasyon:",
   "auto_mod_description": "Bir kullanıcının sohbet mesajı silindiğinde, zaman aşımına uğratıldığında veya yasaklandığında, o kullanıcının gönderdiği klipler kaldırılır.",
   "blue": "Mavi",
   "cancel": "İptal",
@@ -175,5 +176,7 @@
   "authentication_for_integration": "Bu entegrasyon için kimlik doğrulama aşağıdaki şekilde gerçekleştirilmiştir.",
   "source_for_integration": "Bu entegrasyon için mevcut kaynaklar. Bağlantı kurulduğunda, kaynakta algılanan bağlantılar gönderilecektir.",
   "providers_for_integration": "Bu entegrasyon için kullanılabilir sağlayıcılar. Etkinleştirildiğinde, bu tür içerik algılandığında sıraya eklenecektir.",
-  "application_settings_saved": "Uygulama ayarları kaydedildi."
+  "application_settings_saved": "Uygulama ayarları kaydedildi.",
+  "commands": "Komutlar",
+  "clip_detection": "Klip Algılama"
 }

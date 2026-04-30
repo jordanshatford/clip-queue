@@ -5,7 +5,8 @@
   "amber": "Ambre",
   "application": "Application",
   "application_version": "Version de l'application: v{version}",
-  "auto_mod": "Modération automatique:",
+  "auto_mod": "Modération automatique",
+  "auto_mod_colon": "Modération automatique:",
   "auto_mod_description": "Lorsque le message d'un utilisateur est supprimé, que l'utilisateur est mis en pause ou banni, les clips qu'il a soumis seront supprimés.",
   "blue": "Bleu",
   "cancel": "Annuler",
@@ -175,5 +176,7 @@
   "authentication_for_integration": "Authentifié pour cette intégration comme suit.",
   "source_for_integration": "Sources disponibles pour cette intégration. Une fois la connexion établie, les liens détectés dans la source seront soumis.",
   "providers_for_integration": "Fournisseurs disponibles pour cette intégration. Lorsqu'elle est activée, ce type de contenu sera ajouté à la file d'attente dès sa détection.",
-  "application_settings_saved": "Paramètres de l'application enregistrés."
+  "application_settings_saved": "Paramètres de l'application enregistrés.",
+  "commands": "Commandes",
+  "clip_detection": "Détection de clips"
 }

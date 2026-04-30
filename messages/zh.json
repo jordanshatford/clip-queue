@@ -5,7 +5,8 @@
   "amber": "琥珀色",
   "application": "应用",
   "application_version": "应用版本：v{version}",
-  "auto_mod": "自动管理：",
+  "auto_mod": "自动管理",
+  "auto_mod_colon": "自动管理：",
   "auto_mod_description": "当用户的聊天消息被删除、被禁言或被封禁时，他们提交的剪辑将被移除。",
   "blue": "蓝色",
   "cancel": "取消",
@@ -175,5 +176,7 @@
   "authentication_for_integration": "已通过以下方式验证，可用于此集成。",
   "source_for_integration": "可用于此集成的数据源。连接成功后，将提交数据源中检测到的链接。",
   "providers_for_integration": "支持此集成的提供商。启用后，检测到此类内容时，系统会将其添加到队列中。",
-  "application_settings_saved": "已保存应用程序设置。"
+  "application_settings_saved": "已保存应用程序设置。",
+  "commands": "命令",
+  "clip_detection": "剪辑检测"
 }

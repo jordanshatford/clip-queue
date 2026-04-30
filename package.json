@@ -18,7 +18,7 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "typecheck": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide && vue-tsc --build",
-    "local:update": "pnpm dlx @inlang/cli machine translate --project ./project.inlang && pnpm format",
+    "locales:update": "pnpm dlx @inlang/cli machine translate --project ./project.inlang && pnpm format",
     "deps:update": "pnpm self-update && pnpm up --latest",
     "commitlint": "commitlint --edit",
     "changeset": "changeset"

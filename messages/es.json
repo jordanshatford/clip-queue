@@ -5,7 +5,8 @@
   "amber": "Ámbar",
   "application": "Solicitud",
   "application_version": "Versión de la aplicación: v{version}",
-  "auto_mod": "Moderación automática:",
+  "auto_mod": "Moderación automática",
+  "auto_mod_colon": "Moderación automática:",
   "auto_mod_description": "Cuando se elimine un mensaje de chat, se suspenda temporalmente o se bloquee a un usuario, se eliminarán las clips que envió.",
   "blue": "Azul",
   "cancel": "Cancelar",
@@ -175,5 +176,7 @@
   "authentication_for_integration": "Autenticado para esta integración de la siguiente manera.",
   "source_for_integration": "Fuentes disponibles para esta integración. Al conectarse, se enviarán los enlaces detectados en la fuente.",
   "providers_for_integration": "Proveedores disponibles para esta integración. Cuando esté habilitada, este tipo de contenido se agregará a la cola cuando se detecte.",
-  "application_settings_saved": "Configuración de la aplicación guardada."
+  "application_settings_saved": "Configuración de la aplicación guardada.",
+  "commands": "Comandos",
+  "clip_detection": "Detección de clips"
 }

@@ -38,7 +38,7 @@
           }}</Message>
           <Divider />
           <div class="flex justify-between">
-            <label for="autoModeration">{{ m.auto_mod() }}</label>
+            <label for="autoModeration">{{ m.auto_mod_colon() }}</label>
             <ToggleSwitch
               v-model="formSettings.hasAutoModerationEnabled"
               input-id="autoModeration"

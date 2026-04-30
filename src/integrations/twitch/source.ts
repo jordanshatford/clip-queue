@@ -1,8 +1,7 @@
 import { Client } from '@tmi.js/chat'
 import { ref } from 'vue'
 
-import type { IntegrationSource, ClipSourceEventsMap } from '../common'
-
+import { type IntegrationSource, type ClipSourceEventsMap, ClipSourceFeature } from '../common'
 import { getAllURLsFromText } from '../common'
 import { ClipSourceStatus, EventEmitter } from '../common/source'
 import { IntegrationID } from '../indentify'
@@ -16,10 +15,7 @@ export class TwitchChatSource
   extends EventEmitter<ClipSourceEventsMap>
   implements IntegrationSource
 {
-  public id = IntegrationID.TWITCH_CHAT
-
-  private channel?: string
-  private chat = new Client({ token: undefined, channels: [] })
+  public readonly id: IntegrationID = IntegrationID.TWITCH_CHAT
 
   public get name() {
     return `twitch.tv/${this.channel}/chat`
@@ -29,25 +25,31 @@ export class TwitchChatSource
     return `https://www.twitch.tv/${this.channel}/chat`
   }
 
-  public isExperimental = false
-  public get status() {
+  public readonly features: ClipSourceFeature[] = [
+    ClipSourceFeature.AUTOMOD,
+    ClipSourceFeature.COMMANDS,
+    ClipSourceFeature.CLIP_DETECTION,
+  ]
+
+  public readonly isExperimental = false
+
+  public get status(): ClipSourceStatus {
     return status.value
   }
 
-  public set status(value: ClipSourceStatus) {
-    status.value = value
-  }
+  private channel?: string
+  private chat = new Client({ token: undefined, channels: [] })
 
   private timestamp() {
     return new Date().toISOString()
   }
 
-  protected handleStatusUpdate(status: ClipSourceStatus, timestamp?: string) {
-    this.status = status
+  protected handleStatusUpdate(s: ClipSourceStatus, timestamp?: string) {
+    status.value = s
     this.emit('status', {
       timestamp: timestamp ?? this.timestamp(),
       source: this.id,
-      data: status,
+      data: s,
     })
   }
 

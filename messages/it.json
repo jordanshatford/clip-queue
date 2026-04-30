@@ -5,7 +5,8 @@
   "amber": "Ambra",
   "application": "Applicazione",
   "application_version": "Versione dell'applicazione: v{version}",
-  "auto_mod": "Moderazione automatica:",
+  "auto_mod": "Moderazione automatica",
+  "auto_mod_colon": "Moderazione automatica:",
   "auto_mod_description": "Quando a un utente viene cancellato un messaggio in chat, messo in timeout o bannato, le clip che ha inviato verranno rimosse.",
   "blue": "Blu",
   "cancel": "Annulla",
@@ -175,5 +176,7 @@
   "authentication_for_integration": "Autenticazione effettuata per questa integrazione come segue.",
   "source_for_integration": "Fonti disponibili per questa integrazione. Una volta stabilita la connessione, i link rilevati nella fonte verranno inviati.",
   "providers_for_integration": "Provider disponibili per questa integrazione. Quando abilitata, questa tipologia di contenuto verrà aggiunta alla coda non appena rilevata.",
-  "application_settings_saved": "Impostazioni dell'applicazione salvate."
+  "application_settings_saved": "Impostazioni dell'applicazione salvate.",
+  "commands": "Comandi",
+  "clip_detection": "Rilevamento clip"
 }

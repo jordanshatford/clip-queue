@@ -56,6 +56,15 @@ export enum ClipSourceStatus {
 }
 
 /**
+ * Enumeration representing the possible features a clip source can support.
+ */
+export enum ClipSourceFeature {
+  AUTOMOD = 'AutoModeration',
+  COMMANDS = 'Commands',
+  CLIP_DETECTION = 'ClipDetection',
+}
+
+/**
  * Event emitted by a clip source.
  */
 export interface ClipSourceEvent<T = undefined> {
@@ -182,6 +191,10 @@ export type IntegrationSource = {
    */
   readonly url?: string
   /**
+   * List of features the clip source supports.
+   */
+  readonly features: ClipSourceFeature[]
+  /**
    * Whether the source is experimental.
    * Experimental sources are sources that are not fully tested and may be unstable.
    */
@@ -189,7 +202,7 @@ export type IntegrationSource = {
   /**
    * The current status of the source.
    */
-  status: ClipSourceStatus
+  readonly status: ClipSourceStatus
   /**
    * Connect to a source with the provided channel.
    * @param channel - The channel to join.

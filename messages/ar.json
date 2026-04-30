@@ -5,7 +5,8 @@
   "amber": "العنبر",
   "application": "طلب",
   "application_version": "إصدار التطبيق: v{version}",
-  "auto_mod": "التنظيم التلقائي:",
+  "auto_mod": "التنظيم التلقائي",
+  "auto_mod_colon": "التنظيم التلقائي:",
   "auto_mod_description": "عند حذف رسالة مستخدم أو تعليقه أو حظره، ستُزال القصاصات التي أرسلها.",
   "blue": "الأزرق",
   "cancel": "إلغاء",
@@ -175,5 +176,7 @@
   "authentication_for_integration": "تمت المصادقة لهذا التكامل على النحو التالي.",
   "source_for_integration": "المصادر المتاحة لهذا التكامل. عند الاتصال، سيتم إرسال الروابط المكتشفة في المصدر.",
   "providers_for_integration": "مزودو الخدمة المتاحون لهذا التكامل. عند التفعيل، سيتم إضافة هذا النوع من المحتوى إلى قائمة الانتظار عند اكتشافه.",
-  "application_settings_saved": "تم حفظ إعدادات التطبيق."
+  "application_settings_saved": "تم حفظ إعدادات التطبيق.",
+  "commands": "الأوامر",
+  "clip_detection": "اكتشاف المقاطع"
 }

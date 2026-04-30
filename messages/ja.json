@@ -5,7 +5,8 @@
   "amber": "アンバー",
   "application": "応用",
   "application_version": "アプリケーションバージョン: v{version}",
-  "auto_mod": "自動モデレーション:",
+  "auto_mod": "自動モデレーション",
+  "auto_mod_colon": "自動モデレーション:",
   "auto_mod_description": "ユーザーがチャットメッセージを削除されたり、タイムアウトまたは禁止された場合、そのユーザーが提出したクリップは削除されます。",
   "blue": "ブルー",
   "cancel": "キャンセル",
@@ -175,5 +176,7 @@
   "authentication_for_integration": "この統合に関して、以下のとおり認証されました。",
   "source_for_integration": "この連携に利用可能なソース。接続が完了すると、ソース内で検出されたリンクが送信されます。",
   "providers_for_integration": "この連携に対応しているプロバイダー。有効にすると、このタイプのコンテンツが検出されたときにキューに追加されます。",
-  "application_settings_saved": "アプリケーション設定が保存されました。"
+  "application_settings_saved": "アプリケーション設定が保存されました。",
+  "commands": "コマンド",
+  "clip_detection": "クリップ検出"
 }
