@@ -1,8 +1,12 @@
 import { Client } from '@tmi.js/chat'
 import { ref } from 'vue'
 
-import { type IntegrationSource, type ClipSourceEventsMap, ClipSourceFeature } from '../common'
 import { getAllURLsFromText } from '../common'
+import {
+  type IntegrationSource,
+  type ClipSourceEventsMap,
+  ClipSourceFeature,
+} from '../common/source'
 import { ClipSourceStatus, EventEmitter } from '../common/source'
 import { IntegrationID } from '../indentify'
 
