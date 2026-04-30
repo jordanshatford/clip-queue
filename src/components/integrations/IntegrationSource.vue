@@ -4,6 +4,15 @@
   </Message>
   <InputGroup>
     <InputText id="username" :value="source.name" readonly fluid size="small" />
+    <InputGroupAddon v-if="source.isExperimental">
+      <Tag
+        icon="pi pi-exclamation-triangle"
+        class="text-xs"
+        severity="warn"
+        :value="m.experimental()"
+      >
+      </Tag>
+    </InputGroupAddon>
     <InputGroupAddon>
       <IntegrationSourceStatus :status="source.status" />
     </InputGroupAddon>

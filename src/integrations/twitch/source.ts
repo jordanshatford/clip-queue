@@ -35,7 +35,7 @@ export class TwitchChatSource
     ClipSourceFeature.CLIP_DETECTION,
   ]
 
-  public readonly isExperimental = false
+  public readonly isExperimental: boolean = false
 
   public get status(): ClipSourceStatus {
     return status.value

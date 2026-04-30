@@ -29,12 +29,12 @@ export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationPr
     isEnabled.value = value
   }
 
-  private ctx: () => string | Promise<string> = () => ''
+  private token: () => string | Promise<string> = () => ''
 
-  public constructor(callback?: () => string | Promise<string>) {
+  public constructor(token?: () => string | Promise<string>) {
     super()
-    if (callback) {
-      this.ctx = callback
+    if (token) {
+      this.token = token
     }
   }
 
@@ -51,12 +51,12 @@ export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationPr
       return this.cache[id]
     }
     try {
-      const clips = await getClips(CLIENT_ID, await this.ctx(), [id])
+      const clips = await getClips(CLIENT_ID, await this.token(), [id])
       const clip = clips[0]
       if (!clip) {
         throw new Error(`[${this.name}]: Clip not found for ID ${id}.`)
       }
-      const games = await getGames(CLIENT_ID, await this.ctx(), [clip.game_id])
+      const games = await getGames(CLIENT_ID, await this.token(), [clip.game_id])
       const response: Clip = {
         id: clip.id,
         title: clip.title,
