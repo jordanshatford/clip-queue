@@ -23,6 +23,12 @@ export const useProviders = defineStore('providers', () => {
     }
   })
 
+  const name = computed(() => {
+    return (id: IntegrationID) => {
+      return provider.value(id)?.name
+    }
+  })
+
   const icon = computed(() => {
     return (id: IntegrationID) => {
       for (const integration of integrations) {
@@ -95,6 +101,7 @@ export const useProviders = defineStore('providers', () => {
 
   return {
     provider,
+    name,
     icon,
     isExperimental,
     hasCachedData,

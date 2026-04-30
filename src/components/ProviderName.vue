@@ -4,7 +4,7 @@
       <!-- eslint-disable-next-line vue/no-v-html -->
       <svg v-if="svg" class="size-5" v-html="svg"></svg>
     </div>
-    <div>{{ provider }}</div>
+    <div>{{ name }}</div>
     <i
       v-if="providers.isExperimental(provider)"
       v-tooltip="m.experimental()"
@@ -30,4 +30,5 @@ const { provider } = defineProps<Props>()
 const providers = useProviders()
 
 const svg = computed(() => providers.icon(provider))
+const name = computed(() => providers.name(provider))
 </script>
