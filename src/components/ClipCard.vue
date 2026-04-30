@@ -2,12 +2,7 @@
   <Card class="max-w-2xs shrink-0 overflow-hidden text-left">
     <template #header>
       <div class="relative">
-        <img
-          class="aspect-video w-full"
-          :alt="clip.title"
-          :src="clip.thumbnailUrl"
-          @error="emit('remove')"
-        />
+        <img class="aspect-video w-full" :alt="clip.title" :src="clip.thumbnailUrl" />
         <!-- eslint-disable-next-line vue/no-v-html -->
         <div v-if="svg" class="absolute top-2 right-2 rounded bg-black/50 p-1.5">
           <svg class="size-5" v-html="svg"></svg>
