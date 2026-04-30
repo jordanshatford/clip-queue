@@ -1,22 +1,20 @@
 <template>
-  <div class="mx-auto mb-3 max-w-3xl">
-    <Tabs :value="active">
-      <TabList class="mx-auto" :pt="{ root: { class: 'bg-transparent' } }">
-        <Tab
-          v-for="setting in settingsRoutes"
-          :key="setting.name"
-          :value="setting?.name?.toString() ?? ''"
-        >
-          <router-link v-slot="{ href, navigate }" :to="{ name: setting.name }" custom>
-            <a :href="href" @click="navigate" class="flex items-center gap-2 text-inherit">
-              <i :class="setting.meta?.icon"></i>
-              <span>{{ routeTranslations[setting.name as RouteNameConstants]() }}</span>
-            </a>
-          </router-link>
-        </Tab>
-      </TabList>
-    </Tabs>
-  </div>
+  <Tabs :value="active" scrollable class="mx-auto mb-3 w-full max-w-2xl">
+    <TabList class="w-full overflow-hidden" :pt="{ root: { class: 'bg-transparent' } }">
+      <Tab
+        v-for="setting in settingsRoutes"
+        :key="setting.name"
+        :value="setting?.name?.toString() ?? ''"
+      >
+        <router-link v-slot="{ href, navigate }" :to="{ name: setting.name }" custom>
+          <a :href="href" @click="navigate" class="flex items-center gap-2 text-inherit">
+            <i :class="setting.meta?.icon"></i>
+            <span>{{ routeTranslations[setting.name as RouteNameConstants]() }}</span>
+          </a>
+        </router-link>
+      </Tab>
+    </TabList>
+  </Tabs>
   <RouterView />
 </template>
 
