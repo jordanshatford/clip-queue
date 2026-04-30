@@ -1,5 +1,5 @@
 <template>
-  <Card class="mx-auto max-w-xl">
+  <Card class="mx-auto max-w-2xl">
     <template #title>
       <div class="flex items-center justify-between gap-2">
         <div class="flex items-center gap-2">

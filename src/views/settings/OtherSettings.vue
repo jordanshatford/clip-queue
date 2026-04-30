@@ -1,5 +1,5 @@
 <template>
-  <Card class="mx-auto mb-2 max-w-xl text-left">
+  <Card class="mx-auto mb-2 max-w-2xl text-left">
     <template #content>
       <Button
         :label="m.reset_settings()"
@@ -13,10 +13,7 @@
       <Message size="small" severity="secondary" variant="simple">{{
         m.reset_settings_description()
       }}</Message>
-    </template>
-  </Card>
-  <Card class="mx-auto mb-2 max-w-xl text-left">
-    <template #content>
+      <Divider />
       <Button
         :label="m.purge_history()"
         class="mb-2"
@@ -29,10 +26,7 @@
       <Message size="small" severity="secondary" variant="simple">{{
         m.purge_history_description()
       }}</Message>
-    </template>
-  </Card>
-  <Card class="mx-auto mb-2 max-w-xl text-left">
-    <template #content>
+      <Divider />
       <Button
         :label="m.purge_cache()"
         class="mb-2"
@@ -47,7 +41,7 @@
       }}</Message>
     </template>
   </Card>
-  <Card class="mx-auto max-w-xl">
+  <Card class="mx-auto max-w-2xl">
     <template #content>
       <p class="text-sm text-surface-400">
         {{ m.application_version({ version }) }}
@@ -59,6 +53,7 @@
 <script setup lang="ts">
 import Button from 'primevue/button'
 import Card from 'primevue/card'
+import Divider from 'primevue/divider'
 import Message from 'primevue/message'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'

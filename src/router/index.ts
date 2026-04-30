@@ -3,7 +3,6 @@ import type { RouteRecordRaw } from 'vue-router'
 import { computed } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
-import { config } from '@/config'
 import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useUser } from '@/stores/user'
@@ -141,7 +140,6 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from) => {
-  document.title = config.title
   const logger = useLogger()
   const user = useUser()
   // Attempt to validate the token if not previously done so. This is

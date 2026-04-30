@@ -1,5 +1,5 @@
 <template>
-  <Card class="mx-auto max-w-xl">
+  <Card class="mx-auto max-w-2xl">
     <template #content>
       <form ref="formElement" @submit.prevent="onSubmit" @reset="onReset">
         <div class="flex flex-col gap-2 text-left">
