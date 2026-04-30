@@ -1,8 +1,7 @@
-import type { Clip } from '@/integrations'
-
-import { toClipUUID } from '@/integrations'
-
 import type { IntegrationID } from '../indentify'
+import type { Clip } from './provider'
+
+import { toClipUUID } from './utils'
 
 /**
  * A basic list of clips. Clips are not sorted.
