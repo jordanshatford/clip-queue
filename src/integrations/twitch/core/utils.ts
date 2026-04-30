@@ -1,3 +1,7 @@
+// NOTE: the clips.twitch.tv hostname appears to be deprecated and will
+//       forward all links to twitch.tv/channel/clip_id. There is no harm
+//       to continue to allow these links as the ID of the clip has not
+//       changed so the API will still provide details.
 const CLIP_HOSTNAMES = ['clips.twitch.tv']
 const TWITCH_HOSTNAME = 'twitch.tv'
 const CLIP_SUFFIX = '/clip/'
