@@ -1,22 +1,19 @@
 <template>
-  <div
-    class="mx-auto w-full border border-surface-200 bg-surface-0 p-2 sm:px-16 md:px-20 lg:px-32 dark:border-surface-700 dark:bg-surface-900"
-  >
-    <div class="flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <RouterLink :to="{ name: RouteNameConstants.HOME }" class="mr-2 flex shrink-0 items-center">
-          <img class="aspect-square w-10" src="@/assets/icon.png" />
-        </RouterLink>
-        <div v-for="route in allowedRoutes" :key="route.name">
-          <RouterLink
-            :to="{ name: route.name }"
-            class="bg-surface jusitfy-center flex items-center gap-1 rounded-md px-3 py-2 font-medium text-surface-800 hover:bg-surface-100 active:bg-surface-100 dark:text-surface-100 dark:hover:bg-surface-800 dark:active:bg-surface-800"
-          >
-            <span :class="route.meta?.icon"></span>
-            <span class="ml-2">{{ routeTranslations[route.name as RouteNameConstants]() }}</span>
-          </RouterLink>
-        </div>
-      </div>
+  <Menubar :model="items" class="mx-auto px-2 sm:px-16 md:px-20 lg:px-32">
+    <template #start>
+      <RouterLink :to="{ name: RouteNameConstants.HOME }" class="mr-2 flex shrink-0 items-center">
+        <img class="aspect-square w-10" src="@/assets/icon.png" />
+      </RouterLink>
+    </template>
+    <template #item="{ item, props }">
+      <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
+        <a :href="href" v-bind="props.action" @click="navigate">
+          <span :class="item.icon" />
+          <span>{{ item.label }}</span>
+        </a>
+      </router-link>
+    </template>
+    <template #end>
       <div class="flex items-center gap-2">
         <ThemeToggle :is-dark-mode="preferences.isDark" @toggle="preferences.toggleTheme()" />
         <Button
@@ -27,30 +24,41 @@
         >
         </Button>
       </div>
-    </div>
-  </div>
+    </template>
+  </Menubar>
 </template>
 
 <script setup lang="ts">
-import Button from 'primevue/button'
-import { useRouter } from 'vue-router'
+import Button from "primevue/button";
+import Menubar from "primevue/menubar";
+import { useRouter } from "vue-router";
 
-import { ThemeToggle } from '@/components/ui'
-import { m } from '@/paraglide/messages'
-import { allowedRoutes, RouteNameConstants, routeTranslations } from '@/router'
-import { usePreferences } from '@/stores/preferences'
-import { useUser } from '@/stores/user'
+import { ThemeToggle } from "@/components/ui";
+import { m } from "@/paraglide/messages";
+import { allowedRoutes, RouteNameConstants, routeTranslations } from "@/router";
+import { usePreferences } from "@/stores/preferences";
+import { useUser } from "@/stores/user";
+import { computed } from "vue";
+import type { MenuItem } from "primevue/menuitem";
 
-const preferences = usePreferences()
-const user = useUser()
-const router = useRouter()
+const preferences = usePreferences();
+const user = useUser();
+const router = useRouter();
+
+const items = computed((): MenuItem[] => {
+  return allowedRoutes.value.map((v) => ({
+    label: routeTranslations[v.name as RouteNameConstants](),
+    icon: v.meta?.icon,
+    route: { name: v.name },
+  }));
+});
 
 async function handleAuthButtonClick() {
   if (user.isLoggedIn) {
-    await user.logout()
-    await router.push({ name: RouteNameConstants.HOME })
+    await user.logout();
+    await router.push({ name: RouteNameConstants.HOME });
   } else {
-    user.redirect()
+    user.redirect();
   }
 }
 </script>
