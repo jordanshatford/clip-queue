@@ -37,6 +37,10 @@ export class TwitchAuthentication implements IntegrationAuthentication {
 
   public async autoLogin(): Promise<UserDetails> {
     if (await auth.isLoginValid(this.token)) {
+      const details = await this.getUserDetails()
+      if (details) {
+        user.value = details
+      }
       this.isLoggedIn = true
     } else {
       throw new Error('Failed to auto-login user.')
@@ -59,18 +63,11 @@ export class TwitchAuthentication implements IntegrationAuthentication {
       }
       token.value = access_token
 
-      // Attempt to get the username from Twitch API as the preferred username may not be set
-      // or the user may have a preferred username that is different from their Twitch username.
-      // For example, if the user has simplified chinese characters in their preferred username.
-      const users = await getUsers(CLIENT_ID, this.token, [])
-      if (users.length > 0 && users[0]) {
-        user.value = {
-          ...user.value,
-          id: users[0].id,
-          name: users[0].login,
-          profileImageURL: users[0].profile_image_url,
-        }
+      const details = await this.getUserDetails()
+      if (details) {
+        user.value = details
       }
+
       this.isLoggedIn = true
       return this.user
     }
@@ -88,6 +85,25 @@ export class TwitchAuthentication implements IntegrationAuthentication {
       } catch (e) {
         throw new Error(`[Twitch]: Failed to logout, ${e}`)
       }
+    }
+  }
+
+  private async getUserDetails(): Promise<UserDetails | undefined> {
+    // Attempt to get the username from Twitch API as the preferred username may not be set
+    // or the user may have a preferred username that is different from their Twitch username.
+    // For example, if the user has simplified chinese characters in their preferred username.
+    try {
+      const users = await getUsers(CLIENT_ID, this.token, [])
+      if (users.length > 0 && users[0]) {
+        return {
+          ...user.value,
+          id: users[0].id,
+          name: users[0].login,
+          profileImageURL: users[0].profile_image_url,
+        }
+      }
+    } catch {
+      return undefined
     }
   }
 }
