@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ColorName } from '@/components/ui'
+import type { ColorName } from '@/assets/palettes'
 
 import { m } from '@/paraglide/messages'
 

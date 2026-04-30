@@ -9,7 +9,7 @@
     </div>
     <div class="mt-12 text-left">
       <div class="grid grid-cols-1 gap-y-6 md:grid-cols-3 md:gap-x-6">
-        <FeatureCard
+        <AppFeatureCard
           v-for="(feature, index) in features"
           :key="index"
           :title="feature.title"
@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import { FeatureCard } from '@/components/ui'
+import AppFeatureCard from '@/components/AppFeatureCard.vue'
 import { m } from '@/paraglide/messages'
 
 const features = computed(() => [

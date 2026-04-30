@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
 
-import type { ColorOption } from '@/components/ui'
+import type { ColorOption } from '@/assets/palettes'
 import type { Locale } from '@/paraglide/runtime'
 
-import { colors, setColorPalette, surfaces } from '@/components/ui'
+import { colors, setColorPalette, surfaces } from '@/assets/palettes'
 import { baseLocale, isLocale, setLocale } from '@/paraglide/runtime'
 
 /**

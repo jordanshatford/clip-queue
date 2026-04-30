@@ -9,15 +9,15 @@
       </main>
     </div>
   </div>
-  <Footer :copyright="config.copyright" :github="config.github" />
+  <AppFooter :copyright="config.copyright" :github="config.github" />
 </template>
 
 <script setup lang="ts">
 import ConfirmDialog from 'primevue/confirmdialog'
 import Toast from 'primevue/toast'
 
+import AppFooter from '@/components/AppFooter.vue'
 import AppNavBar from '@/components/AppNavBar.vue'
-import { Footer } from '@/components/ui'
 import { config } from '@/config'
 
 import { usePreferences } from './stores/preferences'

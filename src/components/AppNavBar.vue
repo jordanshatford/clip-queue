@@ -15,7 +15,7 @@
     </template>
     <template #end>
       <div class="flex items-center gap-2">
-        <ThemeToggle :is-dark-mode="preferences.isDark" @toggle="preferences.toggleTheme()" />
+        <AppThemeToggle :is-dark-mode="preferences.isDark" @toggle="preferences.toggleTheme()" />
         <Button
           icon="pi pi-twitch"
           :label="user.isLoggedIn ? m.logout() : m.login()"
@@ -29,36 +29,37 @@
 </template>
 
 <script setup lang="ts">
-import Button from "primevue/button";
-import Menubar from "primevue/menubar";
-import { useRouter } from "vue-router";
+import type { MenuItem } from 'primevue/menuitem'
 
-import { ThemeToggle } from "@/components/ui";
-import { m } from "@/paraglide/messages";
-import { allowedRoutes, RouteNameConstants, routeTranslations } from "@/router";
-import { usePreferences } from "@/stores/preferences";
-import { useUser } from "@/stores/user";
-import { computed } from "vue";
-import type { MenuItem } from "primevue/menuitem";
+import Button from 'primevue/button'
+import Menubar from 'primevue/menubar'
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 
-const preferences = usePreferences();
-const user = useUser();
-const router = useRouter();
+import AppThemeToggle from '@/components/AppThemeToggle.vue'
+import { m } from '@/paraglide/messages'
+import { allowedRoutes, RouteNameConstants, routeTranslations } from '@/router'
+import { usePreferences } from '@/stores/preferences'
+import { useUser } from '@/stores/user'
+
+const preferences = usePreferences()
+const user = useUser()
+const router = useRouter()
 
 const items = computed((): MenuItem[] => {
   return allowedRoutes.value.map((v) => ({
     label: routeTranslations[v.name as RouteNameConstants](),
     icon: v.meta?.icon,
     route: { name: v.name },
-  }));
-});
+  }))
+})
 
 async function handleAuthButtonClick() {
   if (user.isLoggedIn) {
-    await user.logout();
-    await router.push({ name: RouteNameConstants.HOME });
+    await user.logout()
+    await router.push({ name: RouteNameConstants.HOME })
   } else {
-    user.redirect();
+    user.redirect()
   }
 }
 </script>
