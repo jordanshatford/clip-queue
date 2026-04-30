@@ -4,7 +4,7 @@ import type { TwitchClip, TwitchGame } from '@/integrations/twitch'
 
 import { clips as clipSource } from '@/integrations/twitch'
 
-import { mockKickClip, mockTwitchClip, mockTwitchGame } from '../../common/__tests__/mocks'
+import { mockKickClip, mockTwitchClip, mockTwitchGame } from '../../../common/__tests__/mocks'
 
 vi.mock('@/integrations/twitch/core/api.ts', async (importOriginal) => {
   return {
@@ -40,7 +40,7 @@ vi.mock('@/integrations/twitch/core/utils.ts', async (importOriginal) => {
   }
 })
 
-describe('twitch.ts', () => {
+describe('integrations/twitch/providers/clip', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     clipSource.clearCache()

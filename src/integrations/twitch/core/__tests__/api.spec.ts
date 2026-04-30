@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { mockTwitchClip, mockTwitchGame, mockTwitchUser } from '../../../common/__tests__/mocks'
 import { getClips, getGames, getUsers, toCommonHeaders } from '../api'
 
-describe('twitch-api.ts', () => {
+describe('integrations/twitch/core/api', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     global.fetch = vi.fn<typeof fetch>().mockImplementation((url) =>

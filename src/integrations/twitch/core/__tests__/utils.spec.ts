@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { getClipIdFromUrl, toURLParams } from '../utils'
 
-describe('utils.ts', () => {
+describe('integrations/twitch/common/utils', () => {
   it.each([
     [
       'https://clips.twitch.tv/TangibleFreezingPheasantPartyTime-jBBRudZqr_7KehsW',
