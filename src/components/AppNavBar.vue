@@ -8,13 +8,18 @@
         <img class="aspect-square w-10" src="@/assets/icon.png" />
       </RouterLink>
     </template>
-    <template #item="{ item, props }">
+    <template #item="{ item, props, hasSubmenu }">
       <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
         <a :href="href" v-bind="props.action" @click="navigate">
           <span :class="item.icon" />
           <span>{{ item.label }}</span>
         </a>
       </router-link>
+      <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action">
+        <span :class="item.icon" />
+        <span>{{ item.label }}</span>
+        <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down" />
+      </a>
     </template>
     <template #end>
       <div class="flex items-center gap-2">
@@ -53,7 +58,12 @@ const items = computed((): MenuItem[] => {
   return allowedRoutes.value.map((v) => ({
     label: routeTranslations[v.name as RouteNameConstants](),
     icon: v.meta?.icon,
-    route: { name: v.name },
+    route: v.children ? undefined : { name: v.name },
+    items: v.children?.map((c) => ({
+      label: routeTranslations[c.name as RouteNameConstants](),
+      icon: c.meta?.icon,
+      route: { name: c.name },
+    })),
   }))
 })
 
