@@ -1,14 +1,13 @@
 import { useStorage } from '@vueuse/core'
 
+import type { Clip, PlayerFormat, IntegrationProvider } from '@/integrations/common'
+
 import { env } from '@/config'
+import { toStorageKey } from '@/integrations/common/utils'
+import { IntegrationID } from '@/integrations/indentify'
+import { getClips, getGames } from '@/integrations/twitch/core/api'
+import { getClipIdFromUrl } from '@/integrations/twitch/core/utils'
 import { Cacheable } from '@/types/cacheable'
-
-import type { Clip, PlayerFormat, IntegrationProvider } from '../common'
-
-import { toStorageKey } from '../common/utils'
-import { IntegrationID } from '../indentify'
-import { getClips, getGames } from './core/api'
-import { getClipIdFromUrl } from './core/utils'
 
 const { CLIENT_ID } = env
 

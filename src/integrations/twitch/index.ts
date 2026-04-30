@@ -4,7 +4,7 @@ import type { Integration } from '../common'
 
 import { IntegrationID } from '../indentify'
 import { TwitchAuthentication } from './authentication'
-import { TwitchClipProvider } from './providers'
+import { TwitchClipProvider } from './providers/clip'
 import { TwitchChatSource } from './source'
 
 export * from './core/types'
