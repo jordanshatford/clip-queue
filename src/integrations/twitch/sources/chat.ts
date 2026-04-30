@@ -1,14 +1,14 @@
 import { Client } from '@tmi.js/chat'
 import { ref } from 'vue'
 
-import { getAllURLsFromText } from '../common'
+import { getAllURLsFromText } from '../../common'
 import {
   type IntegrationSource,
   type ClipSourceEventsMap,
   ClipSourceFeature,
-} from '../common/source'
-import { ClipSourceStatus, EventEmitter } from '../common/source'
-import { IntegrationID } from '../indentify'
+} from '../../common/source'
+import { ClipSourceStatus, EventEmitter } from '../../common/source'
+import { IntegrationID } from '../../indentify'
 
 const status = ref<ClipSourceStatus>(ClipSourceStatus.UNKNOWN)
 
