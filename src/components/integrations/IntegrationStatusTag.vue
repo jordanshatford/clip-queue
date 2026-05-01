@@ -11,7 +11,7 @@
 import Tag from 'primevue/tag'
 import { computed } from 'vue'
 
-import { IntegrationStatus } from '@/integrations/core/types'
+import { IntegrationStatus } from '@/integrations/core'
 import { m } from '@/paraglide/messages'
 
 export interface Props {

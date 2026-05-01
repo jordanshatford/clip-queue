@@ -8,7 +8,8 @@ import type { IntegrationSource } from './source'
 export * from './authentication'
 export * from './provider'
 export * from './source'
-export { toClipUUID, getAllURLsFromText } from './utils'
+export * from './types'
+export * from './utils'
 
 export interface Integration {
   /**

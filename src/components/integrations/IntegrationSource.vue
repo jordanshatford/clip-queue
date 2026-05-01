@@ -42,9 +42,9 @@ import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
 import Tag from 'primevue/tag'
 
-import type { IntegrationSource } from '@/integrations/core/source'
+import type { IntegrationSource } from '@/integrations/core'
 
-import { ClipSourceFeature } from '@/integrations/core/source'
+import { ClipSourceFeature } from '@/integrations/core'
 import { m } from '@/paraglide/messages'
 
 import IntegrationStatusTag from './IntegrationStatusTag.vue'
