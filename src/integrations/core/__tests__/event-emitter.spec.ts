@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from 'vitest'
 
-import { EventEmitter } from '../source'
+import { EventEmitter } from '../event-emitter'
 
 type TestEvents = {
   test: () => void
@@ -8,7 +8,7 @@ type TestEvents = {
   test3: (t: string, t2: string) => void
 }
 
-describe('emitter.ts', () => {
+describe('integrations/core/event-emitter', () => {
   let emitter: EventEmitter<TestEvents> | undefined
 
   beforeAll(() => {

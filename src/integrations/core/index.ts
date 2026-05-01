@@ -7,6 +7,7 @@ import type { IntegrationSource } from './source'
 
 export * from './authentication'
 export * from './cacheable'
+export * from './event-emitter'
 export * from './provider'
 export * from './source'
 export * from './types'
