@@ -6,7 +6,7 @@
           <div class="flex flex-col gap-2 text-left">
             <label for="language">{{ m.language() }}</label>
             <Select
-              v-model="formPreferences.language"
+              v-model="formSettings.language"
               :options="[...locales]"
               label-id="language"
               size="small"
@@ -19,7 +19,7 @@
             }}</Message>
             <label for="theme">{{ m.theme() }}</label>
             <Select
-              v-model="formPreferences.theme"
+              v-model="formSettings.theme"
               :options="[...availableThemes]"
               label-id="theme"
               size="small"
@@ -32,7 +32,7 @@
             }}</Message>
             <label for="primaryColor">{{ m.primary_color() }}</label>
             <Select
-              v-model="formPreferences.primary"
+              v-model="formSettings.primary"
               :options="colors"
               data-key="name"
               label-id="primaryColor"
@@ -51,7 +51,7 @@
             }}</Message>
             <label for="surfaceColor">{{ m.surface_color() }}</label>
             <Select
-              v-model="formPreferences.surface"
+              v-model="formSettings.surface"
               data-key="name"
               :options="surfaces"
               label-id="surfaceColor"
@@ -76,14 +76,14 @@
               class="mr-2"
               type="submit"
               severity="secondary"
-              :disabled="!preferences.isModifiedFrom(formPreferences)"
+              :disabled="!preferences.isModifiedFrom(formSettings)"
             ></Button>
             <Button
               type="reset"
               :label="m.cancel()"
               size="small"
               severity="danger"
-              :disabled="!preferences.isModifiedFrom(formPreferences)"
+              :disabled="!preferences.isModifiedFrom(formSettings)"
             ></Button>
           </div>
         </form>
@@ -97,8 +97,7 @@ import Button from 'primevue/button'
 import Card from 'primevue/card'
 import Message from 'primevue/message'
 import Select from 'primevue/select'
-import { useToast } from 'primevue/usetoast'
-import { ref, toRaw, useTemplateRef, watch } from 'vue'
+import { watch } from 'vue'
 
 import type { ColorOption } from '@/assets/palettes'
 import type { Locale } from '@/paraglide/runtime'
@@ -106,15 +105,19 @@ import type { Theme } from '@/stores/preferences'
 
 import { colors, surfaces } from '@/assets/palettes'
 import ColorName from '@/components/ColorName.vue'
+import { useSettingsForm } from '@/composables/use-settings-form'
 import { m } from '@/paraglide/messages'
 import { locales } from '@/paraglide/runtime'
 import { availableThemes, usePreferences } from '@/stores/preferences'
 
-const toast = useToast()
 const preferences = usePreferences()
 
-const formElement = useTemplateRef<HTMLFormElement>('formElement')
-const formPreferences = ref(structuredClone(toRaw(preferences.preferences)))
+const { formSettings, onReset, onSubmit } = useSettingsForm(
+  'formElement',
+  () => preferences.preferences,
+  (v) => (preferences.preferences = v),
+  m.preferences_saved(),
+)
 
 const themeTranslations: Record<Theme, () => string> = {
   dark: m.theme_dark,
@@ -137,21 +140,5 @@ const languageLabels: Record<Locale, string> = {
   zh: '中文 (Chinese)',
 }
 
-watch(preferences.preferences, (v) => (formPreferences.value.theme = v.theme))
-
-function onReset() {
-  formPreferences.value = structuredClone(toRaw(preferences.preferences))
-  formElement.value?.reset()
-}
-
-function onSubmit() {
-  preferences.preferences = formPreferences.value
-  toast.add({
-    severity: 'success',
-    summary: m.success(),
-    detail: m.preferences_saved(),
-    life: 3000,
-  })
-  onReset()
-}
+watch(preferences.preferences, (v) => (formSettings.value.theme = v.theme))
 </script>

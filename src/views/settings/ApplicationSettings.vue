@@ -96,20 +96,22 @@ import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
 import MultiSelect from 'primevue/multiselect'
 import ToggleSwitch from 'primevue/toggleswitch'
-import { useToast } from 'primevue/usetoast'
-import { ref, toRaw, useTemplateRef } from 'vue'
 
+import { useSettingsForm } from '@/composables/use-settings-form'
 import { m } from '@/paraglide/messages'
 import { usePreferences } from '@/stores/preferences'
 import { useSettings } from '@/stores/settings'
 import commands, { Command } from '@/utils/commands'
 
-const toast = useToast()
 const settings = useSettings()
 const preferences = usePreferences()
 
-const formElement = useTemplateRef<HTMLFormElement>('formElement')
-const formSettings = ref(structuredClone(toRaw(settings.application)))
+const { formSettings, onReset, onSubmit } = useSettingsForm(
+  'formElement',
+  () => settings.application,
+  (v) => (settings.application = v),
+  m.application_settings_saved(),
+)
 
 function toCommandCall(command: Command) {
   const help = commands.help.value[command]
@@ -119,21 +121,5 @@ function toCommandCall(command: Command) {
     cmd += help.args.map((arg) => `<${arg}>`).join(' ')
   }
   return cmd
-}
-
-function onReset() {
-  formSettings.value = structuredClone(toRaw(settings.application))
-  formElement.value?.reset()
-}
-
-function onSubmit() {
-  settings.application = formSettings.value
-  toast.add({
-    severity: 'success',
-    summary: m.success(),
-    detail: m.application_settings_saved(),
-    life: 3000,
-  })
-  onReset()
 }
 </script>

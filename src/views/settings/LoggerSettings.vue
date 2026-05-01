@@ -76,37 +76,23 @@ import Divider from 'primevue/divider'
 import InputNumber from 'primevue/inputnumber'
 import Message from 'primevue/message'
 import Select from 'primevue/select'
-import { useToast } from 'primevue/usetoast'
-import { ref, toRaw, useTemplateRef } from 'vue'
 
 import type { LogLevel } from '@/stores/logger'
 
+import { useSettingsForm } from '@/composables/use-settings-form'
 import { m } from '@/paraglide/messages'
 import { RouteNameConstants } from '@/router'
 import { availableLogLevels, logLevelTranslations } from '@/stores/logger'
 import { usePreferences } from '@/stores/preferences'
 import { useSettings } from '@/stores/settings'
 
-const toast = useToast()
 const preferences = usePreferences()
 const settings = useSettings()
 
-const formElement = useTemplateRef<HTMLFormElement>('formElement')
-const formSettings = ref(structuredClone(toRaw(settings.logger)))
-
-function onReset() {
-  formSettings.value = structuredClone(toRaw(settings.logger))
-  formElement.value?.reset()
-}
-
-function onSubmit() {
-  settings.logger = formSettings.value
-  toast.add({
-    severity: 'success',
-    summary: m.success(),
-    detail: m.logger_settings_saved(),
-    life: 3000,
-  })
-  onReset()
-}
+const { formSettings, onReset, onSubmit } = useSettingsForm(
+  'formElement',
+  () => settings.logger,
+  (v) => (settings.logger = v),
+  m.logger_settings_saved(),
+)
 </script>
