@@ -4,9 +4,10 @@ import { ref } from 'vue'
 import type { Clip } from '@/integrations'
 
 import { IntegrationID } from '@/integrations'
-import { BasicClipList, ClipList, toClipUUID } from '@/integrations'
+import { toClipUUID } from '@/integrations/common/utils'
 import { useLogger } from '@/stores/logger'
 import { useSettings } from '@/stores/settings'
+import { BasicClipList, ClipList } from '@/utils/clip-list'
 
 export const useQueue = defineStore(
   'queue',

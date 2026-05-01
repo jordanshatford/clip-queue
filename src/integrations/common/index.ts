@@ -6,7 +6,6 @@ import type { IntegrationProvider } from './provider'
 import type { IntegrationSource } from './source'
 
 export * from './authentication'
-export * from './clip-list'
 export * from './provider'
 export * from './source'
 export { toClipUUID, getAllURLsFromText } from './utils'

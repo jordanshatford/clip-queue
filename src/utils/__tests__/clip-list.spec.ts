@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { IntegrationID } from '@/integrations'
+import { clipFromKick, clipFromTwitch } from '@/integrations/common/__tests__/mocks'
 
 import { ClipList } from '../clip-list'
-import { clipFromKick, clipFromTwitch } from './mocks'
 
 describe('clip-list.ts', () => {
   let clipList: ClipList
