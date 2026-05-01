@@ -75,55 +75,43 @@ export interface TwitchUser {
    */
   id: string
   /**
-   * The login of the user.
+   * The name of the user.
    */
   login: string
-  /**
-   * The type of the user.
-   */
-  type: string
-  /**
-   * The broadcaster type of the user.
-   */
-  broadcaster_type: string
-  /**
-   * The date the user was created.
-   */
-  created_at: string
-  /**
-   * The email of the user.
-   */
-  email: string
-  /**
-   * The description of the user.
-   */
-  description: string
   /**
    * The display name of the user.
    */
   display_name: string
   /**
-   * The offline image URL of the user.
+   * The description of the user.
    */
-  offline_image_url: string
+  description: string
   /**
-   * The profile image URL of the user.
+   * The type of the user.
+   */
+  type: string
+  /**
+   * The type of the broadcaster.
+   */
+  broadcaster_type: string
+  /**
+   * The URL of the profile picture of the user.
    */
   profile_image_url: string
   /**
-   * The view count of the user.
+   * The URL of the offline video placeholder of the user.
    */
-  view_count: number
+  offline_image_url: string
+  /**
+   * The date when the user was created, i.e. when they registered on Twitch.
+   */
+  created_at: string
 }
 
 /**
  * A Twitch game.
  */
 export interface TwitchGame {
-  /**
-   * The box art URL of the game.
-   */
-  box_art_url: string
   /**
    * The ID of the game.
    */
@@ -132,6 +120,14 @@ export interface TwitchGame {
    * The name of the game.
    */
   name: string
+  /**
+   * The URL of the box art of the game.
+   */
+  box_art_url: string
+  /**
+   * The IGDB ID of the game, or null if the game doesn't have an IGDB ID assigned at Twitch.
+   */
+  igdb_id?: string
 }
 
 /**
@@ -139,7 +135,7 @@ export interface TwitchGame {
  */
 export interface TwitchClip {
   /**
-   * The ID of the clip.
+   * The clip ID.
    */
   id: string
   /**
@@ -151,31 +147,31 @@ export interface TwitchClip {
    */
   embed_url: string
   /**
-   * The broadcaster ID of the clip.
+   * The user ID of the broadcaster of the stream where the clip was created.
    */
   broadcaster_id: string
   /**
-   * The broadcaster name of the clip.
+   * The display name of the broadcaster of the stream where the clip was created.
    */
   broadcaster_name: string
   /**
-   * The creator ID of the clip.
+   * The user ID of the creator of the clip.
    */
   creator_id: string
   /**
-   * The creator name of the clip.
+   * The display name of the creator of the clip.
    */
   creator_name: string
   /**
-   * The video ID of the clip.
+   * The ID of the video the clip is taken from.
    */
   video_id: string
   /**
-   * The game ID of the clip.
+   * The ID of the game that was being played when the clip was created.
    */
   game_id: string
   /**
-   * The language of the clip.
+   * The language of the stream where the clip was created.
    */
   language: string
   /**
@@ -183,19 +179,19 @@ export interface TwitchClip {
    */
   title: string
   /**
-   * The view count of the clip.
+   * The number of views of the clip.
    */
   view_count: number
   /**
-   * The created at time of the clip.
+   * The date when the clip was created.
    */
   created_at: string
   /**
-   * The thumbnail URL of the clip.
+   *  The URL of the thumbnail of the clip.
    */
   thumbnail_url: string
   /**
-   * The duration of the clip.
+   * The duration of the clip in seconds (up to 0.1 precision).
    */
   duration: number
 }
@@ -227,5 +223,9 @@ export interface TwitchPagedResponse<T> extends TwitchResponse<T> {
   /**
    * The pagination information.
    */
-  pagination: TwitchPagination
+  pagination?:
+    | string
+    | {
+        cursor?: string
+      }
 }

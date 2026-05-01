@@ -1,49 +1,23 @@
-// NOTE: the clips.twitch.tv hostname appears to be deprecated and will
-//       forward all links to twitch.tv/channel/clip_id. There is no harm
-//       to continue to allow these links as the ID of the clip has not
-//       changed so the API will still provide details.
-const CLIP_HOSTNAMES = ['clips.twitch.tv']
-const TWITCH_HOSTNAME = 'twitch.tv'
-const CLIP_SUFFIX = '/clip/'
+/**
+ * List of known Twitch hostnames that these integrations support.
+ */
+const TWITCH_HOSTNAMES: string[] = [
+  // NOTE: The clips.twitch.tv hostname appears to be deprecated and will
+  //       forward all links to twitch.tv/channel/clip_id. There is no harm
+  //       to continue to allow these links as the ID of the clip has not
+  //       changed so the API will still provide details.
+  'clips.twitch.tv',
+  'm.twitch.tv',
+  'twitch.tv',
+]
 
 /**
- * Check if a URL is a Twitch clip URL.
+ * Check if a URL is a supported Twitch.tv URL.
  * @param url - The URL to check.
- * @returns True if the URL is a Twitch clip URL.
+ * @returns true if it is a Twitch URL, false otherwise.
  */
-function isClipUrl(url: string): boolean {
-  try {
-    const uri = new URL(url)
-    if (CLIP_HOSTNAMES.includes(uri.hostname)) {
-      return true
-    }
-    if (uri.hostname.endsWith(TWITCH_HOSTNAME)) {
-      if (uri.pathname.includes(CLIP_SUFFIX)) {
-        return true
-      }
-    }
-    return false
-  } catch {
-    return false
-  }
-}
-
-/**
- * Get a clip ID from a Twitch clip URL.
- * @param url - The Twitch clip URL.
- * @returns The clip ID or undefined if the URL is invalid.
- */
-export function getClipIdFromUrl(url: string): string | undefined {
-  if (!isClipUrl(url)) {
-    return
-  }
-  try {
-    const uri = new URL(url)
-    const idStart = uri.pathname.lastIndexOf('/')
-    return uri.pathname.slice(idStart).split('?')[0]?.slice(1)
-  } catch {
-    return
-  }
+export function isTwitchURL(url: URL): boolean {
+  return TWITCH_HOSTNAMES.some((n) => url.hostname.endsWith(n))
 }
 
 /**
@@ -56,8 +30,4 @@ export function toURLParams(key: string, values: string[]): URLSearchParams {
   const params = new URLSearchParams()
   values.forEach((v) => params.append(key, v))
   return params
-}
-
-export default {
-  getClipIdFromUrl,
 }

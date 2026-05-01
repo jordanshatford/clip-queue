@@ -1,34 +1,18 @@
 import { describe, expect, it } from 'vitest'
 
-import { getClipIdFromUrl, toURLParams } from '../utils'
+import { isTwitchURL, toURLParams } from '../utils'
 
 describe('integrations/twitch/core/utils', () => {
   it.each([
-    [
-      'https://clips.twitch.tv/TangibleFreezingPheasantPartyTime-jBBRudZqr_7KehsW',
-      'TangibleFreezingPheasantPartyTime-jBBRudZqr_7KehsW',
-    ],
-    [
-      'https://clips.twitch.tv/RockyDreamyDumplings4Head-FQpZsAzs89ihPF6I',
-      'RockyDreamyDumplings4Head-FQpZsAzs89ihPF6I',
-    ],
-    [
-      'https://clips.twitch.tv/FantasticQuaintWrenchPogChamp-seNiJaPPjYls0ID8',
-      'FantasticQuaintWrenchPogChamp-seNiJaPPjYls0ID8',
-    ],
-    [
-      'https://twitch.tv/clip/test/FantasticQuaintWrenchPogChamp-seNiJaPPjYls0ID8',
-      'FantasticQuaintWrenchPogChamp-seNiJaPPjYls0ID8',
-    ],
-    ['', undefined],
-    ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', undefined],
-    ['https://m.twitch.tv/c/RockySteamyWalrusMoreCowbell-ZBrnUiZwQsENj3pi', undefined],
-  ])(
-    'can get a clip ID from a url: (url: %s) -> %s',
-    (input: string, expected: string | undefined) => {
-      expect(getClipIdFromUrl(input)).toEqual(expected)
-    },
-  )
+    [new URL('https://clips.twitch.tv/testclip'), true],
+    [new URL('https://twitch.tv/testchannel/clip/testclip'), true],
+    [new URL('https://clips.twitch.tv/testchannel/video/testvideo'), true],
+    [new URL('https://twitch.tv/'), true],
+    [new URL('https://m.twitch.tv/c/testchannel'), true],
+    [new URL('https://google.ca'), false],
+  ])('can detect if a url is a twitch url: (url: %s) -> %s', (input: URL, expected: boolean) => {
+    expect(isTwitchURL(input)).toEqual(expected)
+  })
 
   it.each([
     [

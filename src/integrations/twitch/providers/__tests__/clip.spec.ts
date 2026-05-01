@@ -73,7 +73,13 @@ describe('integrations/twitch/providers/clip', () => {
     ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', false],
     ['', false],
     [mockKickClip.clip_url, false],
+    ['http://www.twitch.tv/channel/v/test?t=5m10s', false],
+    ['http://www.twitch.tv/channel/v/test', false],
+    ['https://www.twitch.tv/videos/test', false],
     [mockTwitchClip.url, true],
+    ['https://m.twitch.tv/clip/testclip', true],
+    ['https://clips.twitch.tv/channel/testclip', true],
+    ['https://www.twitch.tv/channel/clip/testclip', true],
   ])('can detect clip urls it supports: (url: %s)', async (url: string, expected: boolean) => {
     expect(provider.hasClipSupport(url)).toEqual(expected)
   })
