@@ -16,7 +16,7 @@ vi.mock('@/integrations/kick/core/index.ts', async (importOriginal) => {
 
 const provider = new KickClipsProvider()
 
-describe('kick.ts', () => {
+describe('integrations/kick/providers/clip', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     provider.clearCache()

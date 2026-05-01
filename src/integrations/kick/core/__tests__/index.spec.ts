@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { getClip, getClipIdFromUrl } from '..'
 import { mockKickClip } from '../../../core/__tests__/mocks'
 
-describe('kick.ts', () => {
+describe('integrations/kick/core', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     global.fetch = vi.fn<typeof fetch>().mockImplementation((url) =>
