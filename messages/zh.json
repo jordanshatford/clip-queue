@@ -15,7 +15,10 @@
     {
       "declarations": ["input length", "local lengthPlural = length: plural"],
       "selectors": ["lengthPlural"],
-      "match": { "lengthPlural=one": "{length}剪辑", "lengthPlural=other": "{length}剪辑" }
+      "match": {
+        "lengthPlural=one": "{length}剪辑",
+        "lengthPlural=other": "{length}剪辑"
+      }
     }
   ],
   "clip_cache_purged": "已清除剪辑缓存。",
@@ -39,7 +42,6 @@
   "command_disable_auto_mod": "禁用自动审核。",
   "command_purge_cache": "清除所有缓存片段。",
   "command_purge_history": "清除所有历史观看记录。",
-  "connected": "已连接",
   "cyan": "青色",
   "delete_history": "删除历史记录",
   "delete_history_confirm": [
@@ -53,7 +55,6 @@
     }
   ],
   "delete_label": "删除",
-  "disconnected": "断开连接",
   "emerald": "翠",
   "error": "错误",
   "experimental": "实验",
@@ -175,5 +176,8 @@
   "providers_for_integration": "支持此集成的提供商。启用后，检测到此类内容时，系统会将其添加到队列中。",
   "application_settings_saved": "应用程序设置已保存。",
   "commands": "命令",
-  "clip_detection": "剪辑检测"
+  "clip_detection": "剪辑检测",
+  "not_configured": "未配置",
+  "misconfigured": "配置错误",
+  "healthy": "健康"
 }

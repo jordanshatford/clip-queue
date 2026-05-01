@@ -15,7 +15,10 @@
     {
       "declarations": ["input length", "local lengthPlural = length: plural"],
       "selectors": ["lengthPlural"],
-      "match": { "lengthPlural=one": "{length} clip", "lengthPlural=other": "{length} clips" }
+      "match": {
+        "lengthPlural=one": "{length} clip",
+        "lengthPlural=other": "{length} clips"
+      }
     }
   ],
   "clip_cache_purged": "Кэш клипов очищен.",
@@ -39,7 +42,6 @@
   "command_disable_auto_mod": "Отключить автоматическую модерацию.",
   "command_purge_cache": "Очистить все кэшированные клипы.",
   "command_purge_history": "Удалите все просмотренные ранее видеоролики.",
-  "connected": "Подключено",
   "cyan": "Голубой",
   "delete_history": "Удалить историю",
   "delete_history_confirm": [
@@ -53,7 +55,6 @@
     }
   ],
   "delete_label": "Удалить",
-  "disconnected": "Отключено",
   "emerald": "Изумруд",
   "error": "Ошибка",
   "experimental": "Экспериментальный",
@@ -175,5 +176,8 @@
   "providers_for_integration": "Доступные для этой интеграции поставщики. При включении этот тип контента будет добавляться в очередь при обнаружении.",
   "application_settings_saved": "Настройки приложения сохранены.",
   "commands": "Команды",
-  "clip_detection": "Обнаружение клипов"
+  "clip_detection": "Обнаружение клипов",
+  "not_configured": "Не настроено",
+  "misconfigured": "Неправильная настройка",
+  "healthy": "Здоровый"
 }

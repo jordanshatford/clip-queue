@@ -15,7 +15,10 @@
     {
       "declarations": ["input length", "local lengthPlural = length: plural"],
       "selectors": ["lengthPlural"],
-      "match": { "lengthPlural=one": "{length} clip", "lengthPlural=other": "{length} clips" }
+      "match": {
+        "lengthPlural=one": "{length} clip",
+        "lengthPlural=other": "{length} clips"
+      }
     }
   ],
   "clip_cache_purged": "Cache des clips purgé.",
@@ -39,7 +42,6 @@
   "command_disable_auto_mod": "Désactiver la modération automatique.",
   "command_purge_cache": "Supprimer tous les clips mis en cache.",
   "command_purge_history": "Supprimer tous les clips historiquement visionnés.",
-  "connected": "Connecté",
   "cyan": "Cyan",
   "delete_history": "Supprimer l'historique",
   "delete_history_confirm": [
@@ -53,7 +55,6 @@
     }
   ],
   "delete_label": "Supprimer",
-  "disconnected": "Déconnecté",
   "emerald": "Émeraude",
   "error": "Erreur",
   "experimental": "Expérimental",
@@ -175,5 +176,8 @@
   "providers_for_integration": "Fournisseurs disponibles pour cette intégration. Lorsqu'elle est activée, ce type de contenu sera ajouté à la file d'attente dès sa détection.",
   "application_settings_saved": "Paramètres de l'application enregistrés.",
   "commands": "Commandes",
-  "clip_detection": "Détection de clips"
+  "clip_detection": "Détection de clips",
+  "not_configured": "Non configuré",
+  "misconfigured": "Mauvaise configuration",
+  "healthy": "En bonne santé"
 }

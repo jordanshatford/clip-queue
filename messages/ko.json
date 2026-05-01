@@ -15,7 +15,10 @@
     {
       "declarations": ["input length", "local lengthPlural = length: plural"],
       "selectors": ["lengthPlural"],
-      "match": { "lengthPlural=one": "{length} 클립", "lengthPlural=other": "{length} 클립" }
+      "match": {
+        "lengthPlural=one": "{length} 클립",
+        "lengthPlural=other": "{length} 클립"
+      }
     }
   ],
   "clip_cache_purged": "클립 캐시가 삭제되었습니다.",
@@ -39,7 +42,6 @@
   "command_disable_auto_mod": "자동 검열 기능을 비활성화하세요.",
   "command_purge_cache": "캐시된 클립을 모두 삭제합니다.",
   "command_purge_history": "과거에 시청한 모든 클립을 삭제합니다.",
-  "connected": "연결됨",
   "cyan": "시안",
   "delete_history": "삭제 기록",
   "delete_history_confirm": [
@@ -53,7 +55,6 @@
     }
   ],
   "delete_label": "삭제",
-  "disconnected": "연결이 끊어졌습니다",
   "emerald": "에메랄드",
   "error": "오류",
   "experimental": "실험적인",
@@ -175,5 +176,8 @@
   "providers_for_integration": "이 통합에 사용 가능한 제공업체입니다. 활성화되면 이 유형의 콘텐츠가 감지될 때 대기열에 추가됩니다.",
   "application_settings_saved": "애플리케이션 설정이 저장되었습니다.",
   "commands": "명령어",
-  "clip_detection": "클립 감지"
+  "clip_detection": "클립 감지",
+  "not_configured": "구성되지 않음",
+  "misconfigured": "잘못 구성됨",
+  "healthy": "건강한"
 }

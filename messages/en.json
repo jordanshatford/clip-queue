@@ -42,7 +42,6 @@
   "command_disable_auto_mod": "Disable auto moderation.",
   "command_purge_cache": "Purge all cached clips.",
   "command_purge_history": "Purge all historically watched clips.",
-  "connected": "Connected",
   "cyan": "Cyan",
   "delete_history": "Delete History",
   "delete_history_confirm": [
@@ -56,7 +55,6 @@
     }
   ],
   "delete_label": "Delete",
-  "disconnected": "Disconnected",
   "emerald": "Emerald",
   "error": "Error",
   "experimental": "Experimental",
@@ -178,5 +176,8 @@
   "providers_for_integration": "Providers available for this integration. When enabled, this type of content will be added to the queue when detected.",
   "application_settings_saved": "Application settings saved.",
   "commands": "Commands",
-  "clip_detection": "Clip Detection"
+  "clip_detection": "Clip Detection",
+  "not_configured": "Not Configured",
+  "misconfigured": "Misconfigured",
+  "healthy": "Healthy"
 }

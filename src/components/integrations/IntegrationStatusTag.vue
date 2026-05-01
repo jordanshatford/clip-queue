@@ -35,17 +35,17 @@ const STATUS_CONFIG: Record<IntegrationStatus, TagConfig> = {
     icon: 'pi pi-exclamation-circle',
   },
   [IntegrationStatus.HEALTHY]: {
-    label: () => 'Healthy',
+    label: m.healthy,
     severity: 'success',
     icon: 'pi pi-check-circle',
   },
   [IntegrationStatus.DISABLED]: {
-    label: () => 'Not configured',
+    label: m.not_configured,
     severity: 'warn',
     icon: 'pi pi-exclamation-triangle',
   },
   [IntegrationStatus.MISCONFIGURED]: {
-    label: () => 'Misconfigured',
+    label: m.misconfigured,
     severity: 'danger',
     icon: 'pi pi-exclamation-circle',
   },

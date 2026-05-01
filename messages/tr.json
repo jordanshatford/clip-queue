@@ -15,7 +15,10 @@
     {
       "declarations": ["input length", "local lengthPlural = length: plural"],
       "selectors": ["lengthPlural"],
-      "match": { "lengthPlural=one": "{length} clip", "lengthPlural=other": "{length} klipler" }
+      "match": {
+        "lengthPlural=one": "{length} clip",
+        "lengthPlural=other": "{length} klipler"
+      }
     }
   ],
   "clip_cache_purged": "Klip önbelleği temizlendi.",
@@ -39,7 +42,6 @@
   "command_disable_auto_mod": "Otomatik moderasyonu devre dışı bırakın.",
   "command_purge_cache": "Önbelleğe alınmış tüm klipleri temizleyin.",
   "command_purge_history": "Geçmişte izlenmiş tüm videoları silin.",
-  "connected": "Bağlı",
   "cyan": "Camgöbeği",
   "delete_history": "Geçmişi Sil",
   "delete_history_confirm": [
@@ -53,7 +55,6 @@
     }
   ],
   "delete_label": "Silmek",
-  "disconnected": "Bağlantı kesildi",
   "emerald": "Zümrüt",
   "error": "Hata",
   "experimental": "Deneysel",
@@ -175,5 +176,8 @@
   "providers_for_integration": "Bu entegrasyon için kullanılabilir sağlayıcılar. Etkinleştirildiğinde, bu tür içerik algılandığında sıraya eklenecektir.",
   "application_settings_saved": "Uygulama ayarları kaydedildi.",
   "commands": "Komutlar",
-  "clip_detection": "Klip Algılama"
+  "clip_detection": "Klip Algılama",
+  "not_configured": "Yapılandırılmamış",
+  "misconfigured": "Yanlış yapılandırılmış",
+  "healthy": "Sağlıklı"
 }

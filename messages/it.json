@@ -15,7 +15,10 @@
     {
       "declarations": ["input length", "local lengthPlural = length: plural"],
       "selectors": ["lengthPlural"],
-      "match": { "lengthPlural=one": "{length} clip", "lengthPlural=other": "{length} clip" }
+      "match": {
+        "lengthPlural=one": "{length} clip",
+        "lengthPlural=other": "{length} clip"
+      }
     }
   ],
   "clip_cache_purged": "Cache delle clip svuotata.",
@@ -39,7 +42,6 @@
   "command_disable_auto_mod": "Disattiva la moderazione automatica.",
   "command_purge_cache": "Elimina tutti i clip memorizzati nella cache.",
   "command_purge_history": "Elimina tutti i video visualizzati in precedenza.",
-  "connected": "Collegato",
   "cyan": "Ciano",
   "delete_history": "Elimina cronologia",
   "delete_history_confirm": [
@@ -53,7 +55,6 @@
     }
   ],
   "delete_label": "Eliminare",
-  "disconnected": "Disconnesso",
   "emerald": "Smeraldo",
   "error": "Errore",
   "experimental": "Sperimentale",
@@ -175,5 +176,8 @@
   "providers_for_integration": "Provider disponibili per questa integrazione. Quando abilitata, questa tipologia di contenuto verrà aggiunta alla coda non appena rilevata.",
   "application_settings_saved": "Impostazioni dell'applicazione salvate.",
   "commands": "Comandi",
-  "clip_detection": "Rilevamento clip"
+  "clip_detection": "Rilevamento clip",
+  "not_configured": "Non configurato",
+  "misconfigured": "Configurazione errata",
+  "healthy": "Salutare"
 }

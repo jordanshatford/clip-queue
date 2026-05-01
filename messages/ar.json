@@ -15,7 +15,10 @@
     {
       "declarations": ["input length", "local lengthPlural = length: plural"],
       "selectors": ["lengthPlural"],
-      "match": { "lengthPlural=one": "{length} clip", "lengthPlural=other": "{length} clips" }
+      "match": {
+        "lengthPlural=one": "{length} clip",
+        "lengthPlural=other": "{length} clips"
+      }
     }
   ],
   "clip_cache_purged": "تم مسح ذاكرة التخزين المؤقت للمقاطع.",
@@ -39,7 +42,6 @@
   "command_disable_auto_mod": "قم بتعطيل خاصية الإشراف التلقائي.",
   "command_purge_cache": "قم بمسح جميع المقاطع المخزنة مؤقتًا.",
   "command_purge_history": "حذف جميع المقاطع التي تمت مشاهدتها سابقاً.",
-  "connected": "متصل",
   "cyan": "سماوي",
   "delete_history": "حذف السجل",
   "delete_history_confirm": [
@@ -53,7 +55,6 @@
     }
   ],
   "delete_label": "يمسح",
-  "disconnected": "غير متصل",
   "emerald": "الزمرد",
   "error": "خطأ",
   "experimental": "تجريبي",
@@ -175,5 +176,8 @@
   "providers_for_integration": "مزودو الخدمة المتاحون لهذا التكامل. عند التفعيل، سيتم إضافة هذا النوع من المحتوى إلى قائمة الانتظار عند اكتشافه.",
   "application_settings_saved": "تم حفظ إعدادات التطبيق.",
   "commands": "الأوامر",
-  "clip_detection": "اكتشاف المقاطع"
+  "clip_detection": "اكتشاف المقاطع",
+  "not_configured": "غير مهيأ",
+  "misconfigured": "إعدادات خاطئة",
+  "healthy": "صحيح"
 }

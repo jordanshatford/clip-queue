@@ -15,7 +15,10 @@
     {
       "declarations": ["input length", "local lengthPlural = length: plural"],
       "selectors": ["lengthPlural"],
-      "match": { "lengthPlural=one": "{length} clip", "lengthPlural=other": "{length}クリップ" }
+      "match": {
+        "lengthPlural=one": "{length} clip",
+        "lengthPlural=other": "{length}クリップ"
+      }
     }
   ],
   "clip_cache_purged": "クリップキャッシュが削除されました。",
@@ -39,7 +42,6 @@
   "command_disable_auto_mod": "自動モデレーションを無効にします。",
   "command_purge_cache": "キャッシュされたクリップをすべて削除します。",
   "command_purge_history": "過去に視聴された動画クリップをすべて削除する。",
-  "connected": "接続済み",
   "cyan": "シアン",
   "delete_history": "履歴を削除",
   "delete_history_confirm": [
@@ -53,7 +55,6 @@
     }
   ],
   "delete_label": "消去",
-  "disconnected": "接続が切断されました",
   "emerald": "エメラルド",
   "error": "エラー",
   "experimental": "実験的",
@@ -175,5 +176,8 @@
   "providers_for_integration": "この連携に対応しているプロバイダー。有効にすると、このタイプのコンテンツが検出されたときにキューに追加されます。",
   "application_settings_saved": "アプリケーション設定が保存されました。",
   "commands": "コマンド",
-  "clip_detection": "クリップ検出"
+  "clip_detection": "クリップ検出",
+  "not_configured": "未設定",
+  "misconfigured": "設定ミス",
+  "healthy": "健康"
 }
