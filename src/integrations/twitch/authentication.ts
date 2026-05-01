@@ -2,9 +2,9 @@ import { useStorage } from '@vueuse/core'
 
 import { env } from '@/config'
 
-import type { UserDetails, IntegrationAuthentication } from '../common'
+import type { UserDetails, IntegrationAuthentication } from '../core'
 
-import { toStorageKey } from '../common/utils'
+import { toStorageKey } from '../core/utils'
 import { IntegrationID } from '../indentify'
 import { getUsers } from './core/api'
 import auth from './core/auth'

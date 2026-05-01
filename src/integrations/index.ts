@@ -1,8 +1,8 @@
-export type { Clip, PlayerFormat, IntegrationProvider, Integration } from './common'
+export type { Clip, PlayerFormat, IntegrationProvider, Integration } from './core'
 export { IntegrationID } from './indentify'
-export { toClipUUID } from './common'
+export { toClipUUID } from './core'
 
-import type { Integration } from './common'
+import type { Integration } from './core'
 
 import { kick } from './kick'
 import { twitch } from './twitch'

@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 
-import { IntegrationStatus } from '@/integrations/common/types'
+import { IntegrationStatus } from '@/integrations/core/types'
 
 import IntegrationStatusTag from '../IntegrationStatusTag.vue'
 

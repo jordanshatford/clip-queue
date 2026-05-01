@@ -55,6 +55,10 @@ export interface Clip {
    * The created at time of the clip.
    */
   createdAt?: string
+  /**
+   * Additional details a provider can add to the clip.
+   */
+  meta?: Record<string, unknown>
 }
 
 /**

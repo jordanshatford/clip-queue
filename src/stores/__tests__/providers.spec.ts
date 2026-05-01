@@ -1,7 +1,7 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { Clip, PlayerFormat } from '@/integrations/common/provider'
+import type { Clip, PlayerFormat } from '@/integrations/core/provider'
 import type { KickClip } from '@/integrations/kick'
 import type { TwitchClip, TwitchGame } from '@/integrations/twitch/core/types'
 

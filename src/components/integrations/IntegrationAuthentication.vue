@@ -9,7 +9,7 @@
 import Chip from 'primevue/chip'
 import Message from 'primevue/message'
 
-import type { IntegrationAuthentication } from '@/integrations/common'
+import type { IntegrationAuthentication } from '@/integrations/core'
 
 import { m } from '@/paraglide/messages'
 

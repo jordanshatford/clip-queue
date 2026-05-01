@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 
-import type { Integration } from '../common'
+import type { Integration } from '../core'
 
 import { IntegrationID } from '../indentify'
 import { KickClipsProvider } from './providers'

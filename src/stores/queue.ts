@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import type { Clip } from '@/integrations'
 
 import { IntegrationID } from '@/integrations'
-import { toClipUUID } from '@/integrations/common/utils'
+import { toClipUUID } from '@/integrations/core/utils'
 import { useLogger } from '@/stores/logger'
 import { useSettings } from '@/stores/settings'
 import { BasicClipList, ClipList } from '@/utils/clip-list'

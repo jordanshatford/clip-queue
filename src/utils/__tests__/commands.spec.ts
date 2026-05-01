@@ -1,7 +1,7 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { ClipSourceEvent, ClipSourceMessage } from '@/integrations/common'
+import type { ClipSourceEvent, ClipSourceMessage } from '@/integrations/core'
 
 import { IntegrationID } from '@/integrations'
 import { useProviders } from '@/stores/providers'

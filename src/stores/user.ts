@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { computed, ref, type Reactive } from 'vue'
 
-import type { IntegrationAuthentication } from '@/integrations/common'
+import type { IntegrationAuthentication } from '@/integrations/core'
 
 import { authentication } from '@/integrations/twitch'
 

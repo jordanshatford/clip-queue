@@ -1,14 +1,14 @@
 import { Client } from '@tmi.js/chat'
 import { ref } from 'vue'
 
-import { getAllURLsFromText } from '../../common'
+import { getAllURLsFromText } from '../../core'
 import {
   type IntegrationSource,
   type ClipSourceEventsMap,
   ClipSourceFeature,
-} from '../../common/source'
-import { EventEmitter } from '../../common/source'
-import { IntegrationStatus } from '../../common/types'
+} from '../../core/source'
+import { EventEmitter } from '../../core/source'
+import { IntegrationStatus } from '../../core/types'
 import { IntegrationID } from '../../indentify'
 
 const status = ref<IntegrationStatus>(IntegrationStatus.DISABLED)

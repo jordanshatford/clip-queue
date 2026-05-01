@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { IntegrationID } from '@/integrations'
-import { clipFromKick, clipFromTwitch } from '@/integrations/common/__tests__/mocks'
+import { clipFromKick, clipFromTwitch } from '@/integrations/core/__tests__/mocks'
 
 import { ClipList } from '../clip-list'
 

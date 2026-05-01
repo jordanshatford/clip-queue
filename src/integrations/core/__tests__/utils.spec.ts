@@ -12,7 +12,7 @@ import {
 } from '../utils'
 import { clipFromKick, clipFromTwitch } from './mocks'
 
-describe('integrations/common/utils', () => {
+describe('integrations/core/utils', () => {
   it.each([
     [IntegrationID.TWITCH, 'test', '__cqi_twitch_test'],
     [IntegrationID.KICK, 'test', '__cqi_kick_test'],

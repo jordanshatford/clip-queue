@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-import type { IntegrationSource } from '@/integrations/common'
+import type { IntegrationSource } from '@/integrations/core'
 
 import { chat as chatSource } from '@/integrations/twitch'
 import { useProviders } from '@/stores/providers'
