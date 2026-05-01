@@ -21,7 +21,7 @@ Clip Queue integrates into a users chat and queues clips submitted in chat by th
 - Support for multiple integrations:
   - [Twitch](https://www.twitch.tv/)
     - Authentication: `Twitch Authentication`.
-    - Providers: `Twitch Clips`.
+    - Providers: `Twitch Clips`, `Twitch Videos`.
     - Sources: `Twitch Chat`.
   - [Kick](https://kick.com/)
     - Authentication: `N/A`.

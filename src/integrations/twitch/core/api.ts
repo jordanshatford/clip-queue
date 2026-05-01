@@ -4,6 +4,7 @@ import type {
   TwitchPagedResponse,
   TwitchResponse,
   TwitchUser,
+  TwitchVideo,
 } from './types'
 
 import { toURLParams } from './utils'
@@ -21,6 +22,32 @@ export function toCommonHeaders(clientID: string, token: string): Record<string,
     'Client-ID': clientID,
     Authorization: `Bearer ${token}`,
   }
+}
+
+/**
+ * Get videos from Twitch.
+ * @param clientID - The client ID to use.
+ * @param token - The users Twitch token.
+ * @param ids - The vidoe IDs to fetch.
+ * @returns The videos.
+ * @throws Will throw an error if no video IDs are provided or the fetch fails.
+ */
+export async function getVideos(
+  clientID: string,
+  token: string,
+  ids: string[],
+): Promise<TwitchVideo[]> {
+  if (ids.length <= 0) {
+    throw new Error('Video IDs were not provided.')
+  }
+  const response = await fetch(`${BASE_URL}/videos?${toURLParams('id', ids)}`, {
+    headers: toCommonHeaders(clientID, token),
+  })
+  if (!response.ok) {
+    throw new Error(`Failed to fetch videos with IDs ${ids.join(' ')}: ${response.statusText}`)
+  }
+  const data: TwitchPagedResponse<TwitchVideo[]> = await response.json()
+  return data.data
 }
 
 /**

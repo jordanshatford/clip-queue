@@ -21,24 +21,6 @@ vi.mock('@/integrations/twitch/core/api.ts', async (importOriginal) => {
   }
 })
 
-vi.mock('@/integrations/twitch/core/utils.ts', async (importOriginal) => {
-  return {
-    ...(await importOriginal<typeof import('@/integrations/twitch/core/utils')>()),
-    getClipIdFromUrl: vi.fn<(url: string) => string | undefined>((url: string) => {
-      if (!url.includes('twitch')) {
-        return
-      }
-      try {
-        const uri = new URL(url)
-        const idStart = uri.pathname.lastIndexOf('/')
-        return uri.pathname.slice(idStart).split('?')[0]?.slice(1)
-      } catch {
-        return
-      }
-    }),
-  }
-})
-
 const provider = new TwitchClipProvider(() => '')
 
 describe('integrations/twitch/providers/clip', () => {

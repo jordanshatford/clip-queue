@@ -1,6 +1,6 @@
 import type { Clip } from '@/integrations'
 import type { KickCategory, KickChannel, KickClip } from '@/integrations/kick'
-import type { TwitchClip, TwitchGame, TwitchUser } from '@/integrations/twitch'
+import type { TwitchClip, TwitchGame, TwitchUser, TwitchVideo } from '@/integrations/twitch'
 
 import { IntegrationID } from '@/integrations'
 
@@ -70,6 +70,24 @@ export const mockTwitchClip: TwitchClip = {
   duration: 50,
 }
 
+export const mockTwitchVod: TwitchVideo = {
+  id: 'testvod',
+  user_id: 'testuser',
+  user_login: 'testuser',
+  user_name: 'testuser',
+  title: 'testvod',
+  description: 'testvoddescription',
+  created_at: '2024-02-22T08:47:27.000Z',
+  published_at: '2024-02-22T08:47:27.000Z',
+  url: 'https://twitch.tv/videos/testvod',
+  thumbnail_url: 'https://twitch.tv/testvod/thumbnail',
+  viewable: 'public',
+  view_count: 100,
+  language: 'english',
+  type: 'archive',
+  duration: '1h20m',
+}
+
 export const mockTwitchUser: TwitchUser = {
   id: 'testuser',
   login: 'testuser',
@@ -79,9 +97,7 @@ export const mockTwitchUser: TwitchUser = {
   description: 'This is a test user',
   profile_image_url: 'https://twitch.tv/testuser/profile_image',
   offline_image_url: 'https://twitch.tv/testuser/offline_image',
-  email: 'testuser@twitch.com',
   created_at: '2024-02-22T08:47:27.000Z',
-  view_count: 1000,
 }
 
 export const clipFromKick: Clip = {

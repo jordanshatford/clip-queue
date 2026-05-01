@@ -197,13 +197,73 @@ export interface TwitchClip {
 }
 
 /**
- * A Twitch pagination object.
+ * A Twitch video (VOD).
  */
-export interface TwitchPagination {
+export interface TwitchVideo {
   /**
-   * The cursor. This will not be present if there are no more pages.
+   * The ID of the video.
    */
-  cursor?: string
+  id: string
+  /**
+   * The ID of the user who created the video.
+   */
+  user_id: string
+  /**
+   * The name of the user who created the video.
+   */
+  user_login: string
+  /**
+   * The display name of the user who created the video.
+   */
+  user_name: string
+  /**
+   * The title of the video.
+   */
+  title: string
+  /**
+   * The description of the video.
+   */
+  description: string
+  /**
+   * The date when the video was created.
+   */
+  created_at: string
+  /**
+   * The date when the video was published.
+   */
+  published_at: string
+  /**
+   * The URL of the video.
+   */
+  url: string
+  /**
+   * The URL of the thumbnail of the video.
+   */
+  thumbnail_url: string
+  /**
+   * Whether the video is public or not.
+   */
+  viewable: 'public' | 'private'
+  /**
+   * The number of views of the video.
+   */
+  view_count: number
+  /**
+   * The language of the video.
+   */
+  language: string
+  /**
+   * The type of the video.
+   */
+  type: 'upload' | 'archive' | 'highlight'
+  /**
+   * The duration of the video, as formatted by Twitch.
+   */
+  duration: string
+  /**
+   * The ID of the stream this video belongs to.
+   */
+  stream_id?: string
 }
 
 /**

@@ -5,12 +5,14 @@ import type { Integration } from '../core'
 import { IntegrationID } from '../indentify'
 import { TwitchAuthentication } from './authentication'
 import { TwitchClipProvider } from './providers/clip'
+import { TwitchVodProvider } from './providers/vod'
 import { TwitchChatSource } from './sources/chat'
 
 export * from './core/types'
 
 export const authentication = reactive<TwitchAuthentication>(new TwitchAuthentication())
 export const clips = reactive(new TwitchClipProvider(() => authentication.token))
+export const vods = reactive(new TwitchVodProvider(() => authentication.token))
 export const chat = reactive(new TwitchChatSource())
 
 export const twitch: Integration = {
@@ -38,6 +40,6 @@ export const twitch: Integration = {
   `,
   isExperimental: false,
   authentication,
-  providers: [clips],
+  providers: [clips, vods],
   source: chat,
 }
