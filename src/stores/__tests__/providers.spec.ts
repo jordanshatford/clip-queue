@@ -15,12 +15,10 @@ import {
 
 import { useProviders } from '../providers'
 
-vi.mock('@/integrations/kick/core', async (importOriginal) => {
+vi.mock('@/integrations/kick/core/api', async (importOriginal) => {
   return {
-    default: {
-      ...(await importOriginal<typeof import('@/integrations/kick/core')>()),
-      getClip: vi.fn<(id: string) => KickClip>((id: string) => ({ ...mockKickClip, id })),
-    },
+    ...(await importOriginal<typeof import('@/integrations/kick/core/api')>()),
+    getClip: vi.fn<(id: string) => KickClip>((id: string) => ({ ...mockKickClip, id })),
   }
 })
 

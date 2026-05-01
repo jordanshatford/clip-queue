@@ -5,12 +5,10 @@ import type { KickClip } from '../../core/types'
 import { mockKickClip, mockTwitchClip } from '../../../core/__tests__/mocks'
 import { KickClipsProvider } from '../clip'
 
-vi.mock('@/integrations/kick/core/index.ts', async (importOriginal) => {
+vi.mock('@/integrations/kick/core/api', async (importOriginal) => {
   return {
-    default: {
-      ...(await importOriginal<typeof import('@/integrations/kick/core')>()),
-      getClip: vi.fn<(id: string) => KickClip>((id: string) => ({ ...mockKickClip, id })),
-    },
+    ...(await importOriginal<typeof import('@/integrations/kick/core/api')>()),
+    getClip: vi.fn<(id: string) => KickClip>((id: string) => ({ ...mockKickClip, id })),
   }
 })
 
@@ -47,6 +45,10 @@ describe('integrations/kick/providers/clip', () => {
     ['', false],
     [mockKickClip.clip_url, true],
     [mockTwitchClip.url, false],
+    ['https://kick.com/channel?clip=clip_ABC', true],
+    ['https://kick.com/channel/clip/clip_ABC', true],
+    ['https://kick.com/test?clip=clip_01HQ7ZWTEKKJP16Y34SDFF2SBC', true],
+    ['https://kick.com/test?somenonclipparam=123', false],
   ])('can detect clip urls it supports: (url: %s)', async (url: string, expected: boolean) => {
     expect(provider.hasClipSupport(url)).toEqual(expected)
   })

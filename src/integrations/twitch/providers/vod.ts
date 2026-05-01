@@ -98,6 +98,7 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
 }
 
 const VIDEO_PATH_SUFFIXS = ['/videos/', '/video/', '/v/']
+const VIDEO_TIMESTAMP_PARAM = 't'
 /**
  * Get a vod ID from a provided URL.
  * @param url - The URL of the vod.
@@ -125,7 +126,7 @@ function getVodIdAndTimestampFromUrl(url: string): [string | undefined, string |
     // Get the ID out of the URL. Always at the end of the URL.
     const idStart = uri.pathname.lastIndexOf('/')
     const id = uri.pathname.slice(idStart).split('?')[0]?.slice(1)
-    const timestamp = uri.searchParams.get('t')
+    const timestamp = uri.searchParams.get(VIDEO_TIMESTAMP_PARAM)
     return [id, timestamp ?? undefined]
   } catch {
     return [undefined, undefined]
