@@ -18,7 +18,7 @@ export const twitch: Integration = {
   name: 'Twitch',
   url: 'https://www.twitch.tv/',
   icon: `
-    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2400 2800" style="enable-background:new 0 0 2400 2800;" xml:space="preserve">
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2400 2800" xml:space="preserve">
       <title>Twitch</title>
       <style type="text/css">
         .st0{fill:#FFFFFF;}
