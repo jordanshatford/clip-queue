@@ -3,7 +3,7 @@ import { reactive } from 'vue'
 import type { Integration } from '../core'
 
 import { IntegrationID } from '../indentify'
-import { KickClipsProvider } from './providers'
+import { KickClipsProvider } from './providers/clip'
 
 export * from './core/types'
 

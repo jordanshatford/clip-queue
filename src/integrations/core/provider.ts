@@ -58,7 +58,7 @@ export interface Clip {
   /**
    * Additional details a provider can add to the clip.
    */
-  meta?: Record<string, unknown>
+  metadata?: Record<string, unknown>
 }
 
 /**
