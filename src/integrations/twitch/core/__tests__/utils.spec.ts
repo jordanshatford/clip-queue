@@ -16,6 +16,10 @@ describe('integrations/twitch/common/utils', () => {
       'https://clips.twitch.tv/FantasticQuaintWrenchPogChamp-seNiJaPPjYls0ID8',
       'FantasticQuaintWrenchPogChamp-seNiJaPPjYls0ID8',
     ],
+    [
+      'https://twitch.tv/clip/test/FantasticQuaintWrenchPogChamp-seNiJaPPjYls0ID8',
+      'FantasticQuaintWrenchPogChamp-seNiJaPPjYls0ID8',
+    ],
     ['', undefined],
     ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', undefined],
     ['https://m.twitch.tv/c/RockySteamyWalrusMoreCowbell-ZBrnUiZwQsENj3pi', undefined],
