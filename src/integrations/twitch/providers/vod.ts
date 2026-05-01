@@ -50,25 +50,25 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
       return this.cache[id]
     }
     try {
-      const clips = await getVideos(env.CLIENT_ID, await this.token(), [id])
-      const clip = clips[0]
-      if (!clip) {
+      const videos = await getVideos(env.CLIENT_ID, await this.token(), [id])
+      const video = videos[0]
+      if (!video) {
         throw new Error(`[${this.name}]: VOD not found for ID ${id}.`)
       }
-      let category = `Video (${clip.duration})`
+      let category = `Video (${video.duration})`
       if (timestamp) {
-        category = `Video (${clip.duration} at ${timestamp})`
+        category = `Video (${video.duration} at ${timestamp})`
       }
       const response: Clip = {
-        id: clip.id,
-        title: clip.title,
-        channel: clip.user_name,
-        creator: clip.user_name,
+        id: video.id,
+        title: video.title,
+        channel: video.user_name,
+        creator: video.user_name,
         category,
-        createdAt: clip.created_at,
+        createdAt: video.created_at,
         url,
-        embedUrl: `https://player.twitch.tv/?video=${clip.id}`,
-        thumbnailUrl: clip.thumbnail_url?.replace('%{width}x%{height}', '480x272'),
+        embedUrl: `https://player.twitch.tv/?video=${video.id}`,
+        thumbnailUrl: video.thumbnail_url?.replace('%{width}x%{height}', '480x272'),
         provider: this.id,
         submitters: [],
         metadata: {
@@ -115,10 +115,9 @@ function getVodIdAndTimestampFromUrl(url: string): [string | undefined, string |
 
     // Verify the formats of vod URLs provided by Twitch:
     //  1. https://www.twitch.tv/<CHANNEL>/v/<ID>
-    //  2. https://www.twitch.tv/<CHANNEL>/v/<ID>?t=<TIMESTAMP>
-    //  3. https://www.twitch.tv/<CHANNEL>/v/<ID>
-    //  4. https://www.twitch.tv/videos/<ID>
-    //  5. https://www.twitch.tv/video/<ID>
+    //  2. https://www.twitch.tv/<CHANNEL>/video/<ID>
+    //  3. https://www.twitch.tv/videos/<ID>
+    // Any of the above URLs can have a ?t=<TIMESTAMP> search parameter.
     if (!VIDEO_PATH_SUFFIXS.some((suffix) => uri.pathname.includes(suffix))) {
       return [undefined, undefined]
     }
