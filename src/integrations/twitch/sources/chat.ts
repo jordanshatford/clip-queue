@@ -7,10 +7,11 @@ import {
   type ClipSourceEventsMap,
   ClipSourceFeature,
 } from '../../common/source'
-import { ClipSourceStatus, EventEmitter } from '../../common/source'
+import { EventEmitter } from '../../common/source'
+import { IntegrationStatus } from '../../common/types'
 import { IntegrationID } from '../../indentify'
 
-const status = ref<ClipSourceStatus>(ClipSourceStatus.UNKNOWN)
+const status = ref<IntegrationStatus>(IntegrationStatus.DISABLED)
 
 /**
  * Twitch Chat Source.
@@ -37,7 +38,7 @@ export class TwitchChatSource
 
   public readonly isExperimental: boolean = false
 
-  public get status(): ClipSourceStatus {
+  public get status(): IntegrationStatus {
     return status.value
   }
 
@@ -48,7 +49,7 @@ export class TwitchChatSource
     return new Date().toISOString()
   }
 
-  protected handleStatusUpdate(s: ClipSourceStatus, timestamp?: string) {
+  protected handleStatusUpdate(s: IntegrationStatus, timestamp?: string) {
     status.value = s
     this.emit('status', {
       timestamp: timestamp ?? this.timestamp(),
@@ -64,7 +65,7 @@ export class TwitchChatSource
       source: this.id,
       data: error,
     })
-    this.handleStatusUpdate(ClipSourceStatus.ERROR, timestamp)
+    this.handleStatusUpdate(IntegrationStatus.ERROR, timestamp)
   }
 
   public constructor() {
@@ -72,7 +73,7 @@ export class TwitchChatSource
     this.chat.on('connect', async () => {
       const timestamp = this.timestamp()
       this.emit('connected', { timestamp, source: this.id, data: undefined })
-      this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
+      this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
       if (this.channel) {
         try {
           await this.chat.join(this.channel)
@@ -88,7 +89,7 @@ export class TwitchChatSource
         source: this.id,
         data: event.channel.login,
       })
-      this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
+      this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
     })
     this.chat.on('message', (event) => {
       if (event.user.isBot) {
@@ -106,7 +107,7 @@ export class TwitchChatSource
           urls: getAllURLsFromText(event.message.text),
         },
       })
-      this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
+      this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
     })
     this.chat.on('moderation', (event) => {
       switch (event.type) {
@@ -122,7 +123,7 @@ export class TwitchChatSource
               urls: getAllURLsFromText(event.message.text),
             },
           })
-          this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
+          this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
           break
         }
         case 'ban':
@@ -136,7 +137,7 @@ export class TwitchChatSource
               username: event.user.login,
             },
           })
-          this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
+          this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
           break
         }
         default: {
@@ -151,7 +152,7 @@ export class TwitchChatSource
         source: this.id,
         data: event.channel.login,
       })
-      this.handleStatusUpdate(ClipSourceStatus.CONNECTED, timestamp)
+      this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
     })
     this.chat.on('close', (event) => {
       const timestamp = this.timestamp()
@@ -160,12 +161,12 @@ export class TwitchChatSource
         source: this.id,
         data: event.reason,
       })
-      this.handleStatusUpdate(ClipSourceStatus.DISCONNECTED, timestamp)
+      this.handleStatusUpdate(IntegrationStatus.ERROR, timestamp)
     })
   }
 
   public async connect(channel: string) {
-    this.handleStatusUpdate(ClipSourceStatus.UNKNOWN)
+    this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
     try {
       this.channel = channel
       this.chat.connect()
@@ -175,10 +176,10 @@ export class TwitchChatSource
   }
 
   public async disconnect() {
-    if (this.status !== ClipSourceStatus.CONNECTED) {
+    if (this.status !== IntegrationStatus.HEALTHY) {
       return
     }
-    this.handleStatusUpdate(ClipSourceStatus.UNKNOWN)
+    this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
     try {
       if (this.channel) {
         await this.chat.part(this.channel)
@@ -190,7 +191,7 @@ export class TwitchChatSource
   }
 
   public async reconnect() {
-    this.handleStatusUpdate(ClipSourceStatus.UNKNOWN)
+    this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
     try {
       await this.chat.reconnect()
     } catch (e) {

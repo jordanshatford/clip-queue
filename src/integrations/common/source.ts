@@ -1,4 +1,5 @@
 import type { IntegrationID } from '../indentify'
+import type { IntegrationStatus } from './types'
 
 /**
  * A simple event emitter.
@@ -43,16 +44,6 @@ export class EventEmitter<
     }
     return false
   }
-}
-
-/**
- * Enumeration of clip source statuses.
- */
-export enum ClipSourceStatus {
-  CONNECTED = 'Connected',
-  DISCONNECTED = 'Disconnected',
-  ERROR = 'Error',
-  UNKNOWN = 'Unknown',
 }
 
 /**
@@ -165,7 +156,7 @@ export type ClipSourceEventsMap = {
    * Event emitted when the status of the source changes.
    * @param event.data - The new status of the source.
    */
-  status: (event: ClipSourceEvent<ClipSourceStatus>) => Promise<void> | void
+  status: (event: ClipSourceEvent<IntegrationStatus>) => Promise<void> | void
   /**
    * Event emitted when an error occurs.
    * @param event.data - The error that occurred.
@@ -202,7 +193,7 @@ export type IntegrationSource = {
   /**
    * The current status of the source.
    */
-  readonly status: ClipSourceStatus
+  readonly status: IntegrationStatus
   /**
    * Connect to a source with the provided channel.
    * @param channel - The channel to join.

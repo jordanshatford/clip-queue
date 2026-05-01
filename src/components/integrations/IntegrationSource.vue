@@ -14,7 +14,7 @@
       </Tag>
     </InputGroupAddon>
     <InputGroupAddon>
-      <IntegrationSourceStatus :status="source.status" />
+      <IntegrationStatusTag :status="source.status" />
     </InputGroupAddon>
     <InputGroupAddon>
       <i
@@ -28,7 +28,7 @@
     <Tag
       v-for="f of source.features"
       :key="f"
-      class="font-mono text-xs"
+      class="text-xs"
       severity="secondary"
       :value="featureTranslations[f]()"
     ></Tag>
@@ -47,7 +47,7 @@ import type { IntegrationSource } from '@/integrations/common/source'
 import { ClipSourceFeature } from '@/integrations/common/source'
 import { m } from '@/paraglide/messages'
 
-import IntegrationSourceStatus from './IntegrationSourceStatus.vue'
+import IntegrationStatusTag from './IntegrationStatusTag.vue'
 
 interface Props {
   source: IntegrationSource

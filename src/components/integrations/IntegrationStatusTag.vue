@@ -1,0 +1,60 @@
+<template>
+  <Tag
+    class="text-xs"
+    :icon="config.icon"
+    :severity="config.severity"
+    :value="config.label()"
+  ></Tag>
+</template>
+
+<script setup lang="ts">
+import Tag from 'primevue/tag'
+import { computed } from 'vue'
+
+import { IntegrationStatus } from '@/integrations/common/types'
+import { m } from '@/paraglide/messages'
+
+export interface Props {
+  status: IntegrationStatus
+}
+
+const { status } = defineProps<Props>()
+
+type TagProps = InstanceType<typeof Tag>['$props']
+
+type TagConfig = {
+  label: () => TagProps['value']
+  severity: TagProps['severity']
+  icon: TagProps['icon']
+}
+
+const STATUS_CONFIG: Record<IntegrationStatus, TagConfig> = {
+  [IntegrationStatus.ERROR]: {
+    label: m.error,
+    severity: 'danger',
+    icon: 'pi pi-exclamation-circle',
+  },
+  [IntegrationStatus.HEALTHY]: {
+    label: () => 'Healthy',
+    severity: 'success',
+    icon: 'pi pi-check-circle',
+  },
+  [IntegrationStatus.DISABLED]: {
+    label: () => 'Not configured',
+    severity: 'warn',
+    icon: 'pi pi-exclamation-triangle',
+  },
+  [IntegrationStatus.MISCONFIGURED]: {
+    label: () => 'Misconfigured',
+    severity: 'danger',
+    icon: 'pi pi-exclamation-circle',
+  },
+  [IntegrationStatus.UNKNOWN]: {
+    label: m.unknown,
+    severity: 'warn',
+    icon: 'pi pi-exclamation-triangle',
+  },
+}
+
+const config = computed(() => STATUS_CONFIG[status])
+</script>
