@@ -4,7 +4,7 @@ import { env } from '@/config'
 
 import type { UserDetails, IntegrationAuthentication } from '../core'
 
-import { toStorageKey } from '../core/utils'
+import { toStorageKey } from '../core'
 import { IntegrationID } from '../indentify'
 import { getUsers } from './core/api'
 import auth from './core/auth'

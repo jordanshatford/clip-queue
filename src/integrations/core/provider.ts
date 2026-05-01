@@ -1,6 +1,6 @@
-import { Cacheable } from '@/types/cacheable'
-
 import type { IntegrationID } from '../indentify'
+
+import { Cacheable } from './cacheable'
 
 /**
  * The format of the player.

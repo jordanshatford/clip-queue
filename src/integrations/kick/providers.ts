@@ -1,10 +1,8 @@
 import { useStorage } from '@vueuse/core'
 
-import { Cacheable } from '@/types/cacheable'
-
 import type { Clip, PlayerFormat, IntegrationProvider } from '../core'
 
-import { toStorageKey } from '../core/utils'
+import { toStorageKey, Cacheable } from '../core'
 import { IntegrationID } from '../indentify'
 import kick from './core'
 

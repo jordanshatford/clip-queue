@@ -6,6 +6,7 @@ import type { IntegrationProvider } from './provider'
 import type { IntegrationSource } from './source'
 
 export * from './authentication'
+export * from './cacheable'
 export * from './provider'
 export * from './source'
 export * from './types'
