@@ -1,5 +1,51 @@
 # clip-queue
 
+## 2.1.0
+
+### Minor Changes
+
+- feat: settings on navbar allows selecting sub setting page ([`0a00a5f`](https://github.com/jordanshatford/clip-queue/commit/0a00a5fbaf01f6fee02a64c0885ef165402585b0))
+
+- feat: add provider for twitch videos to integrations ([`af63580`](https://github.com/jordanshatford/clip-queue/commit/af63580b9c6fcff6776f62b37c291fd8bbd2a1e6))
+
+- feat: use common integration status enumeration ([`bee2957`](https://github.com/jordanshatford/clip-queue/commit/bee295791fdd6faf98fdf128eaeca2751c00d68c))
+
+- feat: allow providers to add optional metadata to clip ([`a41faff`](https://github.com/jordanshatford/clip-queue/commit/a41faffee8c827fc4126350af8a40dd9150127a8))
+
+- feat: make integrations page use expandable panels per integration ([`5e8437b`](https://github.com/jordanshatford/clip-queue/commit/5e8437b3803b7070223db1ee787d0c29087c29d0))
+
+- feat: display queue status and number of items in tab ([`1a56776`](https://github.com/jordanshatford/clip-queue/commit/1a567760414ece67a33f6c579f91efe23dc9ab7a))
+
+- feat: allow integration source to specify the features it provides ([`f458b8f`](https://github.com/jordanshatford/clip-queue/commit/f458b8fadc78dcfb6f9e370f4351208a9c1c4b53))
+
+- feat: use composable for settings form handling ([`9f0eaf4`](https://github.com/jordanshatford/clip-queue/commit/9f0eaf45de62b6bcd34762d84f1c16c297517d34))
+
+### Patch Changes
+
+- fix: remove deprecated enable background from twitch svg ([`75d1be1`](https://github.com/jordanshatford/clip-queue/commit/75d1be18cf9bb6c7e065bb1784b8c02b6968995c))
+
+- fix: add missing translations for integration status ([`64b9ffe`](https://github.com/jordanshatford/clip-queue/commit/64b9ffe7f8eb7869cf2c0a19c1c1f817556a5576))
+
+- fix: navbar layout on mobile devices ([`f7bb4ff`](https://github.com/jordanshatford/clip-queue/commit/f7bb4ff132aa8c5178dabf8e8f3c23a047d8b41a))
+
+- fix: settings tabs on mobile device by using scrollable tabs ([`3ec992f`](https://github.com/jordanshatford/clip-queue/commit/3ec992fbad5edccb790c2b8154a6033dba2e7630))
+
+- fix: update translations using inlang cli ([`1058036`](https://github.com/jordanshatford/clip-queue/commit/1058036480b31b319e7cba9010fd157fdaf3d623))
+
+- fix: display in integrations page if source is experimental ([`bd8629b`](https://github.com/jordanshatford/clip-queue/commit/bd8629bbefbf394b1a462ef2721a30a10323cd7a))
+
+- fix: do not remove clip from queue if thumbnail cannot be loaded ([`4aa5e2d`](https://github.com/jordanshatford/clip-queue/commit/4aa5e2dd654a873e3978e0a53c38651c4861dd31))
+
+- fix: add missing chinese translation ([`d26b5ec`](https://github.com/jordanshatford/clip-queue/commit/d26b5ecfcb88f6119367149ffb691e58c8ff2321))
+
+- fix: show correct provider name in history table ([`8d420a6`](https://github.com/jordanshatford/clip-queue/commit/8d420a6f6642ef6e09b7673e59ce892595d9c73e))
+
+- fix: make navbar sticky to the top ([`b566796`](https://github.com/jordanshatford/clip-queue/commit/b5667965effaf08e9d7e9686421b4473b199eaf9))
+
+- fix: always fetch latest user details from twitch ([`9b23176`](https://github.com/jordanshatford/clip-queue/commit/9b2317669b87101c269d313864080e6374c98f05))
+
+- fix: unify all settings card styling and size ([`e7acd8f`](https://github.com/jordanshatford/clip-queue/commit/e7acd8f38c0619a455b9e5cddfa6b7033a02f7c6))
+
 ## 2.0.0
 
 ### Major Changes
