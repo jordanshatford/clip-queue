@@ -6,43 +6,41 @@ updates:
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: 'weekly'
-    assignees:
-      - 'jordanshatford'
-    groups:
-      github-actions:
-        patterns:
-          - '*'
+      interval: 'daily'
 
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
-      interval: 'weekly'
-    assignees:
-      - 'jordanshatford'
+      interval: 'daily'
     groups:
-      npm:
+      commitlint:
         patterns:
-          - '*'
+          - '@commitlint/*'
+      eslint:
+        patterns:
+          - 'eslint'
+          - 'eslint-*'
+          - '*/eslint-*'
+          - 'typescript-eslint'
+      vite:
+        patterns:
+          - 'vite'
+          - 'vite-*'
+          - '@vitejs/*'
+          - 'vitest'
+          - '@vitest/*'
+      vue:
+        patterns:
+          - 'vue'
+          - 'vue-*'
+          - '@vue/*'
 
   - package-ecosystem: 'docker'
     directory: '/'
     schedule:
-      interval: 'weekly'
-    assignees:
-      - 'jordanshatford'
-    groups:
-      docker:
-        patterns:
-          - '*'
+      interval: 'daily'
 
   - package-ecosystem: 'docker-compose'
     directory: '/'
     schedule:
-      interval: 'weekly'
-    assignees:
-      - 'jordanshatford'
-    groups:
-      docker:
-        patterns:
-          - '*'
+      interval: 'daily'
