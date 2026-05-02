@@ -24,6 +24,15 @@ describe('integrations/kick/providers/clip', () => {
     expect(provider.isExperimental).toEqual(false)
   })
 
+  it('can be enabled and disabled', () => {
+    provider.isEnabled = true
+    expect(provider.isEnabled).toEqual(true)
+    provider.isEnabled = false
+    expect(provider.isEnabled).toEqual(false)
+    provider.isEnabled = true
+    expect(provider.isEnabled).toEqual(true)
+  })
+
   it('gets the player format of the clip', () => {
     expect(provider.getPlayerFormat()).toEqual('video')
   })

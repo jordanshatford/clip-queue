@@ -28,6 +28,15 @@ describe('integrations/twitch/providers/vod', () => {
     expect(provider.isExperimental).toEqual(false)
   })
 
+  it('can be enabled and disabled', () => {
+    provider.isEnabled = true
+    expect(provider.isEnabled).toEqual(true)
+    provider.isEnabled = false
+    expect(provider.isEnabled).toEqual(false)
+    provider.isEnabled = true
+    expect(provider.isEnabled).toEqual(true)
+  })
+
   it('gets the player format of the vod', () => {
     expect(provider.getPlayerFormat()).toEqual('iframe')
   })

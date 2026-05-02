@@ -20,13 +20,10 @@
         <p class="line-clamp-1">
           {{ m.submitter_name({ name: clip.submitters[0] ?? '' }) }}
         </p>
-        <p class="line-clamp-1">
-          {{ m.creator_name({ name: clip.creator ?? m.unknown() }) }}
-        </p>
       </div>
     </template>
     <template #footer>
-      <div class="flex justify-between gap-2">
+      <div class="flex justify-between gap-2 pt-1">
         <Button
           class="grow"
           icon="pi pi-play"

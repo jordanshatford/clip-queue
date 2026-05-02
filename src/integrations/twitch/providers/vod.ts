@@ -63,7 +63,6 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
         id: video.id,
         title: video.title,
         channel: video.user_name,
-        creator: video.user_name,
         category,
         createdAt: video.created_at,
         url,

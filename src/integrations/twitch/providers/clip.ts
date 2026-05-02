@@ -59,7 +59,6 @@ export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationPr
         id: clip.id,
         title: clip.title,
         channel: clip.broadcaster_name,
-        creator: clip.creator_name,
         category: games[0]?.name,
         createdAt: clip.created_at,
         url,
