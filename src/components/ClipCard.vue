@@ -2,7 +2,7 @@
   <Card class="max-w-2xs shrink-0 overflow-hidden text-left">
     <template #header>
       <div class="relative">
-        <img class="aspect-video w-full" :alt="clip.title" :src="clip.thumbnailUrl" />
+        <ClipThumbnail :src="clip.thumbnailUrl" :alt="clip.title" />
         <!-- eslint-disable-next-line vue/no-v-html -->
         <div v-if="svg" class="absolute top-2 right-2 rounded bg-black/50 p-1.5">
           <svg class="size-5" v-html="svg"></svg>
@@ -56,6 +56,8 @@ import type { Clip } from '@/integrations'
 
 import { m } from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'
+
+import ClipThumbnail from './ClipThumbnail.vue'
 
 export interface Props {
   clip: Clip

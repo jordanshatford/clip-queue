@@ -47,12 +47,7 @@
     <Column field="title" :header="m.info()" sortable :sort-field="(data: Clip) => data.title">
       <template #body="{ data }: { data: Clip }">
         <div class="flex items-center">
-          <img
-            class="hidden aspect-video w-24 rounded-lg sm:block"
-            :src="data.thumbnailUrl"
-            :alt="data.title"
-            @error="queue.removeFromHistory(data)"
-          />
+          <ClipThumbnail class="hidden w-24 sm:block" :src="data.thumbnailUrl" :alt="data.title" />
           <div class="text-left text-sm sm:ml-3">
             <p class="font-normal">
               {{ data.title }}
@@ -104,6 +99,7 @@ import { computed, ref } from 'vue'
 
 import type { Clip } from '@/integrations'
 
+import ClipThumbnail from '@/components/ClipThumbnail.vue'
 import ProviderName from '@/components/ProviderName.vue'
 import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
