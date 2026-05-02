@@ -3,8 +3,7 @@
     <template #header>
       <div class="flex items-center justify-between gap-2">
         <div class="flex items-center gap-2">
-          <!-- eslint-disable-next-line vue/no-v-html -->
-          <svg v-if="integration.icon" class="size-5" v-html="integration.icon"></svg>
+          <IntegrationIcon class="size-5" :id="integration.id" />
           {{ integration.name }}
         </div>
         <div class="flex items-center gap-1">
@@ -45,6 +44,7 @@ import type { Integration } from '@/integrations'
 import { m } from '@/paraglide/messages'
 
 import IntegrationAuthentication from './IntegrationAuthentication.vue'
+import IntegrationIcon from './IntegrationIcon.vue'
 import IntegrationProviders from './IntegrationProviders.vue'
 import IntegrationSource from './IntegrationSource.vue'
 

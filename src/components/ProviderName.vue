@@ -1,8 +1,7 @@
 <template>
   <div class="flex items-center gap-2">
     <div class="h-5">
-      <!-- eslint-disable-next-line vue/no-v-html -->
-      <svg v-if="svg" class="size-5" v-html="svg"></svg>
+      <IntegrationIcon class="size-5" :id="provider" />
     </div>
     <div>{{ name }}</div>
     <i
@@ -18,6 +17,7 @@ import { computed } from 'vue'
 
 import type { IntegrationID } from '@/integrations'
 
+import IntegrationIcon from '@/components/integrations/IntegrationIcon.vue'
 import { m } from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'
 
@@ -29,6 +29,5 @@ const { provider } = defineProps<Props>()
 
 const providers = useProviders()
 
-const svg = computed(() => providers.icon(provider))
 const name = computed(() => providers.name(provider))
 </script>

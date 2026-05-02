@@ -3,9 +3,8 @@
     <template #header>
       <div class="relative">
         <ClipThumbnail :src="clip.thumbnailUrl" :alt="clip.title" />
-        <!-- eslint-disable-next-line vue/no-v-html -->
-        <div v-if="svg" class="absolute top-2 right-2 rounded bg-black/50 p-1.5">
-          <svg class="size-5" v-html="svg"></svg>
+        <div class="absolute top-2 right-2 rounded bg-black/50 p-1.5">
+          <IntegrationIcon class="size-5" :id="clip.provider" />
         </div>
       </div>
     </template>
@@ -54,8 +53,8 @@ import { computed } from 'vue'
 
 import type { Clip } from '@/integrations'
 
+import IntegrationIcon from '@/components/integrations/IntegrationIcon.vue'
 import { m } from '@/paraglide/messages'
-import { useProviders } from '@/stores/providers'
 
 import ClipThumbnail from './ClipThumbnail.vue'
 
@@ -65,16 +64,12 @@ export interface Props {
 
 const { clip } = defineProps<Props>()
 
-const providers = useProviders()
-
 const subtitle = computed(() => {
   if (clip.category) {
     return `${clip.channel} - ${clip.category}`
   }
   return clip.channel
 })
-
-const svg = computed(() => providers.icon(clip.provider))
 
 const emit = defineEmits<{
   (e: 'play'): void
