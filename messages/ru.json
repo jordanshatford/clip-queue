@@ -142,8 +142,6 @@
   "viva": "Вива",
   "yellow": "Желтый",
   "zinc": "Цинк",
-  "creator_name": "Создатель: {name}",
-  "creator": "Создатель",
   "logs_colon": "Журналы:",
   "clear_logs": "Очистить журналы",
   "clear_logs_confirm": [

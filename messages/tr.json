@@ -142,8 +142,6 @@
   "viva": "Viva",
   "yellow": "Sarı",
   "zinc": "Çinko",
-  "creator_name": "Oluşturan: {name}",
-  "creator": "Yaratıcı",
   "logs_colon": "Günlükler:",
   "clear_logs": "Günlükleri Temizle",
   "clear_logs_confirm": [

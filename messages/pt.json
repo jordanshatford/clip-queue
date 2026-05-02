@@ -142,8 +142,6 @@
   "viva": "Viva",
   "yellow": "Amarelo",
   "zinc": "Zinco",
-  "creator_name": "Criador: {name}",
-  "creator": "Criador",
   "logs_colon": "Registros:",
   "clear_logs": "Limpar registros",
   "clear_logs_confirm": [

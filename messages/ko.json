@@ -142,8 +142,6 @@
   "viva": "만세",
   "yellow": "노란색",
   "zinc": "아연",
-  "creator_name": "생성자: {name}",
-  "creator": "창조자",
   "logs_colon": "로그:",
   "clear_logs": "로그 삭제",
   "clear_logs_confirm": [

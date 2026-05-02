@@ -142,8 +142,6 @@
   "viva": "Viva",
   "yellow": "Gelb",
   "zinc": "Zink",
-  "creator_name": "Ersteller: {name}",
-  "creator": "Schöpfer",
   "logs_colon": "Protokolle:",
   "clear_logs": "Protokolle löschen",
   "clear_logs_confirm": [

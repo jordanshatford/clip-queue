@@ -142,8 +142,6 @@
   "viva": "Vive",
   "yellow": "Jaune",
   "zinc": "Zinc",
-  "creator_name": "Créateur : {name}",
-  "creator": "Créateur",
   "logs_colon": "Journaux :",
   "clear_logs": "Effacer les journaux",
   "clear_logs_confirm": [
