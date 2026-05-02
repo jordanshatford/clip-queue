@@ -27,13 +27,11 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
     isEnabled.value = value
   }
 
-  private token: () => string | Promise<string> = () => ''
+  private token: () => string | Promise<string>
 
-  public constructor(token?: () => string | Promise<string>) {
+  public constructor(token: () => string | Promise<string>) {
     super()
-    if (token) {
-      this.token = token
-    }
+    this.token = token
   }
 
   public hasClipSupport(url: string): boolean {
