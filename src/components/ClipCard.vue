@@ -18,6 +18,12 @@
       <div class="text-xs text-surface-400">
         <p class="line-clamp-1">
           {{ m.submitter_name({ name: clip.submitters[0] ?? '' }) }}
+          <Badge
+            v-if="totalSubmitters"
+            :value="totalSubmitters"
+            severity="secondary"
+            size="small"
+          ></Badge>
         </p>
       </div>
     </template>
@@ -47,6 +53,7 @@
 </template>
 
 <script setup lang="ts">
+import Badge from 'primevue/badge'
 import Button from 'primevue/button'
 import Card from 'primevue/card'
 import { computed } from 'vue'
@@ -69,6 +76,13 @@ const subtitle = computed(() => {
     return `${clip.channel} - ${clip.category}`
   }
   return clip.channel
+})
+
+const totalSubmitters = computed((): string | undefined => {
+  if (clip.submitters.length < 2) {
+    return
+  }
+  return `${clip.submitters.length > 9999 ? '9999+' : clip.submitters.length}`
 })
 
 const emit = defineEmits<{
