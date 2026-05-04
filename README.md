@@ -24,9 +24,9 @@ Clip Queue integrates into a users chat and queues clips submitted in chat by th
     - Providers: `Twitch Clips`, `Twitch Videos`.
     - Sources: `Twitch Chat`.
   - [Kick](https://kick.com/)
-    - Authentication: `N/A`.
     - Providers: `Kick Clips`, `Kick Videos`.
-    - Sources: `N/A`.
+  - [YouTube](https://www.youtube.com/)
+    - Providers: `YouTube Shorts`, `YouTube Videos`.
 - Chat commands available to moderators and broadcasters.
 - Automatic moderation and clip removal.
 - Settings customization to personalize for your needs.
