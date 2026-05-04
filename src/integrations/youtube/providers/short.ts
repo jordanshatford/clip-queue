@@ -17,7 +17,7 @@ export class YouTubeShortProvider extends Cacheable<Clip> implements Integration
   public readonly name: string = 'YouTube Shorts'
   public readonly isExperimental: boolean = false
 
-  public get isEnabled() {
+  public get isEnabled(): boolean {
     return isEnabled.value
   }
 

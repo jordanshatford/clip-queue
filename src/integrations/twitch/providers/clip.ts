@@ -19,7 +19,7 @@ export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationPr
   public readonly name: string = 'Twitch Clips'
   public readonly isExperimental: boolean = false
 
-  public get isEnabled() {
+  public get isEnabled(): boolean {
     return isEnabled.value
   }
 

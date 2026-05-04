@@ -17,11 +17,11 @@ export class TwitchChatSource
 {
   public readonly id: IntegrationID = IntegrationID.TWITCH_CHAT
 
-  public get name() {
+  public get name(): string {
     return `twitch.tv/${this.channel}/chat`
   }
 
-  public get url() {
+  public get url(): string {
     return `https://www.twitch.tv/${this.channel}/chat`
   }
 
@@ -40,11 +40,11 @@ export class TwitchChatSource
   private channel?: string
   private chat = new Client({ token: undefined, channels: [] })
 
-  private timestamp() {
+  private timestamp(): string {
     return new Date().toISOString()
   }
 
-  protected handleStatusUpdate(s: IntegrationStatus, timestamp?: string) {
+  protected handleStatusUpdate(s: IntegrationStatus, timestamp?: string): void {
     status.value = s
     this.emit('status', {
       timestamp: timestamp ?? this.timestamp(),
@@ -53,7 +53,7 @@ export class TwitchChatSource
     })
   }
 
-  protected handleError(error: unknown) {
+  protected handleError(error: unknown): void {
     const timestamp = this.timestamp()
     this.emit('error', {
       timestamp,
@@ -160,7 +160,7 @@ export class TwitchChatSource
     })
   }
 
-  public async connect(channel: string) {
+  public async connect(channel: string): Promise<void> {
     this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
     try {
       this.channel = channel
@@ -170,7 +170,7 @@ export class TwitchChatSource
     }
   }
 
-  public async disconnect() {
+  public async disconnect(): Promise<void> {
     if (this.status !== IntegrationStatus.HEALTHY) {
       return
     }
@@ -185,7 +185,7 @@ export class TwitchChatSource
     }
   }
 
-  public async reconnect() {
+  public async reconnect(): Promise<void> {
     this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
     try {
       await this.chat.reconnect()

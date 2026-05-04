@@ -17,7 +17,7 @@ export class KickVodProvider extends Cacheable<Clip> implements IntegrationProvi
   public readonly name: string = 'Kick Videos'
   public readonly isExperimental: boolean = false
 
-  public get isEnabled() {
+  public get isEnabled(): boolean {
     return isEnabled.value
   }
 
