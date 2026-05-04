@@ -1,5 +1,7 @@
 import type { KickClip, KickVideo } from './types'
 
+const BASE_URL = 'https://kick.com/api'
+
 /**
  * Get a Kick clip by ID.
  * @param id - The Kick clip ID.
@@ -10,7 +12,7 @@ export async function getClip(id: string): Promise<KickClip> {
   if (id.length <= 0) {
     throw new Error('Clip ID was not provided.')
   }
-  const response = await fetch(`https://kick.com/api/v2/clips/${id}`)
+  const response = await fetch(`${BASE_URL}/v2/clips/${id}`)
   if (!response.ok) {
     throw new Error(`Failed to fetch clip with ID ${id}: ${response.statusText}.`)
   }
@@ -28,7 +30,7 @@ export async function getVideo(id: string): Promise<KickVideo> {
   if (id.length <= 0) {
     throw new Error('Video ID was not provided.')
   }
-  const response = await fetch(`https://kick.com/api/v1/video/${id}`)
+  const response = await fetch(`${BASE_URL}/v1/video/${id}`)
   if (!response.ok) {
     throw new Error(`Failed to fetch video with ID ${id}: ${response.statusText}.`)
   }
