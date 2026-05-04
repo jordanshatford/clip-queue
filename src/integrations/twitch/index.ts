@@ -39,6 +39,11 @@ export const twitch: Integration = {
     </svg>
   `,
   isExperimental: false,
+  // NOTE: currently Twitch cannot be disabled as we rely on it for authentication and chat.
+  get isEnabled(): boolean {
+    return true
+  },
+  set isEnabled(_: boolean) {},
   authentication,
   providers: [clips, vods],
   source: chat,

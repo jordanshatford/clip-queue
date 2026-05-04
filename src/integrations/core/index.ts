@@ -37,6 +37,11 @@ export interface Integration {
    */
   readonly isExperimental: boolean
   /**
+   * If the integration is enabled. If it is not enabled, then any providers, source, or
+   * authentication it has will not be used.
+   */
+  isEnabled: boolean
+  /**
    * The ability to authenticate with this integration. Only defined if this integration can
    * be used to get authentication details required for other parts of the integration to
    * function.

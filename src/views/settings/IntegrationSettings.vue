@@ -1,6 +1,6 @@
 <template>
   <div v-for="integration of integrations" :key="integration.id" class="mb-2">
-    <IntegrationCard :integration="integration" />
+    <IntegrationCard :integration="integration" v-model:enabled="integration.isEnabled" />
   </div>
 </template>
 

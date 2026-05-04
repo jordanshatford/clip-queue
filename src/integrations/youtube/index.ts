@@ -1,12 +1,14 @@
+import { useStorage } from '@vueuse/core'
 import { reactive } from 'vue'
 
-import type { Integration } from '../core'
-
+import { toStorageKey, type Integration } from '../core'
 import { IntegrationID } from '../indentify'
 import { YouTubeShortProvider } from './providers/short'
 import { YouTubeVideoProvider } from './providers/video'
 
 export * from './core/types'
+
+const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.YOUTUBE, 'enabled'), true)
 
 const shorts = reactive(new YouTubeShortProvider())
 const videos = reactive(new YouTubeVideoProvider())
@@ -22,5 +24,11 @@ export const youtube: Integration = {
     </svg>
   `,
   isExperimental: false,
+  get isEnabled(): boolean {
+    return isEnabled.value
+  },
+  set isEnabled(value: boolean) {
+    isEnabled.value = value
+  },
   providers: [shorts, videos],
 }

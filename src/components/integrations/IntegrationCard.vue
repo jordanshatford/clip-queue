@@ -1,10 +1,11 @@
 <template>
-  <Panel toggleable collapsed class="mx-auto max-w-2xl">
+  <Panel :collapsed="!integration.isEnabled" class="mx-auto max-w-2xl">
     <template #header>
-      <div class="flex items-center justify-between gap-2">
+      <div class="flex w-full items-center justify-between gap-2">
         <div class="flex items-center gap-2">
           <IntegrationIcon class="size-5" :id="integration.id" />
           {{ integration.name }}
+          <Tag class="font-mono text-xs" severity="secondary" :value="integration.id"></Tag>
         </div>
         <div class="flex items-center gap-1">
           <Tag
@@ -16,6 +17,14 @@
           >
           </Tag>
         </div>
+        <!-- TODO(jordan): currently you cannot disable twitch -->
+        <ToggleSwitch
+          class="ml-auto"
+          v-if="integration.id !== IntegrationID.TWITCH"
+          v-model="isEnabled"
+          :input-id="integration.id"
+          size="small"
+        />
       </div>
     </template>
     <div class="flex flex-col gap-2 text-left">
@@ -38,9 +47,9 @@
 import Divider from 'primevue/divider'
 import Panel from 'primevue/panel'
 import Tag from 'primevue/tag'
+import ToggleSwitch from 'primevue/toggleswitch'
 
-import type { Integration } from '@/integrations'
-
+import { IntegrationID, type Integration } from '@/integrations'
 import { m } from '@/paraglide/messages'
 
 import IntegrationAuthentication from './IntegrationAuthentication.vue'
@@ -53,4 +62,5 @@ interface Props {
 }
 
 const { integration } = defineProps<Props>()
+const isEnabled = defineModel<boolean>('enabled')
 </script>

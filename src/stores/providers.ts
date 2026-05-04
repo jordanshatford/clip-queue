@@ -10,7 +10,7 @@ export const useProviders = defineStore('providers', () => {
   const logger = useLogger()
 
   const providers = computed((): Reactive<IntegrationProvider>[] =>
-    integrations.flatMap((i) => i.providers),
+    integrations.filter((i) => i.isEnabled).flatMap((i) => i.providers),
   )
 
   const provider = computed(() => {
