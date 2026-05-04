@@ -26,12 +26,12 @@ export class KickVodProvider extends Cacheable<Clip> implements IntegrationProvi
   }
 
   public hasClipSupport(url: string): boolean {
-    const [id] = getVodIdAndTimestampFromUrl(url)
+    const { id } = getVodIdAndTimestampFromUrl(url)
     return id !== undefined
   }
 
   public async getClip(url: string): Promise<Clip> {
-    const [id, timestamp] = getVodIdAndTimestampFromUrl(url)
+    const { id, timestamp } = getVodIdAndTimestampFromUrl(url)
     if (!id) {
       throw new Error(`[${this.name}]: Invalid VOD URL (${url}).`)
     }
@@ -95,29 +95,29 @@ const VIDEO_TIMESTAMP_PARAM = 't'
  * @param url - The URL of the vod.
  * @returns The vod ID or undefined if the URL is not valid.
  */
-function getVodIdAndTimestampFromUrl(url: string): [string | undefined, string | undefined] {
+function getVodIdAndTimestampFromUrl(url: string): { id?: string; timestamp?: string } {
   try {
     const uri = new URL(url)
 
     // Only accept valid Kick URLs.
     if (!isKickURL(uri)) {
-      return [undefined, undefined]
+      return {}
     }
 
     // Verify the formats of vod URLs provided by Kick:
     //  1. https://www.kick.com/<CHANNEL>/videos/<ID>
     //  2. https://www.kick.com/<CHANNEL>/videos/<ID>?t=<TIMESTAMP>
     if (!VIDEO_PATH_SUFFIXS.some((suffix) => uri.pathname.includes(suffix))) {
-      return [undefined, undefined]
+      return {}
     }
 
     // Get the ID out of the URL. Always at the end of the URL.
     const idStart = uri.pathname.lastIndexOf('/')
     const id = uri.pathname.slice(idStart).split('?')[0]?.slice(1)
     const timestamp = uri.searchParams.get(VIDEO_TIMESTAMP_PARAM)
-    return [id, timestamp ?? undefined]
+    return { id, timestamp: timestamp ?? undefined }
   } catch {
-    return [undefined, undefined]
+    return {}
   }
 }
 
