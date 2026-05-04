@@ -1,7 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { mockTwitchClip, mockTwitchGame, mockTwitchUser } from '../../../core/__tests__/mocks'
-import { getClips, getGames, getUsers, toCommonHeaders } from '../api'
+import {
+  mockTwitchClip,
+  mockTwitchGame,
+  mockTwitchUser,
+  mockTwitchVod,
+} from '../../../core/__tests__/mocks'
+import { getClips, getGames, getUsers, getVideos, toCommonHeaders } from '../api'
 
 describe('integrations/twitch/core/api', () => {
   beforeEach(() => {
@@ -17,6 +22,8 @@ describe('integrations/twitch/core/api', () => {
             data = [mockTwitchGame]
           } else if (url.toString().includes('users')) {
             data = [mockTwitchUser]
+          } else if (url.toString().includes('videos')) {
+            data = [mockTwitchVod]
           }
           return Promise.resolve({ data })
         },
@@ -49,6 +56,19 @@ describe('integrations/twitch/core/api', () => {
 
   it('throws if no game IDs are passed', async () => {
     await expect(getGames('', '', [])).rejects.toThrow('Game IDs were not provided.')
+  })
+
+  it('gets a twitch videos from twitch api', async () => {
+    const videos = await getVideos('', '', ['testvod'])
+    const clipInfo = videos[0]
+    expect(clipInfo).toBeDefined()
+    expect(clipInfo?.id).toEqual('testvod')
+    expect(clipInfo?.title).toEqual('testvod')
+    expect(fetch).toHaveBeenCalledTimes(1)
+  })
+
+  it('throws if no video IDs are passed', async () => {
+    await expect(getVideos('', '', [])).rejects.toThrow('Video IDs were not provided.')
   })
 
   it('gets a twitch user from twitch api', async () => {
