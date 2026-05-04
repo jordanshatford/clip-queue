@@ -12,9 +12,16 @@ export interface Props {
   source: string | undefined
   autoplay?: boolean
   title?: string
+  start?: number
 }
 
-const { poster, source, autoplay = true, title = undefined } = defineProps<Props>()
+const {
+  poster,
+  source,
+  autoplay = true,
+  title = undefined,
+  start = undefined,
+} = defineProps<Props>()
 
 const videoElement = useTemplateRef<HTMLVideoElement>('videoElement')
 
@@ -35,7 +42,11 @@ onMounted(() => {
         poster,
         sources: [source],
       },
-      () => {},
+      () => {
+        if (start) {
+          player?.currentTime(start)
+        }
+      },
     )
   }
 })

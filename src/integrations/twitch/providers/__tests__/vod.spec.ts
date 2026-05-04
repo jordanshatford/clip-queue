@@ -37,26 +37,26 @@ describe('integrations/twitch/providers/vod', () => {
     expect(provider.isEnabled).toEqual(true)
   })
 
-  it('gets the player format of the vod', () => {
-    expect(provider.getPlayerFormat()).toEqual('iframe')
+  it('gets the player config of the vod', async () => {
+    const clip = await provider.getClip(mockTwitchVod.url)
+    expect(clip).toBeDefined()
+    expect(provider.getPlayerConfig(clip)).toEqual({
+      type: 'iframe',
+      src: `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`,
+      title: clip.title,
+    })
   })
 
-  it('gets the player source of the vod', async () => {
-    const video = await provider.getClip(mockTwitchVod.url)
-    expect(video).toBeDefined()
-    expect(provider.getPlayerSource(video)).toEqual(
-      `${video.embedUrl}&autoplay=true&parent=${window.location.hostname}`,
-    )
-  })
-
-  it('gets the player source of the vod if it has a timestamp', async () => {
+  it('gets the player config of the vod with a timestamp', async () => {
     const time = '1h20m5s'
     const url = `${mockTwitchVod.url}?t=${time}`
-    const video = await provider.getClip(url)
-    expect(video).toBeDefined()
-    expect(provider.getPlayerSource(video)).toEqual(
-      `${video.embedUrl}&autoplay=true&parent=${window.location.hostname}&time=${time}`,
-    )
+    const clip = await provider.getClip(url)
+    expect(clip).toBeDefined()
+    expect(provider.getPlayerConfig(clip)).toEqual({
+      type: 'iframe',
+      src: `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}&time=${time}`,
+      title: clip.title,
+    })
   })
 
   it('can get a video from a twitch url', async () => {

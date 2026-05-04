@@ -1,15 +1,11 @@
 import { useStorage } from '@vueuse/core'
 
-import type { Clip, PlayerFormat, IntegrationProvider } from '../../core'
+import type { Clip, IntegrationProvider, PlayerConfig } from '../../core'
 
 import { toStorageKey, Cacheable } from '../../core'
 import { IntegrationID } from '../../indentify'
 import { getVideo } from '../core/api'
 import { isKickURL } from '../core/utils'
-
-// TODO(jordan): note this currently does not support kick video links that includes a timestamp
-//               parameter. If one is submitted, it will be added to queue, but start at the
-//               begining of the video rather than the timestamp.
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.KICK_VODS, 'enabled'), false)
 
@@ -80,12 +76,15 @@ export class KickVodProvider extends Cacheable<Clip> implements IntegrationProvi
     }
   }
 
-  public getPlayerFormat(): PlayerFormat {
-    return 'video'
-  }
-
-  public getPlayerSource(clip: Clip): string {
-    return clip.embedUrl
+  public getPlayerConfig(clip: Clip): PlayerConfig {
+    const start = clip.metadata?.['start']
+    return {
+      type: 'video',
+      src: clip.embedUrl,
+      poster: clip.thumbnailUrl,
+      title: clip.title,
+      start: start ? parseInt(start as string) : undefined,
+    }
   }
 }
 

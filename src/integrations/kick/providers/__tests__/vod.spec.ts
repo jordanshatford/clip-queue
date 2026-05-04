@@ -40,23 +40,30 @@ describe('integrations/kick/providers/vod', () => {
     expect(provider.isEnabled).toEqual(true)
   })
 
-  it('gets the player format of the vod', () => {
-    expect(provider.getPlayerFormat()).toEqual('video')
-  })
-
-  it('gets the player source of the vod', async () => {
+  it('gets the player config of the vod', async () => {
     const url = `https://www.kick.com/channel/videos/${mockKickVod.uuid}`
     const video = await provider.getClip(url)
     expect(video).toBeDefined()
-    expect(provider.getPlayerSource(video)).toEqual(video.embedUrl)
+    expect(provider.getPlayerConfig(video)).toEqual({
+      type: 'video',
+      src: video.embedUrl,
+      title: video.title,
+      poster: video.thumbnailUrl,
+      start: undefined,
+    })
   })
 
-  it('gets the player source of the vod if it has a timestamp', async () => {
+  it('gets the player config of the vod with a timestamp', async () => {
     const url = `https://www.kick.com/channel/videos/${mockKickVod.uuid}?t=1000`
     const video = await provider.getClip(url)
     expect(video).toBeDefined()
-    // TODO(jordan): this test should be updated to ensure that we can support timestamp.
-    expect(provider.getPlayerSource(video)).toEqual(video.embedUrl)
+    expect(provider.getPlayerConfig(video)).toEqual({
+      type: 'video',
+      src: video.embedUrl,
+      title: video.title,
+      poster: video.thumbnailUrl,
+      start: 1000,
+    })
   })
 
   it('can get a video from a kick url', async () => {

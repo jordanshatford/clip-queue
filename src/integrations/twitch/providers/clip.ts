@@ -2,7 +2,7 @@ import { useStorage } from '@vueuse/core'
 
 import { env } from '@/config'
 
-import type { Clip, PlayerFormat, IntegrationProvider } from '../../core'
+import type { Clip, IntegrationProvider, PlayerConfig } from '../../core'
 
 import { toStorageKey, Cacheable } from '../../core'
 import { IntegrationID } from '../../indentify'
@@ -72,12 +72,12 @@ export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationPr
     }
   }
 
-  public getPlayerFormat(): PlayerFormat {
-    return 'iframe'
-  }
-
-  public getPlayerSource(clip: Clip): string {
-    return `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`
+  public getPlayerConfig(clip: Clip): PlayerConfig {
+    return {
+      type: 'iframe',
+      src: `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`,
+      title: clip.title,
+    }
   }
 }
 

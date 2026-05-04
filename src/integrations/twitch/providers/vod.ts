@@ -2,7 +2,7 @@ import { useStorage } from '@vueuse/core'
 
 import { env } from '@/config'
 
-import type { Clip, PlayerFormat, IntegrationProvider } from '../../core'
+import type { Clip, IntegrationProvider, PlayerConfig } from '../../core'
 
 import { toStorageKey, Cacheable } from '../../core'
 import { IntegrationID } from '../../indentify'
@@ -79,18 +79,18 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
     }
   }
 
-  public getPlayerFormat(): PlayerFormat {
-    return 'iframe'
-  }
-
-  public getPlayerSource(clip: Clip): string {
-    const base = `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`
+  public getPlayerConfig(clip: Clip): PlayerConfig {
+    let src = `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`
     // Include timestamp in the player source if available.
     const timestamp = clip.metadata?.['start']
     if (timestamp && typeof timestamp === 'string') {
-      return `${base}&time=${timestamp}`
+      src = `${src}&time=${timestamp}`
     }
-    return base
+    return {
+      type: 'iframe',
+      src: src,
+      title: clip.title,
+    }
   }
 }
 

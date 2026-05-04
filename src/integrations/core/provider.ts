@@ -3,9 +3,11 @@ import type { IntegrationID } from '../indentify'
 import { Cacheable } from './cacheable'
 
 /**
- * The format of the player.
+ * The configuration of the player.
  */
-export type PlayerFormat = 'iframe' | 'video' | 'unknown'
+export type PlayerConfig =
+  | { type: 'iframe'; src: string; title?: string }
+  | { type: 'video'; src: string; poster?: string; title?: string; start?: number }
 
 /**
  * A clip. This represents some item allowed in the queue. In some cases this could be a VOD.
@@ -93,16 +95,10 @@ export interface IntegrationProvider extends Cacheable<Clip> {
    */
   getClip(url: string): Promise<Clip>
   /**
-   * Get the player format for a clip.
-   * @param clip - The clip to get the player format for.
-   * @returns The player format.
+   * Get the player configuration for a clip.
+   * @param clip - The clip to get the player config for.
+   * @returns The player config.
+   * @throws An error if the player config cannot be retrieved.
    */
-  getPlayerFormat(clip: Clip): PlayerFormat
-  /**
-   * Get the player source for a clip.
-   * @param clip - The clip to get the player source for.
-   * @returns The player source.
-   * @throws An error if the player source cannot be retrieved.
-   */
-  getPlayerSource(clip: Clip): string
+  getPlayerConfig(clip: Clip): PlayerConfig
 }

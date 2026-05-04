@@ -1,11 +1,6 @@
 <template>
   <div class="player-container">
-    <Player
-      :title="clip.title"
-      :format="playerFormat"
-      :source="playerSource"
-      :thumbnail-url="clip.thumbnailUrl"
-    >
+    <Player :config>
       <template #unsupported>{{ m.unsupported_clip() }}</template>
     </Player>
     <div class="mt-2 text-left">
@@ -62,7 +57,7 @@ import { onKeyDown } from '@vueuse/core'
 import Button from 'primevue/button'
 import { computed } from 'vue'
 
-import type { Clip, PlayerFormat } from '@/integrations'
+import type { Clip } from '@/integrations'
 
 import { Player } from '@/components/player'
 import ProviderName from '@/components/ProviderName.vue'
@@ -96,12 +91,8 @@ const emit = defineEmits<{
 
 const providers = useProviders()
 
-const playerFormat = computed<PlayerFormat | undefined>(() => {
-  return providers.getPlayerFormat(clip)
-})
-
-const playerSource = computed<string | undefined>(() => {
-  return providers.getPlayerSource(clip)
+const config = computed(() => {
+  return providers.getPlayerConfig(clip)
 })
 </script>
 

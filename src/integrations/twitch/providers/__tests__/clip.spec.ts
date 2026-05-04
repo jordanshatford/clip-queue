@@ -42,16 +42,14 @@ describe('integrations/twitch/providers/clip', () => {
     expect(provider.isEnabled).toEqual(true)
   })
 
-  it('gets the player format of the clip', () => {
-    expect(provider.getPlayerFormat()).toEqual('iframe')
-  })
-
-  it('gets the player source of the clip', async () => {
+  it('gets the player config of the clip', async () => {
     const clip = await provider.getClip(mockTwitchClip.url)
     expect(clip).toBeDefined()
-    expect(provider.getPlayerSource(clip)).toEqual(
-      `${mockTwitchClip.embed_url}&autoplay=true&parent=${window.location.hostname}`,
-    )
+    expect(provider.getPlayerConfig(clip)).toEqual({
+      type: 'iframe',
+      src: `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`,
+      title: clip.title,
+    })
   })
 
   it('can get a clip from a twitch url', async () => {

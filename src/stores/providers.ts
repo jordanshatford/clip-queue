@@ -1,13 +1,9 @@
 import { defineStore } from 'pinia'
 import { computed, type Reactive } from 'vue'
 
-import {
-  type Clip,
-  type PlayerFormat,
-  IntegrationID,
-  type IntegrationProvider,
-  integrations,
-} from '@/integrations'
+import type { PlayerConfig } from '@/integrations/core'
+
+import { type Clip, IntegrationID, type IntegrationProvider, integrations } from '@/integrations'
 import { useLogger } from '@/stores/logger'
 
 export const useProviders = defineStore('providers', () => {
@@ -77,7 +73,7 @@ export const useProviders = defineStore('providers', () => {
     }
   }
 
-  function getPlayerFormat(clip: Clip): PlayerFormat | undefined {
+  function getPlayerConfig(clip: Clip): PlayerConfig | undefined {
     const p = provider.value(clip.provider)
     if (!p?.isEnabled) {
       logger.warn(
@@ -85,18 +81,7 @@ export const useProviders = defineStore('providers', () => {
       )
       return
     }
-    return p?.getPlayerFormat(clip)
-  }
-
-  function getPlayerSource(clip: Clip): string | undefined {
-    const p = provider.value(clip.provider)
-    if (!p?.isEnabled) {
-      logger.warn(
-        `[Providers]: Attempted to get player source for clip from disabled provider: ${clip.provider}.`,
-      )
-      return
-    }
-    return p?.getPlayerSource(clip)
+    return p?.getPlayerConfig(clip)
   }
 
   return {
@@ -107,7 +92,6 @@ export const useProviders = defineStore('providers', () => {
     hasCachedData,
     purge,
     getClip,
-    getPlayerFormat,
-    getPlayerSource,
+    getPlayerConfig,
   }
 })

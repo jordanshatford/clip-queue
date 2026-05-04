@@ -1,6 +1,6 @@
 import { useStorage } from '@vueuse/core'
 
-import type { Clip, PlayerFormat, IntegrationProvider } from '../../core'
+import type { Clip, IntegrationProvider, PlayerConfig } from '../../core'
 
 import { toStorageKey, Cacheable } from '../../core'
 import { IntegrationID } from '../../indentify'
@@ -58,12 +58,13 @@ export class KickClipsProvider extends Cacheable<Clip> implements IntegrationPro
     }
   }
 
-  public getPlayerFormat(): PlayerFormat {
-    return 'video'
-  }
-
-  public getPlayerSource(clip: Clip): string {
-    return clip.embedUrl
+  public getPlayerConfig(clip: Clip): PlayerConfig {
+    return {
+      type: 'video',
+      src: clip.embedUrl,
+      poster: clip.thumbnailUrl,
+      title: clip.title,
+    }
   }
 }
 

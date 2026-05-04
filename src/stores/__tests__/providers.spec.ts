@@ -1,17 +1,11 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { Clip, PlayerFormat } from '@/integrations/core'
+import type { Clip } from '@/integrations/core'
 import type { KickClip } from '@/integrations/kick'
 import type { TwitchClip, TwitchGame } from '@/integrations/twitch/core/types'
 
-import {
-  clipFromKick,
-  clipFromTwitch,
-  mockKickClip,
-  mockTwitchClip,
-  mockTwitchGame,
-} from '@/__tests__/mocks'
+import { mockKickClip, mockTwitchClip, mockTwitchGame } from '@/__tests__/mocks'
 
 import { useProviders } from '../providers'
 
@@ -87,30 +81,6 @@ describe('providers.ts', () => {
     async (input: string, expected: Clip | undefined) => {
       const providers = useProviders()
       expect(await providers.getClip(input)).toEqual(expected)
-    },
-  )
-
-  it.each([
-    [clipFromKick, 'video' as PlayerFormat],
-    [clipFromTwitch, 'iframe' as PlayerFormat],
-    [{} as Clip, undefined],
-  ])(
-    'returns the correct player format based on clip: (clip: %o) -> %s',
-    (input: Clip, expected: PlayerFormat | undefined) => {
-      const providers = useProviders()
-      expect(providers.getPlayerFormat(input)).toEqual(expected)
-    },
-  )
-
-  it.each([
-    [clipFromKick, clipFromKick.embedUrl],
-    [clipFromTwitch, `${clipFromTwitch.embedUrl}&autoplay=true&parent=${window.location.hostname}`],
-    [{} as Clip, undefined],
-  ])(
-    'returns the correct player source based on clip: (clip: %o) -> %s',
-    (input: Clip, expected: string | undefined) => {
-      const providers = useProviders()
-      expect(providers.getPlayerSource(input)).toEqual(expected)
     },
   )
 

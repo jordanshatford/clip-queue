@@ -33,14 +33,15 @@ describe('integrations/kick/providers/clip', () => {
     expect(provider.isEnabled).toEqual(true)
   })
 
-  it('gets the player format of the clip', () => {
-    expect(provider.getPlayerFormat()).toEqual('video')
-  })
-
-  it('gets the player source of the clip', async () => {
+  it('gets the player config of the clip', async () => {
     const clip = await provider.getClip(mockKickClip.clip_url)
     expect(clip).toBeDefined()
-    expect(provider.getPlayerSource(clip)).toEqual(mockKickClip.clip_url)
+    expect(provider.getPlayerConfig(clip)).toEqual({
+      type: 'video',
+      src: clip.embedUrl,
+      title: clip.title,
+      poster: clip.thumbnailUrl,
+    })
   })
 
   it('can get a clip from a kick url', async () => {
