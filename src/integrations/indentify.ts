@@ -11,6 +11,10 @@ export enum IntegrationID {
    */
   KICK_CLIPS = 'kick-clips',
   /**
+   * Kick VODs provider.
+   */
+  KICK_VODS = 'kick-vods',
+  /**
    * Twitch integration.
    */
   TWITCH = 'twitch',

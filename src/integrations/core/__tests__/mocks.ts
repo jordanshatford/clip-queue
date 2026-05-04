@@ -1,5 +1,5 @@
 import type { Clip } from '@/integrations'
-import type { KickCategory, KickChannel, KickClip } from '@/integrations/kick'
+import type { KickCategory, KickChannel, KickClip, KickVideo } from '@/integrations/kick'
 import type { TwitchClip, TwitchGame, TwitchUser, TwitchVideo } from '@/integrations/twitch'
 
 import { IntegrationID } from '@/integrations'
@@ -44,6 +44,85 @@ export const mockKickClip: KickClip = {
   category: mockKickCategory,
   creator: mockKickChannel,
   channel: mockKickChannel,
+}
+
+export const mockKickVod: KickVideo = {
+  id: 987654,
+  live_stream_id: 123456,
+  slug: null,
+  thumb: null,
+  s3: null,
+  trading_platform_id: null,
+  created_at: '2026-05-03T18:25:43Z',
+  updated_at: '2026-05-03T20:10:12Z',
+  uuid: 'testkickvod',
+  views: 48291,
+  deleted_at: null,
+  source: 'livestream',
+  livestream: {
+    id: 123456,
+    slug: 'testvodslug',
+    channel_id: 777,
+    created_at: '2026-05-03T17:55:00Z',
+    session_title: 'testvodtitle',
+    is_live: false,
+    risk_level_id: null,
+    start_time: '2026-05-03T18:00:00Z',
+    source: null,
+    twitch_channel: null,
+    duration: 14400, // 4 hours in seconds
+    language: 'en',
+    is_mature: false,
+    viewer_count: 0,
+    thumbnail: 'https://kick.com/test.jpg',
+    channel: {
+      id: 777,
+      user_id: 999,
+      slug: 'pro_gamer123',
+      is_banned: false,
+      playback_url: 'https://stream.kick.com/ivs/test.m3u8',
+      name_updated_at: null,
+      vod_enabled: true,
+      subscription_enabled: true,
+      followersCount: 125430,
+      user: {
+        profilepic: 'https://kick.com/test.jpg',
+        bio: 'testvodbio',
+        twitter: '',
+        facebook: '',
+        instagram: '',
+        youtube: '',
+        discord: '',
+        tiktok: '',
+        username: 'testkickvoduser',
+      },
+      can_host: true,
+      verified: {
+        id: 1,
+        channel_id: 777,
+        created_at: '2025-01-10T12:00:00Z',
+        updated_at: '2025-01-10T12:00:00Z',
+      },
+    },
+    categories: [
+      {
+        id: 1,
+        category_id: 10,
+        name: 'testkickvodcategory',
+        slug: 'testkickvodcategory',
+        tags: [],
+        description: null,
+        deleted_at: null,
+        viewers: 52340,
+        category: {
+          id: 10,
+          name: 'Games',
+          slug: 'games',
+          icon: 'https://kick.com/icons/games.png',
+        },
+      },
+    ],
+  },
 }
 
 export const mockTwitchGame: TwitchGame = {
