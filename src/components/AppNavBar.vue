@@ -24,13 +24,7 @@
     <template #end>
       <div class="flex items-center gap-2">
         <AppThemeToggle :is-dark-mode="preferences.isDark" @toggle="preferences.toggleTheme()" />
-        <Button
-          icon="pi pi-twitch"
-          :label="user.isLoggedIn ? m.logout() : m.login()"
-          size="small"
-          @click="() => handleAuthButtonClick()"
-        >
-        </Button>
+        <AppAuthentication />
       </div>
     </template>
   </Menubar>
@@ -39,20 +33,15 @@
 <script setup lang="ts">
 import type { MenuItem } from 'primevue/menuitem'
 
-import Button from 'primevue/button'
 import Menubar from 'primevue/menubar'
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
 
+import AppAuthentication from '@/components/AppAuthentication.vue'
 import AppThemeToggle from '@/components/AppThemeToggle.vue'
-import { m } from '@/paraglide/messages'
 import { allowedRoutes, RouteNameConstants, routeTranslations } from '@/router'
 import { usePreferences } from '@/stores/preferences'
-import { useUser } from '@/stores/user'
 
 const preferences = usePreferences()
-const user = useUser()
-const router = useRouter()
 
 const items = computed((): MenuItem[] => {
   return allowedRoutes.value.map((v) => ({
@@ -66,13 +55,4 @@ const items = computed((): MenuItem[] => {
     })),
   }))
 })
-
-async function handleAuthButtonClick() {
-  if (user.isLoggedIn) {
-    await user.logout()
-    await router.push({ name: RouteNameConstants.HOME })
-  } else {
-    user.redirect()
-  }
-}
 </script>
