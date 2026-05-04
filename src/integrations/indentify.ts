@@ -35,6 +35,18 @@ export enum IntegrationID {
    */
   TWITCH_VODS = 'ttv-vods',
   /**
+   * YouTube integration.
+   */
+  YOUTUBE = 'youtube',
+  /**
+   * YouTube shorts provider.
+   */
+  YOUTUBE_SHORTS = 'yt-shorts',
+  /**
+   * YouTube videos provider.
+   */
+  YOUTUBE_VIDEOS = 'yt-vids',
+  /**
    * Unknown. This should never be used on purpose.
    */
   UNKNOWN = 'unknown',
