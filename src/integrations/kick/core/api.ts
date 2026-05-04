@@ -33,6 +33,5 @@ export async function getVideo(id: string): Promise<KickVideo> {
     throw new Error(`Failed to fetch video with ID ${id}: ${response.statusText}.`)
   }
   const data: KickVideo = await response.json()
-  console.log(data)
   return data
 }
