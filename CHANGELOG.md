@@ -1,5 +1,31 @@
 # clip-queue
 
+## 2.2.0
+
+### Minor Changes
+
+- feat: display total submitters on clip card ([`8ca3c9f`](https://github.com/jordanshatford/clip-queue/commit/8ca3c9f267a1fbcb639edf3732c7b1464ea5e8f6))
+
+- feat: add provider for kick videos ([`81476c2`](https://github.com/jordanshatford/clip-queue/commit/81476c20399b8a135a7e51d2cd12d66bbc3cc5de))
+
+- feat: update provider to return player config ([`5b711df`](https://github.com/jordanshatford/clip-queue/commit/5b711df058bfa9d7874e66f9c85095dfaf5dec7c))
+
+- feat: add component for rendering an integration icon based on ID ([`51d66ea`](https://github.com/jordanshatford/clip-queue/commit/51d66ea56cab6dda6bc98c6ea9afb09ad58a6d82))
+
+- feat: add provider for youtube shorts ([`048fd49`](https://github.com/jordanshatford/clip-queue/commit/048fd49d87ba40dc8c8c006639c07d96c79916bf))
+
+- feat: add provider for youtube videos ([`048fd49`](https://github.com/jordanshatford/clip-queue/commit/048fd49d87ba40dc8c8c006639c07d96c79916bf))
+
+- feat: add youtube integration ([`048fd49`](https://github.com/jordanshatford/clip-queue/commit/048fd49d87ba40dc8c8c006639c07d96c79916bf))
+
+### Patch Changes
+
+- fix: remove creator from clips as it is not relevant ([`e0bb083`](https://github.com/jordanshatford/clip-queue/commit/e0bb083cd9b4a8eb74ad88eb142c08d65c63a665))
+
+- fix: require twitch token callback for clip and vod providers ([`4c64ef5`](https://github.com/jordanshatford/clip-queue/commit/4c64ef5df6f1e6c0acff1ca4eb6aa75fbc437658))
+
+- fix: add fallback with clip thumbnail cannot load ([`9696dcf`](https://github.com/jordanshatford/clip-queue/commit/9696dcfcb0a6188c4745393dd889db775349774b))
+
 ## 2.1.0
 
 ### Minor Changes
