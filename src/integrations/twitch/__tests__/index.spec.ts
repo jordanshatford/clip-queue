@@ -1,0 +1,51 @@
+import { describe, it, expect } from 'vitest'
+
+import { IntegrationID } from '@/integrations/indentify'
+
+import { twitch, clips, vods } from '..'
+
+const integration = twitch
+const providers = [clips, vods]
+
+describe('integrations/twitch', () => {
+  it('exports an integration object', () => {
+    expect(integration).toBeDefined()
+    expect(integration.id).toBe(IntegrationID.TWITCH)
+    expect(integration.name).toBe('Twitch')
+    expect(integration.url).toBe('https://www.twitch.tv/')
+  })
+
+  it('contains svg icon', () => {
+    expect(integration.icon).toContain('<svg')
+    expect(integration.icon).toContain('</svg>')
+  })
+
+  it('initializes providers', () => {
+    for (const p of providers) {
+      expect(integration.providers).toContain(p)
+    }
+  })
+
+  it('returns default enabled state', () => {
+    expect(integration.isEnabled).toBe(true)
+  })
+
+  it('cannot update enabled state via setter', () => {
+    integration.isEnabled = false
+    expect(integration.isEnabled).toBe(true)
+    integration.isEnabled = true
+    expect(integration.isEnabled).toBe(true)
+  })
+
+  it('matches Integration contract shape', () => {
+    expect(integration).toMatchObject({
+      id: IntegrationID.TWITCH,
+      name: 'Twitch',
+      url: expect.any(String),
+      icon: expect.any(String),
+      isExperimental: false,
+      providers: expect.any(Array),
+    })
+    expect(typeof integration.isEnabled).toBe('boolean')
+  })
+})

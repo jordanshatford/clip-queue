@@ -8,8 +8,8 @@ import { YouTubeVideoProvider } from './providers/video'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.YOUTUBE, 'enabled'), true)
 
-const shorts = reactive(new YouTubeShortProvider())
-const videos = reactive(new YouTubeVideoProvider())
+export const shorts = reactive(new YouTubeShortProvider())
+export const videos = reactive(new YouTubeVideoProvider())
 
 export const youtube: Integration = {
   id: IntegrationID.YOUTUBE,

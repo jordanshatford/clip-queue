@@ -11,9 +11,9 @@ export * from './core/types'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.MISCELLANEOUS, 'enabled'), false)
 
-const soop = reactive(new SoopProvider())
-const streamable = reactive(new StreamableProvider())
-const vimeo = reactive(new VimeoProvider())
+export const soop = reactive(new SoopProvider())
+export const streamable = reactive(new StreamableProvider())
+export const vimeo = reactive(new VimeoProvider())
 
 export const misc: Integration = {
   id: IntegrationID.MISCELLANEOUS,
