@@ -27,6 +27,11 @@ Clip Queue integrates into a users chat and queues clips submitted in chat by th
     - Providers: `Kick Clips`, `Kick Videos`.
   - [YouTube](https://www.youtube.com/)
     - Providers: `YouTube Shorts`, `YouTube Videos`.
+  - Miscellaneous:
+    - Providers:
+      - [Soop](https://www.sooplive.com/)
+      - [Streamable](https://streamable.com/)
+      - [Vimeo](https://vimeo.com/)
 - Chat commands available to moderators and broadcasters.
 - Automatic moderation and clip removal.
 - Settings customization to personalize for your needs.
