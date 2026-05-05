@@ -4,12 +4,14 @@ import { reactive } from 'vue'
 import { toStorageKey, type Integration } from '../core'
 import { IntegrationID } from '../indentify'
 import { SoopProvider } from './providers/soop'
+import { VimeoProvider } from './providers/vimeo'
 
 export * from './core/types'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.MISCELLANEOUS, 'enabled'), false)
 
 const soop = reactive(new SoopProvider())
+const vimeo = reactive(new VimeoProvider())
 
 export const misc: Integration = {
   id: IntegrationID.MISCELLANEOUS,
@@ -29,5 +31,5 @@ export const misc: Integration = {
   set isEnabled(value: boolean) {
     isEnabled.value = value
   },
-  providers: [soop],
+  providers: [soop, vimeo],
 }

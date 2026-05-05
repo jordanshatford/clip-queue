@@ -58,4 +58,8 @@ export enum IntegrationID {
    * Unknown. This should never be used on purpose.
    */
   UNKNOWN = 'unknown',
+  /**
+   * Vimeo videos provider.
+   */
+  VIMEO = 'vimeo',
 }
