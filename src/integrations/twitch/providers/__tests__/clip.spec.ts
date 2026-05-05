@@ -91,6 +91,7 @@ describe('integrations/twitch/providers/clip', () => {
     expect(provider.hasCachedData).toEqual(false)
     expect(await provider.getClip(mockTwitchClip.url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
+    expect(await provider.getClip(mockTwitchClip.url)).toBeDefined()
   })
 
   it('can have the cached data cleared', async () => {

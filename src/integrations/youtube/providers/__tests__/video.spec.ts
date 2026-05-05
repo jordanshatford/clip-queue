@@ -110,6 +110,7 @@ describe('integrations/youtube/providers/video', () => {
     expect(provider.hasCachedData).toEqual(false)
     expect(await provider.getClip(url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
+    expect(await provider.getClip(url)).toBeDefined()
   })
 
   it('can have the cached data cleared', async () => {

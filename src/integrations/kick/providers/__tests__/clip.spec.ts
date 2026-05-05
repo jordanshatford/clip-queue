@@ -79,6 +79,7 @@ describe('integrations/kick/providers/clip', () => {
     expect(provider.hasCachedData).toEqual(false)
     expect(await provider.getClip(mockKickClip.clip_url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
+    expect(await provider.getClip(mockKickClip.clip_url)).toBeDefined()
   })
 
   it('can have the cached data cleared', async () => {
