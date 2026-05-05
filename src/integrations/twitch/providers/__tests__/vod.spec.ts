@@ -28,6 +28,10 @@ describe('integrations/twitch/providers/vod', () => {
     expect(provider.isExperimental).toEqual(false)
   })
 
+  it('knows its initial enabled state', () => {
+    expect(provider.isEnabled).toEqual(false)
+  })
+
   it('can be enabled and disabled', () => {
     provider.isEnabled = true
     expect(provider.isEnabled).toEqual(true)

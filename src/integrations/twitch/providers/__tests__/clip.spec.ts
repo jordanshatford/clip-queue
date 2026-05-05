@@ -33,6 +33,10 @@ describe('integrations/twitch/providers/clip', () => {
     expect(provider.isExperimental).toEqual(false)
   })
 
+  it('knows its initial enabled state', () => {
+    expect(provider.isEnabled).toEqual(true)
+  })
+
   it('can be enabled and disabled', () => {
     provider.isEnabled = true
     expect(provider.isEnabled).toEqual(true)
