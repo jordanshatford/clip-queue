@@ -39,9 +39,7 @@ export class SoopProvider extends Cacheable<Clip> implements IntegrationProvider
     }
     try {
       const endpoint = `https://openapi.sooplive.com/oembed/embedinfo?url=https://vod.sooplive.com/player/${id}`
-      console.log(endpoint)
       const oembed = await getOEmbed(endpoint)
-      console.log(oembed)
       const response: Clip = {
         id: id,
         url,
