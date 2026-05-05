@@ -1,19 +1,11 @@
 /**
- * OEmbed response from YouTube OEmbed.
+ * Geneic OEmbed response.
  */
 export interface OEmbedResponse {
   /**
    * The title of the OEmbed.
    */
   title: string
-  /**
-   * The author name of the OEmbed.
-   */
-  author_name: string
-  /**
-   * The author URL the OEmbed.
-   */
-  author_url: string
   /**
    * The type of OEmbed.
    */
@@ -30,6 +22,14 @@ export interface OEmbedResponse {
    * The version of the OEmbed.
    */
   version: string
+  /**
+   * The author name of the OEmbed.
+   */
+  author_name?: string
+  /**
+   * The author URL the OEmbed.
+   */
+  author_url?: string
   /**
    * The provider name of the OEmbed.
    */
@@ -54,4 +54,12 @@ export interface OEmbedResponse {
    * The HTML for the OEmbed.
    */
   html: string
+  /**
+   * The description of the OEmbed.
+   */
+  description?: string
+  /**
+   * The upload date of the OEmbed.
+   */
+  upload_date?: string
 }

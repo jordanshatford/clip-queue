@@ -1,4 +1,4 @@
-import type { OEmbedResponse } from './types'
+import type { OEmbedResponse } from '@/integrations/misc'
 
 const BASE_URL = 'https://www.youtube.com/oembed'
 

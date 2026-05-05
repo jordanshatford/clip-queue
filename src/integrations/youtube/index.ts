@@ -6,8 +6,6 @@ import { IntegrationID } from '../indentify'
 import { YouTubeShortProvider } from './providers/short'
 import { YouTubeVideoProvider } from './providers/video'
 
-export * from './core/types'
-
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.YOUTUBE, 'enabled'), true)
 
 const shorts = reactive(new YouTubeShortProvider())

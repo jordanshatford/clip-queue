@@ -15,6 +15,14 @@ export enum IntegrationID {
    */
   KICK_VODS = 'kick-vods',
   /**
+   * Integration containing miscellaneous providers.
+   */
+  MISCELLANEOUS = 'misc',
+  /**
+   * Soop videos provider.
+   */
+  SOOP = 'soop',
+  /**
    * Twitch integration.
    */
   TWITCH = 'twitch',

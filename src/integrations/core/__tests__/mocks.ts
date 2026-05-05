@@ -1,7 +1,7 @@
 import type { Clip } from '@/integrations'
 import type { KickCategory, KickChannel, KickClip, KickVideo } from '@/integrations/kick'
+import type { OEmbedResponse } from '@/integrations/misc'
 import type { TwitchClip, TwitchGame, TwitchUser, TwitchVideo } from '@/integrations/twitch'
-import type { OEmbedResponse } from '@/integrations/youtube'
 
 import { IntegrationID } from '@/integrations'
 
@@ -193,6 +193,22 @@ export const mockYouTubeOEmbed: OEmbedResponse = {
   thumbnail_height: '',
   thumbnail_width: '',
   thumbnail_url: 'https://youtube.com/test/thumbnail',
+  html: '',
+}
+
+export const mockOEmbed: OEmbedResponse = {
+  title: 'testoembed',
+  author_name: 'testoembedauthor',
+  author_url: 'https://oembed.com/author/test',
+  type: 'video',
+  height: '',
+  width: '',
+  version: '',
+  provider_name: 'OEmbed',
+  provider_url: 'https://oembed.com',
+  thumbnail_height: '',
+  thumbnail_width: '',
+  thumbnail_url: 'https://oembed.com/test/thumbnail',
   html: '',
 }
 

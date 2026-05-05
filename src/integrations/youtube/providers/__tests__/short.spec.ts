@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { OEmbedResponse } from '../../core/types'
+import type { OEmbedResponse } from '@/integrations/misc'
 
 import {
   mockKickClip,

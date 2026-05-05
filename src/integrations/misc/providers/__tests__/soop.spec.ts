@@ -1,27 +1,28 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { OEmbedResponse } from '@/integrations/misc'
+import type { OEmbedResponse } from '../../core/types'
 
 import {
   mockKickClip,
+  mockKickVod,
+  mockOEmbed,
   mockTwitchClip,
   mockTwitchVod,
-  mockYouTubeOEmbed,
 } from '../../../core/__tests__/mocks'
-import { YouTubeVideoProvider } from '../video'
+import { SoopProvider } from '../soop'
 
-vi.mock('@/integrations/youtube/core/api.ts', async (importOriginal) => {
+vi.mock('@/integrations/misc/core/api.ts', async (importOriginal) => {
   return {
-    ...(await importOriginal<typeof import('@/integrations/youtube/core/api')>()),
-    getYouTubeOEmbed: vi.fn<(id: string) => OEmbedResponse>((id: string) => {
-      return { ...mockYouTubeOEmbed, version: id }
+    ...(await importOriginal<typeof import('@/integrations/misc/core/api')>()),
+    getOEmbed: vi.fn<(url: string) => OEmbedResponse>((url: string): OEmbedResponse => {
+      return { ...mockOEmbed, provider_url: url }
     }),
   }
 })
 
-const provider = new YouTubeVideoProvider()
+const provider = new SoopProvider()
 
-describe('integrations/youtube/providers/video', () => {
+describe('integrations/misc/providers/soop', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     provider.clearCache()
@@ -45,32 +46,32 @@ describe('integrations/youtube/providers/video', () => {
   })
 
   it('gets the player config of the video', async () => {
-    const url = 'https://www.youtube.com/watch?v=id'
-    const clip = await provider.getClip(url)
-    expect(clip).toBeDefined()
-    expect(provider.getPlayerConfig(clip)).toEqual({
+    const url = 'https://vod.sooplive.com/player/test'
+    const video = await provider.getClip(url)
+    expect(video).toBeDefined()
+    expect(provider.getPlayerConfig(video)).toEqual({
       type: 'iframe',
-      src: `${clip.embedUrl}/${clip.id}?autoplay=true`,
-      title: clip.title,
+      src: `${video.embedUrl}?autoPlay=true`,
+      title: video.title,
     })
   })
 
   it('gets the player config of the video with a timestamp', async () => {
-    const url = 'https://www.youtube.com/watch?v=id&t=123'
-    const clip = await provider.getClip(url)
-    expect(clip).toBeDefined()
-    expect(provider.getPlayerConfig(clip)).toEqual({
+    const url = 'https://vod.sooplive.com/player/test?change_second=123'
+    const video = await provider.getClip(url)
+    expect(video).toBeDefined()
+    expect(provider.getPlayerConfig(video)).toEqual({
       type: 'iframe',
-      src: `${clip.embedUrl}/${clip.id}?autoplay=true&start=123`,
-      title: clip.title,
+      src: `${video.embedUrl}?autoPlay=true&change_second=123`,
+      title: video.title,
     })
   })
 
-  it('can get a video from a youtube url', async () => {
-    const url = 'https://www.youtube.com/watch?v=id&t=123'
+  it('can get a video from a soop url', async () => {
+    const url = 'https://vod.sooplive.com/player/test'
     const video = await provider.getClip(url)
     expect(video).toBeDefined()
-    expect(video.id).toEqual('id')
+    expect(video.id).toEqual('test')
   })
 
   it.each([
@@ -85,12 +86,14 @@ describe('integrations/youtube/providers/video', () => {
     ['https://m.twitch.tv/clip/testclip', false],
     ['https://clips.twitch.tv/channel/testclip', false],
     ['https://www.twitch.tv/channel/clip/testclip', false],
-    ['https://www.youtube.com/shorts/<ID>', false],
-    ['https://www.youtube.com/watch?v=<ID>', true],
-    ['https://www.youtube.com/watch?v=<ID>&t=<TIMESTAMP>', true],
-    ['https://youtu.be/<ID>', true],
-    ['https://youtu.be/<ID>?t=<TIMESTAMP>', true],
-  ])('can detect video urls it supports: (url: %s)', async (url: string, expected: boolean) => {
+    [`https://www.kick.com/channel/videos/${mockKickVod.uuid}`, false],
+    [`https://www.kick.com/channel/videos/${mockKickVod.uuid}?t=123`, false],
+    ['https://vimeo.com/test', false],
+    ['https://vimeo.com/test#t=1m21s', false],
+    ['https://vimeo.com/test#t=1m0s&end=2m1s', false],
+    ['https://vod.sooplive.com/player/test', true],
+    ['https://vod.sooplive.com/player/test?change_second=123', true],
+  ])('can detect clip urls it supports: (url: %s)', async (url: string, expected: boolean) => {
     expect(provider.hasClipSupport(url)).toEqual(expected)
   })
 
@@ -100,20 +103,18 @@ describe('integrations/youtube/providers/video', () => {
     [mockTwitchClip.url],
     [mockKickClip.clip_url],
   ])('throws an error for unknown video urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow(
-      `[YouTube Videos]: Invalid video URL (${url}).`,
-    )
+    await expect(provider.getClip(url)).rejects.toThrow(`[Soop]: Invalid video URL (${url}).`)
   })
 
   it('caches clip data that it fetchs', async () => {
-    const url = 'https://www.youtube.com/watch?v=id?t=123'
+    const url = 'https://vod.sooplive.com/player/test'
     expect(provider.hasCachedData).toEqual(false)
     expect(await provider.getClip(url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
   })
 
   it('can have the cached data cleared', async () => {
-    const url = 'https://www.youtube.com/watch?v=id?t=123'
+    const url = 'https://vod.sooplive.com/player/test'
     expect(provider.hasCachedData).toEqual(false)
     expect(await provider.getClip(url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)

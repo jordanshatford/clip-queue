@@ -5,10 +5,11 @@ export { toClipUUID } from './core'
 import type { Integration } from './core'
 
 import { kick } from './kick'
+import { misc } from './misc'
 import { twitch } from './twitch'
 import { youtube } from './youtube'
 
 /**
  * A list of all supported integrations for the application.
  */
-export const integrations: Integration[] = [twitch, kick, youtube]
+export const integrations: Integration[] = [twitch, kick, youtube, misc]
