@@ -41,8 +41,9 @@ vi.mock('@/integrations/twitch/core/utils', async (importOriginal) => {
       }
       try {
         const uri = new URL(url)
-        const idStart = uri.pathname.lastIndexOf('/')
-        return uri.pathname.slice(idStart).split('?')[0]?.slice(1)
+        const segments = uri.pathname.split('/').filter(Boolean)
+        const id = segments.pop()
+        return id
       } catch {
         return
       }

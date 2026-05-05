@@ -112,8 +112,8 @@ function getVodIdAndTimestampFromUrl(url: string): { id?: string; timestamp?: st
     }
 
     // Get the ID out of the URL. Always at the end of the URL.
-    const idStart = uri.pathname.lastIndexOf('/')
-    const id = uri.pathname.slice(idStart).split('?')[0]?.slice(1)
+    const segments = uri.pathname.split('/').filter(Boolean)
+    const id = segments.pop()
     const timestamp = uri.searchParams.get(VIDEO_TIMESTAMP_PARAM)
     return { id, timestamp: timestamp ?? undefined }
   } catch {

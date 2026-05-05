@@ -105,8 +105,8 @@ function getClipIdFromUrl(url: string): string | undefined {
     }
 
     // Get the ID out of the URL. Always at the end of the URL.
-    const idStart = uri.pathname.lastIndexOf('/')
-    return uri.pathname.slice(idStart).split('?')[0]?.slice(1)
+    const segments = uri.pathname.split('/').filter(Boolean)
+    return segments.pop()
   } catch {
     return
   }

@@ -44,8 +44,8 @@ export function getYouTubeUrlDetails(url: string): {
 
     // Handle if it is a YouTube short URL.
     if (uri.pathname.includes(SHORT_PATH_SUFFIX)) {
-      const idStart = uri.pathname.lastIndexOf('/')
-      const id = uri.pathname.slice(idStart).split('?')[0]?.slice(1)
+      const segments = uri.pathname.split('/').filter(Boolean)
+      const id = segments.pop()
       return { type: 'short', id }
     }
 
@@ -53,8 +53,8 @@ export function getYouTubeUrlDetails(url: string): {
 
     // Handle the different formats of YouTube video URLs.
     if (uri.hostname === VIDEO_ALT_HOSTNAME) {
-      const idStart = uri.pathname.lastIndexOf('/')
-      const id = uri.pathname.slice(idStart).split('?')[0]?.slice(1)
+      const segments = uri.pathname.split('/').filter(Boolean)
+      const id = segments.pop()
       return { type: 'video', id, timestamp }
     } else if (uri.hostname.endsWith(YOUTUBE_HOSTNAME)) {
       const id = uri.searchParams.get('v') ?? undefined
