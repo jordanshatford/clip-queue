@@ -23,6 +23,10 @@ export enum IntegrationID {
    */
   SOOP = 'soop',
   /**
+   * Streamable videos provider.
+   */
+  STREAMABLE = 'streamable',
+  /**
    * Twitch integration.
    */
   TWITCH = 'twitch',
