@@ -16,6 +16,11 @@ updates:
       commitlint:
         patterns:
           - '@commitlint/*'
+      oxc:
+        patterns:
+          - 'oxfmt'
+          - 'oxlint'
+          - 'eslint-plugin-oxlint'
       eslint:
         patterns:
           - 'eslint'
