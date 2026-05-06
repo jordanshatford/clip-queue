@@ -30,6 +30,7 @@ Clip Queue integrates into a users chat and queues clips submitted in chat by th
   - Miscellaneous (_Experimental_):
     - Providers:
       - [Dailymotion](https://www.dailymotion.com/)
+      - [Medal](https://medal.tv/)
       - [Soop](https://www.sooplive.com/)
       - [Streamable](https://streamable.com/)
       - [Vimeo](https://vimeo.com/)

@@ -19,6 +19,10 @@ export enum IntegrationID {
    */
   KICK_VODS = 'kick-vods',
   /**
+   * Medal tv clips provider.
+   */
+  MEDAL = 'medal',
+  /**
    * Integration containing miscellaneous providers.
    */
   MISCELLANEOUS = 'misc',
