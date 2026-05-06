@@ -80,7 +80,7 @@ const subtitle = computed(() => {
 
 const totalSubmitters = computed((): string | undefined => {
   if (clip.submitters.length < 2) {
-    return
+    return undefined
   }
   return `${clip.submitters.length > 9999 ? '9999+' : clip.submitters.length}`
 })
