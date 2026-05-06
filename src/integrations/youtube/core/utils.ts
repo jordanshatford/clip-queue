@@ -1,10 +1,11 @@
 const YOUTUBE_HOSTNAME = 'youtube.com'
+const YOUTUBE_HOSTNAME2 = 'www.youtube.com'
 const VIDEO_ALT_HOSTNAME = 'youtu.be'
 
 /**
  * List of known YouTube hostnames that these integrations support.
  */
-const YOUTUBE_HOSTNAMES: string[] = [YOUTUBE_HOSTNAME, VIDEO_ALT_HOSTNAME]
+const YOUTUBE_HOSTNAMES: string[] = [YOUTUBE_HOSTNAME, YOUTUBE_HOSTNAME2, VIDEO_ALT_HOSTNAME]
 
 /**
  * Check if a URL is a supported YouTube.com URL.
@@ -12,7 +13,7 @@ const YOUTUBE_HOSTNAMES: string[] = [YOUTUBE_HOSTNAME, VIDEO_ALT_HOSTNAME]
  * @returns true if it is a YouTube URL, false otherwise.
  */
 export function isYouTubeURL(url: URL): boolean {
-  return YOUTUBE_HOSTNAMES.some((n) => url.hostname.endsWith(n))
+  return YOUTUBE_HOSTNAMES.includes(url.hostname)
 }
 
 const SHORT_PATH_SUFFIX = 'shorts'
@@ -56,7 +57,7 @@ export function getYouTubeUrlDetails(url: string): {
       const segments = uri.pathname.split('/').filter(Boolean)
       const id = segments.pop()
       return { type: 'video', id, timestamp }
-    } else if (uri.hostname.endsWith(YOUTUBE_HOSTNAME)) {
+    } else if (uri.hostname === YOUTUBE_HOSTNAME || uri.hostname === YOUTUBE_HOSTNAME2) {
       const id = uri.searchParams.get('v') ?? undefined
       return { type: 'video', id, timestamp }
     }

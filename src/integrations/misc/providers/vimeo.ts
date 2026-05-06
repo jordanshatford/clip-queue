@@ -91,7 +91,7 @@ function getDetailsFromURL(url: string): { id?: string; timestamp?: string; end?
     const uri = new URL(url)
 
     // Only accept valid Vimeo URLs.
-    if (!uri.hostname.includes('vimeo.com')) {
+    if (!['vimeo.com', 'www.vimeo.com'].includes(uri.hostname)) {
       return {}
     }
 

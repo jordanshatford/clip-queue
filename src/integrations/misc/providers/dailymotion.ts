@@ -67,7 +67,7 @@ export class DailyMotionProvider extends Cacheable<Clip> implements IntegrationP
 }
 
 const SHORT_HOSTNAME = 'dai.ly'
-const HOSTNAMES = ['dailymotion.com', SHORT_HOSTNAME]
+const HOSTNAMES = ['dailymotion.com', 'www.dailymotion.com', SHORT_HOSTNAME]
 /**
  * Get the ID from a provided URL.
  * @param url - The URL of the video.

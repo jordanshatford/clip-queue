@@ -1,7 +1,7 @@
 /**
  * List of known Kick hostnames that these integrations support.
  */
-const KICK_HOSTNAMES: string[] = ['kick.com']
+const KICK_HOSTNAMES: string[] = ['kick.com', 'www.kick.com']
 
 /**
  * Check if a URL is a supported kick.com URL.
@@ -9,5 +9,5 @@ const KICK_HOSTNAMES: string[] = ['kick.com']
  * @returns true if it is a Kick URL, false otherwise.
  */
 export function isKickURL(url: URL): boolean {
-  return KICK_HOSTNAMES.some((n) => url.hostname.endsWith(n))
+  return KICK_HOSTNAMES.includes(url.hostname)
 }

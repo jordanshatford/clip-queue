@@ -4,8 +4,6 @@ import { reactive } from 'vue'
 import { toStorageKey, type Integration } from '../core'
 import { IntegrationID } from '../indentify'
 import { DailyMotionProvider } from './providers/dailymotion'
-import { MedalProvider } from './providers/medal'
-import { RumbleProvider } from './providers/rumble'
 import { SoopProvider } from './providers/soop'
 import { StreamableProvider } from './providers/streamable'
 import { VimeoProvider } from './providers/vimeo'
@@ -15,8 +13,6 @@ export * from './core/types'
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.MISCELLANEOUS, 'enabled'), false)
 
 export const dailymotion = reactive(new DailyMotionProvider())
-export const medal = reactive(new MedalProvider())
-export const rumble = reactive(new RumbleProvider())
 export const soop = reactive(new SoopProvider())
 export const streamable = reactive(new StreamableProvider())
 export const vimeo = reactive(new VimeoProvider())

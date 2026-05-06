@@ -86,7 +86,7 @@ function getDetailsFromURL(url: string): { id?: string; timestamp?: string } {
     const uri = new URL(url)
 
     // Only accept valid Soop URLs.
-    if (!uri.hostname.endsWith('vod.sooplive.com')) {
+    if (!(uri.hostname === 'vod.sooplive.com')) {
       return {}
     }
 

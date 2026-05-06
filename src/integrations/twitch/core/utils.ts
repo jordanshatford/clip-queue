@@ -9,6 +9,7 @@ const TWITCH_HOSTNAMES: string[] = [
   'clips.twitch.tv',
   'm.twitch.tv',
   'twitch.tv',
+  'www.twitch.tv',
 ]
 
 /**
@@ -17,7 +18,7 @@ const TWITCH_HOSTNAMES: string[] = [
  * @returns true if it is a Twitch URL, false otherwise.
  */
 export function isTwitchURL(url: URL): boolean {
-  return TWITCH_HOSTNAMES.some((n) => url.hostname.endsWith(n))
+  return TWITCH_HOSTNAMES.includes(url.hostname)
 }
 
 /**

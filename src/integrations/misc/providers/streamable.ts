@@ -75,7 +75,7 @@ function getIdFromURL(url: string): string | undefined {
     const uri = new URL(url)
 
     // Only accept valid Streamable URLs.
-    if (!uri.hostname.endsWith('streamable.com')) {
+    if (!['streamable.com', 'www.streamable.com'].includes(uri.hostname)) {
       return
     }
 
