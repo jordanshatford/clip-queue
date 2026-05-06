@@ -67,7 +67,6 @@ export class SoopProvider extends Cacheable<Clip> implements IntegrationProvider
     if (timestamp && typeof timestamp === 'string') {
       src = `${src}&change_second=${timestamp}`
     }
-
     return {
       type: 'iframe',
       src,
@@ -86,7 +85,7 @@ function getDetailsFromURL(url: string): { id?: string; timestamp?: string } {
   try {
     const uri = new URL(url)
 
-    // Only accept valid Streamable URLs.
+    // Only accept valid Soop URLs.
     if (!uri.hostname.endsWith('vod.sooplive.com')) {
       return {}
     }

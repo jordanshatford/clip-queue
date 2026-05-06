@@ -27,8 +27,9 @@ Clip Queue integrates into a users chat and queues clips submitted in chat by th
     - Providers: `Kick Clips`, `Kick Videos`.
   - [YouTube](https://www.youtube.com/)
     - Providers: `YouTube Shorts`, `YouTube Videos`.
-  - Miscellaneous:
+  - Miscellaneous (*Experimental*):
     - Providers:
+      - [Dailymotion](https://www.dailymotion.com/)
       - [Soop](https://www.sooplive.com/)
       - [Streamable](https://streamable.com/)
       - [Vimeo](https://vimeo.com/)

@@ -3,6 +3,10 @@
  */
 export enum IntegrationID {
   /**
+   * Dailymotion videos provider.
+   */
+  DAILYMOTION = 'dailymotion',
+  /**
    * Kick integration.
    */
   KICK = 'kick',
