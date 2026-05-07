@@ -60,12 +60,10 @@ export function getYouTubeUrlDetails(url: string): {
       const segments = uri.pathname.split('/').filter(Boolean)
       const id = segments.pop()
       return { type: 'video', id, timestamp }
-    } else if (uri.hostname === YOUTUBE_HOSTNAME || uri.hostname === YOUTUBE_HOSTNAME2) {
-      const id = uri.searchParams.get('v') ?? undefined
-      return { type: 'video', id, timestamp }
     }
 
-    return {}
+    const id = uri.searchParams.get('v') ?? undefined
+    return { type: 'video', id, timestamp }
   } catch {
     return {}
   }

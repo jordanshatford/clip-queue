@@ -27,6 +27,17 @@ describe('integrations/misc/core/api', () => {
     await expect(getOEmbed('')).rejects.toThrow('URL was not provided.')
   })
 
+  it('throws when the oembed fetch fails', async () => {
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: false,
+      statusText: 'Forbidden',
+    } as Response)
+
+    await expect(getOEmbed('https://example.com/oembed')).rejects.toThrow(
+      'Failed to fetch OEmbed with URL https://example.com/oembed: Forbidden',
+    )
+  })
+
   it('gets oembed details from a URL but proxied', async () => {
     const oembed = await getOEmbedProxied(
       'https://api.oembed.com/oembed.json?url=https://some.com/url',
@@ -38,5 +49,45 @@ describe('integrations/misc/core/api', () => {
 
   it('throws if no oembed URL is passed when proxied', async () => {
     await expect(getOEmbedProxied('')).rejects.toThrow('URL was not provided.')
+  })
+
+  it('throws when the proxied fetch fails', async () => {
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: false,
+      statusText: 'Bad Gateway',
+    } as Response)
+
+    await expect(getOEmbedProxied('https://example.com/oembed')).rejects.toThrow(
+      'Failed to fetch OEmbed with URL https://example.com/oembed: Bad Gateway',
+    )
+  })
+
+  it('throws when the proxy response contains an errorId', async () => {
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: true,
+      json: () =>
+        Promise.resolve({
+          errorId: 1,
+          errorMessage: 'The requested entity could not be found',
+        }),
+    } as Response)
+
+    await expect(getOEmbedProxied('https://example.com/oembed')).rejects.toThrow(
+      'Failed to handle proxied response: The requested entity could not be found',
+    )
+  })
+
+  it('throws when the proxy response contains an errorMessage', async () => {
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: true,
+      json: () =>
+        Promise.resolve({
+          errorMessage: 'Unknown proxy error',
+        }),
+    } as Response)
+
+    await expect(getOEmbedProxied('https://example.com/oembed')).rejects.toThrow(
+      'Failed to handle proxied response: Unknown proxy error',
+    )
   })
 })

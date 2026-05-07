@@ -35,6 +35,17 @@ describe('integrations/kick/core/api', () => {
     await expect(getClip('')).rejects.toThrow('Clip ID was not provided.')
   })
 
+  it('throws when the clip fetch fails', async () => {
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: false,
+      statusText: 'Not Found',
+    } as Response)
+
+    await expect(getClip('missing-clip')).rejects.toThrow(
+      'Failed to fetch clip with ID missing-clip: Not Found.',
+    )
+  })
+
   it('gets a kick videos from kick api', async () => {
     const clip = await getVideo('testvod')
     expect(clip).toBeDefined()
@@ -44,5 +55,16 @@ describe('integrations/kick/core/api', () => {
 
   it('throws if no video ID is passed', async () => {
     await expect(getVideo('')).rejects.toThrow('Video ID was not provided.')
+  })
+
+  it('throws when the video fetch fails', async () => {
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: false,
+      statusText: 'Forbidden',
+    } as Response)
+
+    await expect(getVideo('missing-video')).rejects.toThrow(
+      'Failed to fetch video with ID missing-video: Forbidden.',
+    )
   })
 })

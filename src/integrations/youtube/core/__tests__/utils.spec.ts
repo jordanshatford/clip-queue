@@ -29,6 +29,10 @@ describe('integrations/youtube/core/utils', () => {
     ],
     ['https://youtu.be/test', { type: 'video', id: 'test' } as Details],
     ['https://youtu.be/test?t=456', { type: 'video', id: 'test', timestamp: '456' } as Details],
+    [
+      'https://www.youtube.com/watch',
+      { type: 'video', id: undefined, timestamp: undefined } as Details,
+    ],
   ])('can get youtube url details: (url: %s)', (input: string, expected: Details) => {
     expect(getYouTubeUrlDetails(input)).toEqual(expected)
   })

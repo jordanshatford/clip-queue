@@ -26,4 +26,15 @@ describe('integrations/youtube/core/api', () => {
   it('throws if no video ID is passed', async () => {
     await expect(getYouTubeOEmbed('')).rejects.toThrow('ID was not provided.')
   })
+
+  it('throws when the oembed fetch fails', async () => {
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: false,
+      statusText: 'Not Found',
+    } as Response)
+
+    await expect(getYouTubeOEmbed('missing-video')).rejects.toThrow(
+      'Failed to fetch OEmbed with ID missing-video: Not Found',
+    )
+  })
 })
