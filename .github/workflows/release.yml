@@ -32,5 +32,6 @@ jobs:
           title: 'ci: release'
           commit: 'ci: release'
           version: pnpm changeset version
+          publish: pnpm changeset tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
