@@ -26,21 +26,14 @@
     <InputGroupAddon>
       <IntegrationStatusTag :status="source.status" />
     </InputGroupAddon>
-    <InputGroupAddon>
-      <i
-        v-tooltip="m.reconnect()"
-        class="pi pi-refresh hover:cursor-pointer"
-        @click="source.reconnect()"
-      ></i>
-    </InputGroupAddon>
   </InputGroup>
   <div class="flex gap-2">
     <Tag
-      v-for="f of source.features"
-      :key="f"
+      v-for="feature of source.features"
+      :key="feature"
       class="text-xs"
       severity="secondary"
-      :value="featureTranslations[f]()"
+      :value="featureTranslations[feature]()"
     ></Tag>
   </div>
 </template>

@@ -1,10 +1,15 @@
 /**
+ * A generic type for T or a promise like of T.
+ */
+export type Awaitable<T> = PromiseLike<T> | T
+
+/**
  * A simple event emitter.
  */
 export class EventEmitter<
   Events extends {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: (...args: any[]) => void | Promise<void>
+    [key: string]: (...args: any[]) => Awaitable<void>
   },
 > {
   private listeners: Partial<Record<keyof Events, Array<Events[keyof Events]>>>
