@@ -9,9 +9,8 @@ const VALUE_LIGHT = '{"preferences": {"theme": "light"}}'
 const VALUE_DARK = '{"preferences": {"theme": "dark"}}'
 
 describe('preferences.ts', () => {
-  const app = createApp({})
-
   beforeEach(() => {
+    const app = createApp({})
     const pinia = createPinia().use(piniaPluginPersistedState)
     app.use(pinia)
     setActivePinia(pinia)

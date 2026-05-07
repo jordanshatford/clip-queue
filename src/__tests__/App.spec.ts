@@ -13,7 +13,7 @@ describe('App.vue', () => {
         }),
       ],
       stubs: {
-        img: true,
+        RouterView: true,
       },
     },
   })

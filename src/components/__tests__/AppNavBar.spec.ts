@@ -13,7 +13,7 @@ describe('AppNavBar.vue', () => {
         }),
       ],
       stubs: {
-        img: true,
+        RouterLink: true,
       },
     },
   })

@@ -10,6 +10,11 @@ describe('IntegrationStatusTag.vue', () => {
     props: {
       status: IntegrationStatus.HEALTHY,
     },
+    global: {
+      directives: {
+        tooltip: {},
+      },
+    },
   })
 
   it('mounts successfully', () => {
