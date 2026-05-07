@@ -1,7 +1,8 @@
 <template>
   <Menubar
     :model="items"
-    class="sticky top-0 z-50 mx-auto bg-surface-0 px-2 sm:px-16 md:px-20 lg:px-32 dark:bg-surface-900"
+    breakpoint="768px"
+    class="sticky top-0 z-50 mx-auto bg-surface-0 px-2 sm:px-16 md:px-10 lg:px-32 dark:bg-surface-900"
   >
     <template #start>
       <RouterLink to="/" class="mr-2 flex shrink-0 items-center">
