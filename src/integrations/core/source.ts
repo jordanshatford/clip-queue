@@ -156,6 +156,14 @@ export type IntegrationSource = {
    */
   readonly isExperimental: boolean
   /**
+   * Whether the source is actively busy loading.
+   */
+  readonly isLoading?: boolean
+  /**
+   * Whether the source is enabled.
+   */
+  isEnabled: boolean
+  /**
    * The current status of the source.
    */
   readonly status: IntegrationStatus

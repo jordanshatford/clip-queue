@@ -1,11 +1,20 @@
 import { Client } from '@tmi.js/chat'
-import { ref } from 'vue'
+import { useStorage } from '@vueuse/core'
+import { ref, watch } from 'vue'
 
 import type { IntegrationSource, ClipSourceEventsMap } from '../../core'
 
-import { IntegrationSourceFeature, getAllURLsFromText, EventEmitter, IntegrationStatus } from '../../core'
+import {
+  IntegrationSourceFeature,
+  getAllURLsFromText,
+  EventEmitter,
+  IntegrationStatus,
+  toStorageKey,
+} from '../../core'
 import { IntegrationID } from '../../indentify'
 
+const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.TWITCH_CHAT, 'enabled'), true)
+const isLoading = ref<boolean>(false)
 const status = ref<IntegrationStatus>(IntegrationStatus.DISABLED)
 
 /**
@@ -17,9 +26,22 @@ export class TwitchChatSource
 {
   public readonly id: IntegrationID = IntegrationID.TWITCH_CHAT
   public readonly name: string = 'Twitch Chat'
+  public readonly isExperimental: boolean = false
+
+  public get isLoading(): boolean {
+    return isLoading.value
+  }
 
   public get url(): string {
     return `twitch.tv/${this.channel}/chat`
+  }
+
+  public get isEnabled(): boolean {
+    return isEnabled.value
+  }
+
+  public set isEnabled(value: boolean) {
+    isEnabled.value = value
   }
 
   public readonly features: IntegrationSourceFeature[] = [
@@ -28,9 +50,10 @@ export class TwitchChatSource
     IntegrationSourceFeature.LINK_DETECTION,
   ]
 
-  public readonly isExperimental: boolean = false
-
   public get status(): IntegrationStatus {
+    if (!isEnabled.value) {
+      return IntegrationStatus.DISABLED
+    }
     return status.value
   }
 
@@ -62,7 +85,18 @@ export class TwitchChatSource
 
   public constructor() {
     super()
+    // Watch for changes to the enabled status.
+    watch(isEnabled, async (enabled) => {
+      isLoading.value = true
+      if (enabled && this.channel) {
+        await this.connect(this.channel)
+      } else {
+        await this.disconnect()
+      }
+    })
+
     this.chat.on('connect', async () => {
+      isLoading.value = false
       const timestamp = this.timestamp()
       this.emit('connected', { timestamp, source: this.id, data: undefined })
       this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
@@ -147,6 +181,7 @@ export class TwitchChatSource
       this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
     })
     this.chat.on('close', (event) => {
+      isLoading.value = false
       const timestamp = this.timestamp()
       this.emit('disconnected', {
         timestamp,
@@ -159,8 +194,11 @@ export class TwitchChatSource
 
   public async connect(channel: string): Promise<void> {
     this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
+    this.channel = channel
+    if (!isEnabled.value) {
+      return
+    }
     try {
-      this.channel = channel
       this.chat.connect()
     } catch (e) {
       this.handleError(e)
@@ -168,9 +206,6 @@ export class TwitchChatSource
   }
 
   public async disconnect(): Promise<void> {
-    if (this.status !== IntegrationStatus.HEALTHY) {
-      return
-    }
     this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
     try {
       if (this.channel) {
@@ -185,6 +220,9 @@ export class TwitchChatSource
   public async reconnect(): Promise<void> {
     this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
     try {
+      if (!isEnabled.value) {
+        return
+      }
       await this.chat.reconnect()
     } catch (e) {
       this.handleError(e)

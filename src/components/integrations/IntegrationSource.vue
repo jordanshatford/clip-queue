@@ -14,6 +14,12 @@
         :value="m.experimental()"
       ></Tag>
     </div>
+    <ToggleSwitch
+      v-model="source.isEnabled"
+      :disabled="source.isLoading"
+      :input-id="source.id"
+      size="small"
+    />
   </div>
   <InputGroup>
     <InputText id="username" :value="source.url" readonly fluid size="small" />
@@ -47,6 +53,7 @@ import InputGroupAddon from 'primevue/inputgroupaddon'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
 import Tag from 'primevue/tag'
+import ToggleSwitch from 'primevue/toggleswitch'
 
 import type { IntegrationSource } from '@/integrations/core'
 
