@@ -2,7 +2,7 @@ import type { ComputedRef } from 'vue'
 
 import { computed } from 'vue'
 
-import type { ClipSourceEvent, ClipSourceMessage } from '@/integrations/core'
+import type { IntegrationSourceMessageEvent } from '@/integrations/core'
 
 import { IntegrationID } from '@/integrations'
 import { m } from '@/paraglide/messages'
@@ -139,7 +139,7 @@ const help: ComputedRef<Record<Command, CommandHelp>> = computed(() => ({
  * @param args - The command arguments.
  */
 export function handleCommand(
-  event: ClipSourceEvent<ClipSourceMessage>,
+  event: IntegrationSourceMessageEvent,
   command: string,
   ...args: string[]
 ): void {

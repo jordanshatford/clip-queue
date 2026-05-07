@@ -1,5 +1,5 @@
 import type { IntegrationID } from '../indentify'
-import type { EventEmitter } from './event-emitter'
+import type { Awaitable, EventEmitter } from './event-emitter'
 import type { IntegrationStatus } from './types'
 
 /**
@@ -21,9 +21,9 @@ export enum IntegrationSourceFeature {
 }
 
 /**
- * Event emitted by a clip source.
+ * Generic event emitted by a source.
  */
-export interface ClipSourceEvent<T = undefined> {
+export interface IntegrationSourceEvent<T = undefined> {
   /**
    * The timestamp of the event.
    */
@@ -39,9 +39,9 @@ export interface ClipSourceEvent<T = undefined> {
 }
 
 /**
- * Message from a clip source.
+ * Message event emitted by a source.
  */
-export interface ClipSourceMessage {
+export type IntegrationSourceMessageEvent = IntegrationSourceEvent<{
   /**
    * The channel of the message.
    */
@@ -62,12 +62,12 @@ export interface ClipSourceMessage {
    * Whether the user is allowed to use commands.
    */
   isAllowedCommands?: boolean
-}
+}>
 
 /**
- * Moderation event from a clip source.
+ * Moderation event emitted by a source.
  */
-export interface ClipSourceModeration {
+export type IntegrationSourceModerationEvent = IntegrationSourceEvent<{
   /**
    * The channel of the moderation event.
    */
@@ -76,61 +76,46 @@ export interface ClipSourceModeration {
    * The username of the the user that was moderated.
    */
   username: string
-}
+}>
 
 /**
- * Events emitted by a clip source.
+ * Map of possible events from a source.
  */
-export type ClipSourceEventsMap = {
+export type IntegrationSourceEvents = {
   /**
    * Event emitted when the source is connected.
-   * @param event - The event data.
+   * @param event.data - The channel connected to.
    */
-  connected: (event: ClipSourceEvent) => Promise<void> | void
+  connected: (event: IntegrationSourceEvent<string>) => Awaitable<void>
   /**
    * Event emitted when the source is disconnected.
    * @param event.data - The reason for the disconnection.
    */
-  disconnected: (event: ClipSourceEvent<string | undefined>) => Promise<void> | void
-  /**
-   * Event emitted when a channel is joined.
-   * @param event.data - The channel that was joined.
-   */
-  join: (event: ClipSourceEvent<string>) => Promise<void> | void
-  /**
-   * Event emitted when a channel is left.
-   * @param event.data - The channel that was left.
-   */
-  leave: (event: ClipSourceEvent<string>) => Promise<void> | void
+  disconnected: (event: IntegrationSourceEvent<string | undefined>) => Awaitable<void>
   /**
    * Event emitted when a message is received.
    * @param event.data - The message that was received.
    */
-  message: (event: ClipSourceEvent<ClipSourceMessage>) => Promise<void> | void
+  message: (event: IntegrationSourceMessageEvent) => Awaitable<void>
   /**
    * Event emitted when a message is deleted.
    * @param event.data - The message that was deleted.
    */
-  'message-deleted': (event: ClipSourceEvent<ClipSourceMessage>) => Promise<void> | void
+  'message-deleted': (event: IntegrationSourceMessageEvent) => Awaitable<void>
   /**
    * Event emitted when a user is handled via moderation (timeout or ban).
    * @param event.data - The moderation event.
    */
-  moderation: (event: ClipSourceEvent<ClipSourceModeration>) => Promise<void> | void
-  /**
-   * Event emitted when the status of the source changes.
-   * @param event.data - The new status of the source.
-   */
-  status: (event: ClipSourceEvent<IntegrationStatus>) => Promise<void> | void
+  moderation: (event: IntegrationSourceModerationEvent) => Awaitable<void>
   /**
    * Event emitted when an error occurs.
    * @param event.data - The error that occurred.
    */
-  error: (event: ClipSourceEvent<unknown>) => Promise<void> | void
+  error: (event: IntegrationSourceEvent<string>) => Awaitable<void>
 }
 
 /**
- * The interface of an integration that is a source of clips. These integrations handle
+ * The interface of an integration that is a source of URLs. These integrations handle
  * connecting to external sources and detecting URLs submitted in them.
  */
 export type IntegrationSource = {
@@ -168,19 +153,18 @@ export type IntegrationSource = {
    */
   readonly status: IntegrationStatus
   /**
+   * Optional reason for the current status.
+   */
+  readonly reason?: string
+  /**
    * Connect to a source with the provided channel.
    * @param channel - The channel to join.
    * @returns A promise that resolves when the source is connected.
    */
-  connect: (channel: string) => Promise<void>
+  connect: (channel: string) => Awaitable<void>
   /**
    * Disconnect from the source.
    * @returns A promise that resolves when the source is disconnected.
    */
-  disconnect: () => Promise<void>
-  /**
-   * Reconnect the source.
-   * @returns A promise that resolves when the source is reconnected.
-   */
-  reconnect: () => Promise<void>
-} & Pick<EventEmitter<ClipSourceEventsMap>, 'on'>
+  disconnect: () => Awaitable<void>
+} & Pick<EventEmitter<IntegrationSourceEvents>, 'on'>

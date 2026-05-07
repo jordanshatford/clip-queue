@@ -1,7 +1,7 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { ClipSourceEvent, ClipSourceMessage } from '@/integrations/core'
+import type { IntegrationSourceMessageEvent } from '@/integrations/core'
 
 import { IntegrationID } from '@/integrations'
 import { useProviders } from '@/stores/providers'
@@ -10,7 +10,7 @@ import { useSettings } from '@/stores/settings'
 
 import commands, { Command } from '../commands'
 
-const MOCK_EVENT: ClipSourceEvent<ClipSourceMessage> = {
+const MOCK_EVENT: IntegrationSourceMessageEvent = {
   source: IntegrationID.TWITCH,
   timestamp: '2021-01-01T00:00:00Z',
   data: {

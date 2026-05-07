@@ -2,7 +2,7 @@ import { Client } from '@tmi.js/chat'
 import { useStorage } from '@vueuse/core'
 import { ref, watch } from 'vue'
 
-import type { IntegrationSource, ClipSourceEventsMap } from '../../core'
+import type { IntegrationSource, IntegrationSourceEvents } from '../../core'
 
 import {
   IntegrationSourceFeature,
@@ -16,24 +16,32 @@ import { IntegrationID } from '../../indentify'
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.TWITCH_CHAT, 'enabled'), true)
 const isLoading = ref<boolean>(false)
 const status = ref<IntegrationStatus>(IntegrationStatus.DISABLED)
+const reason = ref<string | undefined>(undefined)
 
 /**
  * Twitch Chat Source.
  */
 export class TwitchChatSource
-  extends EventEmitter<ClipSourceEventsMap>
+  extends EventEmitter<IntegrationSourceEvents>
   implements IntegrationSource
 {
   public readonly id: IntegrationID = IntegrationID.TWITCH_CHAT
   public readonly name: string = 'Twitch Chat'
+
+  public get url(): string {
+    return `twitch.tv/${this.channel}/chat`
+  }
+
+  public readonly features: IntegrationSourceFeature[] = [
+    IntegrationSourceFeature.AUTOMOD,
+    IntegrationSourceFeature.COMMANDS,
+    IntegrationSourceFeature.LINK_DETECTION,
+  ]
+
   public readonly isExperimental: boolean = false
 
   public get isLoading(): boolean {
     return isLoading.value
-  }
-
-  public get url(): string {
-    return `twitch.tv/${this.channel}/chat`
   }
 
   public get isEnabled(): boolean {
@@ -44,17 +52,15 @@ export class TwitchChatSource
     isEnabled.value = value
   }
 
-  public readonly features: IntegrationSourceFeature[] = [
-    IntegrationSourceFeature.AUTOMOD,
-    IntegrationSourceFeature.COMMANDS,
-    IntegrationSourceFeature.LINK_DETECTION,
-  ]
-
   public get status(): IntegrationStatus {
-    if (!isEnabled.value) {
+    if (!this.isEnabled) {
       return IntegrationStatus.DISABLED
     }
     return status.value
+  }
+
+  public get reason(): string | undefined {
+    return reason.value
   }
 
   private channel?: string
@@ -64,23 +70,20 @@ export class TwitchChatSource
     return new Date().toISOString()
   }
 
-  protected handleStatusUpdate(s: IntegrationStatus, timestamp?: string): void {
+  private handleStatusUpdate(s: IntegrationStatus, r?: string): void {
     status.value = s
-    this.emit('status', {
-      timestamp: timestamp ?? this.timestamp(),
-      source: this.id,
-      data: s,
-    })
+    reason.value = r
   }
 
-  protected handleError(error: unknown): void {
-    const timestamp = this.timestamp()
+  private handleError(error: unknown): void {
+    const reason = error as string
+    isLoading.value = false
     this.emit('error', {
-      timestamp,
+      timestamp: this.timestamp(),
       source: this.id,
-      data: error,
+      data: reason,
     })
-    this.handleStatusUpdate(IntegrationStatus.ERROR, timestamp)
+    this.handleStatusUpdate(IntegrationStatus.ERROR, reason)
   }
 
   public constructor() {
@@ -95,11 +98,11 @@ export class TwitchChatSource
       }
     })
 
+    // Hook into chat events from tmi.js/chat that we require for our application.
+    // Each event gets used and re-routed into the structure our sources use.
     this.chat.on('connect', async () => {
-      isLoading.value = false
-      const timestamp = this.timestamp()
-      this.emit('connected', { timestamp, source: this.id, data: undefined })
-      this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
+      // Whenever we connect to the source, automatically connect to the channel we want.
+      // Until then assume connection is not fully completed.
       if (this.channel) {
         try {
           await this.chat.join(this.channel)
@@ -109,21 +112,27 @@ export class TwitchChatSource
       }
     })
     this.chat.on('join', (event) => {
-      const timestamp = this.timestamp()
-      this.emit('join', {
-        timestamp,
+      // Joined the correct channel for this integration. At this point we are
+      // fully connected to the source, so emit a connected event with details
+      // about the channel we connected to.
+      isLoading.value = false
+      this.emit('connected', {
+        timestamp: this.timestamp(),
         source: this.id,
         data: event.channel.login,
       })
-      this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
+      this.handleStatusUpdate(IntegrationStatus.HEALTHY)
     })
     this.chat.on('message', (event) => {
+      // Ignore any bot messages, we only care about real user messages.
       if (event.user.isBot) {
         return
       }
-      const timestamp = this.timestamp()
+      // Emit the message in a unified format that we use for out sources.
+      // This includes all details that are required for the application to
+      // handle commands, URLs, etc.
       this.emit('message', {
-        timestamp,
+        timestamp: this.timestamp(),
         source: this.id,
         data: {
           channel: event.channel.login,
@@ -133,14 +142,15 @@ export class TwitchChatSource
           urls: getAllURLsFromText(event.message.text),
         },
       })
-      this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
+      this.handleStatusUpdate(IntegrationStatus.HEALTHY)
     })
     this.chat.on('moderation', (event) => {
       switch (event.type) {
+        // If a message is deleted we want to provide that message incase
+        // we should clean the queue of any items that were in that message.
         case 'deleteMessage': {
-          const timestamp = this.timestamp()
           this.emit('message-deleted', {
-            timestamp,
+            timestamp: this.timestamp(),
             source: this.id,
             data: {
               channel: event.channel.login,
@@ -149,21 +159,22 @@ export class TwitchChatSource
               urls: getAllURLsFromText(event.message.text),
             },
           })
-          this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
+          this.handleStatusUpdate(IntegrationStatus.HEALTHY)
           break
         }
+        // If a user is banned or timed out we also want those details, so
+        // we can remove all items that have been submitted by them.
         case 'ban':
         case 'timeout': {
-          const timestamp = this.timestamp()
           this.emit('moderation', {
-            timestamp,
+            timestamp: this.timestamp(),
             source: this.id,
             data: {
               channel: event.channel.login,
               username: event.user.login,
             },
           })
-          this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
+          this.handleStatusUpdate(IntegrationStatus.HEALTHY)
           break
         }
         default: {
@@ -171,33 +182,35 @@ export class TwitchChatSource
         }
       }
     })
-    this.chat.on('part', (event) => {
-      const timestamp = this.timestamp()
-      this.emit('leave', {
-        timestamp,
-        source: this.id,
-        data: event.channel.login,
-      })
-      this.handleStatusUpdate(IntegrationStatus.HEALTHY, timestamp)
+    this.chat.on('part', async (event) => {
+      // This source relys on being connected to the channel. If we are disconnected, we
+      // treat that as an error, and should provide those details to the user.
+      await this.disconnect()
+      this.handleStatusUpdate(IntegrationStatus.ERROR, `Left channel ${event.channel.login}.`)
     })
     this.chat.on('close', (event) => {
+      // When the source is fully disconnected, we also want to display this to the
+      // user and allow them to re-enable the source, or toggle it, to attempt to get
+      // the connection working again.
       isLoading.value = false
-      const timestamp = this.timestamp()
       this.emit('disconnected', {
-        timestamp,
+        timestamp: this.timestamp(),
         source: this.id,
         data: event.reason,
       })
-      this.handleStatusUpdate(IntegrationStatus.ERROR, timestamp)
+      this.handleStatusUpdate(IntegrationStatus.ERROR, event.reason)
     })
   }
 
   public async connect(channel: string): Promise<void> {
-    this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
+    // When connecting always set the channel to ensure that the class has the value
+    // configured by the user. If the source is disabled, do not actually connect it.
     this.channel = channel
-    if (!isEnabled.value) {
+    if (!this.isEnabled) {
       return
     }
+    isLoading.value = true
+    this.handleStatusUpdate(IntegrationStatus.UNKNOWN, `Connecting to ${this.name}.`)
     try {
       this.chat.connect()
     } catch (e) {
@@ -206,24 +219,18 @@ export class TwitchChatSource
   }
 
   public async disconnect(): Promise<void> {
-    this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
+    // When the source is disabled, do nothing. We cannot disconnect it as it will have
+    // never been properly connected.
+    if (!this.isEnabled) {
+      return
+    }
+    isLoading.value = true
+    this.handleStatusUpdate(IntegrationStatus.UNKNOWN, `Disconnected from ${this.name}.`)
     try {
       if (this.channel) {
         await this.chat.part(this.channel)
       }
       this.chat.close()
-    } catch (e) {
-      this.handleError(e)
-    }
-  }
-
-  public async reconnect(): Promise<void> {
-    this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
-    try {
-      if (!isEnabled.value) {
-        return
-      }
-      await this.chat.reconnect()
     } catch (e) {
       this.handleError(e)
     }

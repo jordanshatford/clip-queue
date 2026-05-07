@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 import type { IntegrationSource } from '@/integrations/core'
 
-import { chat as chatSource } from '@/integrations/twitch'
+import { chat } from '@/integrations/twitch'
 import { useProviders } from '@/stores/providers'
 import { useUser } from '@/stores/user'
 import commands, { Command } from '@/utils/commands'
@@ -12,26 +12,23 @@ import { useLogger } from './logger'
 import { useQueue } from './queue'
 import { useSettings } from './settings'
 
-const ctx = () => {
-  const user = useUser()
-  return { username: user.details?.name }
-}
-
 export const useSources = defineStore('sources', () => {
   const queue = useQueue()
   const settings = useSettings()
   const logger = useLogger()
 
-  const source = ref<IntegrationSource>(chatSource)
+  const source = ref<IntegrationSource>(chat)
 
-  // setup watching chat
-  source.value.on('connected', (event) => logger.debug(`[${event.source}]: Connected.`))
-  source.value.on('disconnected', (event) => logger.debug(`[${event.source}]: Disconnected.`))
-  source.value.on('join', (event) => {
-    logger.info(`[${event.source}]: Joined channel ${event.data}.`)
-  })
-  source.value.on('leave', (event) => {
-    logger.info(`[${event.source}]: Left channel ${event.data}.`)
+  // Configure listeners for all source events required for the application.
+  source.value.on('connected', (event) =>
+    logger.debug(`[${event.source}]: Connected to ${event.data}.`),
+  )
+  source.value.on('disconnected', (event) => {
+    if (event.data) {
+      logger.debug(`[${event.source}]: Disconnected due to ${event.data}.`)
+    } else {
+      logger.debug(`[${event.source}]: Disconnected.`)
+    }
   })
   source.value.on('message', async (event) => {
     // Check if message is a command and perform command if proper permission to do so
@@ -99,7 +96,7 @@ export const useSources = defineStore('sources', () => {
   })
 
   async function connect(): Promise<void> {
-    const username = ctx().username
+    const username = useUser().details?.name
     logger.debug(`[Sources]: Connecting to source for user: ${username}.`)
     if (username) {
       await source.value.connect(username)
@@ -107,7 +104,7 @@ export const useSources = defineStore('sources', () => {
   }
 
   async function disconnect(): Promise<void> {
-    const username = ctx().username
+    const username = useUser().details?.name
     logger.debug(`[Sources]: Disconnecting from source for user: ${username}.`)
     await source.value.disconnect()
   }
