@@ -174,8 +174,8 @@
   "providers_for_integration": "Fournisseurs de contenu :",
   "application_settings_saved": "Paramètres de l'application enregistrés.",
   "commands": "Commandes",
-  "clip_detection": "Détection de clips",
   "not_configured": "Non configuré",
   "misconfigured": "Mauvaise configuration",
-  "healthy": "En bonne santé"
+  "healthy": "En bonne santé",
+  "link_detection": "Détection de liens"
 }

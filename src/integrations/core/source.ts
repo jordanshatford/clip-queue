@@ -6,9 +6,18 @@ import type { IntegrationStatus } from './types'
  * Enumeration representing the possible features a clip source can support.
  */
 export enum ClipSourceFeature {
+  /**
+   * Has support for detecting moderation at the source and actioning it to the clip queue.
+   */
   AUTOMOD = 'AutoModeration',
+  /**
+   * Has support for triggering clip queue commands.
+   */
   COMMANDS = 'Commands',
-  CLIP_DETECTION = 'ClipDetection',
+  /**
+   * Has support for detecting links submitted in the source and adding them to the queue.
+   */
+  LINK_DETECTION = 'LinkDetection',
 }
 
 /**

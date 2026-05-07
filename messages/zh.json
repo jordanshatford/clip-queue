@@ -174,8 +174,8 @@
   "providers_for_integration": "内容提供商：",
   "application_settings_saved": "应用程序设置已保存。",
   "commands": "命令",
-  "clip_detection": "剪辑检测",
   "not_configured": "未配置",
   "misconfigured": "配置错误",
-  "healthy": "健康"
+  "healthy": "健康",
+  "link_detection": "链路检测"
 }

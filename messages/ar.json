@@ -174,8 +174,8 @@
   "providers_for_integration": "موفر المحتوى:",
   "application_settings_saved": "تم حفظ إعدادات التطبيق.",
   "commands": "الأوامر",
-  "clip_detection": "الكشف عن المقاطع",
   "not_configured": "غير مهيأ",
   "misconfigured": "إعدادات خاطئة",
-  "healthy": "صحيح"
+  "healthy": "صحيح",
+  "link_detection": "الكشف عن الروابط"
 }

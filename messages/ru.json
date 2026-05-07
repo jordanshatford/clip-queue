@@ -174,8 +174,8 @@
   "providers_for_integration": "Поставщики контента:",
   "application_settings_saved": "Настройки приложения сохранены.",
   "commands": "Команды",
-  "clip_detection": "Обнаружение клипов",
   "not_configured": "Не настроено",
   "misconfigured": "Неправильная настройка",
-  "healthy": "Здоровый"
+  "healthy": "Здоровый",
+  "link_detection": "Обнаружение связей"
 }

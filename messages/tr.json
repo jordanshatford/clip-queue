@@ -174,8 +174,8 @@
   "providers_for_integration": "İçerik sağlayıcılar:",
   "application_settings_saved": "Uygulama ayarları kaydedildi.",
   "commands": "Komutlar",
-  "clip_detection": "Klip Algılama",
   "not_configured": "Yapılandırılmamış",
   "misconfigured": "Yanlış yapılandırılmış",
-  "healthy": "Sağlıklı"
+  "healthy": "Sağlıklı",
+  "link_detection": "Bağlantı Algılama"
 }

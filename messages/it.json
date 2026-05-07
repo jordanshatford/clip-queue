@@ -174,8 +174,8 @@
   "providers_for_integration": "Fornitori di contenuti:",
   "application_settings_saved": "Impostazioni dell'applicazione salvate.",
   "commands": "Comandi",
-  "clip_detection": "Rilevamento clip",
   "not_configured": "Non configurato",
   "misconfigured": "Configurazione errata",
-  "healthy": "Salutare"
+  "healthy": "Salutare",
+  "link_detection": "Rilevamento del collegamento"
 }

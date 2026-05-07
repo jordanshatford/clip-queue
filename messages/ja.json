@@ -174,8 +174,8 @@
   "providers_for_integration": "コンテンツプロバイダー:",
   "application_settings_saved": "アプリケーション設定が保存されました。",
   "commands": "コマンド",
-  "clip_detection": "クリップ検出",
   "not_configured": "未設定",
   "misconfigured": "設定ミス",
-  "healthy": "健康"
+  "healthy": "健康",
+  "link_detection": "リンク検出"
 }

@@ -28,7 +28,7 @@ export class TwitchChatSource
   public readonly features: ClipSourceFeature[] = [
     ClipSourceFeature.AUTOMOD,
     ClipSourceFeature.COMMANDS,
-    ClipSourceFeature.CLIP_DETECTION,
+    ClipSourceFeature.LINK_DETECTION,
   ]
 
   public readonly isExperimental: boolean = false

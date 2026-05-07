@@ -58,6 +58,6 @@ const { source } = defineProps<Props>()
 const featureTranslations: Record<ClipSourceFeature, () => string> = {
   [ClipSourceFeature.AUTOMOD]: m.auto_mod,
   [ClipSourceFeature.COMMANDS]: m.commands,
-  [ClipSourceFeature.CLIP_DETECTION]: m.clip_detection,
+  [ClipSourceFeature.LINK_DETECTION]: m.link_detection,
 }
 </script>
