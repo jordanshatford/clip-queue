@@ -10,7 +10,7 @@
           fluid
           severity="secondary"
           as="router-link"
-          :to="{ name: RouteNameConstants.LOGS }"
+          to="/logs"
         >
         </Button>
       </div>
@@ -81,10 +81,18 @@ import type { LogLevel } from '@/stores/logger'
 
 import { useSettingsForm } from '@/composables/use-settings-form'
 import { m } from '@/paraglide/messages'
-import { RouteNameConstants } from '@/router'
 import { availableLogLevels, logLevelTranslations } from '@/stores/logger'
 import { usePreferences } from '@/stores/preferences'
 import { useSettings } from '@/stores/settings'
+
+definePage({
+  meta: {
+    requiresAuth: true,
+    icon: 'pi pi-book',
+    title: m.logs,
+    order: 4,
+  },
+})
 
 const preferences = usePreferences()
 const settings = useSettings()

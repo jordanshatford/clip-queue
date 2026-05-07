@@ -1,18 +1,16 @@
 import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
-import ConfirmationService from 'primevue/confirmationservice'
 import { describe, expect, it, vi } from 'vitest'
 
-import LogsPage from '../LogsPage.vue'
+import QueuePage from '../queue.vue'
 
-describe('LogsPage.vue', () => {
-  const wrapper = shallowMount(LogsPage, {
+describe('queue.vue', () => {
+  const wrapper = shallowMount(QueuePage, {
     global: {
       plugins: [
         createTestingPinia({
           createSpy: vi.fn,
         }),
-        ConfirmationService,
       ],
     },
   })

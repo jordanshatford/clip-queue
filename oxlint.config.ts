@@ -5,6 +5,9 @@ export default defineConfig({
   env: {
     browser: true,
   },
+  globals: {
+    definePage: 'readonly',
+  },
   categories: {
     correctness: 'error',
   },

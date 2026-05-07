@@ -6,10 +6,10 @@
         :key="setting.name"
         :value="setting?.name?.toString() ?? ''"
       >
-        <router-link v-slot="{ href, navigate }" :to="{ name: setting.name }" custom>
+        <router-link v-slot="{ href, navigate }" :to="setting.path" custom>
           <a :href="href" @click="navigate" class="flex items-center gap-2 text-inherit">
             <i :class="setting.meta?.icon"></i>
-            <span>{{ routeTranslations[setting.name as RouteNameConstants]() }}</span>
+            <span>{{ setting.meta?.title?.() }}</span>
           </a>
         </router-link>
       </Tab>
@@ -26,13 +26,23 @@ import Tabs from 'primevue/tabs'
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-import { allowedRoutes, RouteNameConstants, routeTranslations } from '@/router'
+import { m } from '@/paraglide/messages'
+import { visibleRoutes } from '@/router'
+
+definePage({
+  redirect: '/settings/application',
+  meta: {
+    requiresAuth: true,
+    icon: 'pi pi-cog',
+    title: m.settings,
+    order: 3,
+  },
+})
 
 const router = useRouter()
 const route = useRoute()
 
-const settingsRoutes =
-  allowedRoutes.value.find((r) => r.name === RouteNameConstants.SETTINGS)?.children ?? []
+const settingsRoutes = visibleRoutes.value.find((r) => r.name === '/settings')?.children ?? []
 
 const active = computed(() => route?.name?.toString() ?? '')
 const current = computed(() => settingsRoutes.findIndex((r) => r.name === route.name))
@@ -41,7 +51,7 @@ onKeyDown('ArrowLeft', () => {
   if (current.value > 0) {
     const previous = settingsRoutes[current.value - 1]
     if (previous) {
-      router.push({ name: previous.name })
+      router.push(previous.path)
     }
   }
 })
@@ -50,7 +60,7 @@ onKeyDown('ArrowRight', () => {
   if (current.value < settingsRoutes.length - 1) {
     const next = settingsRoutes[current.value + 1]
     if (next) {
-      router.push({ name: next.name })
+      router.push(next.path)
     }
   }
 })

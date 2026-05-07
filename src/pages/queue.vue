@@ -26,5 +26,14 @@ import { toClipUUID } from '@/integrations'
 import { m } from '@/paraglide/messages'
 import { useQueue } from '@/stores/queue'
 
+definePage({
+  meta: {
+    requiresAuth: true,
+    icon: 'pi pi-list',
+    title: m.queue,
+    order: 1,
+  },
+})
+
 const queue = useQueue()
 </script>

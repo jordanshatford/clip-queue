@@ -103,6 +103,15 @@ import { usePreferences } from '@/stores/preferences'
 import { useSettings } from '@/stores/settings'
 import commands, { Command } from '@/utils/commands'
 
+definePage({
+  meta: {
+    requiresAuth: true,
+    icon: 'pi pi-sliders-h',
+    title: m.application,
+    order: 1,
+  },
+})
+
 const settings = useSettings()
 const preferences = usePreferences()
 

@@ -1,142 +1,22 @@
-import type { RouteRecordRaw } from 'vue-router'
-
 import { computed } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import { routes } from 'vue-router/auto-routes'
 
-import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useUser } from '@/stores/user'
 declare module 'vue-router' {
   interface RouteMeta {
     icon: string
     requiresAuth: boolean
+    title: () => string
+    hidden?: boolean
+    order?: number
   }
 }
 
-export enum RouteNameConstants {
-  INTEGRATIONS = 'integrations',
-  HOME = 'home',
-  QUEUE = 'queue',
-  HISTORY = 'history',
-  LOGS = 'logs',
-  SETTINGS = 'settings',
-  SETTINGS_APPLICATION = 'settings_application',
-  SETTINGS_INTEGRATIONS = 'settings_integrations',
-  SETTINGS_PREFERENCES = 'settings_preferences',
-  SETTINGS_LOGS = 'settings_logs',
-  SETTINGS_OTHER = 'settings_other',
-}
-
-const integrationRoutes: RouteRecordRaw[] = [
-  {
-    path: '/integrations/:id',
-    name: RouteNameConstants.INTEGRATIONS,
-    component: () => import('@/views/IntegrationsPage.vue'),
-  },
-]
-
-export const routes: RouteRecordRaw[] = [
-  {
-    path: '/queue',
-    name: RouteNameConstants.QUEUE,
-    component: () => import('@/views/QueuePage.vue'),
-    meta: {
-      icon: 'pi pi-list',
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/history',
-    name: RouteNameConstants.HISTORY,
-    component: () => import('@/views/HistoryPage.vue'),
-    meta: {
-      icon: 'pi pi-history',
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/settings',
-    name: RouteNameConstants.SETTINGS,
-    redirect: { name: RouteNameConstants.SETTINGS_APPLICATION },
-    component: () => import('@/views/SettingsPage.vue'),
-    meta: {
-      icon: 'pi pi-cog',
-      requiresAuth: true,
-    },
-    children: [
-      {
-        path: 'application',
-        name: RouteNameConstants.SETTINGS_APPLICATION,
-        component: () => import('@/views/settings/ApplicationSettings.vue'),
-        meta: {
-          icon: 'pi pi-sliders-h',
-          requiresAuth: true,
-        },
-      },
-      {
-        path: 'integrations',
-        name: RouteNameConstants.SETTINGS_INTEGRATIONS,
-        component: () => import('@/views/settings/IntegrationSettings.vue'),
-        meta: {
-          icon: 'pi pi-share-alt',
-          requiresAuth: true,
-        },
-      },
-      {
-        path: 'preferences',
-        name: RouteNameConstants.SETTINGS_PREFERENCES,
-        component: () => import('@/views/settings/PreferenceSettings.vue'),
-        meta: {
-          icon: 'pi pi-palette',
-          requiresAuth: true,
-        },
-      },
-      {
-        path: 'logs',
-        name: RouteNameConstants.SETTINGS_LOGS,
-        component: () => import('@/views/settings/LoggerSettings.vue'),
-        meta: {
-          icon: 'pi pi-book',
-          requiresAuth: true,
-        },
-      },
-      {
-        path: 'other',
-        name: RouteNameConstants.SETTINGS_OTHER,
-        component: () => import('@/views/settings/OtherSettings.vue'),
-        meta: {
-          icon: 'pi pi-cog',
-          requiresAuth: true,
-        },
-      },
-    ],
-  },
-]
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: RouteNameConstants.HOME,
-      component: () => import('@/views/HomePage.vue'),
-    },
-    {
-      path: '/logs',
-      name: RouteNameConstants.LOGS,
-      component: () => import('@/views/LogsPage.vue'),
-      meta: {
-        icon: 'pi pi-book',
-        requiresAuth: true,
-      },
-    },
-    ...routes,
-    ...integrationRoutes,
-    {
-      path: '/:pathMatch(.*)*',
-      redirect: { name: RouteNameConstants.HOME },
-    },
-  ],
+  routes,
 })
 
 router.beforeEach(async (to, from) => {
@@ -144,48 +24,91 @@ router.beforeEach(async (to, from) => {
   const user = useUser()
   // Attempt to validate the token if not previously done so. This is
   // to ensure the refresh returns you to the same route.
-  if (
-    !user.hasAttemptedAutoLogin &&
-    !user.isLoggedIn &&
-    !(to.name === RouteNameConstants.INTEGRATIONS)
-  ) {
+  if (!user.hasAttemptedAutoLogin && !user.isLoggedIn && !(to.name === '/integrations/[id]')) {
     logger.debug('[Router]: Attempting to auto-login user.')
     await user.autoLoginIfPossible()
   }
   // If the user is trying to login via an integration
-  if (to.name === RouteNameConstants.INTEGRATIONS && to.hash !== '' && !user.isLoggedIn) {
+  if (to.name === '/integrations/[id]' && to.hash !== '' && !user.isLoggedIn) {
     await user.login(to.hash)
     logger.debug(`[Router]: User is logging in via Twitch ${user.details?.name}.`)
-    return { name: RouteNameConstants.QUEUE, hash: '' }
+    return '/queue'
     // User is not logged in trying to access auth required route
   } else if (!user.isLoggedIn && to.meta.requiresAuth) {
     logger.debug(`[Router]: User is not logged in, redirecting to home page from ${to.fullPath}.`)
-    return { name: RouteNameConstants.HOME }
+    return '/'
   }
   logger.debug(`[Router]: Navigating from ${from.fullPath} to ${to.fullPath}.`)
 })
 
 export default router
 
-// Translations for each of the routes.
-export const routeTranslations = {
-  [RouteNameConstants.INTEGRATIONS]: () => '',
-  [RouteNameConstants.HOME]: () => '',
-  [RouteNameConstants.QUEUE]: m.queue,
-  [RouteNameConstants.HISTORY]: m.history,
-  [RouteNameConstants.LOGS]: m.logs,
-  [RouteNameConstants.SETTINGS]: m.settings,
-  [RouteNameConstants.SETTINGS_APPLICATION]: m.application,
-  [RouteNameConstants.SETTINGS_INTEGRATIONS]: m.integrations,
-  [RouteNameConstants.SETTINGS_PREFERENCES]: m.settings_preferences,
-  [RouteNameConstants.SETTINGS_LOGS]: m.logs,
-  [RouteNameConstants.SETTINGS_OTHER]: m.settings_other,
+/**
+ * Sort routes based on meta order.
+ * @param a - The first route.
+ * @param b - The second route.
+ * @returns Number based on the ordering of the two routes.
+ */
+function sortRoutes(a: RouteRecordRaw, b: RouteRecordRaw): number {
+  if (!a.meta?.order || !b.meta?.order) {
+    return 0
+  }
+  if (!a.meta?.order) {
+    return 1
+  }
+  if (!b.meta?.order) {
+    return -1
+  }
+  return a.meta.order - b.meta.order
+}
+
+/**
+ * Deep sort all routes based on the ordering they specified.
+ * @param routes - The routes to sort.
+ * @returns Array of deeply sorted routes.
+ */
+function deepSortRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
+  return routes.sort(sortRoutes).map(
+    (route) =>
+      ({
+        ...route,
+        children: route.children ? deepSortRoutes(route.children).sort(sortRoutes) : undefined,
+      }) as RouteRecordRaw,
+  )
+}
+
+/**
+ * Deep filter all routes based on the ordering they specified.
+ * @param routes - The routes to filter.
+ * @returns Array of deeply filtered routes.
+ */
+function deepFilterRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
+  const user = useUser()
+  return routes
+    .filter((route) => {
+      // Do not show any hidden routes.
+      if (route.meta?.hidden) {
+        return false
+      }
+      // Do not show any unnamed routes.
+      if (!route.name) {
+        return false
+      }
+      // Do not show any routes that require authentication when the user is logged out.
+      return (route.meta?.requiresAuth && user.isLoggedIn) || !route.meta?.requiresAuth
+    })
+    .map(
+      (route) =>
+        ({
+          ...route,
+          children: route.children ? deepFilterRoutes(route.children) : undefined,
+        }) as RouteRecordRaw,
+    )
 }
 
 /**
  * Returns list of allowed routes for the current user.
  */
-export const allowedRoutes = computed(() => {
-  const user = useUser()
-  return routes.filter((r) => (r.meta?.requiresAuth && user.isLoggedIn) || !r.meta?.requiresAuth)
+export const visibleRoutes = computed(() => {
+  return deepSortRoutes(deepFilterRoutes(routes))
 })

@@ -1,16 +1,20 @@
 import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
+import ConfirmationService from 'primevue/confirmationservice'
+import ToastService from 'primevue/toastservice'
 import { describe, expect, it, vi } from 'vitest'
 
-import SettingsPage from '../SettingsPage.vue'
+import PreferenceSettings from '../preferences.vue'
 
-describe('SettingsPage.vue', () => {
-  const wrapper = shallowMount(SettingsPage, {
+describe('settings/preferences.vue', () => {
+  const wrapper = shallowMount(PreferenceSettings, {
     global: {
       plugins: [
         createTestingPinia({
           createSpy: vi.fn,
         }),
+        ConfirmationService,
+        ToastService,
       ],
     },
   })

@@ -23,9 +23,19 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { definePage } from 'vue-router/dist/experimental/index.js'
 
 import AppFeatureCard from '@/components/AppFeatureCard.vue'
 import { m } from '@/paraglide/messages'
+
+definePage({
+  meta: {
+    requiresAuth: false,
+    icon: '',
+    title: () => '',
+    hidden: true,
+  },
+})
 
 const features = computed(() => [
   {

@@ -1,20 +1,26 @@
 import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
-import ConfirmationService from 'primevue/confirmationservice'
-import ToastService from 'primevue/toastservice'
 import { describe, expect, it, vi } from 'vitest'
 
-import OtherSettings from '../OtherSettings.vue'
+import { IntegrationID } from '@/integrations'
 
-describe('OtherSettings.vue', () => {
-  const wrapper = shallowMount(OtherSettings, {
+import IntegrationPage from '../[id].vue'
+
+vi.mock('vue-router', () => ({
+  useRoute: () => ({
+    params: {
+      id: IntegrationID.TWITCH,
+    },
+  }),
+}))
+
+describe('integrations/[id].vue', () => {
+  const wrapper = shallowMount(IntegrationPage, {
     global: {
       plugins: [
         createTestingPinia({
           createSpy: vi.fn,
         }),
-        ConfirmationService,
-        ToastService,
       ],
     },
   })

@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 
-import HomePage from '../HomePage.vue'
+import IndexPage from '../index.vue'
 
-describe('HomePage.vue', () => {
-  const wrapper = shallowMount(HomePage)
+describe('index.vue', () => {
+  const wrapper = shallowMount(IndexPage)
 
   it('mounts successfully', () => {
     expect(wrapper.exists()).toEqual(true)

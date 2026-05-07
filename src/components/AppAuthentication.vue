@@ -45,7 +45,6 @@ import { useTemplateRef } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { m } from '@/paraglide/messages'
-import { RouteNameConstants } from '@/router'
 import { useUser } from '@/stores/user'
 
 const router = useRouter()
@@ -60,7 +59,7 @@ const items: MenuItem[] = [
     icon: 'pi pi-sign-out',
     command: async () => {
       await user.logout()
-      await router.push({ name: RouteNameConstants.HOME })
+      await router.push('/')
     },
   },
 ]

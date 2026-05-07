@@ -3,9 +3,9 @@ import { shallowMount } from '@vue/test-utils'
 import ToastService from 'primevue/toastservice'
 import { describe, expect, it, vi } from 'vitest'
 
-import ApplicationSettings from '../ApplicationSettings.vue'
+import ApplicationSettings from '../application.vue'
 
-describe('ApplicationSettings.vue', () => {
+describe('settings/application.vue', () => {
   const wrapper = shallowMount(ApplicationSettings, {
     global: {
       plugins: [

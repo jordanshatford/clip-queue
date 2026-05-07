@@ -105,6 +105,15 @@ import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useQueue } from '@/stores/queue'
 
+definePage({
+  meta: {
+    requiresAuth: true,
+    icon: 'pi pi-history',
+    title: m.history,
+    order: 2,
+  },
+})
+
 const filters = ref({
   global: { value: null, matchMode: 'contains' },
 })

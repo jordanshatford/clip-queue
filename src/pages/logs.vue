@@ -66,6 +66,15 @@ import { datetime } from '@/paraglide/registry'
 import { logLevelIcons, logLevelSeverities, logLevelTranslations, useLogger } from '@/stores/logger'
 import { usePreferences } from '@/stores/preferences'
 
+definePage({
+  meta: {
+    requiresAuth: true,
+    icon: 'pi pi-book',
+    title: m.logs,
+    hidden: true,
+  },
+})
+
 const confirm = useConfirm()
 const preferences = usePreferences()
 const logger = useLogger()

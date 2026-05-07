@@ -110,6 +110,15 @@ import { m } from '@/paraglide/messages'
 import { locales } from '@/paraglide/runtime'
 import { availableThemes, usePreferences } from '@/stores/preferences'
 
+definePage({
+  meta: {
+    requiresAuth: true,
+    icon: 'pi pi-palette',
+    title: m.settings_preferences,
+    order: 3,
+  },
+})
+
 const preferences = usePreferences()
 
 const { formSettings, onReset, onSubmit } = useSettingsForm(

@@ -64,6 +64,15 @@ import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
 import { useSettings } from '@/stores/settings'
 
+definePage({
+  meta: {
+    requiresAuth: true,
+    icon: 'pi pi-cog',
+    title: m.settings_other,
+    order: 5,
+  },
+})
+
 const version = __APP_VERSION__
 
 const toast = useToast()

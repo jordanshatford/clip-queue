@@ -4,9 +4,9 @@ import ConfirmationService from 'primevue/confirmationservice'
 import ToastService from 'primevue/toastservice'
 import { describe, expect, it, vi } from 'vitest'
 
-import LoggerSettings from '../LoggerSettings.vue'
+import LoggerSettings from '../logs.vue'
 
-describe('LoggerSettings.vue', () => {
+describe('settings/logs.vue', () => {
   const wrapper = shallowMount(LoggerSettings, {
     global: {
       plugins: [

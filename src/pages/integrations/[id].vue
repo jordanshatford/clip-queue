@@ -10,8 +10,18 @@ import { useRoute } from 'vue-router'
 
 import IntegrationIcon from '@/components/integrations/IntegrationIcon.vue'
 import { integrations } from '@/integrations'
+import { m } from '@/paraglide/messages'
 
-const route = useRoute()
+definePage({
+  meta: {
+    requiresAuth: false,
+    icon: 'pi pi-share-alt',
+    title: m.integrations,
+    hidden: true,
+  },
+})
+
+const route = useRoute('/integrations/[id]')
 
 const integration = integrations.find((i) => i.id === route.params.id)
 </script>
