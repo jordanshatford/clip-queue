@@ -59,9 +59,9 @@ interface Props {
 
 const { source } = defineProps<Props>()
 
-const featureTranslations: Record<ClipSourceFeature, () => string> = {
-  [ClipSourceFeature.AUTOMOD]: m.auto_mod,
-  [ClipSourceFeature.COMMANDS]: m.commands,
-  [ClipSourceFeature.LINK_DETECTION]: m.link_detection,
+const featureTranslations: Record<IntegrationSourceFeature, () => string> = {
+  [IntegrationSourceFeature.AUTOMOD]: m.auto_mod,
+  [IntegrationSourceFeature.COMMANDS]: m.commands,
+  [IntegrationSourceFeature.LINK_DETECTION]: m.link_detection,
 }
 </script>

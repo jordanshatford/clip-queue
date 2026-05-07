@@ -22,10 +22,10 @@ export class TwitchChatSource
     return `twitch.tv/${this.channel}/chat`
   }
 
-  public readonly features: ClipSourceFeature[] = [
-    ClipSourceFeature.AUTOMOD,
-    ClipSourceFeature.COMMANDS,
-    ClipSourceFeature.LINK_DETECTION,
+  public readonly features: IntegrationSourceFeature[] = [
+    IntegrationSourceFeature.AUTOMOD,
+    IntegrationSourceFeature.COMMANDS,
+    IntegrationSourceFeature.LINK_DETECTION,
   ]
 
   public readonly isExperimental: boolean = false

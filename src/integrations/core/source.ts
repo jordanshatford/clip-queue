@@ -3,15 +3,15 @@ import type { EventEmitter } from './event-emitter'
 import type { IntegrationStatus } from './types'
 
 /**
- * Enumeration representing the possible features a clip source can support.
+ * Enumeration representing the possible features a integration source can support.
  */
-export enum ClipSourceFeature {
+export enum IntegrationSourceFeature {
   /**
-   * Has support for detecting moderation at the source and actioning it to the clip queue.
+   * Has support for detecting moderation at the source and actioning it to the queue.
    */
   AUTOMOD = 'AutoModeration',
   /**
-   * Has support for triggering clip queue commands.
+   * Has support for triggering commands.
    */
   COMMANDS = 'Commands',
   /**
@@ -147,9 +147,9 @@ export type IntegrationSource = {
    */
   readonly url?: string
   /**
-   * List of features the clip source supports.
+   * List of features the source supports.
    */
-  readonly features: ClipSourceFeature[]
+  readonly features: IntegrationSourceFeature[]
   /**
    * Whether the source is experimental.
    * Experimental sources are sources that are not fully tested and may be unstable.
