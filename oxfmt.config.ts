@@ -1,7 +1,7 @@
 import { defineConfig } from 'oxfmt'
 
 export default defineConfig({
-  ignorePatterns: ['**/.changeset/**', '**/dist/**', '**/node_modules/**'],
+  ignorePatterns: ['**/.changeset/**', '**/dist/**', '**/node_modules/**', 'typed-router.d.ts'],
   semi: false,
   singleQuote: true,
   sortImports: {
