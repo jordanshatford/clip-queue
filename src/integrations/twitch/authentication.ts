@@ -11,6 +11,8 @@ import auth from './core/auth'
 
 const { CLIENT_ID, REDIRECT_URI } = env
 
+const state = useStorage<string>(toStorageKey(IntegrationID.TWITCH_AUTH, 'redirect-state'), '')
+
 const user = useStorage<UserDetails>(toStorageKey(IntegrationID.TWITCH_AUTH, 'user'), {
   id: '',
   name: '',
@@ -32,7 +34,8 @@ export class TwitchAuthentication implements IntegrationAuthentication {
   }
 
   public async redirect(): Promise<void> {
-    auth.redirect(CLIENT_ID, REDIRECT_URI, ['openid', 'chat:read'])
+    state.value = Math.random().toString(36).substring(2)
+    auth.redirect(CLIENT_ID, REDIRECT_URI, ['openid', 'chat:read'], state.value)
   }
 
   public async autoLogin(): Promise<UserDetails> {
@@ -49,7 +52,7 @@ export class TwitchAuthentication implements IntegrationAuthentication {
   }
 
   public async login(hash: string): Promise<UserDetails> {
-    const authInfo = auth.login(hash)
+    const authInfo = auth.login(hash, state.value)
     if (authInfo === null) {
       throw new Error('Failed to parse authentication information from URL hash.')
     }

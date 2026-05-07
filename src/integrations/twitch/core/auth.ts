@@ -5,9 +5,17 @@ const BASE_URL = 'https://id.twitch.tv/oauth2'
 /**
  * Get AuthInfo from Twitch login hash.
  * @param hash - The hash from the URL.
+ * @param state - String used to validate the state.
  * @returns The AuthInfo or null if the hash is invalid.
  */
-export function login(hash: string): AuthInfo | null {
+export function login(hash: string, state: string): AuthInfo | null {
+  const params = new URLSearchParams(hash.replace(/^#/, ''))
+  if (!params.has('state')) {
+    return null
+  }
+  if (params.get('state') !== state) {
+    return null
+  }
   const authInfo = processAuthHash(hash)
   if (authInfo.access_token && authInfo.id_token) {
     authInfo.decodedIdToken = parseJWT(authInfo.id_token) as IDToken
@@ -36,15 +44,22 @@ export async function logout(clientID: string, token: string): Promise<void> {
  * @param clientID - The client ID to use.
  * @param redirectUri - The URI to redirect to after login.
  * @param scopes - The scopes to request.
+ * @param state - String used to validate the state.
  */
-export function redirect(clientID: string, redirectUri: string, scopes: string[]): void {
-  const loginURL = new URL(`${BASE_URL}/authorize`)
-  loginURL.searchParams.set('client_id', clientID)
-  loginURL.searchParams.set('redirect_uri', redirectUri)
-  loginURL.searchParams.set('response_type', 'token id_token')
-  loginURL.searchParams.set('scope', scopes.join(' '))
-  loginURL.searchParams.set('claims', JSON.stringify({ id_token: { preferred_username: null } }))
-  window.location.assign(loginURL)
+export function redirect(
+  clientID: string,
+  redirectUri: string,
+  scopes: string[],
+  state: string,
+): void {
+  const url = new URL(`${BASE_URL}/authorize`)
+  url.searchParams.set('client_id', clientID)
+  url.searchParams.set('redirect_uri', redirectUri)
+  url.searchParams.set('response_type', 'token id_token')
+  url.searchParams.set('scope', scopes.join(' '))
+  url.searchParams.set('state', state)
+  url.searchParams.set('claims', JSON.stringify({ id_token: { preferred_username: null } }))
+  window.location.assign(url)
 }
 
 /**
