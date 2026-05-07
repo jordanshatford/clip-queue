@@ -1,5 +1,35 @@
 # clip-queue
 
+## 2.3.0
+
+### Minor Changes
+
+- feat: add provider for streamable videos ([`476b6e1`](https://github.com/jordanshatford/clip-queue/commit/476b6e10f4fdc0b9e3174f9d3b0821288f432189))
+
+- feat: add provider for vimeo videos ([`054886c`](https://github.com/jordanshatford/clip-queue/commit/054886cf4c1d01830cb8055a999727fb2a48d5cc))
+
+- feat: display logged in user name and photo in navbar ([`6e4fad4`](https://github.com/jordanshatford/clip-queue/commit/6e4fad4e8dc94b114da65ad20515c6693dc44d5b))
+
+- feat: add provider for medal tv clips ([`0513362`](https://github.com/jordanshatford/clip-queue/commit/05133628fdeb00ed12fe8dce9dd148d7ebc18ad3))
+
+- feat: add provider for sooplive vods ([`f9980d9`](https://github.com/jordanshatford/clip-queue/commit/f9980d9dbf80e2378547d1a8b7f676781e8d36e5))
+
+- feat: add ability to disable complete integrations aside from twitch ([`a7b91a2`](https://github.com/jordanshatford/clip-queue/commit/a7b91a2159c0991655fe5aaf87593feef86f9c4b))
+
+- feat: add integration for miscellaneous providers ([`f9980d9`](https://github.com/jordanshatford/clip-queue/commit/f9980d9dbf80e2378547d1a8b7f676781e8d36e5))
+
+- feat: add provider for rumble videos and shorts ([`f1979a8`](https://github.com/jordanshatford/clip-queue/commit/f1979a85bde6e0a8bc03dfee381edfe65556c19d))
+
+- feat: add provider for dailymotion videos ([`a01b0ba`](https://github.com/jordanshatford/clip-queue/commit/a01b0ba47b904124c6f9fb67116eadfca7669598))
+
+### Patch Changes
+
+- fix: improve provider url detection and handling ([`c00f254`](https://github.com/jordanshatford/clip-queue/commit/c00f254bc71e0be1a8e7b18e609d1dd0000b6ad4))
+
+- fix: simplify integrations authentication, source, provider description ([`a49861d`](https://github.com/jordanshatford/clip-queue/commit/a49861d4811de4d1bf7b601676483e9115bb3064))
+
+- fix: tighten url hostname checks for providers ([`7e7157d`](https://github.com/jordanshatford/clip-queue/commit/7e7157df7a46196dd85da9fc21437a088f7160f8))
+
 ## 2.2.0
 
 ### Minor Changes
