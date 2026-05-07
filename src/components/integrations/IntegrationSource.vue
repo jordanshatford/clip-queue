@@ -2,17 +2,21 @@
   <Message size="small" severity="secondary" variant="simple">
     {{ m.source_for_integration() }}
   </Message>
-  <InputGroup>
-    <InputText id="username" :value="source.name" readonly fluid size="small" />
-    <InputGroupAddon v-if="source.isExperimental">
+  <div class="flex justify-between">
+    <div class="flex items-center gap-2">
+      <label :for="source.id">{{ source.name }}</label>
+      <Tag class="font-mono text-xs" severity="secondary" :value="source.id"></Tag>
       <Tag
+        v-if="source.isExperimental"
         icon="pi pi-exclamation-triangle"
         class="text-xs"
         severity="warn"
         :value="m.experimental()"
-      >
-      </Tag>
-    </InputGroupAddon>
+      ></Tag>
+    </div>
+  </div>
+  <InputGroup>
+    <InputText id="username" :value="source.url" readonly fluid size="small" />
     <InputGroupAddon>
       <IntegrationStatusTag :status="source.status" />
     </InputGroupAddon>

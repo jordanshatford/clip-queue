@@ -16,13 +16,10 @@ export class TwitchChatSource
   implements IntegrationSource
 {
   public readonly id: IntegrationID = IntegrationID.TWITCH_CHAT
-
-  public get name(): string {
-    return `twitch.tv/${this.channel}/chat`
-  }
+  public readonly name: string = 'Twitch Chat'
 
   public get url(): string {
-    return `https://www.twitch.tv/${this.channel}/chat`
+    return `twitch.tv/${this.channel}/chat`
   }
 
   public readonly features: ClipSourceFeature[] = [
