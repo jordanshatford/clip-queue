@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import TwitchAuth from '../auth'
 
@@ -18,6 +18,10 @@ params.set('state', state)
 const hash = `#${params.toString()}`
 
 describe('integrations/twitch/core/auth', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+  })
+
   it('parses twitch authorization hash into login details', () => {
     const authInfo = TwitchAuth.login(hash, state)
     expect(authInfo?.access_token).toEqual(accessToken)
@@ -49,5 +53,56 @@ describe('integrations/twitch/core/auth', () => {
     p.delete('id_token')
     const authInfo = TwitchAuth.login(`#${p.toString()}`, state)
     expect(authInfo).toEqual(null)
+  })
+
+  it('can successfully logout of twitch', async () => {
+    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue({
+      ok: true,
+    } as Response)
+    global.fetch = fetchMock
+    await TwitchAuth.logout('client-id', 'token-123')
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://id.twitch.tv/oauth2/revoke?client_id=client-id&token=token-123',
+      {
+        method: 'POST',
+      },
+    )
+  })
+
+  it('throws an error when failing to logout of twitch', async () => {
+    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue({
+      ok: false,
+    } as Response)
+    global.fetch = fetchMock
+    await expect(TwitchAuth.logout('client-id', 'token-123')).rejects.toThrow(
+      'Failed to revoke token',
+    )
+  })
+
+  it('returns true when the token is valid', async () => {
+    const fetchMock = vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: true,
+    } as Response)
+    const result = await TwitchAuth.isLoginValid('token-123')
+    expect(result).toEqual(true)
+    expect(fetchMock).toHaveBeenCalledWith('https://id.twitch.tv/oauth2/validate', {
+      headers: {
+        Authorization: 'Bearer token-123',
+      },
+    })
+  })
+
+  it('returns false when the token is invalid', async () => {
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: false,
+    } as Response)
+    const result = await TwitchAuth.isLoginValid('token-123')
+    expect(result).toEqual(false)
+  })
+
+  it('returns false when fetch throws', async () => {
+    vi.spyOn(global, 'fetch').mockRejectedValue(new Error('Network error'))
+    const result = await TwitchAuth.isLoginValid('token-123')
+    expect(result).toEqual(false)
   })
 })
