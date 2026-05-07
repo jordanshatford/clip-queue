@@ -26,8 +26,7 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm build
-      - name: Create Release Pull Request
-        uses: changesets/action@v1
+      - uses: changesets/action@v1
         with:
           title: 'ci: release'
           commit: 'ci: release'

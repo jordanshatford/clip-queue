@@ -31,8 +31,7 @@ jobs:
         run: pnpm build
       - name: Run test coverage
         run: pnpm test:coverage
-      - name: Upload code coverage to codecov.io
-        uses: codecov/codecov-action@v6
+      - uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./coverage
