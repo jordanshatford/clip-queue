@@ -209,7 +209,7 @@ export const mockOEmbed: OEmbedResponse = {
   thumbnail_height: '',
   thumbnail_width: '',
   thumbnail_url: 'https://oembed.com/test/thumbnail',
-  html: '',
+  html: '<iframe src="https://test-src-iframe.com">',
 }
 
 export const clipFromKick: Clip = {

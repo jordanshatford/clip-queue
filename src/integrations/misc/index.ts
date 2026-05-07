@@ -5,6 +5,7 @@ import { toStorageKey, type Integration } from '../core'
 import { IntegrationID } from '../indentify'
 import { DailyMotionProvider } from './providers/dailymotion'
 import { MedalProvider } from './providers/medal'
+import { RumbleProvider } from './providers/rumble'
 import { SoopProvider } from './providers/soop'
 import { StreamableProvider } from './providers/streamable'
 import { VimeoProvider } from './providers/vimeo'
@@ -15,6 +16,7 @@ const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.MISCELLANEOUS, 
 
 export const dailymotion = reactive(new DailyMotionProvider())
 export const medal = reactive(new MedalProvider())
+export const rumble = reactive(new RumbleProvider())
 export const soop = reactive(new SoopProvider())
 export const streamable = reactive(new StreamableProvider())
 export const vimeo = reactive(new VimeoProvider())
@@ -37,5 +39,5 @@ export const misc: Integration = {
   set isEnabled(value: boolean) {
     isEnabled.value = value
   },
-  providers: [dailymotion, medal, soop, streamable, vimeo],
+  providers: [dailymotion, medal, rumble, soop, streamable, vimeo],
 }
