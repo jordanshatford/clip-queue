@@ -177,5 +177,6 @@
   "not_configured": "Yapılandırılmamış",
   "misconfigured": "Yanlış yapılandırılmış",
   "healthy": "Sağlıklı",
-  "link_detection": "Bağlantı Algılama"
+  "link_detection": "Bağlantı Algılama",
+  "disabled": "Engelli"
 }

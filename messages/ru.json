@@ -177,5 +177,6 @@
   "not_configured": "Не настроено",
   "misconfigured": "Неправильная настройка",
   "healthy": "Здоровый",
-  "link_detection": "Обнаружение связей"
+  "link_detection": "Обнаружение связей",
+  "disabled": "Неполноценный"
 }

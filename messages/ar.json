@@ -177,5 +177,6 @@
   "not_configured": "غير مهيأ",
   "misconfigured": "إعدادات خاطئة",
   "healthy": "صحيح",
-  "link_detection": "الكشف عن الروابط"
+  "link_detection": "الكشف عن الروابط",
+  "disabled": "عاجز"
 }

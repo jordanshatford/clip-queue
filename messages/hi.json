@@ -177,5 +177,6 @@
   "not_configured": "कॉन्फ़िगर नहीं किया गया",
   "misconfigured": "गलत तरह से कॉन्फ़िगर",
   "healthy": "स्वस्थ",
-  "link_detection": "लिंक पहचान"
+  "link_detection": "लिंक पहचान",
+  "disabled": "अक्षम"
 }

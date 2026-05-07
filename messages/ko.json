@@ -177,5 +177,6 @@
   "not_configured": "구성되지 않음",
   "misconfigured": "잘못 구성됨",
   "healthy": "건강한",
-  "link_detection": "링크 감지"
+  "link_detection": "링크 감지",
+  "disabled": "장애가 있는"
 }

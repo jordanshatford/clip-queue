@@ -177,5 +177,6 @@
   "not_configured": "未配置",
   "misconfigured": "配置错误",
   "healthy": "健康",
-  "link_detection": "链路检测"
+  "link_detection": "链路检测",
+  "disabled": "已禁用"
 }

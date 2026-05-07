@@ -3,7 +3,7 @@
     class="text-xs"
     :icon="config.icon"
     :severity="config.severity"
-    :value="config.label()"
+    v-tooltip="config.label()"
   ></Tag>
 </template>
 
@@ -40,9 +40,9 @@ const STATUS_CONFIG: Record<IntegrationStatus, TagConfig> = {
     icon: 'pi pi-check-circle',
   },
   [IntegrationStatus.DISABLED]: {
-    label: m.not_configured,
-    severity: 'warn',
-    icon: 'pi pi-exclamation-triangle',
+    label: m.disabled,
+    severity: 'secondary',
+    icon: 'pi pi-stop-circle',
   },
   [IntegrationStatus.MISCONFIGURED]: {
     label: m.misconfigured,

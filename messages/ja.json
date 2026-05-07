@@ -177,5 +177,6 @@
   "not_configured": "未設定",
   "misconfigured": "設定ミス",
   "healthy": "健康",
-  "link_detection": "リンク検出"
+  "link_detection": "リンク検出",
+  "disabled": "無効"
 }

@@ -177,5 +177,6 @@
   "not_configured": "No configurado",
   "misconfigured": "Mal configurado",
   "healthy": "Saludable",
-  "link_detection": "Detección de enlaces"
+  "link_detection": "Detección de enlaces",
+  "disabled": "Desactivado"
 }

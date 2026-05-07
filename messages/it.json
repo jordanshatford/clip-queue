@@ -177,5 +177,6 @@
   "not_configured": "Non configurato",
   "misconfigured": "Configurazione errata",
   "healthy": "Salutare",
-  "link_detection": "Rilevamento del collegamento"
+  "link_detection": "Rilevamento del collegamento",
+  "disabled": "Disabile"
 }
