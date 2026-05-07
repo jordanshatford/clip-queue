@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 import type { IntegrationSource, ClipSourceEventsMap } from '../../core'
 
-import { ClipSourceFeature, getAllURLsFromText, EventEmitter, IntegrationStatus } from '../../core'
+import { IntegrationSourceFeature, getAllURLsFromText, EventEmitter, IntegrationStatus } from '../../core'
 import { IntegrationID } from '../../indentify'
 
 const status = ref<IntegrationStatus>(IntegrationStatus.DISABLED)
