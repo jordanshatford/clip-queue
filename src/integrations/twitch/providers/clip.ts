@@ -81,6 +81,7 @@ export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationPr
   }
 }
 
+const MOBILE_HOSTNAME = 'm.twitch.tv'
 const DEPRECATED_CLIP_HOSTNAME = 'clips.twitch.tv'
 const CLIP_PATH_SUFFIX = '/clip/'
 /**
@@ -106,6 +107,12 @@ function getClipIdFromUrl(url: string): string | undefined {
 
     // Get the ID out of the URL. Always at the end of the URL.
     const segments = uri.pathname.split('/').filter(Boolean)
+    if (
+      ![MOBILE_HOSTNAME, DEPRECATED_CLIP_HOSTNAME].includes(uri.hostname) &&
+      segments.length < 3
+    ) {
+      return
+    }
     return segments.pop()
   } catch {
     return

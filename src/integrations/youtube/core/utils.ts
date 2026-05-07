@@ -16,7 +16,7 @@ export function isYouTubeURL(url: URL): boolean {
   return YOUTUBE_HOSTNAMES.includes(url.hostname)
 }
 
-const SHORT_PATH_SUFFIX = 'shorts'
+const SHORT_PATH_SUFFIX = '/shorts/'
 const VIDEO_TIMESTAMP_PARAM = 't'
 /**
  * Get YouTube URL details.
@@ -46,6 +46,9 @@ export function getYouTubeUrlDetails(url: string): {
     // Handle if it is a YouTube short URL.
     if (uri.pathname.includes(SHORT_PATH_SUFFIX)) {
       const segments = uri.pathname.split('/').filter(Boolean)
+      if (segments.length < 2) {
+        return {}
+      }
       const id = segments.pop()
       return { type: 'short', id }
     }

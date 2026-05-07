@@ -91,8 +91,8 @@ export function getClipIdFromUrl(url: string): string | undefined {
     if (id) {
       return id
     }
-    if (uri.pathname.includes(CLIP_PATH_SUFFIX)) {
-      const segments = uri.pathname.split('/').filter(Boolean)
+    const segments = uri.pathname.split('/').filter(Boolean)
+    if (uri.pathname.includes(CLIP_PATH_SUFFIX) && segments.length >= 3) {
       return segments.pop()
     }
   } catch {

@@ -82,14 +82,18 @@ function getIdFromURL(url: string): string | undefined {
       return
     }
 
+    const segments = uri.pathname.split('/').filter(Boolean)
+
     // Get the ID out of the URL.
     //  1. https://dai.ly/<ID>
     //  2. https://www.dailymotion.com/video/<ID>
     if (uri.hostname === SHORT_HOSTNAME) {
-      return uri.pathname.slice(1)
+      const id = segments.pop()
+      return id
     }
-
-    const segments = uri.pathname.split('/').filter(Boolean)
+    if (segments.length < 2) {
+      return
+    }
     const id = segments.pop()
     return id
   } catch {

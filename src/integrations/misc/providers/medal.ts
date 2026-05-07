@@ -67,6 +67,8 @@ export class MedalProvider extends Cacheable<Clip> implements IntegrationProvide
   }
 }
 
+const GAMES_PATH_SUFFIX = '/games/'
+const CLIPS_PATH_SUFFIX = '/clips/'
 /**
  * Get the ID from a provided URL.
  * @param url - The URL of the video.
@@ -81,9 +83,17 @@ function getIdFromURL(url: string): string | undefined {
       return
     }
 
+    if (!uri.pathname.includes(CLIPS_PATH_SUFFIX)) {
+      return
+    }
+
     // Get the ID out of the URL.
-    //  1. https://medal.tv/games/<GAME>/clips/<ID>
+    //  1. https://medal.tv/clips/<ID>
+    //  2. https://medal.tv/games/<GAME>/clips/<ID>
     const segments = uri.pathname.split('/').filter(Boolean)
+    if (segments.length < 2 || (uri.pathname.includes(GAMES_PATH_SUFFIX) && segments.length < 4)) {
+      return
+    }
     const id = segments.pop()
     return id
   } catch {

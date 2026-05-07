@@ -94,7 +94,8 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
   }
 }
 
-const VIDEO_PATH_SUFFIXS = ['/videos/', '/video/', '/v/']
+const VIDEOS_PATH_SUFFIX = '/videos/'
+const VIDEO_PATH_SUFFIXS = ['/video/', '/v/']
 const VIDEO_TIMESTAMP_PARAM = 't'
 /**
  * Get a vod ID from a provided URL.
@@ -115,12 +116,21 @@ function getVodIdAndTimestampFromUrl(url: string): { id?: string; timestamp?: st
     //  2. https://www.twitch.tv/<CHANNEL>/video/<ID>
     //  3. https://www.twitch.tv/videos/<ID>
     // Any of the above URLs can have a ?t=<TIMESTAMP> search parameter.
-    if (!VIDEO_PATH_SUFFIXS.some((suffix) => uri.pathname.includes(suffix))) {
+    if (
+      !uri.pathname.includes(VIDEOS_PATH_SUFFIX) &&
+      !VIDEO_PATH_SUFFIXS.some((suffix) => uri.pathname.includes(suffix))
+    ) {
       return {}
     }
 
     // Get the ID out of the URL. Always at the end of the URL.
     const segments = uri.pathname.split('/').filter(Boolean)
+    if (
+      (uri.pathname.includes(VIDEOS_PATH_SUFFIX) && segments.length < 2) ||
+      (VIDEO_PATH_SUFFIXS.some((suffix) => uri.pathname.includes(suffix)) && segments.length < 3)
+    ) {
+      return {}
+    }
     const id = segments.pop()
     const timestamp = uri.searchParams.get(VIDEO_TIMESTAMP_PARAM)
     return { id, timestamp: timestamp ?? undefined }
