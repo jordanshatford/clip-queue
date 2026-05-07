@@ -31,9 +31,5 @@ import type { IntegrationProvider } from '@/integrations'
 
 import { m } from '@/paraglide/messages'
 
-interface Props {
-  providers: Reactive<IntegrationProvider>[]
-}
-
-const { providers } = defineProps<Props>()
+const providers = defineModel<Reactive<IntegrationProvider>[]>({ required: true })
 </script>

@@ -40,6 +40,8 @@
 </template>
 
 <script setup lang="ts">
+import type { Reactive } from 'vue'
+
 import InputGroup from 'primevue/inputgroup'
 import InputGroupAddon from 'primevue/inputgroupaddon'
 import InputText from 'primevue/inputtext'
@@ -48,16 +50,12 @@ import Tag from 'primevue/tag'
 
 import type { IntegrationSource } from '@/integrations/core'
 
-import { ClipSourceFeature } from '@/integrations/core'
+import { IntegrationSourceFeature } from '@/integrations/core'
 import { m } from '@/paraglide/messages'
 
 import IntegrationStatusTag from './IntegrationStatusTag.vue'
 
-interface Props {
-  source: IntegrationSource
-}
-
-const { source } = defineProps<Props>()
+const source = defineModel<Reactive<IntegrationSource>>({ required: true })
 
 const featureTranslations: Record<IntegrationSourceFeature, () => string> = {
   [IntegrationSourceFeature.AUTOMOD]: m.auto_mod,

@@ -21,7 +21,7 @@
         <ToggleSwitch
           class="ml-auto"
           v-if="integration.id !== IntegrationID.TWITCH"
-          v-model="isEnabled"
+          v-model="integration.isEnabled"
           :input-id="integration.id"
           size="small"
         />
@@ -30,14 +30,14 @@
     <div class="flex flex-col gap-2 text-left">
       <IntegrationAuthentication
         v-if="integration.authentication"
-        :authentication="integration.authentication"
+        v-model="integration.authentication"
       />
       <Divider v-if="integration.authentication" />
-      <IntegrationSource v-if="integration.source" :source="integration.source" />
+      <IntegrationSource v-if="integration.source" v-model="integration.source" />
       <Divider v-if="integration.source" />
       <IntegrationProviders
         v-if="integration.providers && integration.providers.length > 0"
-        :providers="integration.providers"
+        v-model="integration.providers"
       />
     </div>
   </Panel>
@@ -57,10 +57,5 @@ import IntegrationIcon from './IntegrationIcon.vue'
 import IntegrationProviders from './IntegrationProviders.vue'
 import IntegrationSource from './IntegrationSource.vue'
 
-interface Props {
-  integration: Integration
-}
-
-const { integration } = defineProps<Props>()
-const isEnabled = defineModel<boolean>('enabled')
+const integration = defineModel<Integration>({ required: true })
 </script>

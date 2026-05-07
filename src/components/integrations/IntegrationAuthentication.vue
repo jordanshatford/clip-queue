@@ -6,6 +6,8 @@
 </template>
 
 <script setup lang="ts">
+import type { Reactive } from 'vue'
+
 import Chip from 'primevue/chip'
 import Message from 'primevue/message'
 
@@ -13,9 +15,5 @@ import type { IntegrationAuthentication } from '@/integrations/core'
 
 import { m } from '@/paraglide/messages'
 
-interface Props {
-  authentication: IntegrationAuthentication
-}
-
-const { authentication } = defineProps<Props>()
+const authentication = defineModel<Reactive<IntegrationAuthentication>>({ required: true })
 </script>

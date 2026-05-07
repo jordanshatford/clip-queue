@@ -8,7 +8,7 @@ import IntegrationAuthentication from '../IntegrationAuthentication.vue'
 describe('IntegrationAuthentication.vue', () => {
   const wrapper = shallowMount(IntegrationAuthentication, {
     props: {
-      authentication: authentication,
+      modelValue: authentication,
     },
   })
 

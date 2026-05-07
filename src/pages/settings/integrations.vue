@@ -1,6 +1,6 @@
 <template>
-  <div v-for="integration of integrations" :key="integration.id" class="mb-2">
-    <IntegrationCard :integration="integration" v-model:enabled="integration.isEnabled" />
+  <div v-for="(integration, index) of integrations" :key="integration.id" class="mb-2">
+    <IntegrationCard v-model="integrations[index]!" />
   </div>
 </template>
 

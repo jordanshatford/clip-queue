@@ -8,7 +8,7 @@ import IntegrationCard from '../IntegrationCard.vue'
 describe('IntegrationCard.vue', () => {
   const wrapper = shallowMount(IntegrationCard, {
     props: {
-      integration: twitch,
+      modelValue: twitch,
     },
   })
 

@@ -8,7 +8,7 @@ import IntegrationProviders from '../IntegrationProviders.vue'
 describe('IntegrationProviders.vue', () => {
   const wrapper = shallowMount(IntegrationProviders, {
     props: {
-      providers: [clips],
+      modelValue: [clips],
     },
   })
 

@@ -8,7 +8,7 @@ import IntegrationSource from '../IntegrationSource.vue'
 describe('IntegrationSource.vue', () => {
   const wrapper = shallowMount(IntegrationSource, {
     props: {
-      source: chat,
+      modelValue: chat,
     },
   })
 
