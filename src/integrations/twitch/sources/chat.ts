@@ -1,6 +1,6 @@
 import { Client } from '@tmi.js/chat'
 import { useStorage } from '@vueuse/core'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 
 import type { IntegrationSource, IntegrationSourceEvents } from '../../core'
 
@@ -49,7 +49,18 @@ export class TwitchChatSource
   }
 
   public set isEnabled(value: boolean) {
-    isEnabled.value = value
+    // Ensure we update the state of the chat connection based on the change.
+    // Specifically update the isEnabled value based on if we are connecting
+    // or disconnecting in a different order to ensure connecting and disconnecting
+    // works as intended.
+    isLoading.value = true
+    if (value && this.channel) {
+      isEnabled.value = value
+      this.connect(this.channel)
+    } else {
+      this.disconnect()
+      isEnabled.value = value
+    }
   }
 
   public get status(): IntegrationStatus {
@@ -88,15 +99,6 @@ export class TwitchChatSource
 
   public constructor() {
     super()
-    // Watch for changes to the enabled status.
-    watch(isEnabled, async (enabled) => {
-      isLoading.value = true
-      if (enabled && this.channel) {
-        await this.connect(this.channel)
-      } else {
-        await this.disconnect()
-      }
-    })
 
     // Hook into chat events from tmi.js/chat that we require for our application.
     // Each event gets used and re-routed into the structure our sources use.
