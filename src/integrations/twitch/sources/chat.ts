@@ -229,9 +229,6 @@ export class TwitchChatSource
     isLoading.value = true
     this.handleStatusUpdate(IntegrationStatus.UNKNOWN, `Disconnected from ${this.name}.`)
     try {
-      if (this.channel) {
-        await this.chat.part(this.channel)
-      }
       this.chat.close()
     } catch (e) {
       this.handleError(e)
