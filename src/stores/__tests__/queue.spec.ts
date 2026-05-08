@@ -6,12 +6,15 @@ import type { Clip } from '@/integrations'
 import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
 import { IntegrationID } from '@/integrations'
 
+import { useHistory } from '../history'
 import { useQueue } from '../queue'
 import { useSettings } from '../settings'
 
 describe('queue.ts', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
+    const history = useHistory()
+    history.reset()
   })
 
   it('initializes with the expected values', () => {
@@ -20,8 +23,6 @@ describe('queue.ts', () => {
     expect(queue.current).toEqual(undefined)
     expect(queue.upcoming.size()).toEqual(0)
     expect(queue.upcoming.toArray()).toEqual([])
-    expect(queue.history.size()).toEqual(0)
-    expect(queue.history.toArray()).toEqual([])
   })
 
   it('adds a clip to the queue', () => {
@@ -145,14 +146,14 @@ describe('queue.ts', () => {
     expect(queue.current).toEqual(clipFromTwitch)
     queue.next()
     expect(queue.current).toEqual(clipFromKick)
-    expect(queue.history.size()).toEqual(1)
+    expect(queue.history.length).toEqual(1)
   })
 
   it('does not add the current clip to previous when it is not defined', () => {
     const queue = useQueue()
     queue.add(clipFromTwitch)
     queue.next()
-    expect(queue.history.size()).toEqual(0)
+    expect(queue.history.length).toEqual(0)
   })
 
   it('can purge all clips from the history', () => {
@@ -162,9 +163,9 @@ describe('queue.ts', () => {
     queue.next()
     queue.next()
     queue.next()
-    expect(queue.history.size()).toEqual(2)
+    expect(queue.history.length).toEqual(2)
     queue.purge()
-    expect(queue.history.size()).toEqual(0)
+    expect(queue.history.length).toEqual(0)
   })
 
   it('can remove a specific clip from the history', () => {
@@ -174,10 +175,10 @@ describe('queue.ts', () => {
     queue.next()
     queue.next()
     queue.next()
-    expect(queue.history.size()).toEqual(2)
+    expect(queue.history.length).toEqual(2)
     queue.removeFromHistory(clipFromKick)
-    expect(queue.history.size()).toEqual(1)
-    expect(queue.history.toArray()).not.toContain(clipFromKick)
+    expect(queue.history.length).toEqual(1)
+    expect(queue.history.items).not.toContain(clipFromKick)
   })
 
   it('can have a limit set to prevent additional clips from being added', () => {

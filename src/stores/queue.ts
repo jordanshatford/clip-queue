@@ -7,7 +7,9 @@ import { IntegrationID } from '@/integrations'
 import { toClipUUID } from '@/integrations/core'
 import { useLogger } from '@/stores/logger'
 import { useSettings } from '@/stores/settings'
-import { BasicClipList, ClipList } from '@/utils/clip-list'
+import { ClipList } from '@/utils/clip-list'
+
+import { useHistory } from './history'
 
 export const useQueue = defineStore(
   'queue',
@@ -16,7 +18,7 @@ export const useQueue = defineStore(
     const logger = useLogger()
 
     const isOpen = ref<boolean>(true)
-    const history = ref<BasicClipList>(new BasicClipList())
+    const history = useHistory()
     const current = ref<Clip | undefined>(undefined)
     const upcoming = ref<ClipList>(new ClipList())
 
@@ -27,7 +29,7 @@ export const useQueue = defineStore(
 
     function purge() {
       logger.info('[Queue]: Purging queue history.')
-      history.value.clear()
+      history.reset()
     }
 
     function add(clip: Clip, force = false) {
@@ -42,8 +44,7 @@ export const useQueue = defineStore(
       }
       // Ignore when we have previously watched it
       const hasBeenWatched =
-        (current.value && toClipUUID(current.value) === toClipUUID(clip)) ||
-        history.value.includes(clip)
+        (current.value && toClipUUID(current.value) === toClipUUID(clip)) || history.includes(clip)
       if (hasBeenWatched) {
         return
       }
@@ -70,7 +71,7 @@ export const useQueue = defineStore(
     }
 
     function removeFromHistory(clip: Clip) {
-      history.value.remove(clip)
+      history.remove(clip)
     }
 
     function play(clip: Clip) {
@@ -78,7 +79,7 @@ export const useQueue = defineStore(
         return
       }
       if (current.value?.id) {
-        history.value.add(current.value)
+        history.add(current.value)
       }
       upcoming.value.remove(clip)
       current.value = clip
@@ -96,12 +97,12 @@ export const useQueue = defineStore(
       if (current.value?.id) {
         upcoming.value.unshift(current.value)
       }
-      current.value = history.value.pop()
+      current.value = history.pop()
     }
 
     function next() {
       if (current.value?.id) {
-        history.value.add(current.value)
+        history.add(current.value)
       }
       current.value = upcoming.value.shift()
     }
@@ -128,7 +129,7 @@ export const useQueue = defineStore(
   {
     persist: {
       key: 'cq-queue',
-      pick: ['history', 'current', 'upcoming'],
+      pick: ['current', 'upcoming'],
     },
   },
 )

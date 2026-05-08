@@ -3,7 +3,7 @@
     v-if="queue.current && queue.current.id"
     :key="toClipUUID(queue.current)"
     :clip="queue.current"
-    :previous-disabled="queue.history.empty()"
+    :previous-disabled="queue.history.length === 0"
     @previous="queue.previous()"
     @next="queue.next()"
   />

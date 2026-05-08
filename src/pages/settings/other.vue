@@ -20,7 +20,7 @@
         fluid
         size="small"
         severity="danger"
-        :disabled="queue.history.empty()"
+        :disabled="queue.history.length === 0"
         @click="purgeHistory()"
       ></Button>
       <Message size="small" severity="secondary" variant="simple">{{

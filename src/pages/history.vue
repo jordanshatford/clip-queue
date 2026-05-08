@@ -21,7 +21,7 @@
     v-model:selection="selection"
     v-model:filters="filters"
     :global-filter-fields="['category', 'channel', 'provider', 'submitters', 'title']"
-    :value="queue.history.toArray()"
+    :value="queue.history.items"
     size="small"
     paginator
     removable-sort
