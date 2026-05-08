@@ -177,5 +177,7 @@
   "misconfigured": "إعدادات خاطئة",
   "healthy": "صحيح",
   "link_detection": "الكشف عن الروابط",
-  "disabled": "عاجز"
+  "disabled": "عاجز",
+  "connected_to_source_name": "متصل بـ {source} كـ {name} .",
+  "disconnected_from_source": "تم فصل الاتصال بـ {source} ."
 }

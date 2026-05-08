@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 import { useTitle } from '@vueuse/core'
+import { useToast } from 'primevue'
 import ConfirmDialog from 'primevue/confirmdialog'
 import Toast from 'primevue/toast'
 import { computed } from 'vue'
@@ -24,9 +25,16 @@ import { config } from '@/config'
 
 import { usePreferences } from './stores/preferences'
 import { useQueue } from './stores/queue'
+import { useSources } from './stores/sources'
 
+const toast = useToast()
 const preferences = usePreferences()
 const queue = useQueue()
+const sources = useSources()
+
+sources.onToast((m) => {
+  toast.add(m)
+})
 
 const title = computed((): string => {
   let queueState = queue.isOpen ? 'Open' : 'Closed'

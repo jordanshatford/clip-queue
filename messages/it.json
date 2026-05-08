@@ -177,5 +177,7 @@
   "misconfigured": "Configurazione errata",
   "healthy": "Salutare",
   "link_detection": "Rilevamento del collegamento",
-  "disabled": "Disabile"
+  "disabled": "Disabile",
+  "connected_to_source_name": "Connesso a {source} come {name} .",
+  "disconnected_from_source": "Disconnesso da {source} ."
 }

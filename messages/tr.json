@@ -177,5 +177,7 @@
   "misconfigured": "Yanlış yapılandırılmış",
   "healthy": "Sağlıklı",
   "link_detection": "Bağlantı Algılama",
-  "disabled": "Engelli"
+  "disabled": "Engelli",
+  "connected_to_source_name": "{source} ile {name} olarak bağlantılı.",
+  "disconnected_from_source": "{source} bağlantısı kesildi."
 }

@@ -177,5 +177,7 @@
   "misconfigured": "Fehlkonfiguriert",
   "healthy": "Gesund",
   "link_detection": "Linkerkennung",
-  "disabled": "Deaktiviert"
+  "disabled": "Deaktiviert",
+  "connected_to_source_name": "Verbunden mit {source} als {name} .",
+  "disconnected_from_source": "Verbindung zu {source} ."
 }

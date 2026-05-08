@@ -177,5 +177,7 @@
   "misconfigured": "Неправильная настройка",
   "healthy": "Здоровый",
   "link_detection": "Обнаружение связей",
-  "disabled": "Неполноценный"
+  "disabled": "Неполноценный",
+  "connected_to_source_name": "Подключено к {source} как {name} .",
+  "disconnected_from_source": "Отключено от {source} ."
 }

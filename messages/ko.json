@@ -177,5 +177,7 @@
   "misconfigured": "잘못 구성됨",
   "healthy": "건강한",
   "link_detection": "링크 감지",
-  "disabled": "장애가 있는"
+  "disabled": "장애가 있는",
+  "connected_to_source_name": "{source} 에 {name} 으로 연결되었습니다.",
+  "disconnected_from_source": "{source} 에서 연결이 끊어졌습니다."
 }

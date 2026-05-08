@@ -177,5 +177,7 @@
   "misconfigured": "設定ミス",
   "healthy": "健康",
   "link_detection": "リンク検出",
-  "disabled": "無効"
+  "disabled": "無効",
+  "connected_to_source_name": "{source}に{name}接続しました。",
+  "disconnected_from_source": "{source}から切断されました。"
 }

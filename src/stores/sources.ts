@@ -1,9 +1,12 @@
+import type { ToastMessageOptions } from 'primevue'
+
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 import type { IntegrationSource } from '@/integrations/core'
 
 import { chat } from '@/integrations/twitch'
+import { m } from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'
 import { useUser } from '@/stores/user'
 import commands, { Command } from '@/utils/commands'
@@ -13,6 +16,7 @@ import { useQueue } from './queue'
 import { useSettings } from './settings'
 
 export const useSources = defineStore('sources', () => {
+  const toast = ref<(o: ToastMessageOptions) => void>(() => {})
   const queue = useQueue()
   const settings = useSettings()
   const logger = useLogger()
@@ -20,15 +24,32 @@ export const useSources = defineStore('sources', () => {
   const source = ref<IntegrationSource>(chat)
 
   // Configure listeners for all source events required for the application.
-  source.value.on('connected', (event) =>
-    logger.debug(`[${event.source}]: Connected to ${event.data}.`),
-  )
+  source.value.on('connected', (event) => {
+    logger.debug(`[${event.source}]: Connected to ${event.data}.`)
+    toast.value({
+      severity: 'success',
+      summary: m.success(),
+      detail: m.connected_to_source_name({
+        source: source.value.name,
+        name: event.data,
+      }),
+      life: 3000,
+    })
+  })
   source.value.on('disconnected', (event) => {
     if (event.data) {
       logger.debug(`[${event.source}]: Disconnected due to ${event.data}.`)
     } else {
       logger.debug(`[${event.source}]: Disconnected.`)
     }
+    toast.value({
+      severity: 'error',
+      summary: m.error(),
+      detail: m.disconnected_from_source({
+        source: source.value.name,
+      }),
+      life: 3000,
+    })
   })
   source.value.on('message', async (event) => {
     // Check if message is a command and perform command if proper permission to do so
@@ -95,6 +116,10 @@ export const useSources = defineStore('sources', () => {
     logger.error(`[${event.source}]: ${event.data}.`)
   })
 
+  function onToast(callback: (options: ToastMessageOptions) => void): void {
+    toast.value = callback
+  }
+
   async function connect(): Promise<void> {
     const username = useUser().details?.name
     logger.debug(`[Sources]: Connecting to source for user: ${username}.`)
@@ -109,5 +134,5 @@ export const useSources = defineStore('sources', () => {
     await source.value.disconnect()
   }
 
-  return { connect, disconnect }
+  return { onToast, connect, disconnect }
 })
