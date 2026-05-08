@@ -107,7 +107,7 @@ export const useLogger = defineStore(
       }
     }
 
-    function $reset() {
+    function reset() {
       logs.value = []
     }
 
@@ -117,7 +117,7 @@ export const useLogger = defineStore(
       info: (message: string) => handle('INFO', message),
       warn: (message: string) => handle('WARN', message),
       error: (message: string) => handle('ERROR', message),
-      $reset,
+      reset,
     }
   },
   {

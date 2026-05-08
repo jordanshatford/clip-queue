@@ -96,8 +96,8 @@ function resetSettingsToDefault() {
       severity: 'secondary',
     },
     accept: () => {
-      settings.$reset()
-      preferences.$reset()
+      settings.reset()
+      preferences.reset()
       toast.add({
         severity: 'success',
         summary: m.success(),

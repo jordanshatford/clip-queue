@@ -92,7 +92,7 @@ export const useSettings = defineStore(
       )
     })
 
-    function $reset(): void {
+    function reset(): void {
       application.value = DEFAULT_APPLICATION_SETTINGS
       logger.value = DEFAULT_LOGGER_SETTINGS
     }
@@ -103,7 +103,7 @@ export const useSettings = defineStore(
       isModified,
       isApplicationSettingsModified,
       isLoggerSettingsModified,
-      $reset,
+      reset,
     }
   },
   {

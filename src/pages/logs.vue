@@ -115,7 +115,7 @@ function deleteAllLogs() {
     },
     accept: () => {
       logger.debug('[Logs]: deleting all logs.')
-      logger.$reset()
+      logger.reset()
     },
     reject: () => {
       logger.debug('[Logs]: deletion of logs was cancelled.')

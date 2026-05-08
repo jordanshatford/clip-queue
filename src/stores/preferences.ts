@@ -138,7 +138,7 @@ export const usePreferences = defineStore(
       document.querySelector('html')?.classList.toggle('dark')
     }
 
-    function $reset() {
+    function reset() {
       preferences.value = DEFAULTS
     }
 
@@ -149,7 +149,7 @@ export const usePreferences = defineStore(
       isModifiedFrom,
       updatePreferences,
       toggleTheme,
-      $reset,
+      reset,
     }
   },
   {

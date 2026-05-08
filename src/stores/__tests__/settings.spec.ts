@@ -58,7 +58,7 @@ describe('settings.ts', () => {
     const settings = useSettings()
     settings.application.limit = 100
     expect(settings.application.limit).toEqual(100)
-    settings.$reset()
+    settings.reset()
     expect(settings.application).toEqual(DEFAULT_APPLICATION_SETTINGS)
     expect(settings.logger).toEqual(DEFAULT_LOGGER_SETTINGS)
   })
