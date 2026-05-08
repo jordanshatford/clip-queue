@@ -27,7 +27,7 @@
     "@fontsource-variable/inter": "^5.2.8",
     "@primeuix/themes": "^2.0.3",
     "@primevue/icons": "^4.5.5",
-    "@tmi.js/chat": "^0.7.5",
+    "@tmi.js/chat": "^0.8.0",
     "@vueuse/core": "^14.3.0",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
