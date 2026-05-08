@@ -1,5 +1,5 @@
 <template>
-  <Toast position="bottom-center" />
+  <Toast position="bottom-right" />
   <ConfirmDialog :draggable="false" />
   <div :key="preferences.preferences.language" class="h-full min-h-screen dark:bg-surface-950">
     <div class="h-full">
