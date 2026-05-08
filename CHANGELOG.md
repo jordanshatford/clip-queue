@@ -1,5 +1,35 @@
 # clip-queue
 
+## 2.4.0
+
+### Minor Changes
+
+- feat: allow enabling and disabling twitch chat source ([`c88067c`](https://github.com/jordanshatford/clip-queue/commit/c88067ca511ce1ab76cb820fae661032dca33091))
+
+- feat: use state in twitch authentication redirect ([`fb45bef`](https://github.com/jordanshatford/clip-queue/commit/fb45befee98e8bd23b261400720c6eb242410b7e))
+
+- feat: toast on source connect and disconnect events ([`c652053`](https://github.com/jordanshatford/clip-queue/commit/c652053f4073b1d8294946dde2f78ee562150278))
+
+- feat: display twitch chat source id in settings ([`eb2ad35`](https://github.com/jordanshatford/clip-queue/commit/eb2ad35c87d7ee4636d020ca91b31f1b48c62f21))
+
+- feat: use vue router file based routing ([`e15bf54`](https://github.com/jordanshatford/clip-queue/commit/e15bf541de1309b10dc6d1441c0e498fd38be227))
+
+- feat: remove source reconnect in place of disabling and re-enabling ([`7351371`](https://github.com/jordanshatford/clip-queue/commit/7351371e74ecee186bc01c234cd2c7baef84a2c3))
+
+- feat: rework integration source and simplify ([`b474c80`](https://github.com/jordanshatford/clip-queue/commit/b474c807886a1012c858984f66130009aeb4663b))
+
+### Patch Changes
+
+- fix: breakpoints on app navigation bar ([`31bf999`](https://github.com/jordanshatford/clip-queue/commit/31bf999f6de10309f780d6b83de0e61bb93d2982))
+
+- fix: issue causing enabling and disabling chat to fail ([`0c79f30`](https://github.com/jordanshatford/clip-queue/commit/0c79f30ee983da518cddba8dbb144d145417a9be))
+
+- fix: move toasts to bottom right of application ([`40d02c7`](https://github.com/jordanshatford/clip-queue/commit/40d02c7b709e83ba9ecccb707904e7f5a4e7bc5d))
+
+- fix: all integration status tag status values ([`f4f9366`](https://github.com/jordanshatford/clip-queue/commit/f4f9366cf7ee4be01071009a631b1a6fe20afd37))
+
+- fix: rename clip detection to link detection for source features ([`8721ecd`](https://github.com/jordanshatford/clip-queue/commit/8721ecd5061509090c6f2d5477670e3823bfc865))
+
 ## 2.3.0
 
 ### Minor Changes
