@@ -168,19 +168,6 @@ describe('queue.ts', () => {
     expect(queue.history.length).toEqual(0)
   })
 
-  it('can remove a specific clip from the history', () => {
-    const queue = useQueue()
-    queue.add(clipFromTwitch)
-    queue.add(clipFromKick)
-    queue.next()
-    queue.next()
-    queue.next()
-    expect(queue.history.length).toEqual(2)
-    queue.removeFromHistory(clipFromKick)
-    expect(queue.history.length).toEqual(1)
-    expect(queue.history.items).not.toContain(clipFromKick)
-  })
-
   it('can have a limit set to prevent additional clips from being added', () => {
     const queue = useQueue()
     const settings = useSettings()

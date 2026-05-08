@@ -155,7 +155,7 @@ function deleteClips() {
     accept: () => {
       logger.debug(`[History]: deleting ${clips.length} clip(s).`)
       for (const clip of clips) {
-        queue.removeFromHistory(clip)
+        queue.history.remove(clip)
       }
     },
     reject: () => {

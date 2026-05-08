@@ -70,10 +70,6 @@ export const useQueue = defineStore(
       upcoming.value.removeByProvider(provider)
     }
 
-    function removeFromHistory(clip: Clip) {
-      history.remove(clip)
-    }
-
     function play(clip: Clip) {
       if (!upcoming.value.includes(clip)) {
         return
@@ -118,7 +114,6 @@ export const useQueue = defineStore(
       remove,
       removeSubmitterClips,
       removeProviderClips,
-      removeFromHistory,
       play,
       open,
       close,
