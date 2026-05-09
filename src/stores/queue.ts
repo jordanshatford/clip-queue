@@ -5,11 +5,10 @@ import type { Clip } from '@/integrations'
 
 import { IntegrationID } from '@/integrations'
 import { toClipUUID } from '@/integrations/core'
+import { useHistory } from '@/stores/history'
 import { useLogger } from '@/stores/logger'
 import { useSettings } from '@/stores/settings'
-import { ClipList } from '@/utils/clip-list'
-
-import { useHistory } from './history'
+import { useUpcoming } from '@/stores/upcoming'
 
 export const useQueue = defineStore(
   'queue',
@@ -17,14 +16,15 @@ export const useQueue = defineStore(
     const settings = useSettings()
     const logger = useLogger()
 
-    const isOpen = ref<boolean>(true)
     const history = useHistory()
+    const upcoming = useUpcoming()
+
+    const isOpen = ref<boolean>(true)
     const current = ref<Clip | undefined>(undefined)
-    const upcoming = ref<ClipList>(new ClipList())
 
     function clear() {
       logger.info('[Queue]: Clearing upcoming queue.')
-      upcoming.value.clear()
+      upcoming.reset()
     }
 
     function purge() {
@@ -35,7 +35,7 @@ export const useQueue = defineStore(
     function add(clip: Clip, force = false) {
       // Force add the clip
       if (force) {
-        upcoming.value.add(clip)
+        upcoming.add(clip)
         return
       }
       // Ignore clip when queue isnt open
@@ -49,35 +49,27 @@ export const useQueue = defineStore(
         return
       }
       // Queue is full based on limit
-      if (settings.application.limit && upcoming.value.size() >= settings.application.limit) {
+      if (settings.application.limit && upcoming.length >= settings.application.limit) {
         // If the clip is already in the queue add it so submitters is updated
-        if (!upcoming.value.includes(clip)) {
+        if (!upcoming.includes(clip)) {
           return
         }
       }
-      upcoming.value.add(clip)
+      upcoming.add(clip)
     }
 
     function remove(clip: Clip) {
-      upcoming.value.remove(clip)
-    }
-
-    function removeSubmitterClips(submitter: string) {
-      upcoming.value.removeBySubmitter(submitter)
-    }
-
-    function removeProviderClips(provider: IntegrationID) {
-      upcoming.value.removeByProvider(provider)
+      upcoming.remove(clip)
     }
 
     function play(clip: Clip) {
-      if (!upcoming.value.includes(clip)) {
+      if (!upcoming.includes(clip)) {
         return
       }
       if (current.value?.id) {
         history.add(current.value)
       }
-      upcoming.value.remove(clip)
+      upcoming.remove(clip)
       current.value = clip
     }
 
@@ -91,7 +83,7 @@ export const useQueue = defineStore(
 
     function previous() {
       if (current.value?.id) {
-        upcoming.value.unshift(current.value)
+        upcoming.unshift(current.value)
       }
       current.value = history.pop()
     }
@@ -100,7 +92,7 @@ export const useQueue = defineStore(
       if (current.value?.id) {
         history.add(current.value)
       }
-      current.value = upcoming.value.shift()
+      current.value = upcoming.shift()
     }
 
     return {
@@ -112,8 +104,6 @@ export const useQueue = defineStore(
       purge,
       add,
       remove,
-      removeSubmitterClips,
-      removeProviderClips,
       play,
       open,
       close,
@@ -124,7 +114,7 @@ export const useQueue = defineStore(
   {
     persist: {
       key: 'cq-queue',
-      pick: ['current', 'upcoming'],
+      pick: ['current', 'isOpen'],
     },
   },
 )

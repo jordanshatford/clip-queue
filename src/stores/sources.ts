@@ -110,7 +110,7 @@ export const useSources = defineStore('sources', () => {
     if (!settings.application.hasAutoModerationEnabled) {
       return
     }
-    queue.removeSubmitterClips(username)
+    queue.upcoming.removeBySubmitter(username)
   })
   source.value.on('error', (event) => {
     logger.error(`[${event.source}]: ${event.data}.`)

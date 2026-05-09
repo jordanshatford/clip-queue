@@ -5,13 +5,13 @@ import { computed } from 'vue'
 import { toClipUUID, type Clip } from '@/integrations'
 
 /**
- * Store used for tracking clip history. Contains information about clips previously watched.
+ * Store used for tracking history. Contains information about items previously watched.
  */
 export const useHistory = defineStore('history', () => {
   /**
    * List of items in the history.
    */
-  const items = useStorage<Clip[]>('__cq_history_values', [], localStorage, { deep: true })
+  const items = useStorage<Clip[]>('__cq_history_items', [])
 
   /**
    * Current length of the history.
@@ -21,7 +21,16 @@ export const useHistory = defineStore('history', () => {
   })
 
   /**
-   * Add a clip to the history if not already present.
+   * Check if the history includes a item.
+   * @param clip - The clip to check for.
+   * @returns True if the clip is in the history, false otherwise.
+   */
+  function includes(clip: Clip): boolean {
+    return items.value.some((c) => toClipUUID(c) === toClipUUID(clip))
+  }
+
+  /**
+   * Add an item to the history if not already present.
    * @param clip - The clip to add to the history.
    */
   function add(clip: Clip): void {
@@ -32,14 +41,14 @@ export const useHistory = defineStore('history', () => {
   }
 
   /**
-   * Remove a clip from the history.
+   * Remove an item from the history.
    */
   function remove(clip: Clip): void {
     items.value = items.value.filter((c) => toClipUUID(c) !== toClipUUID(clip))
   }
 
   /**
-   * Pop a clip from the history. I.e used to get the most recent clip in history.
+   * Pop an item from the history. I.e used to get the most recent item in history.
    * @returns A clip if one is in the history, undefined otherwise.
    */
   function pop(): Clip | undefined {
@@ -47,16 +56,7 @@ export const useHistory = defineStore('history', () => {
   }
 
   /**
-   * Check if the history includes a clip.
-   * @param clip - The clip to check for.
-   * @returns True if the clip is in the history, false otherwise.
-   */
-  function includes(clip: Clip): boolean {
-    return items.value.some((c) => toClipUUID(c) === toClipUUID(clip))
-  }
-
-  /**
-   * Reset the clip history to its default state.
+   * Reset the history to its default state.
    */
   function reset(): void {
     items.value = []

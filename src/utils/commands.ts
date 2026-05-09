@@ -189,13 +189,13 @@ export function handleCommand(
     }
     case Command.REMOVE_BY_SUBMITTER: {
       if (args[0]) {
-        queue.removeSubmitterClips(args[0])
+        queue.upcoming.removeBySubmitter(args[0])
       }
       break
     }
     case Command.REMOVE_BY_PROVIDER: {
       if (args[0]) {
-        queue.removeProviderClips(args[0] as IntegrationID)
+        queue.upcoming.removeByProvider(args[0] as IntegrationID)
       }
       break
     }

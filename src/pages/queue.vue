@@ -9,7 +9,7 @@
   />
   <ClipQueue
     :title="m.upcoming_clips()"
-    :clips="queue.upcoming.toArray()"
+    :clips="queue.upcoming.items"
     :is-open="queue.isOpen"
     @open="queue.open()"
     @close="queue.close()"

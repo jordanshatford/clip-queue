@@ -25,7 +25,7 @@ describe('history.ts', () => {
     expect(history.length).toEqual(0)
   })
 
-  it('can does not add duplicate clips', () => {
+  it('does not add duplicate clips', () => {
     const history = useHistory()
     history.add(clipFromTwitch)
     expect(history.length).toEqual(1)

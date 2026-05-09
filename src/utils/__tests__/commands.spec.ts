@@ -56,8 +56,8 @@ describe('commands.ts', () => {
   )
 
   it.each([
-    [Command.REMOVE_BY_SUBMITTER, ['testsubmitter'], 'removeSubmitterClips', ['testsubmitter']],
-    [Command.REMOVE_BY_PROVIDER, ['testprovider'], 'removeProviderClips', ['testprovider']],
+    [Command.REMOVE_BY_SUBMITTER, ['testsubmitter'], 'removeBySubmitter', ['testsubmitter']],
+    [Command.REMOVE_BY_PROVIDER, ['testprovider'], 'removeByProvider', ['testprovider']],
   ])(
     'calls the proper clip queue function with params when issued: (command: %s, args: %o) -> %s(%o)',
     (
@@ -68,7 +68,7 @@ describe('commands.ts', () => {
     ) => {
       const queue = useQueue()
       // @ts-expect-error function with unknown type
-      const spy = vi.spyOn(queue, expectedFunctionCall)
+      const spy = vi.spyOn(queue.upcoming, expectedFunctionCall)
       commands.handleCommand(MOCK_EVENT, commandName.toString(), ...args)
       expect(spy).toHaveBeenCalledTimes(1)
       expect(spy).toHaveBeenCalledWith(...expectedFunctionArgs)
