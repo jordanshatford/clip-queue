@@ -1,8 +1,6 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import type { Clip } from '@/integrations'
-
 import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
 import { IntegrationID } from '@/integrations'
 
@@ -86,5 +84,108 @@ describe('upcoming.ts', () => {
     expect(upcoming.length).toEqual(4)
     upcoming.removeByProvider(IntegrationID.KICK_CLIPS)
     expect(upcoming.length).toEqual(1)
+  })
+
+  it('adds multiple clips with the same id if they are from different providers', () => {
+    const upcoming = useUpcoming()
+    upcoming.add({ ...clipFromTwitch, id: 'test', submitters: ['s'] })
+    upcoming.add({ ...clipFromKick, id: 'test', submitters: ['S'] })
+    expect(upcoming.length).toEqual(2)
+    expect(upcoming.items[0]?.id).toEqual(upcoming.items[1]?.id)
+    expect(upcoming.items[0]?.provider).toEqual(IntegrationID.TWITCH_CLIPS)
+    expect(upcoming.items[1]?.provider).toEqual(IntegrationID.KICK_CLIPS)
+  })
+
+  it('does not add the same submitter to a clip twice', () => {
+    const upcoming = useUpcoming()
+    upcoming.add({ ...clipFromTwitch, id: 'test', submitters: ['s'] })
+    upcoming.add({ ...clipFromTwitch, id: 'test', submitters: ['S'] })
+    upcoming.add({ ...clipFromTwitch, id: 'test', submitters: ['s'] })
+    expect(upcoming.length).toEqual(1)
+    expect(upcoming.items[0]?.submitters?.length).toEqual(1)
+  })
+
+  it('does not care about case of submitter when removing clip', () => {
+    const upcoming = useUpcoming()
+    upcoming.add({ ...clipFromTwitch, id: 'test', submitters: ['s'] })
+    expect(upcoming.length).toEqual(1)
+    upcoming.remove({ ...clipFromTwitch, id: 'test', submitters: ['S'] })
+    expect(upcoming.length).toEqual(0)
+  })
+
+  it('does not care about case of the submitter when removing based on a submitter', () => {
+    const upcoming = useUpcoming()
+    upcoming.add({ ...clipFromTwitch, id: 'test', submitters: ['s'] })
+    expect(upcoming.length).toEqual(1)
+    upcoming.removeBySubmitter('S')
+    expect(upcoming.length).toEqual(0)
+  })
+
+  it('can remove multiple clips when removing based on submitter', () => {
+    const upcoming = useUpcoming()
+    for (let i = 1; i <= 10; i++) {
+      upcoming.add({ ...clipFromTwitch, id: `test${i}`, submitters: ['s'] })
+    }
+    expect(upcoming.length).toEqual(10)
+    upcoming.removeBySubmitter('s')
+    expect(upcoming.length).toEqual(0)
+  })
+
+  it('sorts the list of clips based on number of submitters then the time submitted', () => {
+    const upcoming = useUpcoming()
+    for (let i = 1; i <= 10; i++) {
+      upcoming.add({
+        ...clipFromTwitch,
+        id: 'test',
+        submitters: [`submitter${i}`],
+      })
+    }
+    for (let i = 1; i <= 10; i++) {
+      upcoming.add({
+        ...clipFromTwitch,
+        id: 'test2',
+        submitters: [`submitter${i}`],
+      })
+    }
+    for (let i = 1; i <= 10; i++) {
+      upcoming.add({
+        ...clipFromTwitch,
+        id: 'test3',
+        submitters: [`submitter${i}`],
+      })
+    }
+    expect(upcoming.items[0]?.id).toEqual('test')
+    expect(upcoming.items[1]?.id).toEqual('test2')
+    expect(upcoming.items[2]?.id).toEqual('test3')
+  })
+
+  it('can remove the first submitter from a clip which has multiple submitters', () => {
+    const upcoming = useUpcoming()
+    upcoming.add({ ...clipFromTwitch, submitters: ['testsubmitter'] })
+    upcoming.add({ ...clipFromTwitch, submitters: ['testsubmitter2'] })
+    expect(upcoming.length).toEqual(1)
+    upcoming.remove({ ...clipFromTwitch, submitters: ['testsubmitter2'] })
+    expect(upcoming.length).toEqual(1)
+    const queuedClip = upcoming.items[0]
+    expect(queuedClip?.submitters?.length).toEqual(1)
+    expect(queuedClip?.submitters).not.toContain('testsubmitter2')
+    expect(queuedClip?.submitters).toContain('testsubmitter')
+  })
+
+  it('can remove the second submitter from a clip which has multiple submitters', () => {
+    const upcoming = useUpcoming()
+    upcoming.add(clipFromTwitch)
+    upcoming.add({ ...clipFromTwitch, submitters: ['testsubmitter2'] })
+    expect(upcoming.length).toEqual(1)
+    upcoming.remove({
+      ...clipFromTwitch,
+      submitters: ['testsubmittertwitch'],
+    })
+    expect(upcoming.length).toEqual(1)
+    const queuedClip = upcoming.items[0]
+    expect(queuedClip?.submitters[0]).toEqual('testsubmitter2')
+    expect(queuedClip?.submitters?.length).toEqual(1)
+    expect(queuedClip?.submitters).not.toContain('testsubmittertwitch')
+    expect(queuedClip?.submitters).toContain('testsubmitter2')
   })
 })

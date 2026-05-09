@@ -3,7 +3,6 @@ import { ref } from 'vue'
 
 import type { Clip } from '@/integrations'
 
-import { IntegrationID } from '@/integrations'
 import { toClipUUID } from '@/integrations/core'
 import { useHistory } from '@/stores/history'
 import { useLogger } from '@/stores/logger'
