@@ -9,8 +9,8 @@ import { chat } from '@/integrations/twitch'
 import { m } from '@/paraglide/messages'
 import { useProviders } from '@/stores/providers'
 import { useUser } from '@/stores/user'
-import commands, { Command } from '@/utils/commands'
 
+import { useCommands } from './commands'
 import { useLogger } from './logger'
 import { useQueue } from './queue'
 import { useSettings } from './settings'
@@ -64,11 +64,14 @@ export const useSources = defineStore('sources', () => {
       const [command, ...args] = event.data.text
         .substring(settings.application.prefix.length)
         .split(' ')
-      if (!settings.application.allowed.includes(command as Command)) {
-        logger.debug(`[${event.source}]: Command ${command} is not enabled or does not exist.`)
-        return
+      if (command) {
+        if (!settings.application.allowed.includes(command)) {
+          logger.debug(`[${event.source}]: Command ${command} is not enabled or does not exist.`)
+          return
+        }
+        const commands = useCommands()
+        commands.execute({ origin: event, command, args })
       }
-      commands.handleCommand(event, command!, ...args)
       return
     }
     for (const url of event.data.urls) {

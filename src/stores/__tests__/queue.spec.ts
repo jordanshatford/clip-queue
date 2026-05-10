@@ -6,6 +6,7 @@ import type { Clip } from '@/integrations'
 import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
 import { IntegrationID } from '@/integrations'
 
+import { useCommands } from '../commands'
 import { useHistory } from '../history'
 import { useQueue } from '../queue'
 import { useSettings } from '../settings'
@@ -213,5 +214,26 @@ describe('queue.ts', () => {
     expect(queuedClip?.submitters?.length).toEqual(2)
     expect(queuedClip?.submitters).toContain('testsubmitter')
     expect(queuedClip?.submitters).toContain('testsubmitter2')
+  })
+
+  it('registers commands for interacting with the queue', () => {
+    const commands = useCommands()
+    useQueue()
+    const cmd = commands.commands['open']
+    expect(cmd).toBeDefined()
+    expect(cmd?.id).toEqual('open')
+    expect(cmd?.aliases).toEqual(['o'])
+    const cmd2 = commands.commands['close']
+    expect(cmd2).toBeDefined()
+    expect(cmd2?.id).toEqual('close')
+    expect(cmd2?.aliases).toEqual(['c'])
+    const cmd3 = commands.commands['previous']
+    expect(cmd3).toBeDefined()
+    expect(cmd3?.id).toEqual('previous')
+    expect(cmd3?.aliases).toEqual(['back', 'prev', 'last'])
+    const cmd4 = commands.commands['next']
+    expect(cmd4).toBeDefined()
+    expect(cmd4?.id).toEqual('next')
+    expect(cmd4?.aliases).toEqual(['forward'])
   })
 })

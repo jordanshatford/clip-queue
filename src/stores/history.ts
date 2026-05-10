@@ -3,6 +3,9 @@ import { defineStore } from 'pinia'
 import { computed } from 'vue'
 
 import { toClipUUID, type Clip } from '@/integrations'
+import { m } from '@/paraglide/messages'
+
+import { useCommands } from './commands'
 
 /**
  * Store used for tracking history. Contains information about items previously watched.
@@ -61,6 +64,20 @@ export const useHistory = defineStore('history', () => {
   function reset(): void {
     items.value = []
   }
+
+  /**
+   * Register commands for the history.
+   */
+  useCommands().register({
+    id: 'purgehistory',
+    aliases: ['rmhistory'],
+    help: {
+      description: m.command_purge_history,
+    },
+    execute: () => {
+      reset()
+    },
+  })
 
   return {
     items,

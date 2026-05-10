@@ -10,6 +10,7 @@ import { createApp } from 'vue'
 
 import App from '@/App.vue'
 import router from '@/router'
+import { initialize } from '@/stores'
 
 const app = createApp(App)
 
@@ -34,6 +35,7 @@ app.directive('tooltip', Tooltip)
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedState)
 app.use(pinia)
+initialize()
 
 // Router
 app.use(router)

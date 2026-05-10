@@ -4,6 +4,8 @@ import { ref } from 'vue'
 import type { Clip } from '@/integrations'
 
 import { toClipUUID } from '@/integrations/core'
+import { m } from '@/paraglide/messages'
+import { useCommands } from '@/stores/commands'
 import { useHistory } from '@/stores/history'
 import { useLogger } from '@/stores/logger'
 import { useSettings } from '@/stores/settings'
@@ -93,6 +95,52 @@ export const useQueue = defineStore(
       }
       current.value = upcoming.shift()
     }
+
+    /**
+     * Register commands for the queue.
+     */
+    useCommands().register(
+      {
+        id: 'open',
+        aliases: ['o'],
+        help: {
+          description: m.command_open,
+        },
+        execute: () => {
+          open()
+        },
+      },
+      {
+        id: 'close',
+        aliases: ['c'],
+        help: {
+          description: m.command_close,
+        },
+        execute: () => {
+          close()
+        },
+      },
+      {
+        id: 'previous',
+        aliases: ['back', 'prev', 'last'],
+        help: {
+          description: m.command_previous,
+        },
+        execute: () => {
+          previous()
+        },
+      },
+      {
+        id: 'next',
+        aliases: ['forward'],
+        help: {
+          description: m.command_next,
+        },
+        execute: () => {
+          next()
+        },
+      },
+    )
 
     return {
       isOpen,

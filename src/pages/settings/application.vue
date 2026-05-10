@@ -20,16 +20,16 @@
           <MultiSelect
             v-model="formSettings.allowed"
             input-id="allowedCommands"
-            :options="Object.values(Command)"
+            :options="Object.keys(commands.commands)"
             :placeholder="m.none()"
             display="chip"
             size="small"
             aria-describedby="allowedCommands-help"
           >
-            <template #option="{ option }: { option: Command }">
+            <template #option="{ option }: { option: string }">
               <div class="flex flex-col gap-1">
-                <p>{{ toCommandCall(option) }}</p>
-                <small>{{ commands.help.value[option].description }}</small>
+                <p>{{ commands.toCallHelp(option) }}</p>
+                <small>{{ commands.toDescription(option) }}</small>
               </div>
             </template>
           </MultiSelect>
@@ -99,9 +99,9 @@ import ToggleSwitch from 'primevue/toggleswitch'
 
 import { useSettingsForm } from '@/composables/use-settings-form'
 import { m } from '@/paraglide/messages'
+import { useCommands } from '@/stores/commands'
 import { usePreferences } from '@/stores/preferences'
 import { useSettings } from '@/stores/settings'
-import commands, { Command } from '@/utils/commands'
 
 definePage({
   meta: {
@@ -112,6 +112,7 @@ definePage({
   },
 })
 
+const commands = useCommands()
 const settings = useSettings()
 const preferences = usePreferences()
 
@@ -121,14 +122,4 @@ const { formSettings, onReset, onSubmit } = useSettingsForm(
   (v) => (settings.application = v),
   m.application_settings_saved(),
 )
-
-function toCommandCall(command: Command) {
-  const help = commands.help.value[command]
-  let cmd = command.toString()
-  if (help.args && help.args.length > 0) {
-    cmd += ' '
-    cmd += help.args.map((arg) => `<${arg}>`).join(' ')
-  }
-  return cmd
-}
 </script>

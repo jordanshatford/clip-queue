@@ -7,6 +7,7 @@ import type { TwitchClip, TwitchGame } from '@/integrations/twitch/core/types'
 
 import { mockKickClip, mockTwitchClip, mockTwitchGame } from '@/__tests__/mocks'
 
+import { useCommands } from '../commands'
 import { useProviders } from '../providers'
 
 vi.mock('@/integrations/kick/core/api', async (importOriginal) => {
@@ -101,5 +102,22 @@ describe('providers.ts', () => {
     expect(providers.hasCachedData).toEqual(false)
     expect(await providers.getClip(mockKickClip.clip_url)).toBeDefined()
     expect(providers.hasCachedData).toEqual(true)
+  })
+
+  it('registers commands for interacting with the providers', () => {
+    const commands = useCommands()
+    useProviders()
+    const cmd = commands.commands['enableprovider']
+    expect(cmd).toBeDefined()
+    expect(cmd?.id).toEqual('enableprovider')
+    expect(cmd?.aliases).toEqual(['enablep'])
+    const cmd2 = commands.commands['disableprovider']
+    expect(cmd2).toBeDefined()
+    expect(cmd2?.id).toEqual('disableprovider')
+    expect(cmd2?.aliases).toEqual(['disablep'])
+    const cmd3 = commands.commands['purgecache']
+    expect(cmd3).toBeDefined()
+    expect(cmd3?.id).toEqual('purgecache')
+    expect(cmd3?.aliases).toEqual(['rmcache'])
   })
 })

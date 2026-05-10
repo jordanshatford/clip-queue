@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 
 import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
 
+import { useCommands } from '../commands'
 import { useHistory } from '../history'
 
 describe('history.ts', () => {
@@ -44,5 +45,14 @@ describe('history.ts', () => {
     expect(history.length).toEqual(1)
     expect(history.items).toContainEqual(clipFromTwitch)
     expect(history.items).not.toContainEqual(clipFromKick)
+  })
+
+  it('registers commands for interacting with the history', () => {
+    const commands = useCommands()
+    useHistory()
+    const cmd = commands.commands['purgehistory']
+    expect(cmd).toBeDefined()
+    expect(cmd?.id).toEqual('purgehistory')
+    expect(cmd?.aliases).toEqual(['rmhistory'])
   })
 })

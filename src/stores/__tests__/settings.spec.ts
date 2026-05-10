@@ -1,6 +1,7 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it } from 'vitest'
 
+import { useCommands } from '../commands'
 import { DEFAULT_APPLICATION_SETTINGS, DEFAULT_LOGGER_SETTINGS, useSettings } from '../settings'
 
 describe('settings.ts', () => {
@@ -61,5 +62,26 @@ describe('settings.ts', () => {
     settings.reset()
     expect(settings.application).toEqual(DEFAULT_APPLICATION_SETTINGS)
     expect(settings.logger).toEqual(DEFAULT_LOGGER_SETTINGS)
+  })
+
+  it('registers commands for interacting with the queue', () => {
+    const commands = useCommands()
+    useSettings()
+    const cmd = commands.commands['setlimit']
+    expect(cmd).toBeDefined()
+    expect(cmd?.id).toEqual('setlimit')
+    expect(cmd?.aliases).toEqual(['limit'])
+    const cmd2 = commands.commands['removelimit']
+    expect(cmd2).toBeDefined()
+    expect(cmd2?.id).toEqual('removelimit')
+    expect(cmd2?.aliases).toEqual(['rmlimit'])
+    const cmd3 = commands.commands['enableautomod']
+    expect(cmd3).toBeDefined()
+    expect(cmd3?.id).toEqual('enableautomod')
+    expect(cmd3?.aliases).toEqual(['enableautomoderation', 'automod'])
+    const cmd4 = commands.commands['disableautomod']
+    expect(cmd4).toBeDefined()
+    expect(cmd4?.id).toEqual('disableautomod')
+    expect(cmd4?.aliases).toEqual(['disableautomoderation', 'dautomod'])
   })
 })

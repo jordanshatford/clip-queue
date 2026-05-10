@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
 import { IntegrationID } from '@/integrations'
 
+import { useCommands } from '../commands'
 import { useUpcoming } from '../upcoming'
 
 describe('upcoming.ts', () => {
@@ -187,5 +188,22 @@ describe('upcoming.ts', () => {
     expect(queuedClip?.submitters?.length).toEqual(1)
     expect(queuedClip?.submitters).not.toContain('testsubmittertwitch')
     expect(queuedClip?.submitters).toContain('testsubmitter2')
+  })
+
+  it('registers commands for interacting with the upcoming items', () => {
+    const commands = useCommands()
+    useUpcoming()
+    const cmd = commands.commands['clear']
+    expect(cmd).toBeDefined()
+    expect(cmd?.id).toEqual('clear')
+    expect(cmd?.aliases).toEqual(['clr'])
+    const cmd2 = commands.commands['removebysubmitter']
+    expect(cmd2).toBeDefined()
+    expect(cmd2?.id).toEqual('removebysubmitter')
+    expect(cmd2?.aliases).toEqual(['rmsubmitter', 'rmsub'])
+    const cmd3 = commands.commands['removebyprovider']
+    expect(cmd3).toBeDefined()
+    expect(cmd3?.id).toEqual('removebyprovider')
+    expect(cmd3?.aliases).toEqual(['rmprovider', 'rmp'])
   })
 })

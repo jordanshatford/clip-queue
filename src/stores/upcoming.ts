@@ -3,6 +3,9 @@ import { defineStore } from 'pinia'
 import { computed } from 'vue'
 
 import { type Clip, toClipUUID, type IntegrationID } from '@/integrations'
+import { m } from '@/paraglide/messages'
+
+import { useCommands } from './commands'
 
 export const useUpcoming = defineStore('upcoming', () => {
   /**
@@ -134,6 +137,49 @@ export const useUpcoming = defineStore('upcoming', () => {
   function reset(): void {
     items.value = []
   }
+
+  /**
+   * Register commands for the upcoming items.
+   */
+  useCommands().register(
+    {
+      id: 'clear',
+      aliases: ['clr'],
+      help: {
+        description: m.command_clear,
+      },
+      execute: () => {
+        reset()
+      },
+    },
+    {
+      id: 'removebysubmitter',
+      aliases: ['rmsubmitter', 'rmsub'],
+      help: {
+        args: [m.submitter],
+        description: m.command_remove_by_submitter,
+      },
+      execute: ({ args }) => {
+        if (args[0]) {
+          removeBySubmitter(args[0])
+        }
+      },
+    },
+    // TODO(jordan): rename to integration.
+    {
+      id: 'removebyprovider',
+      aliases: ['rmprovider', 'rmp'],
+      help: {
+        args: [m.provider],
+        description: m.command_remove_by_provider,
+      },
+      execute: ({ args }) => {
+        if (args[0]) {
+          removeByProvider(args[0] as IntegrationID)
+        }
+      },
+    },
+  )
 
   return {
     items,

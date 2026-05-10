@@ -4,7 +4,10 @@ import { computed, type Reactive } from 'vue'
 import type { PlayerConfig } from '@/integrations/core'
 
 import { type Clip, IntegrationID, type IntegrationProvider, integrations } from '@/integrations'
+import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
+
+import { useCommands } from './commands'
 
 export const useProviders = defineStore('providers', () => {
   const logger = useLogger()
@@ -83,6 +86,64 @@ export const useProviders = defineStore('providers', () => {
     }
     return p?.getPlayerConfig(clip)
   }
+
+  /**
+   * Register commands for the providers.
+   */
+  useCommands().register(
+    {
+      id: 'enableprovider',
+      aliases: ['enablep'],
+      help: {
+        args: [m.provider],
+        description: m.command_enable_provider,
+      },
+      execute: ({ args }) => {
+        if (args[0]) {
+          const integration = Object.values(IntegrationID).find(
+            (p) => p.toLowerCase() === args[0]?.toLowerCase(),
+          )
+          if (integration) {
+            const p = provider.value(integration)
+            if (p) {
+              p.isEnabled = true
+            }
+          }
+        }
+      },
+    },
+    {
+      id: 'disableprovider',
+      aliases: ['disablep'],
+      help: {
+        args: [m.provider],
+        description: m.command_disable_provider,
+      },
+      execute: ({ args }) => {
+        if (args[0]) {
+          const integration = Object.values(IntegrationID).find(
+            (p) => p.toLowerCase() === args[0]?.toLowerCase(),
+          )
+          if (integration) {
+            const p = provider.value(integration)
+            if (p) {
+              p.isEnabled = false
+            }
+          }
+        }
+      },
+    },
+    {
+      id: 'purgecache',
+      aliases: ['rmcache'],
+      help: {
+        description: m.command_purge_cache,
+      },
+      execute: () => {
+        purge()
+      },
+    },
+  )
 
   return {
     provider,

@@ -3,7 +3,8 @@ import { computed, ref } from 'vue'
 
 import type { LogLevel } from '@/stores/logger'
 
-import { Command } from '@/utils/commands'
+import { m } from '@/paraglide/messages'
+import { useCommands } from '@/stores/commands'
 
 /**
  * Settings for the application.
@@ -18,7 +19,7 @@ export interface ApplicationSettings {
   /**
    * The commands allowed to be used.
    */
-  allowed: Command[]
+  allowed: string[]
   /**
    * Whether auto moderation is enabled.
    *
@@ -50,7 +51,7 @@ export interface LoggerSettings {
 
 export const DEFAULT_APPLICATION_SETTINGS: ApplicationSettings = {
   prefix: '!cq',
-  allowed: Object.values(Command),
+  allowed: [],
   hasAutoModerationEnabled: true,
   limit: null,
 }
@@ -70,7 +71,7 @@ export const useSettings = defineStore(
       return (s: ApplicationSettings) => {
         return (
           application.value.prefix !== s.prefix ||
-          Object.values(Command).some(
+          Object.keys(useCommands().commands).some(
             (cmd) => application.value.allowed.includes(cmd) !== s.allowed.includes(cmd),
           ) ||
           application.value.hasAutoModerationEnabled !== s.hasAutoModerationEnabled ||
@@ -97,6 +98,59 @@ export const useSettings = defineStore(
       logger.value = DEFAULT_LOGGER_SETTINGS
     }
 
+    /**
+     * Register commands for the settings.
+     */
+    useCommands().register(
+      {
+        id: 'setlimit',
+        aliases: ['limit'],
+        help: {
+          args: [m.number],
+          description: m.command_set_limit,
+        },
+        execute: ({ args }) => {
+          if (args[0]) {
+            const limit = Number.parseInt(args[0])
+            if (Number.isNaN(limit) || limit < 1) {
+              return
+            }
+            application.value.limit = limit
+          }
+        },
+      },
+      {
+        id: 'removelimit',
+        aliases: ['rmlimit'],
+        help: {
+          description: m.command_remove_limit,
+        },
+        execute: () => {
+          application.value.limit = null
+        },
+      },
+      {
+        id: 'enableautomod',
+        aliases: ['enableautomoderation', 'automod'],
+        help: {
+          description: m.command_enable_auto_mod,
+        },
+        execute: () => {
+          application.value.hasAutoModerationEnabled = true
+        },
+      },
+      {
+        id: 'disableautomod',
+        aliases: ['disableautomoderation', 'dautomod'],
+        help: {
+          description: m.command_disable_auto_mod,
+        },
+        execute: () => {
+          application.value.hasAutoModerationEnabled = false
+        },
+      },
+    )
+
     return {
       application,
       logger,
@@ -109,14 +163,6 @@ export const useSettings = defineStore(
   {
     persist: {
       key: 'cq-settings',
-      afterHydrate(context) {
-        // Ensure that the commands allowed are valid.
-        const commands = context.store.application.allowed
-        const availableCommands = Object.values(Command)
-        context.store.application.allowed = commands.filter((c: Command) => {
-          return availableCommands.includes(c)
-        })
-      },
     },
   },
 )
