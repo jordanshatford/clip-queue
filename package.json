@@ -45,7 +45,7 @@
     "@inlang/paraglide-js": "2.18.0",
     "@pinia/testing": "^1.0.3",
     "@svitejs/changesets-changelog-github-compact": "^1.2.0",
-    "@tailwindcss/vite": "^4.2.4",
+    "@tailwindcss/vite": "^4.3.0",
     "@tsconfig/node24": "^24.0.4",
     "@types/jsdom": "^28.0.1",
     "@types/node": "^25.6.2",
