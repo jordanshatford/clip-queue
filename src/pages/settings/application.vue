@@ -53,7 +53,7 @@
           v-model="queue.limit"
           input-id="limit"
           allow-empty
-          :locale="preferences.preferences.language"
+          :locale="preferences.locale"
           :min="1"
           :step="1"
           size="small"

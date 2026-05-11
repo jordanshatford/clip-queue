@@ -5,11 +5,11 @@
         <div class="flex flex-col gap-2 text-left">
           <label for="language">{{ m.language() }}</label>
           <Select
-            v-model="preferences.preferences.language"
+            v-model="preferences.locale"
             :options="[...locales]"
             label-id="language"
             size="small"
-            :option-label="(value: Locale) => languageLabels[value]"
+            :option-label="(value: Locale) => localeLabels[value]"
             aria-describedby="language-help"
           >
           </Select>
@@ -18,11 +18,11 @@
           }}</Message>
           <label for="theme">{{ m.theme() }}</label>
           <Select
-            v-model="preferences.preferences.theme"
+            v-model="preferences.mode"
             :options="[...availableThemes]"
             label-id="theme"
             size="small"
-            :option-label="(value: Theme) => themeTranslations[value]()"
+            :option-label="(value: BasicColorMode) => themeTranslations[value]()"
             aria-describedby="theme-help"
           >
           </Select>
@@ -31,7 +31,7 @@
           }}</Message>
           <label for="primaryColor">{{ m.primary_color() }}</label>
           <Select
-            v-model="preferences.preferences.primary"
+            v-model="preferences.primary"
             :options="colors"
             data-key="name"
             label-id="primaryColor"
@@ -50,7 +50,7 @@
           }}</Message>
           <label for="surfaceColor">{{ m.surface_color() }}</label>
           <Select
-            v-model="preferences.preferences.surface"
+            v-model="preferences.surface"
             data-key="name"
             :options="surfaces"
             label-id="surfaceColor"
@@ -74,13 +74,14 @@
 </template>
 
 <script setup lang="ts">
+import type { BasicColorMode } from '@vueuse/core'
+
 import Card from 'primevue/card'
 import Message from 'primevue/message'
 import Select from 'primevue/select'
 
 import type { ColorOption } from '@/assets/palettes'
 import type { Locale } from '@/paraglide/runtime'
-import type { Theme } from '@/stores/preferences'
 
 import { colors, surfaces } from '@/assets/palettes'
 import ColorName from '@/components/ColorName.vue'
@@ -99,12 +100,12 @@ definePage({
 
 const preferences = usePreferences()
 
-const themeTranslations: Record<Theme, () => string> = {
+const themeTranslations: Record<BasicColorMode, () => string> = {
   dark: m.theme_dark,
   light: m.theme_light,
 }
 
-const languageLabels: Record<Locale, string> = {
+const localeLabels: Record<Locale, string> = {
   ar: 'عربي (Arabic)',
   de: 'Deutsch (German)',
   en: 'English',

@@ -34,7 +34,7 @@
           v-model="logger.limit"
           input-id="loggerLimit"
           :allow-empty="false"
-          :locale="preferences.preferences.language"
+          :locale="preferences.locale"
           :min="1"
           :max="100000"
           :step="1"

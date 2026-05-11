@@ -1,7 +1,7 @@
 <template>
   <Toast position="bottom-right" />
   <ConfirmDialog :draggable="false" />
-  <div :key="preferences.preferences.language" class="h-full min-h-screen dark:bg-surface-950">
+  <div :key="preferences.locale" class="h-full min-h-screen dark:bg-surface-950">
     <div class="h-full">
       <AppNavBar />
       <main class="mx-auto h-full max-w-7xl px-4 py-5 text-center sm:px-6 lg:px-8">

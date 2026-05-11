@@ -87,7 +87,7 @@ const logs = computed(() => {
 })
 
 function formatTimestamp(timestamp: string) {
-  return datetime(preferences.preferences.language, timestamp, {
+  return datetime(preferences.locale, timestamp, {
     dateStyle: 'short',
     timeStyle: 'medium',
     hour12: false,
