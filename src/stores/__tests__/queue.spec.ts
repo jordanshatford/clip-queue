@@ -16,12 +16,15 @@ describe('queue.ts', () => {
     setActivePinia(createPinia())
     useHistory().reset()
     useUpcoming().reset()
+    const queue = useQueue()
+    queue.reset()
+    queue.resetSettings()
   })
 
   it('initializes with the expected values', () => {
     const queue = useQueue()
     expect(queue.isOpen).toEqual(true)
-    expect(queue.current).toEqual(undefined)
+    expect(queue.current).toEqual(null)
     expect(queue.upcoming.length).toEqual(0)
     expect(queue.upcoming.items).toEqual([])
   })
@@ -75,7 +78,7 @@ describe('queue.ts', () => {
     })
     expect(queue.upcoming.items).toContainEqual(clipFromTwitch)
     expect(queue.upcoming.items).toContainEqual(clipFromKick)
-    expect(queue.current).toEqual(undefined)
+    expect(queue.current).toEqual(null)
   })
 
   it('can remove clips when they are in the queue', () => {
@@ -136,7 +139,7 @@ describe('queue.ts', () => {
     queue.previous()
     expect(queue.current).toEqual(clipFromTwitch)
     queue.previous()
-    expect(queue.current).toEqual(undefined)
+    expect(queue.current).toEqual(null)
   })
 
   it('can start playing the next clip', () => {

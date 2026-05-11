@@ -1,7 +1,7 @@
 /**
  * PrimeVue palettes.
  */
-type ColorPalette = {
+export type ColorPalette = {
   0?: string // undefined with primary colors
   50: string
   100: string

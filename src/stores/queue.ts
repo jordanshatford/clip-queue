@@ -1,4 +1,4 @@
-import { useStorage } from '@vueuse/core'
+import { StorageSerializers, useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
 import { computed } from 'vue'
 
@@ -27,7 +27,9 @@ export const useQueue = defineStore('queue', () => {
    */
   const limit = useStorage<number | null>('__cq_queue_limit', DEFAULT_LIMIT)
   const isOpen = useStorage<boolean>('__cq_queue_isopen', true)
-  const current = useStorage<Clip | undefined>('__cq_queue_current', undefined)
+  const current = useStorage<Clip | null>('__cq_queue_current', null, undefined, {
+    serializer: StorageSerializers.object,
+  })
 
   function clear() {
     logger.info('[Queue]: Clearing upcoming queue.')
@@ -92,14 +94,32 @@ export const useQueue = defineStore('queue', () => {
     if (current.value?.id) {
       upcoming.unshift(current.value)
     }
-    current.value = history.pop()
+    const last = history.pop()
+    if (last) {
+      current.value = last
+    } else {
+      current.value = null
+    }
   }
 
   function next() {
     if (current.value?.id) {
       history.add(current.value)
     }
-    current.value = upcoming.shift()
+    const next = upcoming.shift()
+    if (next) {
+      current.value = next
+    } else {
+      current.value = null
+    }
+  }
+
+  /**
+   * Reset queue to its default state.
+   */
+  function reset(): void {
+    isOpen.value = true
+    current.value = null
   }
 
   /**
@@ -204,6 +224,7 @@ export const useQueue = defineStore('queue', () => {
     close,
     previous,
     next,
+    reset,
     isSettingsModified,
     resetSettings,
   }
