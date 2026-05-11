@@ -23,7 +23,7 @@ jobs:
           node-version: '24'
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm ci
       - name: Build
         run: pnpm build
       - uses: changesets/action@v1

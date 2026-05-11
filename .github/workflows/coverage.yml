@@ -26,7 +26,7 @@ jobs:
           node-version: '24'
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm ci
       - name: Run build
         run: pnpm build
       - name: Run test coverage
