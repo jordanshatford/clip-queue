@@ -35,7 +35,6 @@
   "command_previous": "前のクリップに切り替えてください。",
   "command_next": "次のクリップに切り替えてください。",
   "command_remove_by_submitter": "投稿者から送られてきた動画クリップを削除してください。",
-  "command_remove_by_provider": "プロバイダーからクリップを削除してください。",
   "command_enable_provider": "指定されたプロバイダを有効にします。",
   "command_disable_provider": "指定されたプロバイダを無効にします。",
   "command_enable_auto_mod": "自動モデレーションを有効にする。",
@@ -177,5 +176,7 @@
   "connected_to_source_name": "{source}に{name}接続しました。",
   "disconnected_from_source": "{source}から切断されました。",
   "allow_duplicates": "重複を許可する:",
-  "allow_duplicates_description": "以前視聴した動画クリップが再度投稿された場合、再生キューに戻すことができます。"
+  "allow_duplicates_description": "以前視聴した動画クリップが再度投稿された場合、再生キューに戻すことができます。",
+  "integration": "統合",
+  "command_remove_by_integration": "特定の統合機能から生成されたクリップを削除します。"
 }

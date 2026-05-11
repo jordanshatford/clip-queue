@@ -92,10 +92,10 @@ export const useUpcoming = defineStore('upcoming', () => {
   }
 
   /**
-   * Remove all items in the upcoming list that are linked to a given provider.
-   * @param provider - The provider to remove.
+   * Remove all items in the upcoming list that are linked to a given integration.
+   * @param integration - The ID of integration to remove.
    */
-  function removeByProvider(provider: IntegrationID): void {
+  function removeByIntegration(provider: IntegrationID): void {
     items.value = items.value.filter((c) => c.provider.toLowerCase() !== provider.toLowerCase())
   }
 
@@ -165,17 +165,16 @@ export const useUpcoming = defineStore('upcoming', () => {
         }
       },
     },
-    // TODO(jordan): rename to integration.
     {
-      id: 'removebyprovider',
-      aliases: ['rmprovider', 'rmp'],
+      id: 'removebyintegration',
+      aliases: ['rmbyint'],
       help: {
-        args: [m.provider],
-        description: m.command_remove_by_provider,
+        args: [m.integration],
+        description: m.command_remove_by_integration,
       },
       execute: ({ args }) => {
         if (args[0]) {
-          removeByProvider(args[0] as IntegrationID)
+          removeByIntegration(args[0] as IntegrationID)
         }
       },
     },
@@ -190,7 +189,7 @@ export const useUpcoming = defineStore('upcoming', () => {
     shift,
     remove,
     removeBySubmitter,
-    removeByProvider,
+    removeByIntegration,
     reset,
   }
 })

@@ -35,7 +35,6 @@
   "command_previous": "Переключиться на предыдущий ролик.",
   "command_next": "Переключиться на следующий клип.",
   "command_remove_by_submitter": "Удалите видеоролики, присланные отправителем.",
-  "command_remove_by_provider": "Удалите клипы от поставщика.",
   "command_enable_provider": "Включить указанного поставщика.",
   "command_disable_provider": "Отключите указанного поставщика.",
   "command_enable_auto_mod": "Включить автоматическую модерацию.",
@@ -177,5 +176,7 @@
   "connected_to_source_name": "Подключено к {source} как {name} .",
   "disconnected_from_source": "Отключено от {source} .",
   "allow_duplicates": "Разрешить дубликаты:",
-  "allow_duplicates_description": "Если ранее просмотренный видеоролик будет отправлен, он будет добавлен обратно в очередь."
+  "allow_duplicates_description": "Если ранее просмотренный видеоролик будет отправлен, он будет добавлен обратно в очередь.",
+  "integration": "Интеграция",
+  "command_remove_by_integration": "Удалите клипы, полученные в результате данной интеграции."
 }

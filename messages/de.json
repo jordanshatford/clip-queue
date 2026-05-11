@@ -35,7 +35,6 @@
   "command_previous": "Wechseln Sie zum vorherigen Clip.",
   "command_next": "Wechseln Sie zum nächsten Clip.",
   "command_remove_by_submitter": "Vom Einsender gesendete Clips entfernen.",
-  "command_remove_by_provider": "Entfernen Sie Clips vom Anbieter.",
   "command_enable_provider": "Aktivieren Sie den angegebenen Anbieter.",
   "command_disable_provider": "Deaktivieren Sie den angegebenen Anbieter.",
   "command_enable_auto_mod": "Automatische Moderation aktivieren.",
@@ -177,5 +176,7 @@
   "connected_to_source_name": "Verbunden mit {source} als {name} .",
   "disconnected_from_source": "Verbindung zu {source} .",
   "allow_duplicates": "Duplikate zulassen:",
-  "allow_duplicates_description": "Wenn ein zuvor angesehener Clip erneut eingereicht wird, kann er wieder in die Warteschlange aufgenommen werden."
+  "allow_duplicates_description": "Wenn ein zuvor angesehener Clip erneut eingereicht wird, kann er wieder in die Warteschlange aufgenommen werden.",
+  "integration": "Integration",
+  "command_remove_by_integration": "Entfernen Sie Clips, die aus einer bestimmten Integration stammen."
 }

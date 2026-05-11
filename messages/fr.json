@@ -35,7 +35,6 @@
   "command_previous": "Passez à la séquence précédente.",
   "command_next": "Passez à la vidéo suivante.",
   "command_remove_by_submitter": "Supprimer les clips envoyés par l'expéditeur.",
-  "command_remove_by_provider": "Supprimer les clips du fournisseur.",
   "command_enable_provider": "Activez le fournisseur spécifié.",
   "command_disable_provider": "Désactiver le fournisseur spécifié.",
   "command_enable_auto_mod": "Activer la modération automatique.",
@@ -177,5 +176,7 @@
   "connected_to_source_name": "Connecté à {source} comme {name} .",
   "disconnected_from_source": "Déconnecté de {source} .",
   "allow_duplicates": "Autoriser les doublons :",
-  "allow_duplicates_description": "Lorsqu'un clip déjà visionné est soumis, il sera remis dans la file d'attente."
+  "allow_duplicates_description": "Lorsqu'un clip déjà visionné est soumis, il sera remis dans la file d'attente.",
+  "integration": "Intégration",
+  "command_remove_by_integration": "Supprimer les clips provenant d'une intégration donnée."
 }

@@ -35,7 +35,6 @@
   "command_previous": "Cambia al clip anterior.",
   "command_next": "Pasa al siguiente vídeo.",
   "command_remove_by_submitter": "Eliminar los clips enviados por el remitente.",
-  "command_remove_by_provider": "Elimine los clips del proveedor.",
   "command_enable_provider": "Habilitar el proveedor especificado.",
   "command_disable_provider": "Desactive el proveedor especificado.",
   "command_enable_auto_mod": "Habilitar la moderación automática.",
@@ -177,5 +176,7 @@
   "connected_to_source_name": "Conectado a {source} como {name} .",
   "disconnected_from_source": "Desconectado de {source} .",
   "allow_duplicates": "Permitir duplicados:",
-  "allow_duplicates_description": "Cuando se envíe un vídeo que ya se haya visto, se permitirá que vuelva a la cola."
+  "allow_duplicates_description": "Cuando se envíe un vídeo que ya se haya visto, se permitirá que vuelva a la cola.",
+  "integration": "Integración",
+  "command_remove_by_integration": "Eliminar los clips que provienen de una integración determinada."
 }

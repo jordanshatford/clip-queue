@@ -35,7 +35,6 @@
   "command_previous": "Switch to the previous clip.",
   "command_next": "Switch to the next clip.",
   "command_remove_by_submitter": "Remove clips sent by the submitter.",
-  "command_remove_by_provider": "Remove clips from the provider.",
   "command_enable_provider": "Enable the specified provider.",
   "command_disable_provider": "Disable the specified provider.",
   "command_enable_auto_mod": "Enable auto moderation.",
@@ -177,5 +176,7 @@
   "connected_to_source_name": "Connected to {source} as {name}.",
   "disconnected_from_source": "Disconnected from {source}.",
   "allow_duplicates": "Allow Duplicates:",
-  "allow_duplicates_description": "When a clip previously watched is submitted it will be allowed back in the queue."
+  "allow_duplicates_description": "When a clip previously watched is submitted it will be allowed back in the queue.",
+  "integration": "Integration",
+  "command_remove_by_integration": "Remove clips that came from a given integration."
 }

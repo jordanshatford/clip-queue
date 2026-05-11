@@ -116,7 +116,7 @@ describe('queue.ts', () => {
     queue.add({ ...clipFromKick, id: 'other2' })
     queue.add(clipFromTwitch)
     expect(queue.upcoming.length).toEqual(4)
-    queue.upcoming.removeByProvider(IntegrationID.KICK_CLIPS)
+    queue.upcoming.removeByIntegration(IntegrationID.KICK_CLIPS)
     expect(queue.upcoming.length).toEqual(1)
   })
 

@@ -83,7 +83,7 @@ describe('upcoming.ts', () => {
     upcoming.add({ ...clipFromKick, id: 'other2' })
     upcoming.add(clipFromTwitch)
     expect(upcoming.length).toEqual(4)
-    upcoming.removeByProvider(IntegrationID.KICK_CLIPS)
+    upcoming.removeByIntegration(IntegrationID.KICK_CLIPS)
     expect(upcoming.length).toEqual(1)
   })
 
@@ -201,9 +201,9 @@ describe('upcoming.ts', () => {
     expect(cmd2).toBeDefined()
     expect(cmd2?.id).toEqual('removebysubmitter')
     expect(cmd2?.aliases).toEqual(['rmsubmitter', 'rmsub'])
-    const cmd3 = commands.commands['removebyprovider']
+    const cmd3 = commands.commands['removebyintegration']
     expect(cmd3).toBeDefined()
-    expect(cmd3?.id).toEqual('removebyprovider')
-    expect(cmd3?.aliases).toEqual(['rmprovider', 'rmp'])
+    expect(cmd3?.id).toEqual('removebyintegration')
+    expect(cmd3?.aliases).toEqual(['rmbyint'])
   })
 })

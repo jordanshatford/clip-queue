@@ -35,7 +35,6 @@
   "command_previous": "切换到上一段视频。",
   "command_next": "切换到下一个片段。",
   "command_remove_by_submitter": "删除提交者发送的视频片段。",
-  "command_remove_by_provider": "从提供商处移除视频片段。",
   "command_enable_provider": "启用指定的提供商。",
   "command_disable_provider": "禁用指定的提供商。",
   "command_enable_auto_mod": "启用自动审核。",
@@ -177,5 +176,7 @@
   "connected_to_source_name": "连接到{source}作为{name} 。",
   "disconnected_from_source": "已断开与{source}的连接。",
   "allow_duplicates": "允许重复项：",
-  "allow_duplicates_description": "如果之前观看过的视频片段被提交，它将被允许重新加入队列。"
+  "allow_duplicates_description": "如果之前观看过的视频片段被提交，它将被允许重新加入队列。",
+  "integration": "一体化",
+  "command_remove_by_integration": "移除来自特定集成的剪辑。"
 }

@@ -35,7 +35,6 @@
   "command_previous": "Passa al video precedente.",
   "command_next": "Passa al video successivo.",
   "command_remove_by_submitter": "Rimuovi i video inviati dall'utente.",
-  "command_remove_by_provider": "Rimuovere le clip dal fornitore.",
   "command_enable_provider": "Abilita il provider specificato.",
   "command_disable_provider": "Disabilita il provider specificato.",
   "command_enable_auto_mod": "Attiva la moderazione automatica.",
@@ -177,5 +176,7 @@
   "connected_to_source_name": "Connesso a {source} come {name} .",
   "disconnected_from_source": "Disconnesso da {source} .",
   "allow_duplicates": "Consenti duplicati:",
-  "allow_duplicates_description": "Quando viene inviato un video precedentemente visualizzato, questo verrà rimesso in coda."
+  "allow_duplicates_description": "Quando viene inviato un video precedentemente visualizzato, questo verrà rimesso in coda.",
+  "integration": "Integrazione",
+  "command_remove_by_integration": "Rimuovi i clip provenienti da una determinata integrazione."
 }

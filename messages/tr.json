@@ -35,7 +35,6 @@
   "command_previous": "Önceki videoya geçin.",
   "command_next": "Sonraki videoya geçin.",
   "command_remove_by_submitter": "Gönderen tarafından gönderilen klipleri kaldırın.",
-  "command_remove_by_provider": "Sağlayıcıdan klipleri kaldırın.",
   "command_enable_provider": "Belirtilen sağlayıcıyı etkinleştirin.",
   "command_disable_provider": "Belirtilen sağlayıcıyı devre dışı bırakın.",
   "command_enable_auto_mod": "Otomatik moderasyonu etkinleştirin.",
@@ -177,5 +176,7 @@
   "connected_to_source_name": "{source} ile {name} olarak bağlantılı.",
   "disconnected_from_source": "{source} bağlantısı kesildi.",
   "allow_duplicates": "Yinelenen kayıtlara izin ver:",
-  "allow_duplicates_description": "Daha önce izlenmiş bir video tekrar gönderildiğinde, sıraya geri alınmasına izin verilecektir."
+  "allow_duplicates_description": "Daha önce izlenmiş bir video tekrar gönderildiğinde, sıraya geri alınmasına izin verilecektir.",
+  "integration": "Entegrasyon",
+  "command_remove_by_integration": "Verilen entegrasyondan gelen klipleri kaldırın."
 }

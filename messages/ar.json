@@ -35,7 +35,6 @@
   "command_previous": "انتقل إلى المقطع السابق.",
   "command_next": "انتقل إلى المقطع التالي.",
   "command_remove_by_submitter": "قم بإزالة المقاطع المرسلة من قبل المرسل.",
-  "command_remove_by_provider": "قم بإزالة المقاطع من مزود الخدمة.",
   "command_enable_provider": "قم بتفعيل الموفر المحدد.",
   "command_disable_provider": "قم بتعطيل الموفر المحدد.",
   "command_enable_auto_mod": "تفعيل خاصية الإشراف التلقائي.",
@@ -177,5 +176,7 @@
   "connected_to_source_name": "متصل بـ {source} كـ {name} .",
   "disconnected_from_source": "تم فصل الاتصال بـ {source} .",
   "allow_duplicates": "السماح بالتكرارات:",
-  "allow_duplicates_description": "عند إرسال مقطع فيديو تمت مشاهدته مسبقاً، سيتم السماح له بالعودة إلى قائمة الانتظار."
+  "allow_duplicates_description": "عند إرسال مقطع فيديو تمت مشاهدته مسبقاً، سيتم السماح له بالعودة إلى قائمة الانتظار.",
+  "integration": "اندماج",
+  "command_remove_by_integration": "قم بإزالة المقاطع التي جاءت من عملية دمج معينة."
 }
