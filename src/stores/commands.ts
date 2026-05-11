@@ -1,5 +1,6 @@
+import { useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import type { IntegrationSourceMessageEvent } from '@/integrations/core'
 
@@ -53,7 +54,20 @@ export interface Command {
   execute: (event: CommandExecuteEvent) => Awaited<void>
 }
 
+const DEFAULT_PREFIX: string = '!cq'
+const DEFAULT_ENABLED: string[] = []
+
 export const useCommands = defineStore('commands', () => {
+  /**
+   * The prefix for commands.
+   *
+   * @example !cq
+   */
+  const prefix = useStorage<string>('__cq_commands_prefix', DEFAULT_PREFIX)
+  /**
+   * The commands enabled to be used.
+   */
+  const enabled = useStorage<string[]>('__cq_commands_enabled', DEFAULT_ENABLED)
   /**
    * Command details by command ID.
    */
@@ -177,7 +191,29 @@ export const useCommands = defineStore('commands', () => {
     aliases.value = {}
   }
 
+  /**
+   * Determine if the settings are modified.
+   */
+  const isSettingsModified = computed(() => {
+    return (
+      prefix.value !== DEFAULT_PREFIX ||
+      Object.keys(commands.value).some(
+        (cmd) => enabled.value.includes(cmd) !== DEFAULT_ENABLED.includes(cmd),
+      )
+    )
+  })
+
+  /**
+   * Reset settings related to this store.
+   */
+  function resetSettings(): void {
+    prefix.value = DEFAULT_PREFIX
+    enabled.value = DEFAULT_ENABLED
+  }
+
   return {
+    prefix,
+    enabled,
     commands,
     aliases,
     resolve,
@@ -187,5 +223,7 @@ export const useCommands = defineStore('commands', () => {
     toCallHelp,
     toDescription,
     reset,
+    isSettingsModified,
+    resetSettings,
   }
 })

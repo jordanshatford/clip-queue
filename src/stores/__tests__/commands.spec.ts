@@ -181,4 +181,21 @@ describe('commands', () => {
     expect(commands.commands).toEqual({})
     expect(commands.aliases).toEqual({})
   })
+
+  it('can have its settings reset', () => {
+    const commands = useCommands()
+    commands.resetSettings()
+    expect(commands.isSettingsModified).toEqual(false)
+    commands.prefix = '~cq'
+    expect(commands.isSettingsModified).toEqual(true)
+    commands.resetSettings()
+    expect(commands.isSettingsModified).toEqual(false)
+    expect(commands.prefix).toEqual('!cq')
+    commands.register(createCommand({ id: 'test' }))
+    commands.enabled = ['test']
+    expect(commands.isSettingsModified).toEqual(true)
+    commands.resetSettings()
+    expect(commands.isSettingsModified).toEqual(false)
+    expect(commands.enabled).toEqual([])
+  })
 })

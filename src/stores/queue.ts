@@ -1,5 +1,6 @@
+import { useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import type { Clip } from '@/integrations'
 
@@ -8,18 +9,25 @@ import { m } from '@/paraglide/messages'
 import { useCommands } from '@/stores/commands'
 import { useHistory } from '@/stores/history'
 import { useLogger } from '@/stores/logger'
-import { useSettings } from '@/stores/settings'
 import { useUpcoming } from '@/stores/upcoming'
+
+const DEFAULT_LIMIT: number | null = null
 
 export const useQueue = defineStore(
   'queue',
   () => {
-    const settings = useSettings()
     const logger = useLogger()
 
     const history = useHistory()
     const upcoming = useUpcoming()
 
+    /**
+     * The limit of clips in the queue.
+     *
+     * @example 10
+     * @note null means no limit.
+     */
+    const limit = useStorage<number | null>('__cq_queue_limit', DEFAULT_LIMIT)
     const isOpen = ref<boolean>(true)
     const current = ref<Clip | undefined>(undefined)
 
@@ -50,7 +58,7 @@ export const useQueue = defineStore(
         return
       }
       // Queue is full based on limit
-      if (settings.application.limit && upcoming.length >= settings.application.limit) {
+      if (limit.value && upcoming.length >= limit.value) {
         // If the clip is already in the queue add it so submitters is updated
         if (!upcoming.includes(clip)) {
           return
@@ -97,6 +105,20 @@ export const useQueue = defineStore(
     }
 
     /**
+     * Determine if the settings are modified.
+     */
+    const isSettingsModified = computed(() => {
+      return limit.value !== DEFAULT_LIMIT
+    })
+
+    /**
+     * Reset settings related to this store.
+     */
+    function resetSettings(): void {
+      limit.value = DEFAULT_LIMIT
+    }
+
+    /**
      * Register commands for the queue.
      */
     useCommands().register(
@@ -140,9 +162,37 @@ export const useQueue = defineStore(
           next()
         },
       },
+      {
+        id: 'setlimit',
+        aliases: ['limit'],
+        help: {
+          args: [m.number],
+          description: m.command_set_limit,
+        },
+        execute: ({ args }) => {
+          if (args[0]) {
+            const l = Number.parseInt(args[0])
+            if (Number.isNaN(l) || l < 1) {
+              return
+            }
+            limit.value = l
+          }
+        },
+      },
+      {
+        id: 'removelimit',
+        aliases: ['rmlimit'],
+        help: {
+          description: m.command_remove_limit,
+        },
+        execute: () => {
+          limit.value = null
+        },
+      },
     )
 
     return {
+      limit,
       isOpen,
       history,
       current,
@@ -156,6 +206,8 @@ export const useQueue = defineStore(
       close,
       previous,
       next,
+      isSettingsModified,
+      resetSettings,
     }
   },
   {

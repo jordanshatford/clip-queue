@@ -9,7 +9,6 @@ import { IntegrationID } from '@/integrations'
 import { useCommands } from '../commands'
 import { useHistory } from '../history'
 import { useQueue } from '../queue'
-import { useSettings } from '../settings'
 import { useUpcoming } from '../upcoming'
 
 describe('queue.ts', () => {
@@ -172,8 +171,7 @@ describe('queue.ts', () => {
 
   it('can have a limit set to prevent additional clips from being added', () => {
     const queue = useQueue()
-    const settings = useSettings()
-    settings.application.limit = 2
+    queue.limit = 2
     queue.add({
       ...clipFromTwitch,
       id: 'test',
@@ -203,8 +201,7 @@ describe('queue.ts', () => {
       provider: IntegrationID.TWITCH_CLIPS,
     }
     const queue = useQueue()
-    const settings = useSettings()
-    settings.application.limit = 1
+    queue.limit = 1
     queue.add(clip)
     queue.add({ ...clip, submitters: ['testsubmitter2'] })
     queue.add({ ...clip, id: 'test2' })
@@ -214,6 +211,17 @@ describe('queue.ts', () => {
     expect(queuedClip?.submitters?.length).toEqual(2)
     expect(queuedClip?.submitters).toContain('testsubmitter')
     expect(queuedClip?.submitters).toContain('testsubmitter2')
+  })
+
+  it('can have its settings reset', () => {
+    const queue = useQueue()
+    queue.resetSettings()
+    expect(queue.isSettingsModified).toEqual(false)
+    queue.limit = 100
+    expect(queue.isSettingsModified).toEqual(true)
+    queue.resetSettings()
+    expect(queue.isSettingsModified).toEqual(false)
+    expect(queue.limit).toEqual(null)
   })
 
   it('registers commands for interacting with the queue', () => {
@@ -235,5 +243,13 @@ describe('queue.ts', () => {
     expect(cmd4).toBeDefined()
     expect(cmd4?.id).toEqual('next')
     expect(cmd4?.aliases).toEqual(['forward'])
+    const cmd5 = commands.commands['setlimit']
+    expect(cmd5).toBeDefined()
+    expect(cmd5?.id).toEqual('setlimit')
+    expect(cmd5?.aliases).toEqual(['limit'])
+    const cmd6 = commands.commands['removelimit']
+    expect(cmd6).toBeDefined()
+    expect(cmd6?.id).toEqual('removelimit')
+    expect(cmd6?.aliases).toEqual(['rmlimit'])
   })
 })

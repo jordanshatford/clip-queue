@@ -7,7 +7,14 @@
         fluid
         size="small"
         severity="danger"
-        :disabled="!(settings.isModified || preferences.isModified)"
+        :disabled="
+          !(
+            commands.isSettingsModified ||
+            queue.isSettingsModified ||
+            sources.isSettingsModified ||
+            preferences.isModified
+          )
+        "
         @click="resetSettingsToDefault()"
       ></Button>
       <Message size="small" severity="secondary" variant="simple">{{
@@ -59,10 +66,11 @@ import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
 
 import { m } from '@/paraglide/messages'
+import { useCommands } from '@/stores/commands'
 import { usePreferences } from '@/stores/preferences'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
-import { useSettings } from '@/stores/settings'
+import { useSources } from '@/stores/sources'
 
 definePage({
   meta: {
@@ -77,9 +85,11 @@ const version = __APP_VERSION__
 
 const toast = useToast()
 const confirm = useConfirm()
+
+const commands = useCommands()
 const preferences = usePreferences()
 const queue = useQueue()
-const settings = useSettings()
+const sources = useSources()
 const providers = useProviders()
 
 function resetSettingsToDefault() {
@@ -96,7 +106,9 @@ function resetSettingsToDefault() {
       severity: 'secondary',
     },
     accept: () => {
-      settings.reset()
+      commands.resetSettings()
+      queue.resetSettings()
+      sources.resetSettings()
       preferences.reset()
       toast.add({
         severity: 'success',
