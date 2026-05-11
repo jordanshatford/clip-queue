@@ -15,56 +15,37 @@
         </Button>
       </div>
       <Divider />
-      <form ref="formElement" @submit.prevent="onSubmit" @reset="onReset">
-        <div class="flex flex-col gap-2 text-left">
-          <label for="loggerLevel">{{ m.level_colon() }}</label>
-          <Select
-            v-model="formSettings.level"
-            :options="availableLogLevels"
-            label-id="loggerLevel"
-            size="small"
-            :option-label="(value: LogLevel) => logLevelTranslations[value]()"
-            aria-describedby="loggerLevel-help"
-          >
-          </Select>
-          <Message id="loggerLevel-help" size="small" severity="secondary" variant="simple">{{
-            m.logger_level_description()
-          }}</Message>
-          <label for="loggerLimit">{{ m.size_limit() }}</label>
-          <InputNumber
-            v-model="formSettings.limit"
-            input-id="loggerLimit"
-            :allow-empty="false"
-            :locale="preferences.preferences.language"
-            :min="1"
-            :max="100000"
-            :step="1"
-            size="small"
-            show-buttons
-            aria-describedby="loggerLimit-help"
-          />
-          <Message id="loggerLimit-help" size="small" severity="secondary" variant="simple">{{
-            m.logger_size_limit_description()
-          }}</Message>
-        </div>
-        <div class="mt-3">
-          <Button
-            :label="m.save()"
-            size="small"
-            class="mr-2"
-            type="submit"
-            severity="secondary"
-            :disabled="!settings.isLoggerSettingsModified(formSettings)"
-          ></Button>
-          <Button
-            type="reset"
-            :label="m.cancel()"
-            size="small"
-            severity="danger"
-            :disabled="!settings.isLoggerSettingsModified(formSettings)"
-          ></Button>
-        </div>
-      </form>
+      <div class="flex flex-col gap-2 text-left">
+        <label for="loggerLevel">{{ m.level_colon() }}</label>
+        <Select
+          v-model="logger.level"
+          :options="availableLogLevels"
+          label-id="loggerLevel"
+          size="small"
+          :option-label="(value: LogLevel) => logLevelTranslations[value]()"
+          aria-describedby="loggerLevel-help"
+        >
+        </Select>
+        <Message id="loggerLevel-help" size="small" severity="secondary" variant="simple">{{
+          m.logger_level_description()
+        }}</Message>
+        <label for="loggerLimit">{{ m.size_limit() }}</label>
+        <InputNumber
+          v-model="logger.limit"
+          input-id="loggerLimit"
+          :allow-empty="false"
+          :locale="preferences.preferences.language"
+          :min="1"
+          :max="100000"
+          :step="1"
+          size="small"
+          show-buttons
+          aria-describedby="loggerLimit-help"
+        />
+        <Message id="loggerLimit-help" size="small" severity="secondary" variant="simple">{{
+          m.logger_size_limit_description()
+        }}</Message>
+      </div>
     </template>
   </Card>
 </template>
@@ -79,11 +60,9 @@ import Select from 'primevue/select'
 
 import type { LogLevel } from '@/stores/logger'
 
-import { useSettingsForm } from '@/composables/use-settings-form'
 import { m } from '@/paraglide/messages'
-import { availableLogLevels, logLevelTranslations } from '@/stores/logger'
+import { availableLogLevels, logLevelTranslations, useLogger } from '@/stores/logger'
 import { usePreferences } from '@/stores/preferences'
-import { useSettings } from '@/stores/settings'
 
 definePage({
   meta: {
@@ -95,12 +74,5 @@ definePage({
 })
 
 const preferences = usePreferences()
-const settings = useSettings()
-
-const { formSettings, onReset, onSubmit } = useSettingsForm(
-  'formElement',
-  () => settings.logger,
-  (v) => (settings.logger = v),
-  m.logger_settings_saved(),
-)
+const logger = useLogger()
 </script>

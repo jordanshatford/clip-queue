@@ -163,7 +163,6 @@
   "off": "Desligado",
   "debug": "Depurar",
   "warning": "Aviso",
-  "logger_settings_saved": "Configurações do registrador salvas.",
   "logger_level_description": "O nível mais baixo de registros a serem capturados. Quaisquer níveis de registro acima do nível selecionado também serão registrados.",
   "logger_size_limit_description": "Número máximo de registros a serem mantidos. Quando o limite for atingido, os registros mais antigos serão removidos.",
   "no_logs_captured": "Nenhum registro foi capturado.",

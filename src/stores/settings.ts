@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-import type { LogLevel } from '@/stores/logger'
-
 import { m } from '@/paraglide/messages'
 import { useCommands } from '@/stores/commands'
 
@@ -35,37 +33,20 @@ export interface ApplicationSettings {
   limit: number | null
 }
 
-/**
- * Settings for the logger.
- */
-export interface LoggerSettings {
-  /**
-   * The log level of the application.
-   */
-  level: LogLevel
-  /**
-   * The maximum number of logs to keep.
-   */
-  limit: number
-}
-
 export const DEFAULT_APPLICATION_SETTINGS: ApplicationSettings = {
+  // TODO(jordan): move to commands.
   prefix: '!cq',
   allowed: [],
+  // TODO(jordan): move to sources.
   hasAutoModerationEnabled: true,
+  // TODO(jordan): move to queue.
   limit: null,
-}
-
-export const DEFAULT_LOGGER_SETTINGS: LoggerSettings = {
-  level: 'WARN',
-  limit: 100,
 }
 
 export const useSettings = defineStore(
   'settings',
   () => {
     const application = ref<ApplicationSettings>({ ...DEFAULT_APPLICATION_SETTINGS })
-    const logger = ref<LoggerSettings>({ ...DEFAULT_LOGGER_SETTINGS })
 
     const isApplicationSettingsModified = computed(() => {
       return (s: ApplicationSettings) => {
@@ -80,22 +61,12 @@ export const useSettings = defineStore(
       }
     })
 
-    const isLoggerSettingsModified = computed(() => {
-      return (l: LoggerSettings) => {
-        return logger.value.level !== l.level || logger.value.limit !== l.limit
-      }
-    })
-
     const isModified = computed(() => {
-      return (
-        isApplicationSettingsModified.value(DEFAULT_APPLICATION_SETTINGS) ||
-        isLoggerSettingsModified.value(DEFAULT_LOGGER_SETTINGS)
-      )
+      return isApplicationSettingsModified.value(DEFAULT_APPLICATION_SETTINGS)
     })
 
     function reset(): void {
       application.value = DEFAULT_APPLICATION_SETTINGS
-      logger.value = DEFAULT_LOGGER_SETTINGS
     }
 
     /**
@@ -153,10 +124,8 @@ export const useSettings = defineStore(
 
     return {
       application,
-      logger,
       isModified,
       isApplicationSettingsModified,
-      isLoggerSettingsModified,
       reset,
     }
   },

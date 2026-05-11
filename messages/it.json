@@ -163,7 +163,6 @@
   "off": "Spento",
   "debug": "Debug",
   "warning": "Avvertimento",
-  "logger_settings_saved": "Impostazioni del logger salvate.",
   "logger_level_description": "Il livello minimo di log da acquisire. Tutti i livelli di log superiori a quello selezionato verranno comunque registrati.",
   "logger_size_limit_description": "Il numero massimo di registri da conservare. Al raggiungimento del limite, i registri più vecchi verranno eliminati.",
   "no_logs_captured": "Nessun registro acquisito.",

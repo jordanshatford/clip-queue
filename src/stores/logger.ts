@@ -1,9 +1,7 @@
+import { useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 
 import { m } from '@/paraglide/messages'
-
-import { useSettings } from './settings'
 
 /**
  * Log levels.
@@ -78,51 +76,46 @@ export interface Log {
   message: string
 }
 
-export const useLogger = defineStore(
-  'logger',
-  () => {
-    const settings = useSettings()
-    const logs = ref<Log[]>([])
+export const useLogger = defineStore('logger', () => {
+  const level = useStorage<LogLevel>('__cq_logger_level', 'WARN')
+  const limit = useStorage<number>('__cq_logger_limit', 100)
+  const logs = useStorage<Log[]>('__cq_logger_logs', [])
 
-    function timestamp() {
-      return new Date().toISOString()
+  function timestamp() {
+    return new Date().toISOString()
+  }
+
+  function handle(lev: LogLevel, message: string) {
+    const log = { level: lev, message, timestamp: timestamp() }
+    const logIndex = availableLogLevels.indexOf(lev)
+    const settingsIndex = availableLogLevels.indexOf(level.value)
+    const warnIndex = availableLogLevels.indexOf('WARN')
+    // Log the message to the console if configured to do so, or if the log level is WARN or higher.
+    if (logIndex <= settingsIndex || logIndex <= warnIndex) {
+      logLevelConsole[lev](`[${log.level}] (${log.timestamp}): ${log.message}`)
     }
-
-    function handle(level: LogLevel, message: string) {
-      const log = { level, message, timestamp: timestamp() }
-      const logIndex = availableLogLevels.indexOf(level)
-      const settingsIndex = availableLogLevels.indexOf(settings.logger.level)
-      const warnIndex = availableLogLevels.indexOf('WARN')
-      // Log the message to the console if configured to do so, or if the log level is WARN or higher.
-      if (logIndex <= settingsIndex || logIndex <= warnIndex) {
-        logLevelConsole[level](`[${log.level}] (${log.timestamp}): ${log.message}`)
-      }
-      // Store the log if required based on the users settings.
-      if (logIndex <= settingsIndex) {
-        logs.value.unshift(log)
-        // Remove the oldest item if the array is too long.
-        if (logs.value.length > settings.logger.limit) {
-          logs.value.pop()
-        }
+    // Store the log if required based on the configured settings.
+    if (logIndex <= settingsIndex) {
+      logs.value.unshift(log)
+      // Remove the oldest item if the array is too long.
+      while (logs.value.length > limit.value) {
+        logs.value.pop()
       }
     }
+  }
 
-    function reset() {
-      logs.value = []
-    }
+  function reset() {
+    logs.value = []
+  }
 
-    return {
-      logs,
-      debug: (message: string) => handle('DEBUG', message),
-      info: (message: string) => handle('INFO', message),
-      warn: (message: string) => handle('WARN', message),
-      error: (message: string) => handle('ERROR', message),
-      reset,
-    }
-  },
-  {
-    persist: {
-      key: 'cq-logger',
-    },
-  },
-)
+  return {
+    logs,
+    limit,
+    level,
+    debug: (message: string) => handle('DEBUG', message),
+    info: (message: string) => handle('INFO', message),
+    warn: (message: string) => handle('WARN', message),
+    error: (message: string) => handle('ERROR', message),
+    reset,
+  }
+})

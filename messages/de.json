@@ -163,7 +163,6 @@
   "off": "Aus",
   "debug": "Debuggen",
   "warning": "Warnung",
-  "logger_settings_saved": "Protokolleinstellungen gespeichert.",
   "logger_level_description": "Die niedrigste Protokollierungsstufe. Alle Protokollierungsstufen oberhalb der ausgewählten Stufe werden ebenfalls protokolliert.",
   "logger_size_limit_description": "Die maximale Anzahl der aufzubewahrenden Protokolldateien. Sobald diese Grenze erreicht ist, werden die ältesten Protokolldateien gelöscht.",
   "no_logs_captured": "Es wurden keine Protokolle erfasst.",

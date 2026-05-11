@@ -163,7 +163,6 @@
   "off": "Désactivé",
   "debug": "Déboguer",
   "warning": "Avertissement",
-  "logger_settings_saved": "Paramètres de journalisation enregistrés.",
   "logger_level_description": "Niveau de journalisation le plus bas à capturer. Tous les niveaux de journalisation supérieurs au niveau sélectionné seront également enregistrés.",
   "logger_size_limit_description": "Nombre maximal d'entrées de journal à conserver. Lorsque cette limite est atteinte, les entrées les plus anciennes seront supprimées.",
   "no_logs_captured": "Aucun journal d'événements n'a été enregistré.",

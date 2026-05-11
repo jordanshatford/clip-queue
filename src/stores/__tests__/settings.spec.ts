@@ -2,7 +2,7 @@ import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { useCommands } from '../commands'
-import { DEFAULT_APPLICATION_SETTINGS, DEFAULT_LOGGER_SETTINGS, useSettings } from '../settings'
+import { DEFAULT_APPLICATION_SETTINGS, useSettings } from '../settings'
 
 describe('settings.ts', () => {
   beforeEach(() => {
@@ -12,7 +12,6 @@ describe('settings.ts', () => {
   it('inits the settings with default value', () => {
     const settings = useSettings()
     expect(settings.isApplicationSettingsModified(DEFAULT_APPLICATION_SETTINGS)).toEqual(false)
-    expect(settings.isLoggerSettingsModified(DEFAULT_LOGGER_SETTINGS)).toEqual(false)
   })
 
   it('updates the settings in local storage', () => {
@@ -39,13 +38,6 @@ describe('settings.ts', () => {
       }),
     ).toEqual(true)
     expect(settings.isApplicationSettingsModified(settings.$state.application)).toEqual(false)
-    expect(
-      settings.isLoggerSettingsModified({
-        ...DEFAULT_LOGGER_SETTINGS,
-        limit: -100,
-      }),
-    ).toEqual(true)
-    expect(settings.isLoggerSettingsModified(settings.$state.logger)).toEqual(false)
   })
 
   it('detects when it has been modified', () => {
@@ -61,7 +53,6 @@ describe('settings.ts', () => {
     expect(settings.application.limit).toEqual(100)
     settings.reset()
     expect(settings.application).toEqual(DEFAULT_APPLICATION_SETTINGS)
-    expect(settings.logger).toEqual(DEFAULT_LOGGER_SETTINGS)
   })
 
   it('registers commands for interacting with the queue', () => {
