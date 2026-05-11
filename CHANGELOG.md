@@ -1,5 +1,39 @@
 # clip-queue
 
+## 2.5.0
+
+### Minor Changes
+
+- feat: update preferences settings to save immediately ([`154b43a`](https://github.com/jordanshatford/clip-queue/commit/154b43aac15825b5c6701059214be923d9f82673))
+
+- feat: implement history as its own store ([`b0bed00`](https://github.com/jordanshatford/clip-queue/commit/b0bed0054de4d62c0a309664047888d3a7859a7f))
+
+- feat: default to having all commands disabled ([`8d6124e`](https://github.com/jordanshatford/clip-queue/commit/8d6124ebb9328283b3128b6b31c6a0c888a0079f))
+
+- feat: move logger related settings to logger store ([`73337da`](https://github.com/jordanshatford/clip-queue/commit/73337dac1e9277c0cda77e8a9c458715288de94a))
+
+- feat: implement upcoming as its own store ([`b9f25ce`](https://github.com/jordanshatford/clip-queue/commit/b9f25cedbe87bc7eae8cc076aa6da52471318f70))
+
+- feat: move command prefix and enabled to commands store ([`9a643ac`](https://github.com/jordanshatford/clip-queue/commit/9a643ac0206decc017c7dff9898f4c6161b5a514))
+
+- feat: move automod setting to sources store ([`9a643ac`](https://github.com/jordanshatford/clip-queue/commit/9a643ac0206decc017c7dff9898f4c6161b5a514))
+
+- feat: move queue limit setting to queue store ([`9a643ac`](https://github.com/jordanshatford/clip-queue/commit/9a643ac0206decc017c7dff9898f4c6161b5a514))
+
+- feat: redesign command system to allow registering commands ([`8d6124e`](https://github.com/jordanshatford/clip-queue/commit/8d6124ebb9328283b3128b6b31c6a0c888a0079f))
+
+- feat: rework preferences store to use vueuse ([`6531ac2`](https://github.com/jordanshatford/clip-queue/commit/6531ac2ddc1f73b1f29fdc750ee838d982586ef4))
+
+### Patch Changes
+
+- fix: clear twitch authentication redirect state after use ([`1f8ceda`](https://github.com/jordanshatford/clip-queue/commit/1f8cedadbe1b5e664baf69d15bcae246c2ec5be7))
+
+- fix: persist open state of the queue ([`b9f25ce`](https://github.com/jordanshatford/clip-queue/commit/b9f25cedbe87bc7eae8cc076aa6da52471318f70))
+
+- fix: dont part from twitch chat just disconnect ([`6fdf33e`](https://github.com/jordanshatford/clip-queue/commit/6fdf33e47ced67654273cf1e89861ea066a97264))
+
+- fix: persist queue current and open state using vueuse ([`0c6b4cc`](https://github.com/jordanshatford/clip-queue/commit/0c6b4cc86172f653a8bb1dfa9c133d3b476d7b5f))
+
 ## 2.4.0
 
 ### Minor Changes
