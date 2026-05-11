@@ -10,7 +10,7 @@
   <ClipQueue
     :title="m.upcoming_clips()"
     :clips="queue.upcoming.items"
-    :is-open="queue.isOpen"
+    :is-open="queue.settings.open"
     @open="queue.open()"
     @close="queue.close()"
     @remove="queue.remove"

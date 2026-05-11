@@ -11,22 +11,42 @@ import { useHistory } from '@/stores/history'
 import { useLogger } from '@/stores/logger'
 import { useUpcoming } from '@/stores/upcoming'
 
-const DEFAULT_LIMIT: number | null = null
-
-export const useQueue = defineStore('queue', () => {
-  const logger = useLogger()
-
-  const history = useHistory()
-  const upcoming = useUpcoming()
-
+/**
+ * Settings related to queue store.
+ */
+export interface QueueSettings {
+  /**
+   * If the queue is open.
+   */
+  open: boolean
   /**
    * The limit of clips in the queue.
    *
    * @example 10
    * @note null means no limit.
    */
-  const limit = useStorage<number | null>('__cq_queue_limit', DEFAULT_LIMIT)
-  const isOpen = useStorage<boolean>('__cq_queue_isopen', true)
+  limit: number | null
+}
+
+export const DEFAULT_SETTINGS: QueueSettings = {
+  open: true,
+  limit: null,
+}
+
+export const useQueue = defineStore('queue', () => {
+  const logger = useLogger()
+  const history = useHistory()
+  const upcoming = useUpcoming()
+
+  /**
+   * Settings related to the queue.
+   */
+  const settings = useStorage<QueueSettings>(
+    '__cq_queue_settings',
+    structuredClone(DEFAULT_SETTINGS),
+    undefined,
+    { mergeDefaults: true },
+  )
   const current = useStorage<Clip | null>('__cq_queue_current', null, undefined, {
     serializer: StorageSerializers.object,
   })
@@ -48,7 +68,7 @@ export const useQueue = defineStore('queue', () => {
       return
     }
     // Ignore clip when queue isnt open
-    if (!isOpen.value) {
+    if (!settings.value.open) {
       return
     }
     // Ignore when we have previously watched it
@@ -58,7 +78,7 @@ export const useQueue = defineStore('queue', () => {
       return
     }
     // Queue is full based on limit
-    if (limit.value && upcoming.length >= limit.value) {
+    if (settings.value.limit && upcoming.length >= settings.value.limit) {
       // If the clip is already in the queue add it so submitters is updated
       if (!upcoming.includes(clip)) {
         return
@@ -83,11 +103,11 @@ export const useQueue = defineStore('queue', () => {
   }
 
   function open() {
-    isOpen.value = true
+    settings.value.open = true
   }
 
   function close() {
-    isOpen.value = false
+    settings.value.open = false
   }
 
   function previous() {
@@ -118,7 +138,6 @@ export const useQueue = defineStore('queue', () => {
    * Reset queue to its default state.
    */
   function reset(): void {
-    isOpen.value = true
     current.value = null
   }
 
@@ -126,14 +145,17 @@ export const useQueue = defineStore('queue', () => {
    * Determine if the settings are modified.
    */
   const isSettingsModified = computed(() => {
-    return limit.value !== DEFAULT_LIMIT
+    return (
+      settings.value.open !== DEFAULT_SETTINGS.open ||
+      settings.value.limit !== DEFAULT_SETTINGS.limit
+    )
   })
 
   /**
    * Reset settings related to this store.
    */
   function resetSettings(): void {
-    limit.value = DEFAULT_LIMIT
+    settings.value = structuredClone(DEFAULT_SETTINGS)
   }
 
   /**
@@ -189,11 +211,11 @@ export const useQueue = defineStore('queue', () => {
       },
       execute: ({ args }) => {
         if (args[0]) {
-          const l = Number.parseInt(args[0])
-          if (Number.isNaN(l) || l < 1) {
+          const limit = Number.parseInt(args[0])
+          if (Number.isNaN(limit) || limit < 1) {
             return
           }
-          limit.value = l
+          settings.value.limit = limit
         }
       },
     },
@@ -204,14 +226,13 @@ export const useQueue = defineStore('queue', () => {
         description: m.command_remove_limit,
       },
       execute: () => {
-        limit.value = null
+        settings.value.limit = null
       },
     },
   )
 
   return {
-    limit,
-    isOpen,
+    settings,
     history,
     current,
     upcoming,

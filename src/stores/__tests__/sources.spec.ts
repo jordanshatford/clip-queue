@@ -13,11 +13,11 @@ describe('sources.ts', () => {
     const sources = useSources()
     sources.resetSettings()
     expect(sources.isSettingsModified).toEqual(false)
-    sources.hasAutoModEnabled = false
+    sources.settings.automod = false
     expect(sources.isSettingsModified).toEqual(true)
     sources.resetSettings()
     expect(sources.isSettingsModified).toEqual(false)
-    expect(sources.hasAutoModEnabled).toEqual(true)
+    expect(sources.settings.automod).toEqual(true)
   })
 
   it('registers commands for interacting with the sources', () => {

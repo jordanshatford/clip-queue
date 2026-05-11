@@ -18,7 +18,7 @@
       <div class="flex flex-col gap-2 text-left">
         <label for="loggerLevel">{{ m.level_colon() }}</label>
         <Select
-          v-model="logger.level"
+          v-model="logger.settings.level"
           :options="availableLogLevels"
           label-id="loggerLevel"
           size="small"
@@ -31,7 +31,7 @@
         }}</Message>
         <label for="loggerLimit">{{ m.size_limit() }}</label>
         <InputNumber
-          v-model="logger.limit"
+          v-model="logger.settings.limit"
           input-id="loggerLimit"
           :allow-empty="false"
           :locale="preferences.locale"

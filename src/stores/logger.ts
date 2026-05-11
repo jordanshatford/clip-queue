@@ -1,5 +1,6 @@
 import { useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
+import { computed } from 'vue'
 
 import { m } from '@/paraglide/messages'
 
@@ -76,29 +77,51 @@ export interface Log {
   message: string
 }
 
+/**
+ * Settings related to logger store.
+ */
+export interface LoggerSettings {
+  /**
+   * The minimum log level to log.
+   */
+  level: LogLevel
+  /**
+   * The number of logs stored.
+   */
+  limit: number
+}
+
+export const DEFAULT_SETTINGS: LoggerSettings = {
+  level: 'WARN',
+  limit: 100,
+}
+
 export const useLogger = defineStore('logger', () => {
-  const level = useStorage<LogLevel>('__cq_logger_level', 'WARN')
-  const limit = useStorage<number>('__cq_logger_limit', 100)
+  /**
+   * Settings related to the logger.
+   */
+  const settings = useStorage<LoggerSettings>(
+    '__cq_logger_settings',
+    structuredClone(DEFAULT_SETTINGS),
+    undefined,
+    { mergeDefaults: true },
+  )
   const logs = useStorage<Log[]>('__cq_logger_logs', [])
 
-  function timestamp() {
-    return new Date().toISOString()
-  }
-
-  function handle(lev: LogLevel, message: string) {
-    const log = { level: lev, message, timestamp: timestamp() }
-    const logIndex = availableLogLevels.indexOf(lev)
-    const settingsIndex = availableLogLevels.indexOf(level.value)
+  function handle(level: LogLevel, message: string) {
+    const log = { level, message, timestamp: new Date().toISOString() }
+    const logIndex = availableLogLevels.indexOf(level)
+    const settingsIndex = availableLogLevels.indexOf(settings.value.level)
     const warnIndex = availableLogLevels.indexOf('WARN')
     // Log the message to the console if configured to do so, or if the log level is WARN or higher.
     if (logIndex <= settingsIndex || logIndex <= warnIndex) {
-      logLevelConsole[lev](`[${log.level}] (${log.timestamp}): ${log.message}`)
+      logLevelConsole[level](`[${log.level}] (${log.timestamp}): ${log.message}`)
     }
     // Store the log if required based on the configured settings.
     if (logIndex <= settingsIndex) {
       logs.value.unshift(log)
       // Remove the oldest item if the array is too long.
-      while (logs.value.length > limit.value) {
+      while (logs.value.length > settings.value.limit) {
         logs.value.pop()
       }
     }
@@ -108,14 +131,32 @@ export const useLogger = defineStore('logger', () => {
     logs.value = []
   }
 
+  /**
+   * Determine if the settings are modified.
+   */
+  const isSettingsModified = computed(() => {
+    return (
+      settings.value.level !== DEFAULT_SETTINGS.level ||
+      settings.value.limit !== DEFAULT_SETTINGS.limit
+    )
+  })
+
+  /**
+   * Reset settings related to this store.
+   */
+  function resetSettings(): void {
+    settings.value = structuredClone(DEFAULT_SETTINGS)
+  }
+
   return {
+    settings,
     logs,
-    limit,
-    level,
     debug: (message: string) => handle('DEBUG', message),
     info: (message: string) => handle('INFO', message),
     warn: (message: string) => handle('WARN', message),
     error: (message: string) => handle('ERROR', message),
     reset,
+    isSettingsModified,
+    resetSettings,
   }
 })

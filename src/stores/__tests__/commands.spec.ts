@@ -186,16 +186,16 @@ describe('commands', () => {
     const commands = useCommands()
     commands.resetSettings()
     expect(commands.isSettingsModified).toEqual(false)
-    commands.prefix = '~cq'
+    commands.settings.prefix = '~cq'
     expect(commands.isSettingsModified).toEqual(true)
     commands.resetSettings()
     expect(commands.isSettingsModified).toEqual(false)
-    expect(commands.prefix).toEqual('!cq')
+    expect(commands.settings.prefix).toEqual('!cq')
     commands.register(createCommand({ id: 'test' }))
-    commands.enabled = ['test']
+    commands.settings.enabled = ['test']
     expect(commands.isSettingsModified).toEqual(true)
     commands.resetSettings()
     expect(commands.isSettingsModified).toEqual(false)
-    expect(commands.enabled).toEqual([])
+    expect(commands.settings.enabled).toEqual([])
   })
 })

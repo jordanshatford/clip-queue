@@ -15,7 +15,21 @@ import { useCommands } from './commands'
 import { useLogger } from './logger'
 import { useQueue } from './queue'
 
-const DEFAULT_AUTOMOD: boolean = true
+/**
+ * Settings related to sources store.
+ */
+export interface SourcesSettings {
+  /**
+   * Whether auto moderation is enabled.
+   *
+   * @note This will remove clips when the submitter has their message deleted, or is timed out / banned.
+   */
+  automod: boolean
+}
+
+export const DEFAULT_SETTINGS: SourcesSettings = {
+  automod: true,
+}
 
 export const useSources = defineStore('sources', () => {
   const toast = ref<(o: ToastMessageOptions) => void>(() => {})
@@ -23,11 +37,15 @@ export const useSources = defineStore('sources', () => {
   const logger = useLogger()
 
   /**
-   * Whether auto moderation is enabled.
-   *
-   * @note This will remove clips when the submitter has their message deleted, or is timed out / banned.
+   * Settings related to sources.
    */
-  const hasAutoModEnabled = useStorage<boolean>('__cq_sources_automod', DEFAULT_AUTOMOD)
+  const settings = useStorage<SourcesSettings>(
+    '__cq_sources_settings',
+    structuredClone(DEFAULT_SETTINGS),
+    undefined,
+    { mergeDefaults: true },
+  )
+
   const source = ref<IntegrationSource>(chat)
 
   // Configure listeners for all source events required for the application.
@@ -61,7 +79,7 @@ export const useSources = defineStore('sources', () => {
   source.value.on('message', async (event) => {
     const commands = useCommands()
     // Check if message is a command and perform command if proper permission to do so
-    if (event.data.text.startsWith(commands.prefix)) {
+    if (event.data.text.startsWith(commands.settings.prefix)) {
       // Ensure the user is allowed to use commands.
       if (!event.data.isAllowedCommands) {
         logger.debug(
@@ -69,9 +87,11 @@ export const useSources = defineStore('sources', () => {
         )
         return
       }
-      const [command, ...args] = event.data.text.substring(commands.prefix.length).split(' ')
+      const [command, ...args] = event.data.text
+        .substring(commands.settings.prefix.length)
+        .split(' ')
       if (command) {
-        if (!commands.enabled.includes(command)) {
+        if (!commands.settings.enabled.includes(command)) {
           logger.debug(`[${event.source}]: Command ${command} is not enabled or does not exist.`)
           return
         }
@@ -95,7 +115,7 @@ export const useSources = defineStore('sources', () => {
     }
   })
   source.value.on('message-deleted', async (event) => {
-    if (!hasAutoModEnabled.value) {
+    if (!settings.value.automod) {
       return
     }
     for (const url of event.data.urls) {
@@ -114,7 +134,7 @@ export const useSources = defineStore('sources', () => {
     }
   })
   source.value.on('moderation', (event) => {
-    if (!hasAutoModEnabled.value) {
+    if (!settings.value.automod) {
       return
     }
     const username = event.data.username
@@ -146,14 +166,14 @@ export const useSources = defineStore('sources', () => {
    * Determine if the settings are modified.
    */
   const isSettingsModified = computed(() => {
-    return hasAutoModEnabled.value !== DEFAULT_AUTOMOD
+    return settings.value.automod !== DEFAULT_SETTINGS.automod
   })
 
   /**
    * Reset settings related to this store.
    */
   function resetSettings(): void {
-    hasAutoModEnabled.value = DEFAULT_AUTOMOD
+    settings.value = structuredClone(DEFAULT_SETTINGS)
   }
 
   /**
@@ -167,7 +187,7 @@ export const useSources = defineStore('sources', () => {
         description: m.command_enable_auto_mod,
       },
       execute: () => {
-        hasAutoModEnabled.value = true
+        settings.value.automod = true
       },
     },
     {
@@ -177,10 +197,10 @@ export const useSources = defineStore('sources', () => {
         description: m.command_disable_auto_mod,
       },
       execute: () => {
-        hasAutoModEnabled.value = false
+        settings.value.automod = false
       },
     },
   )
 
-  return { hasAutoModEnabled, onToast, connect, disconnect, isSettingsModified, resetSettings }
+  return { settings, onToast, connect, disconnect, isSettingsModified, resetSettings }
 })

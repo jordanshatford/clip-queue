@@ -23,7 +23,7 @@ describe('queue.ts', () => {
 
   it('initializes with the expected values', () => {
     const queue = useQueue()
-    expect(queue.isOpen).toEqual(true)
+    expect(queue.settings.open).toEqual(true)
     expect(queue.current).toEqual(null)
     expect(queue.upcoming.length).toEqual(0)
     expect(queue.upcoming.items).toEqual([])
@@ -123,9 +123,9 @@ describe('queue.ts', () => {
   it('opens and closes the queue properly', () => {
     const queue = useQueue()
     queue.open()
-    expect(queue.isOpen).toEqual(true)
+    expect(queue.settings.open).toEqual(true)
     queue.close()
-    expect(queue.isOpen).toEqual(false)
+    expect(queue.settings.open).toEqual(false)
   })
 
   it('can go back to playing the previous clip', () => {
@@ -174,7 +174,7 @@ describe('queue.ts', () => {
 
   it('can have a limit set to prevent additional clips from being added', () => {
     const queue = useQueue()
-    queue.limit = 2
+    queue.settings.limit = 2
     queue.add({
       ...clipFromTwitch,
       id: 'test',
@@ -204,7 +204,7 @@ describe('queue.ts', () => {
       provider: IntegrationID.TWITCH_CLIPS,
     }
     const queue = useQueue()
-    queue.limit = 1
+    queue.settings.limit = 1
     queue.add(clip)
     queue.add({ ...clip, submitters: ['testsubmitter2'] })
     queue.add({ ...clip, id: 'test2' })
@@ -220,11 +220,11 @@ describe('queue.ts', () => {
     const queue = useQueue()
     queue.resetSettings()
     expect(queue.isSettingsModified).toEqual(false)
-    queue.limit = 100
+    queue.settings.limit = 100
     expect(queue.isSettingsModified).toEqual(true)
     queue.resetSettings()
     expect(queue.isSettingsModified).toEqual(false)
-    expect(queue.limit).toEqual(null)
+    expect(queue.settings.limit).toEqual(null)
   })
 
   it('registers commands for interacting with the queue', () => {

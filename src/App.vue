@@ -37,8 +37,8 @@ sources.onToast((m) => {
 })
 
 const title = computed((): string => {
-  let queueState = queue.isOpen ? 'Open' : 'Closed'
-  if (queue.isOpen) {
+  let queueState = queue.settings.open ? 'Open' : 'Closed'
+  if (queue.settings.open) {
     queueState = `${queueState} (${queue.upcoming.length})`
   }
   return `${queueState} - ${config.title}`

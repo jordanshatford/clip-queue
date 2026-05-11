@@ -5,7 +5,7 @@
         <label for="commandPrefix">{{ m.command_prefix() }}</label>
         <InputText
           id="commandPrefix"
-          v-model="commands.prefix"
+          v-model="commands.settings.prefix"
           required
           maxlength="8"
           size="small"
@@ -17,7 +17,7 @@
         }}</Message>
         <label for="allowedCommands">{{ m.allowed_commands() }}</label>
         <MultiSelect
-          v-model="commands.enabled"
+          v-model="commands.settings.enabled"
           input-id="allowedCommands"
           :options="Object.keys(commands.commands)"
           :placeholder="m.none()"
@@ -39,7 +39,7 @@
         <div class="flex justify-between">
           <label for="autoModeration">{{ m.auto_mod_colon() }}</label>
           <ToggleSwitch
-            v-model="sources.hasAutoModEnabled"
+            v-model="sources.settings.automod"
             input-id="autoModeration"
             size="small"
             aria-describedby="autoModeration-help"
@@ -50,7 +50,7 @@
         }}</Message>
         <label for="limit">{{ m.size_limit() }}</label>
         <InputNumber
-          v-model="queue.limit"
+          v-model="queue.settings.limit"
           input-id="limit"
           allow-empty
           :locale="preferences.locale"

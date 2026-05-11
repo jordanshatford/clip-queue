@@ -11,7 +11,7 @@ describe('logger.ts', () => {
 
   it('handles all logging levels correctly', () => {
     const logger = useLogger()
-    logger.level = 'DEBUG'
+    logger.settings.level = 'DEBUG'
     const errorSpy = vi.spyOn(logLevelConsole, 'ERROR')
     expect(logger.logs.length).toEqual(0)
     logger.error('test')
@@ -22,7 +22,7 @@ describe('logger.ts', () => {
     expect(errorSpy).toHaveBeenCalledWith(expect.stringContaining('ERROR'))
     expect(errorSpy).toHaveBeenCalledWith(expect.stringContaining('test'))
     logger.reset()
-    logger.level = 'DEBUG'
+    logger.settings.level = 'DEBUG'
     const warnSpy = vi.spyOn(logLevelConsole, 'WARN')
     expect(logger.logs.length).toEqual(0)
     logger.warn('test')
@@ -33,7 +33,7 @@ describe('logger.ts', () => {
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('WARN'))
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('test'))
     logger.reset()
-    logger.level = 'DEBUG'
+    logger.settings.level = 'DEBUG'
     const infoSpy = vi.spyOn(logLevelConsole, 'INFO')
     expect(logger.logs.length).toEqual(0)
     logger.info('test')
@@ -44,7 +44,7 @@ describe('logger.ts', () => {
     expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('INFO'))
     expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('test'))
     logger.reset()
-    logger.level = 'DEBUG'
+    logger.settings.level = 'DEBUG'
     const debugSpy = vi.spyOn(logLevelConsole, 'DEBUG')
     expect(logger.logs.length).toEqual(0)
     logger.debug('test')
@@ -59,7 +59,7 @@ describe('logger.ts', () => {
 
   it('calls console methods for ERROR and WARN levels no matter the settings', () => {
     const logger = useLogger()
-    logger.level = 'OFF'
+    logger.settings.level = 'OFF'
     const errorSpy = vi.spyOn(logLevelConsole, 'ERROR')
     logger.error('test')
     expect(errorSpy).toHaveBeenCalledTimes(1)
@@ -77,7 +77,7 @@ describe('logger.ts', () => {
 
   it('properly stores logs based on the log level settings', () => {
     const logger = useLogger()
-    logger.level = 'INFO'
+    logger.settings.level = 'INFO'
     logger.error('test')
     expect(logger.logs.length).toEqual(1)
     expect(logger.logs[0]?.level).toEqual('ERROR')
@@ -97,7 +97,7 @@ describe('logger.ts', () => {
 
   it('clears logs when the limit is reached', () => {
     const logger = useLogger()
-    logger.limit = 1
+    logger.settings.limit = 1
     logger.error('test')
     expect(logger.logs.length).toEqual(1)
     logger.error('test2')

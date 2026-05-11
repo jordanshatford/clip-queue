@@ -7,14 +7,7 @@
         fluid
         size="small"
         severity="danger"
-        :disabled="
-          !(
-            commands.isSettingsModified ||
-            queue.isSettingsModified ||
-            sources.isSettingsModified ||
-            preferences.isModified
-          )
-        "
+        :disabled="!isSettingsModified"
         @click="resetSettingsToDefault()"
       ></Button>
       <Message size="small" severity="secondary" variant="simple">{{
@@ -64,9 +57,11 @@ import Divider from 'primevue/divider'
 import Message from 'primevue/message'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
+import { computed } from 'vue'
 
 import { m } from '@/paraglide/messages'
 import { useCommands } from '@/stores/commands'
+import { useLogger } from '@/stores/logger'
 import { usePreferences } from '@/stores/preferences'
 import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
@@ -91,6 +86,17 @@ const preferences = usePreferences()
 const queue = useQueue()
 const sources = useSources()
 const providers = useProviders()
+const logger = useLogger()
+
+const isSettingsModified = computed<boolean>(() => {
+  return (
+    commands.isSettingsModified ||
+    queue.isSettingsModified ||
+    sources.isSettingsModified ||
+    logger.isSettingsModified ||
+    preferences.isModified
+  )
+})
 
 function resetSettingsToDefault() {
   confirm.require({
@@ -109,6 +115,7 @@ function resetSettingsToDefault() {
       commands.resetSettings()
       queue.resetSettings()
       sources.resetSettings()
+      logger.resetSettings()
       preferences.reset()
       toast.add({
         severity: 'success',

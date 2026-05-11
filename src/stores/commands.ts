@@ -54,20 +54,37 @@ export interface Command {
   execute: (event: CommandExecuteEvent) => Awaited<void>
 }
 
-const DEFAULT_PREFIX: string = '!cq'
-const DEFAULT_ENABLED: string[] = []
-
-export const useCommands = defineStore('commands', () => {
+/**
+ * Settings related to commands store.
+ */
+export interface CommandsSettings {
   /**
    * The prefix for commands.
    *
    * @example !cq
    */
-  const prefix = useStorage<string>('__cq_commands_prefix', DEFAULT_PREFIX)
+  prefix: string
   /**
-   * The commands enabled to be used.
+   * The commands that are able to be triggered.
    */
-  const enabled = useStorage<string[]>('__cq_commands_enabled', DEFAULT_ENABLED)
+  enabled: string[]
+}
+
+export const DEFAULT_SETTINGS: CommandsSettings = {
+  prefix: '!cq',
+  enabled: [],
+}
+
+export const useCommands = defineStore('commands', () => {
+  /**
+   * Settings related to commands.
+   */
+  const settings = useStorage<CommandsSettings>(
+    '__cq_commands_settings',
+    structuredClone(DEFAULT_SETTINGS),
+    undefined,
+    { mergeDefaults: true },
+  )
   /**
    * Command details by command ID.
    */
@@ -196,9 +213,9 @@ export const useCommands = defineStore('commands', () => {
    */
   const isSettingsModified = computed(() => {
     return (
-      prefix.value !== DEFAULT_PREFIX ||
+      settings.value.prefix !== DEFAULT_SETTINGS.prefix ||
       Object.keys(commands.value).some(
-        (cmd) => enabled.value.includes(cmd) !== DEFAULT_ENABLED.includes(cmd),
+        (cmd) => settings.value.enabled.includes(cmd) !== DEFAULT_SETTINGS.enabled.includes(cmd),
       )
     )
   })
@@ -207,13 +224,11 @@ export const useCommands = defineStore('commands', () => {
    * Reset settings related to this store.
    */
   function resetSettings(): void {
-    prefix.value = DEFAULT_PREFIX
-    enabled.value = DEFAULT_ENABLED
+    settings.value = structuredClone(DEFAULT_SETTINGS)
   }
 
   return {
-    prefix,
-    enabled,
+    settings,
     commands,
     aliases,
     resolve,
