@@ -37,7 +37,7 @@ export function getInferredDefaultLanguage(fallback: Locale = baseLocale): Local
 }
 
 export const DEFAULT_PRIMARY_COLOR: ColorOption = structuredClone(colors[12]!) // Purple
-export const DEFAULT_SURFACE_COLOR: ColorOption = structuredClone(surfaces[2]!) // Zinc
+export const DEFAULT_SURFACE_COLOR: ColorOption = structuredClone(surfaces[3]!) // Neutral
 
 /**
  * Store used to track and manage user preferences.
