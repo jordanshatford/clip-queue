@@ -15,41 +15,39 @@ export type Theme = 'dark' | 'light'
 /**
  * The available themes.
  */
-export const availableThemes: Theme[] = ['dark', 'light'] as const
+export const availableThemes = ['dark', 'light'] as const satisfies readonly Theme[]
 
 /**
  * Gets the inferred default theme.
- * @param fallback - The fallback theme.
- * @returns The inferred default theme.
  */
 export function getInferredDefaultTheme(fallback: Theme): Theme {
   if (!window.matchMedia) {
     return fallback
   }
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return 'dark'
-  } else {
-    return 'light'
-  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
 /**
  * Gets the inferred default language.
- * @param fallback - The fallback language.
- * @returns The inferred default language.
  */
 export function getInferredDefaultLanguage(fallback: Locale): Locale {
   if (!window.navigator?.language) {
     return fallback
   }
+
   const language = window.navigator.language
+
   if (isLocale(language)) {
     return language
   }
+
   const genericLanguage = language.split('-')[0]
+
   if (isLocale(genericLanguage)) {
     return genericLanguage
   }
+
   return fallback
 }
 
@@ -57,21 +55,9 @@ export function getInferredDefaultLanguage(fallback: Locale): Locale {
  * The user preferences.
  */
 export interface UserPreferences {
-  /**
-   * The language.
-   */
   language: Locale
-  /**
-   * The theme.
-   */
   theme: Theme
-  /**
-   * The primary color.
-   */
   primary: ColorOption
-  /**
-   * The surface color.
-   */
   surface: ColorOption
 }
 
@@ -87,10 +73,16 @@ export const usePreferences = defineStore(
   () => {
     const preferences = ref<UserPreferences>(structuredClone(DEFAULTS))
 
-    watch(preferences, updatePreferences, { deep: true })
+    /**
+     * Whether dark mode is enabled.
+     */
+    const isDark = computed(() => {
+      return preferences.value.theme === 'dark'
+    })
 
-    const isDark = computed(() => preferences.value.theme === 'dark')
-
+    /**
+     * Whether preferences differ from another preferences object.
+     */
     const isModifiedFrom = computed(() => {
       return (p: UserPreferences) => {
         return (
@@ -102,62 +94,84 @@ export const usePreferences = defineStore(
       }
     })
 
+    /**
+     * Whether preferences differ from defaults.
+     */
     const isModified = computed(() => {
-      return isModifiedFrom.value({ ...DEFAULTS })
+      return isModifiedFrom.value(DEFAULTS)
     })
 
-    function updatePreferences(value: UserPreferences, old?: UserPreferences) {
-      if (value.language !== old?.language) {
-        if (isLocale(value.language)) {
-          document.documentElement.lang = value.language
-          preferences.value.language = value.language
-          setLocale(value.language, { reload: false })
-        } else {
-          document.documentElement.lang = value.language
-          preferences.value.language = value.language
-          setLocale(DEFAULTS.language, { reload: false })
-        }
-      }
-      if (value.primary.name !== old?.primary.name) {
-        setColorPalette('primary', value.primary.palette)
-      }
-      if (value.surface.name !== old?.surface.name) {
-        setColorPalette('surface', value.surface.palette)
-      }
-      if (value.theme !== old?.theme) {
-        if (value.theme === 'dark') {
-          document?.querySelector('html')?.classList.add('dark')
-        } else {
-          document.querySelector('html')?.classList.remove('dark')
-        }
-      }
-    }
+    /**
+     * Synchronize theme changes with the DOM.
+     */
+    watch(
+      () => preferences.value.theme,
+      (theme) => {
+        document.documentElement.classList.toggle('dark', theme === 'dark')
+      },
+      { immediate: true },
+    )
 
-    function toggleTheme() {
+    /**
+     * Synchronize locale changes.
+     */
+    watch(
+      () => preferences.value.language,
+      (language) => {
+        document.documentElement.lang = language
+
+        setLocale(isLocale(language) ? language : DEFAULTS.language, { reload: false })
+      },
+      { immediate: true },
+    )
+
+    /**
+     * Synchronize primary palette changes.
+     */
+    watch(
+      () => preferences.value.primary,
+      (primary) => {
+        setColorPalette('primary', primary.palette)
+      },
+      { immediate: true },
+    )
+
+    /**
+     * Synchronize surface palette changes.
+     */
+    watch(
+      () => preferences.value.surface,
+      (surface) => {
+        setColorPalette('surface', surface.palette)
+      },
+      { immediate: true },
+    )
+
+    /**
+     * Toggle between light and dark mode.
+     */
+    function toggleDark() {
       preferences.value.theme = preferences.value.theme === 'dark' ? 'light' : 'dark'
-      document.querySelector('html')?.classList.toggle('dark')
     }
 
+    /**
+     * Reset preferences to defaults.
+     */
     function reset() {
-      preferences.value = DEFAULTS
+      preferences.value = structuredClone(DEFAULTS)
     }
 
     return {
       preferences,
       isDark,
       isModified,
-      isModifiedFrom,
-      updatePreferences,
-      toggleTheme,
+      toggleDark,
       reset,
     }
   },
   {
     persist: {
       key: 'cq-preferences',
-      afterHydrate: (ctx) => {
-        ctx.store.updatePreferences(ctx.store.preferences)
-      },
     },
   },
 )

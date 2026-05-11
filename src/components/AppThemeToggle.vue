@@ -1,23 +1,17 @@
 <template>
   <Button
-    :icon="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'"
+    :icon="preferences.isDark ? 'pi pi-sun' : 'pi pi-moon'"
     size="small"
     variant="text"
     aria-label="Theme"
-    @click="() => emit('toggle')"
+    @click="preferences.toggleDark()"
   ></Button>
 </template>
 
 <script setup lang="ts">
 import Button from 'primevue/button'
 
-export interface Props {
-  isDarkMode?: boolean
-}
+import { usePreferences } from '@/stores/preferences'
 
-const { isDarkMode = false } = defineProps<Props>()
-
-const emit = defineEmits<{
-  (e: 'toggle'): void
-}>()
+const preferences = usePreferences()
 </script>

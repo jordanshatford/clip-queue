@@ -24,7 +24,7 @@
     </template>
     <template #end>
       <div class="flex items-center gap-2">
-        <AppThemeToggle :is-dark-mode="preferences.isDark" @toggle="preferences.toggleTheme()" />
+        <AppThemeToggle />
         <AppAuthentication />
       </div>
     </template>
@@ -40,9 +40,6 @@ import { computed } from 'vue'
 import AppAuthentication from '@/components/AppAuthentication.vue'
 import AppThemeToggle from '@/components/AppThemeToggle.vue'
 import { visibleRoutes } from '@/router'
-import { usePreferences } from '@/stores/preferences'
-
-const preferences = usePreferences()
 
 const items = computed((): MenuItem[] => {
   return visibleRoutes.value.map((v) => ({

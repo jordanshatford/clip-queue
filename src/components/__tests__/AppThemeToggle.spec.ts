@@ -1,12 +1,17 @@
+import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import AppThemeToggle from '../AppThemeToggle.vue'
 
 describe('AppThemeToggle.vue', () => {
   const wrapper = shallowMount(AppThemeToggle, {
-    props: {
-      isDarkMode: false,
+    global: {
+      plugins: [
+        createTestingPinia({
+          createSpy: vi.fn,
+        }),
+      ],
     },
   })
 
