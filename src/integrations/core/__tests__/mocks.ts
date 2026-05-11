@@ -196,6 +196,22 @@ export const mockYouTubeOEmbed: OEmbedResponse = {
   html: '',
 }
 
+export const mockRumbleOEmbed: OEmbedResponse = {
+  title: 'testrumble',
+  author_name: 'testrumbleauthor',
+  author_url: 'https://rumble.com/author/test',
+  type: 'video',
+  height: '',
+  width: '',
+  version: '',
+  provider_name: 'Rumble',
+  provider_url: 'https://rumble.com',
+  thumbnail_height: '',
+  thumbnail_width: '',
+  thumbnail_url: 'https://rumble.com/test/thumbnail',
+  html: '<iframe src="https://rumble.com/embed/url">',
+}
+
 export const mockOEmbed: OEmbedResponse = {
   title: 'testoembed',
   author_name: 'testoembedauthor',

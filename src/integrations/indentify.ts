@@ -27,9 +27,17 @@ export enum IntegrationID {
    */
   MISCELLANEOUS = 'misc',
   /**
-   * Rumble videos and shorts provider.
+   * Rumble integration.
    */
   RUMBLE = 'rumble',
+  /**
+   * Rumble shorts provider.
+   */
+  RUMBLE_SHORTS = 'rumble-shorts',
+  /**
+   * Rumble videos provider.
+   */
+  RUMBLE_VIDEOS = 'rumble-vids',
   /**
    * Soop videos provider.
    */
