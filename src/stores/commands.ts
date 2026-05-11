@@ -168,6 +168,15 @@ export const useCommands = defineStore('commands', () => {
   }
 
   /**
+   * Check if a command or alias is valid and enabled.
+   * @param idlike - The command ID or alias.
+   * @returns true if the command exists and is enabled, false otherwise.
+   */
+  function isEnabled(idlike: string): boolean {
+    return settings.value.enabled.includes(resolve(idlike))
+  }
+
+  /**
    * Get a string to represent what calling the command could look like (without prefix).
    * @param idlike - The command id or alias.
    * @returns String representing the command call.
@@ -235,6 +244,7 @@ export const useCommands = defineStore('commands', () => {
     register,
     unregister,
     execute,
+    isEnabled,
     toCallHelp,
     toDescription,
     reset,

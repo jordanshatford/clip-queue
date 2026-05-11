@@ -5,29 +5,28 @@ import type { IntegrationAuthentication } from '@/integrations/core'
 
 import { authentication } from '@/integrations/twitch'
 
+import { useIntegrations } from './integrations'
 import { useLogger } from './logger'
-import { useSources } from './sources'
 
 export const useUser = defineStore('user', () => {
-  const integration: Reactive<IntegrationAuthentication> = authentication
-  const sources = useSources()
+  const auth: Reactive<IntegrationAuthentication> = authentication
+  const integrations = useIntegrations()
   const logger = useLogger()
 
   const hasAttemptedAutoLogin = ref<boolean>(false)
-  const isLoggedIn = computed(() => integration.isLoggedIn)
-  const details = computed(() => integration.user)
-  const token = computed(() => integration.token)
+  const isLoggedIn = computed(() => auth.isLoggedIn)
+  const details = computed(() => auth.user)
+  const token = computed(() => auth.token)
 
   function redirect(): void {
-    integration.redirect()
+    auth.redirect()
   }
 
   async function autoLoginIfPossible(): Promise<void> {
     try {
-      const user = await integration.autoLogin()
-      if (user) {
-        await sources.connect()
-      }
+      await auth.autoLogin()
+      await integrations.configureSources()
+      await integrations.connectSources()
     } catch {
       logger.debug('[User]: failed auto-login attempt.')
       hasAttemptedAutoLogin.value = true
@@ -35,15 +34,14 @@ export const useUser = defineStore('user', () => {
   }
 
   async function login(hash: string): Promise<void> {
-    const user = await integration.login(hash)
-    if (user) {
-      await sources.connect()
-    }
+    await auth.login(hash)
+    await integrations.configureSources()
+    await integrations.connectSources()
   }
 
   async function logout(): Promise<void> {
-    await sources.disconnect()
-    await integration.logout()
+    await integrations.disconnectSources()
+    await auth.logout()
   }
 
   return {

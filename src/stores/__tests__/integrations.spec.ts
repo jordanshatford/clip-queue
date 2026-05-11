@@ -118,5 +118,13 @@ describe('integrations.ts', () => {
     expect(cmd3).toBeDefined()
     expect(cmd3?.id).toEqual('resetcache')
     expect(cmd3?.aliases).toEqual(['rmcache'])
+    const cmd4 = commands.commands['enableautomod']
+    expect(cmd4).toBeDefined()
+    expect(cmd4?.id).toEqual('enableautomod')
+    expect(cmd4?.aliases).toEqual(['enableautomoderation', 'automod'])
+    const cmd5 = commands.commands['disableautomod']
+    expect(cmd5).toBeDefined()
+    expect(cmd5?.id).toEqual('disableautomod')
+    expect(cmd5?.aliases).toEqual(['disableautomoderation', 'dautomod'])
   })
 })

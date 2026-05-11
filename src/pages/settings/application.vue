@@ -39,7 +39,7 @@
         <div class="flex justify-between">
           <label for="autoModeration">{{ m.auto_mod_colon() }}</label>
           <ToggleSwitch
-            v-model="sources.settings.automod"
+            v-model="integrations.settings.automod"
             input-id="autoModeration"
             size="small"
             aria-describedby="autoModeration-help"
@@ -92,9 +92,9 @@ import ToggleSwitch from 'primevue/toggleswitch'
 
 import { m } from '@/paraglide/messages'
 import { useCommands } from '@/stores/commands'
+import { useIntegrations } from '@/stores/integrations'
 import { usePreferences } from '@/stores/preferences'
 import { useQueue } from '@/stores/queue'
-import { useSources } from '@/stores/sources'
 
 definePage({
   meta: {
@@ -106,7 +106,7 @@ definePage({
 })
 
 const commands = useCommands()
-const sources = useSources()
+const integrations = useIntegrations()
 const preferences = usePreferences()
 const queue = useQueue()
 </script>

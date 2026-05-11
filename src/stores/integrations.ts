@@ -1,5 +1,8 @@
+import type { ToastMessageOptions } from 'primevue'
+
+import { useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
-import { computed, type Reactive } from 'vue'
+import { computed, ref, type Reactive } from 'vue'
 
 import {
   IntegrationID,
@@ -8,16 +11,70 @@ import {
   type Clip,
   type Integration,
 } from '@/integrations'
+import {
+  IntegrationStatus,
+  type IntegrationSource,
+  type IntegrationSourceEvent,
+  type IntegrationSourceMessageEvent,
+  type IntegrationSourceModerationEvent,
+} from '@/integrations/core'
 import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 
 import { useCommands } from './commands'
+import { useQueue } from './queue'
+
+/**
+ * Settings related to the integrations store.
+ */
+export interface IntegrationSettings {
+  /**
+   * Whether auto moderation is enabled.
+   *
+   * @note This will remove clips when the submitter has their message deleted, or is timed out / banned.
+   */
+  automod: boolean
+}
+
+export const DEFAULT_SETTINGS: IntegrationSettings = {
+  automod: true,
+}
 
 /**
  * Composable for unifying all interactions with integrations.
  */
 export const useIntegrations = defineStore('integrations', () => {
   const logger = useLogger()
+
+  /**
+   * Message details used for toasting the user.
+   */
+  const message = ref<ToastMessageOptions | undefined>(undefined)
+
+  /**
+   * Settings related to integrations.
+   */
+  const settings = useStorage<IntegrationSettings>(
+    '__cq_integrations_settings',
+    structuredClone(DEFAULT_SETTINGS),
+    undefined,
+    { mergeDefaults: true },
+  )
+
+  /**
+   * Determine if the integrations are currently loading.
+   */
+  const isLoading = computed<boolean>(() => {
+    return integrations.some((integration) => {
+      if (!integration.isEnabled) {
+        return false
+      }
+      if (integration.source && integration.source.isEnabled) {
+        return integration.source.status !== IntegrationStatus.HEALTHY
+      }
+      return false
+    })
+  })
 
   /**
    * Get an integration based on an integration ID. If authentication, source, or a provider in an
@@ -64,6 +121,21 @@ export const useIntegrations = defineStore('integrations', () => {
   )
 
   /**
+   * Get an integration source using its ID.
+   * @param id - The integration ID of the source.
+   * @returns A source if one exists with that ID, undefined otherwise.
+   */
+  const source = computed<(id: IntegrationID) => Reactive<IntegrationSource> | undefined>(() => {
+    return (id: IntegrationID) => {
+      for (const integration of integrations) {
+        if (integration.source && integration.source.id === id) {
+          return integration.source
+        }
+      }
+    }
+  })
+
+  /**
    * Check if any integrations have cached data.
    * @returns true if there is cached data, false otherwise.
    */
@@ -108,6 +180,204 @@ export const useIntegrations = defineStore('integrations', () => {
         }
       }
     }
+  }
+
+  /**
+   * Handle an integration source connected event.
+   * @param event - The integration source connected event.
+   */
+  function handleIntegrationSourceConnected(event: IntegrationSourceEvent<string>): void {
+    logger.info(`[${event.source}]: Connected to ${event.data}.`)
+    message.value = {
+      severity: 'success',
+      summary: m.success(),
+      detail: m.connected_to_source_name({
+        source: source.value(event.source)?.name ?? event.source,
+        name: event.data,
+      }),
+      life: 3000,
+    }
+  }
+
+  /**
+   * Handle an integration source disconnected event.
+   * @param event - The integration source disconnected event.
+   */
+  function handleIntegrationSourceDisconnected(
+    event: IntegrationSourceEvent<string | undefined>,
+  ): void {
+    if (event.data) {
+      logger.warn(`[${event.source}]: Disconnected due to ${event.data}.`)
+    } else {
+      logger.warn(`[${event.source}]: Disconnected.`)
+    }
+    message.value = {
+      severity: 'error',
+      summary: m.error(),
+      detail: m.disconnected_from_source({
+        source: source.value(event.source)?.name ?? event.source,
+      }),
+      life: 3000,
+    }
+  }
+
+  /**
+   * Handle an integration source message event.
+   * @param event - The integration source message event.
+   */
+  async function handleIntegrationSourceMessage(
+    event: IntegrationSourceMessageEvent,
+  ): Promise<void> {
+    const queue = useQueue()
+    const commands = useCommands()
+
+    // Check if message is a command and perform command if proper permission to do so
+    if (event.data.text.startsWith(commands.settings.prefix)) {
+      // Ensure the user is allowed to use commands.
+      if (!event.data.isAllowedCommands) {
+        logger.debug(
+          `[${event.source}]: User ${event.data.username} is not allowed to use commands.`,
+        )
+        return
+      }
+      const [command, ...args] = event.data.text
+        .substring(commands.settings.prefix.length)
+        .split(' ')
+      if (command) {
+        if (!commands.isEnabled(command)) {
+          logger.debug(`[${event.source}]: Command ${command} is not enabled or does not exist.`)
+          return
+        }
+        commands.execute({ origin: event, command, args })
+      }
+      return
+    }
+    for (const url of event.data.urls) {
+      try {
+        const clip = await resolve(url)
+        if (clip) {
+          queue.add({
+            ...clip,
+            submitters: [event.data.username],
+          })
+        }
+      } catch (e) {
+        logger.error(`[${event.source}]: Failed to get clip: ${e}.`)
+      }
+    }
+  }
+
+  /**
+   * Handle an integration source message deleted event.
+   * @param event - The integration source message deleted event.
+   */
+  async function handleIntegrationSourceMessageDeleted(
+    event: IntegrationSourceMessageEvent,
+  ): Promise<void> {
+    const queue = useQueue()
+    if (!settings.value.automod) {
+      return
+    }
+    for (const url of event.data.urls) {
+      try {
+        const clip = await resolve(url)
+        if (clip) {
+          queue.remove({
+            ...clip,
+            submitters: [event.data.username],
+          })
+        }
+      } catch (e) {
+        logger.error(`[${event.source}]: Failed to get clip: ${e}.`)
+      }
+    }
+  }
+
+  /**
+   * Handle an integration source moderation event.
+   * @param event - The integration source moderation event.
+   */
+  function handleIntegrationSourceModeration(event: IntegrationSourceModerationEvent): void {
+    if (!settings.value.automod) {
+      return
+    }
+    const username = event.data.username
+    const queue = useQueue()
+    queue.upcoming.removeBySubmitter(username)
+  }
+
+  /**
+   * Handle an integration source error event by logging it in our application logs.
+   * @param event - The integration source error event.
+   */
+  function handleIntegrationSourceError(event: IntegrationSourceEvent<string>): void {
+    logger.error(`[${event.source}]: ${event.data}.`)
+  }
+
+  /**
+   * Configure all sources related to integrations.
+   */
+  async function configureSources(): Promise<void> {
+    for (const integration of integrations) {
+      if (integration.source) {
+        // Configure listeners for all relevant events from each source.
+        integration.source.on('connected', handleIntegrationSourceConnected)
+        integration.source.on('disconnected', handleIntegrationSourceDisconnected)
+        integration.source.on('message', handleIntegrationSourceMessage)
+        integration.source.on('message-deleted', handleIntegrationSourceMessageDeleted)
+        integration.source.on('moderation', handleIntegrationSourceModeration)
+        integration.source.on('error', handleIntegrationSourceError)
+      }
+    }
+  }
+
+  /**
+   * Connect all sources related to integrations.
+   */
+  async function connectSources(): Promise<void> {
+    logger.debug(`[Integrations]: Connecting to integration sources.`)
+    for (const integration of integrations) {
+      if (!integration.isEnabled) {
+        continue
+      }
+      const username = integration.authentication?.user?.name
+      if (integration.source && username) {
+        logger.debug(
+          `[Integrations]: Connecting to ${integration.source.name} source as ${username}.`,
+        )
+        await integration.source.connect(username)
+      }
+    }
+  }
+
+  /**
+   * Disconnect all sources related to integrations.
+   */
+  async function disconnectSources(): Promise<void> {
+    logger.debug(`[Integrations]: Disconnecting from integration sources.`)
+    for (const integration of integrations) {
+      if (!integration.isEnabled) {
+        continue
+      }
+      if (integration.source) {
+        logger.debug(`[Integrations]: Disconnecting from ${integration.source.name} source.`)
+        await integration.source.disconnect()
+      }
+    }
+  }
+
+  /**
+   * Determine if the settings are modified.
+   */
+  const isSettingsModified = computed(() => {
+    return settings.value.automod !== DEFAULT_SETTINGS.automod
+  })
+
+  /**
+   * Reset settings related to this store.
+   */
+  function resetSettings(): void {
+    settings.value = structuredClone(DEFAULT_SETTINGS)
   }
 
   /**
@@ -180,13 +450,42 @@ export const useIntegrations = defineStore('integrations', () => {
         clearCache()
       },
     },
+    {
+      id: 'enableautomod',
+      aliases: ['enableautomoderation', 'automod'],
+      help: {
+        description: m.command_enable_auto_mod,
+      },
+      execute: () => {
+        settings.value.automod = true
+      },
+    },
+    {
+      id: 'disableautomod',
+      aliases: ['disableautomoderation', 'dautomod'],
+      help: {
+        description: m.command_disable_auto_mod,
+      },
+      execute: () => {
+        settings.value.automod = false
+      },
+    },
   )
 
   return {
+    message,
+    isLoading,
     integration,
     provider,
+    source,
     resolve,
+    configureSources,
+    connectSources,
+    disconnectSources,
     hasCachedData,
     clearCache,
+    settings,
+    isSettingsModified,
+    resetSettings,
   }
 })

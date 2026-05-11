@@ -65,7 +65,6 @@ import { useIntegrations } from '@/stores/integrations'
 import { useLogger } from '@/stores/logger'
 import { usePreferences } from '@/stores/preferences'
 import { useQueue } from '@/stores/queue'
-import { useSources } from '@/stores/sources'
 
 definePage({
   meta: {
@@ -84,7 +83,6 @@ const confirm = useConfirm()
 const commands = useCommands()
 const preferences = usePreferences()
 const queue = useQueue()
-const sources = useSources()
 const integrations = useIntegrations()
 const logger = useLogger()
 
@@ -92,7 +90,7 @@ const isSettingsModified = computed<boolean>(() => {
   return (
     commands.isSettingsModified ||
     queue.isSettingsModified ||
-    sources.isSettingsModified ||
+    integrations.isSettingsModified ||
     logger.isSettingsModified ||
     preferences.isModified
   )
@@ -114,7 +112,7 @@ function resetSettingsToDefault() {
     accept: () => {
       commands.resetSettings()
       queue.resetSettings()
-      sources.resetSettings()
+      integrations.resetSettings()
       logger.resetSettings()
       preferences.reset()
       toast.add({

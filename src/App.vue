@@ -17,24 +17,31 @@ import { useTitle } from '@vueuse/core'
 import { useToast } from 'primevue'
 import ConfirmDialog from 'primevue/confirmdialog'
 import Toast from 'primevue/toast'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 
 import AppFooter from '@/components/AppFooter.vue'
 import AppNavBar from '@/components/AppNavBar.vue'
 import { config } from '@/config'
 
+import { useIntegrations } from './stores/integrations'
 import { usePreferences } from './stores/preferences'
 import { useQueue } from './stores/queue'
-import { useSources } from './stores/sources'
 
 const toast = useToast()
 const preferences = usePreferences()
 const queue = useQueue()
-const sources = useSources()
+const integrations = useIntegrations()
 
-sources.onToast((m) => {
-  toast.add(m)
-})
+// Watch for any toasts coming from the integrations.
+watch(
+  () => integrations.message,
+  (message) => {
+    if (!message) {
+      return
+    }
+    toast.add(message)
+  },
+)
 
 const title = computed((): string => {
   let queueState = queue.settings.open ? 'Open' : 'Closed'
