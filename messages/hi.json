@@ -34,8 +34,6 @@
   "command_previous": "पिछले वीडियो पर जाएं।",
   "command_next": "अगले क्लिप पर जाएं।",
   "command_remove_by_submitter": "सबमिट करने वाले द्वारा भेजे गए क्लिप हटा दें।",
-  "command_enable_provider": "निर्दिष्ट प्रदाता को सक्षम करें।",
-  "command_disable_provider": "निर्दिष्ट प्रदाता को अक्षम करें।",
   "command_enable_auto_mod": "ऑटो मॉडरेशन चालू करें।",
   "command_disable_auto_mod": "ऑटो मॉडरेशन को अक्षम करें।",
   "command_purge_history": "पहले देखे जा चुके सभी वीडियो क्लिप हटा दें।",
@@ -92,8 +90,6 @@
   "previous": "पहले का",
   "primary_color": "प्राथमिक रंग:",
   "primary_color_description": "यूजर इंटरफेस में प्राथमिक रंग का उपयोग किया गया है।",
-  "provider": "प्रदाता",
-  "provider_colon": "प्रदाता:",
   "purge_history": "इतिहास को मिटाएँ",
   "purge_history_description": "पहले देखे गए सभी क्लिप हटा दें ताकि उन्हें दोबारा सबमिट किया जा सके।",
   "purge_history_confirm": "क्या आप वाकई इतिहास से सभी क्लिप्स को हटाना चाहते हैं?",
@@ -178,5 +174,7 @@
   "reset_cache": "कैश रीसेट करें",
   "reset_cache_description": "विवरणों की बार-बार प्राप्ति को रोकने के लिए एकीकरण आइटम को कैश कर सकते हैं। एकीकरण द्वारा कैश किए गए सभी मानों को साफ़ करें।",
   "reset_cache_confirm": "क्या आप वाकई इंटीग्रेशन द्वारा जनरेट किए गए सभी कैश को रीसेट करना चाहते हैं?",
-  "integrations_cache_reset": "एकीकरण कैश रीसेट।"
+  "integrations_cache_reset": "एकीकरण कैश रीसेट।",
+  "command_enable_integration": "निर्दिष्ट एकीकरण को सक्षम करें।",
+  "command_disable_integration": "निर्दिष्ट एकीकरण को अक्षम करें।"
 }

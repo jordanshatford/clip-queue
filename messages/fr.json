@@ -34,8 +34,6 @@
   "command_previous": "Passez à la séquence précédente.",
   "command_next": "Passez à la vidéo suivante.",
   "command_remove_by_submitter": "Supprimer les clips envoyés par l'expéditeur.",
-  "command_enable_provider": "Activez le fournisseur spécifié.",
-  "command_disable_provider": "Désactiver le fournisseur spécifié.",
   "command_enable_auto_mod": "Activer la modération automatique.",
   "command_disable_auto_mod": "Désactiver la modération automatique.",
   "command_purge_history": "Supprimer tous les clips historiquement visionnés.",
@@ -92,8 +90,6 @@
   "previous": "Précédent",
   "primary_color": "Couleur principale :",
   "primary_color_description": "Couleur principale utilisée dans toute l'interface utilisateur.",
-  "provider": "Fournisseur",
-  "provider_colon": "Fournisseur:",
   "purge_history": "Histoire de la purge",
   "purge_history_description": "Supprimer tous les clips précédemment visionnés afin de permettre leur soumission à nouveau.",
   "purge_history_confirm": "Êtes-vous sûr de vouloir supprimer tous les clips de l'historique ?",
@@ -178,5 +174,7 @@
   "reset_cache": "Réinitialiser le cache",
   "reset_cache_description": "Les intégrations peuvent mettre en cache des éléments pour éviter la récupération en double des informations. Effacez toutes les valeurs que les intégrations ont pu mettre en cache.",
   "reset_cache_confirm": "Êtes-vous sûr de vouloir réinitialiser tous les caches générés par les intégrations ?",
-  "integrations_cache_reset": "Réinitialisation du cache des intégrations."
+  "integrations_cache_reset": "Réinitialisation du cache des intégrations.",
+  "command_enable_integration": "Activez l'intégration spécifiée.",
+  "command_disable_integration": "Désactiver l'intégration spécifiée."
 }

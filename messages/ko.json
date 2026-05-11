@@ -34,8 +34,6 @@
   "command_previous": "이전 영상으로 돌아가세요.",
   "command_next": "다음 영상으로 넘어가세요.",
   "command_remove_by_submitter": "제출자가 보낸 클립을 삭제합니다.",
-  "command_enable_provider": "지정된 공급자를 활성화하십시오.",
-  "command_disable_provider": "지정된 공급자를 비활성화합니다.",
   "command_enable_auto_mod": "자동 검열 기능을 활성화하세요.",
   "command_disable_auto_mod": "자동 검열 기능을 비활성화하세요.",
   "command_purge_history": "과거에 시청한 모든 클립을 삭제합니다.",
@@ -92,8 +90,6 @@
   "previous": "이전의",
   "primary_color": "원색:",
   "primary_color_description": "UI 전체에 사용되는 기본 색상입니다.",
-  "provider": "공급자",
-  "provider_colon": "공급자:",
   "purge_history": "삭제 기록",
   "purge_history_description": "이전에 시청한 모든 클립을 삭제하여 다시 제출할 수 있도록 합니다.",
   "purge_history_confirm": "모든 영상 클립을 기록에서 삭제하시겠습니까?",
@@ -178,5 +174,7 @@
   "reset_cache": "캐시 재설정",
   "reset_cache_description": "연동 기능은 중복된 정보 가져오기를 방지하기 위해 항목을 캐시할 수 있습니다. 연동 기능에 캐시된 모든 값을 지우세요.",
   "reset_cache_confirm": "통합 기능으로 생성된 모든 캐시를 초기화하시겠습니까?",
-  "integrations_cache_reset": "통합 캐시가 초기화되었습니다."
+  "integrations_cache_reset": "통합 캐시가 초기화되었습니다.",
+  "command_enable_integration": "지정된 통합 기능을 활성화하십시오.",
+  "command_disable_integration": "지정된 통합 기능을 비활성화합니다."
 }

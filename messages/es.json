@@ -34,8 +34,6 @@
   "command_previous": "Cambia al clip anterior.",
   "command_next": "Pasa al siguiente vídeo.",
   "command_remove_by_submitter": "Eliminar los clips enviados por el remitente.",
-  "command_enable_provider": "Habilitar el proveedor especificado.",
-  "command_disable_provider": "Desactive el proveedor especificado.",
   "command_enable_auto_mod": "Habilitar la moderación automática.",
   "command_disable_auto_mod": "Desactivar la moderación automática.",
   "command_purge_history": "Borra todos los vídeos vistos anteriormente.",
@@ -92,8 +90,6 @@
   "previous": "Anterior",
   "primary_color": "Color primario:",
   "primary_color_description": "Color principal utilizado en toda la interfaz de usuario.",
-  "provider": "Proveedor",
-  "provider_colon": "Proveedor:",
   "purge_history": "Historial de purgas",
   "purge_history_description": "Eliminar todos los clips vistos previamente para que puedan volver a enviarse.",
   "purge_history_confirm": "¿Estás seguro de que quieres eliminar todos los clips del historial?",
@@ -178,5 +174,7 @@
   "reset_cache": "Restablecer caché",
   "reset_cache_description": "Las integraciones pueden almacenar en caché elementos para evitar la obtención duplicada de detalles. Borre todos los valores que las integraciones puedan haber almacenado en caché.",
   "reset_cache_confirm": "¿Estás seguro de que quieres restablecer todas las cachés generadas por las integraciones?",
-  "integrations_cache_reset": "Reinicio de la caché de integraciones."
+  "integrations_cache_reset": "Reinicio de la caché de integraciones.",
+  "command_enable_integration": "Habilitar la integración especificada.",
+  "command_disable_integration": "Deshabilitar la integración especificada."
 }

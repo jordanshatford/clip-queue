@@ -34,8 +34,6 @@
   "command_previous": "Önceki videoya geçin.",
   "command_next": "Sonraki videoya geçin.",
   "command_remove_by_submitter": "Gönderen tarafından gönderilen klipleri kaldırın.",
-  "command_enable_provider": "Belirtilen sağlayıcıyı etkinleştirin.",
-  "command_disable_provider": "Belirtilen sağlayıcıyı devre dışı bırakın.",
   "command_enable_auto_mod": "Otomatik moderasyonu etkinleştirin.",
   "command_disable_auto_mod": "Otomatik moderasyonu devre dışı bırakın.",
   "command_purge_history": "Geçmişte izlenen tüm videoları silin.",
@@ -92,8 +90,6 @@
   "previous": "Öncesi",
   "primary_color": "Ana Renk:",
   "primary_color_description": "Kullanıcı arayüzünde kullanılan ana renk.",
-  "provider": "Sağlayıcı",
-  "provider_colon": "Sağlayıcı:",
   "purge_history": "Tarihi Temizleme",
   "purge_history_description": "Daha önce izlenen tüm videoları silerek yeniden gönderilmelerine olanak tanıyın.",
   "purge_history_confirm": "Geçmişteki tüm videoları silmek istediğinizden emin misiniz?",
@@ -178,5 +174,7 @@
   "reset_cache": "Önbelleği Sıfırla",
   "reset_cache_description": "Entegrasyonlar, ayrıntıların yinelenen şekilde alınmasını önlemek için öğeleri önbelleğe alabilir. Entegrasyonların önbelleğe almış olabileceği tüm değerleri temizleyin.",
   "reset_cache_confirm": "Entegrasyonlar tarafından oluşturulan tüm önbellekleri sıfırlamak istediğinizden emin misiniz?",
-  "integrations_cache_reset": "Entegrasyon önbelleği sıfırlandı."
+  "integrations_cache_reset": "Entegrasyon önbelleği sıfırlandı.",
+  "command_enable_integration": "Belirtilen entegrasyonu etkinleştirin.",
+  "command_disable_integration": "Belirtilen entegrasyonu devre dışı bırakın."
 }

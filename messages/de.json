@@ -34,8 +34,6 @@
   "command_previous": "Wechseln Sie zum vorherigen Clip.",
   "command_next": "Wechseln Sie zum nächsten Clip.",
   "command_remove_by_submitter": "Vom Einsender gesendete Clips entfernen.",
-  "command_enable_provider": "Aktivieren Sie den angegebenen Anbieter.",
-  "command_disable_provider": "Deaktivieren Sie den angegebenen Anbieter.",
   "command_enable_auto_mod": "Automatische Moderation aktivieren.",
   "command_disable_auto_mod": "Automatische Moderation deaktivieren.",
   "command_purge_history": "Alle historisch angesehenen Clips löschen.",
@@ -92,8 +90,6 @@
   "previous": "Vorherige",
   "primary_color": "Grundfarbe:",
   "primary_color_description": "Primärfarbe, die in der gesamten Benutzeroberfläche verwendet wird.",
-  "provider": "Anbieter",
-  "provider_colon": "Anbieter:",
   "purge_history": "Geschichte bereinigen",
   "purge_history_description": "Alle zuvor angesehenen Clips werden gelöscht, damit sie erneut eingereicht werden können.",
   "purge_history_confirm": "Sind Sie sicher, dass Sie alle Clips aus dem Verlauf löschen möchten?",
@@ -178,5 +174,7 @@
   "reset_cache": "Cache zurücksetzen",
   "reset_cache_description": "Integrationen können Elemente zwischenspeichern, um das doppelte Abrufen von Details zu verhindern. Löschen Sie alle Werte, die möglicherweise von Integrationen zwischengespeichert wurden.",
   "reset_cache_confirm": "Möchten Sie wirklich alle von den Integrationen erzeugten Caches zurücksetzen?",
-  "integrations_cache_reset": "Integrationscache zurückgesetzt."
+  "integrations_cache_reset": "Integrationscache zurückgesetzt.",
+  "command_enable_integration": "Aktivieren Sie die angegebene Integration.",
+  "command_disable_integration": "Die angegebene Integration deaktivieren."
 }

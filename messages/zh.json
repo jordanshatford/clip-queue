@@ -34,8 +34,6 @@
   "command_previous": "切换到上一段视频。",
   "command_next": "切换到下一个片段。",
   "command_remove_by_submitter": "删除提交者发送的视频片段。",
-  "command_enable_provider": "启用指定的提供商。",
-  "command_disable_provider": "禁用指定的提供商。",
   "command_enable_auto_mod": "启用自动审核。",
   "command_disable_auto_mod": "禁用自动审核。",
   "command_purge_history": "清除所有历史观看记录。",
@@ -92,8 +90,6 @@
   "previous": "以前的",
   "primary_color": "原色：",
   "primary_color_description": "用户界面中使用的主色调。",
-  "provider": "提供者",
-  "provider_colon": "提供商：",
   "purge_history": "清除历史记录",
   "purge_history_description": "清除所有之前观看过的视频片段，允许重新提交。",
   "purge_history_confirm": "您确定要清除历史记录中的所有剪辑吗？",
@@ -178,5 +174,7 @@
   "reset_cache": "重置缓存",
   "reset_cache_description": "集成功能可能会缓存数据，以防止重复获取详细信息。清除集成功能可能缓存的所有值。",
   "reset_cache_confirm": "您确定要重置集成生成的所有缓存吗？",
-  "integrations_cache_reset": "集成缓存已重置。"
+  "integrations_cache_reset": "集成缓存已重置。",
+  "command_enable_integration": "启用指定的集成。",
+  "command_disable_integration": "禁用指定的集成。"
 }

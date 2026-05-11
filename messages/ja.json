@@ -34,8 +34,6 @@
   "command_previous": "前のクリップに切り替えてください。",
   "command_next": "次のクリップに切り替えてください。",
   "command_remove_by_submitter": "投稿者から送られてきた動画クリップを削除してください。",
-  "command_enable_provider": "指定されたプロバイダを有効にします。",
-  "command_disable_provider": "指定されたプロバイダを無効にします。",
   "command_enable_auto_mod": "自動モデレーションを有効にする。",
   "command_disable_auto_mod": "自動モデレーションを無効にします。",
   "command_purge_history": "過去に視聴された動画クリップをすべて削除する。",
@@ -92,8 +90,6 @@
   "previous": "前の",
   "primary_color": "原色：",
   "primary_color_description": "UI全体で使用されているメインカラー。",
-  "provider": "プロバイダー",
-  "provider_colon": "提供者:",
   "purge_history": "パージの歴史",
   "purge_history_description": "以前閲覧したすべてのクリップを削除し、再提出できるようにします。",
   "purge_history_confirm": "履歴からすべてのクリップを削除してもよろしいですか？",
@@ -178,5 +174,7 @@
   "reset_cache": "キャッシュをリセット",
   "reset_cache_description": "連携機能は、詳細情報の重複取得を防ぐためにアイテムをキャッシュする場合があります。連携機能がキャッシュした可能性のあるすべての値をクリアしてください。",
   "reset_cache_confirm": "統合機能によって生成されたすべてのキャッシュをリセットしてもよろしいですか？",
-  "integrations_cache_reset": "統合キャッシュがリセットされました。"
+  "integrations_cache_reset": "統合キャッシュがリセットされました。",
+  "command_enable_integration": "指定された連携機能を有効にします。",
+  "command_disable_integration": "指定された連携機能を無効にします。"
 }

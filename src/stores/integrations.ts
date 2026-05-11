@@ -153,7 +153,7 @@ export const useIntegrations = defineStore('integrations', () => {
       aliases: ['enableint'],
       help: {
         args: [m.integration],
-        description: () => 'TODO(jordan)',
+        description: m.command_enable_integration,
       },
       execute: ({ args }) => {
         handleEnableCommand(args, true)
@@ -164,7 +164,7 @@ export const useIntegrations = defineStore('integrations', () => {
       aliases: ['disableint'],
       help: {
         args: [m.integration],
-        description: () => 'TODO(jordan)',
+        description: m.command_disable_integration,
       },
       execute: ({ args }) => {
         handleEnableCommand(args, false)

@@ -34,8 +34,6 @@
   "command_previous": "Passa al video precedente.",
   "command_next": "Passa al video successivo.",
   "command_remove_by_submitter": "Rimuovi i video inviati dall'utente.",
-  "command_enable_provider": "Abilita il provider specificato.",
-  "command_disable_provider": "Disabilita il provider specificato.",
   "command_enable_auto_mod": "Attiva la moderazione automatica.",
   "command_disable_auto_mod": "Disattiva la moderazione automatica.",
   "command_purge_history": "Elimina tutti i video visualizzati in precedenza.",
@@ -92,8 +90,6 @@
   "previous": "Precedente",
   "primary_color": "Colore primario:",
   "primary_color_description": "Colore primario utilizzato in tutta l'interfaccia utente.",
-  "provider": "Fornitore",
-  "provider_colon": "Fornitore:",
   "purge_history": "Storia della Purga",
   "purge_history_description": "Elimina tutti i video visualizzati in precedenza, consentendone il reinvio.",
   "purge_history_confirm": "Sei sicuro di voler eliminare tutti i clip dalla cronologia?",
@@ -178,5 +174,7 @@
   "reset_cache": "Reimposta la cache",
   "reset_cache_description": "Le integrazioni potrebbero memorizzare nella cache gli elementi per evitare il recupero duplicato dei dettagli. Cancella tutti i valori che le integrazioni potrebbero aver memorizzato nella cache.",
   "reset_cache_confirm": "Sei sicuro di voler reimpostare tutte le cache generate dalle integrazioni?",
-  "integrations_cache_reset": "Reimpostazione della cache delle integrazioni."
+  "integrations_cache_reset": "Reimpostazione della cache delle integrazioni.",
+  "command_enable_integration": "Abilita l'integrazione specificata.",
+  "command_disable_integration": "Disabilita l'integrazione specificata."
 }

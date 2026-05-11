@@ -34,8 +34,6 @@
   "command_previous": "انتقل إلى المقطع السابق.",
   "command_next": "انتقل إلى المقطع التالي.",
   "command_remove_by_submitter": "قم بإزالة المقاطع المرسلة من قبل المرسل.",
-  "command_enable_provider": "قم بتفعيل الموفر المحدد.",
-  "command_disable_provider": "قم بتعطيل الموفر المحدد.",
   "command_enable_auto_mod": "تفعيل خاصية الإشراف التلقائي.",
   "command_disable_auto_mod": "قم بتعطيل خاصية الإشراف التلقائي.",
   "command_purge_history": "حذف جميع المقاطع التي تمت مشاهدتها سابقاً.",
@@ -92,8 +90,6 @@
   "previous": "سابق",
   "primary_color": "اللون الأساسي:",
   "primary_color_description": "تم استخدام اللون الأساسي في جميع أنحاء واجهة المستخدم.",
-  "provider": "مزود",
-  "provider_colon": "مزود:",
   "purge_history": "تاريخ التطهير",
   "purge_history_description": "قم بحذف جميع المقاطع التي تمت مشاهدتها مسبقًا للسماح بإعادة إرسالها.",
   "purge_history_confirm": "هل أنت متأكد من رغبتك في حذف جميع المقاطع من السجل؟",
@@ -178,5 +174,7 @@
   "reset_cache": "إعادة ضبط ذاكرة التخزين المؤقت",
   "reset_cache_description": "قد تقوم عمليات التكامل بتخزين العناصر مؤقتًا لمنع جلب التفاصيل بشكل مكرر. امسح جميع القيم التي قد تكون عمليات التكامل قد خزنتها مؤقتًا.",
   "reset_cache_confirm": "هل أنت متأكد من رغبتك في إعادة ضبط جميع الذاكرات المؤقتة التي تم إنشاؤها بواسطة عمليات التكامل؟",
-  "integrations_cache_reset": "تمت إعادة ضبط ذاكرة التخزين المؤقت للتكاملات."
+  "integrations_cache_reset": "تمت إعادة ضبط ذاكرة التخزين المؤقت للتكاملات.",
+  "command_enable_integration": "قم بتمكين التكامل المحدد.",
+  "command_disable_integration": "قم بتعطيل التكامل المحدد."
 }
