@@ -64,7 +64,7 @@
     "jsdom": "^29.1.1",
     "oxfmt": "^0.48.0",
     "oxlint": "~1.63.0",
-    "tailwindcss": "^4.2.4",
+    "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.2",
     "vite": "^8.0.11",
