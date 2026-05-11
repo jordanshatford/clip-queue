@@ -72,7 +72,7 @@
         </div>
       </template>
     </Column>
-    <Column field="provider" sortable :header="m.provider()">
+    <Column field="integration" sortable :header="m.integration()">
       <template #body="{ data }: { data: Clip }">
         <ProviderName :provider="data.provider" />
       </template>
