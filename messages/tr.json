@@ -175,5 +175,7 @@
   "link_detection": "Bağlantı Algılama",
   "disabled": "Engelli",
   "connected_to_source_name": "{source} ile {name} olarak bağlantılı.",
-  "disconnected_from_source": "{source} bağlantısı kesildi."
+  "disconnected_from_source": "{source} bağlantısı kesildi.",
+  "allow_duplicates": "Yinelenen kayıtlara izin ver:",
+  "allow_duplicates_description": "Daha önce izlenmiş bir video tekrar gönderildiğinde, sıraya geri alınmasına izin verilecektir."
 }

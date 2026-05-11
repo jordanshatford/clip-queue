@@ -175,5 +175,7 @@
   "link_detection": "Détection de liens",
   "disabled": "Désactivé",
   "connected_to_source_name": "Connecté à {source} comme {name} .",
-  "disconnected_from_source": "Déconnecté de {source} ."
+  "disconnected_from_source": "Déconnecté de {source} .",
+  "allow_duplicates": "Autoriser les doublons :",
+  "allow_duplicates_description": "Lorsqu'un clip déjà visionné est soumis, il sera remis dans la file d'attente."
 }

@@ -175,5 +175,7 @@
   "link_detection": "लिंक पहचान",
   "disabled": "अक्षम",
   "connected_to_source_name": "{source} से {name} के रूप में जुड़ा हुआ है।",
-  "disconnected_from_source": "{source} से डिस्कनेक्ट हो गया।"
+  "disconnected_from_source": "{source} से डिस्कनेक्ट हो गया।",
+  "allow_duplicates": "डुप्लिकेट की अनुमति दें:",
+  "allow_duplicates_description": "पहले से देखी गई क्लिप को दोबारा सबमिट करने पर उसे फिर से कतार में शामिल कर लिया जाएगा।"
 }

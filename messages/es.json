@@ -175,5 +175,7 @@
   "link_detection": "Detección de enlaces",
   "disabled": "Desactivado",
   "connected_to_source_name": "Conectado a {source} como {name} .",
-  "disconnected_from_source": "Desconectado de {source} ."
+  "disconnected_from_source": "Desconectado de {source} .",
+  "allow_duplicates": "Permitir duplicados:",
+  "allow_duplicates_description": "Cuando se envíe un vídeo que ya se haya visto, se permitirá que vuelva a la cola."
 }

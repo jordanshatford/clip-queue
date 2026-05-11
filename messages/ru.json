@@ -175,5 +175,7 @@
   "link_detection": "Обнаружение связей",
   "disabled": "Неполноценный",
   "connected_to_source_name": "Подключено к {source} как {name} .",
-  "disconnected_from_source": "Отключено от {source} ."
+  "disconnected_from_source": "Отключено от {source} .",
+  "allow_duplicates": "Разрешить дубликаты:",
+  "allow_duplicates_description": "Если ранее просмотренный видеоролик будет отправлен, он будет добавлен обратно в очередь."
 }

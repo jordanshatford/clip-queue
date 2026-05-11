@@ -48,6 +48,7 @@
         <Message id="autoModeration-help" size="small" severity="secondary" variant="simple">{{
           m.auto_mod_description()
         }}</Message>
+        <Divider />
         <label for="limit">{{ m.size_limit() }}</label>
         <InputNumber
           v-model="queue.settings.limit"
@@ -62,6 +63,18 @@
         />
         <Message id="limit-help" size="small" severity="secondary" variant="simple">{{
           m.size_limit_description()
+        }}</Message>
+        <div class="flex justify-between">
+          <label for="duplicates">{{ m.allow_duplicates() }}</label>
+          <ToggleSwitch
+            v-model="queue.settings.duplicates"
+            input-id="duplicates"
+            size="small"
+            aria-describedby="duplicates-help"
+          />
+        </div>
+        <Message id="duplicates-help" size="small" severity="secondary" variant="simple">{{
+          m.allow_duplicates_description()
         }}</Message>
       </div>
     </template>

@@ -175,5 +175,7 @@
   "link_detection": "Link Detection",
   "disabled": "Disabled",
   "connected_to_source_name": "Connected to {source} as {name}.",
-  "disconnected_from_source": "Disconnected from {source}."
+  "disconnected_from_source": "Disconnected from {source}.",
+  "allow_duplicates": "Allow Duplicates:",
+  "allow_duplicates_description": "When a clip previously watched is submitted it will be allowed back in the queue."
 }

@@ -175,5 +175,7 @@
   "link_detection": "リンク検出",
   "disabled": "無効",
   "connected_to_source_name": "{source}に{name}接続しました。",
-  "disconnected_from_source": "{source}から切断されました。"
+  "disconnected_from_source": "{source}から切断されました。",
+  "allow_duplicates": "重複を許可する:",
+  "allow_duplicates_description": "以前視聴した動画クリップが再度投稿された場合、再生キューに戻すことができます。"
 }

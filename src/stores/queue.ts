@@ -26,11 +26,16 @@ export interface QueueSettings {
    * @note null means no limit.
    */
   limit: number | null
+  /**
+   * If the queue should block duplicate clips from being added to the queue.
+   */
+  duplicates: boolean
 }
 
 export const DEFAULT_SETTINGS: QueueSettings = {
   open: true,
   limit: null,
+  duplicates: false,
 }
 
 export const useQueue = defineStore('queue', () => {
@@ -74,7 +79,7 @@ export const useQueue = defineStore('queue', () => {
     // Ignore when we have previously watched it
     const hasBeenWatched =
       (current.value && toClipUUID(current.value) === toClipUUID(clip)) || history.includes(clip)
-    if (hasBeenWatched) {
+    if (hasBeenWatched && !settings.value.duplicates) {
       return
     }
     // Queue is full based on limit

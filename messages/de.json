@@ -175,5 +175,7 @@
   "link_detection": "Linkerkennung",
   "disabled": "Deaktiviert",
   "connected_to_source_name": "Verbunden mit {source} als {name} .",
-  "disconnected_from_source": "Verbindung zu {source} ."
+  "disconnected_from_source": "Verbindung zu {source} .",
+  "allow_duplicates": "Duplikate zulassen:",
+  "allow_duplicates_description": "Wenn ein zuvor angesehener Clip erneut eingereicht wird, kann er wieder in die Warteschlange aufgenommen werden."
 }

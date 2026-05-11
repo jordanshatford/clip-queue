@@ -175,5 +175,7 @@
   "link_detection": "الكشف عن الروابط",
   "disabled": "عاجز",
   "connected_to_source_name": "متصل بـ {source} كـ {name} .",
-  "disconnected_from_source": "تم فصل الاتصال بـ {source} ."
+  "disconnected_from_source": "تم فصل الاتصال بـ {source} .",
+  "allow_duplicates": "السماح بالتكرارات:",
+  "allow_duplicates_description": "عند إرسال مقطع فيديو تمت مشاهدته مسبقاً، سيتم السماح له بالعودة إلى قائمة الانتظار."
 }
