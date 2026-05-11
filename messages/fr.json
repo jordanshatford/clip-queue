@@ -39,7 +39,6 @@
   "command_disable_provider": "Désactiver le fournisseur spécifié.",
   "command_enable_auto_mod": "Activer la modération automatique.",
   "command_disable_auto_mod": "Désactiver la modération automatique.",
-  "command_purge_cache": "Supprimer tous les clips mis en cache.",
   "command_purge_history": "Supprimer tous les clips historiquement visionnés.",
   "cyan": "Cyan",
   "delete_history": "Supprimer l'historique",
@@ -96,9 +95,6 @@
   "primary_color_description": "Couleur principale utilisée dans toute l'interface utilisateur.",
   "provider": "Fournisseur",
   "provider_colon": "Fournisseur:",
-  "purge_cache": "Purger le cache",
-  "purge_cache_description": "Les clips soumis peuvent être mis en cache pour une utilisation ultérieure. Supprimer tous les clips mis en cache.",
-  "purge_cache_confirm": "Êtes-vous sûr de vouloir supprimer tous les clips mis en cache localement ?",
   "purge_history": "Histoire de la purge",
   "purge_history_description": "Supprimer tous les clips précédemment visionnés afin de permettre leur soumission à nouveau.",
   "purge_history_confirm": "Êtes-vous sûr de vouloir supprimer tous les clips de l'historique ?",
@@ -178,5 +174,9 @@
   "allow_duplicates": "Autoriser les doublons :",
   "allow_duplicates_description": "Lorsqu'un clip déjà visionné est soumis, il sera remis dans la file d'attente.",
   "integration": "Intégration",
-  "command_remove_by_integration": "Supprimer les clips provenant d'une intégration donnée."
+  "command_remove_by_integration": "Supprimer les clips provenant d'une intégration donnée.",
+  "command_reset_cache": "Réinitialiser toutes les valeurs mises en cache par les intégrations.",
+  "reset_cache": "Réinitialiser le cache",
+  "reset_cache_description": "Les intégrations peuvent mettre en cache des éléments pour éviter la récupération en double des informations. Effacez toutes les valeurs que les intégrations ont pu mettre en cache.",
+  "reset_cache_confirm": "Êtes-vous sûr de vouloir réinitialiser tous les caches générés par les intégrations ?"
 }

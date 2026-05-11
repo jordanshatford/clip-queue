@@ -28,16 +28,16 @@
       }}</Message>
       <Divider />
       <Button
-        :label="m.purge_cache()"
+        :label="m.reset_cache()"
         class="mb-2"
         fluid
         size="small"
         severity="danger"
         :disabled="!providers.hasCachedData"
-        @click="purgeCache()"
+        @click="resetCache()"
       ></Button>
       <Message size="small" severity="secondary" variant="simple">{{
-        m.purge_cache_description()
+        m.reset_cache_description()
       }}</Message>
     </template>
   </Card>
@@ -154,10 +154,10 @@ function purgeHistory() {
   })
 }
 
-function purgeCache() {
+function resetCache() {
   confirm.require({
-    header: m.purge_cache(),
-    message: m.purge_cache_confirm(),
+    header: m.reset_cache(),
+    message: m.reset_cache_confirm(),
     icon: 'pi pi-exclamation-triangle',
     acceptProps: {
       label: m.confirm(),

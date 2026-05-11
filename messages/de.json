@@ -39,7 +39,6 @@
   "command_disable_provider": "Deaktivieren Sie den angegebenen Anbieter.",
   "command_enable_auto_mod": "Automatische Moderation aktivieren.",
   "command_disable_auto_mod": "Automatische Moderation deaktivieren.",
-  "command_purge_cache": "Alle zwischengespeicherten Clips löschen.",
   "command_purge_history": "Alle historisch angesehenen Clips löschen.",
   "cyan": "Cyan",
   "delete_history": "Verlauf löschen",
@@ -96,9 +95,6 @@
   "primary_color_description": "Primärfarbe, die in der gesamten Benutzeroberfläche verwendet wird.",
   "provider": "Anbieter",
   "provider_colon": "Anbieter:",
-  "purge_cache": "Cache leeren",
-  "purge_cache_description": "Eingereichte Clips können zur späteren Verwendung zwischengespeichert werden. Alle zwischengespeicherten Clips löschen.",
-  "purge_cache_confirm": "Möchten Sie wirklich alle lokal zwischengespeicherten Clips löschen?",
   "purge_history": "Geschichte bereinigen",
   "purge_history_description": "Alle zuvor angesehenen Clips werden gelöscht, damit sie erneut eingereicht werden können.",
   "purge_history_confirm": "Sind Sie sicher, dass Sie alle Clips aus dem Verlauf löschen möchten?",
@@ -178,5 +174,9 @@
   "allow_duplicates": "Duplikate zulassen:",
   "allow_duplicates_description": "Wenn ein zuvor angesehener Clip erneut eingereicht wird, kann er wieder in die Warteschlange aufgenommen werden.",
   "integration": "Integration",
-  "command_remove_by_integration": "Entfernen Sie Clips, die aus einer bestimmten Integration stammen."
+  "command_remove_by_integration": "Entfernen Sie Clips, die aus einer bestimmten Integration stammen.",
+  "command_reset_cache": "Alle von Integrationen zwischengespeicherten Werte zurücksetzen.",
+  "reset_cache": "Cache zurücksetzen",
+  "reset_cache_description": "Integrationen können Elemente zwischenspeichern, um das doppelte Abrufen von Details zu verhindern. Löschen Sie alle Werte, die möglicherweise von Integrationen zwischengespeichert wurden.",
+  "reset_cache_confirm": "Möchten Sie wirklich alle von den Integrationen erzeugten Caches zurücksetzen?"
 }

@@ -115,9 +115,9 @@ describe('providers.ts', () => {
     expect(cmd2).toBeDefined()
     expect(cmd2?.id).toEqual('disableprovider')
     expect(cmd2?.aliases).toEqual(['disablep'])
-    const cmd3 = commands.commands['purgecache']
+    const cmd3 = commands.commands['resetcache']
     expect(cmd3).toBeDefined()
-    expect(cmd3?.id).toEqual('purgecache')
+    expect(cmd3?.id).toEqual('resetcache')
     expect(cmd3?.aliases).toEqual(['rmcache'])
   })
 })

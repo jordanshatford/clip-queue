@@ -39,7 +39,6 @@
   "command_disable_provider": "지정된 공급자를 비활성화합니다.",
   "command_enable_auto_mod": "자동 검열 기능을 활성화하세요.",
   "command_disable_auto_mod": "자동 검열 기능을 비활성화하세요.",
-  "command_purge_cache": "캐시된 클립을 모두 삭제합니다.",
   "command_purge_history": "과거에 시청한 모든 클립을 삭제합니다.",
   "cyan": "시안",
   "delete_history": "삭제 기록",
@@ -96,9 +95,6 @@
   "primary_color_description": "UI 전체에 사용되는 기본 색상입니다.",
   "provider": "공급자",
   "provider_colon": "공급자:",
-  "purge_cache": "캐시 삭제",
-  "purge_cache_description": "제출된 클립은 향후 사용을 위해 캐시될 수 있습니다. 캐시된 모든 클립을 삭제하세요.",
-  "purge_cache_confirm": "로컬에 캐시된 모든 클립을 삭제하시겠습니까?",
   "purge_history": "삭제 기록",
   "purge_history_description": "이전에 시청한 모든 클립을 삭제하여 다시 제출할 수 있도록 합니다.",
   "purge_history_confirm": "모든 영상 클립을 기록에서 삭제하시겠습니까?",
@@ -178,5 +174,9 @@
   "allow_duplicates": "중복 허용:",
   "allow_duplicates_description": "이전에 시청했던 영상 클립을 다시 제출하면 대기열에 다시 추가될 수 있습니다.",
   "integration": "완성",
-  "command_remove_by_integration": "특정 통합에서 생성된 클립을 제거합니다."
+  "command_remove_by_integration": "특정 통합에서 생성된 클립을 제거합니다.",
+  "command_reset_cache": "통합 기능으로 캐시된 모든 값을 초기화합니다.",
+  "reset_cache": "캐시 재설정",
+  "reset_cache_description": "연동 기능은 중복된 정보 가져오기를 방지하기 위해 항목을 캐시할 수 있습니다. 연동 기능에 캐시된 모든 값을 지우세요.",
+  "reset_cache_confirm": "통합 기능으로 생성된 모든 캐시를 초기화하시겠습니까?"
 }

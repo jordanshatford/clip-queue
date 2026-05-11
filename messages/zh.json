@@ -39,7 +39,6 @@
   "command_disable_provider": "禁用指定的提供商。",
   "command_enable_auto_mod": "启用自动审核。",
   "command_disable_auto_mod": "禁用自动审核。",
-  "command_purge_cache": "清除所有缓存片段。",
   "command_purge_history": "清除所有历史观看记录。",
   "cyan": "青色",
   "delete_history": "删除历史记录",
@@ -96,9 +95,6 @@
   "primary_color_description": "用户界面中使用的主色调。",
   "provider": "提供者",
   "provider_colon": "提供商：",
-  "purge_cache": "清除缓存",
-  "purge_cache_description": "提交的视频片段可能会被缓存以供日后使用。请清除所有缓存的视频片段。",
-  "purge_cache_confirm": "您确定要清除本地缓存的所有片段吗？",
   "purge_history": "清除历史记录",
   "purge_history_description": "清除所有之前观看过的视频片段，允许重新提交。",
   "purge_history_confirm": "您确定要清除历史记录中的所有剪辑吗？",
@@ -178,5 +174,9 @@
   "allow_duplicates": "允许重复项：",
   "allow_duplicates_description": "如果之前观看过的视频片段被提交，它将被允许重新加入队列。",
   "integration": "一体化",
-  "command_remove_by_integration": "移除来自特定集成的剪辑。"
+  "command_remove_by_integration": "移除来自特定集成的剪辑。",
+  "command_reset_cache": "重置所有集成缓存的值。",
+  "reset_cache": "重置缓存",
+  "reset_cache_description": "集成功能可能会缓存数据，以防止重复获取详细信息。清除集成功能可能缓存的所有值。",
+  "reset_cache_confirm": "您确定要重置集成生成的所有缓存吗？"
 }

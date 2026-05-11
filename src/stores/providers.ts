@@ -134,10 +134,10 @@ export const useProviders = defineStore('providers', () => {
       },
     },
     {
-      id: 'purgecache',
+      id: 'resetcache',
       aliases: ['rmcache'],
       help: {
-        description: m.command_purge_cache,
+        description: m.command_reset_cache,
       },
       execute: () => {
         purge()

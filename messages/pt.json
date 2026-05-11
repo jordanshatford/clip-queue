@@ -39,7 +39,6 @@
   "command_disable_provider": "Desative o provedor especificado.",
   "command_enable_auto_mod": "Ativar moderação automática.",
   "command_disable_auto_mod": "Desative a moderação automática.",
-  "command_purge_cache": "Limpar todos os clipes em cache.",
   "command_purge_history": "Excluir todos os vídeos assistidos anteriormente.",
   "cyan": "Ciano",
   "delete_history": "Excluir histórico",
@@ -96,9 +95,6 @@
   "primary_color_description": "Cor primária utilizada em toda a interface do usuário.",
   "provider": "Fornecedor",
   "provider_colon": "Fornecedor:",
-  "purge_cache": "Limpar cache",
-  "purge_cache_description": "Os vídeos enviados podem ser armazenados em cache para uso futuro. Limpe todos os vídeos em cache.",
-  "purge_cache_confirm": "Tem certeza de que deseja apagar todos os clipes armazenados em cache localmente?",
   "purge_history": "Histórico de expurgos",
   "purge_history_description": "Exclua todos os vídeos visualizados anteriormente, permitindo que sejam reenviados.",
   "purge_history_confirm": "Tem certeza de que deseja apagar todos os vídeos do histórico?",
@@ -178,5 +174,9 @@
   "allow_duplicates": "Permitir duplicados:",
   "allow_duplicates_description": "Quando um vídeo assistido anteriormente for enviado, ele poderá retornar à fila.",
   "integration": "Integração",
-  "command_remove_by_integration": "Remover clipes provenientes de uma determinada integração."
+  "command_remove_by_integration": "Remover clipes provenientes de uma determinada integração.",
+  "command_reset_cache": "Redefinir todos os valores armazenados em cache pelas integrações.",
+  "reset_cache": "Redefinir cache",
+  "reset_cache_description": "As integrações podem armazenar itens em cache para evitar a busca duplicada de detalhes. Limpe todos os valores que as integrações possam ter armazenado em cache.",
+  "reset_cache_confirm": "Tem certeza de que deseja redefinir todos os caches gerados pelas integrações?"
 }

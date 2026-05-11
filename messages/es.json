@@ -39,7 +39,6 @@
   "command_disable_provider": "Desactive el proveedor especificado.",
   "command_enable_auto_mod": "Habilitar la moderación automática.",
   "command_disable_auto_mod": "Desactivar la moderación automática.",
-  "command_purge_cache": "Borra todos los clips almacenados en caché.",
   "command_purge_history": "Borra todos los vídeos vistos anteriormente.",
   "cyan": "Cian",
   "delete_history": "Borrar historial",
@@ -96,9 +95,6 @@
   "primary_color_description": "Color principal utilizado en toda la interfaz de usuario.",
   "provider": "Proveedor",
   "provider_colon": "Proveedor:",
-  "purge_cache": "Borrar caché",
-  "purge_cache_description": "Los clips enviados pueden almacenarse en caché para su uso futuro. Elimine todos los clips almacenados en caché.",
-  "purge_cache_confirm": "¿Estás seguro de que quieres eliminar todos los clips almacenados en caché localmente?",
   "purge_history": "Historial de purgas",
   "purge_history_description": "Eliminar todos los clips vistos previamente para que puedan volver a enviarse.",
   "purge_history_confirm": "¿Estás seguro de que quieres eliminar todos los clips del historial?",
@@ -178,5 +174,9 @@
   "allow_duplicates": "Permitir duplicados:",
   "allow_duplicates_description": "Cuando se envíe un vídeo que ya se haya visto, se permitirá que vuelva a la cola.",
   "integration": "Integración",
-  "command_remove_by_integration": "Eliminar los clips que provienen de una integración determinada."
+  "command_remove_by_integration": "Eliminar los clips que provienen de una integración determinada.",
+  "command_reset_cache": "Restablecer todos los valores almacenados en caché por las integraciones.",
+  "reset_cache": "Restablecer caché",
+  "reset_cache_description": "Las integraciones pueden almacenar en caché elementos para evitar la obtención duplicada de detalles. Borre todos los valores que las integraciones puedan haber almacenado en caché.",
+  "reset_cache_confirm": "¿Estás seguro de que quieres restablecer todas las cachés generadas por las integraciones?"
 }

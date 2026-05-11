@@ -39,7 +39,6 @@
   "command_disable_provider": "Disabilita il provider specificato.",
   "command_enable_auto_mod": "Attiva la moderazione automatica.",
   "command_disable_auto_mod": "Disattiva la moderazione automatica.",
-  "command_purge_cache": "Elimina tutti i clip memorizzati nella cache.",
   "command_purge_history": "Elimina tutti i video visualizzati in precedenza.",
   "cyan": "Ciano",
   "delete_history": "Elimina cronologia",
@@ -96,9 +95,6 @@
   "primary_color_description": "Colore primario utilizzato in tutta l'interfaccia utente.",
   "provider": "Fornitore",
   "provider_colon": "Fornitore:",
-  "purge_cache": "Svuota la cache",
-  "purge_cache_description": "I video inviati potrebbero essere memorizzati nella cache per un utilizzo futuro. Elimina tutti i video memorizzati nella cache.",
-  "purge_cache_confirm": "Sei sicuro di voler eliminare tutti i clip memorizzati nella cache locale?",
   "purge_history": "Storia della Purga",
   "purge_history_description": "Elimina tutti i video visualizzati in precedenza, consentendone il reinvio.",
   "purge_history_confirm": "Sei sicuro di voler eliminare tutti i clip dalla cronologia?",
@@ -178,5 +174,9 @@
   "allow_duplicates": "Consenti duplicati:",
   "allow_duplicates_description": "Quando viene inviato un video precedentemente visualizzato, questo verrà rimesso in coda.",
   "integration": "Integrazione",
-  "command_remove_by_integration": "Rimuovi i clip provenienti da una determinata integrazione."
+  "command_remove_by_integration": "Rimuovi i clip provenienti da una determinata integrazione.",
+  "command_reset_cache": "Reimposta tutti i valori memorizzati nella cache dalle integrazioni.",
+  "reset_cache": "Reimposta la cache",
+  "reset_cache_description": "Le integrazioni potrebbero memorizzare nella cache gli elementi per evitare il recupero duplicato dei dettagli. Cancella tutti i valori che le integrazioni potrebbero aver memorizzato nella cache.",
+  "reset_cache_confirm": "Sei sicuro di voler reimpostare tutte le cache generate dalle integrazioni?"
 }

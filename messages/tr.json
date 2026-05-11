@@ -39,7 +39,6 @@
   "command_disable_provider": "Belirtilen sağlayıcıyı devre dışı bırakın.",
   "command_enable_auto_mod": "Otomatik moderasyonu etkinleştirin.",
   "command_disable_auto_mod": "Otomatik moderasyonu devre dışı bırakın.",
-  "command_purge_cache": "Önbelleğe alınmış tüm klipleri temizleyin.",
   "command_purge_history": "Geçmişte izlenen tüm videoları silin.",
   "cyan": "Camgöbeği",
   "delete_history": "Geçmişi Sil",
@@ -96,9 +95,6 @@
   "primary_color_description": "Kullanıcı arayüzünde kullanılan ana renk.",
   "provider": "Sağlayıcı",
   "provider_colon": "Sağlayıcı:",
-  "purge_cache": "Önbelleği Temizle",
-  "purge_cache_description": "Gönderilen videolar ileride kullanılmak üzere önbelleğe alınabilir. Önbelleğe alınmış tüm videoları silin.",
-  "purge_cache_confirm": "Yerel olarak önbelleğe alınmış tüm videoları silmek istediğinizden emin misiniz?",
   "purge_history": "Tarihi Temizleme",
   "purge_history_description": "Daha önce izlenen tüm videoları silerek yeniden gönderilmelerine olanak tanıyın.",
   "purge_history_confirm": "Geçmişteki tüm videoları silmek istediğinizden emin misiniz?",
@@ -178,5 +174,9 @@
   "allow_duplicates": "Yinelenen kayıtlara izin ver:",
   "allow_duplicates_description": "Daha önce izlenmiş bir video tekrar gönderildiğinde, sıraya geri alınmasına izin verilecektir.",
   "integration": "Entegrasyon",
-  "command_remove_by_integration": "Verilen entegrasyondan gelen klipleri kaldırın."
+  "command_remove_by_integration": "Verilen entegrasyondan gelen klipleri kaldırın.",
+  "command_reset_cache": "Entegrasyonlar tarafından önbelleğe alınan tüm değerleri sıfırlayın.",
+  "reset_cache": "Önbelleği Sıfırla",
+  "reset_cache_description": "Entegrasyonlar, ayrıntıların yinelenen şekilde alınmasını önlemek için öğeleri önbelleğe alabilir. Entegrasyonların önbelleğe almış olabileceği tüm değerleri temizleyin.",
+  "reset_cache_confirm": "Entegrasyonlar tarafından oluşturulan tüm önbellekleri sıfırlamak istediğinizden emin misiniz?"
 }
