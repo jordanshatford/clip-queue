@@ -1,5 +1,19 @@
 # clip-queue
 
+## 2.6.0
+
+### Minor Changes
+
+- feat: make default surface color neutral ([`96bdcc8`](https://github.com/jordanshatford/clip-queue/commit/96bdcc8575a2a66233c94d6078dfb2ff777f9b7a))
+
+- feat: store settings use single localstorage key ([`882189a`](https://github.com/jordanshatford/clip-queue/commit/882189af7a1863b07075f502fb3c2c898e1bcf8f))
+
+- feat: make rumble its own integration ([`1300e75`](https://github.com/jordanshatford/clip-queue/commit/1300e75568f0ecb3f7d523bff79af70cd159329f))
+
+### Patch Changes
+
+- fix: reset logger settings when resetting settings ([`882189a`](https://github.com/jordanshatford/clip-queue/commit/882189af7a1863b07075f502fb3c2c898e1bcf8f))
+
 ## 2.5.0
 
 ### Minor Changes
