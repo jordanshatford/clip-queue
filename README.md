@@ -26,12 +26,12 @@ Clip Queue integrates into a users chat and queues clips submitted in chat by th
   - [Kick](https://kick.com/)
     - Providers: `Kick Clips`, `Kick Videos`.
   - [YouTube](https://www.youtube.com/)
-    - Providers: `YouTube Shorts`, `YouTube Videos`.
-  - Miscellaneous (_Experimental_):
+    - Providers: `Rumble Shorts`, `Rumble Videos`.
+  - [Rumble](https://rumble.com/)
+  - Miscellaneous (_Experimental_)
     - Providers:
       - [Dailymotion](https://www.dailymotion.com/)
       - [Medal](https://medal.tv/)
-      - [Rumble](https://rumble.com/)
       - [Soop](https://www.sooplive.com/)
       - [Streamable](https://streamable.com/)
       - [Vimeo](https://vimeo.com/)
