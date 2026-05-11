@@ -3,12 +3,7 @@
     <div class="h-5">
       <IntegrationIcon class="size-5" :id="provider" />
     </div>
-    <div>{{ name }}</div>
-    <i
-      v-if="providers.isExperimental(provider)"
-      v-tooltip="m.experimental()"
-      class="pi pi-exclamation-triangle text-yellow-600 dark:text-yellow-500"
-    ></i>
+    <div>{{ p?.name }}</div>
   </div>
 </template>
 
@@ -18,8 +13,7 @@ import { computed } from 'vue'
 import type { IntegrationID } from '@/integrations'
 
 import IntegrationIcon from '@/components/integrations/IntegrationIcon.vue'
-import { m } from '@/paraglide/messages'
-import { useProviders } from '@/stores/providers'
+import { useIntegrations } from '@/stores/integrations'
 
 export interface Props {
   provider: IntegrationID
@@ -27,7 +21,7 @@ export interface Props {
 
 const { provider } = defineProps<Props>()
 
-const providers = useProviders()
+const integration = useIntegrations()
 
-const name = computed(() => providers.name(provider))
+const p = computed(() => integration.provider(provider))
 </script>

@@ -21,7 +21,6 @@
       }
     }
   ],
-  "clip_cache_purged": "Cache delle clip svuotata.",
   "clip_history_purged": "Cronologia delle clip eliminata.",
   "close": "Vicino",
   "confirm": "Confermare",
@@ -178,5 +177,6 @@
   "command_reset_cache": "Reimposta tutti i valori memorizzati nella cache dalle integrazioni.",
   "reset_cache": "Reimposta la cache",
   "reset_cache_description": "Le integrazioni potrebbero memorizzare nella cache gli elementi per evitare il recupero duplicato dei dettagli. Cancella tutti i valori che le integrazioni potrebbero aver memorizzato nella cache.",
-  "reset_cache_confirm": "Sei sicuro di voler reimpostare tutte le cache generate dalle integrazioni?"
+  "reset_cache_confirm": "Sei sicuro di voler reimpostare tutte le cache generate dalle integrazioni?",
+  "integrations_cache_reset": "Reimpostazione della cache delle integrazioni."
 }

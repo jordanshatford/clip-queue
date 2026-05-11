@@ -8,7 +8,10 @@ import {
   type Clip,
   type Integration,
 } from '@/integrations'
+import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
+
+import { useCommands } from './commands'
 
 /**
  * Composable for unifying all interactions with integrations.
@@ -106,6 +109,78 @@ export const useIntegrations = defineStore('integrations', () => {
       }
     }
   }
+
+  /**
+   * Handle updating an integration enabled state based on a command.
+   * @param args - The arguments passed with the command.
+   * @param enabled - The enabled state to set.
+   */
+  function handleEnableCommand(args: string[], enabled: boolean): void {
+    // Ensure the ID passed to the command is a valid integration ID.
+    const id = Object.values(IntegrationID).find(
+      (int) => int.toLowerCase() === args[0]?.toLowerCase(),
+    )
+    if (!id) {
+      return
+    }
+
+    // Find the integration, source, or provider that matches the ID and set
+    // its enabled state appropriately.
+    for (const integration of integrations) {
+      if (integration.id === id) {
+        integration.isEnabled = enabled
+        return
+      }
+      if (integration.source?.id === id) {
+        integration.source.isEnabled = enabled
+        return
+      }
+      for (const provider of integration.providers) {
+        if (provider.id === id) {
+          provider.isEnabled = enabled
+          return
+        }
+      }
+    }
+  }
+
+  /**
+   * Register commands for handling integrations.
+   */
+  useCommands().register(
+    {
+      id: 'enableintegration',
+      aliases: ['enableint'],
+      help: {
+        args: [m.integration],
+        description: () => 'TODO(jordan)',
+      },
+      execute: ({ args }) => {
+        handleEnableCommand(args, true)
+      },
+    },
+    {
+      id: 'disableintegration',
+      aliases: ['disableint'],
+      help: {
+        args: [m.integration],
+        description: () => 'TODO(jordan)',
+      },
+      execute: ({ args }) => {
+        handleEnableCommand(args, false)
+      },
+    },
+    {
+      id: 'resetcache',
+      aliases: ['rmcache'],
+      help: {
+        description: m.command_reset_cache,
+      },
+      execute: () => {
+        clearCache()
+      },
+    },
+  )
 
   return {
     integration,

@@ -21,7 +21,6 @@
       }
     }
   ],
-  "clip_cache_purged": "Cache de clipes limpo.",
   "clip_history_purged": "Histórico de clipes apagado.",
   "close": "Fechar",
   "confirm": "Confirmar",
@@ -178,5 +177,6 @@
   "command_reset_cache": "Redefinir todos os valores armazenados em cache pelas integrações.",
   "reset_cache": "Redefinir cache",
   "reset_cache_description": "As integrações podem armazenar itens em cache para evitar a busca duplicada de detalhes. Limpe todos os valores que as integrações possam ter armazenado em cache.",
-  "reset_cache_confirm": "Tem certeza de que deseja redefinir todos os caches gerados pelas integrações?"
+  "reset_cache_confirm": "Tem certeza de que deseja redefinir todos os caches gerados pelas integrações?",
+  "integrations_cache_reset": "Redefinição do cache de integrações."
 }

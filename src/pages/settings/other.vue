@@ -33,7 +33,7 @@
         fluid
         size="small"
         severity="danger"
-        :disabled="!providers.hasCachedData"
+        :disabled="!integrations.hasCachedData"
         @click="resetCache()"
       ></Button>
       <Message size="small" severity="secondary" variant="simple">{{
@@ -61,9 +61,9 @@ import { computed } from 'vue'
 
 import { m } from '@/paraglide/messages'
 import { useCommands } from '@/stores/commands'
+import { useIntegrations } from '@/stores/integrations'
 import { useLogger } from '@/stores/logger'
 import { usePreferences } from '@/stores/preferences'
-import { useProviders } from '@/stores/providers'
 import { useQueue } from '@/stores/queue'
 import { useSources } from '@/stores/sources'
 
@@ -85,7 +85,7 @@ const commands = useCommands()
 const preferences = usePreferences()
 const queue = useQueue()
 const sources = useSources()
-const providers = useProviders()
+const integrations = useIntegrations()
 const logger = useLogger()
 
 const isSettingsModified = computed<boolean>(() => {
@@ -168,11 +168,11 @@ function resetCache() {
       severity: 'secondary',
     },
     accept: () => {
-      providers.purge()
+      integrations.clearCache()
       toast.add({
         severity: 'success',
         summary: m.success(),
-        detail: m.clip_cache_purged(),
+        detail: m.integrations_cache_reset(),
         life: 3000,
       })
     },

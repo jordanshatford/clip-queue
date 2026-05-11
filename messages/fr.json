@@ -21,7 +21,6 @@
       }
     }
   ],
-  "clip_cache_purged": "Cache des clips purgé.",
   "clip_history_purged": "Historique des clips supprimé.",
   "close": "Fermer",
   "confirm": "Confirmer",
@@ -178,5 +177,6 @@
   "command_reset_cache": "Réinitialiser toutes les valeurs mises en cache par les intégrations.",
   "reset_cache": "Réinitialiser le cache",
   "reset_cache_description": "Les intégrations peuvent mettre en cache des éléments pour éviter la récupération en double des informations. Effacez toutes les valeurs que les intégrations ont pu mettre en cache.",
-  "reset_cache_confirm": "Êtes-vous sûr de vouloir réinitialiser tous les caches générés par les intégrations ?"
+  "reset_cache_confirm": "Êtes-vous sûr de vouloir réinitialiser tous les caches générés par les intégrations ?",
+  "integrations_cache_reset": "Réinitialisation du cache des intégrations."
 }

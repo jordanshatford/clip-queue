@@ -8,7 +8,7 @@ import type { TwitchClip, TwitchGame } from '@/integrations/twitch/core/types'
 import { mockKickClip, mockTwitchClip, mockTwitchGame } from '@/__tests__/mocks'
 
 import { useCommands } from '../commands'
-import { useProviders } from '../providers'
+import { useIntegrations } from '../integrations'
 
 vi.mock('@/integrations/kick/core/api', async (importOriginal) => {
   return {
@@ -52,13 +52,12 @@ vi.mock('@/integrations/twitch/core/utils', async (importOriginal) => {
   }
 })
 
-describe('providers.ts', () => {
+describe('integrations.ts', () => {
   beforeEach(() => {
     localStorage?.clear()
     vi.clearAllMocks()
     setActivePinia(createPinia())
-    const providers = useProviders()
-    providers.purge()
+    useIntegrations().clearCache()
   })
 
   it.each([
@@ -67,8 +66,8 @@ describe('providers.ts', () => {
   ])(
     'returns a clip ID for valid clip url: (url: %s) -> %s',
     async (input: string, expected: string) => {
-      const providers = useProviders()
-      const clip = await providers.getClip(input)
+      const integrations = useIntegrations()
+      const clip = await integrations.resolve(input)
       expect(clip).toBeDefined()
       expect(clip?.id).toEqual(expected)
     },
@@ -81,40 +80,40 @@ describe('providers.ts', () => {
   ])(
     'returns undefined for invalid clip urls: (url: %s) -> %s',
     async (input: string, expected: Clip | undefined) => {
-      const providers = useProviders()
-      expect(await providers.getClip(input)).toEqual(expected)
+      const integrations = useIntegrations()
+      expect(await integrations.resolve(input)).toEqual(expected)
     },
   )
 
   it('caches clip data that it fetchs', async () => {
-    const providers = useProviders()
-    expect(providers.hasCachedData).toEqual(false)
-    expect(await providers.getClip(mockTwitchClip.url)).toBeDefined()
-    expect(providers.hasCachedData).toEqual(true)
+    const integrations = useIntegrations()
+    expect(integrations.hasCachedData).toEqual(false)
+    expect(await integrations.resolve(mockTwitchClip.url)).toBeDefined()
+    expect(integrations.hasCachedData).toEqual(true)
   })
 
   it('can have the cached data purged', async () => {
-    const providers = useProviders()
-    expect(providers.hasCachedData).toEqual(false)
-    expect(await providers.getClip(mockTwitchClip.url)).toBeDefined()
-    expect(providers.hasCachedData).toEqual(true)
-    providers.purge()
-    expect(providers.hasCachedData).toEqual(false)
-    expect(await providers.getClip(mockKickClip.clip_url)).toBeDefined()
-    expect(providers.hasCachedData).toEqual(true)
+    const integrations = useIntegrations()
+    expect(integrations.hasCachedData).toEqual(false)
+    expect(await integrations.resolve(mockTwitchClip.url)).toBeDefined()
+    expect(integrations.hasCachedData).toEqual(true)
+    integrations.clearCache()
+    expect(integrations.hasCachedData).toEqual(false)
+    expect(await integrations.resolve(mockKickClip.clip_url)).toBeDefined()
+    expect(integrations.hasCachedData).toEqual(true)
   })
 
   it('registers commands for interacting with the providers', () => {
     const commands = useCommands()
-    useProviders()
-    const cmd = commands.commands['enableprovider']
+    useIntegrations()
+    const cmd = commands.commands['enableintegration']
     expect(cmd).toBeDefined()
-    expect(cmd?.id).toEqual('enableprovider')
-    expect(cmd?.aliases).toEqual(['enablep'])
-    const cmd2 = commands.commands['disableprovider']
+    expect(cmd?.id).toEqual('enableintegration')
+    expect(cmd?.aliases).toEqual(['enableint'])
+    const cmd2 = commands.commands['disableintegration']
     expect(cmd2).toBeDefined()
-    expect(cmd2?.id).toEqual('disableprovider')
-    expect(cmd2?.aliases).toEqual(['disablep'])
+    expect(cmd2?.id).toEqual('disableintegration')
+    expect(cmd2?.aliases).toEqual(['disableint'])
     const cmd3 = commands.commands['resetcache']
     expect(cmd3).toBeDefined()
     expect(cmd3?.id).toEqual('resetcache')

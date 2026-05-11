@@ -1,6 +1,6 @@
 import { useCommands } from './commands'
 import { useHistory } from './history'
-import { useProviders } from './providers'
+import { useIntegrations } from './integrations'
 import { useQueue } from './queue'
 import { useSources } from './sources'
 import { useUpcoming } from './upcoming'
@@ -12,7 +12,7 @@ import { useUpcoming } from './upcoming'
 export function initialize(): void {
   useCommands()
   useHistory()
-  useProviders()
+  useIntegrations()
   useQueue()
   useSources()
   useUpcoming()

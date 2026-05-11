@@ -62,8 +62,8 @@ import type { Clip } from '@/integrations'
 import { Player } from '@/components/player'
 import ProviderName from '@/components/ProviderName.vue'
 import { m } from '@/paraglide/messages'
+import { useIntegrations } from '@/stores/integrations'
 import { useLogger } from '@/stores/logger'
-import { useProviders } from '@/stores/providers'
 
 export interface Props {
   clip: Clip
@@ -89,10 +89,10 @@ const emit = defineEmits<{
   (e: 'next'): void
 }>()
 
-const providers = useProviders()
+const integrations = useIntegrations()
 
 const config = computed(() => {
-  return providers.getPlayerConfig(clip)
+  return integrations.provider(clip.provider)?.getPlayerConfig(clip)
 })
 </script>
 

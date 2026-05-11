@@ -21,7 +21,6 @@
       }
     }
   ],
-  "clip_cache_purged": "Se ha borrado la caché de clips.",
   "clip_history_purged": "Historial de clips borrado.",
   "close": "Cerca",
   "confirm": "Confirmar",
@@ -178,5 +177,6 @@
   "command_reset_cache": "Restablecer todos los valores almacenados en caché por las integraciones.",
   "reset_cache": "Restablecer caché",
   "reset_cache_description": "Las integraciones pueden almacenar en caché elementos para evitar la obtención duplicada de detalles. Borre todos los valores que las integraciones puedan haber almacenado en caché.",
-  "reset_cache_confirm": "¿Estás seguro de que quieres restablecer todas las cachés generadas por las integraciones?"
+  "reset_cache_confirm": "¿Estás seguro de que quieres restablecer todas las cachés generadas por las integraciones?",
+  "integrations_cache_reset": "Reinicio de la caché de integraciones."
 }

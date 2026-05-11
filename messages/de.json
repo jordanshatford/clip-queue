@@ -21,7 +21,6 @@
       }
     }
   ],
-  "clip_cache_purged": "Clip-Cache geleert.",
   "clip_history_purged": "Clipverlauf gelöscht.",
   "close": "Schließen",
   "confirm": "Bestätigen",
@@ -178,5 +177,6 @@
   "command_reset_cache": "Alle von Integrationen zwischengespeicherten Werte zurücksetzen.",
   "reset_cache": "Cache zurücksetzen",
   "reset_cache_description": "Integrationen können Elemente zwischenspeichern, um das doppelte Abrufen von Details zu verhindern. Löschen Sie alle Werte, die möglicherweise von Integrationen zwischengespeichert wurden.",
-  "reset_cache_confirm": "Möchten Sie wirklich alle von den Integrationen erzeugten Caches zurücksetzen?"
+  "reset_cache_confirm": "Möchten Sie wirklich alle von den Integrationen erzeugten Caches zurücksetzen?",
+  "integrations_cache_reset": "Integrationscache zurückgesetzt."
 }

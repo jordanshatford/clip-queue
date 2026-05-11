@@ -21,7 +21,6 @@
       }
     }
   ],
-  "clip_cache_purged": "Klip önbelleği temizlendi.",
   "clip_history_purged": "Klip geçmişi silindi.",
   "close": "Kapalı",
   "confirm": "Onaylamak",
@@ -178,5 +177,6 @@
   "command_reset_cache": "Entegrasyonlar tarafından önbelleğe alınan tüm değerleri sıfırlayın.",
   "reset_cache": "Önbelleği Sıfırla",
   "reset_cache_description": "Entegrasyonlar, ayrıntıların yinelenen şekilde alınmasını önlemek için öğeleri önbelleğe alabilir. Entegrasyonların önbelleğe almış olabileceği tüm değerleri temizleyin.",
-  "reset_cache_confirm": "Entegrasyonlar tarafından oluşturulan tüm önbellekleri sıfırlamak istediğinizden emin misiniz?"
+  "reset_cache_confirm": "Entegrasyonlar tarafından oluşturulan tüm önbellekleri sıfırlamak istediğinizden emin misiniz?",
+  "integrations_cache_reset": "Entegrasyon önbelleği sıfırlandı."
 }

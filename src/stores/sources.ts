@@ -8,10 +8,10 @@ import type { IntegrationSource } from '@/integrations/core'
 
 import { chat } from '@/integrations/twitch'
 import { m } from '@/paraglide/messages'
-import { useProviders } from '@/stores/providers'
 import { useUser } from '@/stores/user'
 
 import { useCommands } from './commands'
+import { useIntegrations } from './integrations'
 import { useLogger } from './logger'
 import { useQueue } from './queue'
 
@@ -100,9 +100,9 @@ export const useSources = defineStore('sources', () => {
       return
     }
     for (const url of event.data.urls) {
-      const providers = useProviders()
+      const integrations = useIntegrations()
       try {
-        const clip = await providers.getClip(url)
+        const clip = await integrations.resolve(url)
         if (clip) {
           queue.add({
             ...clip,
@@ -119,9 +119,9 @@ export const useSources = defineStore('sources', () => {
       return
     }
     for (const url of event.data.urls) {
-      const providers = useProviders()
+      const integrations = useIntegrations()
       try {
-        const clip = await providers.getClip(url)
+        const clip = await integrations.resolve(url)
         if (clip) {
           queue.remove({
             ...clip,
