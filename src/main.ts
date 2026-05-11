@@ -1,7 +1,6 @@
 import './app.css'
 import Aura from '@primeuix/themes/aura'
 import { createPinia } from 'pinia'
-import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
 import PrimeVue from 'primevue/config'
 import ConfirmationService from 'primevue/confirmationservice'
 import ToastService from 'primevue/toastservice'
@@ -33,7 +32,6 @@ app.directive('tooltip', Tooltip)
 
 // Pinia
 const pinia = createPinia()
-pinia.use(piniaPluginPersistedState)
 app.use(pinia)
 initialize()
 
