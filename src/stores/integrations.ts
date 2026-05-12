@@ -82,54 +82,42 @@ export const useIntegrations = defineStore('integrations', () => {
    * @param id - The integration ID.
    * @returns A integration if one exists related to the ID, undefined otherwise.
    */
-  const integration = computed<(id: IntegrationID) => Reactive<Integration> | undefined>(() => {
-    return (id: IntegrationID) => {
-      return integrations.find(
-        (integration) =>
-          integration.id === id ||
-          integration.authentication?.id === id ||
-          integration.source?.id === id ||
-          integration.providers.some((provider) => provider.id === id),
-      )
-    }
-  })
+  function integration(id: IntegrationID): Reactive<Integration> | undefined {
+    return integrations.find(
+      (integration) =>
+        integration.id === id ||
+        integration.authentication?.id === id ||
+        integration.source?.id === id ||
+        integration.providers.some((provider) => provider.id === id),
+    )
+  }
 
   /**
    * Get an integration provider using its ID.
    * @param id - The integration ID of the provider.
    * @returns A provider if one exists with that ID, undefined otherwise.
    */
-  const provider = computed<(id: IntegrationID) => Reactive<IntegrationProvider> | undefined>(
-    () => {
-      return (id: IntegrationID) => {
-        for (const integration of integrations) {
-          for (const provider of integration.providers) {
-            if (provider.id === id) {
-              return provider
-            }
-          }
-        }
+  function provider(id: IntegrationID): Reactive<IntegrationProvider> | undefined {
+    for (const integration of integrations) {
+      const provider = integration.providers.find((p) => p.id === id)
+      if (provider) {
+        return provider
       }
-    },
-  )
+    }
+  }
 
   /**
    * Get an integration source using its ID.
    * @param id - The integration ID of the source or parent integration.
    * @returns A source if one exists with that ID, undefined otherwise.
    */
-  const source = computed<(id: IntegrationID) => Reactive<IntegrationSource> | undefined>(() => {
-    return (id: IntegrationID) => {
-      for (const integration of integrations) {
-        if (integration.source && integration.id === id) {
-          return integration.source
-        }
-        if (integration.source && integration.source.id === id) {
-          return integration.source
-        }
+  function source(id: IntegrationID): Reactive<IntegrationSource> | undefined {
+    for (const integration of integrations) {
+      if (integration.source && (integration.id === id || integration.source.id === id)) {
+        return integration.source
       }
     }
-  })
+  }
 
   /**
    * Check if any integrations have cached data.
@@ -188,7 +176,7 @@ export const useIntegrations = defineStore('integrations', () => {
       severity: 'success',
       summary: m.success(),
       detail: m.connected_to_source_name({
-        source: source.value(event.source)?.name ?? event.source,
+        source: source(event.source)?.name ?? event.source,
         name: event.data,
       }),
       life: 3000,
@@ -211,7 +199,7 @@ export const useIntegrations = defineStore('integrations', () => {
       severity: 'error',
       summary: m.error(),
       detail: m.disconnected_from_source({
-        source: source.value(event.source)?.name ?? event.source,
+        source: source(event.source)?.name ?? event.source,
       }),
       life: 3000,
     }
