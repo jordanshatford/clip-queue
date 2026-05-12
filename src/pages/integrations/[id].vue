@@ -8,9 +8,11 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 
+import type { IntegrationID } from '@/integrations'
+
 import IntegrationIcon from '@/components/integrations/IntegrationIcon.vue'
-import { integrations } from '@/integrations'
 import { m } from '@/paraglide/messages'
+import { useIntegrations } from '@/stores/integrations'
 
 definePage({
   meta: {
@@ -22,6 +24,6 @@ definePage({
 })
 
 const route = useRoute('/integrations/[id]')
-
-const integration = integrations.find((i) => i.id === route.params.id)
+const integrations = useIntegrations()
+const integration = integrations.integration(route.params.id as IntegrationID)
 </script>

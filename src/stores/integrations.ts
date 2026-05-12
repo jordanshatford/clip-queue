@@ -84,20 +84,13 @@ export const useIntegrations = defineStore('integrations', () => {
    */
   const integration = computed<(id: IntegrationID) => Reactive<Integration> | undefined>(() => {
     return (id: IntegrationID) => {
-      for (const integration of integrations) {
-        if (
+      return integrations.find(
+        (integration) =>
           integration.id === id ||
           integration.authentication?.id === id ||
-          integration.source?.id === id
-        ) {
-          return integration
-        }
-        for (const provider of integration.providers) {
-          if (provider.id === id) {
-            return integration
-          }
-        }
-      }
+          integration.source?.id === id ||
+          integration.providers.some((provider) => provider.id === id),
+      )
     }
   })
 

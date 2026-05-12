@@ -5,7 +5,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import { integrations, type IntegrationID } from '@/integrations'
+import type { IntegrationID } from '@/integrations'
+
+import { useIntegrations } from '@/stores/integrations'
 
 export interface Props {
   id: IntegrationID
@@ -13,21 +15,7 @@ export interface Props {
 
 const { id } = defineProps<Props>()
 
-const svg = computed((): string | undefined => {
-  for (const integration of integrations) {
-    if (
-      integration.id === id ||
-      integration.authentication?.id === id ||
-      integration.source?.id === id
-    ) {
-      return integration.icon
-    }
-    for (const provider of integration.providers) {
-      if (provider.id === id) {
-        return integration.icon
-      }
-    }
-  }
-  return undefined
-})
+const integrations = useIntegrations()
+
+const svg = computed<string | undefined>(() => integrations.integration(id)?.icon)
 </script>
