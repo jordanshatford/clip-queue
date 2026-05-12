@@ -122,12 +122,15 @@ export const useIntegrations = defineStore('integrations', () => {
 
   /**
    * Get an integration source using its ID.
-   * @param id - The integration ID of the source.
+   * @param id - The integration ID of the source or parent integration.
    * @returns A source if one exists with that ID, undefined otherwise.
    */
   const source = computed<(id: IntegrationID) => Reactive<IntegrationSource> | undefined>(() => {
     return (id: IntegrationID) => {
       for (const integration of integrations) {
+        if (integration.source && integration.id === id) {
+          return integration.source
+        }
         if (integration.source && integration.source.id === id) {
           return integration.source
         }
