@@ -86,32 +86,32 @@ export type IntegrationSourceEvents = {
    * Event emitted when the source is connected.
    * @param event.data - The channel connected to.
    */
-  connected: (event: IntegrationSourceEvent<string>) => Awaitable<void>
+  connected: [event: IntegrationSourceEvent<string>]
   /**
    * Event emitted when the source is disconnected.
    * @param event.data - The reason for the disconnection.
    */
-  disconnected: (event: IntegrationSourceEvent<string | undefined>) => Awaitable<void>
+  disconnected: [event: IntegrationSourceEvent<string | undefined>]
   /**
    * Event emitted when a message is received.
    * @param event.data - The message that was received.
    */
-  message: (event: IntegrationSourceMessageEvent) => Awaitable<void>
+  message: [event: IntegrationSourceMessageEvent]
   /**
    * Event emitted when a message is deleted.
    * @param event.data - The message that was deleted.
    */
-  'message-deleted': (event: IntegrationSourceMessageEvent) => Awaitable<void>
+  'message-deleted': [event: IntegrationSourceMessageEvent]
   /**
    * Event emitted when a user is handled via moderation (timeout or ban).
    * @param event.data - The moderation event.
    */
-  moderation: (event: IntegrationSourceModerationEvent) => Awaitable<void>
+  moderation: [event: IntegrationSourceModerationEvent]
   /**
    * Event emitted when an error occurs.
    * @param event.data - The error that occurred.
    */
-  error: (event: IntegrationSourceEvent<string>) => Awaitable<void>
+  error: [event: IntegrationSourceEvent<string>]
 }
 
 /**

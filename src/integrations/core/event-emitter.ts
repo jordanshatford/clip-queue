@@ -1,49 +1,75 @@
 /**
  * A generic type for T or a promise like of T.
  */
-export type Awaitable<T> = PromiseLike<T> | T
+export type Awaitable<T> = T | PromiseLike<T>
 
 /**
  * A simple event emitter.
  */
-export class EventEmitter<
-  Events extends {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: (...args: any[]) => Awaitable<void>
-  },
-> {
-  private listeners: Partial<Record<keyof Events, Array<Events[keyof Events]>>>
-
-  public constructor() {
-    this.listeners = {}
-  }
+export class EventEmitter<Events extends Record<string, unknown[]>> {
+  private listeners: Partial<{
+    [E in keyof Events]: Array<(...args: Events[E]) => Awaitable<void>>
+  }> = {}
 
   /**
    * Add a listener for an event.
    * @param event - The event to listen for.
    * @param listener - The listener for the event.
-   * @returns This instance.
+   * @returns A function that can be called to remove the listener.
    */
-  public on<E extends keyof Events>(event: E, listener: Events[E]): this {
-    if (!this.listeners[event]) {
-      this.listeners[event] = []
-    }
+  public on<E extends keyof Events>(
+    event: E,
+    listener: (...args: Events[E]) => Awaitable<void>,
+  ): () => void {
+    this.listeners[event] ??= []
     this.listeners[event].push(listener)
-    return this
+
+    return () => {
+      const listeners = this.listeners[event]
+      if (!listeners) {
+        return
+      }
+      this.listeners[event] = listeners.filter((current) => current !== listener)
+    }
   }
 
   /**
-   * Emit an event.
-   * @param event - The event to emit.
-   * @param args - The arguments to pass to the listeners.
-   * @returns True if the event was emitted.
+   * Remove a listener from an event.
+   * @param event - The event name.
+   * @param listener - The listener to remove.
    */
-  public emit<E extends keyof Events>(event: E, ...args: Parameters<Events[E]>): boolean {
+  public off<E extends keyof Events>(
+    event: E,
+    listener: (...args: Events[E]) => Awaitable<void>,
+  ): void {
     const listeners = this.listeners[event]
-    if (listeners && listeners.length > 0) {
-      listeners.forEach((listener) => listener(...args))
-      return true
+    if (!listeners) {
+      return
     }
-    return false
+    this.listeners[event] = listeners.filter((current) => current !== listener)
+  }
+
+  /**
+   * Emit an event to all listeners.
+   * @param event - The event to emit.
+   * @param args - The arguments to pass to listeners.
+   * @returns True if the event had listeners that triggered.
+   */
+  public emit<E extends keyof Events>(event: E, ...args: Events[E]): boolean {
+    const listeners = this.listeners[event]
+    if (!listeners?.length) {
+      return false
+    }
+    for (const listener of listeners) {
+      void listener(...args)
+    }
+    return true
+  }
+
+  /**
+   * Remove all listeners.
+   */
+  public clear(): void {
+    this.listeners = {}
   }
 }

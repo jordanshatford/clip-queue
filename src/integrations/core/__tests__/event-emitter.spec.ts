@@ -1,85 +1,117 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { EventEmitter } from '../event-emitter'
 
 type TestEvents = {
-  test: () => void
-  test2: (t: string) => void
-  test3: (t: string, t2: string) => void
+  connected: [id: string]
+  message: [channel: string, body: string]
+  empty: []
 }
 
-describe('integrations/core/event-emitter', () => {
-  it('can be defined', () => {
+describe('EventEmitter', () => {
+  it('registers and emits events', () => {
     const emitter = new EventEmitter<TestEvents>()
-    expect(emitter).toBeDefined()
+    const listener = vi.fn<(...args: TestEvents['connected']) => void>()
+    emitter.on('connected', listener)
+    const emitted = emitter.emit('connected', 'abc123')
+    expect(emitted).toBe(true)
+    expect(listener).toHaveBeenCalledTimes(1)
+    expect(listener).toHaveBeenCalledWith('abc123')
   })
 
-  it('can listen and emit events without arguments', () => {
+  it('passes multiple arguments to listeners', () => {
     const emitter = new EventEmitter<TestEvents>()
-    let hasBeenCalled = false
-    emitter?.on('test', () => {
-      hasBeenCalled = true
-    })
-    emitter?.emit('test')
-    expect(hasBeenCalled).toEqual(true)
+    const listener = vi.fn<(...args: TestEvents['message']) => void>()
+    emitter.on('message', listener)
+    emitter.emit('message', 'general', 'hello world')
+    expect(listener).toHaveBeenCalledWith('general', 'hello world')
   })
 
-  it('can listen and emit events with a single argument', () => {
+  it('returns false when emitting without listeners', () => {
     const emitter = new EventEmitter<TestEvents>()
-    let hasBeenCalled = false
-    emitter?.on('test2', (t) => {
-      hasBeenCalled = true
-      expect(t).toEqual('value')
-    })
-    emitter?.emit('test2', 'value')
-    expect(hasBeenCalled).toEqual(true)
+    const emitted = emitter.emit('connected', 'abc123')
+    expect(emitted).toBe(false)
   })
 
-  it('can listen and emit events with a multiple arguments', () => {
+  it('supports events with no arguments', () => {
     const emitter = new EventEmitter<TestEvents>()
-    let hasBeenCalled = false
-    emitter?.on('test3', (t, t2) => {
-      hasBeenCalled = true
-      expect(t).toEqual('value')
-      expect(t2).toEqual('value2')
-    })
-    emitter?.emit('test3', 'value', 'value2')
-    expect(hasBeenCalled).toEqual(true)
+    const listener = vi.fn<(...args: TestEvents['empty']) => void>()
+    emitter.on('empty', listener)
+    emitter.emit('empty')
+    expect(listener).toHaveBeenCalledTimes(1)
+    expect(listener).toHaveBeenCalledWith()
   })
 
-  it('can listen for multiple calls to the same event', () => {
+  it('removes listeners with off()', () => {
     const emitter = new EventEmitter<TestEvents>()
-    let totalCalls = 0
-    emitter?.on('test', () => {
-      totalCalls++
-    })
-    const n = 5
-    for (let i = 0; i < n; i++) {
-      emitter?.emit('test')
-    }
-    expect(totalCalls).toEqual(n)
+    const listener = vi.fn<(...args: TestEvents['connected']) => void>()
+    emitter.on('connected', listener)
+    emitter.off('connected', listener)
+    const emitted = emitter.emit('connected', 'abc123')
+    expect(emitted).toBe(false)
+    expect(listener).not.toHaveBeenCalled()
   })
 
-  it('can listen with multiple listeners', () => {
+  it('removes listeners using the unsubscribe function returned by on()', () => {
     const emitter = new EventEmitter<TestEvents>()
-    let hasBeenCalled = false
-    let hasBeenCalled2 = false
-    emitter?.on('test', () => {
-      hasBeenCalled = true
-    })
-    emitter?.on('test', () => {
-      hasBeenCalled2 = true
-    })
-    emitter?.emit('test')
-    expect(hasBeenCalled).toEqual(true)
-    expect(hasBeenCalled2).toEqual(true)
+    const listener = vi.fn<(...args: TestEvents['connected']) => void>()
+    const unsubscribe = emitter.on('connected', listener)
+    unsubscribe()
+    emitter.emit('connected', 'abc123')
+    expect(listener).not.toHaveBeenCalled()
   })
 
-  it('does not cause issues when emitting an event without listeners', () => {
+  it('supports multiple listeners for the same event', () => {
     const emitter = new EventEmitter<TestEvents>()
+    const listenerA = vi.fn<(...args: TestEvents['connected']) => void>()
+    const listenerB = vi.fn<(...args: TestEvents['connected']) => void>()
+    emitter.on('connected', listenerA)
+    emitter.on('connected', listenerB)
+    emitter.emit('connected', 'abc123')
+    expect(listenerA).toHaveBeenCalledWith('abc123')
+    expect(listenerB).toHaveBeenCalledWith('abc123')
+  })
+
+  it('clears all listeners', () => {
+    const emitter = new EventEmitter<TestEvents>()
+    const connectedListener = vi.fn<(...args: TestEvents['connected']) => void>()
+    const messageListener = vi.fn<(...args: TestEvents['message']) => void>()
+    emitter.on('connected', connectedListener)
+    emitter.on('message', messageListener)
+    emitter.clear()
+    expect(emitter.emit('connected', 'abc123')).toBe(false)
+    expect(emitter.emit('message', 'general', 'hello')).toBe(false)
+    expect(connectedListener).not.toHaveBeenCalled()
+    expect(messageListener).not.toHaveBeenCalled()
+  })
+
+  it('supports async listeners', async () => {
+    const emitter = new EventEmitter<TestEvents>()
+    const listener = vi.fn<(...args: TestEvents['connected']) => Promise<void>>(async () => {
+      await Promise.resolve()
+    })
+    emitter.on('connected', listener)
+    const emitted = emitter.emit('connected', 'abc123')
+    expect(emitted).toBe(true)
+    await Promise.resolve()
+    expect(listener).toHaveBeenCalledWith('abc123')
+  })
+
+  it('does not fail when removing a listener that does not exist', () => {
+    const emitter = new EventEmitter<TestEvents>()
+    const listener = vi.fn<(...args: TestEvents['connected']) => void>()
     expect(() => {
-      const r = emitter?.emit('test')
-      expect(r).toBeFalsy()
+      emitter.off('connected', listener)
     }).not.toThrow()
+  })
+
+  it('does not fail when unsubscribing multiple times', () => {
+    const emitter = new EventEmitter<TestEvents>()
+    const listener = vi.fn<(...args: TestEvents['connected']) => void>()
+    const unsubscribe = emitter.on('connected', listener)
+    unsubscribe()
+    unsubscribe()
+    emitter.emit('connected', 'abc123')
+    expect(listener).not.toHaveBeenCalled()
   })
 })
