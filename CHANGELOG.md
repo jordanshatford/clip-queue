@@ -1,5 +1,29 @@
 # clip-queue
 
+## 2.7.0
+
+### Minor Changes
+
+- feat: add setting to allow duplicate clips ([`22ed22b`](https://github.com/jordanshatford/clip-queue/commit/22ed22be2f48767be9791eb85132948fa6a69fd6))
+
+- feat: allow getting integration source using integration id ([`9c9579a`](https://github.com/jordanshatford/clip-queue/commit/9c9579a81e0530e5cf62f26b458572cb4e8529b9))
+
+- feat: improve handling by implementing integrations store ([`fe5c9c4`](https://github.com/jordanshatford/clip-queue/commit/fe5c9c4f5194e4c7e863b060bae8118d4e9d6e36))
+
+- feat: update integrations store to handle sources ([`e253a1a`](https://github.com/jordanshatford/clip-queue/commit/e253a1ad10dc88e86b8715315052733ccd9eb7f8))
+
+- feat: have command to remove clips based on integration ID ([`b28feb4`](https://github.com/jordanshatford/clip-queue/commit/b28feb48e2359dd6464998a18fab4e7c3c3c3d77))
+
+- feat: command allows enabled and disabling integrations by ID ([`429b030`](https://github.com/jordanshatford/clip-queue/commit/429b030b690921d49032408aaf616d41ef17888c))
+
+### Patch Changes
+
+- fix: do not connect sources for disabled integrations ([`e253a1a`](https://github.com/jordanshatford/clip-queue/commit/e253a1ad10dc88e86b8715315052733ccd9eb7f8))
+
+- fix: issue causing command aliases to fail as not enabled ([`e253a1a`](https://github.com/jordanshatford/clip-queue/commit/e253a1ad10dc88e86b8715315052733ccd9eb7f8))
+
+- fix: clarify integration cache resetting in settings and commands ([`06d120e`](https://github.com/jordanshatford/clip-queue/commit/06d120e99cf7463cb4ad04b7b4ddb59462542a06))
+
 ## 2.6.0
 
 ### Minor Changes
