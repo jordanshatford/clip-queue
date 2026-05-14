@@ -70,7 +70,7 @@
     "vite": "^8.0.12",
     "vite-plugin-vue-devtools": "^8.1.2",
     "vitest": "^4.1.6",
-    "vue-tsc": "^3.2.8"
+    "vue-tsc": "^3.2.9"
   },
   "engines": {
     "node": ">=22",
