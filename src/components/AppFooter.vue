@@ -6,7 +6,6 @@
         Copyright © {{ copyright.year }}-{{ new Date().getFullYear() }}
       </p>
     </template>
-    <UINavigationMenu :items="[]" variant="link" />
     <template #right>
       <UIButton
         icon="simple-icons:github"

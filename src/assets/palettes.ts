@@ -65,7 +65,7 @@ export interface ColorOption {
  * @param option - The color option.
  */
 export function setColorPalette(type: 'primary' | 'surface', option: ColorOption): void {
-  // @ts-expect-error remove with nuxt change
+  // @ts-ignore
   const c = useAppConfig()
   if (type === 'primary') {
     c.ui.colors.primary = option.name.toLowerCase()
