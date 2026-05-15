@@ -6,14 +6,18 @@
     <div class="flex justify-between">
       <div class="flex items-center gap-2">
         <label :for="provider.id">{{ provider.name }}</label>
-        <Tag class="font-mono text-xs" severity="secondary" :value="provider.id"></Tag>
-        <Tag
+        <UIBadge size="sm" color="neutral" variant="soft" class="font-mono">
+          {{ provider.id }}
+        </UIBadge>
+        <UIBadge
           v-if="provider.isExperimental"
-          icon="pi pi-exclamation-triangle"
-          class="text-xs"
-          severity="warn"
-          :value="m.experimental()"
-        ></Tag>
+          icon="lucide:triangle-alert"
+          color="warning"
+          size="sm"
+          variant="soft"
+        >
+          {{ m.experimental() }}
+        </UIBadge>
       </div>
       <ToggleSwitch v-model="provider.isEnabled" :input-id="provider.id" size="small" />
     </div>
@@ -24,7 +28,6 @@
 import type { Reactive } from 'vue'
 
 import Message from 'primevue/message'
-import Tag from 'primevue/tag'
 import ToggleSwitch from 'primevue/toggleswitch'
 
 import type { IntegrationProvider } from '@/integrations'

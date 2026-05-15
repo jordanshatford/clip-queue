@@ -1,88 +1,85 @@
 <template>
-  <Card class="mx-auto max-w-2xl">
-    <template #content>
-      <div class="flex flex-col gap-2 text-left">
-        <label for="commandPrefix">{{ m.command_prefix() }}</label>
-        <InputText
-          id="commandPrefix"
-          v-model="commands.settings.prefix"
-          required
-          maxlength="8"
+  <UICard class="mx-auto max-w-2xl" variant="subtle">
+    <div class="flex flex-col gap-2 text-left">
+      <label for="commandPrefix">{{ m.command_prefix() }}</label>
+      <InputText
+        id="commandPrefix"
+        v-model="commands.settings.prefix"
+        required
+        maxlength="8"
+        size="small"
+        aria-describedby="commandPrefix-help"
+        @keydown.space.prevent
+      />
+      <Message id="commandPrefix-help" size="small" severity="secondary" variant="simple">{{
+        m.command_prefix_description()
+      }}</Message>
+      <label for="allowedCommands">{{ m.allowed_commands() }}</label>
+      <MultiSelect
+        v-model="commands.settings.enabled"
+        input-id="allowedCommands"
+        :options="Object.keys(commands.commands)"
+        :placeholder="m.none()"
+        display="chip"
+        size="small"
+        aria-describedby="allowedCommands-help"
+      >
+        <template #option="{ option }: { option: string }">
+          <div class="flex flex-col gap-1">
+            <p>{{ commands.toCallHelp(option) }}</p>
+            <small>{{ commands.toDescription(option) }}</small>
+          </div>
+        </template>
+      </MultiSelect>
+      <Message id="allowedCommands-help" size="small" severity="secondary" variant="simple">{{
+        m.allowed_commands_description()
+      }}</Message>
+      <Divider />
+      <div class="flex justify-between">
+        <label for="autoModeration">{{ m.auto_mod_colon() }}</label>
+        <ToggleSwitch
+          v-model="integrations.settings.automod"
+          input-id="autoModeration"
           size="small"
-          aria-describedby="commandPrefix-help"
-          @keydown.space.prevent
+          aria-describedby="autoModeration-help"
         />
-        <Message id="commandPrefix-help" size="small" severity="secondary" variant="simple">{{
-          m.command_prefix_description()
-        }}</Message>
-        <label for="allowedCommands">{{ m.allowed_commands() }}</label>
-        <MultiSelect
-          v-model="commands.settings.enabled"
-          input-id="allowedCommands"
-          :options="Object.keys(commands.commands)"
-          :placeholder="m.none()"
-          display="chip"
-          size="small"
-          aria-describedby="allowedCommands-help"
-        >
-          <template #option="{ option }: { option: string }">
-            <div class="flex flex-col gap-1">
-              <p>{{ commands.toCallHelp(option) }}</p>
-              <small>{{ commands.toDescription(option) }}</small>
-            </div>
-          </template>
-        </MultiSelect>
-        <Message id="allowedCommands-help" size="small" severity="secondary" variant="simple">{{
-          m.allowed_commands_description()
-        }}</Message>
-        <Divider />
-        <div class="flex justify-between">
-          <label for="autoModeration">{{ m.auto_mod_colon() }}</label>
-          <ToggleSwitch
-            v-model="integrations.settings.automod"
-            input-id="autoModeration"
-            size="small"
-            aria-describedby="autoModeration-help"
-          />
-        </div>
-        <Message id="autoModeration-help" size="small" severity="secondary" variant="simple">{{
-          m.auto_mod_description()
-        }}</Message>
-        <Divider />
-        <label for="limit">{{ m.size_limit() }}</label>
-        <InputNumber
-          v-model="queue.settings.limit"
-          input-id="limit"
-          allow-empty
-          :locale="preferences.locale"
-          :min="1"
-          :step="1"
-          size="small"
-          show-buttons
-          aria-describedby="limit-help"
-        />
-        <Message id="limit-help" size="small" severity="secondary" variant="simple">{{
-          m.size_limit_description()
-        }}</Message>
-        <div class="flex justify-between">
-          <label for="duplicates">{{ m.allow_duplicates() }}</label>
-          <ToggleSwitch
-            v-model="queue.settings.duplicates"
-            input-id="duplicates"
-            size="small"
-            aria-describedby="duplicates-help"
-          />
-        </div>
-        <Message id="duplicates-help" size="small" severity="secondary" variant="simple">{{
-          m.allow_duplicates_description()
-        }}</Message>
       </div>
-    </template>
-  </Card>
+      <Message id="autoModeration-help" size="small" severity="secondary" variant="simple">{{
+        m.auto_mod_description()
+      }}</Message>
+      <Divider />
+      <label for="limit">{{ m.size_limit() }}</label>
+      <InputNumber
+        v-model="queue.settings.limit"
+        input-id="limit"
+        allow-empty
+        :locale="preferences.locale"
+        :min="1"
+        :step="1"
+        size="small"
+        show-buttons
+        aria-describedby="limit-help"
+      />
+      <Message id="limit-help" size="small" severity="secondary" variant="simple">{{
+        m.size_limit_description()
+      }}</Message>
+      <div class="flex justify-between">
+        <label for="duplicates">{{ m.allow_duplicates() }}</label>
+        <ToggleSwitch
+          v-model="queue.settings.duplicates"
+          input-id="duplicates"
+          size="small"
+          aria-describedby="duplicates-help"
+        />
+      </div>
+      <Message id="duplicates-help" size="small" severity="secondary" variant="simple">{{
+        m.allow_duplicates_description()
+      }}</Message>
+    </div>
+  </UICard>
 </template>
 
 <script setup lang="ts">
-import Card from 'primevue/card'
 import Divider from 'primevue/divider'
 import InputNumber from 'primevue/inputnumber'
 import InputText from 'primevue/inputtext'
@@ -99,7 +96,7 @@ import { useQueue } from '@/stores/queue'
 definePage({
   meta: {
     requiresAuth: true,
-    icon: 'pi pi-sliders-h',
+    icon: 'lucide:settings-2',
     title: m.application,
     order: 1,
   },

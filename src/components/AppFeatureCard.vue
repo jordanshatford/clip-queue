@@ -1,20 +1,8 @@
 <template>
-  <Card class="p-2">
-    <template #title>
-      <div class="flex items-center gap-2">
-        <i :class="['text-lg text-primary-500 dark:text-primary-400', icon]"></i>
-        <span> {{ title }}</span>
-      </div>
-    </template>
-    <template #content>
-      <p class="text-sm text-surface-400">{{ description }}</p>
-    </template>
-  </Card>
+  <UIPageCard :title :description :icon spotlight spotlight-color="primary" />
 </template>
 
 <script setup lang="ts">
-import Card from 'primevue/card'
-
 export interface Props {
   title: string
   description: string

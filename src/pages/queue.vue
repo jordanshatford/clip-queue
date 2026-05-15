@@ -29,7 +29,7 @@ import { useQueue } from '@/stores/queue'
 definePage({
   meta: {
     requiresAuth: true,
-    icon: 'pi pi-list',
+    icon: 'lucide:list',
     title: m.queue,
     order: 1,
   },

@@ -49,7 +49,7 @@
         <div class="flex items-center">
           <ClipThumbnail class="hidden w-24 sm:block" :src="data.thumbnailUrl" :alt="data.title" />
           <div class="text-left text-sm sm:ml-3">
-            <p class="font-normal">
+            <p class="flex items-center justify-center gap-1 font-normal">
               {{ data.title }}
               <span v-if="data.url">
                 <a
@@ -58,7 +58,7 @@
                   rel="noreferrer"
                   class="text-surface-400 no-underline hover:text-surface-600 dark:text-surface-600 dark:hover:text-surface-200"
                 >
-                  <i class="pi pi-external-link"></i>
+                  <UIIcon name="lucide:external-link" />
                 </a>
               </span>
             </p>
@@ -108,7 +108,7 @@ import { useQueue } from '@/stores/queue'
 definePage({
   meta: {
     requiresAuth: true,
-    icon: 'pi pi-history',
+    icon: 'lucide:history',
     title: m.history,
     order: 2,
   },

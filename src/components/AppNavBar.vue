@@ -1,55 +1,50 @@
 <template>
-  <Menubar
-    :model="items"
-    breakpoint="768px"
-    class="sticky top-0 z-50 mx-auto bg-surface-0 px-2 sm:px-16 md:px-10 lg:px-32 dark:bg-surface-900"
-  >
-    <template #start>
+  <UIHeader>
+    <template #title>
       <RouterLink to="/" class="mr-2 flex shrink-0 items-center">
-        <img class="aspect-square w-10" src="@/assets/icon.png" />
+        <img class="size-9" src="@/assets/icon.png" />
       </RouterLink>
     </template>
-    <template #item="{ item, props, hasSubmenu }">
-      <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
-        <a :href="href" v-bind="props.action" @click="navigate">
-          <span :class="item.icon" />
-          <span>{{ item.label }}</span>
-        </a>
-      </router-link>
-      <a v-else :href="item.url" :target="item.target" v-bind="props.action">
-        <span :class="item.icon" />
-        <span>{{ item.label }}</span>
-        <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down" />
-      </a>
+    <UINavigationMenu :items="items" content-orientation="vertical" />
+    <template #right>
+      <UIColorModeButton size="sm" />
+      <AppAuthentication />
     </template>
-    <template #end>
-      <div class="flex items-center gap-2">
-        <AppThemeToggle />
-        <AppAuthentication />
-      </div>
+    <template #body>
+      <UINavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
     </template>
-  </Menubar>
+  </UIHeader>
 </template>
 
 <script setup lang="ts">
-import type { MenuItem } from 'primevue/menuitem'
+import type { NavigationMenuItem } from '@nuxt/ui'
 
-import Menubar from 'primevue/menubar'
 import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
-import AppAuthentication from '@/components/AppAuthentication.vue'
-import AppThemeToggle from '@/components/AppThemeToggle.vue'
 import { visibleRoutes } from '@/router'
+import { useQueue } from '@/stores/queue'
 
-const items = computed((): MenuItem[] => {
+const route = useRoute()
+const queue = useQueue()
+
+const items = computed<NavigationMenuItem[]>(() => {
   return visibleRoutes.value.map((v) => ({
     label: v.meta?.title?.(),
     icon: v.meta?.icon,
-    route: v.children ? undefined : { name: v.name },
-    items: v.children?.map((c) => ({
+    to: v.path,
+    active: route.path.startsWith(v.path),
+    badge: v.name === '/queue' ? queue.upcoming.display : undefined,
+    chip:
+      v.name === '/queue'
+        ? {
+            color: queue.settings.open ? 'success' : 'error',
+          }
+        : undefined,
+    children: v.children?.map((c) => ({
       label: c.meta?.title?.(),
       icon: c.meta?.icon,
-      route: { name: c.name },
+      to: v.path + '/' + c.path,
     })),
   }))
 })

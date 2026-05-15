@@ -82,7 +82,7 @@ export const usePreferences = defineStore('preferences', () => {
   watch(
     () => primary.value,
     (primary) => {
-      setColorPalette('primary', primary.palette)
+      setColorPalette('primary', primary)
     },
     { immediate: true },
   )
@@ -93,7 +93,7 @@ export const usePreferences = defineStore('preferences', () => {
   watch(
     () => surface.value,
     (surface) => {
-      setColorPalette('surface', surface.palette)
+      setColorPalette('surface', surface)
     },
     { immediate: true },
   )

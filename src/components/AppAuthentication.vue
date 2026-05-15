@@ -16,7 +16,7 @@
     >
       <Avatar :image="user.details?.profileImageURL" shape="circle" />
       <span class="text-sm font-medium">{{ user.details?.name }}</span>
-      <i class="pi pi-chevron-down text-xs"></i>
+      <UIIcon name="lucide:chevron-down" />
     </Button>
     <Menu ref="menu" :model="items" popup>
       <template #item="{ item, props }">

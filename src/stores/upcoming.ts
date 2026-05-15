@@ -21,6 +21,14 @@ export const useUpcoming = defineStore('upcoming', () => {
   })
 
   /**
+   * Display for count of upcoming items. If the value is greater than 999 it will
+   * simplify and display as 999+.
+   */
+  const display = computed<string>(() => {
+    return length.value > 999 ? '999+' : `${length.value}`
+  })
+
+  /**
    * Check if the upcoming includes a item.
    * @param clip - The clip to check for.
    * @returns True if the clip is present, false otherwise.
@@ -183,6 +191,7 @@ export const useUpcoming = defineStore('upcoming', () => {
   return {
     items,
     length,
+    display,
     includes,
     add,
     unshift,

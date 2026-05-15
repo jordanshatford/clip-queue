@@ -1,4 +1,5 @@
 import './app.css'
+import ui from '@nuxt/ui/vue-plugin'
 import Aura from '@primeuix/themes/aura'
 import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config'
@@ -26,6 +27,7 @@ app.use(PrimeVue, {
     },
   },
 })
+app.use(ui)
 app.use(ConfirmationService)
 app.use(ToastService)
 app.directive('tooltip', Tooltip)

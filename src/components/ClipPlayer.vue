@@ -14,7 +14,7 @@
             rel="noreferrer"
             class="text-base no-underline hover:text-surface-600 dark:hover:text-surface-200"
           >
-            <i class="pi pi-external-link"></i>
+            <UIIcon name="lucide:external-link" />
           </a>
         </div>
         <div class="flex gap-2">

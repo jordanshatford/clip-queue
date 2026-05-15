@@ -43,3 +43,7 @@ __screenshots__/
 .env.*
 !.env.example
 !.env.test
+
+# Auto-generated type declarations
+auto-imports.d.ts
+components.d.ts

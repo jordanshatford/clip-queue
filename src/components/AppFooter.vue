@@ -1,32 +1,32 @@
 <template>
-  <footer class="border-t border-surface-100 bg-white dark:border-surface-700 dark:bg-surface-900">
-    <div class="mx-auto flex max-w-6xl flex-col items-center px-8 py-4 sm:flex-row">
-      <p v-if="copyright" class="font-normal text-surface-600 dark:text-surface-300">
-        © {{ copyright.year }} {{ copyright.owner }}
+  <UISeparator type="solid" class="h-px" />
+  <UIFooter>
+    <template #left>
+      <p class="text-sm text-muted">
+        Copyright © {{ copyright.year }}-{{ new Date().getFullYear() }}
       </p>
-      <span class="mt-4 inline-flex justify-center space-x-5 sm:mt-0 sm:ml-auto sm:justify-start">
-        <p class="font-normal text-surface-600 dark:text-surface-300">
-          <a
-            v-if="github"
-            :href="github"
-            class="hover:text-primary-700 dark:hover:text-primary-700"
-            target="_blank"
-          >
-            <i class="pi pi-github"></i>
-          </a>
-        </p>
-      </span>
-    </div>
-  </footer>
+    </template>
+    <UINavigationMenu :items="[]" variant="link" />
+    <template #right>
+      <UIButton
+        icon="simple-icons:github"
+        color="neutral"
+        variant="ghost"
+        :to="github"
+        target="_blank"
+        aria-label="GitHub"
+      />
+    </template>
+  </UIFooter>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  copyright?: {
+  copyright: {
     owner: string
     year: number
   }
-  github?: string
+  github: string
 }
 
 defineProps<Props>()

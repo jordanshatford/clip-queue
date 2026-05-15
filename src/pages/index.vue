@@ -7,17 +7,15 @@
         {{ m.tagline() }}
       </p>
     </div>
-    <div class="mt-12 text-left">
-      <div class="grid grid-cols-1 gap-y-6 md:grid-cols-3 md:gap-x-6">
-        <AppFeatureCard
-          v-for="(feature, index) in features"
-          :key="index"
-          :title="feature.title"
-          :description="feature.description"
-          :icon="feature.icon"
-        />
-      </div>
-    </div>
+    <UIPageGrid class="mt-12 text-left">
+      <AppFeatureCard
+        v-for="(feature, index) in features"
+        :key="index"
+        :title="feature.title"
+        :description="feature.description"
+        :icon="feature.icon"
+      />
+    </UIPageGrid>
   </div>
 </template>
 
@@ -41,32 +39,32 @@ const features = computed(() => [
   {
     title: m.feature_connect_title(),
     description: m.feature_connect_description(),
-    icon: 'pi pi-comments',
+    icon: 'lucide:message-circle',
   },
   {
     title: m.feature_duplicate_prevent_title(),
     description: m.feature_duplicate_prevent_description(),
-    icon: 'pi pi-copy',
+    icon: 'lucide:copy-x',
   },
   {
     title: m.feature_popularity_title(),
     description: m.feature_popularity_description(),
-    icon: 'pi pi-chart-line',
+    icon: 'lucide:chart-line',
   },
   {
     title: m.feature_commands_title(),
     description: m.feature_commands_description(),
-    icon: 'pi pi-bolt',
+    icon: 'lucide:command',
   },
   {
     title: m.feature_moderation_title(),
     description: m.feature_moderation_description(),
-    icon: 'pi pi-flag',
+    icon: 'lucide:shield-check',
   },
   {
     title: m.feature_settings_title(),
     description: m.feature_settings_description(),
-    icon: 'pi pi-cog',
+    icon: 'lucide:settings',
   },
 ])
 </script>

@@ -69,7 +69,7 @@ import { usePreferences } from '@/stores/preferences'
 definePage({
   meta: {
     requiresAuth: true,
-    icon: 'pi pi-book',
+    icon: 'lucide:book-text',
     title: m.logs,
     hidden: true,
   },

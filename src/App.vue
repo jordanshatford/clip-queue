@@ -1,15 +1,15 @@
 <template>
-  <Toast position="bottom-right" />
-  <ConfirmDialog :draggable="false" />
-  <div :key="preferences.locale" class="h-full min-h-screen dark:bg-surface-950">
-    <div class="h-full">
-      <AppNavBar />
+  <UIApp :key="preferences.locale">
+    <Toast position="bottom-right" />
+    <ConfirmDialog :draggable="false" />
+    <AppNavBar />
+    <UIMain>
       <main class="mx-auto h-full max-w-7xl px-4 py-5 text-center sm:px-6 lg:px-8">
         <RouterView />
       </main>
-    </div>
-  </div>
-  <AppFooter :copyright="config.copyright" :github="config.github" />
+    </UIMain>
+    <AppFooter :copyright="config.copyright" :github="config.github" />
+  </UIApp>
 </template>
 
 <script setup lang="ts">

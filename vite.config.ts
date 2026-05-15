@@ -1,6 +1,7 @@
 import { fileURLToPath, URL } from 'node:url'
 
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
+import ui from '@nuxt/ui/vite'
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
@@ -17,6 +18,20 @@ export default defineConfig({
     tailwindcss(),
     router(),
     vue(),
+    ui({
+      prefix: 'UI',
+      ui: {
+        colors: {
+          primary: 'purple',
+          neutral: 'neutral',
+        },
+        icons: {
+          system: 'lucide:monitor',
+          light: 'lucide:sun',
+          dark: 'lucide:moon',
+        },
+      },
+    }),
     devTools(),
   ],
   define: {

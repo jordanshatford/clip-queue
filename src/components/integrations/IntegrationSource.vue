@@ -5,21 +5,20 @@
   <div class="flex justify-between">
     <div class="flex items-center gap-2">
       <label :for="source.id">{{ source.name }}</label>
-      <Tag class="font-mono text-xs" severity="secondary" :value="source.id"></Tag>
-      <Tag
+      <UIBadge size="sm" color="neutral" variant="soft" class="font-mono">
+        {{ source.id }}
+      </UIBadge>
+      <UIBadge
         v-if="source.isExperimental"
-        icon="pi pi-exclamation-triangle"
-        class="text-xs"
-        severity="warn"
-        :value="m.experimental()"
-      ></Tag>
+        icon="lucide:triangle-alert"
+        color="warning"
+        size="sm"
+        variant="soft"
+      >
+        {{ m.experimental() }}
+      </UIBadge>
     </div>
-    <ToggleSwitch
-      v-model="source.isEnabled"
-      :disabled="source.isLoading"
-      :input-id="source.id"
-      size="small"
-    />
+    <UISwitch :id="source.id" v-model="source.isEnabled" :loading="source.isLoading" />
   </div>
   <InputGroup>
     <InputText id="username" :value="source.url" readonly fluid size="small" />
@@ -28,13 +27,15 @@
     </InputGroupAddon>
   </InputGroup>
   <div class="flex gap-2">
-    <Tag
+    <UIBadge
       v-for="feature of source.features"
       :key="feature"
-      class="text-xs"
-      severity="secondary"
-      :value="featureTranslations[feature]()"
-    ></Tag>
+      color="neutral"
+      variant="soft"
+      class="font-mono"
+    >
+      {{ featureTranslations[feature]() }}
+    </UIBadge>
   </div>
 </template>
 
@@ -45,8 +46,6 @@ import InputGroup from 'primevue/inputgroup'
 import InputGroupAddon from 'primevue/inputgroupaddon'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
-import Tag from 'primevue/tag'
-import ToggleSwitch from 'primevue/toggleswitch'
 
 import type { IntegrationSource } from '@/integrations/core'
 

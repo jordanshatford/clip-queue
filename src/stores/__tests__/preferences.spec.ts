@@ -14,7 +14,7 @@ vi.mock('@/assets/palettes', async () => {
   const actual = await vi.importActual<typeof import('@/assets/palettes')>('@/assets/palettes')
   return {
     ...actual,
-    setColorPalette: vi.fn<(type: 'primary' | 'surface', palette: palettes.ColorPalette) => void>(),
+    setColorPalette: vi.fn<(type: 'primary' | 'surface', palette: palettes.ColorOption) => void>(),
   }
 })
 
@@ -141,14 +141,14 @@ describe('preferences.ts', () => {
       const preferences = usePreferences()
       preferences.primary = colors[0]!
       await nextTick()
-      expect(palettes.setColorPalette).toHaveBeenCalledWith('primary', colors[0]!.palette)
+      expect(palettes.setColorPalette).toHaveBeenCalledWith('primary', colors[0])
     })
 
     it('updates the surface palette', async () => {
       const preferences = usePreferences()
       preferences.surface = surfaces[0]!
       await nextTick()
-      expect(palettes.setColorPalette).toHaveBeenCalledWith('surface', surfaces[0]!.palette)
+      expect(palettes.setColorPalette).toHaveBeenCalledWith('surface', surfaces[0])
     })
 
     it('resets preferences', () => {

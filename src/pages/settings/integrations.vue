@@ -12,7 +12,7 @@ import { m } from '@/paraglide/messages'
 definePage({
   meta: {
     requiresAuth: true,
-    icon: 'pi pi-share-alt',
+    icon: 'lucide:share-2',
     title: m.integrations,
     order: 2,
   },

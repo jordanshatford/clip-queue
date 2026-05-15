@@ -1,58 +1,53 @@
 <template>
-  <Card class="mx-auto mb-2 max-w-2xl text-left">
-    <template #content>
-      <Button
-        :label="m.reset_settings()"
-        class="mb-2"
-        fluid
-        size="small"
-        severity="danger"
-        :disabled="!isSettingsModified"
-        @click="resetSettingsToDefault()"
-      ></Button>
-      <Message size="small" severity="secondary" variant="simple">{{
-        m.reset_settings_description()
-      }}</Message>
-      <Divider />
-      <Button
-        :label="m.purge_history()"
-        class="mb-2"
-        fluid
-        size="small"
-        severity="danger"
-        :disabled="queue.history.length === 0"
-        @click="purgeHistory()"
-      ></Button>
-      <Message size="small" severity="secondary" variant="simple">{{
-        m.purge_history_description()
-      }}</Message>
-      <Divider />
-      <Button
-        :label="m.reset_cache()"
-        class="mb-2"
-        fluid
-        size="small"
-        severity="danger"
-        :disabled="!integrations.hasCachedData"
-        @click="resetCache()"
-      ></Button>
-      <Message size="small" severity="secondary" variant="simple">{{
-        m.reset_cache_description()
-      }}</Message>
-    </template>
-  </Card>
-  <Card class="mx-auto max-w-2xl">
-    <template #content>
-      <p class="text-sm text-surface-400">
-        {{ m.application_version({ version }) }}
-      </p>
-    </template>
-  </Card>
+  <UICard class="mx-auto mb-2 max-w-2xl text-left" variant="subtle">
+    <Button
+      :label="m.reset_settings()"
+      class="mb-2"
+      fluid
+      size="small"
+      severity="danger"
+      :disabled="!isSettingsModified"
+      @click="resetSettingsToDefault()"
+    ></Button>
+    <Message size="small" severity="secondary" variant="simple">{{
+      m.reset_settings_description()
+    }}</Message>
+    <Divider />
+    <Button
+      :label="m.purge_history()"
+      class="mb-2"
+      fluid
+      size="small"
+      severity="danger"
+      :disabled="queue.history.length === 0"
+      @click="purgeHistory()"
+    ></Button>
+    <Message size="small" severity="secondary" variant="simple">{{
+      m.purge_history_description()
+    }}</Message>
+    <Divider />
+    <Button
+      :label="m.reset_cache()"
+      class="mb-2"
+      fluid
+      size="small"
+      severity="danger"
+      :disabled="!integrations.hasCachedData"
+      @click="resetCache()"
+    ></Button>
+    <Message size="small" severity="secondary" variant="simple">{{
+      m.reset_cache_description()
+    }}</Message>
+  </UICard>
+  <UICard class="mx-auto max-w-2xl" variant="subtle">
+    <p class="text-sm text-surface-400">
+      {{ m.application_version({ version }) }}
+    </p>
+  </UICard>
 </template>
 
 <script setup lang="ts">
 import Button from 'primevue/button'
-import Card from 'primevue/card'
 import Divider from 'primevue/divider'
 import Message from 'primevue/message'
 import { useConfirm } from 'primevue/useconfirm'
@@ -69,7 +64,7 @@ import { useQueue } from '@/stores/queue'
 definePage({
   meta: {
     requiresAuth: true,
-    icon: 'pi pi-cog',
+    icon: 'lucide:settings',
     title: m.settings_other,
     order: 5,
   },
