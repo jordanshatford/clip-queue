@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "ms-azuretools.vscode-docker",
     "EditorConfig.EditorConfig",
     "Vue.volar",
     "oxc.oxc-vscode",

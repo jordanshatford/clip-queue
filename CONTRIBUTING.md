@@ -8,37 +8,26 @@ Setting up the project for local development will require all of the following t
 - [node](https://nodejs.org/en) (version `22.0` or higher)
 - [pnpm](https://pnpm.io/) (version `11.0` or higher)
   > NOTE: `pnpm` will use the version specified in the root `package.json` file.
-- _optionally_ [docker](https://www.docker.com/) (version `22.0` or higher)
-
-> NOTE: docker is an alternative way to develop. If you are using docker, all other dependencies above will not be required except for git.
 
 ## Setting up for development
 
-First make sure to copy the `example.env` file to a `.env` file and fill out the correct values. Otherwise the web app will not work properly.
+First make sure to copy the `.env.example` file to a `.env` file and fill out the correct values. Otherwise the web app will not work properly.
 
-### Docker
-
-Setting up the project using docker is simple. Simply run the following command with docker installed:
-
-```sh
-# NOTE: ensure to specify the dev docker compose file for features like hot reload when code changes
-docker compose -f docker-compose.dev.yml up --build
-```
-
-> NOTE: using this method will only allow running the project. You must setup the project without docker to be able to format, lint, and check the project.
-
-### Without Docker
-
-Setting up the project will require that the above dependencies are all installed. After which you can run the following commands:
+Install all project dependencies:
 
 ```sh
 # Install all dependencies
 pnpm install
+```
+
+Run the project in development mode:
+
+```sh
 # Run the projects in development mode
 pnpm dev
 ```
 
-#### Running formatting, linting, and checking
+### Running formatting, linting, and checking
 
 Running type checking on the project can be done using the following command:
 
