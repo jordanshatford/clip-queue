@@ -8,7 +8,7 @@
     >
       {{ m.login() }}
     </UIButton>
-    <UIDropdownMenu v-else :items="items">
+    <UIDropdownMenu v-else v-model:open="open" :items="items">
       <UIButton
         size="xl"
         variant="ghost"
@@ -24,7 +24,7 @@
         }"
       >
         {{ user.details?.name }}
-        <UIIcon name="lucide:chevron-down" />
+        <UIIcon :name="open ? 'lucide:chevron-up' : 'lucide:chevron-down'" />
       </UIButton>
     </UIDropdownMenu>
   </div>
@@ -34,7 +34,7 @@
 import type { DropdownMenuItem } from '@nuxt/ui'
 import type { ChipProps } from '@nuxt/ui'
 
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { IntegrationID } from '@/integrations'
@@ -47,6 +47,8 @@ const router = useRouter()
 
 const integrations = useIntegrations()
 const user = useUser()
+
+const open = ref<boolean>(false)
 
 const items: DropdownMenuItem[] = [
   {

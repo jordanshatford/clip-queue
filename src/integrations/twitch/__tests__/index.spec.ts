@@ -15,9 +15,8 @@ describe('integrations/twitch', () => {
     expect(integration.url).toBe('https://www.twitch.tv/')
   })
 
-  it('contains svg icon', () => {
-    expect(integration.icon).toContain('<svg')
-    expect(integration.icon).toContain('</svg>')
+  it('contains an icon', () => {
+    expect(integration.icon).toContain('simple-icons:')
   })
 
   it('initializes providers', () => {

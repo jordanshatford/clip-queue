@@ -15,9 +15,8 @@ describe('integrations/misc', () => {
     expect(integration.url).toBe('')
   })
 
-  it('contains svg icon', () => {
-    expect(integration.icon).toContain('<svg')
-    expect(integration.icon).toContain('</svg>')
+  it('contains an icon', () => {
+    expect(integration.icon).toContain('lucide:')
   })
 
   it('initializes providers', () => {

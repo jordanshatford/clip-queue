@@ -18,24 +18,21 @@
           </a>
         </div>
         <div class="flex gap-2">
-          <Button
-            icon="pi pi-backward"
-            :label="m.previous()"
-            size="small"
-            severity="secondary"
+          <UIButton
+            icon="lucide:rewind"
+            color="neutral"
+            variant="soft"
             :disabled="previousDisabled"
             @click="emit('previous')"
+            >{{ m.previous() }}</UIButton
           >
-          </Button>
-          <Button
-            icon="pi pi-forward"
-            icon-pos="right"
-            :label="m.next()"
-            size="small"
-            severity="secondary"
+          <UIButton
+            trailing-icon="lucide:fast-forward"
+            color="neutral"
+            variant="soft"
             @click="emit('next')"
+            >{{ m.next() }}</UIButton
           >
-          </Button>
         </div>
       </div>
       <div class="flex flex-col gap-1 text-sm font-normal text-surface-400">
@@ -54,7 +51,6 @@
 
 <script setup lang="ts">
 import { onKeyDown } from '@vueuse/core'
-import Button from 'primevue/button'
 import { computed } from 'vue'
 
 import type { Clip } from '@/integrations'

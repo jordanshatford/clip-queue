@@ -1,21 +1,20 @@
 <template>
-  <div class="flex flex-row-reverse gap-2">
-    <Button
-      icon="pi pi-trash"
-      :label="m.delete_label()"
+  <div class="flex flex-row-reverse gap-2 pr-2">
+    <UIButton
+      icon="lucide:trash"
       :disabled="!selection.length"
-      severity="danger"
-      size="small"
+      color="error"
       @click="deleteClips()"
-    ></Button>
-    <Button
-      icon="pi pi-plus"
-      :label="m.queue()"
+      >{{ m.delete_label() }}</UIButton
+    >
+    <UIButton
+      icon="lucide:plus"
       :disabled="isQueueClipsDisabled"
-      severity="secondary"
-      size="small"
+      color="neutral"
+      variant="soft"
       @click="queueClips()"
-    ></Button>
+      >{{ m.queue() }}</UIButton
+    >
   </div>
   <DataTable
     v-model:selection="selection"
@@ -37,10 +36,13 @@
     <template #header>
       <div class="mb-2 flex items-center justify-between">
         <span class="text-xl">{{ m.history() }}</span>
-        <IconField>
-          <InputIcon class="pi pi-search" />
-          <InputText size="small" v-model="filters['global'].value" :placeholder="m.search()" />
-        </IconField>
+        <UIInput
+          icon="lucide:search"
+          size="md"
+          variant="outline"
+          v-model="filters['global'].value"
+          :placeholder="m.search()"
+        />
       </div>
     </template>
     <Column selection-mode="multiple" header-style="width: 3rem"></Column>
@@ -88,12 +90,8 @@
 </template>
 
 <script setup lang="ts">
-import Button from 'primevue/button'
 import Column from 'primevue/column'
 import DataTable from 'primevue/datatable'
-import IconField from 'primevue/iconfield'
-import InputIcon from 'primevue/inputicon'
-import InputText from 'primevue/inputtext'
 import { useConfirm } from 'primevue/useconfirm'
 import { computed, ref } from 'vue'
 

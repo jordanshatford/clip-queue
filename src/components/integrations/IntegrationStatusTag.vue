@@ -1,14 +1,16 @@
 <template>
-  <Tag
+  <UIBadge
     class="text-xs"
     :icon="config.icon"
-    :severity="config.severity"
+    :color="config.color"
+    variant="soft"
     v-tooltip="config.label()"
-  ></Tag>
+  ></UIBadge>
 </template>
 
 <script setup lang="ts">
-import Tag from 'primevue/tag'
+import type { BadgeProps } from '@nuxt/ui'
+
 import { computed } from 'vue'
 
 import { IntegrationStatus } from '@/integrations/core'
@@ -20,39 +22,37 @@ export interface Props {
 
 const { status } = defineProps<Props>()
 
-type TagProps = InstanceType<typeof Tag>['$props']
-
-type TagConfig = {
-  label: () => TagProps['value']
-  severity: TagProps['severity']
-  icon: TagProps['icon']
+type BadgeConfig = {
+  label: () => string
+  color: BadgeProps['color']
+  icon: BadgeProps['icon']
 }
 
-const STATUS_CONFIG: Record<IntegrationStatus, TagConfig> = {
+const STATUS_CONFIG: Record<IntegrationStatus, BadgeConfig> = {
   [IntegrationStatus.ERROR]: {
     label: m.error,
-    severity: 'danger',
-    icon: 'pi pi-exclamation-circle',
+    color: 'error',
+    icon: 'lucide:circle-alert',
   },
   [IntegrationStatus.HEALTHY]: {
     label: m.healthy,
-    severity: 'success',
-    icon: 'pi pi-check-circle',
+    color: 'success',
+    icon: 'lucide:circle-check',
   },
   [IntegrationStatus.DISABLED]: {
     label: m.disabled,
-    severity: 'secondary',
-    icon: 'pi pi-stop-circle',
+    color: 'neutral',
+    icon: 'lucide:circle-stop',
   },
   [IntegrationStatus.MISCONFIGURED]: {
     label: m.misconfigured,
-    severity: 'danger',
-    icon: 'pi pi-exclamation-circle',
+    color: 'error',
+    icon: 'lucide:circle-alert',
   },
   [IntegrationStatus.UNKNOWN]: {
     label: m.unknown,
-    severity: 'warn',
-    icon: 'pi pi-exclamation-triangle',
+    color: 'warning',
+    icon: 'lucide:triangle-alert',
   },
 }
 

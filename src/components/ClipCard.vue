@@ -29,24 +29,23 @@
     </template>
     <template #footer>
       <div class="flex justify-between gap-2 pt-1">
-        <Button
-          class="grow"
-          icon="pi pi-play"
-          :label="m.play()"
-          size="small"
-          severity="secondary"
+        <UIButton
+          class="grow justify-center"
+          icon="lucide:play"
+          color="neutral"
+          variant="soft"
+          size="sm"
           @click="emit('play')"
+          >{{ m.play() }}</UIButton
         >
-        </Button>
-        <Button
-          class="grow"
-          icon="pi pi-trash"
-          :label="m.remove()"
-          size="small"
-          severity="danger"
+        <UIButton
+          class="grow justify-center"
+          icon="lucide:trash"
+          color="error"
+          size="sm"
           @click="emit('remove')"
+          >{{ m.remove() }}</UIButton
         >
-        </Button>
       </div>
     </template>
   </Card>
@@ -54,7 +53,6 @@
 
 <script setup lang="ts">
 import Badge from 'primevue/badge'
-import Button from 'primevue/button'
 import Card from 'primevue/card'
 import { computed } from 'vue'
 

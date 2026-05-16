@@ -17,9 +17,6 @@ importers:
       '@primeuix/themes':
         specifier: ^2.0.3
         version: 2.0.3
-      '@primevue/icons':
-        specifier: ^4.5.5
-        version: 4.5.5(vue@3.5.34(typescript@6.0.3))
       '@tmi.js/chat':
         specifier: ^0.8.0
         version: 0.8.0
@@ -29,9 +26,6 @@ importers:
       pinia:
         specifier: ^3.0.4
         version: 3.0.4(typescript@6.0.3)(vue@3.5.34(typescript@6.0.3))
-      primeicons:
-        specifier: ^7.0.0
-        version: 7.0.0
       primevue:
         specifier: ^4.5.5
         version: 4.5.5(vue@3.5.34(typescript@6.0.3))
@@ -3448,9 +3442,6 @@ packages:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
     hasBin: true
-
-  primeicons@7.0.0:
-    resolution: {integrity: sha512-jK3Et9UzwzTsd6tzl2RmwrVY/b8raJ3QZLzoDACj+oTJ0oX7L9Hy+XnVwgo4QVKlKpnP/Ur13SXV/pVh4LzaDw==}
 
   primevue@4.5.5:
     resolution: {integrity: sha512-Kv5REIewCdP806QaoU+4nBXfmpzOGFKkZ9qH4KsL6MjiAQVc4PUzypt8erl4r3Vzh3nr3aWZIxkxYRRsLGiX2A==}
@@ -7690,8 +7681,6 @@ snapshots:
   prelude-ls@1.2.1: {}
 
   prettier@2.8.8: {}
-
-  primeicons@7.0.0: {}
 
   primevue@4.5.5(vue@3.5.34(typescript@6.0.3)):
     dependencies:
