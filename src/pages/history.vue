@@ -143,7 +143,6 @@ function deleteClips() {
   confirm.require({
     header: m.delete_history(),
     message: m.delete_history_confirm({ length: clips.length }),
-    icon: 'pi pi-exclamation-triangle',
     acceptProps: {
       label: m.confirm(),
       severity: 'danger',

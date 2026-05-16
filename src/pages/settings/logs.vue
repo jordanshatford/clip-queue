@@ -2,16 +2,15 @@
   <UICard class="mx-auto max-w-2xl" variant="subtle">
     <div class="m-0 flex flex-col gap-2 p-0 text-left">
       <p>{{ m.logs_colon() }}</p>
-      <Button
-        :label="m.view()"
-        icon="pi pi-book"
-        size="small"
-        fluid
-        severity="secondary"
-        as="router-link"
+      <UIButton
+        icon="lucide:book-text"
         to="/logs"
+        color="neutral"
+        variant="outline"
+        class="justify-center"
       >
-      </Button>
+        {{ m.view() }}
+      </UIButton>
     </div>
     <Divider />
     <div class="flex flex-col gap-2 text-left">
@@ -49,7 +48,6 @@
 </template>
 
 <script setup lang="ts">
-import Button from 'primevue/button'
 import Divider from 'primevue/divider'
 import InputNumber from 'primevue/inputnumber'
 import Message from 'primevue/message'

@@ -17,7 +17,7 @@ import { useIntegrations } from '@/stores/integrations'
 definePage({
   meta: {
     requiresAuth: false,
-    icon: 'pi pi-share-alt',
+    icon: '',
     title: m.integrations,
     hidden: true,
   },

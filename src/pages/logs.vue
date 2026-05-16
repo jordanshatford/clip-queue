@@ -23,14 +23,15 @@
               size="small"
               @click="deleteAllLogs()"
             ></Button>
-            <Button
-              icon="pi pi-download"
-              :label="m.download()"
+            <UIButton
+              icon="lucide:download"
               :disabled="logs.length === 0"
-              size="small"
+              variant="outline"
+              color="neutral"
               severity="secondary"
               @click="exportCSV()"
-            ></Button>
+              >{{ m.download() }}</UIButton
+            >
           </div>
         </div>
       </div>
@@ -42,9 +43,13 @@
     </Column>
     <Column field="level" :header="m.level()" export-header="Level">
       <template #body="{ data }: { data: Log }">
-        <Tag :severity="logLevelSeverities[data.level]" :icon="logLevelIcons[data.level]">
+        <UIBadge
+          :icon="logLevelIcons[data.level]"
+          :color="logLevelSeverities[data.level]"
+          variant="subtle"
+        >
           {{ logLevelTranslations[data.level]() }}
-        </Tag>
+        </UIBadge>
       </template>
     </Column>
     <Column field="message" :header="m.message()" export-header="Message"></Column>
@@ -104,7 +109,6 @@ function deleteAllLogs() {
   confirm.require({
     header: m.clear_logs(),
     message: m.clear_logs_confirm({ length: logs.value.length }),
-    icon: 'pi pi-exclamation-triangle',
     acceptProps: {
       label: m.confirm(),
       severity: 'danger',

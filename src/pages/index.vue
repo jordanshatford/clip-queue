@@ -8,12 +8,14 @@
       </p>
     </div>
     <UIPageGrid class="mt-12 text-left">
-      <AppFeatureCard
+      <UIPageCard
         v-for="(feature, index) in features"
         :key="index"
         :title="feature.title"
         :description="feature.description"
         :icon="feature.icon"
+        spotlight
+        spotlight-color="primary"
       />
     </UIPageGrid>
   </div>
@@ -23,7 +25,6 @@
 import { computed } from 'vue'
 import { definePage } from 'vue-router/dist/experimental/index.js'
 
-import AppFeatureCard from '@/components/AppFeatureCard.vue'
 import { m } from '@/paraglide/messages'
 
 definePage({

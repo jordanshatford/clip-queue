@@ -95,7 +95,6 @@ function resetSettingsToDefault() {
   confirm.require({
     header: m.reset_settings(),
     message: m.reset_settings_confirm(),
-    icon: 'pi pi-exclamation-triangle',
     acceptProps: {
       label: m.confirm(),
       severity: 'danger',
@@ -125,7 +124,6 @@ function purgeHistory() {
   confirm.require({
     header: m.purge_history(),
     message: m.purge_history_confirm(),
-    icon: 'pi pi-exclamation-triangle',
     acceptProps: {
       label: m.confirm(),
       severity: 'danger',
@@ -151,7 +149,6 @@ function resetCache() {
   confirm.require({
     header: m.reset_cache(),
     message: m.reset_cache_confirm(),
-    icon: 'pi pi-exclamation-triangle',
     acceptProps: {
       label: m.confirm(),
       severity: 'danger',

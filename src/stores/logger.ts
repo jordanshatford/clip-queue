@@ -1,3 +1,5 @@
+import type { BadgeProps } from '@nuxt/ui'
+
 import { useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
 import { computed } from 'vue'
@@ -15,26 +17,26 @@ export type LogLevel = 'OFF' | 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
 export const availableLogLevels: LogLevel[] = ['OFF', 'ERROR', 'WARN', 'INFO', 'DEBUG'] as const
 
 /**
- * Log level mappings to PrimeVue icons.
- * @see https://primefaces.org/primeicons/
+ * Log level mappings to NuxtUI icon.
+ * @see https://ui.nuxt.com/docs/components/icon#usage
  */
-export const logLevelIcons: Record<LogLevel, string> = {
+export const logLevelIcons: Record<LogLevel, BadgeProps['icon']> = {
   OFF: '',
-  DEBUG: 'pi pi-code',
-  INFO: 'pi pi-info-circle',
-  WARN: 'pi pi-exclamation-triangle',
-  ERROR: 'pi pi-times-circle',
+  DEBUG: 'lucide:code',
+  INFO: 'lucide:info',
+  WARN: 'lucide:triangle-alert',
+  ERROR: 'lucide:circle-alert',
 }
 
 /**
  * Log level mappings to PrimeVue severities.
  */
-export const logLevelSeverities: Record<LogLevel, string> = {
-  OFF: 'secondary',
-  DEBUG: 'secondary',
+export const logLevelSeverities: Record<LogLevel, BadgeProps['color']> = {
+  OFF: 'neutral',
+  DEBUG: 'neutral',
   INFO: 'info',
-  WARN: 'warn',
-  ERROR: 'danger',
+  WARN: 'warning',
+  ERROR: 'error',
 }
 
 /**

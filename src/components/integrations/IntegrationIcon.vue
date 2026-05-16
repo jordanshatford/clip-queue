@@ -1,5 +1,5 @@
 <template>
-  <svg v-if="svg" v-html="svg"></svg>
+  <UIIcon :name="svg" />
 </template>
 
 <script setup lang="ts">
