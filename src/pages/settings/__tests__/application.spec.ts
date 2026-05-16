@@ -1,6 +1,5 @@
 import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
-import ToastService from 'primevue/toastservice'
 import { describe, expect, it, vi } from 'vitest'
 
 import ApplicationSettings from '../application.vue'
@@ -12,7 +11,6 @@ describe('settings/application.vue', () => {
         createTestingPinia({
           createSpy: vi.fn,
         }),
-        ToastService,
       ],
     },
   })

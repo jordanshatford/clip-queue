@@ -1,4 +1,4 @@
-import type { ToastMessageOptions } from 'primevue'
+import type { ToastProps } from '@nuxt/ui'
 
 import { useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
@@ -49,7 +49,9 @@ export const useIntegrations = defineStore('integrations', () => {
   /**
    * Message details used for toasting the user.
    */
-  const message = ref<ToastMessageOptions | undefined>(undefined)
+  const message = ref<
+    { icon: string; color: ToastProps['color']; title: string; description: string } | undefined
+  >(undefined)
 
   /**
    * Settings related to integrations.
@@ -173,13 +175,13 @@ export const useIntegrations = defineStore('integrations', () => {
   function handleIntegrationSourceConnected(event: IntegrationSourceEvent<string>): void {
     logger.info(`[${event.source}]: Connected to ${event.data}.`)
     message.value = {
-      severity: 'success',
-      summary: m.success(),
-      detail: m.connected_to_source_name({
+      icon: 'lucide:circle-check',
+      color: 'success',
+      title: m.success(),
+      description: m.connected_to_source_name({
         source: source(event.source)?.name ?? event.source,
         name: event.data,
       }),
-      life: 3000,
     }
   }
 
@@ -196,12 +198,12 @@ export const useIntegrations = defineStore('integrations', () => {
       logger.warn(`[${event.source}]: Disconnected.`)
     }
     message.value = {
-      severity: 'error',
-      summary: m.error(),
-      detail: m.disconnected_from_source({
+      icon: 'lucide:circle-alert',
+      color: 'error',
+      title: m.error(),
+      description: m.disconnected_from_source({
         source: source(event.source)?.name ?? event.source,
       }),
-      life: 3000,
     }
   }
 

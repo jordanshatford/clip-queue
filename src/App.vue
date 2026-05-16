@@ -1,6 +1,5 @@
 <template>
   <UIApp :key="preferences.locale">
-    <Toast position="bottom-right" />
     <ConfirmDialog :draggable="false" />
     <AppNavBar />
     <UIMain>
@@ -14,9 +13,7 @@
 
 <script setup lang="ts">
 import { useTitle } from '@vueuse/core'
-import { useToast } from 'primevue'
 import ConfirmDialog from 'primevue/confirmdialog'
-import Toast from 'primevue/toast'
 import { computed, watch } from 'vue'
 
 import AppFooter from '@/components/AppFooter.vue'

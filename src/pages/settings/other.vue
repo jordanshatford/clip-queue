@@ -51,7 +51,6 @@ import Button from 'primevue/button'
 import Divider from 'primevue/divider'
 import Message from 'primevue/message'
 import { useConfirm } from 'primevue/useconfirm'
-import { useToast } from 'primevue/usetoast'
 import { computed } from 'vue'
 
 import { m } from '@/paraglide/messages'
@@ -110,10 +109,10 @@ function resetSettingsToDefault() {
       logger.resetSettings()
       preferences.reset()
       toast.add({
-        severity: 'success',
-        summary: m.success(),
-        detail: m.settings_reset(),
-        life: 3000,
+        icon: 'lucide:circle-check',
+        color: 'success',
+        title: m.success(),
+        description: m.settings_reset(),
       })
     },
     reject: () => {},
@@ -135,10 +134,10 @@ function purgeHistory() {
     accept: () => {
       queue.purge()
       toast.add({
-        severity: 'success',
-        summary: m.success(),
-        detail: m.clip_history_purged(),
-        life: 3000,
+        icon: 'lucide:circle-check',
+        color: 'success',
+        title: m.success(),
+        description: m.clip_history_purged(),
       })
     },
     reject: () => {},
@@ -160,10 +159,10 @@ function resetCache() {
     accept: () => {
       integrations.clearCache()
       toast.add({
-        severity: 'success',
-        summary: m.success(),
-        detail: m.integrations_cache_reset(),
-        life: 3000,
+        icon: 'lucide:circle-check',
+        color: 'success',
+        title: m.success(),
+        description: m.integrations_cache_reset(),
       })
     },
     reject: () => {},

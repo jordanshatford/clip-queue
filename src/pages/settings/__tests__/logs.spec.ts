@@ -1,7 +1,6 @@
 import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
 import ConfirmationService from 'primevue/confirmationservice'
-import ToastService from 'primevue/toastservice'
 import { describe, expect, it, vi } from 'vitest'
 
 import LoggerSettings from '../logs.vue'
@@ -14,7 +13,6 @@ describe('settings/logs.vue', () => {
           createSpy: vi.fn,
         }),
         ConfirmationService,
-        ToastService,
       ],
     },
   })
