@@ -1,19 +1,19 @@
 <template>
   <div class="flex flex-row-reverse gap-2 pr-2">
-    <UIButton
+    <UButton
       icon="lucide:trash"
       :disabled="!selection.length"
       color="error"
       @click="deleteClips()"
-      >{{ m.delete_label() }}</UIButton
+      >{{ m.delete_label() }}</UButton
     >
-    <UIButton
+    <UButton
       icon="lucide:plus"
       :disabled="isQueueClipsDisabled"
       color="neutral"
       variant="soft"
       @click="queueClips()"
-      >{{ m.queue() }}</UIButton
+      >{{ m.queue() }}</UButton
     >
   </div>
   <DataTable
@@ -36,7 +36,7 @@
     <template #header>
       <div class="mb-2 flex items-center justify-between">
         <span class="text-xl">{{ m.history() }}</span>
-        <UIInput
+        <UInput
           icon="lucide:search"
           size="md"
           variant="outline"
@@ -60,7 +60,7 @@
                   rel="noreferrer"
                   class="text-surface-400 no-underline hover:text-surface-600 dark:text-surface-600 dark:hover:text-surface-200"
                 >
-                  <UIIcon name="lucide:external-link" />
+                  <UIcon name="lucide:external-link" />
                 </a>
               </span>
             </p>

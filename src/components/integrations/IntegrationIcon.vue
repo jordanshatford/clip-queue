@@ -1,5 +1,5 @@
 <template>
-  <UIIcon :name="svg" />
+  <UIcon :name="icon" />
 </template>
 
 <script setup lang="ts">
@@ -17,5 +17,5 @@ const { id } = defineProps<Props>()
 
 const integrations = useIntegrations()
 
-const svg = computed<string | undefined>(() => integrations.integration(id)?.icon)
+const icon = computed<string | undefined>(() => integrations.integration(id)?.icon)
 </script>

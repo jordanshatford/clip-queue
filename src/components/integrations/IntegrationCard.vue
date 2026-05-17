@@ -1,17 +1,17 @@
 <template>
-  <UICard class="mx-auto max-w-2xl" variant="subtle">
+  <UCard class="mx-auto max-w-2xl" variant="outline">
     <div class="flex w-full items-center justify-between gap-2">
       <div class="flex items-center gap-2">
         <IntegrationIcon class="size-5" :id="integration.id" />
         <span class="font-medium">
           {{ integration.name }}
         </span>
-        <UIBadge size="sm" color="neutral" variant="soft" class="font-mono">
+        <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
           {{ integration.id }}
-        </UIBadge>
+        </UBadge>
       </div>
       <div class="flex items-center gap-1">
-        <UIBadge
+        <UBadge
           v-if="integration.isExperimental"
           icon="lucide:triangle-alert"
           color="warning"
@@ -19,33 +19,33 @@
           variant="soft"
         >
           {{ m.experimental() }}
-        </UIBadge>
+        </UBadge>
       </div>
       <!-- TODO(jordan): currently you cannot disable twitch -->
-      <UISwitch
+      <USwitch
         v-if="integration.id !== IntegrationID.TWITCH"
         v-model="integration.isEnabled"
         class="ml-auto"
       />
     </div>
-    <UICollapsible :open="integration.isEnabled">
+    <UCollapsible :open="integration.isEnabled">
       <template #content>
         <div class="mt-4 flex flex-col gap-2 text-left">
           <IntegrationAuthentication
             v-if="integration.authentication"
             v-model="integration.authentication"
           />
-          <UISeparator v-if="integration.authentication" />
+          <USeparator v-if="integration.authentication" />
           <IntegrationSource v-if="integration.source" v-model="integration.source" />
-          <UISeparator v-if="integration.source" />
+          <USeparator v-if="integration.source" />
           <IntegrationProviders
             v-if="integration.providers?.length"
             v-model="integration.providers"
           />
         </div>
       </template>
-    </UICollapsible>
-  </UICard>
+    </UCollapsible>
+  </UCard>
 </template>
 
 <script setup lang="ts">

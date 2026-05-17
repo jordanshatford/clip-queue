@@ -1,5 +1,5 @@
 <template>
-  <UICard class="mx-auto max-w-2xl" variant="subtle">
+  <UCard class="mx-auto max-w-2xl" variant="outline">
     <div class="flex flex-col gap-2 text-left">
       <label for="language">{{ m.language() }}</label>
       <Select
@@ -66,7 +66,7 @@
         m.surface_color_description()
       }}</Message>
     </div>
-  </UICard>
+  </UCard>
 </template>
 
 <script setup lang="ts">

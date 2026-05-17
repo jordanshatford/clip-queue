@@ -1,8 +1,8 @@
 <template>
-  <UICard class="mx-auto max-w-2xl" variant="subtle">
+  <UCard class="mx-auto max-w-2xl" variant="outline">
     <div class="m-0 flex flex-col gap-2 p-0 text-left">
       <p>{{ m.logs_colon() }}</p>
-      <UIButton
+      <UButton
         icon="lucide:book-text"
         to="/logs"
         color="neutral"
@@ -10,7 +10,7 @@
         class="justify-center"
       >
         {{ m.view() }}
-      </UIButton>
+      </UButton>
     </div>
     <Divider />
     <div class="flex flex-col gap-2 text-left">
@@ -44,7 +44,7 @@
         m.logger_size_limit_description()
       }}</Message>
     </div>
-  </UICard>
+  </UCard>
 </template>
 
 <script setup lang="ts">

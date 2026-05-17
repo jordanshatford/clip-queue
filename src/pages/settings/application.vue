@@ -1,5 +1,5 @@
 <template>
-  <UICard class="mx-auto max-w-2xl" variant="subtle">
+  <UCard class="mx-auto max-w-2xl" variant="outline">
     <div class="flex flex-col gap-2 text-left">
       <label for="commandPrefix">{{ m.command_prefix() }}</label>
       <InputText
@@ -76,7 +76,7 @@
         m.allow_duplicates_description()
       }}</Message>
     </div>
-  </UICard>
+  </UCard>
 </template>
 
 <script setup lang="ts">

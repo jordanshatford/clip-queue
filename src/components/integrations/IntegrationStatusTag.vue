@@ -1,11 +1,11 @@
 <template>
-  <UIBadge
+  <UBadge
     class="text-xs"
     :icon="config.icon"
     :color="config.color"
     variant="soft"
     v-tooltip="config.label()"
-  ></UIBadge>
+  ></UBadge>
 </template>
 
 <script setup lang="ts">

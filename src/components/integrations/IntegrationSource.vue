@@ -5,10 +5,10 @@
   <div class="flex justify-between">
     <div class="flex items-center gap-2">
       <label :for="source.id">{{ source.name }}</label>
-      <UIBadge size="sm" color="neutral" variant="soft" class="font-mono">
+      <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
         {{ source.id }}
-      </UIBadge>
-      <UIBadge
+      </UBadge>
+      <UBadge
         v-if="source.isExperimental"
         icon="lucide:triangle-alert"
         color="warning"
@@ -16,9 +16,9 @@
         variant="soft"
       >
         {{ m.experimental() }}
-      </UIBadge>
+      </UBadge>
     </div>
-    <UISwitch :id="source.id" v-model="source.isEnabled" :loading="source.isLoading" />
+    <USwitch :id="source.id" v-model="source.isEnabled" :loading="source.isLoading" />
   </div>
   <InputGroup>
     <InputText id="username" :value="source.url" readonly fluid size="small" />
@@ -27,7 +27,7 @@
     </InputGroupAddon>
   </InputGroup>
   <div class="flex gap-2">
-    <UIBadge
+    <UBadge
       v-for="feature of source.features"
       :key="feature"
       color="neutral"
@@ -35,7 +35,7 @@
       class="font-mono"
     >
       {{ featureTranslations[feature]() }}
-    </UIBadge>
+    </UBadge>
   </div>
 </template>
 

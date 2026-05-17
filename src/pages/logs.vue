@@ -23,14 +23,14 @@
               size="small"
               @click="deleteAllLogs()"
             ></Button>
-            <UIButton
+            <UButton
               icon="lucide:download"
               :disabled="logs.length === 0"
               variant="outline"
               color="neutral"
               severity="secondary"
               @click="exportCSV()"
-              >{{ m.download() }}</UIButton
+              >{{ m.download() }}</UButton
             >
           </div>
         </div>
@@ -43,13 +43,13 @@
     </Column>
     <Column field="level" :header="m.level()" export-header="Level">
       <template #body="{ data }: { data: Log }">
-        <UIBadge
+        <UBadge
           :icon="logLevelIcons[data.level]"
           :color="logLevelSeverities[data.level]"
           variant="subtle"
         >
           {{ logLevelTranslations[data.level]() }}
-        </UIBadge>
+        </UBadge>
       </template>
     </Column>
     <Column field="message" :header="m.message()" export-header="Message"></Column>

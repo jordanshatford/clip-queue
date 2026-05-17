@@ -1,13 +1,13 @@
 <template>
-  <UISeparator type="solid" class="h-px" />
-  <UIFooter>
+  <USeparator type="solid" class="h-px" />
+  <UFooter>
     <template #left>
       <p class="text-sm text-muted">
         Copyright © {{ copyright.year }}-{{ new Date().getFullYear() }}
       </p>
     </template>
     <template #right>
-      <UIButton
+      <UButton
         icon="simple-icons:github"
         color="neutral"
         variant="ghost"
@@ -16,7 +16,7 @@
         aria-label="GitHub"
       />
     </template>
-  </UIFooter>
+  </UFooter>
 </template>
 
 <script setup lang="ts">

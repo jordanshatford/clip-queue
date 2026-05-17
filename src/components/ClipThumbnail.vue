@@ -5,7 +5,7 @@
       v-else
       class="align-center flex aspect-video items-center justify-center rounded-md bg-surface-100 text-surface-400 dark:bg-surface-800 dark:text-surface-500"
     >
-      <UIIcon name="lucide:image" class="size-6" />
+      <UIcon name="lucide:image" class="size-6" />
     </div>
   </div>
 </template>

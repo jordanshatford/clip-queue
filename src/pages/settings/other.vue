@@ -1,5 +1,5 @@
 <template>
-  <UICard class="mx-auto mb-2 max-w-2xl text-left" variant="subtle">
+  <UCard class="mx-auto mb-2 max-w-2xl text-left" variant="outline">
     <Button
       :label="m.reset_settings()"
       class="mb-2"
@@ -38,12 +38,12 @@
     <Message size="small" severity="secondary" variant="simple">{{
       m.reset_cache_description()
     }}</Message>
-  </UICard>
-  <UICard class="mx-auto max-w-2xl" variant="subtle">
+  </UCard>
+  <UCard class="mx-auto max-w-2xl" variant="outline">
     <p class="text-sm text-surface-400">
       {{ m.application_version({ version }) }}
     </p>
-  </UICard>
+  </UCard>
 </template>
 
 <script setup lang="ts">

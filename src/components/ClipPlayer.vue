@@ -14,24 +14,24 @@
             rel="noreferrer"
             class="text-base no-underline hover:text-surface-600 dark:hover:text-surface-200"
           >
-            <UIIcon name="lucide:external-link" />
+            <UIcon name="lucide:external-link" />
           </a>
         </div>
         <div class="flex gap-2">
-          <UIButton
+          <UButton
             icon="lucide:rewind"
             color="neutral"
             variant="soft"
             :disabled="previousDisabled"
             @click="emit('previous')"
-            >{{ m.previous() }}</UIButton
+            >{{ m.previous() }}</UButton
           >
-          <UIButton
+          <UButton
             trailing-icon="lucide:fast-forward"
             color="neutral"
             variant="soft"
             @click="emit('next')"
-            >{{ m.next() }}</UIButton
+            >{{ m.next() }}</UButton
           >
         </div>
       </div>

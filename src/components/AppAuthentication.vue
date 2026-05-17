@@ -1,15 +1,15 @@
 <template>
   <div class="flex items-center gap-2">
-    <UIButton
+    <UButton
       v-if="!user.isLoggedIn"
       size="lg"
       icon="simple-icons:twitch"
       @click="() => user.redirect()"
     >
       {{ m.login() }}
-    </UIButton>
-    <UIDropdownMenu v-else v-model:open="open" :items="items">
-      <UIButton
+    </UButton>
+    <UDropdownMenu v-else v-model:open="open" :items="items">
+      <UButton
         size="xl"
         variant="ghost"
         color="neutral"
@@ -24,9 +24,9 @@
         }"
       >
         {{ user.details?.name }}
-        <UIIcon :name="open ? 'lucide:chevron-up' : 'lucide:chevron-down'" />
-      </UIButton>
-    </UIDropdownMenu>
+        <UIcon :name="open ? 'lucide:chevron-up' : 'lucide:chevron-down'" />
+      </UButton>
+    </UDropdownMenu>
   </div>
 </template>
 

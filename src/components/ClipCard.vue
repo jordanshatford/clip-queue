@@ -29,22 +29,22 @@
     </template>
     <template #footer>
       <div class="flex justify-between gap-2 pt-1">
-        <UIButton
+        <UButton
           class="grow justify-center"
           icon="lucide:play"
           color="neutral"
           variant="soft"
           size="sm"
           @click="emit('play')"
-          >{{ m.play() }}</UIButton
+          >{{ m.play() }}</UButton
         >
-        <UIButton
+        <UButton
           class="grow justify-center"
           icon="lucide:trash"
           color="error"
           size="sm"
           @click="emit('remove')"
-          >{{ m.remove() }}</UIButton
+          >{{ m.remove() }}</UButton
         >
       </div>
     </template>

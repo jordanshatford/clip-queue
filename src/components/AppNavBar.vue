@@ -1,19 +1,19 @@
 <template>
-  <UIHeader>
-    <template #title>
+  <UHeader>
+    <template #left>
       <RouterLink to="/" class="mr-2 flex shrink-0 items-center">
         <img class="size-9" src="@/assets/icon.png" />
       </RouterLink>
     </template>
-    <UINavigationMenu :items="items" content-orientation="vertical" />
+    <UNavigationMenu :items="items" content-orientation="vertical" />
     <template #right>
-      <UIColorModeButton size="sm" />
+      <UColorModeButton size="sm" />
       <AppAuthentication />
     </template>
     <template #body>
-      <UINavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+      <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
     </template>
-  </UIHeader>
+  </UHeader>
 </template>
 
 <script setup lang="ts">

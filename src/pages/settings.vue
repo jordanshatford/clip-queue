@@ -8,7 +8,7 @@
       >
         <router-link v-slot="{ href, navigate }" :to="setting.path" custom>
           <a :href="href" @click="navigate" class="flex items-center gap-2 text-inherit">
-            <UIIcon :name="setting.meta?.icon"></UIIcon>
+            <UIcon :name="setting.meta?.icon" />
             <span>{{ setting.meta?.title?.() }}</span>
           </a>
         </router-link>

@@ -1,14 +1,14 @@
 <template>
-  <UIApp :key="preferences.locale">
+  <UApp :key="preferences.locale">
     <ConfirmDialog :draggable="false" />
     <AppNavBar />
-    <UIMain>
+    <UMain>
       <main class="mx-auto h-full max-w-7xl px-4 py-5 text-center sm:px-6 lg:px-8">
         <RouterView />
       </main>
-    </UIMain>
+    </UMain>
     <AppFooter :copyright="config.copyright" :github="config.github" />
-  </UIApp>
+  </UApp>
 </template>
 
 <script setup lang="ts">

@@ -19,7 +19,6 @@ export default defineConfig({
     router(),
     vue(),
     ui({
-      prefix: 'UI',
       ui: {
         colors: {
           primary: 'purple',

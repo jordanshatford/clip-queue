@@ -6,10 +6,10 @@
     <div class="flex justify-between">
       <div class="flex items-center gap-2">
         <label :for="provider.id">{{ provider.name }}</label>
-        <UIBadge size="sm" color="neutral" variant="soft" class="font-mono">
+        <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
           {{ provider.id }}
-        </UIBadge>
-        <UIBadge
+        </UBadge>
+        <UBadge
           v-if="provider.isExperimental"
           icon="lucide:triangle-alert"
           color="warning"
@@ -17,7 +17,7 @@
           variant="soft"
         >
           {{ m.experimental() }}
-        </UIBadge>
+        </UBadge>
       </div>
       <ToggleSwitch v-model="provider.isEnabled" :input-id="provider.id" size="small" />
     </div>

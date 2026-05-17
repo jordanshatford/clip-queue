@@ -7,8 +7,8 @@
         {{ m.tagline() }}
       </p>
     </div>
-    <UIPageGrid class="mt-12 text-left">
-      <UIPageCard
+    <UPageGrid class="mt-12 text-left">
+      <UPageCard
         v-for="(feature, index) in features"
         :key="index"
         :title="feature.title"
@@ -17,7 +17,7 @@
         spotlight
         spotlight-color="primary"
       />
-    </UIPageGrid>
+    </UPageGrid>
   </div>
 </template>
 
