@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
 import { useTitle } from '@vueuse/core'
 import ConfirmDialog from 'primevue/confirmdialog'
 import { computed, watch } from 'vue'

@@ -47,6 +47,7 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
 import Button from 'primevue/button'
 import Divider from 'primevue/divider'
 import Message from 'primevue/message'
