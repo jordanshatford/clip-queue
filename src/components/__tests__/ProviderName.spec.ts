@@ -17,9 +17,6 @@ describe('ProviderName.vue', () => {
           createSpy: vi.fn,
         }),
       ],
-      directives: {
-        tooltip: {},
-      },
     },
   })
 
