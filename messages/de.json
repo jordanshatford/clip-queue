@@ -176,5 +176,6 @@
   "reset_cache_confirm": "Möchten Sie wirklich alle von den Integrationen erzeugten Caches zurücksetzen?",
   "integrations_cache_reset": "Integrationscache zurückgesetzt.",
   "command_enable_integration": "Aktivieren Sie die angegebene Integration.",
-  "command_disable_integration": "Die angegebene Integration deaktivieren."
+  "command_disable_integration": "Die angegebene Integration deaktivieren.",
+  "theme_auto": "System"
 }

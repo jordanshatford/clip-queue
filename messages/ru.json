@@ -176,5 +176,6 @@
   "reset_cache_confirm": "Вы уверены, что хотите сбросить все кэши, созданные интеграциями?",
   "integrations_cache_reset": "Сброс кэша интеграций.",
   "command_enable_integration": "Включите указанную интеграцию.",
-  "command_disable_integration": "Отключите указанную интеграцию."
+  "command_disable_integration": "Отключите указанную интеграцию.",
+  "theme_auto": "Система"
 }

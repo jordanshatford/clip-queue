@@ -1,5 +1,5 @@
 <template>
-  <USeparator type="solid" class="h-px" />
+  <USeparator />
   <UFooter>
     <template #left>
       <p class="text-sm text-muted">

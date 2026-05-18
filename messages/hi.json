@@ -176,5 +176,6 @@
   "reset_cache_confirm": "क्या आप वाकई इंटीग्रेशन द्वारा जनरेट किए गए सभी कैश को रीसेट करना चाहते हैं?",
   "integrations_cache_reset": "एकीकरण कैश रीसेट।",
   "command_enable_integration": "निर्दिष्ट एकीकरण को सक्षम करें।",
-  "command_disable_integration": "निर्दिष्ट एकीकरण को अक्षम करें।"
+  "command_disable_integration": "निर्दिष्ट एकीकरण को अक्षम करें।",
+  "theme_auto": "प्रणाली"
 }

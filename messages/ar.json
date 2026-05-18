@@ -176,5 +176,6 @@
   "reset_cache_confirm": "هل أنت متأكد من رغبتك في إعادة ضبط جميع الذاكرات المؤقتة التي تم إنشاؤها بواسطة عمليات التكامل؟",
   "integrations_cache_reset": "تمت إعادة ضبط ذاكرة التخزين المؤقت للتكاملات.",
   "command_enable_integration": "قم بتمكين التكامل المحدد.",
-  "command_disable_integration": "قم بتعطيل التكامل المحدد."
+  "command_disable_integration": "قم بتعطيل التكامل المحدد.",
+  "theme_auto": "نظام"
 }

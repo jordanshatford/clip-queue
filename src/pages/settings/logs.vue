@@ -1,63 +1,52 @@
 <template>
-  <UCard class="mx-auto max-w-2xl" variant="outline">
-    <div class="m-0 flex flex-col gap-2 p-0 text-left">
-      <p>{{ m.logs_colon() }}</p>
-      <UButton
-        icon="lucide:book-text"
-        to="/logs"
-        color="neutral"
-        variant="outline"
-        class="justify-center"
-      >
-        {{ m.view() }}
-      </UButton>
-    </div>
-    <Divider />
+  <UCard class="mx-auto max-w-2xl" variant="subtle">
     <div class="flex flex-col gap-2 text-left">
-      <label for="loggerLevel">{{ m.level_colon() }}</label>
-      <Select
-        v-model="logger.settings.level"
-        :options="availableLogLevels"
-        label-id="loggerLevel"
-        size="small"
-        :option-label="(value: LogLevel) => logLevelTranslations[value]()"
-        aria-describedby="loggerLevel-help"
-      >
-      </Select>
-      <Message id="loggerLevel-help" size="small" severity="secondary" variant="simple">{{
-        m.logger_level_description()
-      }}</Message>
-      <label for="loggerLimit">{{ m.size_limit() }}</label>
-      <InputNumber
-        v-model="logger.settings.limit"
-        input-id="loggerLimit"
-        :allow-empty="false"
-        :locale="preferences.locale"
-        :min="1"
-        :max="100000"
-        :step="1"
-        size="small"
-        show-buttons
-        aria-describedby="loggerLimit-help"
-      />
-      <Message id="loggerLimit-help" size="small" severity="secondary" variant="simple">{{
-        m.logger_size_limit_description()
-      }}</Message>
+      <UFormField :label="m.logs_colon()">
+        <UButton
+          icon="lucide:book-text"
+          to="/logs"
+          color="neutral"
+          variant="outline"
+          class="w-full justify-center"
+        >
+          {{ m.view() }}
+        </UButton>
+      </UFormField>
+      <USeparator />
+      <UFormField :label="m.level_colon()" :help="m.logger_level_description()">
+        <USelect
+          id="logger-level"
+          v-model="logger.settings.level"
+          :items="availableLogLevels"
+          class="w-full"
+        >
+          <template #default="{ modelValue }: { modelValue: LogLevel }">
+            {{ logLevelTranslations[modelValue]() }}
+          </template>
+          <template #item-label="{ item }: { item: LogLevel }">
+            {{ logLevelTranslations[item]() }}
+          </template>
+        </USelect>
+      </UFormField>
+      <UFormField :label="m.size_limit()" :help="m.logger_size_limit_description()">
+        <UInputNumber
+          id="logger-limit"
+          v-model="logger.settings.limit"
+          :min="1"
+          :max="100000"
+          :step="1"
+          class="w-full"
+        />
+      </UFormField>
     </div>
   </UCard>
 </template>
 
 <script setup lang="ts">
-import Divider from 'primevue/divider'
-import InputNumber from 'primevue/inputnumber'
-import Message from 'primevue/message'
-import Select from 'primevue/select'
-
 import type { LogLevel } from '@/stores/logger'
 
 import { m } from '@/paraglide/messages'
 import { availableLogLevels, logLevelTranslations, useLogger } from '@/stores/logger'
-import { usePreferences } from '@/stores/preferences'
 
 definePage({
   meta: {
@@ -68,6 +57,5 @@ definePage({
   },
 })
 
-const preferences = usePreferences()
 const logger = useLogger()
 </script>

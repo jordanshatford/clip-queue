@@ -11,7 +11,11 @@ import { baseLocale, isLocale, setLocale } from '@/paraglide/runtime'
 /**
  * The available themes.
  */
-export const availableThemes = ['dark', 'light'] as const satisfies readonly BasicColorSchema[]
+export const availableThemes = [
+  'dark',
+  'light',
+  'auto',
+] as const satisfies readonly BasicColorSchema[]
 
 /**
  * Gets the inferred default language.
@@ -47,6 +51,7 @@ export const usePreferences = defineStore('preferences', () => {
    * Current color mode being used (dark, light).
    */
   const mode = useColorMode()
+  const { store } = useColorMode()
   /**
    * If we are in dark mode.
    */
@@ -118,6 +123,7 @@ export const usePreferences = defineStore('preferences', () => {
 
   return {
     mode,
+    store,
     isDark,
     toggleDark,
     locale,

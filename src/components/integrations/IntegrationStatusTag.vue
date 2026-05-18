@@ -1,6 +1,12 @@
 <template>
   <UTooltip :text="config.label()">
-    <UBadge class="text-xs" :icon="config.icon" :color="config.color" variant="soft"></UBadge>
+    <UBadge
+      class="text-xs"
+      size="lg"
+      :icon="config.icon"
+      :color="config.color"
+      variant="subtle"
+    ></UBadge>
   </UTooltip>
 </template>
 

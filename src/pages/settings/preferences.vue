@@ -1,32 +1,26 @@
 <template>
-  <UCard class="mx-auto max-w-2xl" variant="outline">
+  <UCard class="mx-auto max-w-2xl" variant="subtle">
     <div class="flex flex-col gap-2 text-left">
-      <label for="language">{{ m.language() }}</label>
-      <Select
-        v-model="preferences.locale"
-        :options="[...locales]"
-        label-id="language"
-        size="small"
-        :option-label="(value: Locale) => localeLabels[value]"
-        aria-describedby="language-help"
-      >
-      </Select>
-      <Message id="language-help" size="small" severity="secondary" variant="simple">{{
-        m.language_description()
-      }}</Message>
-      <label for="theme">{{ m.theme() }}</label>
-      <Select
-        v-model="preferences.mode"
-        :options="[...availableThemes]"
-        label-id="theme"
-        size="small"
-        :option-label="(value: BasicColorMode) => themeTranslations[value]()"
-        aria-describedby="theme-help"
-      >
-      </Select>
-      <Message id="theme-help" size="small" severity="secondary" variant="simple">{{
-        m.theme_description()
-      }}</Message>
+      <UFormField :label="m.language()" :help="m.language_description()">
+        <USelect v-model="preferences.locale" :items="[...locales]" class="w-full">
+          <template #default="{ modelValue }: { modelValue: Locale }">
+            {{ localeLabels[modelValue] }}
+          </template>
+          <template #item-label="{ item }: { item: Locale }">
+            {{ localeLabels[item] }}
+          </template>
+        </USelect>
+      </UFormField>
+      <UFormField :label="m.theme()" :help="m.theme_description()">
+        <USelect v-model="preferences.store" :items="[...availableThemes]" class="w-full">
+          <template #default="{ modelValue }: { modelValue: BasicColorSchema }">
+            {{ themeTranslations[modelValue]() }}
+          </template>
+          <template #item-label="{ item }: { item: BasicColorSchema }">
+            {{ themeTranslations[item]() }}
+          </template>
+        </USelect>
+      </UFormField>
       <label for="primaryColor">{{ m.primary_color() }}</label>
       <Select
         v-model="preferences.primary"
@@ -70,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import type { BasicColorMode } from '@vueuse/core'
+import type { BasicColorSchema } from '@vueuse/core'
 
 import Message from 'primevue/message'
 import Select from 'primevue/select'
@@ -95,9 +89,10 @@ definePage({
 
 const preferences = usePreferences()
 
-const themeTranslations: Record<BasicColorMode, () => string> = {
+const themeTranslations: Record<BasicColorSchema, () => string> = {
   dark: m.theme_dark,
   light: m.theme_light,
+  auto: m.theme_auto,
 }
 
 const localeLabels: Record<Locale, string> = {

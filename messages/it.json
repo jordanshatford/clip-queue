@@ -176,5 +176,6 @@
   "reset_cache_confirm": "Sei sicuro di voler reimpostare tutte le cache generate dalle integrazioni?",
   "integrations_cache_reset": "Reimpostazione della cache delle integrazioni.",
   "command_enable_integration": "Abilita l'integrazione specificata.",
-  "command_disable_integration": "Disabilita l'integrazione specificata."
+  "command_disable_integration": "Disabilita l'integrazione specificata.",
+  "theme_auto": "Sistema"
 }

@@ -1,51 +1,52 @@
 <template>
-  <Message size="small" severity="secondary" variant="simple">
-    {{ m.source_for_integration() }}
-  </Message>
-  <div class="flex justify-between">
-    <div class="flex items-center gap-2">
-      <label :for="source.id">{{ source.name }}</label>
-      <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
-        {{ source.id }}
-      </UBadge>
-      <UBadge
-        v-if="source.isExperimental"
-        icon="lucide:triangle-alert"
-        color="warning"
-        size="sm"
-        variant="soft"
-      >
-        {{ m.experimental() }}
-      </UBadge>
+  <UFormField :label="m.source_for_integration()">
+    <div class="flex flex-col gap-2">
+      <div class="flex justify-between">
+        <div class="flex items-center gap-2">
+          <label :for="source.id">{{ source.name }}</label>
+          <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
+            {{ source.id }}
+          </UBadge>
+          <UBadge
+            v-if="source.isExperimental"
+            icon="lucide:triangle-alert"
+            color="warning"
+            size="sm"
+            variant="soft"
+          >
+            {{ m.experimental() }}
+          </UBadge>
+        </div>
+        <USwitch :id="source.id" v-model="source.isEnabled" :loading="source.isLoading" />
+      </div>
+      <UFieldGroup>
+        <UInput
+          id="username"
+          variant="outline"
+          readonly
+          :value="source.url"
+          size="lg"
+          class="w-full"
+        />
+        <IntegrationStatusTag :status="source.status" class="px-2" />
+      </UFieldGroup>
+      <div class="flex gap-2">
+        <UBadge
+          v-for="feature of source.features"
+          :key="feature"
+          color="neutral"
+          variant="soft"
+          class="font-mono"
+        >
+          {{ featureTranslations[feature]() }}
+        </UBadge>
+      </div>
     </div>
-    <USwitch :id="source.id" v-model="source.isEnabled" :loading="source.isLoading" />
-  </div>
-  <InputGroup>
-    <InputText id="username" :value="source.url" readonly fluid size="small" />
-    <InputGroupAddon>
-      <IntegrationStatusTag :status="source.status" />
-    </InputGroupAddon>
-  </InputGroup>
-  <div class="flex gap-2">
-    <UBadge
-      v-for="feature of source.features"
-      :key="feature"
-      color="neutral"
-      variant="soft"
-      class="font-mono"
-    >
-      {{ featureTranslations[feature]() }}
-    </UBadge>
-  </div>
+  </UFormField>
 </template>
 
 <script setup lang="ts">
 import type { Reactive } from 'vue'
-
-import InputGroup from 'primevue/inputgroup'
-import InputGroupAddon from 'primevue/inputgroupaddon'
-import InputText from 'primevue/inputtext'
-import Message from 'primevue/message'
 
 import type { IntegrationSource } from '@/integrations/core'
 

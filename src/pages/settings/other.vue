@@ -1,45 +1,38 @@
 <template>
-  <UCard class="mx-auto mb-2 max-w-2xl text-left" variant="outline">
-    <Button
-      :label="m.reset_settings()"
-      class="mb-2"
-      fluid
-      size="small"
-      severity="danger"
-      :disabled="!isSettingsModified"
-      @click="resetSettingsToDefault()"
-    ></Button>
-    <Message size="small" severity="secondary" variant="simple">{{
-      m.reset_settings_description()
-    }}</Message>
-    <Divider />
-    <Button
-      :label="m.purge_history()"
-      class="mb-2"
-      fluid
-      size="small"
-      severity="danger"
-      :disabled="queue.history.length === 0"
-      @click="purgeHistory()"
-    ></Button>
-    <Message size="small" severity="secondary" variant="simple">{{
-      m.purge_history_description()
-    }}</Message>
-    <Divider />
-    <Button
-      :label="m.reset_cache()"
-      class="mb-2"
-      fluid
-      size="small"
-      severity="danger"
-      :disabled="!integrations.hasCachedData"
-      @click="resetCache()"
-    ></Button>
-    <Message size="small" severity="secondary" variant="simple">{{
-      m.reset_cache_description()
-    }}</Message>
+  <UCard class="mx-auto mb-2 max-w-2xl text-left" variant="subtle">
+    <div class="flex flex-col gap-2">
+      <UFormField :help="m.reset_settings_description()">
+        <UButton
+          class="w-full justify-center"
+          color="error"
+          :disabled="!isSettingsModified"
+          @click="resetSettingsToDefault()"
+          >{{ m.reset_settings() }}</UButton
+        >
+      </UFormField>
+      <USeparator />
+      <UFormField :help="m.purge_history_description()">
+        <UButton
+          class="w-full justify-center"
+          color="error"
+          :disabled="queue.history.length === 0"
+          @click="purgeHistory()"
+          >{{ m.purge_history() }}</UButton
+        >
+      </UFormField>
+      <USeparator />
+      <UFormField :help="m.reset_cache_description()">
+        <UButton
+          class="w-full justify-center"
+          color="error"
+          :disabled="!integrations.hasCachedData"
+          @click="resetCache()"
+          >{{ m.reset_cache() }}</UButton
+        >
+      </UFormField>
+    </div>
   </UCard>
-  <UCard class="mx-auto max-w-2xl" variant="outline">
+  <UCard class="mx-auto max-w-2xl" variant="subtle">
     <p class="text-sm text-surface-400">
       {{ m.application_version({ version }) }}
     </p>
@@ -48,9 +41,6 @@
 
 <script setup lang="ts">
 import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
-import Button from 'primevue/button'
-import Divider from 'primevue/divider'
-import Message from 'primevue/message'
 import { useConfirm } from 'primevue/useconfirm'
 import { computed } from 'vue'
 

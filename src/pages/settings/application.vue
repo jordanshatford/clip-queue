@@ -1,5 +1,5 @@
 <template>
-  <UCard class="mx-auto max-w-2xl" variant="outline">
+  <UCard class="mx-auto max-w-2xl" variant="subtle">
     <div class="flex flex-col gap-2 text-left">
       <label for="commandPrefix">{{ m.command_prefix() }}</label>
       <InputText

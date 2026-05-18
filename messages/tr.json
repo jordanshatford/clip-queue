@@ -176,5 +176,6 @@
   "reset_cache_confirm": "Entegrasyonlar tarafından oluşturulan tüm önbellekleri sıfırlamak istediğinizden emin misiniz?",
   "integrations_cache_reset": "Entegrasyon önbelleği sıfırlandı.",
   "command_enable_integration": "Belirtilen entegrasyonu etkinleştirin.",
-  "command_disable_integration": "Belirtilen entegrasyonu devre dışı bırakın."
+  "command_disable_integration": "Belirtilen entegrasyonu devre dışı bırakın.",
+  "theme_auto": "Sistem"
 }

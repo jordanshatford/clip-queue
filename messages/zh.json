@@ -176,5 +176,6 @@
   "reset_cache_confirm": "您确定要重置集成生成的所有缓存吗？",
   "integrations_cache_reset": "集成缓存已重置。",
   "command_enable_integration": "启用指定的集成。",
-  "command_disable_integration": "禁用指定的集成。"
+  "command_disable_integration": "禁用指定的集成。",
+  "theme_auto": "系统"
 }

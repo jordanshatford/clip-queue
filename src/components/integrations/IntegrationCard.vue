@@ -1,5 +1,5 @@
 <template>
-  <UCard class="mx-auto max-w-2xl" variant="outline">
+  <UCard class="mx-auto max-w-2xl" variant="subtle">
     <div class="flex w-full items-center justify-between gap-2">
       <div class="flex items-center gap-2">
         <IntegrationIcon class="size-5" :id="integration.id" />
