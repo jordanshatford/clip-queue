@@ -9,9 +9,12 @@ import { useUpcoming } from './upcoming'
  * registered by a store are available in the application immediately.
  */
 export function initialize(): void {
-  useCommands()
+  const commands = useCommands()
   useHistory()
   useIntegrations()
   useQueue()
   useUpcoming()
+  // Filter out commands that not longer exist, i.e. were removed.
+  const available = Object.keys(commands.commands)
+  commands.settings.enabled = commands.settings.enabled.filter((command) => available.includes(command))
 }
