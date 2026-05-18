@@ -51,7 +51,7 @@
         <div class="flex items-center">
           <ClipThumbnail class="hidden w-24 sm:block" :src="data.thumbnailUrl" :alt="data.title" />
           <div class="text-left text-sm sm:ml-3">
-            <p class="flex items-center justify-center gap-1 font-normal">
+            <p class="flex items-center gap-1 font-normal">
               {{ data.title }}
               <span v-if="data.url">
                 <a
