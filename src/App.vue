@@ -1,6 +1,5 @@
 <template>
   <UApp :key="preferences.locale">
-    <ConfirmDialog :draggable="false" />
     <AppNavBar />
     <UMain>
       <main class="mx-auto h-full max-w-7xl px-4 py-5 text-center sm:px-6 lg:px-8">
@@ -14,7 +13,6 @@
 <script setup lang="ts">
 import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
 import { useTitle } from '@vueuse/core'
-import ConfirmDialog from 'primevue/confirmdialog'
 import { computed, watch } from 'vue'
 
 import AppFooter from '@/components/AppFooter.vue'

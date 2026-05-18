@@ -60,11 +60,11 @@
 import Button from 'primevue/button'
 import Column from 'primevue/column'
 import DataTable from 'primevue/datatable'
-import { useConfirm } from 'primevue/useconfirm'
 import { computed, useTemplateRef } from 'vue'
 
 import type { Log } from '@/stores/logger'
 
+import { useConfirmDialog } from '@/composables/useConfirmDialog'
 import { m } from '@/paraglide/messages'
 import { datetime } from '@/paraglide/registry'
 import { logLevelIcons, logLevelSeverities, logLevelTranslations, useLogger } from '@/stores/logger'
@@ -79,7 +79,7 @@ definePage({
   },
 })
 
-const confirm = useConfirm()
+const confirm = useConfirmDialog()
 const preferences = usePreferences()
 const logger = useLogger()
 const table = useTemplateRef<InstanceType<typeof DataTable>>('logs-table')
@@ -103,27 +103,18 @@ function exportCSV() {
   table.value?.exportCSV()
 }
 
-function deleteAllLogs() {
+async function deleteAllLogs(): Promise<void> {
   logger.debug('[Logs]: attempting to delete all logs.')
-  confirm.require({
-    header: m.clear_logs(),
-    message: m.clear_logs_confirm({ length: logs.value.length }),
-    acceptProps: {
-      label: m.confirm(),
-      severity: 'danger',
-    },
-    rejectProps: {
-      label: m.cancel(),
-      severity: 'secondary',
-    },
-    accept: () => {
-      logger.debug('[Logs]: deleting all logs.')
-      logger.reset()
-    },
-    reject: () => {
-      logger.debug('[Logs]: deletion of logs was cancelled.')
-    },
+  const confirmed = await confirm({
+    title: m.clear_logs(),
+    description: m.clear_logs_confirm({ length: logs.value.length }),
   })
+  if (confirmed) {
+    logger.debug('[Logs]: deleting all logs.')
+    logger.reset()
+  } else {
+    logger.debug('[Logs]: deletion of logs was cancelled.')
+  }
 }
 </script>
 

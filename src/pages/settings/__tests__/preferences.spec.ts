@@ -1,6 +1,5 @@
 import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
-import ConfirmationService from 'primevue/confirmationservice'
 import { describe, expect, it, vi } from 'vitest'
 
 import PreferenceSettings from '../preferences.vue'
@@ -12,7 +11,6 @@ describe('settings/preferences.vue', () => {
         createTestingPinia({
           createSpy: vi.fn,
         }),
-        ConfirmationService,
       ],
     },
   })

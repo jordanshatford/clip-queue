@@ -92,13 +92,13 @@
 <script setup lang="ts">
 import Column from 'primevue/column'
 import DataTable from 'primevue/datatable'
-import { useConfirm } from 'primevue/useconfirm'
 import { computed, ref } from 'vue'
 
 import type { Clip } from '@/integrations'
 
 import ClipThumbnail from '@/components/ClipThumbnail.vue'
 import ProviderName from '@/components/ProviderName.vue'
+import { useConfirmDialog } from '@/composables/useConfirmDialog'
 import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useQueue } from '@/stores/queue'
@@ -116,7 +116,7 @@ const filters = ref({
   global: { value: null, matchMode: 'contains' },
 })
 
-const confirm = useConfirm()
+const confirm = useConfirmDialog()
 const queue = useQueue()
 const logger = useLogger()
 
@@ -135,30 +135,21 @@ function queueClips() {
   }
 }
 
-function deleteClips() {
+async function deleteClips(): Promise<void> {
   const clips = [...selection.value]
   logger.debug(`[History]: attempting to delete ${clips.length} clip(s).`)
-  confirm.require({
-    header: m.delete_history(),
-    message: m.delete_history_confirm({ length: clips.length }),
-    acceptProps: {
-      label: m.confirm(),
-      severity: 'danger',
-    },
-    rejectProps: {
-      label: m.cancel(),
-      severity: 'secondary',
-    },
-    accept: () => {
-      logger.debug(`[History]: deleting ${clips.length} clip(s).`)
-      for (const clip of clips) {
-        queue.history.remove(clip)
-      }
-    },
-    reject: () => {
-      logger.debug(`[History]: deletion of ${clips.length} clip(s) was cancelled.`)
-    },
+  const confirmed = await confirm({
+    title: m.delete_history(),
+    description: m.delete_history_confirm({ length: clips.length }),
   })
+  if (confirmed) {
+    logger.debug(`[History]: deleting ${clips.length} clip(s).`)
+    for (const clip of clips) {
+      queue.history.remove(clip)
+    }
+  } else {
+    logger.debug(`[History]: deletion of ${clips.length} clip(s) was cancelled.`)
+  }
 }
 </script>
 

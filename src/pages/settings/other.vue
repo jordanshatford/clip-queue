@@ -41,9 +41,9 @@
 
 <script setup lang="ts">
 import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
-import { useConfirm } from 'primevue/useconfirm'
 import { computed } from 'vue'
 
+import { useConfirmDialog } from '@/composables/useConfirmDialog'
 import { m } from '@/paraglide/messages'
 import { useCommands } from '@/stores/commands'
 import { useIntegrations } from '@/stores/integrations'
@@ -63,7 +63,7 @@ definePage({
 const version = __APP_VERSION__
 
 const toast = useToast()
-const confirm = useConfirm()
+const confirm = useConfirmDialog()
 
 const commands = useCommands()
 const preferences = usePreferences()
@@ -81,82 +81,55 @@ const isSettingsModified = computed<boolean>(() => {
   )
 })
 
-function resetSettingsToDefault() {
-  confirm.require({
-    header: m.reset_settings(),
-    message: m.reset_settings_confirm(),
-    acceptProps: {
-      label: m.confirm(),
-      severity: 'danger',
-    },
-    rejectProps: {
-      label: m.cancel(),
-      severity: 'secondary',
-    },
-    accept: () => {
-      commands.resetSettings()
-      queue.resetSettings()
-      integrations.resetSettings()
-      logger.resetSettings()
-      preferences.reset()
-      toast.add({
-        icon: 'lucide:circle-check',
-        color: 'success',
-        title: m.success(),
-        description: m.settings_reset(),
-      })
-    },
-    reject: () => {},
+async function resetSettingsToDefault(): Promise<void> {
+  const confirmed = await confirm({
+    title: m.reset_settings(),
+    description: m.reset_settings_confirm(),
   })
+  if (confirmed) {
+    commands.resetSettings()
+    queue.resetSettings()
+    integrations.resetSettings()
+    logger.resetSettings()
+    preferences.reset()
+    toast.add({
+      icon: 'lucide:circle-check',
+      color: 'success',
+      title: m.success(),
+      description: m.settings_reset(),
+    })
+  }
 }
 
-function purgeHistory() {
-  confirm.require({
-    header: m.purge_history(),
-    message: m.purge_history_confirm(),
-    acceptProps: {
-      label: m.confirm(),
-      severity: 'danger',
-    },
-    rejectProps: {
-      label: m.cancel(),
-      severity: 'secondary',
-    },
-    accept: () => {
-      queue.purge()
-      toast.add({
-        icon: 'lucide:circle-check',
-        color: 'success',
-        title: m.success(),
-        description: m.clip_history_purged(),
-      })
-    },
-    reject: () => {},
+async function purgeHistory(): Promise<void> {
+  const confirmed = await confirm({
+    title: m.purge_history(),
+    description: m.purge_history_confirm(),
   })
+  if (confirmed) {
+    queue.purge()
+    toast.add({
+      icon: 'lucide:circle-check',
+      color: 'success',
+      title: m.success(),
+      description: m.clip_history_purged(),
+    })
+  }
 }
 
-function resetCache() {
-  confirm.require({
-    header: m.reset_cache(),
-    message: m.reset_cache_confirm(),
-    acceptProps: {
-      label: m.confirm(),
-      severity: 'danger',
-    },
-    rejectProps: {
-      label: m.cancel(),
-      severity: 'secondary',
-    },
-    accept: () => {
-      integrations.clearCache()
-      toast.add({
-        icon: 'lucide:circle-check',
-        color: 'success',
-        title: m.success(),
-        description: m.integrations_cache_reset(),
-      })
-    },
-    reject: () => {},
+async function resetCache(): Promise<void> {
+  const confirmed = await confirm({
+    title: m.reset_cache(),
+    description: m.reset_cache_confirm(),
   })
+  if (confirmed) {
+    integrations.clearCache()
+    toast.add({
+      icon: 'lucide:circle-check',
+      color: 'success',
+      title: m.success(),
+      description: m.integrations_cache_reset(),
+    })
+  }
 }
 </script>

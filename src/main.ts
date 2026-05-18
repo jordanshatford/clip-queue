@@ -3,7 +3,6 @@ import ui from '@nuxt/ui/vue-plugin'
 import Aura from '@primeuix/themes/aura'
 import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config'
-import ConfirmationService from 'primevue/confirmationservice'
 import { createApp } from 'vue'
 
 import App from '@/App.vue'
@@ -26,7 +25,6 @@ app.use(PrimeVue, {
   },
 })
 app.use(ui)
-app.use(ConfirmationService)
 
 // Pinia
 const pinia = createPinia()

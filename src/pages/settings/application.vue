@@ -34,7 +34,7 @@
       <Message id="allowedCommands-help" size="small" severity="secondary" variant="simple">{{
         m.allowed_commands_description()
       }}</Message>
-      <Divider />
+      <USeparator />
       <div class="flex justify-between">
         <label for="autoModeration">{{ m.auto_mod_colon() }}</label>
         <ToggleSwitch
@@ -47,7 +47,7 @@
       <Message id="autoModeration-help" size="small" severity="secondary" variant="simple">{{
         m.auto_mod_description()
       }}</Message>
-      <Divider />
+      <USeparator />
       <label for="limit">{{ m.size_limit() }}</label>
       <InputNumber
         v-model="queue.settings.limit"
@@ -80,7 +80,6 @@
 </template>
 
 <script setup lang="ts">
-import Divider from 'primevue/divider'
 import InputNumber from 'primevue/inputnumber'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'

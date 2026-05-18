@@ -1,24 +1,24 @@
 <template>
   <div class="mx-0 mt-4">
-    <div class="mt-1 mb-2 w-full border-t border-surface-300 dark:border-surface-700"></div>
+    <USeparator size="sm" class="mb-4" />
     <div class="float-right">
-      <Button
-        :label="m.clear()"
-        size="small"
+      <UButton
         :disabled="clips.length === 0"
         class="ml-2"
-        severity="secondary"
+        variant="soft"
+        color="neutral"
         @click="emit('clear')"
       >
-      </Button>
-      <Button
-        :severity="isOpen ? 'danger' : 'secondary'"
-        :label="isOpen ? m.close() : m.open()"
-        size="small"
+        {{ m.clear() }}
+      </UButton>
+      <UButton
+        :variant="isOpen ? 'solid' : 'soft'"
+        :color="isOpen ? 'error' : 'neutral'"
         class="ml-2"
         @click="isOpen ? emit('close') : emit('open')"
       >
-      </Button>
+        {{ isOpen ? m.close() : m.open() }}
+      </UButton>
     </div>
     <div class="text-left">
       <p class="text-lg font-normal text-surface-600 dark:text-surface-400">
@@ -41,8 +41,6 @@
 </template>
 
 <script setup lang="ts">
-import Button from 'primevue/button'
-
 import type { Clip } from '@/integrations'
 
 import ClipCard from '@/components/ClipCard.vue'
