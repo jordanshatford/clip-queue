@@ -41,7 +41,7 @@
     "@commitlint/cli": "^21.0.1",
     "@commitlint/config-conventional": "^21.0.1",
     "@commitlint/types": "^21.0.1",
-    "@iconify-json/lucide": "^1.2.107",
+    "@iconify-json/lucide": "^1.2.108",
     "@iconify-json/simple-icons": "^1.2.82",
     "@inlang/paraglide-js": "2.18.0",
     "@pinia/testing": "^1.0.3",
