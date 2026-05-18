@@ -1,28 +1,18 @@
 <template>
-  <Tabs :value="active" scrollable class="mx-auto mb-3 w-full max-w-2xl">
-    <TabList class="w-full overflow-hidden" :pt="{ root: { class: 'bg-transparent' } }">
-      <Tab
-        v-for="setting in settingsRoutes"
-        :key="setting.name"
-        :value="setting?.name?.toString() ?? ''"
-      >
-        <router-link v-slot="{ href, navigate }" :to="setting.path" custom>
-          <a :href="href" @click="navigate" class="flex items-center gap-2 text-inherit">
-            <UIcon :name="setting.meta?.icon" />
-            <span>{{ setting.meta?.title?.() }}</span>
-          </a>
-        </router-link>
-      </Tab>
-    </TabList>
-  </Tabs>
+  <UTabs
+    v-model="active"
+    color="primary"
+    variant="link"
+    :content="false"
+    :items="items"
+    class="mx-auto mb-3 w-full max-w-2xl justify-around"
+  />
   <RouterView />
 </template>
 
 <script setup lang="ts">
-import { onKeyDown } from '@vueuse/core'
-import Tab from 'primevue/tab'
-import TabList from 'primevue/tablist'
-import Tabs from 'primevue/tabs'
+import type { TabsItem } from '@nuxt/ui'
+
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -43,25 +33,20 @@ const router = useRouter()
 const route = useRoute()
 
 const settingsRoutes = visibleRoutes.value.find((r) => r.name === '/settings')?.children ?? []
-
-const active = computed(() => route?.name?.toString() ?? '')
-const current = computed(() => settingsRoutes.findIndex((r) => r.name === route.name))
-
-onKeyDown('ArrowLeft', () => {
-  if (current.value > 0) {
-    const previous = settingsRoutes[current.value - 1]
-    if (previous) {
-      router.push(previous.path)
-    }
-  }
+const items = computed<TabsItem[]>(() => {
+  return settingsRoutes.map((setting) => ({
+    label: setting.meta?.title?.() ?? '',
+    value: setting.name?.toString() ?? '',
+    icon: setting.meta?.icon ?? '',
+  }))
 })
 
-onKeyDown('ArrowRight', () => {
-  if (current.value < settingsRoutes.length - 1) {
-    const next = settingsRoutes[current.value + 1]
-    if (next) {
-      router.push(next.path)
-    }
-  }
+const active = computed<string>({
+  get(): string {
+    return route.name?.toString() ?? '/settings'
+  },
+  set(tab: string) {
+    router.push(tab)
+  },
 })
 </script>

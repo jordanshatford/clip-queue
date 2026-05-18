@@ -16,5 +16,7 @@ export function initialize(): void {
   useUpcoming()
   // Filter out commands that not longer exist, i.e. were removed.
   const available = Object.keys(commands.commands)
-  commands.settings.enabled = commands.settings.enabled.filter((command) => available.includes(command))
+  commands.settings.enabled = commands.settings.enabled.filter((command) =>
+    available.includes(command),
+  )
 }
