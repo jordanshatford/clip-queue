@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "nuxt prepare",
     "prepare": "husky",
-    "typecheck": "nuxt typecheck",
+    "typecheck": "paraglide-js compile --project ./project.inlang --outdir ./paraglide && nuxt typecheck",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "preview": "nuxt preview",

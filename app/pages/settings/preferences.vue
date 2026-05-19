@@ -53,12 +53,12 @@
 <script setup lang="ts">
 import type { BasicColorSchema } from '@vueuse/core'
 
-import type { Locale } from '@/paraglide/runtime'
+import type { Locale } from '#paraglide/runtime'
 
+import { m } from '#paraglide/messages'
+import { locales } from '#paraglide/runtime'
 import { colors, surfaces } from '@/assets/palettes'
 import ColorName from '@/components/ColorName.vue'
-import { m } from '@/paraglide/messages'
-import { locales } from '@/paraglide/runtime'
 import { availableThemes, usePreferences } from '@/stores/preferences'
 
 definePageMeta({

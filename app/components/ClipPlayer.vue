@@ -55,9 +55,9 @@ import { computed } from 'vue'
 
 import type { Clip } from '@/integrations'
 
+import { m } from '#paraglide/messages'
 import { Player } from '@/components/player'
 import ProviderName from '@/components/ProviderName.vue'
-import { m } from '@/paraglide/messages'
 import { useIntegrations } from '@/stores/integrations'
 import { useLogger } from '@/stores/logger'
 

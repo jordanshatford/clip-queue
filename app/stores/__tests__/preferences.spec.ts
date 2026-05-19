@@ -2,9 +2,9 @@ import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 
+import * as runtime from '#paraglide/runtime'
 import * as palettes from '@/assets/palettes'
 import { colors, surfaces } from '@/assets/palettes'
-import * as runtime from '@/paraglide/runtime'
 import {
   DEFAULT_PRIMARY_COLOR,
   DEFAULT_SURFACE_COLOR,
@@ -12,8 +12,8 @@ import {
   usePreferences,
 } from '@/stores/preferences'
 
-vi.mock('@/paraglide/runtime', async () => {
-  const actual = await vi.importActual<typeof import('@/paraglide/runtime')>('@/paraglide/runtime')
+vi.mock('#paraglide/runtime', async () => {
+  const actual = await vi.importActual<typeof import('#paraglide/runtime')>('#paraglide/runtime')
 
   return {
     ...actual,

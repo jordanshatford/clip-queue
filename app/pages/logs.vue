@@ -35,9 +35,9 @@ import { computed, h, ref, resolveComponent, useTemplateRef } from 'vue'
 
 import type { Log } from '@/stores/logger'
 
+import { m } from '#paraglide/messages'
+import { datetime } from '#paraglide/registry'
 import { useConfirmDialog } from '@/composables/useConfirmDialog'
-import { m } from '@/paraglide/messages'
-import { datetime } from '@/paraglide/registry'
 import { logLevelIcons, logLevelSeverities, logLevelTranslations, useLogger } from '@/stores/logger'
 import { usePreferences } from '@/stores/preferences'
 

@@ -21,6 +21,9 @@ export default defineNuxtConfig({
   colorMode: {
     storageKey: 'vueuse-color-scheme',
   },
+  alias: {
+    '#paraglide': fileURLToPath(new URL('./paraglide', import.meta.url)),
+  },
   vite: {
     optimizeDeps: {
       include: ['@tanstack/vue-table', '@tmi.js/chat', '@vueuse/core', 'video.js'],
@@ -28,8 +31,17 @@ export default defineNuxtConfig({
     plugins: [
       paraglideVitePlugin({
         project: './project.inlang',
-        outdir: fileURLToPath(new URL('./app/paraglide', import.meta.url)),
+        outdir: fileURLToPath(new URL('./paraglide', import.meta.url)),
       }),
     ],
+  },
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        paths: {
+          '#paraglide/*': ['../paraglide/*'],
+        },
+      },
+    },
   },
 })

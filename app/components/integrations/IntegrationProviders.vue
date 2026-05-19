@@ -28,7 +28,7 @@ import type { Reactive } from 'vue'
 
 import type { IntegrationProvider } from '@/integrations'
 
-import { m } from '@/paraglide/messages'
+import { m } from '#paraglide/messages'
 
 const providers = defineModel<Reactive<IntegrationProvider>[]>({ required: true })
 </script>

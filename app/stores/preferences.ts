@@ -2,10 +2,10 @@ import { useColorMode, useDark, useStorage, useToggle, type BasicColorSchema } f
 import { defineStore } from 'pinia'
 import { computed, watch } from 'vue'
 
-import type { Locale } from '@/paraglide/runtime'
+import type { Locale } from '#paraglide/runtime'
 
+import { baseLocale, isLocale, setLocale } from '#paraglide/runtime'
 import { colors, setColorPalette, surfaces } from '@/assets/palettes'
-import { baseLocale, isLocale, setLocale } from '@/paraglide/runtime'
 
 /**
  * The available themes.

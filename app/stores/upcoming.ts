@@ -2,8 +2,8 @@ import { useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
 import { computed } from 'vue'
 
+import { m } from '#paraglide/messages'
 import { type Clip, toClipUUID, type IntegrationID } from '@/integrations'
-import { m } from '@/paraglide/messages'
 
 import { useCommands } from './commands'
 

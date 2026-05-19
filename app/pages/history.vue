@@ -76,10 +76,10 @@ import { h, ref, resolveComponent, useTemplateRef } from 'vue'
 
 import type { Clip } from '@/integrations'
 
+import { m } from '#paraglide/messages'
 import ClipInfo from '@/components/ClipInfo.vue'
 import ProviderName from '@/components/ProviderName.vue'
 import { useConfirmDialog } from '@/composables/useConfirmDialog'
-import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 import { useQueue } from '@/stores/queue'
 

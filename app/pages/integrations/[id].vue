@@ -10,8 +10,8 @@ import { useRoute } from 'vue-router'
 
 import type { IntegrationID } from '@/integrations'
 
+import { m } from '#paraglide/messages'
 import IntegrationIcon from '@/components/integrations/IntegrationIcon.vue'
-import { m } from '@/paraglide/messages'
 import { useIntegrations } from '@/stores/integrations'
 
 definePageMeta({

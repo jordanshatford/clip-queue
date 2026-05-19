@@ -7,6 +7,6 @@ export default withNuxt(
   skipFormatting,
   // Ignore Paraglide generated translation files.
   {
-    ignores: ['./app/paraglide/**'],
+    ignores: ['./paraglide/**'],
   },
 )

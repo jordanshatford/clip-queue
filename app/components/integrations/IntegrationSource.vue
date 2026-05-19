@@ -50,8 +50,8 @@ import type { Reactive } from 'vue'
 
 import type { IntegrationSource } from '@/integrations/core'
 
+import { m } from '#paraglide/messages'
 import { IntegrationSourceFeature } from '@/integrations/core'
-import { m } from '@/paraglide/messages'
 
 import IntegrationStatusTag from './IntegrationStatusTag.vue'
 

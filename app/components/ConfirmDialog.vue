@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import { m } from '@/paraglide/messages'
+import { m } from '#paraglide/messages'
 
 export interface ConfirmDialogProps {
   title?: string

@@ -4,8 +4,8 @@ import { computed } from 'vue'
 
 import type { Clip } from '@/integrations'
 
+import { m } from '#paraglide/messages'
 import { toClipUUID } from '@/integrations/core'
-import { m } from '@/paraglide/messages'
 import { useCommands } from '@/stores/commands'
 import { useHistory } from '@/stores/history'
 import { useLogger } from '@/stores/logger'

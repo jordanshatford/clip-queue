@@ -36,9 +36,9 @@ import type { DropdownMenuItem, ChipProps } from '@nuxt/ui'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+import { m } from '#paraglide/messages'
 import { IntegrationID } from '@/integrations'
 import { IntegrationStatus } from '@/integrations/core'
-import { m } from '@/paraglide/messages'
 import { useIntegrations } from '@/stores/integrations'
 import { useUser } from '@/stores/user'
 

@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { m } from '@/paraglide/messages'
+import { m } from '#paraglide/messages'
 
 export interface Props {
   name: string

@@ -4,6 +4,7 @@ import { useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
 import { computed, ref, type Reactive } from 'vue'
 
+import { m } from '#paraglide/messages'
 import {
   IntegrationID,
   type IntegrationProvider,
@@ -18,7 +19,6 @@ import {
   type IntegrationSourceMessageEvent,
   type IntegrationSourceModerationEvent,
 } from '@/integrations/core'
-import { m } from '@/paraglide/messages'
 import { useLogger } from '@/stores/logger'
 
 import { useCommands } from './commands'

@@ -15,8 +15,8 @@ import type { BadgeProps } from '@nuxt/ui'
 
 import { computed } from 'vue'
 
+import { m } from '#paraglide/messages'
 import { IntegrationStatus } from '@/integrations/core'
-import { m } from '@/paraglide/messages'
 
 export interface Props {
   status: IntegrationStatus

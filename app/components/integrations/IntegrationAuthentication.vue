@@ -18,7 +18,7 @@ import type { Reactive } from 'vue'
 
 import type { IntegrationAuthentication } from '@/integrations/core'
 
-import { m } from '@/paraglide/messages'
+import { m } from '#paraglide/messages'
 
 const authentication = defineModel<Reactive<IntegrationAuthentication>>({ required: true })
 </script>
