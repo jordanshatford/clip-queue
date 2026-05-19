@@ -1,13 +1,11 @@
 <template>
-  <UTooltip :text="config.label()">
-    <UBadge
-      class="text-xs"
-      size="lg"
-      :icon="config.icon"
-      :color="config.color"
-      variant="subtle"
-    ></UBadge>
-  </UTooltip>
+  <UBadge
+    class="text-xs"
+    size="lg"
+    :icon="config.icon"
+    :color="config.color"
+    variant="subtle"
+  ></UBadge>
 </template>
 
 <script setup lang="ts">

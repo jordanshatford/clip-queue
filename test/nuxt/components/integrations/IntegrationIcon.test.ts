@@ -1,0 +1,16 @@
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { describe, expect, it } from 'vitest'
+
+import IntegrationIcon from '~/components/integrations/IntegrationIcon.vue'
+import { IntegrationID } from '~/integrations'
+
+describe('IntegrationIcon.vue', () => {
+  it('mounts successfully', async () => {
+    const component = await mountSuspended(IntegrationIcon, {
+      props: {
+        id: IntegrationID.TWITCH,
+      },
+    })
+    expect(component.exists()).toBe(true)
+  })
+})
