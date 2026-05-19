@@ -1,7 +1,7 @@
 import { defineConfig } from 'oxfmt'
 
 export default defineConfig({
-  ignorePatterns: ['**/.changeset/**', '**/dist/**', '**/node_modules/**', 'typed-router.d.ts'],
+  ignorePatterns: ['**/.changeset/**', '**/dist/**', '**/node_modules/**'],
   semi: false,
   singleQuote: true,
   sortImports: {
@@ -21,7 +21,7 @@ export default defineConfig({
     sortScripts: false,
   },
   sortTailwindcss: {
-    stylesheet: './src/app.css',
+    stylesheet: './app/assets/css/main.css',
     functions: ['clsx', 'cn'],
     preserveWhitespace: true,
   },

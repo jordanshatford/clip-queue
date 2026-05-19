@@ -1,5 +1,8 @@
 allowBuilds:
+  '@parcel/watcher': false
+  '@tailwindcss/oxide': false
   esbuild: false
+  unrs-resolver: false
   vue-demi: false
 minimumReleaseAge: 0
 engineStrict: true

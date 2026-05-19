@@ -1,20 +1,35 @@
 import { fileURLToPath } from 'node:url'
 
-import { configDefaults, defineConfig, mergeConfig } from 'vitest/config'
+import { defineVitestProject } from '@nuxt/test-utils/config'
+import { defineConfig } from 'vitest/config'
 
-import viteConfig from './vite.config'
-
-export default mergeConfig(
-  viteConfig,
-  defineConfig({
-    test: {
-      environment: 'jsdom',
-      exclude: [...configDefaults.exclude, 'e2e/*'],
-      root: fileURLToPath(new URL('./', import.meta.url)),
-      coverage: {
-        provider: 'v8',
-        exclude: ['./src/paraglide/**'],
+export default defineConfig({
+  test: {
+    projects: [
+      {
+        test: {
+          name: 'unit',
+          include: ['test/unit/*.{test,spec}.ts'],
+          environment: 'node',
+        },
       },
+      await defineVitestProject({
+        test: {
+          name: 'nuxt',
+          include: ['test/nuxt/*.{test,spec}.ts'],
+          environment: 'nuxt',
+          environmentOptions: {
+            nuxt: {
+              rootDir: fileURLToPath(new URL('.', import.meta.url)),
+              domEnvironment: 'jsdom',
+            },
+          },
+        },
+      }),
+    ],
+    coverage: {
+      provider: 'v8',
+      exclude: ['./src/paraglide/**'],
     },
-  }),
-)
+  },
+})
