@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
-import { IntegrationID, integrations } from '..'
+import { IntegrationID, integrations } from '../../../app/integrations'
 
 const providers = integrations.flatMap((i) => i.providers)
 

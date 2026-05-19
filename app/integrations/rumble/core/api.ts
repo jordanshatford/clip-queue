@@ -1,6 +1,6 @@
-import type { OEmbedResponse } from '@/integrations/misc'
+import type { OEmbedResponse } from '../../../integrations/misc'
 
-import { getOEmbedProxied } from '@/integrations/misc/core/api'
+import { getOEmbedProxied } from '../../../integrations/misc/core/api'
 
 const BASE_URL = 'https://rumble.com/api/Media/oembed'
 

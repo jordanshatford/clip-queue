@@ -1,4 +1,4 @@
-import type { KickClip, KickVideo, KickChannelPartial } from './types'
+import type { KickClip, KickVideo } from './types'
 
 const BASE_URL = 'https://kick.com/api'
 
