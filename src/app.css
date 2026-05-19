@@ -7,6 +7,10 @@
   --font-sans: 'Inter Variable', sans-serif;
 }
 
+:root {
+  --ui-radius: 0.375rem;
+}
+
 html,
 body,
 #app {

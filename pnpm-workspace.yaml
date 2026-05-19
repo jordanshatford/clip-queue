@@ -2,3 +2,4 @@ allowBuilds:
   esbuild: false
   vue-demi: false
 minimumReleaseAge: 0
+engineStrict: true
