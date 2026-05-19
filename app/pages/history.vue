@@ -1,63 +1,65 @@
 <template>
-  <div class="flex flex-wrap items-center justify-between gap-1.5">
-    <UInput v-model="filter" class="max-w-sm" icon="lucide:search" :placeholder="m.search()" />
-    <div class="flex flex-wrap items-center gap-1.5">
-      <UButton
-        v-if="table?.tableApi?.getFilteredSelectedRowModel().rows.length"
-        color="neutral"
-        variant="subtle"
-        icon="lucide:plus"
-        @click="queueClips()"
-      >
-        {{ m.queue() }}
-        <template #trailing>
-          <UKbd>
-            {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length }}
-          </UKbd>
-        </template>
-      </UButton>
-      <UButton
-        v-if="table?.tableApi?.getFilteredSelectedRowModel().rows.length"
-        color="error"
-        variant="subtle"
-        icon="lucide:trash"
-        @click="deleteClips()"
-      >
-        {{ m.delete_label() }}
-        <template #trailing>
-          <UKbd>
-            {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length }}
-          </UKbd>
-        </template>
-      </UButton>
+  <div class="flex flex-col">
+    <div class="flex flex-wrap items-center justify-between gap-1.5">
+      <UInput v-model="filter" class="max-w-sm" icon="lucide:search" :placeholder="m.search()" />
+      <div class="flex flex-wrap items-center gap-1.5">
+        <UButton
+          v-if="table?.tableApi?.getFilteredSelectedRowModel().rows.length"
+          color="neutral"
+          variant="subtle"
+          icon="lucide:plus"
+          @click="queueClips()"
+        >
+          {{ m.queue() }}
+          <template #trailing>
+            <UKbd>
+              {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length }}
+            </UKbd>
+          </template>
+        </UButton>
+        <UButton
+          v-if="table?.tableApi?.getFilteredSelectedRowModel().rows.length"
+          color="error"
+          variant="subtle"
+          icon="lucide:trash"
+          @click="deleteClips()"
+        >
+          {{ m.delete_label() }}
+          <template #trailing>
+            <UKbd>
+              {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length }}
+            </UKbd>
+          </template>
+        </UButton>
+      </div>
     </div>
-  </div>
-  <UTable
-    ref="table"
-    v-model:global-filter="filter"
-    v-model:row-selection="rowSelection"
-    v-model:pagination="pagination"
-    :pagination-options="{
-      getPaginationRowModel: getPaginationRowModel(),
-    }"
-    :data="queue.history.items"
-    :columns="columns"
-    :empty="m.no_clips_previously_watched()"
-    sticky="header"
-    class="text-left"
-  />
-  <div class="mt-auto flex items-center justify-between gap-3 border-t border-default pt-4">
-    <div class="text-sm text-muted">
-      {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
-      {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
-    </div>
-    <div class="flex items-center gap-1.5">
-      <UPagination
-        :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
-        :items-per-page="table?.tableApi?.getState().pagination.pageSize"
-        :total="table?.tableApi?.getFilteredRowModel().rows.length"
-        @update:page="(p: number) => table?.tableApi?.setPageIndex(p - 1)"
-      />
+    <UTable
+      ref="table"
+      v-model:global-filter="filter"
+      v-model:row-selection="rowSelection"
+      v-model:pagination="pagination"
+      :pagination-options="{
+        getPaginationRowModel: getPaginationRowModel(),
+      }"
+      :data="queue.history.items"
+      :columns="columns"
+      :empty="m.no_clips_previously_watched()"
+      sticky="header"
+      class="text-left"
+    />
+    <div class="mt-auto flex items-center justify-between gap-3 border-t border-default pt-4">
+      <div class="text-sm text-muted">
+        {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
+        {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
+      </div>
+      <div class="flex items-center gap-1.5">
+        <UPagination
+          :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
+          :items-per-page="table?.tableApi?.getState().pagination.pageSize"
+          :total="table?.tableApi?.getFilteredRowModel().rows.length"
+          @update:page="(p: number) => table?.tableApi?.setPageIndex(p - 1)"
+        />
+      </div>
     </div>
   </div>
 </template>

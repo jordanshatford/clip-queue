@@ -1,42 +1,44 @@
 <template>
-  <UCard class="mx-auto mb-2 max-w-2xl text-left" variant="subtle">
-    <div class="flex flex-col gap-2">
-      <UFormField :help="m.reset_settings_description()">
-        <UButton
-          class="w-full justify-center"
-          color="error"
-          :disabled="!isSettingsModified"
-          @click="resetSettingsToDefault()"
-          >{{ m.reset_settings() }}</UButton
-        >
-      </UFormField>
-      <USeparator />
-      <UFormField :help="m.purge_history_description()">
-        <UButton
-          class="w-full justify-center"
-          color="error"
-          :disabled="queue.history.length === 0"
-          @click="purgeHistory()"
-          >{{ m.purge_history() }}</UButton
-        >
-      </UFormField>
-      <USeparator />
-      <UFormField :help="m.reset_cache_description()">
-        <UButton
-          class="w-full justify-center"
-          color="error"
-          :disabled="!integrations.hasCachedData"
-          @click="resetCache()"
-          >{{ m.reset_cache() }}</UButton
-        >
-      </UFormField>
-    </div>
-  </UCard>
-  <UCard class="mx-auto max-w-2xl" variant="subtle">
-    <p class="text-sm">
-      {{ m.application_version({ version }) }}
-    </p>
-  </UCard>
+  <div class="flex flex-col">
+    <UCard class="mx-auto mb-2 max-w-2xl text-left" variant="subtle">
+      <div class="flex flex-col gap-2">
+        <UFormField :help="m.reset_settings_description()">
+          <UButton
+            class="w-full justify-center"
+            color="error"
+            :disabled="!isSettingsModified"
+            @click="resetSettingsToDefault()"
+            >{{ m.reset_settings() }}</UButton
+          >
+        </UFormField>
+        <USeparator />
+        <UFormField :help="m.purge_history_description()">
+          <UButton
+            class="w-full justify-center"
+            color="error"
+            :disabled="queue.history.length === 0"
+            @click="purgeHistory()"
+            >{{ m.purge_history() }}</UButton
+          >
+        </UFormField>
+        <USeparator />
+        <UFormField :help="m.reset_cache_description()">
+          <UButton
+            class="w-full justify-center"
+            color="error"
+            :disabled="!integrations.hasCachedData"
+            @click="resetCache()"
+            >{{ m.reset_cache() }}</UButton
+          >
+        </UFormField>
+      </div>
+    </UCard>
+    <UCard class="mx-auto max-w-2xl" variant="subtle">
+      <p class="text-sm">
+        {{ m.application_version({ version }) }}
+      </p>
+    </UCard>
+  </div>
 </template>
 
 <script setup lang="ts">

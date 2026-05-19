@@ -1,13 +1,15 @@
 <template>
-  <UTabs
-    v-model="active"
-    color="primary"
-    variant="link"
-    :content="false"
-    :items="items"
-    class="mx-auto mb-3 w-full max-w-2xl justify-around"
-  />
-  <NuxtPage />
+  <div class="flex flex-col">
+    <UTabs
+      v-model="active"
+      color="primary"
+      variant="link"
+      :content="false"
+      :items="items"
+      class="mx-auto mb-3 w-full max-w-2xl justify-around"
+    />
+    <NuxtPage />
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -139,21 +139,17 @@ export const useCommands = defineStore('commands', () => {
    * @param id - The ids of the commands.
    */
   function unregister(...ids: string[]): void {
-    for (const id of ids) {
-      const cmd = commands.value[id]
-      // Silently ignore any commands that do not actually exist.
-      if (!cmd) {
-        return
-      }
-      // Cleanup and remove all command aliases, and information. If it is present
-      // in the disabled list, remove it from there too.
-      if (cmd.aliases) {
-        for (const alias of cmd.aliases) {
-          delete aliases.value[alias]
-        }
-      }
-      delete commands.value[id]
-    }
+    const idSet = new Set(ids)
+
+    commands.value = Object.fromEntries(
+      Object.entries(commands.value).filter(([id]) => !idSet.has(id)),
+    )
+
+    const aliasesToRemove = ids.flatMap((id) => commands.value[id]?.aliases ?? [])
+
+    aliases.value = Object.fromEntries(
+      Object.entries(aliases.value).filter(([alias]) => !aliasesToRemove.includes(alias)),
+    )
   }
 
   /**
