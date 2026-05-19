@@ -56,10 +56,7 @@ export interface Props {
 const { title = 'Queue', isOpen = false } = defineProps<Props>()
 
 const emit = defineEmits<{
-  (e: 'play', value: Clip): void
-  (e: 'remove', value: Clip): void
-  (e: 'open'): void
-  (e: 'close'): void
-  (e: 'clear'): void
+  (e: 'play' | 'remove', value: Clip): void
+  (e: 'open' | 'close' | 'clear'): void
 }>()
 </script>

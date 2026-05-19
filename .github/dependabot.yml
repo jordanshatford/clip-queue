@@ -16,11 +16,6 @@ updates:
       commitlint:
         patterns:
           - '@commitlint/*'
-      oxc:
-        patterns:
-          - 'oxfmt'
-          - 'oxlint'
-          - 'eslint-plugin-oxlint'
       eslint:
         patterns:
           - 'eslint'
@@ -43,3 +38,8 @@ updates:
           - 'vue'
           - 'vue-*'
           - '@vue/*'
+      nuxt:
+        patterns:
+          - 'nuxt'
+          - '@nuxt/*'
+          - '*/nuxt'
