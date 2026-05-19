@@ -32,7 +32,7 @@ export interface QueueSettings {
   duplicates: boolean
 }
 
-export const DEFAULT_SETTINGS: QueueSettings = {
+export const DEFAULT_QUEUE_SETTINGS: QueueSettings = {
   open: true,
   limit: null,
   duplicates: false,
@@ -48,7 +48,7 @@ export const useQueue = defineStore('queue', () => {
    */
   const settings = useStorage<QueueSettings>(
     '__cq_queue_settings',
-    structuredClone(DEFAULT_SETTINGS),
+    structuredClone(DEFAULT_QUEUE_SETTINGS),
     undefined,
     { mergeDefaults: true },
   )
@@ -151,8 +151,8 @@ export const useQueue = defineStore('queue', () => {
    */
   const isSettingsModified = computed(() => {
     return (
-      settings.value.open !== DEFAULT_SETTINGS.open ||
-      settings.value.limit !== DEFAULT_SETTINGS.limit
+      settings.value.open !== DEFAULT_QUEUE_SETTINGS.open ||
+      settings.value.limit !== DEFAULT_QUEUE_SETTINGS.limit
     )
   })
 
@@ -160,7 +160,7 @@ export const useQueue = defineStore('queue', () => {
    * Reset settings related to this store.
    */
   function resetSettings(): void {
-    settings.value = structuredClone(DEFAULT_SETTINGS)
+    settings.value = structuredClone(DEFAULT_QUEUE_SETTINGS)
   }
 
   /**

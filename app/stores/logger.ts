@@ -93,7 +93,7 @@ export interface LoggerSettings {
   limit: number
 }
 
-export const DEFAULT_SETTINGS: LoggerSettings = {
+export const DEFAULT_LOGGER_SETTINGS: LoggerSettings = {
   level: 'WARN',
   limit: 100,
 }
@@ -104,7 +104,7 @@ export const useLogger = defineStore('logger', () => {
    */
   const settings = useStorage<LoggerSettings>(
     '__cq_logger_settings',
-    structuredClone(DEFAULT_SETTINGS),
+    structuredClone(DEFAULT_LOGGER_SETTINGS),
     undefined,
     { mergeDefaults: true },
   )
@@ -138,8 +138,8 @@ export const useLogger = defineStore('logger', () => {
    */
   const isSettingsModified = computed(() => {
     return (
-      settings.value.level !== DEFAULT_SETTINGS.level ||
-      settings.value.limit !== DEFAULT_SETTINGS.limit
+      settings.value.level !== DEFAULT_LOGGER_SETTINGS.level ||
+      settings.value.limit !== DEFAULT_LOGGER_SETTINGS.limit
     )
   })
 
@@ -147,7 +147,7 @@ export const useLogger = defineStore('logger', () => {
    * Reset settings related to this store.
    */
   function resetSettings(): void {
-    settings.value = structuredClone(DEFAULT_SETTINGS)
+    settings.value = structuredClone(DEFAULT_LOGGER_SETTINGS)
   }
 
   return {

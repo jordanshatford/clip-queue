@@ -70,7 +70,7 @@ export interface CommandsSettings {
   enabled: string[]
 }
 
-export const DEFAULT_SETTINGS: CommandsSettings = {
+export const DEFAULT_COMMANDS_SETTINGS: CommandsSettings = {
   prefix: '!cq',
   enabled: [],
 }
@@ -81,7 +81,7 @@ export const useCommands = defineStore('commands', () => {
    */
   const settings = useStorage<CommandsSettings>(
     '__cq_commands_settings',
-    structuredClone(DEFAULT_SETTINGS),
+    structuredClone(DEFAULT_COMMANDS_SETTINGS),
     undefined,
     { mergeDefaults: true },
   )
@@ -218,9 +218,10 @@ export const useCommands = defineStore('commands', () => {
    */
   const isSettingsModified = computed(() => {
     return (
-      settings.value.prefix !== DEFAULT_SETTINGS.prefix ||
+      settings.value.prefix !== DEFAULT_COMMANDS_SETTINGS.prefix ||
       Object.keys(commands.value).some(
-        (cmd) => settings.value.enabled.includes(cmd) !== DEFAULT_SETTINGS.enabled.includes(cmd),
+        (cmd) =>
+          settings.value.enabled.includes(cmd) !== DEFAULT_COMMANDS_SETTINGS.enabled.includes(cmd),
       )
     )
   })
@@ -229,7 +230,7 @@ export const useCommands = defineStore('commands', () => {
    * Reset settings related to this store.
    */
   function resetSettings(): void {
-    settings.value = structuredClone(DEFAULT_SETTINGS)
+    settings.value = structuredClone(DEFAULT_COMMANDS_SETTINGS)
   }
 
   return {

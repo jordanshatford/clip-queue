@@ -36,7 +36,7 @@ export interface IntegrationSettings {
   automod: boolean
 }
 
-export const DEFAULT_SETTINGS: IntegrationSettings = {
+export const DEFAULT_INTEGRATION_SETTINGS: IntegrationSettings = {
   automod: true,
 }
 
@@ -58,7 +58,7 @@ export const useIntegrations = defineStore('integrations', () => {
    */
   const settings = useStorage<IntegrationSettings>(
     '__cq_integrations_settings',
-    structuredClone(DEFAULT_SETTINGS),
+    structuredClone(DEFAULT_INTEGRATION_SETTINGS),
     undefined,
     { mergeDefaults: true },
   )
@@ -356,14 +356,14 @@ export const useIntegrations = defineStore('integrations', () => {
    * Determine if the settings are modified.
    */
   const isSettingsModified = computed(() => {
-    return settings.value.automod !== DEFAULT_SETTINGS.automod
+    return settings.value.automod !== DEFAULT_INTEGRATION_SETTINGS.automod
   })
 
   /**
    * Reset settings related to this store.
    */
   function resetSettings(): void {
-    settings.value = structuredClone(DEFAULT_SETTINGS)
+    settings.value = structuredClone(DEFAULT_INTEGRATION_SETTINGS)
   }
 
   /**
