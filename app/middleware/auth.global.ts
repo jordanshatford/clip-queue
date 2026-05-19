@@ -1,3 +1,8 @@
+/**
+ * Global authentication middleware for the app. This middleware runs on every route change,
+ * allowing us to enforce authentication requirements and handle special login flows (like
+ * Twitch integration) in a centralized place.
+ */
 export default defineNuxtRouteMiddleware(async (to) => {
   const logger = useLogger()
   const user = useUser()

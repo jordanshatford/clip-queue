@@ -1,9 +1,9 @@
 <template>
   <UHeader>
     <template #left>
-      <RouterLink to="/" class="mr-2 flex shrink-0 items-center">
+      <NuxtLink to="/" class="mr-2 flex shrink-0 items-center">
         <img class="size-9" src="@/assets/icon.png" />
-      </RouterLink>
+      </NuxtLink>
     </template>
     <UNavigationMenu :items="items" content-orientation="vertical" />
     <template #right>

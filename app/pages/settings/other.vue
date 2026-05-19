@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col">
-    <UCard class="mx-auto mb-2 max-w-2xl text-left" variant="subtle">
+  <div class="mx-auto flex max-w-2xl flex-col gap-2">
+    <UCard class="text-left" variant="subtle">
       <div class="flex flex-col gap-2">
         <UFormField :help="m.reset_settings_description()">
           <UButton
@@ -33,7 +33,7 @@
         </UFormField>
       </div>
     </UCard>
-    <UCard class="mx-auto max-w-2xl" variant="subtle">
+    <UCard variant="subtle">
       <p class="text-sm">
         {{ m.application_version({ version }) }}
       </p>
