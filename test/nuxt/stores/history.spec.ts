@@ -1,10 +1,7 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
-
-import { useCommands } from '../commands'
-import { useHistory } from '../history'
+import { clipFromKick, clipFromTwitch } from '../../mocks'
 
 describe('history.ts', () => {
   beforeEach(() => {

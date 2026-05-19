@@ -3,14 +3,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 
 import * as runtime from '#paraglide/runtime'
-import * as palettes from '@/assets/palettes'
-import { colors, surfaces } from '@/assets/palettes'
-import {
-  DEFAULT_PRIMARY_COLOR,
-  DEFAULT_SURFACE_COLOR,
-  getInferredDefaultLanguage,
-  usePreferences,
-} from '@/stores/preferences'
+import * as palettes from '~/assets/palettes'
+import { colors, surfaces } from '~/assets/palettes'
 
 vi.mock('#paraglide/runtime', async () => {
   const actual = await vi.importActual<typeof import('#paraglide/runtime')>('#paraglide/runtime')
@@ -21,8 +15,8 @@ vi.mock('#paraglide/runtime', async () => {
   }
 })
 
-vi.mock('@/assets/palettes', async () => {
-  const actual = await vi.importActual<typeof import('@/assets/palettes')>('@/assets/palettes')
+vi.mock('~/assets/palettes', async () => {
+  const actual = await vi.importActual<typeof import('~/assets/palettes')>('~/assets/palettes')
   return {
     ...actual,
     setColorPalette: vi.fn<(type: 'primary' | 'surface', palette: string) => void>(),

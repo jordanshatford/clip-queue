@@ -1,25 +1,22 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { Clip } from '@/integrations/core'
-import type { KickClip } from '@/integrations/kick'
-import type { TwitchClip, TwitchGame } from '@/integrations/twitch/core/types'
+import type { Clip } from '~/integrations'
+import type { KickClip } from '~/integrations/kick'
+import type { TwitchClip, TwitchGame } from '~/integrations/twitch/core/types'
 
-import { mockKickClip, mockTwitchClip, mockTwitchGame } from '@/__tests__/mocks'
+import { mockKickClip, mockTwitchClip, mockTwitchGame } from '../../mocks'
 
-import { useCommands } from '../commands'
-import { useIntegrations } from '../integrations'
-
-vi.mock('@/integrations/kick/core/api', async (importOriginal) => {
+vi.mock('~/integrations/kick/core/api', async (importOriginal) => {
   return {
-    ...(await importOriginal<typeof import('@/integrations/kick/core/api')>()),
+    ...(await importOriginal<typeof import('~/integrations/kick/core/api')>()),
     getClip: vi.fn<(id: string) => KickClip>((id: string) => ({ ...mockKickClip, id })),
   }
 })
 
-vi.mock('@/integrations/twitch/core/api', async (importOriginal) => {
+vi.mock('~/integrations/twitch/core/api', async (importOriginal) => {
   return {
-    ...(await importOriginal<typeof import('@/integrations/twitch/core/api')>()),
+    ...(await importOriginal<typeof import('~/integrations/twitch/core/api')>()),
     getClips: vi.fn<(_cId: string, _token: string, ids: string[]) => TwitchClip[]>(
       (_cId: string, _token: string, ids: string[]) => {
         return ids.map((id) => ({ ...mockTwitchClip, id }))
@@ -33,9 +30,9 @@ vi.mock('@/integrations/twitch/core/api', async (importOriginal) => {
   }
 })
 
-vi.mock('@/integrations/twitch/core/utils', async (importOriginal) => {
+vi.mock('~/integrations/twitch/core/utils', async (importOriginal) => {
   return {
-    ...(await importOriginal<typeof import('@/integrations/twitch/core/utils')>()),
+    ...(await importOriginal<typeof import('~/integrations/twitch/core/utils')>()),
     getClipIdFromUrl: vi.fn<(url: string) => string | undefined>((url: string) => {
       if (!url.includes('twitch')) {
         return

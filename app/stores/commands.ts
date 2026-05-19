@@ -140,13 +140,11 @@ export const useCommands = defineStore('commands', () => {
    */
   function unregister(...ids: string[]): void {
     const idSet = new Set(ids)
+    const aliasesToRemove = ids.flatMap((id) => commands.value[id]?.aliases ?? [])
 
     commands.value = Object.fromEntries(
       Object.entries(commands.value).filter(([id]) => !idSet.has(id)),
     )
-
-    const aliasesToRemove = ids.flatMap((id) => commands.value[id]?.aliases ?? [])
-
     aliases.value = Object.fromEntries(
       Object.entries(aliases.value).filter(([alias]) => !aliasesToRemove.includes(alias)),
     )

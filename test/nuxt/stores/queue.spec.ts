@@ -1,15 +1,11 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import type { Clip } from '@/integrations'
+import type { Clip } from '~/integrations'
 
-import { clipFromKick, clipFromTwitch } from '@/__tests__/mocks'
-import { IntegrationID } from '@/integrations'
+import { IntegrationID } from '~/integrations'
 
-import { useCommands } from '../commands'
-import { useHistory } from '../history'
-import { useQueue } from '../queue'
-import { useUpcoming } from '../upcoming'
+import { clipFromKick, clipFromTwitch } from '../../mocks'
 
 describe('queue.ts', () => {
   beforeEach(() => {

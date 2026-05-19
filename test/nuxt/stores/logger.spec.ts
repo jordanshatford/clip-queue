@@ -1,8 +1,6 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { logLevelConsole, useLogger } from '../logger'
-
 describe('logger.ts', () => {
   beforeEach(() => {
     vi.clearAllMocks()

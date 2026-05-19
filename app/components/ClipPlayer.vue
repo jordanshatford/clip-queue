@@ -50,7 +50,6 @@
 </template>
 
 <script setup lang="ts">
-import { onKeyDown } from '@vueuse/core'
 import { computed } from 'vue'
 
 import type { Clip } from '@/integrations'

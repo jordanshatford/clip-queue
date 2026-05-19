@@ -12,7 +12,6 @@
 
 <script setup lang="ts">
 import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
-import { useTitle } from '@vueuse/core'
 import { computed, watch } from 'vue'
 
 import AppFooter from '@/components/AppFooter.vue'

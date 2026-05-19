@@ -1,8 +1,6 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { useCommands, type Command } from '@/stores/commands'
-
 describe('commands', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
@@ -88,7 +86,7 @@ describe('commands', () => {
     const commands = useCommands()
     commands.register(createCommand())
     commands.unregister('test')
-    expect(commands.aliases.t).toBeUndefined()
+    expect(commands.aliases['t']).toBeUndefined()
   })
 
   it('silently ignores unregistering unknown commands', () => {
