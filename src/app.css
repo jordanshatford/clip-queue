@@ -1,10 +1,7 @@
 @import '@fontsource-variable/inter';
 
 @import 'tailwindcss';
-@import 'tailwindcss-primeui';
 @import '@nuxt/ui';
-
-@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   --font-sans: 'Inter Variable', sans-serif;

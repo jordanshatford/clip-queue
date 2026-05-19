@@ -177,5 +177,9 @@
   "integrations_cache_reset": "تمت إعادة ضبط ذاكرة التخزين المؤقت للتكاملات.",
   "command_enable_integration": "قم بتمكين التكامل المحدد.",
   "command_disable_integration": "قم بتعطيل التكامل المحدد.",
-  "theme_auto": "نظام"
+  "theme_auto": "نظام",
+  "taupe": "رمادي داكن",
+  "mauve": "خبازي",
+  "mist": "شَبُّورَة",
+  "olive": "زيتون"
 }

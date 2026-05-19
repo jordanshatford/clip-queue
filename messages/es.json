@@ -177,5 +177,9 @@
   "integrations_cache_reset": "Reinicio de la caché de integraciones.",
   "command_enable_integration": "Habilitar la integración especificada.",
   "command_disable_integration": "Deshabilitar la integración especificada.",
-  "theme_auto": "Sistema"
+  "theme_auto": "Sistema",
+  "taupe": "Gris pardo",
+  "mauve": "Color de malva",
+  "mist": "Neblina",
+  "olive": "Aceituna"
 }

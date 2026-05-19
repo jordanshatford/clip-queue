@@ -177,5 +177,9 @@
   "integrations_cache_reset": "Сброс кэша интеграций.",
   "command_enable_integration": "Включите указанную интеграцию.",
   "command_disable_integration": "Отключите указанную интеграцию.",
-  "theme_auto": "Система"
+  "theme_auto": "Система",
+  "taupe": "Серо-коричневый",
+  "mauve": "Сиреневый",
+  "mist": "Туман",
+  "olive": "Олив"
 }

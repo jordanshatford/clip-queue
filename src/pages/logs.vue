@@ -1,66 +1,37 @@
 <template>
-  <DataTable
-    ref="logs-table"
-    :value="logs"
-    size="small"
-    paginator
-    export-filename="logs.clip-queue"
-    :rows="10"
-    :rows-per-page-options="[10, 20, 50]"
-  >
-    <template #empty>
-      <div class="p-4 text-surface-500">{{ m.no_logs_captured() }}</div>
-    </template>
-    <template #header>
-      <div class="mb-2 flex items-center justify-between">
-        <span class="text-xl">{{ m.logs() }}</span>
-        <div class="text-end">
-          <div class="flex flex-row-reverse gap-2">
-            <Button
-              :label="m.clear()"
-              :disabled="logs.length === 0"
-              severity="danger"
-              size="small"
-              @click="deleteAllLogs()"
-            ></Button>
-            <UButton
-              icon="lucide:download"
-              :disabled="logs.length === 0"
-              variant="outline"
-              color="neutral"
-              severity="secondary"
-              @click="exportCSV()"
-              >{{ m.download() }}</UButton
-            >
-          </div>
-        </div>
-      </div>
-    </template>
-    <Column field="timestamp" :header="m.timestamp()" export-header="Timestamp">
-      <template #body="{ data }: { data: Log }">
-        <p>{{ formatTimestamp(data.timestamp) }}</p>
-      </template>
-    </Column>
-    <Column field="level" :header="m.level()" export-header="Level">
-      <template #body="{ data }: { data: Log }">
-        <UBadge
-          :icon="logLevelIcons[data.level]"
-          :color="logLevelSeverities[data.level]"
-          variant="subtle"
-        >
-          {{ logLevelTranslations[data.level]() }}
-        </UBadge>
-      </template>
-    </Column>
-    <Column field="message" :header="m.message()" export-header="Message"></Column>
-  </DataTable>
+  <div class="w-full space-y-4 pb-4">
+    <div class="flex justify-between border-b border-accented px-4 py-3.5">
+      <span class="text-lg font-medium">{{ m.logs() }}</span>
+      <UButton color="error" @click="deleteAllLogs()">{{ m.clear() }}</UButton>
+    </div>
+    <UTable
+      ref="table"
+      sticky="header"
+      :data="logs"
+      :columns="columns"
+      :empty="m.no_logs_captured()"
+      v-model:pagination="pagination"
+      :pagination-options="{
+        getPaginationRowModel: getPaginationRowModel(),
+      }"
+      class="text-left"
+    />
+    <div class="flex justify-end border-t border-default px-4 pt-4">
+      <UPagination
+        :page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
+        :items-per-page="table?.tableApi?.getState().pagination.pageSize"
+        :total="table?.tableApi?.getFilteredRowModel().rows.length"
+        @update:page="(p: number) => table?.tableApi?.setPageIndex(p - 1)"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import Button from 'primevue/button'
-import Column from 'primevue/column'
-import DataTable from 'primevue/datatable'
-import { computed, useTemplateRef } from 'vue'
+import type { TableColumn } from '@nuxt/ui'
+
+import { getPaginationRowModel, type PaginationState } from '@tanstack/vue-table'
+import { computed, h, ref, resolveComponent, useTemplateRef } from 'vue'
 
 import type { Log } from '@/stores/logger'
 
@@ -82,7 +53,13 @@ definePage({
 const confirm = useConfirmDialog()
 const preferences = usePreferences()
 const logger = useLogger()
-const table = useTemplateRef<InstanceType<typeof DataTable>>('logs-table')
+
+const table = useTemplateRef('table')
+
+const pagination = ref<PaginationState>({
+  pageIndex: 0,
+  pageSize: 6,
+})
 
 const logs = computed(() => {
   return [...logger.logs].sort((a, b) => {
@@ -90,17 +67,35 @@ const logs = computed(() => {
   })
 })
 
+const UBadge = resolveComponent('UBadge')
+
+const columns: TableColumn<Log>[] = [
+  {
+    accessorKey: 'timestamp',
+    header: m.timestamp(),
+    cell: ({ row }) => formatTimestamp(row.original.timestamp),
+  },
+  {
+    accessorKey: 'level',
+    header: m.level(),
+    cell: ({ row }) => {
+      const level = row.original.level
+      return h(
+        UBadge,
+        { icon: logLevelIcons[level], variant: 'soft', color: logLevelSeverities[level] },
+        () => logLevelTranslations[level](),
+      )
+    },
+  },
+  { accessorKey: 'message', header: m.message() },
+]
+
 function formatTimestamp(timestamp: string) {
   return datetime(preferences.locale, timestamp, {
     dateStyle: 'short',
     timeStyle: 'medium',
     hour12: false,
   })
-}
-
-function exportCSV() {
-  logger.debug('[Logs]: exporting logs as CSV.')
-  table.value?.exportCSV()
 }
 
 async function deleteAllLogs(): Promise<void> {

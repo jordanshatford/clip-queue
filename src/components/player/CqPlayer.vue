@@ -18,10 +18,7 @@
         :start="config.start"
       />
     </div>
-    <div
-      v-else
-      class="flex h-full items-center justify-center font-normal text-surface-600 dark:text-surface-400"
-    >
+    <div v-else class="flex h-full items-center justify-center font-normal">
       <slot name="unsupported"></slot>
     </div>
   </div>

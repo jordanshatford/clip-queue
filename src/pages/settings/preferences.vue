@@ -2,7 +2,7 @@
   <UCard class="mx-auto max-w-2xl" variant="subtle">
     <div class="flex flex-col gap-2 text-left">
       <UFormField :label="m.language()" :help="m.language_description()">
-        <USelect v-model="preferences.locale" :items="[...locales]" class="w-full">
+        <USelect id="locale" v-model="preferences.locale" :items="[...locales]" class="w-full">
           <template #default="{ modelValue }: { modelValue: Locale }">
             {{ localeLabels[modelValue] }}
           </template>
@@ -12,7 +12,12 @@
         </USelect>
       </UFormField>
       <UFormField :label="m.theme()" :help="m.theme_description()">
-        <USelect v-model="preferences.store" :items="[...availableThemes]" class="w-full">
+        <USelect
+          id="theme"
+          v-model="preferences.store"
+          :items="[...availableThemes]"
+          class="w-full"
+        >
           <template #default="{ modelValue }: { modelValue: BasicColorSchema }">
             {{ themeTranslations[modelValue]() }}
           </template>
@@ -21,44 +26,26 @@
           </template>
         </USelect>
       </UFormField>
-      <label for="primaryColor">{{ m.primary_color() }}</label>
-      <Select
-        v-model="preferences.primary"
-        :options="colors"
-        data-key="name"
-        label-id="primaryColor"
-        size="small"
-        aria-describedby="primaryColor-help"
-      >
-        <template #value="{ value }: { value: ColorOption }">
-          <ColorName :name="value.name" :color="value.palette[500]" />
-        </template>
-        <template #option="{ option }: { option: ColorOption }">
-          <ColorName :name="option.name" :color="option.palette[500]" />
-        </template>
-      </Select>
-      <Message id="primaryColor-help" size="small" severity="secondary" variant="simple">{{
-        m.primary_color_description()
-      }}</Message>
-      <label for="surfaceColor">{{ m.surface_color() }}</label>
-      <Select
-        v-model="preferences.surface"
-        data-key="name"
-        :options="surfaces"
-        label-id="surfaceColor"
-        size="small"
-        aria-describedby="surfaceColor-help"
-      >
-        <template #value="{ value }: { value: ColorOption }">
-          <ColorName :name="value.name" :color="value.palette[500]" />
-        </template>
-        <template #option="{ option }: { option: ColorOption }">
-          <ColorName :name="option.name" :color="option.palette[500]" />
-        </template>
-      </Select>
-      <Message id="surfaceColor-help" size="small" severity="secondary" variant="simple">{{
-        m.surface_color_description()
-      }}</Message>
+      <UFormField :label="m.primary_color()" :help="m.primary_color_description()">
+        <USelect id="primary-color" v-model="preferences.primary" :items="colors" class="w-full">
+          <template #default="{ modelValue }: { modelValue: string }">
+            <ColorName :name="modelValue" />
+          </template>
+          <template #item-label="{ item }: { item: string }">
+            <ColorName :name="item" />
+          </template>
+        </USelect>
+      </UFormField>
+      <UFormField :label="m.surface_color()" :help="m.surface_color_description()">
+        <USelect id="surface-color" v-model="preferences.surface" :items="surfaces" class="w-full">
+          <template #default="{ modelValue }: { modelValue: string }">
+            <ColorName :name="modelValue" />
+          </template>
+          <template #item-label="{ item }: { item: string }">
+            <ColorName :name="item" />
+          </template>
+        </USelect>
+      </UFormField>
     </div>
   </UCard>
 </template>
@@ -66,10 +53,6 @@
 <script setup lang="ts">
 import type { BasicColorSchema } from '@vueuse/core'
 
-import Message from 'primevue/message'
-import Select from 'primevue/select'
-
-import type { ColorOption } from '@/assets/palettes'
 import type { Locale } from '@/paraglide/runtime'
 
 import { colors, surfaces } from '@/assets/palettes'

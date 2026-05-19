@@ -177,5 +177,9 @@
   "integrations_cache_reset": "統合キャッシュがリセットされました。",
   "command_enable_integration": "指定された連携機能を有効にします。",
   "command_disable_integration": "指定された連携機能を無効にします。",
-  "theme_auto": "システム"
+  "theme_auto": "システム",
+  "taupe": "トープ",
+  "mauve": "藤色",
+  "mist": "ミスト",
+  "olive": "オリーブ"
 }

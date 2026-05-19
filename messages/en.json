@@ -177,5 +177,9 @@
   "integrations_cache_reset": "Integrations cache reset.",
   "command_enable_integration": "Enable the specified integration.",
   "command_disable_integration": "Disable the specified integration.",
-  "theme_auto": "System"
+  "theme_auto": "System",
+  "taupe": "Taupe",
+  "mauve": "Mauve",
+  "mist": "Mist",
+  "olive": "Olive"
 }

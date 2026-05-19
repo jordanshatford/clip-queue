@@ -177,5 +177,9 @@
   "integrations_cache_reset": "Entegrasyon önbelleği sıfırlandı.",
   "command_enable_integration": "Belirtilen entegrasyonu etkinleştirin.",
   "command_disable_integration": "Belirtilen entegrasyonu devre dışı bırakın.",
-  "theme_auto": "Sistem"
+  "theme_auto": "Sistem",
+  "taupe": "Boz kahverengi",
+  "mauve": "Leylak",
+  "mist": "Sis",
+  "olive": "Zeytin"
 }

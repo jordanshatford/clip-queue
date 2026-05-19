@@ -177,5 +177,9 @@
   "integrations_cache_reset": "集成缓存已重置。",
   "command_enable_integration": "启用指定的集成。",
   "command_disable_integration": "禁用指定的集成。",
-  "theme_auto": "系统"
+  "theme_auto": "系统",
+  "taupe": "灰褐色",
+  "mauve": "淡紫色",
+  "mist": "薄雾",
+  "olive": "橄榄"
 }

@@ -177,5 +177,9 @@
   "integrations_cache_reset": "Integrationscache zurückgesetzt.",
   "command_enable_integration": "Aktivieren Sie die angegebene Integration.",
   "command_disable_integration": "Die angegebene Integration deaktivieren.",
-  "theme_auto": "System"
+  "theme_auto": "System",
+  "taupe": "Taupe",
+  "mauve": "Mauve",
+  "mist": "Nebel",
+  "olive": "Olive"
 }

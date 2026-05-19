@@ -177,5 +177,9 @@
   "integrations_cache_reset": "통합 캐시가 초기화되었습니다.",
   "command_enable_integration": "지정된 통합 기능을 활성화하십시오.",
   "command_disable_integration": "지정된 통합 기능을 비활성화합니다.",
-  "theme_auto": "체계"
+  "theme_auto": "체계",
+  "taupe": "짙은 회갈색",
+  "mauve": "연보라색",
+  "mist": "안개",
+  "olive": "올리브"
 }

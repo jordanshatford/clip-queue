@@ -29,7 +29,7 @@ export const logLevelIcons: Record<LogLevel, BadgeProps['icon']> = {
 }
 
 /**
- * Log level mappings to PrimeVue severities.
+ * Log level mappings to NuxtUI severities.
  */
 export const logLevelSeverities: Record<LogLevel, BadgeProps['color']> = {
   OFF: 'neutral',

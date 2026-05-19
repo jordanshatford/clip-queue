@@ -1,102 +1,80 @@
 <template>
-  <div class="flex flex-row-reverse gap-2 pr-2">
-    <UButton
-      icon="lucide:trash"
-      :disabled="!selection.length"
-      color="error"
-      @click="deleteClips()"
-      >{{ m.delete_label() }}</UButton
-    >
-    <UButton
-      icon="lucide:plus"
-      :disabled="isQueueClipsDisabled"
-      color="neutral"
-      variant="soft"
-      @click="queueClips()"
-      >{{ m.queue() }}</UButton
-    >
+  <div class="flex flex-wrap items-center justify-between gap-1.5">
+    <UInput v-model="filter" class="max-w-sm" icon="lucide:search" :placeholder="m.search()" />
+    <div class="flex flex-wrap items-center gap-1.5">
+      <UButton
+        v-if="table?.tableApi?.getFilteredSelectedRowModel().rows.length"
+        color="neutral"
+        variant="subtle"
+        icon="lucide:plus"
+        @click="queueClips()"
+      >
+        {{ m.queue() }}
+        <template #trailing>
+          <UKbd>
+            {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length }}
+          </UKbd>
+        </template>
+      </UButton>
+      <UButton
+        v-if="table?.tableApi?.getFilteredSelectedRowModel().rows.length"
+        color="error"
+        variant="subtle"
+        icon="lucide:trash"
+        @click="deleteClips()"
+      >
+        {{ m.delete_label() }}
+        <template #trailing>
+          <UKbd>
+            {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length }}
+          </UKbd>
+        </template>
+      </UButton>
+    </div>
   </div>
-  <DataTable
-    v-model:selection="selection"
-    v-model:filters="filters"
-    :global-filter-fields="['category', 'channel', 'provider', 'submitters', 'title']"
-    :value="queue.history.items"
-    size="small"
-    paginator
-    removable-sort
-    :rows="10"
-    :rows-per-page-options="[10, 20, 50]"
-    class="my-2"
-  >
-    <template #empty>
-      <div class="p-4 text-surface-500">
-        {{ m.no_clips_previously_watched() }}
-      </div>
-    </template>
-    <template #header>
-      <div class="mb-2 flex items-center justify-between">
-        <span class="text-xl">{{ m.history() }}</span>
-        <UInput
-          icon="lucide:search"
-          size="md"
-          variant="outline"
-          v-model="filters['global'].value"
-          :placeholder="m.search()"
-        />
-      </div>
-    </template>
-    <Column selection-mode="multiple" header-style="width: 3rem"></Column>
-    <Column field="title" :header="m.info()" sortable :sort-field="(data: Clip) => data.title">
-      <template #body="{ data }: { data: Clip }">
-        <div class="flex items-center">
-          <ClipThumbnail class="hidden w-24 sm:block" :src="data.thumbnailUrl" :alt="data.title" />
-          <div class="text-left text-sm sm:ml-3">
-            <p class="flex items-center gap-1 font-normal">
-              {{ data.title }}
-              <span v-if="data.url">
-                <a
-                  :href="data.url"
-                  target="_blank"
-                  rel="noreferrer"
-                  class="text-surface-400 no-underline hover:text-surface-600 dark:text-surface-600 dark:hover:text-surface-200"
-                >
-                  <UIcon name="lucide:external-link" />
-                </a>
-              </span>
-            </p>
-            <div class="text-xs text-surface-400">
-              <p v-if="data.category">{{ data.channel }} - {{ data.category }}</p>
-              <p v-else>
-                {{ data.channel }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </template>
-    </Column>
-    <Column field="integration" sortable :header="m.integration()">
-      <template #body="{ data }: { data: Clip }">
-        <ProviderName :provider="data.provider" />
-      </template>
-    </Column>
-    <Column
-      :field="(data: Clip) => data.submitters[0] ?? ''"
-      sortable
-      :sort-field="(data: Clip) => data.submitters[0] ?? ''"
-      :header="m.submitter()"
-    >
-    </Column>
-  </DataTable>
+  <UTable
+    ref="table"
+    v-model:global-filter="filter"
+    v-model:row-selection="rowSelection"
+    v-model:pagination="pagination"
+    :pagination-options="{
+      getPaginationRowModel: getPaginationRowModel(),
+    }"
+    :data="queue.history.items"
+    :columns="columns"
+    :empty="m.no_clips_previously_watched()"
+    sticky="header"
+    class="text-left"
+  />
+  <div class="mt-auto flex items-center justify-between gap-3 border-t border-default pt-4">
+    <div class="text-sm text-muted">
+      {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
+      {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
+    </div>
+    <div class="flex items-center gap-1.5">
+      <UPagination
+        :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
+        :items-per-page="table?.tableApi?.getState().pagination.pageSize"
+        :total="table?.tableApi?.getFilteredRowModel().rows.length"
+        @update:page="(p: number) => table?.tableApi?.setPageIndex(p - 1)"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import Column from 'primevue/column'
-import DataTable from 'primevue/datatable'
-import { computed, ref } from 'vue'
+import type { TableColumn } from '@nuxt/ui'
+
+import {
+  getPaginationRowModel,
+  type RowSelectionState,
+  type PaginationState,
+} from '@tanstack/vue-table'
+import { h, ref, resolveComponent, useTemplateRef } from 'vue'
 
 import type { Clip } from '@/integrations'
 
-import ClipThumbnail from '@/components/ClipThumbnail.vue'
+import ClipInfo from '@/components/ClipInfo.vue'
 import ProviderName from '@/components/ProviderName.vue'
 import { useConfirmDialog } from '@/composables/useConfirmDialog'
 import { m } from '@/paraglide/messages'
@@ -112,23 +90,70 @@ definePage({
   },
 })
 
-const filters = ref({
-  global: { value: null, matchMode: 'contains' },
+const UCheckbox = resolveComponent('UCheckbox')
+
+const table = useTemplateRef('table')
+
+const rowSelection = ref<RowSelectionState>({})
+
+const pagination = ref<PaginationState>({
+  pageIndex: 0,
+  pageSize: 10,
 })
+
+const filter = ref<string>('')
+
+const columns: TableColumn<Clip>[] = [
+  {
+    id: 'select',
+    header: ({ table }) =>
+      h(UCheckbox, {
+        modelValue: table.getIsSomePageRowsSelected()
+          ? 'indeterminate'
+          : table.getIsAllPageRowsSelected(),
+        'onUpdate:modelValue': (value: boolean | 'indeterminate') =>
+          table.toggleAllPageRowsSelected(!!value),
+        ariaLabel: 'Select all',
+      }),
+    cell: ({ row }) =>
+      h(UCheckbox, {
+        modelValue: row.getIsSelected(),
+        'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
+        ariaLabel: 'Select row',
+      }),
+  },
+  {
+    id: 'info',
+    header: m.info(),
+    accessorFn: (row) => `${row.title} ${row.channel} ${row.category}`,
+    cell: ({ row }) => {
+      return h(ClipInfo, { data: row.original })
+    },
+  },
+  {
+    id: 'integration',
+    header: m.integration(),
+    accessorFn: (row) => row.provider.toString(),
+    cell: ({ row }) => h(ProviderName, { provider: row.original.provider }),
+  },
+  {
+    id: 'submitter',
+    header: m.submitter(),
+    accessorFn: (row) => row.submitters?.join(' ') ?? '',
+    cell: ({ row }) => row.original.submitters?.[0] ?? '',
+  },
+]
 
 const confirm = useConfirmDialog()
 const queue = useQueue()
 const logger = useLogger()
 
-const selection = ref<Clip[]>([])
-
-const isQueueClipsDisabled = computed(() => {
-  return selection.value.length === 0 || selection.value.every((c) => queue.upcoming.includes(c))
-})
-
 function queueClips() {
-  const clips = selection.value
-  selection.value = []
+  // @ts-ignore
+  const clips = table.value?.tableApi.getSelectedRowModel().rows?.map((r) => r.original) ?? []
+  if (!clips.length) {
+    return
+  }
   logger.debug(`[History]: queuing ${clips.length} clip(s).`)
   for (const clip of clips) {
     queue.add(clip, true)
@@ -136,7 +161,11 @@ function queueClips() {
 }
 
 async function deleteClips(): Promise<void> {
-  const clips = [...selection.value]
+  // @ts-ignore
+  const clips = table.value?.tableApi.getSelectedRowModel().rows?.map((r) => r.original) ?? []
+  if (!clips.length) {
+    return
+  }
   logger.debug(`[History]: attempting to delete ${clips.length} clip(s).`)
   const confirmed = await confirm({
     title: m.delete_history(),

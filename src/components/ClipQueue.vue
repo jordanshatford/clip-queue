@@ -21,10 +21,10 @@
       </UButton>
     </div>
     <div class="text-left">
-      <p class="text-lg font-normal text-surface-600 dark:text-surface-400">
+      <p class="text-lg font-normal">
         {{ title }}
       </p>
-      <span class="mt-3 text-sm font-normal text-surface-400 dark:text-surface-600">
+      <span class="mt-3 text-sm font-normal">
         {{ m.clips({ length: clips.length }) }}
       </span>
     </div>

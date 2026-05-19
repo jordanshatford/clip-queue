@@ -177,5 +177,9 @@
   "integrations_cache_reset": "एकीकरण कैश रीसेट।",
   "command_enable_integration": "निर्दिष्ट एकीकरण को सक्षम करें।",
   "command_disable_integration": "निर्दिष्ट एकीकरण को अक्षम करें।",
-  "theme_auto": "प्रणाली"
+  "theme_auto": "प्रणाली",
+  "taupe": "भूरे रंग",
+  "mauve": "चमकीला गुलाबी रंग",
+  "mist": "कुहासा",
+  "olive": "जैतून"
 }

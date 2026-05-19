@@ -1,8 +1,6 @@
 import './app.css'
 import ui from '@nuxt/ui/vue-plugin'
-import Aura from '@primeuix/themes/aura'
 import { createPinia } from 'pinia'
-import PrimeVue from 'primevue/config'
 import { createApp } from 'vue'
 
 import App from '@/App.vue'
@@ -11,19 +9,7 @@ import { initialize } from '@/stores'
 
 const app = createApp(App)
 
-// PrimeVue
-app.use(PrimeVue, {
-  theme: {
-    preset: Aura,
-    options: {
-      darkModeSelector: '.dark',
-      cssLayer: {
-        name: 'primevue',
-        order: 'theme, base, primevue',
-      },
-    },
-  },
-})
+// Nuxt UI
 app.use(ui)
 
 // Pinia

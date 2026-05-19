@@ -5,14 +5,14 @@
     </Player>
     <div class="mt-2 text-left">
       <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2 text-2xl font-bold text-surface-500">
+        <div class="flex items-center gap-2 text-2xl font-bold">
           <span>{{ clip.title }}</span>
           <a
             v-if="clip.url"
             :href="clip.url"
             target="_blank"
             rel="noreferrer"
-            class="text-base no-underline hover:text-surface-600 dark:hover:text-surface-200"
+            class="text-base no-underline"
           >
             <UIcon name="lucide:external-link" />
           </a>
@@ -35,7 +35,7 @@
           >
         </div>
       </div>
-      <div class="flex flex-col gap-1 text-sm font-normal text-surface-400">
+      <div class="flex flex-col gap-1 text-sm font-normal">
         <span>
           {{ clip.channel }}
           <span v-if="clip.category"> - {{ clip.category }} </span>

@@ -33,7 +33,7 @@
     </div>
   </UCard>
   <UCard class="mx-auto max-w-2xl" variant="subtle">
-    <p class="text-sm text-surface-400">
+    <p class="text-sm">
       {{ m.application_version({ version }) }}
     </p>
   </UCard>

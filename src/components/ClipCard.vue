@@ -1,39 +1,34 @@
 <template>
-  <Card class="max-w-2xs shrink-0 overflow-hidden text-left">
+  <UCard
+    variant="subtle"
+    class="max-w-2xs shrink-0 overflow-hidden text-left"
+    :ui="{ header: 'p-0!' }"
+  >
     <template #header>
       <div class="relative">
-        <ClipThumbnail :src="clip.thumbnailUrl" :alt="clip.title" />
+        <ClipThumbnail :src="clip.thumbnailUrl" :alt="clip.title" class="w-full object-cover" />
         <div class="absolute top-2 right-2 rounded bg-black/50 p-1.5">
-          <IntegrationIcon class="size-5" :id="clip.provider" />
+          <IntegrationIcon class="size-5 text-white" :id="clip.provider" />
         </div>
       </div>
     </template>
-    <template #title>
-      <span :title="clip.title" class="line-clamp-1 font-normal">{{ clip.title }}</span>
-    </template>
-    <template #subtitle>
-      <span :title="subtitle" class="line-clamp-1">{{ subtitle }}</span>
-    </template>
-    <template #content>
-      <div class="text-xs text-surface-400">
-        <p class="line-clamp-1">
-          {{ m.submitter_name({ name: clip.submitters[0] ?? '' }) }}
-          <Badge
-            v-if="totalSubmitters"
-            :value="totalSubmitters"
-            severity="secondary"
-            size="small"
-          ></Badge>
-        </p>
-      </div>
-    </template>
+    <span :title="clip.title" class="line-clamp-1 font-normal">{{ clip.title }}</span>
+    <span :title="subtitle" class="line-clamp-1 text-sm">{{ subtitle }}</span>
+    <div class="text-xs">
+      <p class="line-clamp-1">
+        {{ m.submitter_name({ name: clip.submitters[0] ?? '' }) }}
+        <UBadge v-if="totalSubmitters" size="sm" color="neutral" variant="soft">
+          {{ totalSubmitters }}
+        </UBadge>
+      </p>
+    </div>
     <template #footer>
       <div class="flex justify-between gap-2 pt-1">
         <UButton
           class="grow justify-center"
           icon="lucide:play"
           color="neutral"
-          variant="soft"
+          variant="subtle"
           size="sm"
           @click="emit('play')"
           >{{ m.play() }}</UButton
@@ -48,12 +43,10 @@
         >
       </div>
     </template>
-  </Card>
+  </UCard>
 </template>
 
 <script setup lang="ts">
-import Badge from 'primevue/badge'
-import Card from 'primevue/card'
 import { computed } from 'vue'
 
 import type { Clip } from '@/integrations'

@@ -2,7 +2,6 @@ import { useColorMode, useDark, useStorage, useToggle, type BasicColorSchema } f
 import { defineStore } from 'pinia'
 import { computed, watch } from 'vue'
 
-import type { ColorOption } from '@/assets/palettes'
 import type { Locale } from '@/paraglide/runtime'
 
 import { colors, setColorPalette, surfaces } from '@/assets/palettes'
@@ -40,8 +39,8 @@ export function getInferredDefaultLanguage(fallback: Locale = baseLocale): Local
   return fallback
 }
 
-export const DEFAULT_PRIMARY_COLOR: ColorOption = structuredClone(colors[12]!) // Purple
-export const DEFAULT_SURFACE_COLOR: ColorOption = structuredClone(surfaces[3]!) // Neutral
+export const DEFAULT_PRIMARY_COLOR: string = colors[13]! // Purple
+export const DEFAULT_SURFACE_COLOR: string = surfaces[3]! // Neutral
 
 /**
  * Store used to track and manage user preferences.
@@ -78,8 +77,8 @@ export const usePreferences = defineStore('preferences', () => {
     { immediate: true },
   )
 
-  const primary = useStorage<ColorOption>('__cq_preferences_pcolor', DEFAULT_PRIMARY_COLOR)
-  const surface = useStorage<ColorOption>('__cq_preferences_scolor', DEFAULT_SURFACE_COLOR)
+  const primary = useStorage<string>('__cq_preferences_pcolor', DEFAULT_PRIMARY_COLOR)
+  const surface = useStorage<string>('__cq_preferences_scolor', DEFAULT_SURFACE_COLOR)
 
   /**
    * Synchronize primary palette changes.
@@ -107,10 +106,7 @@ export const usePreferences = defineStore('preferences', () => {
    * Whether preferences differ from defaults.
    */
   const isModified = computed(() => {
-    return (
-      primary.value.name !== DEFAULT_PRIMARY_COLOR.name ||
-      surface.value.name !== DEFAULT_SURFACE_COLOR.name
-    )
+    return primary.value !== DEFAULT_PRIMARY_COLOR || surface.value !== DEFAULT_SURFACE_COLOR
   })
 
   /**
