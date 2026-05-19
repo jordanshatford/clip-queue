@@ -6,7 +6,7 @@ import pkg from './package.json' with { type: 'json' }
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxt/test-utils', '@nuxt/ui', '@pinia/nuxt'],
+  modules: ['@nuxt/eslint', '@nuxt/test-utils', '@nuxt/ui', '@pinia/nuxt', '@vueuse/nuxt'],
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],

@@ -4,14 +4,14 @@
  * state early in the app lifecycle.
  */
 export default defineNuxtPlugin(async () => {
-  const logger = useLogger()
   const user = useUser()
 
-  // Prevent duplicate initialization during HMR/navigation
+  // Prevent duplicate initialization during HMR/navigation.
   if (user.hasAttemptedAutoLogin) {
     return
   }
 
+  const logger = useLogger()
   logger.debug('[Auth]: Attempting auto-login.')
 
   try {

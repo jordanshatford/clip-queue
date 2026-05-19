@@ -28,6 +28,7 @@
     "@tanstack/vue-table": "^8.21.3",
     "@tmi.js/chat": "^0.8.0",
     "@vueuse/core": "^14.3.0",
+    "@vueuse/nuxt": "^14.3.0",
     "nuxt": "^4.4.6",
     "pinia": "^3.0.4",
     "video.js": "^8.23.7",
