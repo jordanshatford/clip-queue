@@ -33,7 +33,7 @@ export default defineConfigWithVueTs(
     },
   },
   {
-    files: ['src/assets/**/*.ts', 'src/composables/useConfirmDialog.ts', 'src/pages/history.ts'],
+    files: ['src/assets/**/*.ts', 'src/composables/useConfirmDialog.ts', 'src/pages/history.vue'],
     rules: {
       '@typescript-eslint/ban-ts-comment': 'off',
     },
