@@ -7,11 +7,15 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
+    cooldown:
+      default-days: 5
 
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
       interval: 'daily'
+    cooldown:
+      default-days: 5
     groups:
       commitlint:
         patterns:
