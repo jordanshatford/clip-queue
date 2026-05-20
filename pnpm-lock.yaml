@@ -61,8 +61,8 @@ importers:
         specifier: ^1.2.83
         version: 1.2.83
       '@inlang/paraglide-js':
-        specifier: 2.18.0
-        version: 2.18.0(typescript@6.0.3)
+        specifier: 2.18.1
+        version: 2.18.1(typescript@6.0.3)
       '@nuxt/eslint':
         specifier: ^1.15.2
         version: 1.15.2(@typescript-eslint/utils@8.59.4(eslint@10.4.0(jiti@2.7.0))(typescript@6.0.3))(@vue/compiler-sfc@3.5.34)(eslint@10.4.0(jiti@2.7.0))(magicast@0.5.3)(typescript@6.0.3)(vite@8.0.13(@types/node@25.9.0)(esbuild@0.27.7)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))
@@ -958,8 +958,8 @@ packages:
     peerDependencies:
       vue: '>=3.0.0'
 
-  '@inlang/paraglide-js@2.18.0':
-    resolution: {integrity: sha512-Acp6htA5W7rS2kL3iMjhSr08eECz696MYsud+FBKrmahzM7PdywPVq9UOr9MaC/aV7AZPElrYcqYZOOlUri5fg==}
+  '@inlang/paraglide-js@2.18.1':
+    resolution: {integrity: sha512-YzIrJ34KbsJwzvVKBzcBEgp4AqmhNYD1EF2pOV+g87L024XTFmcmikI4/NMfb63H9zJ6UeEPTOmEK7Nzu/4E2Q==}
     hasBin: true
     peerDependencies:
       typescript: '>=5'
@@ -7458,7 +7458,7 @@ snapshots:
       '@iconify/types': 2.0.0
       vue: 3.5.34(typescript@6.0.3)
 
-  '@inlang/paraglide-js@2.18.0(typescript@6.0.3)':
+  '@inlang/paraglide-js@2.18.1(typescript@6.0.3)':
     dependencies:
       '@inlang/recommend-sherlock': 0.2.1
       '@inlang/sdk': 2.9.3
