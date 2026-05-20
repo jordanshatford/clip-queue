@@ -10,7 +10,6 @@ import { useRoute } from 'vue-router'
 
 import type { IntegrationID } from '@/integrations'
 
-import { m } from '#paraglide/messages'
 import IntegrationIcon from '@/components/integrations/IntegrationIcon.vue'
 import { useIntegrations } from '@/stores/integrations'
 
@@ -18,8 +17,14 @@ definePageMeta({
   meta: {
     requiresAuth: false,
     icon: '',
-    title: m.integrations,
     hidden: true,
+  },
+  validate(route) {
+    // Validate that the integration has valid authentication, otherwise we should
+    // not handle a callback or even show that the integration exists.
+    const id = route.params.id as IntegrationID
+    const integration = useIntegrations().integration(id)
+    return !!integration?.authentication
   },
 })
 
