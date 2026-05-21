@@ -3,7 +3,44 @@ import { useColorMode, useDark, useStorage, useToggle, type BasicColorSchema } f
 import type { Locale } from '#paraglide/runtime'
 
 import { baseLocale, isLocale, setLocale } from '#paraglide/runtime'
-import { colors, setColorPalette, surfaces } from '~/assets/palettes'
+
+/**
+ * Primary colors available for selection.
+ */
+export const primaryColors: string[] = [
+  'red',
+  'orange',
+  'amber',
+  'yellow',
+  'lime',
+  'green',
+  'emerald',
+  'teal',
+  'cyan',
+  'sky',
+  'blue',
+  'indigo',
+  'violet',
+  'purple',
+  'fuchsia',
+  'pink',
+  'rose',
+]
+
+/**
+ * Neutral colors available for selection.
+ */
+export const neutralColors: string[] = [
+  'slate',
+  'gray',
+  'zinc',
+  'neutral',
+  'stone',
+  'taupe',
+  'mauve',
+  'mist',
+  'olive',
+]
 
 /**
  * The available themes.
@@ -37,13 +74,14 @@ export function getInferredDefaultLanguage(fallback: Locale = baseLocale): Local
   return fallback
 }
 
-export const DEFAULT_PRIMARY_COLOR: string = colors[13]! // Purple
-export const DEFAULT_SURFACE_COLOR: string = surfaces[3]! // Neutral
+export const DEFAULT_PRIMARY_COLOR: string = primaryColors[13]! // Purple
+export const DEFAULT_SURFACE_COLOR: string = neutralColors[3]! // Neutral
 
 /**
  * Store used to track and manage user preferences.
  */
 export const usePreferences = defineStore('preferences', () => {
+  const config = useAppConfig()
   /**
    * Current color mode being used (dark, light).
    */
@@ -84,7 +122,7 @@ export const usePreferences = defineStore('preferences', () => {
   watch(
     () => primary.value,
     (primary) => {
-      setColorPalette('primary', primary)
+      config.ui.colors.primary = primary.toLowerCase()
     },
     { immediate: true },
   )
@@ -95,7 +133,7 @@ export const usePreferences = defineStore('preferences', () => {
   watch(
     () => surface.value,
     (surface) => {
-      setColorPalette('surface', surface)
+      config.ui.colors.neutral = surface.toLowerCase()
     },
     { immediate: true },
   )

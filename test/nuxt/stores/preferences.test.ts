@@ -3,23 +3,18 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 
 import * as runtime from '#paraglide/runtime'
-import * as palettes from '~/assets/palettes'
-import { colors, surfaces } from '~/assets/palettes'
+import {
+  DEFAULT_PRIMARY_COLOR,
+  DEFAULT_SURFACE_COLOR,
+  primaryColors,
+  neutralColors,
+} from '~/stores/preferences'
 
 vi.mock('#paraglide/runtime', async () => {
   const actual = await vi.importActual<typeof import('#paraglide/runtime')>('#paraglide/runtime')
-
   return {
     ...actual,
     setLocale: vi.fn<(locale: string) => void>(),
-  }
-})
-
-vi.mock('~/assets/palettes', async () => {
-  const actual = await vi.importActual<typeof import('~/assets/palettes')>('~/assets/palettes')
-  return {
-    ...actual,
-    setColorPalette: vi.fn<(type: 'primary' | 'surface', palette: string) => void>(),
   }
 })
 
@@ -42,7 +37,6 @@ describe('preferences.ts', () => {
       vi.stubGlobal('navigator', {
         language: 'en',
       })
-
       expect(getInferredDefaultLanguage('fr')).toEqual('en')
     })
 
@@ -50,7 +44,6 @@ describe('preferences.ts', () => {
       vi.stubGlobal('navigator', {
         language: 'en-CA',
       })
-
       expect(getInferredDefaultLanguage('fr')).toEqual('en')
     })
 
@@ -58,12 +51,11 @@ describe('preferences.ts', () => {
       vi.stubGlobal('navigator', {
         language: 'invalid',
       })
-
       expect(getInferredDefaultLanguage('fr')).toEqual('fr')
     })
   })
 
-  describe('preferences', () => {
+  describe('preferences store', () => {
     beforeEach(() => {
       usePreferences().reset()
     })
@@ -88,7 +80,7 @@ describe('preferences.ts', () => {
     it('detects when preferences are modified', () => {
       const preferences = usePreferences()
       expect(preferences.isModified).toEqual(false)
-      preferences.primary = colors[0]!
+      preferences.primary = primaryColors[0]!
       expect(preferences.isModified).toEqual(true)
     })
 
@@ -130,24 +122,26 @@ describe('preferences.ts', () => {
       })
     })
 
-    it('updates the primary palette', async () => {
+    it('updates the primary palette via app config', async () => {
       const preferences = usePreferences()
-      preferences.primary = colors[0]!
+      preferences.primary = primaryColors[0]!
       await nextTick()
-      expect(palettes.setColorPalette).toHaveBeenCalledWith('primary', colors[0])
+      const config = useAppConfig()
+      expect(config.ui.colors.primary).toBe(primaryColors[0]!.toLowerCase())
     })
 
-    it('updates the surface palette', async () => {
+    it('updates the surface palette via app config', async () => {
       const preferences = usePreferences()
-      preferences.surface = surfaces[0]!
+      preferences.surface = neutralColors[0]!
       await nextTick()
-      expect(palettes.setColorPalette).toHaveBeenCalledWith('surface', surfaces[0])
+      const config = useAppConfig()
+      expect(config.ui.colors.neutral).toBe(neutralColors[0]!.toLowerCase())
     })
 
     it('resets preferences', () => {
       const preferences = usePreferences()
-      preferences.primary = colors[0]!
-      preferences.surface = surfaces[0]!
+      preferences.primary = primaryColors[0]!
+      preferences.surface = neutralColors[0]!
       expect(preferences.isModified).toEqual(true)
       preferences.reset()
       expect(preferences.primary).toEqual(DEFAULT_PRIMARY_COLOR)

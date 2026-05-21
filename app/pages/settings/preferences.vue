@@ -27,7 +27,12 @@
         </USelect>
       </UFormField>
       <UFormField :label="m.primary_color()" :help="m.primary_color_description()">
-        <USelect id="primary-color" v-model="preferences.primary" :items="colors" class="w-full">
+        <USelect
+          id="primary-color"
+          v-model="preferences.primary"
+          :items="primaryColors"
+          class="w-full"
+        >
           <template #default="{ modelValue }: { modelValue: string }">
             <ColorName :name="modelValue" />
           </template>
@@ -37,7 +42,12 @@
         </USelect>
       </UFormField>
       <UFormField :label="m.surface_color()" :help="m.surface_color_description()">
-        <USelect id="surface-color" v-model="preferences.surface" :items="surfaces" class="w-full">
+        <USelect
+          id="surface-color"
+          v-model="preferences.surface"
+          :items="neutralColors"
+          class="w-full"
+        >
           <template #default="{ modelValue }: { modelValue: string }">
             <ColorName :name="modelValue" />
           </template>
@@ -57,7 +67,6 @@ import type { Locale } from '#paraglide/runtime'
 
 import { m } from '#paraglide/messages'
 import { locales } from '#paraglide/runtime'
-import { colors, surfaces } from '~/assets/palettes'
 import ColorName from '~/components/ColorName.vue'
 
 definePageMeta({
