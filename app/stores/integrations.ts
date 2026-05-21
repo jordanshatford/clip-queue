@@ -1,4 +1,3 @@
-import type { ToastProps } from '@nuxt/ui'
 import type { Reactive } from 'vue'
 
 import { useStorage } from '@vueuse/core'
@@ -39,14 +38,8 @@ export const DEFAULT_INTEGRATION_SETTINGS: IntegrationSettings = {
  * Composable for unifying all interactions with integrations.
  */
 export const useIntegrations = defineStore('integrations', () => {
+  const toast = useToast()
   const logger = useLogger()
-
-  /**
-   * Message details used for toasting the user.
-   */
-  const message = ref<
-    { icon: string; color: ToastProps['color']; title: string; description: string } | undefined
-  >(undefined)
 
   /**
    * Settings related to integrations.
@@ -169,7 +162,7 @@ export const useIntegrations = defineStore('integrations', () => {
    */
   function handleIntegrationSourceConnected(event: IntegrationSourceEvent<string>): void {
     logger.info(`[${event.source}]: Connected to ${event.data}.`)
-    message.value = {
+    toast.add({
       icon: 'lucide:circle-check',
       color: 'success',
       title: m.success(),
@@ -177,7 +170,7 @@ export const useIntegrations = defineStore('integrations', () => {
         source: source(event.source)?.name ?? event.source,
         name: event.data,
       }),
-    }
+    })
   }
 
   /**
@@ -192,14 +185,14 @@ export const useIntegrations = defineStore('integrations', () => {
     } else {
       logger.warn(`[${event.source}]: Disconnected.`)
     }
-    message.value = {
+    toast.add({
       icon: 'lucide:circle-alert',
       color: 'error',
       title: m.error(),
       description: m.disconnected_from_source({
         source: source(event.source)?.name ?? event.source,
       }),
-    }
+    })
   }
 
   /**
@@ -454,7 +447,6 @@ export const useIntegrations = defineStore('integrations', () => {
   )
 
   return {
-    message,
     isLoading,
     integration,
     source,

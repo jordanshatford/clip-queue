@@ -11,23 +11,9 @@
 </template>
 
 <script setup lang="ts">
-const toast = useToast()
+const app = useAppConfig()
 const preferences = usePreferences()
 const queue = useQueue()
-const integrations = useIntegrations()
-
-// Watch for any toasts coming from the integrations.
-watch(
-  () => integrations.message,
-  (message) => {
-    if (!message) {
-      return
-    }
-    toast.add(message)
-  },
-)
-
-const app = useAppConfig()
 
 const title = computed((): string => {
   let queueState = queue.settings.open ? 'Open' : 'Closed'
