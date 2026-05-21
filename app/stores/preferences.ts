@@ -10,7 +10,7 @@ import { baseLocale, isLocale, setLocale } from '#paraglide/runtime'
 /**
  * Primary colors available for selection.
  */
-export const primaryColors: string[] = [
+export const primaryColors = [
   'red',
   'orange',
   'amber',
@@ -28,12 +28,14 @@ export const primaryColors: string[] = [
   'fuchsia',
   'pink',
   'rose',
-]
+] as const
+
+export type PrimaryColorName = (typeof primaryColors)[number]
 
 /**
  * Neutral colors available for selection.
  */
-export const neutralColors: string[] = [
+export const neutralColors = [
   'slate',
   'gray',
   'zinc',
@@ -43,7 +45,9 @@ export const neutralColors: string[] = [
   'mauve',
   'mist',
   'olive',
-]
+] as const
+
+export type NeutralColorName = (typeof neutralColors)[number]
 
 /**
  * The available themes.
@@ -77,8 +81,8 @@ export function getInferredDefaultLanguage(fallback: Locale = baseLocale): Local
   return fallback
 }
 
-export const DEFAULT_PRIMARY_COLOR: string = primaryColors[13]! // Purple
-export const DEFAULT_SURFACE_COLOR: string = neutralColors[3]! // Neutral
+export const DEFAULT_PRIMARY_COLOR: PrimaryColorName = primaryColors[13]! // Purple
+export const DEFAULT_SURFACE_COLOR: NeutralColorName = neutralColors[3]! // Neutral
 
 /**
  * Store used to track and manage user preferences.
@@ -142,8 +146,8 @@ export const usePreferences = defineStore('preferences', () => {
     { immediate: true },
   )
 
-  const primary = useStorage<string>('__cq_preferences_pcolor', DEFAULT_PRIMARY_COLOR)
-  const surface = useStorage<string>('__cq_preferences_scolor', DEFAULT_SURFACE_COLOR)
+  const primary = useStorage<PrimaryColorName>('__cq_preferences_pcolor', DEFAULT_PRIMARY_COLOR)
+  const surface = useStorage<NeutralColorName>('__cq_preferences_scolor', DEFAULT_SURFACE_COLOR)
 
   /**
    * Synchronize primary palette changes.

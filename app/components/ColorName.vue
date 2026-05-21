@@ -10,12 +10,12 @@
 import { m } from '#paraglide/messages'
 
 export interface Props {
-  name: string
+  name: PrimaryColorName | NeutralColorName
 }
 
 defineProps<Props>()
 
-const colorNameTranslations: Record<string, () => string> = {
+const colorNameTranslations: Record<PrimaryColorName | NeutralColorName, () => string> = {
   emerald: m.emerald,
   green: m.green,
   lime: m.lime,
@@ -38,16 +38,13 @@ const colorNameTranslations: Record<string, () => string> = {
   zinc: m.zinc,
   neutral: m.neutral,
   stone: m.stone,
-  soho: m.soho,
-  viva: m.viva,
-  ocean: m.ocean,
   taupe: m.taupe,
   mauve: m.mauve,
   mist: m.mist,
   olive: m.olive,
 }
 
-const colorClasses: Record<string, string> = {
+const colorClasses: Record<PrimaryColorName | NeutralColorName, string> = {
   emerald: 'bg-emerald-500',
   green: 'bg-green-500',
   lime: 'bg-lime-500',
@@ -70,9 +67,6 @@ const colorClasses: Record<string, string> = {
   zinc: 'bg-zinc-500',
   neutral: 'bg-neutral-500',
   stone: 'bg-stone-500',
-  soho: 'bg-soho-500',
-  viva: 'bg-viva-500',
-  ocean: 'bg-ocean-500',
   taupe: 'bg-taupe-500',
   mauve: 'bg-mauve-500',
   mist: 'bg-mist-500',

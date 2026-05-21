@@ -30,13 +30,13 @@
         <USelect
           id="primary-color"
           v-model="preferences.primary"
-          :items="primaryColors"
+          :items="[...primaryColors]"
           class="w-full"
         >
-          <template #default="{ modelValue }: { modelValue: string }">
+          <template #default="{ modelValue }: { modelValue: PrimaryColorName }">
             <ColorName :name="modelValue" />
           </template>
-          <template #item-label="{ item }: { item: string }">
+          <template #item-label="{ item }: { item: PrimaryColorName }">
             <ColorName :name="item" />
           </template>
         </USelect>
@@ -45,13 +45,13 @@
         <USelect
           id="surface-color"
           v-model="preferences.surface"
-          :items="neutralColors"
+          :items="[...neutralColors]"
           class="w-full"
         >
-          <template #default="{ modelValue }: { modelValue: string }">
+          <template #default="{ modelValue }: { modelValue: NeutralColorName }">
             <ColorName :name="modelValue" />
           </template>
-          <template #item-label="{ item }: { item: string }">
+          <template #item-label="{ item }: { item: NeutralColorName }">
             <ColorName :name="item" />
           </template>
         </USelect>
