@@ -181,5 +181,19 @@
   "taupe": "짙은 회갈색",
   "mauve": "연보라색",
   "mist": "안개",
-  "olive": "올리브"
+  "olive": "올리브",
+  "pagination_selected": [
+    {
+      "declarations": [
+        "input selected",
+        "input total",
+        "local formattedSelected = selected: number",
+        "local formattedTotal = total: number"
+      ],
+      "selectors": ["selected", "total"],
+      "match": {
+        "selected=*, total=*": "{formattedSelected} 개의 {formattedTotal} 행이 선택되었습니다."
+      }
+    }
+  ]
 }

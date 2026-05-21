@@ -181,5 +181,19 @@
   "taupe": "भूरे रंग",
   "mauve": "चमकीला गुलाबी रंग",
   "mist": "कुहासा",
-  "olive": "जैतून"
+  "olive": "जैतून",
+  "pagination_selected": [
+    {
+      "declarations": [
+        "input selected",
+        "input total",
+        "local formattedSelected = selected: number",
+        "local formattedTotal = total: number"
+      ],
+      "selectors": ["selected", "total"],
+      "match": {
+        "selected=*, total=*": "{formattedSelected} में से {formattedTotal} पंक्तियाँ चयनित"
+      }
+    }
+  ]
 }

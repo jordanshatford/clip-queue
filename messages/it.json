@@ -181,5 +181,19 @@
   "taupe": "Tortora",
   "mauve": "Malva",
   "mist": "Nebbia",
-  "olive": "Oliva"
+  "olive": "Oliva",
+  "pagination_selected": [
+    {
+      "declarations": [
+        "input selected",
+        "input total",
+        "local formattedSelected = selected: number",
+        "local formattedTotal = total: number"
+      ],
+      "selectors": ["selected", "total"],
+      "match": {
+        "selected=*, total=*": "{formattedSelected} di {formattedTotal} riga(e) selezionata(e)"
+      }
+    }
+  ]
 }

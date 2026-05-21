@@ -181,5 +181,19 @@
   "taupe": "Gris pardo",
   "mauve": "Color de malva",
   "mist": "Neblina",
-  "olive": "Aceituna"
+  "olive": "Aceituna",
+  "pagination_selected": [
+    {
+      "declarations": [
+        "input selected",
+        "input total",
+        "local formattedSelected = selected: number",
+        "local formattedTotal = total: number"
+      ],
+      "selectors": ["selected", "total"],
+      "match": {
+        "selected=*, total=*": "{formattedSelected} de {formattedTotal} fila(s) seleccionada(s)"
+      }
+    }
+  ]
 }

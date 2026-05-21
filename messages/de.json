@@ -181,5 +181,19 @@
   "taupe": "Taupe",
   "mauve": "Mauve",
   "mist": "Nebel",
-  "olive": "Olive"
+  "olive": "Olive",
+  "pagination_selected": [
+    {
+      "declarations": [
+        "input selected",
+        "input total",
+        "local formattedSelected = selected: number",
+        "local formattedTotal = total: number"
+      ],
+      "selectors": ["selected", "total"],
+      "match": {
+        "selected=*, total=*": "{formattedSelected} von {formattedTotal} Zeile(n) ausgewählt"
+      }
+    }
+  ]
 }

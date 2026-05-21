@@ -49,8 +49,12 @@
     />
     <div class="mt-auto flex items-center justify-between gap-3 border-t border-default pt-4">
       <div class="text-sm text-muted">
-        {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
-        {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
+        {{
+          m.pagination_selected({
+            selected: table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0,
+            total: table?.tableApi?.getFilteredRowModel().rows.length || 0,
+          })
+        }}
       </div>
       <div class="flex items-center gap-1.5">
         <UPagination

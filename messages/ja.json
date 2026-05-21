@@ -181,5 +181,19 @@
   "taupe": "トープ",
   "mauve": "藤色",
   "mist": "ミスト",
-  "olive": "オリーブ"
+  "olive": "オリーブ",
+  "pagination_selected": [
+    {
+      "declarations": [
+        "input selected",
+        "input total",
+        "local formattedSelected = selected: number",
+        "local formattedTotal = total: number"
+      ],
+      "selectors": ["selected", "total"],
+      "match": {
+        "selected=*, total=*": "{formattedSelected}のうち{formattedTotal}行が選択されました"
+      }
+    }
+  ]
 }
