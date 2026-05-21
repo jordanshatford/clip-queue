@@ -6,7 +6,6 @@
 definePageMeta({
   redirect: '/',
   requiresAuth: false,
-  icon: '',
   hidden: true,
 })
 </script>

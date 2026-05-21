@@ -1,14 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-declare module 'vue-router' {
-  interface RouteMeta {
-    icon: string
-    requiresAuth: boolean
-    hidden?: boolean
-    order?: number
-  }
-}
-
 /**
  * Sort routes based on meta order.
  * @param a - The first route.

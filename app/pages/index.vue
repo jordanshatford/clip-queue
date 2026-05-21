@@ -24,7 +24,6 @@ import { m } from '#paraglide/messages'
 
 definePageMeta({
   requiresAuth: false,
-  icon: '',
   hidden: true,
 })
 

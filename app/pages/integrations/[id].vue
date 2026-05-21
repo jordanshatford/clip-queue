@@ -11,11 +11,8 @@ import type { IntegrationID } from '~/integrations'
 import IntegrationIcon from '~/components/integrations/IntegrationIcon.vue'
 
 definePageMeta({
-  meta: {
-    requiresAuth: false,
-    icon: '',
-    hidden: true,
-  },
+  requiresAuth: false,
+  hidden: true,
   validate(route) {
     // Validate that the integration has valid authentication, otherwise we should
     // not handle a callback or even show that the integration exists.
