@@ -7,7 +7,9 @@
     <template #header>
       <div class="relative">
         <ClipThumbnail :src="clip.thumbnailUrl" :alt="clip.title" class="w-full object-cover" />
-        <div class="absolute top-2 right-2 rounded bg-black/50 p-1.5">
+        <div
+          class="absolute top-2 right-2 flex h-9 w-9 items-center justify-center rounded bg-black/50 p-2"
+        >
           <IntegrationIcon :id="clip.provider" class="size-5 text-white" />
         </div>
       </div>
