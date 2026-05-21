@@ -157,6 +157,7 @@ function queueClips() {
   for (const clip of clips) {
     queue.add(clip, true)
   }
+  rowSelection.value = {}
 }
 
 async function deleteClips(): Promise<void> {
@@ -174,6 +175,7 @@ async function deleteClips(): Promise<void> {
     for (const clip of clips) {
       queue.history.remove(clip)
     }
+    rowSelection.value = {}
   } else {
     logger.debug(`[History]: deletion of ${clips.length} clip(s) was cancelled.`)
   }
