@@ -48,7 +48,7 @@
     "@pinia/testing": "^1.0.3",
     "@svitejs/changesets-changelog-github-compact": "^1.2.0",
     "@types/node": "^25.9.1",
-    "@vitest/coverage-v8": "^4.1.7",
+    "@vitest/coverage-v8": "^4.1.6",
     "@vue/test-utils": "^2.4.10",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
@@ -57,7 +57,7 @@
     "oxfmt": "^0.51.0",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.7",
+    "vitest": "^4.1.6",
     "vue-tsc": "^3.3.1"
   },
   "engines": {
