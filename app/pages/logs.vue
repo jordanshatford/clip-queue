@@ -31,15 +31,12 @@
 import type { TableColumn } from '@nuxt/ui'
 
 import { getPaginationRowModel, type PaginationState } from '@tanstack/vue-table'
-import { computed, h, ref, resolveComponent, useTemplateRef } from 'vue'
 
 import type { Log } from '@/stores/logger'
 
 import { m } from '#paraglide/messages'
 import { datetime } from '#paraglide/registry'
-import { useConfirmDialog } from '@/composables/useConfirmDialog'
-import { logLevelIcons, logLevelSeverities, logLevelTranslations, useLogger } from '@/stores/logger'
-import { usePreferences } from '@/stores/preferences'
+import { useConfirmDialog } from '~/composables/useConfirmDialog'
 
 definePageMeta({
   requiresAuth: true,

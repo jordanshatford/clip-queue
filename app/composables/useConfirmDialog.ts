@@ -1,4 +1,4 @@
-import ConfirmDialog, { type ConfirmDialogProps } from '@/components/ConfirmDialog.vue'
+import ConfirmDialog, { type ConfirmDialogProps } from '~/components/ConfirmDialog.vue'
 
 export const useConfirmDialog = () => {
   const overlay = useOverlay()

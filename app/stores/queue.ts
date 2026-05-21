@@ -1,15 +1,9 @@
 import { StorageSerializers, useStorage } from '@vueuse/core'
-import { defineStore } from 'pinia'
-import { computed } from 'vue'
 
-import type { Clip } from '@/integrations'
+import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
-import { toClipUUID } from '@/integrations/core'
-import { useCommands } from '@/stores/commands'
-import { useHistory } from '@/stores/history'
-import { useLogger } from '@/stores/logger'
-import { useUpcoming } from '@/stores/upcoming'
+import { toClipUUID } from '~/integrations/core'
 
 /**
  * Settings related to queue store.

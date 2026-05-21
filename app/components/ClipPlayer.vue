@@ -50,15 +50,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-
-import type { Clip } from '@/integrations'
+import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
-import { Player } from '@/components/player'
-import ProviderName from '@/components/ProviderName.vue'
-import { useIntegrations } from '@/stores/integrations'
-import { useLogger } from '@/stores/logger'
+import { Player } from '~/components/player'
+import ProviderName from '~/components/ProviderName.vue'
 
 export interface Props {
   clip: Clip

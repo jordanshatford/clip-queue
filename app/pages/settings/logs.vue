@@ -43,10 +43,9 @@
 </template>
 
 <script setup lang="ts">
-import type { LogLevel } from '@/stores/logger'
+import type { LogLevel } from '~/stores/logger'
 
 import { m } from '#paraglide/messages'
-import { availableLogLevels, logLevelTranslations, useLogger } from '@/stores/logger'
 
 definePageMeta({
   requiresAuth: true,

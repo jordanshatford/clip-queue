@@ -50,7 +50,7 @@
 
 <script setup lang="ts">
 import { m } from '#paraglide/messages'
-import { IntegrationID, type Integration } from '@/integrations'
+import { IntegrationID, type Integration } from '~/integrations'
 
 import IntegrationAuthentication from './IntegrationAuthentication.vue'
 import IntegrationIcon from './IntegrationIcon.vue'

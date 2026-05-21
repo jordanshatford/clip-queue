@@ -3,11 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-
-import type { IntegrationID } from '@/integrations'
-
-import { useIntegrations } from '@/stores/integrations'
+import type { IntegrationID } from '~/integrations'
 
 export interface Props {
   id: IntegrationID

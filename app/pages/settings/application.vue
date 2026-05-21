@@ -60,9 +60,6 @@
 
 <script setup lang="ts">
 import { m } from '#paraglide/messages'
-import { useCommands } from '@/stores/commands'
-import { useIntegrations } from '@/stores/integrations'
-import { useQueue } from '@/stores/queue'
 
 definePageMeta({
   requiresAuth: true,

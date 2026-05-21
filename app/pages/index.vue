@@ -20,8 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-
 import { m } from '#paraglide/messages'
 
 definePageMeta({

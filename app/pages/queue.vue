@@ -23,10 +23,9 @@
 
 <script setup lang="ts">
 import { m } from '#paraglide/messages'
-import ClipPlayer from '@/components/ClipPlayer.vue'
-import ClipQueue from '@/components/ClipQueue.vue'
-import { toClipUUID } from '@/integrations'
-import { useQueue } from '@/stores/queue'
+import ClipPlayer from '~/components/ClipPlayer.vue'
+import ClipQueue from '~/components/ClipQueue.vue'
+import { toClipUUID } from '~/integrations'
 
 definePageMeta({
   requiresAuth: true,

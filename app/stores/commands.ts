@@ -1,8 +1,6 @@
 import { useStorage } from '@vueuse/core'
-import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
 
-import type { IntegrationSourceMessageEvent } from '@/integrations/core'
+import type { IntegrationSourceMessageEvent } from '~/integrations/core'
 
 /**
  * An event that causes a command to execute.

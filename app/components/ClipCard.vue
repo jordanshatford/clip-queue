@@ -47,12 +47,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-
-import type { Clip } from '@/integrations'
+import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
-import IntegrationIcon from '@/components/integrations/IntegrationIcon.vue'
+import IntegrationIcon from '~/components/integrations/IntegrationIcon.vue'
 
 import ClipThumbnail from './ClipThumbnail.vue'
 

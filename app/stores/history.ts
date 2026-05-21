@@ -1,11 +1,7 @@
 import { useStorage } from '@vueuse/core'
-import { defineStore } from 'pinia'
-import { computed } from 'vue'
 
 import { m } from '#paraglide/messages'
-import { toClipUUID, type Clip } from '@/integrations'
-
-import { useCommands } from './commands'
+import { toClipUUID, type Clip } from '~/integrations'
 
 /**
  * Store used for tracking history. Contains information about items previously watched.

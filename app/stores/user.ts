@@ -1,12 +1,8 @@
-import { defineStore } from 'pinia'
-import { computed, ref, type Reactive } from 'vue'
+import type { Reactive } from 'vue'
 
-import type { IntegrationAuthentication } from '@/integrations/core'
+import type { IntegrationAuthentication } from '~/integrations/core'
 
-import { authentication } from '@/integrations/twitch'
-
-import { useIntegrations } from './integrations'
-import { useLogger } from './logger'
+import { authentication } from '~/integrations/twitch'
 
 export const useUser = defineStore('user', () => {
   const auth: Reactive<IntegrationAuthentication> = authentication

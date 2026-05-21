@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import type { Reactive } from 'vue'
 
-import type { IntegrationProvider } from '@/integrations'
+import type { IntegrationProvider } from '~/integrations'
 
 import { m } from '#paraglide/messages'
 

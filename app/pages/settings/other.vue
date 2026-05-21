@@ -42,16 +42,8 @@
 </template>
 
 <script setup lang="ts">
-import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
-import { computed } from 'vue'
-
 import { m } from '#paraglide/messages'
-import { useConfirmDialog } from '@/composables/useConfirmDialog'
-import { useCommands } from '@/stores/commands'
-import { useIntegrations } from '@/stores/integrations'
-import { useLogger } from '@/stores/logger'
-import { usePreferences } from '@/stores/preferences'
-import { useQueue } from '@/stores/queue'
+import { useConfirmDialog } from '~/composables/useConfirmDialog'
 
 definePageMeta({
   requiresAuth: true,

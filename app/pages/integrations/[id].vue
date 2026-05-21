@@ -6,12 +6,9 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import type { IntegrationID } from '~/integrations'
 
-import type { IntegrationID } from '@/integrations'
-
-import IntegrationIcon from '@/components/integrations/IntegrationIcon.vue'
-import { useIntegrations } from '@/stores/integrations'
+import IntegrationIcon from '~/components/integrations/IntegrationIcon.vue'
 
 definePageMeta({
   meta: {

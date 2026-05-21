@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import type { PlayerConfig } from '@/integrations/core'
+import type { PlayerConfig } from '~/integrations/core'
 
 import VideoJS from './VideoJSPlayer.vue'
 

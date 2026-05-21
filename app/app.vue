@@ -11,16 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
-import { computed, watch } from 'vue'
-
-import AppFooter from '@/components/AppFooter.vue'
-import AppNavBar from '@/components/AppNavBar.vue'
-
-import { useIntegrations } from './stores/integrations'
-import { usePreferences } from './stores/preferences'
-import { useQueue } from './stores/queue'
-
 const toast = useToast()
 const preferences = usePreferences()
 const queue = useQueue()

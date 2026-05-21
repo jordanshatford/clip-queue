@@ -1,9 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-import { computed } from 'vue'
-
-import { useUser } from '@/stores/user'
-
 declare module 'vue-router' {
   interface RouteMeta {
     icon: string

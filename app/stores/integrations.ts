@@ -1,8 +1,7 @@
 import type { ToastProps } from '@nuxt/ui'
+import type { Reactive } from 'vue'
 
 import { useStorage } from '@vueuse/core'
-import { defineStore } from 'pinia'
-import { computed, ref, type Reactive } from 'vue'
 
 import { m } from '#paraglide/messages'
 import {
@@ -11,18 +10,14 @@ import {
   integrations,
   type Clip,
   type Integration,
-} from '@/integrations'
+} from '~/integrations'
 import {
   IntegrationStatus,
   type IntegrationSource,
   type IntegrationSourceEvent,
   type IntegrationSourceMessageEvent,
   type IntegrationSourceModerationEvent,
-} from '@/integrations/core'
-import { useLogger } from '@/stores/logger'
-
-import { useCommands } from './commands'
-import { useQueue } from './queue'
+} from '~/integrations/core'
 
 /**
  * Settings related to the integrations store.

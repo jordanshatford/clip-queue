@@ -11,10 +11,8 @@
 <script setup lang="ts">
 import type { BadgeProps } from '@nuxt/ui'
 
-import { computed } from 'vue'
-
 import { m } from '#paraglide/messages'
-import { IntegrationStatus } from '@/integrations/core'
+import { IntegrationStatus } from '~/integrations/core'
 
 export interface Props {
   status: IntegrationStatus

@@ -21,9 +21,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Clip } from '@/integrations'
+import type { Clip } from '~/integrations'
 
-import ClipThumbnail from '@/components/ClipThumbnail.vue'
+import ClipThumbnail from '~/components/ClipThumbnail.vue'
 
 export interface Props {
   data: Clip

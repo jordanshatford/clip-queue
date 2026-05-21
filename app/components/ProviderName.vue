@@ -8,12 +8,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import type { IntegrationID } from '~/integrations'
 
-import type { IntegrationID } from '@/integrations'
-
-import IntegrationIcon from '@/components/integrations/IntegrationIcon.vue'
-import { useIntegrations } from '@/stores/integrations'
+import IntegrationIcon from '~/components/integrations/IntegrationIcon.vue'
+import { useIntegrations } from '~/stores/integrations'
 
 export interface Props {
   provider: IntegrationID

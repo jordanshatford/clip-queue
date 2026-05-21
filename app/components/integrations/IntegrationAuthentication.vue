@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import type { Reactive } from 'vue'
 
-import type { IntegrationAuthentication } from '@/integrations/core'
+import type { IntegrationAuthentication } from '~/integrations/core'
 
 import { m } from '#paraglide/messages'
 

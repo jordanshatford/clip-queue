@@ -4,7 +4,6 @@
 
 <script setup lang="ts">
 import videojs from 'video.js'
-import { onBeforeUnmount, onMounted, useTemplateRef } from 'vue'
 import 'video.js/dist/video-js.css'
 
 export interface Props {

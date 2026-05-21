@@ -19,12 +19,8 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-
 import { m } from '#paraglide/messages'
-import { visibleRoutes } from '@/router'
-import { useQueue } from '@/stores/queue'
+import { visibleRoutes } from '~/router'
 
 const route = useRoute()
 const queue = useQueue()

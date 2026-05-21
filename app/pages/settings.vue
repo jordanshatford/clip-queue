@@ -15,11 +15,8 @@
 <script setup lang="ts">
 import type { TabsItem } from '@nuxt/ui'
 
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-
 import { m } from '#paraglide/messages'
-import { visibleRoutes } from '@/router'
+import { visibleRoutes } from '~/router'
 
 definePageMeta({
   redirect: '/settings/application',
