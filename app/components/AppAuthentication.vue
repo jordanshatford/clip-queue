@@ -35,7 +35,7 @@ import type { DropdownMenuItem, ChipProps } from '@nuxt/ui'
 
 import { m } from '#paraglide/messages'
 import { IntegrationID } from '~/integrations'
-import { IntegrationStatus } from '~/integrations/core'
+import { IntegrationStatus, toColor } from '~/integrations/core'
 
 const router = useRouter()
 
@@ -57,21 +57,6 @@ const items: DropdownMenuItem[] = [
 
 const chipColor = computed<ChipProps['color']>(() => {
   const status = integrations.source(IntegrationID.TWITCH)?.status
-  switch (status) {
-    case IntegrationStatus.HEALTHY: {
-      return 'success'
-    }
-    case IntegrationStatus.UNKNOWN: {
-      return 'warning'
-    }
-    case IntegrationStatus.DISABLED: {
-      return 'neutral'
-    }
-    case IntegrationStatus.ERROR:
-    case IntegrationStatus.MISCONFIGURED:
-    default: {
-      return 'error'
-    }
-  }
+  return toColor(status ?? IntegrationStatus.UNKNOWN)
 })
 </script>

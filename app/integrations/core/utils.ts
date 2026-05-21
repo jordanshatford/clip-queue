@@ -1,6 +1,7 @@
 import type { Clip } from './provider'
 
 import { IntegrationID } from '../indentify'
+import { IntegrationStatus } from './types'
 
 /**
  * Generate a unique key for an integration assuming that the key value provided is unique.
@@ -61,4 +62,54 @@ export function fromSubmitterUUID(uuid: string): [IntegrationID, string] {
  */
 export function toSubmitterUUID(source: IntegrationID, submitter: string): string {
   return `${source.toString()}:${submitter.toLowerCase()}`
+}
+
+type UiColor =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'info'
+  | 'warning'
+  | 'error'
+  | 'neutral'
+  | undefined
+
+/**
+ * Convert an integration status to a UI color for consistent display across the app.
+ * @param status - the status of the integration.
+ * @returns a UI color corresponding to the integration status.
+ */
+export function toColor(status: IntegrationStatus): UiColor {
+  switch (status) {
+    case IntegrationStatus.HEALTHY:
+      return 'success'
+    case IntegrationStatus.UNKNOWN:
+      return 'warning'
+    case IntegrationStatus.MISCONFIGURED:
+    case IntegrationStatus.ERROR:
+      return 'error'
+    case IntegrationStatus.DISABLED:
+    default:
+      return 'neutral'
+  }
+}
+
+/**
+ * Convert an integration status to an icon name for consistent display across the app.
+ * @param status - the status of the integration.
+ * @returns an icon name corresponding to the integration status.
+ */
+export function toIcon(status: IntegrationStatus): string {
+  switch (status) {
+    case IntegrationStatus.HEALTHY:
+      return 'lucide:circle-check'
+    case IntegrationStatus.UNKNOWN:
+      return 'lucide:triangle-alert'
+    case IntegrationStatus.MISCONFIGURED:
+    case IntegrationStatus.ERROR:
+      return 'lucide:circle-alert'
+    case IntegrationStatus.DISABLED:
+    default:
+      return 'lucide:circle-stop'
+  }
 }

@@ -8,6 +8,14 @@
             {{ source.id }}
           </UBadge>
           <UBadge
+            size="sm"
+            :icon="toIcon(source.status)"
+            :color="toColor(source.status)"
+            variant="subtle"
+          >
+            {{ statusTranslations[source.status]() }}
+          </UBadge>
+          <UBadge
             v-if="source.isExperimental"
             icon="lucide:triangle-alert"
             color="warning"
@@ -19,17 +27,7 @@
         </div>
         <USwitch :id="source.id" v-model="source.isEnabled" :loading="source.isLoading" />
       </div>
-      <UFieldGroup>
-        <UInput
-          id="username"
-          variant="outline"
-          readonly
-          :value="source.url"
-          size="lg"
-          class="w-full"
-        />
-        <IntegrationStatusTag :status="source.status" class="px-2" />
-      </UFieldGroup>
+      <UInput id="username" variant="outline" readonly :value="source.url" class="w-full" />
       <div class="flex gap-2">
         <UBadge
           v-for="feature of source.features"
@@ -48,12 +46,9 @@
 <script setup lang="ts">
 import type { Reactive } from 'vue'
 
-import type { IntegrationSource } from '~/integrations/core'
-
 import { m } from '#paraglide/messages'
-import { IntegrationSourceFeature } from '~/integrations/core'
-
-import IntegrationStatusTag from './IntegrationStatusTag.vue'
+import { IntegrationStatus, type IntegrationSource } from '~/integrations/core'
+import { IntegrationSourceFeature, toColor, toIcon } from '~/integrations/core'
 
 const source = defineModel<Reactive<IntegrationSource>>({ required: true })
 
@@ -61,5 +56,13 @@ const featureTranslations: Record<IntegrationSourceFeature, () => string> = {
   [IntegrationSourceFeature.AUTOMOD]: m.auto_mod,
   [IntegrationSourceFeature.COMMANDS]: m.commands,
   [IntegrationSourceFeature.LINK_DETECTION]: m.link_detection,
+}
+
+const statusTranslations: Record<IntegrationStatus, () => string> = {
+  [IntegrationStatus.HEALTHY]: m.healthy,
+  [IntegrationStatus.UNKNOWN]: m.unknown,
+  [IntegrationStatus.MISCONFIGURED]: m.misconfigured,
+  [IntegrationStatus.ERROR]: m.error,
+  [IntegrationStatus.DISABLED]: m.disabled,
 }
 </script>
