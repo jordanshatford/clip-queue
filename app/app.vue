@@ -15,12 +15,13 @@ const app = useAppConfig()
 const preferences = usePreferences()
 const queue = useQueue()
 
-const title = computed((): string => {
-  let queueState = queue.settings.open ? 'Open' : 'Closed'
-  if (queue.settings.open) {
-    queueState = `${queueState} (${queue.upcoming.length})`
-  }
-  return `${queueState} - ${app.cq.title}`
+useHead({
+  title: computed(() => {
+    let queueState = queue.settings.open ? 'Open' : 'Closed'
+    if (queue.settings.open) {
+      queueState = `${queueState} (${queue.upcoming.length})`
+    }
+    return `${queueState} - ${app.cq.title}`
+  }),
 })
-useTitle(title)
 </script>

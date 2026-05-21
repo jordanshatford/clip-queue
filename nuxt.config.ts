@@ -11,6 +11,16 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   ssr: false,
+  app: {
+    head: {
+      title: 'Clip Queue',
+      htmlAttrs: {
+        lang: 'en',
+      },
+      meta: [{ name: 'description', content: 'An enhanced clip viewing experience.' }],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    },
+  },
   runtimeConfig: {
     public: {
       version: pkg.version,
