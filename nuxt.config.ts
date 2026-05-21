@@ -21,6 +21,7 @@ export default defineNuxtConfig({
       meta: [{ name: 'description', content: 'An enhanced clip viewing experience.' }],
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
+    pageTransition: { name: 'page', mode: 'out-in' },
   },
   runtimeConfig: {
     public: {
