@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { getRumbleOEmbed } from '~/integrations/rumble/core/api'
 
-import { mockRumbleOEmbed } from '../core/mocks'
+import { mockRumbleOEmbed } from '../../../mocks'
 
 describe('integrations/rumble/core/api', () => {
   beforeEach(() => {

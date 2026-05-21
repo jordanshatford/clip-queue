@@ -8,7 +8,7 @@ import {
   toCommonHeaders,
 } from '~/integrations/twitch/core/api'
 
-import { mockTwitchClip, mockTwitchGame, mockTwitchUser, mockTwitchVod } from '../core/mocks'
+import { mockTwitchClip, mockTwitchGame, mockTwitchUser, mockTwitchVod } from '../../../mocks'
 
 describe('integrations/twitch/core/api', () => {
   beforeEach(() => {

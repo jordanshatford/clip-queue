@@ -11,7 +11,7 @@ import {
 } from '~/integrations/core/utils'
 import { IntegrationID } from '~/integrations/indentify'
 
-import { clipFromKick, clipFromTwitch } from './mocks'
+import { clipFromKick, clipFromTwitch } from '../../../mocks'
 
 describe('integrations/core/utils', () => {
   it.each([

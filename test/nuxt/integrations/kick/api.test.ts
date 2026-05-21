@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { getClip, getVideo } from '~/integrations/kick/core/api'
 
-import { mockKickClip, mockKickVod } from '../core/mocks'
+import { mockKickClip, mockKickVod } from '../../../mocks'
 
 describe('integrations/kick/core/api', () => {
   beforeEach(() => {

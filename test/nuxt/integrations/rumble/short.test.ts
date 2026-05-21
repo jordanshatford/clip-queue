@@ -4,7 +4,7 @@ import type { OEmbedResponse } from '~/integrations/misc'
 
 import { RumbleShortProvider } from '~/integrations/rumble/providers/short'
 
-import { mockKickClip, mockTwitchClip, mockTwitchVod, mockRumbleOEmbed } from '../core/mocks'
+import { mockKickClip, mockTwitchClip, mockTwitchVod, mockRumbleOEmbed } from '../../../mocks'
 
 vi.mock('~/integrations/rumble/core/api.ts', async (importOriginal) => {
   return {

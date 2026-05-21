@@ -4,7 +4,7 @@ import type { KickVideo } from '~/integrations/kick/core/types'
 
 import { KickVodProvider } from '~/integrations/kick/providers/vod'
 
-import { mockKickClip, mockKickVod, mockTwitchClip, mockTwitchVod } from '../core/mocks'
+import { mockKickClip, mockKickVod, mockTwitchClip, mockTwitchVod } from '../../../mocks'
 
 vi.mock('~/integrations/kick/core/api.ts', async (importOriginal) => {
   return {

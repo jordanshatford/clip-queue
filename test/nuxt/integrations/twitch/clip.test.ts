@@ -4,7 +4,7 @@ import type { TwitchClip, TwitchGame } from '~/integrations/twitch/core/types'
 
 import { TwitchClipProvider } from '~/integrations/twitch/providers/clip'
 
-import { mockKickClip, mockTwitchClip, mockTwitchGame } from '../core/mocks'
+import { mockKickClip, mockTwitchClip, mockTwitchGame } from '../../../mocks'
 
 vi.mock('~/integrations/twitch/core/api.ts', async (importOriginal) => {
   return {

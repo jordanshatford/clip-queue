@@ -4,7 +4,7 @@ import type { OEmbedResponse } from '~/integrations/misc'
 
 import { YouTubeShortProvider } from '~/integrations/youtube/providers/short'
 
-import { mockKickClip, mockTwitchClip, mockTwitchVod, mockYouTubeOEmbed } from '../core/mocks'
+import { mockKickClip, mockTwitchClip, mockTwitchVod, mockYouTubeOEmbed } from '../../../mocks'
 
 vi.mock('~/integrations/youtube/core/api.ts', async (importOriginal) => {
   return {

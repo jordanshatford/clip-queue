@@ -4,7 +4,13 @@ import type { OEmbedResponse } from '~/integrations/misc/core/types'
 
 import { StreamableProvider } from '~/integrations/misc/providers/streamable'
 
-import { mockKickClip, mockKickVod, mockOEmbed, mockTwitchClip, mockTwitchVod } from '../core/mocks'
+import {
+  mockKickClip,
+  mockKickVod,
+  mockOEmbed,
+  mockTwitchClip,
+  mockTwitchVod,
+} from '../../../mocks'
 
 vi.mock('~/integrations/misc/core/api.ts', async (importOriginal) => {
   return {

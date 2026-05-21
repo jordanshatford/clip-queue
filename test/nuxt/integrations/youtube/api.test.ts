@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { getYouTubeOEmbed } from '~/integrations/youtube/core/api'
 
-import { mockYouTubeOEmbed } from '../core/mocks'
+import { mockYouTubeOEmbed } from '../../../mocks'
 
 describe('integrations/youtube/core/api', () => {
   beforeEach(() => {
