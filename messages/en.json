@@ -195,5 +195,6 @@
         "selected=*, total=*": "{formattedSelected} of {formattedTotal} row(s) selected"
       }
     }
-  ]
+  ],
+  "red": "Red"
 }

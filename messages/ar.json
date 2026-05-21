@@ -195,5 +195,6 @@
         "selected=*, total=*": "{formattedSelected} من {formattedTotal} صفًا"
       }
     }
-  ]
+  ],
+  "red": "أحمر"
 }

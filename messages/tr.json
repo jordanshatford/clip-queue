@@ -195,5 +195,6 @@
         "selected=*, total=*": "{formattedSelected} / {formattedTotal} satır seçildi"
       }
     }
-  ]
+  ],
+  "red": "Kırmızı"
 }

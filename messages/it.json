@@ -195,5 +195,6 @@
         "selected=*, total=*": "{formattedSelected} di {formattedTotal} riga(e) selezionata(e)"
       }
     }
-  ]
+  ],
+  "red": "Rosso"
 }

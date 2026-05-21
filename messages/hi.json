@@ -195,5 +195,6 @@
         "selected=*, total=*": "{formattedSelected} में से {formattedTotal} पंक्तियाँ चयनित"
       }
     }
-  ]
+  ],
+  "red": "लाल"
 }

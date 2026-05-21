@@ -195,5 +195,6 @@
         "selected=*, total=*": "{formattedSelected} sur {formattedTotal} ligne(s) sélectionnée(s)"
       }
     }
-  ]
+  ],
+  "red": "Rouge"
 }

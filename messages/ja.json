@@ -195,5 +195,6 @@
         "selected=*, total=*": "{formattedSelected}のうち{formattedTotal}行が選択されました"
       }
     }
-  ]
+  ],
+  "red": "赤"
 }
