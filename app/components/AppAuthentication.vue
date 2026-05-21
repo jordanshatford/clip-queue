@@ -23,8 +23,8 @@
           },
         }"
       >
-        {{ user.details?.name }}
-        <UIcon :name="open ? 'lucide:chevron-up' : 'lucide:chevron-down'" />
+        <span class="hidden sm:block">{{ user.details?.name }}</span>
+        <UIcon :name="open ? 'lucide:chevron-up' : 'lucide:chevron-down'" class="hidden sm:block" />
       </UButton>
     </UDropdownMenu>
   </div>
