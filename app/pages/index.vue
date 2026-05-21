@@ -54,9 +54,9 @@ const features = computed(() => [
     icon: 'lucide:shield-check',
   },
   {
-    title: m.feature_settings_title(),
-    description: m.feature_settings_description(),
-    icon: 'lucide:settings',
+    title: m.feature_integrations_title(),
+    description: m.feature_integrations_description(),
+    icon: 'lucide:share-2',
   },
 ])
 </script>
