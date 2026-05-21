@@ -5,7 +5,7 @@
       color="primary"
       variant="link"
       :content="false"
-      :items="items"
+      :items="routes.settings.value"
       class="mx-auto mb-3 w-full max-w-2xl justify-around"
     />
     <NuxtPage />
@@ -13,11 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import type { TabsItem } from '@nuxt/ui'
-
-import { m } from '#paraglide/messages'
-import { visibleRoutes } from '~/router'
-
 definePageMeta({
   redirect: '/settings/application',
   requiresAuth: true,
@@ -27,27 +22,7 @@ definePageMeta({
 
 const router = useRouter()
 const route = useRoute()
-
-const t: Record<string, () => string> = {
-  '/queue': m.queue,
-  '/history': m.history,
-  '/settings': m.settings,
-  '/logs': m.logs,
-  logs: m.logs,
-  preferences: m.settings_preferences,
-  application: m.application,
-  other: m.settings_other,
-  integrations: m.integrations,
-}
-
-const settingsRoutes = visibleRoutes.value.find((r) => r.name === 'settings')?.children ?? []
-const items = computed<TabsItem[]>(() => {
-  return settingsRoutes.map((setting) => ({
-    label: t[setting.path]?.() ?? '',
-    value: setting.path ? `/settings/${setting.path}` : '',
-    icon: setting.meta?.icon ?? '',
-  }))
-})
+const routes = useVisibleRoutes()
 
 const active = computed<string>({
   get(): string {
