@@ -110,6 +110,7 @@ describe('preferences.ts', () => {
       const preferences = usePreferences()
       preferences.locale = 'fr'
       await nextTick()
+      await new Promise(requestAnimationFrame)
       expect(document.documentElement.lang).toEqual('fr')
     })
 

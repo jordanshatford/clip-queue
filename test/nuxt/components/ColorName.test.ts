@@ -6,7 +6,9 @@ import ColorName from '~/components/ColorName.vue'
 describe('ColorName.vue', () => {
   it('mounts successfully', async () => {
     const component = await mountSuspended(ColorName, {
-      name: 'amber',
+      props: {
+        name: 'amber',
+      },
     })
     expect(component.exists()).toBe(true)
   })
