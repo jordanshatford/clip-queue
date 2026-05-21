@@ -1,8 +1,7 @@
 <template>
   <div class="flex items-center gap-2">
-    <span class="h-4 w-4 rounded-full" :class="colorClasses[name]" />
-
-    <div>{{ colorNameTranslations[name]?.() }}</div>
+    <span class="h-4 w-4 rounded-full" :class="color.class" />
+    <div>{{ color.text() }}</div>
   </div>
 </template>
 
@@ -13,63 +12,36 @@ export interface Props {
   name: PrimaryColorName | NeutralColorName
 }
 
-defineProps<Props>()
+const { name } = defineProps<Props>()
 
-const colorNameTranslations: Record<PrimaryColorName | NeutralColorName, () => string> = {
-  emerald: m.emerald,
-  green: m.green,
-  lime: m.lime,
-  orange: m.orange,
-  amber: m.amber,
-  yellow: m.yellow,
-  teal: m.teal,
-  cyan: m.cyan,
-  sky: m.sky,
-  blue: m.blue,
-  indigo: m.indigo,
-  violet: m.violet,
-  purple: m.purple,
-  fuchsia: m.fuchsia,
-  pink: m.pink,
-  rose: m.rose,
-  red: m.red,
-  slate: m.slate,
-  gray: m.gray,
-  zinc: m.zinc,
-  neutral: m.neutral,
-  stone: m.stone,
-  taupe: m.taupe,
-  mauve: m.mauve,
-  mist: m.mist,
-  olive: m.olive,
+const lookup: Record<PrimaryColorName | NeutralColorName, { class: string; text: () => string }> = {
+  amber: { class: 'bg-amber-500', text: m.amber },
+  blue: { class: 'bg-blue-500', text: m.blue },
+  cyan: { class: 'bg-cyan-500', text: m.cyan },
+  emerald: { class: 'bg-emerald-500', text: m.emerald },
+  fuchsia: { class: 'bg-fuchsia-500', text: m.fuchsia },
+  gray: { class: 'bg-gray-500', text: m.gray },
+  green: { class: 'bg-green-500', text: m.green },
+  indigo: { class: 'bg-indigo-500', text: m.indigo },
+  lime: { class: 'bg-lime-500', text: m.lime },
+  mauve: { class: 'bg-mauve-500', text: m.mauve },
+  mist: { class: 'bg-mist-500', text: m.mist },
+  neutral: { class: 'bg-neutral-500', text: m.neutral },
+  olive: { class: 'bg-olive-500', text: m.olive },
+  orange: { class: 'bg-orange-500', text: m.orange },
+  pink: { class: 'bg-pink-500', text: m.pink },
+  purple: { class: 'bg-purple-500', text: m.purple },
+  red: { class: 'bg-red-500', text: m.red },
+  rose: { class: 'bg-rose-500', text: m.rose },
+  slate: { class: 'bg-slate-500', text: m.slate },
+  stone: { class: 'bg-stone-500', text: m.stone },
+  sky: { class: 'bg-sky-500', text: m.sky },
+  taupe: { class: 'bg-taupe-500', text: m.taupe },
+  teal: { class: 'bg-teal-500', text: m.teal },
+  violet: { class: 'bg-violet-500', text: m.violet },
+  yellow: { class: 'bg-yellow-500', text: m.yellow },
+  zinc: { class: 'bg-zinc-500', text: m.zinc },
 }
 
-const colorClasses: Record<PrimaryColorName | NeutralColorName, string> = {
-  emerald: 'bg-emerald-500',
-  green: 'bg-green-500',
-  lime: 'bg-lime-500',
-  orange: 'bg-orange-500',
-  amber: 'bg-amber-500',
-  yellow: 'bg-yellow-500',
-  teal: 'bg-teal-500',
-  cyan: 'bg-cyan-500',
-  sky: 'bg-sky-500',
-  blue: 'bg-blue-500',
-  indigo: 'bg-indigo-500',
-  violet: 'bg-violet-500',
-  purple: 'bg-purple-500',
-  fuchsia: 'bg-fuchsia-500',
-  pink: 'bg-pink-500',
-  rose: 'bg-rose-500',
-  red: 'bg-red-500',
-  slate: 'bg-slate-500',
-  gray: 'bg-gray-500',
-  zinc: 'bg-zinc-500',
-  neutral: 'bg-neutral-500',
-  stone: 'bg-stone-500',
-  taupe: 'bg-taupe-500',
-  mauve: 'bg-mauve-500',
-  mist: 'bg-mist-500',
-  olive: 'bg-olive-500',
-}
+const color = computed(() => lookup[name])
 </script>
