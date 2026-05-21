@@ -76,7 +76,7 @@ const columns: TableColumn<Log>[] = [
       const level = row.original.level
       return h(
         UBadge,
-        { icon: logLevelIcons[level], variant: 'soft', color: logLevelSeverities[level] },
+        { icon: logLevelIcons[level], variant: 'subtle', color: logLevelSeverities[level] },
         () => logLevelTranslations[level](),
       )
     },

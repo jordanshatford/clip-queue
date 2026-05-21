@@ -16,6 +16,7 @@ export default defineNuxtConfig({
       title: 'Clip Queue',
       htmlAttrs: {
         lang: 'en',
+        dir: 'ltr',
       },
       meta: [{ name: 'description', content: 'An enhanced clip viewing experience.' }],
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],

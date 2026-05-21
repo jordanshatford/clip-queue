@@ -1,3 +1,6 @@
+import type { Messages, Locale as UILocale } from '@nuxt/ui'
+
+import * as locales from '@nuxt/ui/locale'
 import { useColorMode, useDark, useStorage, useToggle, type BasicColorSchema } from '@vueuse/core'
 
 import type { Locale } from '#paraglide/runtime'
@@ -100,6 +103,33 @@ export const usePreferences = defineStore('preferences', () => {
    * Current locale being used.
    */
   const locale = useStorage<Locale>('__cq_preferences_locale', getInferredDefaultLanguage())
+  /**
+   * Current local be used as expected by the UI library UApp.
+   */
+  const uilocale = computed<UILocale<Messages>>(() => {
+    // Special case for Chinese since the locale code is different between paraglide and nuxt/ui.
+    const key = locale.value === 'zh' ? 'zh_cn' : locale.value
+    return locales[key]
+  })
+
+  /**
+   * Computed property for the lang HTML attribute based on the current locale.
+   */
+  const lang = computed(() => locale.value)
+  /**
+   * Computed property for the dir HTML attribute based on the current locale's directionality as defined in the UI library.
+   */
+  const dir = computed(() => uilocale.value.dir)
+
+  /**
+   * Set HTML attributes for language and text direction based on the current locale to ensure proper rendering and accessibility.
+   */
+  useHead({
+    htmlAttrs: {
+      lang: lang,
+      dir: dir,
+    },
+  })
 
   /**
    * Synchronize locale changes to update the user interface.
@@ -107,7 +137,6 @@ export const usePreferences = defineStore('preferences', () => {
   watch(
     () => locale.value,
     (language) => {
-      document.documentElement.lang = language
       setLocale(isLocale(language) ? language : getInferredDefaultLanguage(), { reload: false })
     },
     { immediate: true },
@@ -159,6 +188,7 @@ export const usePreferences = defineStore('preferences', () => {
     isDark,
     toggleDark,
     locale,
+    uilocale,
     primary,
     surface,
     isModified,
