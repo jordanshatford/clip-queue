@@ -2,7 +2,7 @@
   <UHeader>
     <template #left>
       <NuxtLink to="/" class="mr-2 flex shrink-0 items-center">
-        <img class="size-9" src="@/assets/icon.png" />
+        <img class="size-9" src="/icon.png" />
       </NuxtLink>
     </template>
     <UNavigationMenu :items="routes.all.value" content-orientation="vertical" />
