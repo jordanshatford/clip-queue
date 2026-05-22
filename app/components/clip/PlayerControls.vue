@@ -39,7 +39,7 @@
           - {{ m.submitter_name({ name: clip.submitters[0] }) }}</span
         >
       </span>
-      <ProviderName :provider="clip.provider" />
+      <ClipProviderName :id="clip.provider" />
     </div>
   </div>
 </template>
@@ -48,7 +48,6 @@
 import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
-import ProviderName from '~/components/ProviderName.vue'
 
 export interface Props {
   clip: Clip
