@@ -2,15 +2,23 @@
   <UCard class="mx-auto max-w-2xl" variant="subtle">
     <div class="flex flex-col gap-2 text-left">
       <UFormField :label="m.logs_colon()">
-        <UButton
-          icon="lucide:book-text"
-          to="/logs"
-          color="neutral"
-          variant="outline"
-          class="w-full justify-center"
-        >
-          {{ m.view() }}
-        </UButton>
+        <UFieldGroup class="w-full">
+          <UButton
+            icon="lucide:book-text"
+            to="/logs"
+            color="neutral"
+            variant="outline"
+            class="w-full justify-center"
+          >
+            {{ m.view() }}
+          </UButton>
+          <UButton
+            color="neutral"
+            variant="outline"
+            :icon="copied ? 'lucide:check' : 'lucide:copy'"
+            @click="copyLogs()"
+          />
+        </UFieldGroup>
       </UFormField>
       <USeparator />
       <UFormField :label="m.level_colon()" :help="m.logger_level_description()">
@@ -53,5 +61,10 @@ definePageMeta({
   order: 4,
 })
 
+const { copy, copied } = useClipboard()
 const logger = useLogger()
+
+async function copyLogs(): Promise<void> {
+  return await copy(logger.text)
+}
 </script>

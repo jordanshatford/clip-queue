@@ -3,6 +3,7 @@ import type { BadgeProps } from '@nuxt/ui'
 import { useStorage } from '@vueuse/core'
 
 import { m } from '#paraglide/messages'
+import { datetime } from '#paraglide/registry'
 
 /**
  * Log levels.
@@ -97,6 +98,7 @@ export const DEFAULT_LOGGER_SETTINGS: LoggerSettings = {
 }
 
 export const useLogger = defineStore('logger', () => {
+  const preferences = usePreferences()
   /**
    * Settings related to the logger.
    */
@@ -106,16 +108,68 @@ export const useLogger = defineStore('logger', () => {
     undefined,
     { mergeDefaults: true },
   )
+  /**
+   * Logs current available.
+   */
   const logs = useStorage<Log[]>('__cq_logger_logs', [])
+  /**
+   * Logs as a text string available for copying.
+   */
+  const text = computed<string>(() => {
+    return logs.value.map((log) => format(log)).join('\n')
+  })
 
-  function handle(level: LogLevel, message: string) {
+  /**
+   * Format the timestamp of a log.
+   * @param timestamp - The timestamp to format.
+   * @param locale - The locale to use when formatting.
+   * @param options - The format options to apply.
+   * @returns String representing the formatted timestamp.
+   */
+  function formatTimestamp(
+    timestamp: string,
+    locale = preferences.locale,
+    options: Intl.DateTimeFormatOptions = {
+      dateStyle: 'short',
+      timeStyle: 'medium',
+      hour12: false,
+    },
+  ): string {
+    return datetime(locale, timestamp, options)
+  }
+
+  /**
+   * Format a log to a string for printing in the console or copying to the clipboard.
+   * @param log - The log to format.
+   * @returns String representing the formatted log.
+   */
+  function format(log: Log): string {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+      timeZone: 'UTC',
+    }
+    return `[${log.level.padEnd(5, ' ')}] (${formatTimestamp(log.timestamp, 'en', options)}): ${log.message}`
+  }
+
+  /**
+   * Handle a logged message.
+   * @param level - The level of the log.
+   * @param message - The message for the log.
+   */
+  function handle(level: LogLevel, message: string): void {
     const log = { level, message, timestamp: new Date().toISOString() }
     const logIndex = availableLogLevels.indexOf(level)
     const settingsIndex = availableLogLevels.indexOf(settings.value.level)
     const warnIndex = availableLogLevels.indexOf('WARN')
     // Log the message to the console if configured to do so, or if the log level is WARN or higher.
     if (logIndex <= settingsIndex || logIndex <= warnIndex) {
-      logLevelConsole[level](`[${log.level}] (${log.timestamp}): ${log.message}`)
+      logLevelConsole[level](format(log))
     }
     // Store the log if required based on the configured settings.
     if (logIndex <= settingsIndex) {
@@ -127,14 +181,17 @@ export const useLogger = defineStore('logger', () => {
     }
   }
 
-  function reset() {
+  /**
+   * Reset all tracked logs.
+   */
+  function reset(): void {
     logs.value = []
   }
 
   /**
    * Determine if the settings are modified.
    */
-  const isSettingsModified = computed(() => {
+  const isSettingsModified = computed<boolean>(() => {
     return (
       settings.value.level !== DEFAULT_LOGGER_SETTINGS.level ||
       settings.value.limit !== DEFAULT_LOGGER_SETTINGS.limit
@@ -151,10 +208,12 @@ export const useLogger = defineStore('logger', () => {
   return {
     settings,
     logs,
+    text,
     debug: (message: string) => handle('DEBUG', message),
     info: (message: string) => handle('INFO', message),
     warn: (message: string) => handle('WARN', message),
     error: (message: string) => handle('ERROR', message),
+    formatTimestamp,
     reset,
     isSettingsModified,
     resetSettings,

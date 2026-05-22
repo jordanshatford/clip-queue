@@ -35,7 +35,6 @@ import { getPaginationRowModel, type PaginationState } from '@tanstack/vue-table
 import type { Log } from '@/stores/logger'
 
 import { m } from '#paraglide/messages'
-import { datetime } from '#paraglide/registry'
 import { useConfirmDialog } from '~/composables/useConfirmDialog'
 
 definePageMeta({
@@ -45,7 +44,6 @@ definePageMeta({
 })
 
 const confirm = useConfirmDialog()
-const preferences = usePreferences()
 const logger = useLogger()
 
 const table = useTemplateRef('table')
@@ -67,7 +65,7 @@ const columns: TableColumn<Log>[] = [
   {
     accessorKey: 'timestamp',
     header: m.timestamp(),
-    cell: ({ row }) => formatTimestamp(row.original.timestamp),
+    cell: ({ row }) => logger.formatTimestamp(row.original.timestamp),
   },
   {
     accessorKey: 'level',
@@ -83,14 +81,6 @@ const columns: TableColumn<Log>[] = [
   },
   { accessorKey: 'message', header: m.message() },
 ]
-
-function formatTimestamp(timestamp: string) {
-  return datetime(preferences.locale, timestamp, {
-    dateStyle: 'short',
-    timeStyle: 'medium',
-    hour12: false,
-  })
-}
 
 async function deleteAllLogs(): Promise<void> {
   logger.debug('[Logs]: attempting to delete all logs.')
