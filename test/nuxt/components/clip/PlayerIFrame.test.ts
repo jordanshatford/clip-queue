@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 
 import PlayerIFrame from '~/components/clip/PlayerIFrame.vue'
 
-describe('PlayerIFrame.vue', () => {
+describe('clip/PlayerIFrame.vue', () => {
   it('mounts successfully', async () => {
     const component = await mountSuspended(PlayerIFrame, {
       props: {

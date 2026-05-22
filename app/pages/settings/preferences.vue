@@ -67,7 +67,6 @@ import type { Locale } from '#paraglide/runtime'
 
 import { m } from '#paraglide/messages'
 import { locales } from '#paraglide/runtime'
-import ColorName from '~/components/ColorName.vue'
 
 definePageMeta({
   requiresAuth: true,

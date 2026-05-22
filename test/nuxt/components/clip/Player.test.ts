@@ -4,7 +4,7 @@ import { clipFromKick, clipFromTwitch } from '~~/test/mocks'
 
 import Player from '~/components/clip/Player.vue'
 
-describe('Player.vue', () => {
+describe('clip/Player.vue', () => {
   it('mounts successfully', async () => {
     const component = await mountSuspended(Player, {
       props: {

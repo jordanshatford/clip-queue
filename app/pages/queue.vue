@@ -23,7 +23,6 @@
 
 <script setup lang="ts">
 import { m } from '#paraglide/messages'
-import ClipQueue from '~/components/ClipQueue.vue'
 import { toClipUUID } from '~/integrations'
 
 definePageMeta({

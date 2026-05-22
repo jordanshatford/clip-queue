@@ -1,11 +1,11 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { describe, expect, it } from 'vitest'
 
-import AppNavBar from '~/components/AppNavBar.vue'
+import AppHeader from '~/components/AppHeader.vue'
 
-describe('AppNavBar.vue', () => {
+describe('AppHeader.vue', () => {
   it('mounts successfully', async () => {
-    const component = await mountSuspended(AppNavBar)
+    const component = await mountSuspended(AppHeader)
     expect(component.exists()).toBe(true)
   })
 })

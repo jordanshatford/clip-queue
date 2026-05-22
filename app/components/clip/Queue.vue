@@ -44,7 +44,6 @@
 import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
-import ClipCard from '~/components/ClipCard.vue'
 import { toClipUUID } from '~/integrations'
 
 export interface Props {

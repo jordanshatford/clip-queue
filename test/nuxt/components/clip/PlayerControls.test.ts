@@ -4,7 +4,7 @@ import { clipFromTwitch } from '~~/test/mocks'
 
 import PlayerControls from '~/components/clip/PlayerControls.vue'
 
-describe('PlayerControls.vue', () => {
+describe('clip/PlayerControls.vue', () => {
   it('mounts successfully', async () => {
     const component = await mountSuspended(PlayerControls, {
       props: {

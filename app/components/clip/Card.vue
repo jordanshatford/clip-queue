@@ -53,8 +53,6 @@ import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
 
-import ClipThumbnail from './ClipThumbnail.vue'
-
 export interface Props {
   clip: Clip
 }

@@ -80,8 +80,8 @@ import {
 import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
+import ClipDetails from '~/components/clip/Details.vue'
 import ClipProviderName from '~/components/clip/ProviderName.vue'
-import ClipInfo from '~/components/ClipInfo.vue'
 import { useConfirmDialog } from '~/composables/useConfirmDialog'
 
 definePageMeta({
@@ -127,7 +127,7 @@ const columns: TableColumn<Clip>[] = [
     header: m.info(),
     accessorFn: (row) => `${row.title} ${row.channel} ${row.category}`,
     cell: ({ row }) => {
-      return h(ClipInfo, { data: row.original })
+      return h(ClipDetails, { data: row.original })
     },
   },
   {

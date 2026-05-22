@@ -1,11 +1,11 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { describe, expect, it } from 'vitest'
 
-import ClipThumbnail from '~/components/ClipThumbnail.vue'
+import ClipThumbnail from '~/components/clip/Thumbnail.vue'
 
-import { clipFromTwitch } from '../../mocks'
+import { clipFromTwitch } from '../../../mocks'
 
-describe('ClipThumbnail.vue', () => {
+describe('clip/Thumbnail.vue', () => {
   it('mounts successfully', async () => {
     const component = await mountSuspended(ClipThumbnail, {
       props: {

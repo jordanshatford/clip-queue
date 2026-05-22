@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 
 import PlayerVideo from '~/components/clip/PlayerVideo.vue'
 
-describe('PlayerVideo.vue', () => {
+describe('clip/PlayerVideo.vue', () => {
   it('mounts successfully', async () => {
     const component = await mountSuspended(PlayerVideo, {
       props: {

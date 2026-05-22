@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest'
 import IntegrationIcon from '~/components/integration/Icon.vue'
 import { IntegrationID } from '~/integrations'
 
-describe('IntegrationIcon.vue', () => {
+describe('integration/Icon.vue', () => {
   it('mounts successfully', async () => {
     const component = await mountSuspended(IntegrationIcon, {
       props: {
