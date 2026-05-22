@@ -12,19 +12,7 @@
         </USelect>
       </UFormField>
       <UFormField :label="m.theme()" :help="m.theme_description()">
-        <USelect
-          id="theme"
-          v-model="preferences.store"
-          :items="[...availableThemes]"
-          class="w-full"
-        >
-          <template #default="{ modelValue }: { modelValue: BasicColorSchema }">
-            {{ themeTranslations[modelValue]?.() }}
-          </template>
-          <template #item-label="{ item }: { item: BasicColorSchema }">
-            {{ themeTranslations[item]?.() }}
-          </template>
-        </USelect>
+        <UColorModeSelect id="theme" class="w-full" />
       </UFormField>
       <UFormField :label="m.primary_color()" :help="m.primary_color_description()">
         <USelect
@@ -61,8 +49,6 @@
 </template>
 
 <script setup lang="ts">
-import type { BasicColorSchema } from '@vueuse/core'
-
 import type { Locale } from '#paraglide/runtime'
 
 import { m } from '#paraglide/messages'

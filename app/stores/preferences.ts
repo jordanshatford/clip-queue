@@ -1,7 +1,7 @@
 import type { Messages, Locale as UILocale } from '@nuxt/ui'
 
 import * as locales from '@nuxt/ui/locale'
-import { useColorMode, useDark, useStorage, useToggle, type BasicColorSchema } from '@vueuse/core'
+import { useStorage } from '@vueuse/core'
 
 import type { Locale } from '#paraglide/runtime'
 
@@ -89,24 +89,6 @@ export const colorDetails: Record<
 }
 
 /**
- * The available themes.
- */
-export const availableThemes = [
-  'dark',
-  'light',
-  'auto',
-] as const satisfies readonly BasicColorSchema[]
-
-/**
- * Translations for available themes.
- */
-export const themeTranslations: Record<BasicColorSchema, () => string> = {
-  dark: m.theme_dark,
-  light: m.theme_light,
-  auto: m.theme_auto,
-}
-
-/**
  * Gets the inferred default language.
  */
 export function getInferredDefaultLanguage(fallback: Locale = baseLocale): Locale {
@@ -154,19 +136,9 @@ export const localeLabels: Record<Locale, string> = {
 export const usePreferences = defineStore('preferences', () => {
   const config = useAppConfig()
   /**
-   * Current color mode being used (dark, light).
+   * Current color mode being used (dark, light, system).
    */
   const mode = useColorMode()
-  const { store } = useColorMode()
-  /**
-   * If we are in dark mode.
-   */
-  const isDark = useDark()
-  /**
-   * Toggle between dark and light mode.
-   */
-  const toggleDark = useToggle(isDark)
-
   /**
    * Current locale being used.
    */
@@ -252,9 +224,6 @@ export const usePreferences = defineStore('preferences', () => {
 
   return {
     mode,
-    store,
-    isDark,
-    toggleDark,
     locale,
     uilocale,
     primary,

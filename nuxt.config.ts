@@ -30,9 +30,6 @@ export default defineNuxtConfig({
       twitchRedirectUri: '',
     },
   },
-  colorMode: {
-    storageKey: 'vueuse-color-scheme',
-  },
   alias: {
     '#paraglide': fileURLToPath(new URL('./paraglide', import.meta.url)),
   },

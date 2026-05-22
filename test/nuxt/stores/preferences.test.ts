@@ -4,10 +4,10 @@ import { nextTick } from 'vue'
 
 import * as runtime from '#paraglide/runtime'
 import {
-  DEFAULT_PRIMARY_COLOR,
-  DEFAULT_SURFACE_COLOR,
   primaryColors,
   neutralColors,
+  DEFAULT_PRIMARY_COLOR,
+  DEFAULT_SURFACE_COLOR,
 } from '~/stores/preferences'
 
 vi.mock('#paraglide/runtime', async () => {
@@ -18,136 +18,96 @@ vi.mock('#paraglide/runtime', async () => {
   }
 })
 
-describe('preferences.ts', () => {
+describe('getInferredDefaultLanguage', () => {
+  it('returns exact locale matches', () => {
+    vi.stubGlobal('navigator', {
+      language: 'en',
+    })
+    expect(getInferredDefaultLanguage('fr')).toEqual('en')
+  })
+
+  it('returns generic locale matches', () => {
+    vi.stubGlobal('navigator', {
+      language: 'en-CA',
+    })
+    expect(getInferredDefaultLanguage('fr')).toEqual('en')
+  })
+
+  it('falls back when locale is unsupported', () => {
+    vi.stubGlobal('navigator', {
+      language: 'invalid',
+    })
+    expect(getInferredDefaultLanguage('fr')).toEqual('fr')
+  })
+})
+
+describe('preferences store', () => {
   beforeEach(() => {
     localStorage.clear()
     sessionStorage.clear()
-
     document.documentElement.className = ''
     document.documentElement.lang = ''
-
     setActivePinia(createPinia())
-
     vi.clearAllMocks()
     vi.unstubAllGlobals()
   })
 
-  describe('getInferredDefaultLanguage', () => {
-    it('returns exact locale matches', () => {
-      vi.stubGlobal('navigator', {
-        language: 'en',
-      })
-      expect(getInferredDefaultLanguage('fr')).toEqual('en')
-    })
+  it('initializes with defaults', () => {
+    const preferences = usePreferences()
+    expect(preferences.primary).toBe(DEFAULT_PRIMARY_COLOR)
+    expect(preferences.surface).toBe(DEFAULT_SURFACE_COLOR)
+    expect(preferences.isModified).toBe(false)
+  })
 
-    it('returns generic locale matches', () => {
-      vi.stubGlobal('navigator', {
-        language: 'en-CA',
-      })
-      expect(getInferredDefaultLanguage('fr')).toEqual('en')
-    })
+  it('detects when preferences are modified', () => {
+    const preferences = usePreferences()
+    expect(preferences.isModified).toBe(false)
+    preferences.primary = primaryColors[0]!
+    expect(preferences.isModified).toBe(true)
+  })
 
-    it('falls back when locale is unsupported', () => {
-      vi.stubGlobal('navigator', {
-        language: 'invalid',
-      })
-      expect(getInferredDefaultLanguage('fr')).toEqual('fr')
+  it('updates html lang and dir via useHead', async () => {
+    const preferences = usePreferences()
+    preferences.locale = 'fr'
+    await nextTick()
+    await new Promise(requestAnimationFrame)
+    expect(document.documentElement.lang).toBe('fr')
+    expect(document.documentElement.dir).toBe('ltr')
+  })
+
+  it('calls setLocale when language changes', async () => {
+    const preferences = usePreferences()
+    preferences.locale = 'fr'
+    await nextTick()
+    expect(runtime.setLocale).toHaveBeenCalledWith('fr', {
+      reload: false,
     })
   })
 
-  describe('preferences store', () => {
-    beforeEach(() => {
-      usePreferences().reset()
-    })
+  it('updates the primary palette via app config', async () => {
+    const preferences = usePreferences()
+    preferences.primary = primaryColors[0]!
+    await nextTick()
+    const config = useAppConfig()
+    expect(config.ui.colors.primary).toBe(primaryColors[0]!.toLowerCase())
+  })
 
-    it('initializes with defaults', () => {
-      const preferences = usePreferences()
-      expect(preferences.primary).toEqual(DEFAULT_PRIMARY_COLOR)
-      expect(preferences.surface).toEqual(DEFAULT_SURFACE_COLOR)
-      expect(preferences.isModified).toEqual(false)
-    })
+  it('updates the surface palette via app config', async () => {
+    const preferences = usePreferences()
+    preferences.surface = neutralColors[0]!
+    await nextTick()
+    const config = useAppConfig()
+    expect(config.ui.colors.neutral).toBe(neutralColors[0]!.toLowerCase())
+  })
 
-    it('detects dark mode', async () => {
-      const preferences = usePreferences()
-      preferences.mode = 'dark'
-      await nextTick()
-      expect(preferences.isDark).toEqual(true)
-      preferences.mode = 'light'
-      await nextTick()
-      expect(preferences.isDark).toEqual(false)
-    })
-
-    it('detects when preferences are modified', () => {
-      const preferences = usePreferences()
-      expect(preferences.isModified).toEqual(false)
-      preferences.primary = primaryColors[0]!
-      expect(preferences.isModified).toEqual(true)
-    })
-
-    it('toggles dark mode', async () => {
-      const preferences = usePreferences()
-      preferences.mode = 'light'
-      await nextTick()
-      preferences.toggleDark()
-      await nextTick()
-      expect(preferences.mode).toEqual('dark')
-      preferences.toggleDark()
-      await nextTick()
-      expect(preferences.mode).toEqual('light')
-    })
-
-    it('updates the html dark class', async () => {
-      const preferences = usePreferences()
-      preferences.mode = 'dark'
-      await nextTick()
-      expect(document.documentElement.classList.contains('dark')).toEqual(true)
-      preferences.mode = 'light'
-      await nextTick()
-      expect(document.documentElement.classList.contains('dark')).toEqual(false)
-    })
-
-    it('updates the html lang attribute', async () => {
-      const preferences = usePreferences()
-      preferences.locale = 'fr'
-      await nextTick()
-      await new Promise(requestAnimationFrame)
-      expect(document.documentElement.lang).toEqual('fr')
-    })
-
-    it('calls setLocale when language changes', async () => {
-      const preferences = usePreferences()
-      preferences.locale = 'fr'
-      await nextTick()
-      expect(runtime.setLocale).toHaveBeenCalledWith('fr', {
-        reload: false,
-      })
-    })
-
-    it('updates the primary palette via app config', async () => {
-      const preferences = usePreferences()
-      preferences.primary = primaryColors[0]!
-      await nextTick()
-      const config = useAppConfig()
-      expect(config.ui.colors.primary).toBe(primaryColors[0]!.toLowerCase())
-    })
-
-    it('updates the surface palette via app config', async () => {
-      const preferences = usePreferences()
-      preferences.surface = neutralColors[0]!
-      await nextTick()
-      const config = useAppConfig()
-      expect(config.ui.colors.neutral).toBe(neutralColors[0]!.toLowerCase())
-    })
-
-    it('resets preferences', () => {
-      const preferences = usePreferences()
-      preferences.primary = primaryColors[0]!
-      preferences.surface = neutralColors[0]!
-      expect(preferences.isModified).toEqual(true)
-      preferences.reset()
-      expect(preferences.primary).toEqual(DEFAULT_PRIMARY_COLOR)
-      expect(preferences.surface).toEqual(DEFAULT_SURFACE_COLOR)
-      expect(preferences.isModified).toEqual(false)
-    })
+  it('resets preferences', () => {
+    const preferences = usePreferences()
+    preferences.primary = primaryColors[0]!
+    preferences.surface = neutralColors[0]!
+    expect(preferences.isModified).toBe(true)
+    preferences.reset()
+    expect(preferences.primary).toBe(DEFAULT_PRIMARY_COLOR)
+    expect(preferences.surface).toBe(DEFAULT_SURFACE_COLOR)
+    expect(preferences.isModified).toBe(false)
   })
 })
