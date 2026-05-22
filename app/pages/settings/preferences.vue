@@ -75,26 +75,4 @@ definePageMeta({
 })
 
 const preferences = usePreferences()
-
-const themeTranslations: Record<BasicColorSchema, () => string> = {
-  dark: m.theme_dark,
-  light: m.theme_light,
-  auto: m.theme_auto,
-}
-
-const localeLabels: Record<Locale, string> = {
-  ar: 'عربي (Arabic)',
-  de: 'Deutsch (German)',
-  en: 'English',
-  es: 'Español (Spanish)',
-  fr: 'Français (French)',
-  hi: 'हिंदी (Hindi)',
-  it: 'Italiano (Italian)',
-  ja: '日本語 (Japanese)',
-  ko: '한국인 (Korean)',
-  pt: 'Português (Portuguese)',
-  ru: 'русский (Russian)',
-  tr: 'Türkçe (Turkish)',
-  zh: '中文 (Chinese)',
-}
 </script>
