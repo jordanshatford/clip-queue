@@ -1,7 +1,7 @@
 <template>
   <UCard class="mx-auto w-full max-w-2xl" variant="subtle">
     <div class="flex flex-col gap-2 text-left">
-      <UFormField :label="m.language()" :help="m.language_description()">
+      <UFormField :label="m.locale()" :help="m.locale_description()">
         <USelect id="locale" v-model="preferences.locale" :items="[...locales]" class="w-full">
           <template #default="{ modelValue }: { modelValue: Locale }">
             {{ localeLabels[modelValue] }}
