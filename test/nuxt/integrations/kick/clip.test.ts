@@ -62,6 +62,7 @@ describe('integrations/kick/providers/clip', () => {
     [mockTwitchClip.url, false],
     ['https://kick.com/channel?clip=clip_ABC', true],
     ['https://kick.com/channel/clip/clip_ABC', true],
+    ['https://kick.com/<CHANNEL>/clips/clip_ABC', true],
     ['https://kick.com/test?clip=clip_01HQ7ZWTEKKJP16Y34SDFF2SBC', true],
     ['https://kick.com/test?somenonclipparam=123', false],
   ])('can detect clip urls it supports: (url: %s)', async (url: string, expected: boolean) => {

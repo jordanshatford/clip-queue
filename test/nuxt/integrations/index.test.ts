@@ -52,6 +52,7 @@ describe('integrations', () => {
     ['https://kick.com/channel/clip/', undefined],
     ['https://www.kick.com/channel/clip/clip_ABC', IntegrationID.KICK_CLIPS],
     ['https://kick.com/channel/clip/clip_ABC', IntegrationID.KICK_CLIPS],
+    ['https://kick.com/channel/clips/clip_ABC', IntegrationID.KICK_CLIPS],
     ['https://kick.com/test?clip=clip_01HQ7ZWTEKKJP16Y34SDFF2SBC', IntegrationID.KICK_CLIPS],
     ['https://kick.com/channel/videos', undefined],
     ['https://kick.com/channel/videos/', undefined],

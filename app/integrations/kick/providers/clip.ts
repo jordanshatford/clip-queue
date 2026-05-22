@@ -69,7 +69,7 @@ export class KickClipsProvider extends Cacheable<Clip> implements IntegrationPro
 }
 
 const CLIP_PATH_PARAM = 'clip'
-const CLIP_PATH_SUFFIX = '/clip/'
+const CLIP_PATH_SUFFIXS = ['/clip/', '/clips']
 /**
  * Get a clip ID from a provided URL.
  * @param url - The URL of the clip.
@@ -86,13 +86,14 @@ export function getClipIdFromUrl(url: string): string | undefined {
 
     // Verify the formats of clip URLs is valid for Kick:
     //  1. https://kick.com/<CHANNEL>?clip=<ID>
-    //  2. https://kick.com/<CHANNEL>/clips/<ID>
+    //  2. https://kick.com/<CHANNEL>/clip/<ID>
+    //  3. https://kick.com/<CHANNEL>/clips/<ID>
     const id = uri.searchParams.get(CLIP_PATH_PARAM)
     if (id) {
       return id
     }
     const segments = uri.pathname.split('/').filter(Boolean)
-    if (uri.pathname.includes(CLIP_PATH_SUFFIX) && segments.length >= 3) {
+    if (CLIP_PATH_SUFFIXS.some((s) => uri.pathname.includes(s)) && segments.length >= 3) {
       return segments.pop()
     }
   } catch {
