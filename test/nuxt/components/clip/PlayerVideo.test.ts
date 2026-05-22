@@ -1,15 +1,15 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { describe, expect, it } from 'vitest'
 
-import VideoJSPlayer from '~/components/player/VideoJSPlayer.vue'
+import PlayerVideo from '~/components/clip/PlayerVideo.vue'
 
-describe('VideoJSPlayer.vue', () => {
+describe('PlayerVideo.vue', () => {
   it('mounts successfully', async () => {
-    const component = await mountSuspended(VideoJSPlayer, {
+    const component = await mountSuspended(PlayerVideo, {
       props: {
         title: '',
         poster: '',
-        source: '',
+        src: '',
       },
     })
     expect(component.exists()).toBe(true)

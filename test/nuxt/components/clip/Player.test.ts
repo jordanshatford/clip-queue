@@ -1,13 +1,12 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { describe, expect, it } from 'vitest'
+import { clipFromKick, clipFromTwitch } from '~~/test/mocks'
 
-import ClipPlayer from '~/components/ClipPlayer.vue'
+import Player from '~/components/clip/Player.vue'
 
-import { clipFromKick, clipFromTwitch } from '../../mocks'
-
-describe('ClipPlayer.vue', () => {
+describe('Player.vue', () => {
   it('mounts successfully', async () => {
-    const component = await mountSuspended(ClipPlayer, {
+    const component = await mountSuspended(Player, {
       props: {
         clip: clipFromTwitch,
       },
@@ -16,7 +15,7 @@ describe('ClipPlayer.vue', () => {
   })
 
   it('mounts successfully when using video.js', async () => {
-    const component = await mountSuspended(ClipPlayer, {
+    const component = await mountSuspended(Player, {
       props: {
         clip: clipFromKick,
       },
