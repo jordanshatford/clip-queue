@@ -1,5 +1,5 @@
 <template>
-  <UIcon :name="icon" />
+  <UIcon :name="icon" :title="integration?.name" />
 </template>
 
 <script setup lang="ts">
@@ -11,7 +11,7 @@ export interface Props {
 
 const { id } = defineProps<Props>()
 
-const integrations = useIntegrations()
+const integration = useIntegrations().integration(id)
 
-const icon = computed<string | undefined>(() => integrations.integration(id)?.icon)
+const icon = computed<string | undefined>(() => integration?.icon)
 </script>
