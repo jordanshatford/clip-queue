@@ -9,20 +9,7 @@
       {{ m.login() }}
     </UButton>
     <UDropdownMenu v-else v-model:open="open" :items="items">
-      <UButton
-        size="xl"
-        variant="ghost"
-        color="neutral"
-        :avatar="{
-          src: user.details?.profileImageURL,
-          loading: 'lazy',
-          icon: 'lucide:image',
-          chip: {
-            inset: true,
-            color: chipColor,
-          },
-        }"
-      >
+      <UButton size="xl" variant="ghost" color="neutral" :avatar="avatar">
         <span class="hidden sm:block">{{ user.details?.name }}</span>
         <UIcon :name="open ? 'lucide:chevron-up' : 'lucide:chevron-down'" class="hidden sm:block" />
       </UButton>
@@ -31,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import type { DropdownMenuItem, ChipProps } from '@nuxt/ui'
+import type { DropdownMenuItem, AvatarProps } from '@nuxt/ui'
 
 import { m } from '#paraglide/messages'
 import { IntegrationID } from '~/integrations'
@@ -44,19 +31,38 @@ const user = useUser()
 
 const open = ref<boolean>(false)
 
-const items: DropdownMenuItem[] = [
-  {
-    label: m.logout(),
-    icon: 'lucide:log-out',
-    onSelect: async () => {
-      await user.logout()
-      await router.push('/')
+const avatar = computed<AvatarProps>(() => {
+  const color = toColor(
+    integrations.source(IntegrationID.TWITCH)?.status ?? IntegrationStatus.UNKNOWN,
+  )
+  return {
+    src: user.details?.profileImageURL,
+    loading: 'lazy',
+    icon: 'lucide:image',
+    chip: {
+      inset: true,
+      color: color,
     },
-  },
-]
-
-const chipColor = computed<ChipProps['color']>(() => {
-  const status = integrations.source(IntegrationID.TWITCH)?.status
-  return toColor(status ?? IntegrationStatus.UNKNOWN)
+  }
 })
+
+const items = computed<DropdownMenuItem[][]>(() => [
+  [
+    {
+      label: m.settings(),
+      icon: 'lucide:settings',
+      to: '/settings/integrations',
+    },
+  ],
+  [
+    {
+      label: m.logout(),
+      icon: 'lucide:log-out',
+      onSelect: async () => {
+        await user.logout()
+        await router.push('/')
+      },
+    },
+  ],
+])
 </script>
