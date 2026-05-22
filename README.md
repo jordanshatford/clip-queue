@@ -11,7 +11,7 @@
   </p>
 </p>
 
-Clip Queue integrates into a users chat and queues clips submitted in chat by their viewers. Clips can be easily viewed through the web interface.
+Clip Queue integrates into a users chat and queues clips submitted by their viewers. Clips can be easily viewed through the applications interface.
 
 ## Features
 
