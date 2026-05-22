@@ -55,15 +55,6 @@ export const useUpcoming = defineStore('upcoming', () => {
   }
 
   /**
-   * Unshift an item into the upcoming list.
-   * @param clip - The clip to add.
-   * @returns The new length of the upcoming list.
-   */
-  function unshift(clip: Clip): number {
-    return items.value.unshift(clip)
-  }
-
-  /**
    * Get the first element in the upcoming list.
    * @returns The first clip.
    */
@@ -190,7 +181,6 @@ export const useUpcoming = defineStore('upcoming', () => {
     display,
     includes,
     add,
-    unshift,
     shift,
     remove,
     removeBySubmitter,

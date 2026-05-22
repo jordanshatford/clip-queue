@@ -111,7 +111,8 @@ export const useQueue = defineStore('queue', () => {
 
   function previous() {
     if (current.value?.id) {
-      upcoming.unshift(current.value)
+      // Add the current value back to the queue.
+      upcoming.add(current.value)
     }
     const last = history.pop()
     if (last) {
