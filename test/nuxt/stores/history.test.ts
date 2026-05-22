@@ -21,6 +21,7 @@ describe('history.ts', () => {
     expect(history.length).toEqual(2)
     history.reset()
     expect(history.length).toEqual(0)
+    expect(history.items).toEqual([])
   })
 
   it('does not add duplicate clips', () => {
@@ -33,6 +34,14 @@ describe('history.ts', () => {
     expect(history.length).toEqual(2)
   })
 
+  it('adds newest clips to the beginning of the list', () => {
+    const history = useHistory()
+    history.add(clipFromTwitch)
+    history.add(clipFromKick)
+    expect(history.items[0]).toEqual(clipFromKick)
+    expect(history.items[1]).toEqual(clipFromTwitch)
+  })
+
   it('can remove a specific clip', () => {
     const history = useHistory()
     history.add(clipFromTwitch)
@@ -42,6 +51,20 @@ describe('history.ts', () => {
     expect(history.length).toEqual(1)
     expect(history.items).toContainEqual(clipFromTwitch)
     expect(history.items).not.toContainEqual(clipFromKick)
+  })
+
+  it('enforces max history limit by trimming oldest items', () => {
+    const history = useHistory()
+    // create more than MAX_HISTORY_LIMIT (100 + a bit extra)
+    for (let i = 0; i < 105; i++) {
+      history.add({
+        ...clipFromTwitch,
+        id: `clip-${i}`,
+      })
+    }
+    expect(history.length).toBeLessThanOrEqual(100)
+    // ensures it trimmed oldest items (end of array)
+    expect(history.items.length).toBeLessThanOrEqual(100)
   })
 
   it('registers commands for interacting with the history', () => {

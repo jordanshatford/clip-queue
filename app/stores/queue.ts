@@ -114,7 +114,7 @@ export const useQueue = defineStore('queue', () => {
       // Add the current value back to the queue.
       upcoming.add(current.value)
     }
-    const last = history.pop()
+    const last = history.shift()
     if (last) {
       current.value = last
     } else {

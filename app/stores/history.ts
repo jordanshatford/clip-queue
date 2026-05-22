@@ -4,6 +4,16 @@ import { m } from '#paraglide/messages'
 import { toClipUUID, type Clip } from '~/integrations'
 
 /**
+ * Only track this many items in the history at any given time.
+ */
+const MAX_HISTORY_LIMIT: number = 100
+/**
+ * Number of elements to remove when the max history limit is hit. This helps
+ * limit the number of add and removals with quick history usage.
+ */
+const HISTORY_LIMIT_REMOVE: number = 5
+
+/**
  * Store used for tracking history. Contains information about items previously watched.
  */
 export const useHistory = defineStore('history', () => {
@@ -36,7 +46,11 @@ export const useHistory = defineStore('history', () => {
     if (includes(clip)) {
       return
     }
-    items.value.push(clip)
+    items.value.unshift(clip)
+    // Cleanup some of the history
+    if (items.value.length > MAX_HISTORY_LIMIT) {
+      items.value.splice(-HISTORY_LIMIT_REMOVE)
+    }
   }
 
   /**
@@ -47,11 +61,11 @@ export const useHistory = defineStore('history', () => {
   }
 
   /**
-   * Pop an item from the history. I.e used to get the most recent item in history.
+   * Shift an item from the history. I.e used to get the most recent item in history.
    * @returns A clip if one is in the history, undefined otherwise.
    */
-  function pop(): Clip | undefined {
-    return items.value.pop()
+  function shift(): Clip | undefined {
+    return items.value.shift()
   }
 
   /**
@@ -81,7 +95,7 @@ export const useHistory = defineStore('history', () => {
     includes,
     add,
     remove,
-    pop,
+    shift,
     reset,
   }
 })
