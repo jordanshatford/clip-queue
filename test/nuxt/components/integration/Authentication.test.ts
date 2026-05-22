@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { describe, expect, it } from 'vitest'
 
-import IntegrationAuthentication from '~/components/integrations/IntegrationAuthentication.vue'
+import IntegrationAuthentication from '~/components/integration/Authentication.vue'
 import { authentication } from '~/integrations/twitch'
 
 describe('IntegrationAuthentication.vue', () => {

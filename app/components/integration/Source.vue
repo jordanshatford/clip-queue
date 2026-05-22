@@ -46,9 +46,10 @@
 <script setup lang="ts">
 import type { Reactive } from 'vue'
 
+import type { IntegrationSource } from '~/integrations/core'
+
 import { m } from '#paraglide/messages'
-import { IntegrationStatus, type IntegrationSource } from '~/integrations/core'
-import { IntegrationSourceFeature, toColor, toIcon } from '~/integrations/core'
+import { IntegrationStatus, IntegrationSourceFeature, toColor, toIcon } from '~/integrations/core'
 
 const source = defineModel<Reactive<IntegrationSource>>({ required: true })
 

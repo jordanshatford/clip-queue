@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { describe, expect, it } from 'vitest'
 
-import IntegrationCard from '~/components/integrations/IntegrationCard.vue'
+import IntegrationCard from '~/components/integration/Card.vue'
 import { twitch } from '~/integrations/twitch'
 
 describe('IntegrationCard.vue', () => {

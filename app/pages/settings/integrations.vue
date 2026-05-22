@@ -7,7 +7,6 @@
 </template>
 
 <script setup lang="ts">
-import IntegrationCard from '~/components/integrations/IntegrationCard.vue'
 import { integrations } from '~/integrations'
 
 definePageMeta({

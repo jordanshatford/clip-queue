@@ -52,10 +52,5 @@
 import { m } from '#paraglide/messages'
 import { IntegrationID, type Integration } from '~/integrations'
 
-import IntegrationAuthentication from './IntegrationAuthentication.vue'
-import IntegrationIcon from './IntegrationIcon.vue'
-import IntegrationProviders from './IntegrationProviders.vue'
-import IntegrationSource from './IntegrationSource.vue'
-
 const integration = defineModel<Integration>({ required: true })
 </script>

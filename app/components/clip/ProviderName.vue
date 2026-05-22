@@ -10,8 +10,6 @@
 <script setup lang="ts">
 import type { IntegrationID } from '~/integrations'
 
-import IntegrationIcon from '~/components/integrations/IntegrationIcon.vue'
-
 export interface Props {
   id: IntegrationID
 }

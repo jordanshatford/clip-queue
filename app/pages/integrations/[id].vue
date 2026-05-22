@@ -8,8 +8,6 @@
 <script setup lang="ts">
 import type { IntegrationID } from '~/integrations'
 
-import IntegrationIcon from '~/components/integrations/IntegrationIcon.vue'
-
 definePageMeta({
   requiresAuth: false,
   hidden: true,

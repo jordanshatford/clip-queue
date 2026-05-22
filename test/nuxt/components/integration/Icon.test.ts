@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { describe, expect, it } from 'vitest'
 
-import IntegrationIcon from '~/components/integrations/IntegrationIcon.vue'
+import IntegrationIcon from '~/components/integration/Icon.vue'
 import { IntegrationID } from '~/integrations'
 
 describe('IntegrationIcon.vue', () => {

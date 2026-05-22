@@ -52,7 +52,6 @@
 import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
-import IntegrationIcon from '~/components/integrations/IntegrationIcon.vue'
 
 import ClipThumbnail from './ClipThumbnail.vue'
 
