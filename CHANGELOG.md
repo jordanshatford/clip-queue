@@ -1,5 +1,105 @@
 # clip-queue
 
+## 3.0.0
+
+### Major Changes
+
+- feat: migrate repository to use nuxt ([`8220682`](https://github.com/jordanshatford/clip-queue/commit/8220682fc2cdfc4f258fd179632878fc6dbb79f7))
+
+### Minor Changes
+
+- feat: mention integrations on feature cards ([`01b4eb0`](https://github.com/jordanshatford/clip-queue/commit/01b4eb085035ad4969a7677b7577d1cef98f88be))
+
+- feat: show queue size in application navbar ([`44fa141`](https://github.com/jordanshatford/clip-queue/commit/44fa1412dcc8a15fdda144913eb6c3378b0ca8a2))
+
+- feat: use common layout for app and error entrypoints ([`02d4621`](https://github.com/jordanshatford/clip-queue/commit/02d4621fcad2756a8515dc0ff6de5a99f4faac6d))
+
+- feat: limit the maximum number of elements in the queue history ([`0992785`](https://github.com/jordanshatford/clip-queue/commit/0992785db30fcff1360961f29f4e4b3e5ee0d4fe))
+
+- feat: increase ui radius used by nuxt ui ([`62b93f8`](https://github.com/jordanshatford/clip-queue/commit/62b93f8cb00e088eba656b58d192d6d8a999ec19))
+
+- feat: settings item in user dropdown to go to integration settings ([`bfbcd82`](https://github.com/jordanshatford/clip-queue/commit/bfbcd825f8e8b8eca6b0534dedd59fd0357bfd8a))
+
+- feat: use nuxt middleware for authentication handling ([`8220682`](https://github.com/jordanshatford/clip-queue/commit/8220682fc2cdfc4f258fd179632878fc6dbb79f7))
+
+- feat: move visible routes handling to composable ([`b5509a0`](https://github.com/jordanshatford/clip-queue/commit/b5509a0a9348d85298c0e32d82374a30a07512de))
+
+- feat: simplify integration source status indicator ([`d41c0a0`](https://github.com/jordanshatford/clip-queue/commit/d41c0a01922e373f527d2d8654b6d1b69bb4395e))
+
+- feat: replace primevue table with tanstack table and nuxt/ui ([`ec41908`](https://github.com/jordanshatford/clip-queue/commit/ec419082df84c3548cec41f7c68c4f7a3d60f7ac))
+
+- feat: show queue open status in application navbar ([`44fa141`](https://github.com/jordanshatford/clip-queue/commit/44fa1412dcc8a15fdda144913eb6c3378b0ca8a2))
+
+- feat: use route validation to ensure integration auth exists ([`0f42ee9`](https://github.com/jordanshatford/clip-queue/commit/0f42ee9ff3b5f1786ddfab82edd8bc04152c3716))
+
+- feat: use nuxt plugin for auto login ([`8220682`](https://github.com/jordanshatford/clip-queue/commit/8220682fc2cdfc4f258fd179632878fc6dbb79f7))
+
+- feat: allow specifying system as ui theme ([`b050886`](https://github.com/jordanshatford/clip-queue/commit/b0508865223ca2057c71c0b213ce17ce80e412e0))
+
+- feat: update language labeling to be locale in preferences ([`b567b51`](https://github.com/jordanshatford/clip-queue/commit/b567b51e4ef9ccb7e45b4ba4d5dcede8985bdc4b))
+
+- feat: remove duplicate integration status lookup ([`d41c0a0`](https://github.com/jordanshatford/clip-queue/commit/d41c0a01922e373f527d2d8654b6d1b69bb4395e))
+
+- feat: support localizations that use rtl direction ([`25e8fc2`](https://github.com/jordanshatford/clip-queue/commit/25e8fc2783a99e5a097258767368dc12ba2f4f3f))
+
+- feat: add nuxt page transitions when navigating ([`6608973`](https://github.com/jordanshatford/clip-queue/commit/66089732259067a19b8902a52399d03f6186fdf1))
+
+- feat: use tooltip from nuxt/ui ([`8ab9908`](https://github.com/jordanshatford/clip-queue/commit/8ab99088cf83a4875fca40add4c3631320cd3eda))
+
+- feat: use primary and surface colors based on nuxt/ui ([`ec41908`](https://github.com/jordanshatford/clip-queue/commit/ec419082df84c3548cec41f7c68c4f7a3d60f7ac))
+
+- feat: use toast handling from nuxt/ui ([`f2c48d5`](https://github.com/jordanshatford/clip-queue/commit/f2c48d55d1d09d584338cd527e4a82c10659824d))
+
+- feat: add confirmation modal using nuxt/ui ([`c00bdeb`](https://github.com/jordanshatford/clip-queue/commit/c00bdeb43853e4efda77d7df04dbd56f17bbfee9))
+
+- feat: rework clip player components ([`608379c`](https://github.com/jordanshatford/clip-queue/commit/608379c0c06398863527d5c01f8e261e68288743))
+
+- feat: only show logged in user image on mobile ([`63781ff`](https://github.com/jordanshatford/clip-queue/commit/63781ff43481747b736b6e9cb6db46cbaf5fce9e))
+
+- feat: show locale icon in locales select ([`b802c32`](https://github.com/jordanshatford/clip-queue/commit/b802c32cfeb534acfb8de1a04316f7a64036a4d4))
+
+- feat: use nuxt plugin for logger initialization ([`8220682`](https://github.com/jordanshatford/clip-queue/commit/8220682fc2cdfc4f258fd179632878fc6dbb79f7))
+
+- feat: show chat connection status chip in navbar ([`9758f59`](https://github.com/jordanshatford/clip-queue/commit/9758f591f4321b6398006adc1012ae6361483f55))
+
+- feat: initial reworking and setup for nuxt and nuxt/ui ([`44fa141`](https://github.com/jordanshatford/clip-queue/commit/44fa1412dcc8a15fdda144913eb6c3378b0ca8a2))
+
+- feat: add ability to copy logs in settings ([`6bef758`](https://github.com/jordanshatford/clip-queue/commit/6bef758c7dc9669657ae3f514b5e17f8a67691ba))
+
+- feat: migrate to using nuxt/ui theme mode handling ([`a11945b`](https://github.com/jordanshatford/clip-queue/commit/a11945b22367b34a224e0c2fb849f0b36eef68a4))
+
+- feat: allow logging out of integration on integrations page ([`bce970d`](https://github.com/jordanshatford/clip-queue/commit/bce970da99831b1a450f4bf83a0e1f7d8ad21c06))
+
+### Patch Changes
+
+- fix: add error page used by nuxt ([`947a898`](https://github.com/jordanshatford/clip-queue/commit/947a89891c77b19bf24f65a17593bc876660fabf))
+
+- fix: cleanup commands that may have been removed ([`cc5b68b`](https://github.com/jordanshatford/clip-queue/commit/cc5b68b0cc69e37c7a61c67fb8bc787e128b506c))
+
+- fix: issue causing some kick clips to not be detected ([`6245ae1`](https://github.com/jordanshatford/clip-queue/commit/6245ae12acb341f00c9cb3628f734bc27ea8369e))
+
+- fix: remove toast hack in integrations store ([`c9cdc7e`](https://github.com/jordanshatford/clip-queue/commit/c9cdc7e371656304ba10467d0a27c0698fc46a2c))
+
+- fix: properly add item back to queue when going to previous item ([`754affd`](https://github.com/jordanshatford/clip-queue/commit/754affdf6e5c02ea59cb966771752a5ee1593128))
+
+- fix: ensure locale is specified on error page ([`3c87fad`](https://github.com/jordanshatford/clip-queue/commit/3c87fad81180e595878a9f4acac14781420d5628))
+
+- fix: properly type primary and neutral color options ([`6112054`](https://github.com/jordanshatford/clip-queue/commit/6112054fcd94e0bf57066ec722d52c0650a9d187))
+
+- fix: add page meta typing declaration ([`5371e02`](https://github.com/jordanshatford/clip-queue/commit/5371e0216ca2dd5624c42277f0df5a913cca8fca))
+
+- fix: add translations for selected table items ([`05a9dda`](https://github.com/jordanshatford/clip-queue/commit/05a9ddacd6052332ea094efa391b7a6510b22eec))
+
+- fix: remove no longer used primeicons ([`d0548bf`](https://github.com/jordanshatford/clip-queue/commit/d0548bfac577d097526d86b9bbbceb654bf23c69))
+
+- fix: display history table with most recent at the top ([`0992785`](https://github.com/jordanshatford/clip-queue/commit/0992785db30fcff1360961f29f4e4b3e5ee0d4fe))
+
+- fix: improve nuxt head elements and handling ([`bb90401`](https://github.com/jordanshatford/clip-queue/commit/bb904019e847058016674a94418791e65a311e49))
+
+- fix: sizing of integration icon on clip card ([`cd00917`](https://github.com/jordanshatford/clip-queue/commit/cd00917bd904c7d4eb0ed760067253b38c8b04fc))
+
+- fix: localize nuxt ui components ([`25e8fc2`](https://github.com/jordanshatford/clip-queue/commit/25e8fc2783a99e5a097258767368dc12ba2f4f3f))
+
 ## 2.7.0
 
 ### Minor Changes
