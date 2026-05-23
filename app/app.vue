@@ -1,18 +1,11 @@
 <template>
-  <UApp :key="preferences.locale" :locale="preferences.uilocale">
-    <AppHeader />
-    <UMain>
-      <main class="mx-auto h-full max-w-7xl px-4 py-5 text-center sm:px-6 lg:px-8">
-        <NuxtPage />
-      </main>
-    </UMain>
-    <AppFooter />
-  </UApp>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <script setup lang="ts">
 const app = useAppConfig()
-const preferences = usePreferences()
 const queue = useQueue()
 
 useHead({
