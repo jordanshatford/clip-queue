@@ -183,7 +183,14 @@ export const usePreferences = defineStore('preferences', () => {
   )
 
   const primary = useStorage<PrimaryColorName>('__cq_preferences_pcolor', DEFAULT_PRIMARY_COLOR)
+  if (!primaryColors.includes(primary.value)) {
+    primary.value = DEFAULT_PRIMARY_COLOR
+  }
+
   const surface = useStorage<NeutralColorName>('__cq_preferences_scolor', DEFAULT_SURFACE_COLOR)
+  if (!neutralColors.includes(surface.value)) {
+    surface.value = DEFAULT_SURFACE_COLOR
+  }
 
   /**
    * Synchronize primary palette changes.
