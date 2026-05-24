@@ -1,5 +1,11 @@
 # clip-queue
 
+## 3.0.1
+
+### Patch Changes
+
+- fix: ensure primary and surface color are valid ([`7579fca`](https://github.com/jordanshatford/clip-queue/commit/7579fca63eace7e4fe14ed2e0bcd20d28e628798))
+
 ## 3.0.0
 
 ### Major Changes
