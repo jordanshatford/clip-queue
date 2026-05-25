@@ -28,9 +28,22 @@ export interface Integration {
    */
   readonly url: string
   /**
-   * The icon representing the integration as a string SVG.
+   * Branding details for the integration.
    */
-  readonly icon: string
+  readonly branding: {
+    /**
+     * The icon representing the integration as a string Iconify icon.
+     */
+    readonly icon: string
+    /**
+     * The primary color for the integration.
+     */
+    readonly primary: string
+    /**
+     * The optional secondary color for the integration.
+     */
+    readonly secondary?: string
+  }
   /**
    * If the integration is experimental. In most cases this will be true if one of the sub
    * integrations it has it also experimental.

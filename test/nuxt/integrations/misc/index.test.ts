@@ -14,8 +14,10 @@ describe('integrations/misc', () => {
     expect(integration.url).toBe('')
   })
 
-  it('contains an icon', () => {
-    expect(integration.icon).toContain('lucide:')
+  it('contains branding details', () => {
+    expect(integration.branding.icon).toBe('lucide:folder')
+    expect(integration.branding.primary).toBe('')
+    expect(integration.branding.secondary).toBe(undefined)
   })
 
   it('initializes providers', () => {
@@ -40,7 +42,7 @@ describe('integrations/misc', () => {
       id: IntegrationID.MISCELLANEOUS,
       name: 'Miscellaneous',
       url: expect.any(String),
-      icon: expect.any(String),
+      branding: expect.any(Object),
       isExperimental: true,
       providers: expect.any(Array),
     })

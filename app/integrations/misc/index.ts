@@ -23,7 +23,10 @@ export const misc: Integration = {
   id: IntegrationID.MISCELLANEOUS,
   name: 'Miscellaneous',
   url: '',
-  icon: 'lucide:folder',
+  branding: {
+    icon: 'lucide:folder',
+    primary: '',
+  },
   isExperimental: true,
   get isEnabled(): boolean {
     return isEnabled.value

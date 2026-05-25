@@ -14,8 +14,10 @@ describe('integrations/rumble', () => {
     expect(integration.url).toBe('https://www.rumble.com/')
   })
 
-  it('contains an icon', () => {
-    expect(integration.icon).toContain('simple-icons:')
+  it('contains branding details', () => {
+    expect(integration.branding.icon).toBe('simple-icons:rumble')
+    expect(integration.branding.primary).toBe('#85C742')
+    expect(integration.branding.secondary).toBe('#A9B8C3')
   })
 
   it('initializes providers', () => {
@@ -40,7 +42,7 @@ describe('integrations/rumble', () => {
       id: IntegrationID.RUMBLE,
       name: 'Rumble',
       url: expect.any(String),
-      icon: expect.any(String),
+      branding: expect.any(Object),
       isExperimental: false,
       providers: expect.any(Array),
     })

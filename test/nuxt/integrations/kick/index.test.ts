@@ -14,8 +14,10 @@ describe('integrations/kick', () => {
     expect(integration.url).toBe('https://kick.com/')
   })
 
-  it('contains an icon', () => {
-    expect(integration.icon).toContain('simple-icons:')
+  it('contains branding details', () => {
+    expect(integration.branding.icon).toBe('simple-icons:kick')
+    expect(integration.branding.primary).toBe('#00E701')
+    expect(integration.branding.secondary).toBe('#0B0E0F')
   })
 
   it('initializes providers', () => {
@@ -40,7 +42,7 @@ describe('integrations/kick', () => {
       id: IntegrationID.KICK,
       name: 'Kick',
       url: expect.any(String),
-      icon: expect.any(String),
+      branding: expect.any(Object),
       isExperimental: false,
       providers: expect.any(Array),
     })

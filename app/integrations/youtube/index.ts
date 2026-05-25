@@ -15,7 +15,11 @@ export const youtube: Integration = {
   id: IntegrationID.YOUTUBE,
   name: 'YouTube',
   url: 'https://www.youtube.com/',
-  icon: 'simple-icons:youtube',
+  branding: {
+    icon: 'simple-icons:youtube',
+    primary: '#FF0000',
+    secondary: '#FFFFFF',
+  },
   isExperimental: false,
   get isEnabled(): boolean {
     return isEnabled.value

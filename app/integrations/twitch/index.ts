@@ -19,7 +19,11 @@ export const twitch: Integration = {
   id: IntegrationID.TWITCH,
   name: 'Twitch',
   url: 'https://www.twitch.tv/',
-  icon: 'simple-icons:twitch',
+  branding: {
+    icon: 'simple-icons:twitch',
+    primary: '#8956FB',
+    secondary: '#FFFFFF',
+  },
   isExperimental: false,
   // NOTE: currently Twitch cannot be disabled as we rely on it for authentication and chat.
   get isEnabled(): boolean {

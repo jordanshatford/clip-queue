@@ -17,7 +17,11 @@ export const kick: Integration = {
   id: IntegrationID.KICK,
   name: 'Kick',
   url: 'https://kick.com/',
-  icon: 'simple-icons:kick',
+  branding: {
+    icon: 'simple-icons:kick',
+    primary: '#00E701',
+    secondary: '#0B0E0F',
+  },
   isExperimental: false,
   get isEnabled(): boolean {
     return isEnabled.value

@@ -14,8 +14,10 @@ describe('integrations/twitch', () => {
     expect(integration.url).toBe('https://www.twitch.tv/')
   })
 
-  it('contains an icon', () => {
-    expect(integration.icon).toContain('simple-icons:')
+  it('contains branding details', () => {
+    expect(integration.branding.icon).toBe('simple-icons:twitch')
+    expect(integration.branding.primary).toBe('#8956FB')
+    expect(integration.branding.secondary).toBe('#FFFFFF')
   })
 
   it('initializes providers', () => {
@@ -40,7 +42,7 @@ describe('integrations/twitch', () => {
       id: IntegrationID.TWITCH,
       name: 'Twitch',
       url: expect.any(String),
-      icon: expect.any(String),
+      branding: expect.any(Object),
       isExperimental: false,
       providers: expect.any(Array),
     })

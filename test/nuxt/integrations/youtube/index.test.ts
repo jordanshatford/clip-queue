@@ -14,8 +14,10 @@ describe('integrations/youtube', () => {
     expect(integration.url).toBe('https://www.youtube.com/')
   })
 
-  it('contains an icon', () => {
-    expect(integration.icon).toContain('simple-icons:')
+  it('contains branding details', () => {
+    expect(integration.branding.icon).toBe('simple-icons:youtube')
+    expect(integration.branding.primary).toBe('#FF0000')
+    expect(integration.branding.secondary).toBe('#FFFFFF')
   })
 
   it('initializes providers', () => {
@@ -40,7 +42,7 @@ describe('integrations/youtube', () => {
       id: IntegrationID.YOUTUBE,
       name: 'YouTube',
       url: expect.any(String),
-      icon: expect.any(String),
+      branding: expect.any(Object),
       isExperimental: false,
       providers: expect.any(Array),
     })
