@@ -7,7 +7,6 @@
   "amber": "العنبر",
   "application": "طلب",
   "application_version": "إصدار التطبيق: v {version}",
-  "authentication_for_integration": "تم التحقق من الهوية على النحو التالي:",
   "auto_mod": "الإشراف التلقائي",
   "auto_mod_colon": "الإشراف التلقائي:",
   "auto_mod_description": "عندما يتم حذف رسالة الدردشة الخاصة بالمستخدم، أو انتهاء وقتها، أو حظره، فسيتم حذف المقاطع التي أرسلها.",

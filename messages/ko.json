@@ -7,7 +7,6 @@
   "amber": "호박색",
   "application": "애플리케이션",
   "application_version": "애플리케이션 버전: v {version}",
-  "authentication_for_integration": "인증된 사용자:",
   "auto_mod": "자동 검열",
   "auto_mod_colon": "자동 검열:",
   "auto_mod_description": "사용자의 채팅 메시지가 삭제되거나, 이용 시간이 초과되거나, 차단되면 해당 사용자가 제출한 영상 클립도 삭제됩니다.",

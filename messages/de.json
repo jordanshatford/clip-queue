@@ -7,7 +7,6 @@
   "amber": "Bernstein",
   "application": "Anwendung",
   "application_version": "Anwendungsversion: v {version}",
-  "authentication_for_integration": "Authentifiziert als:",
   "auto_mod": "Automatische Moderation",
   "auto_mod_colon": "Automatische Moderation:",
   "auto_mod_description": "Wenn die Chatnachricht eines Nutzers gelöscht wird, sein Konto gesperrt wird oder er gesperrt wird, werden auch die von ihm eingereichten Clips entfernt.",

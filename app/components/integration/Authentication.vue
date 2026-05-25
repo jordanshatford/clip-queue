@@ -1,5 +1,5 @@
 <template>
-  <UFormField :label="m.authentication_for_integration()">
+  <div>
     <UBadge
       v-if="authentication.isLoggedIn"
       color="neutral"
@@ -33,7 +33,7 @@
         >{{ m.login() }}</UButton
       >
     </UBadge>
-  </UFormField>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -43,8 +43,9 @@ import type { IntegrationAuthentication } from '~/integrations/core'
 
 import { m } from '#paraglide/messages'
 
-const integrations = useIntegrations()
 const authentication = defineModel<Reactive<IntegrationAuthentication>>({ required: true })
+
+const integrations = useIntegrations()
 
 async function logout(): Promise<void> {
   // Disconnect the integrations source as current we rely on the authenticatino to use the source.

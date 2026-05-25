@@ -7,7 +7,6 @@
   "amber": "Amber",
   "application": "Başvuru",
   "application_version": "Uygulama sürümü: v {version}",
-  "authentication_for_integration": "Doğrulandı:",
   "auto_mod": "Otomatik Moderasyon",
   "auto_mod_colon": "Otomatik Moderasyon:",
   "auto_mod_description": "Bir kullanıcının sohbet mesajı silindiğinde, zaman aşımına uğradığında veya yasaklandığında, gönderdiği videolar da kaldırılacaktır.",

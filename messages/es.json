@@ -7,7 +7,6 @@
   "amber": "Ámbar",
   "application": "Solicitud",
   "application_version": "Versión de la aplicación: v {version}",
-  "authentication_for_integration": "Autenticado como:",
   "auto_mod": "Automoderación",
   "auto_mod_colon": "Moderación automática:",
   "auto_mod_description": "Cuando se elimina el mensaje de chat de un usuario, se le suspende el servicio temporalmente o se le bloquea, los vídeos que haya enviado serán eliminados.",

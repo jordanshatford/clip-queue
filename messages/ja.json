@@ -7,7 +7,6 @@
   "amber": "アンバー",
   "application": "応用",
   "application_version": "アプリケーションバージョン: v {version}",
-  "authentication_for_integration": "認証済み:",
   "auto_mod": "自動モデレーション",
   "auto_mod_colon": "自動モデレーション:",
   "auto_mod_description": "ユーザーのチャットメッセージが削除された場合、タイムアウトになった場合、またはアカウントが停止された場合、そのユーザーが投稿した動画クリップは削除されます。",
