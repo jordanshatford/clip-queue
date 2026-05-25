@@ -1,6 +1,11 @@
 <template>
   <UFormField :label="m.authentication_for_integration()">
-    <UBadge color="neutral" variant="soft" class="flex w-full justify-between rounded-full">
+    <UBadge
+      v-if="authentication.isLoggedIn"
+      color="neutral"
+      variant="soft"
+      class="flex w-full justify-between rounded-full"
+    >
       <UUser
         :name="authentication.user?.name"
         :avatar="{
@@ -16,6 +21,16 @@
         variant="subtle"
         @click="logout()"
         >{{ m.logout() }}</UButton
+      >
+    </UBadge>
+    <UBadge v-else color="neutral" variant="soft" class="flex w-full justify-between rounded-full">
+      <UButton
+        :disabled="authentication.isLoggedIn"
+        class="w-full justify-center rounded-full"
+        color="neutral"
+        variant="subtle"
+        @click="authentication.redirect()"
+        >{{ m.login() }}</UButton
       >
     </UBadge>
   </UFormField>
