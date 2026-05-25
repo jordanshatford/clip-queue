@@ -1,11 +1,20 @@
 <template>
   <UCard class="mx-auto max-w-2xl" variant="subtle">
     <div class="flex w-full items-center justify-between gap-2">
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 align-middle">
         <IntegrationIcon :id="integration.id" class="size-5" />
-        <span class="font-medium">
-          {{ integration.name }}
-        </span>
+        <a
+          v-if="integration.url"
+          :href="integration.url"
+          target="_blank"
+          rel="noreferrer"
+          class="flex items-center gap-2 no-underline"
+        >
+          <span class="font-medium">
+            {{ integration.name }}
+          </span>
+          <UIcon name="lucide:external-link" class="size-3" />
+        </a>
         <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
           {{ integration.id }}
         </UBadge>
