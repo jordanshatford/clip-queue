@@ -169,7 +169,7 @@
   "size_limit_description": "Número de clips permitidos en la cola. Déjelo en blanco para no tener límite.",
   "sky": "Cielo",
   "slate": "Pizarra",
-  "source_for_integration": "Fuentes de contenido:",
+  "source_for_integration": "Fuente del contenido:",
   "stone": "Piedra",
   "submitter": "Remitente",
   "submitter_name": "Remitente: {name}",

@@ -27,14 +27,13 @@
         </div>
         <USwitch :id="source.id" v-model="source.isEnabled" :loading="source.isLoading" />
       </div>
-      <UInput id="username" variant="outline" readonly :value="source.url" class="w-full" />
       <div class="flex gap-2">
         <UBadge
           v-for="feature of source.features"
           :key="feature"
+          icon="lucide:check"
           color="neutral"
-          variant="soft"
-          class="font-mono"
+          variant="subtle"
         >
           {{ featureTranslations[feature]() }}
         </UBadge>

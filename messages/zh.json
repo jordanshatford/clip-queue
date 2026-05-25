@@ -164,7 +164,7 @@
   "settings": "设置",
   "settings_other": "其他",
   "settings_preferences": "偏好",
-  "settings_reset": "设置已重置为默认值。",
+  "settings_reset": "设置将重置为默认值。",
   "size_limit": "尺寸限制：",
   "size_limit_description": "队列中允许的视频片段数量。留空则无限制。",
   "sky": "天空",

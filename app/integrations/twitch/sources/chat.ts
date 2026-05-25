@@ -28,10 +28,6 @@ export class TwitchChatSource
   public readonly id: IntegrationID = IntegrationID.TWITCH_CHAT
   public readonly name: string = 'Twitch Chat'
 
-  public get url(): string {
-    return `twitch.tv/${this.channel}/chat`
-  }
-
   public readonly features: IntegrationSourceFeature[] = [
     IntegrationSourceFeature.AUTOMOD,
     IntegrationSourceFeature.COMMANDS,

@@ -128,10 +128,6 @@ export type IntegrationSource = {
    */
   readonly name: string
   /**
-   * The URL to the source.
-   */
-  readonly url?: string
-  /**
    * List of features the source supports.
    */
   readonly features: IntegrationSourceFeature[]
