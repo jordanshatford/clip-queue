@@ -1,5 +1,5 @@
 <template>
-  <UHeader>
+  <UHeader :toggle="routes.all.value.length > 0">
     <template #left>
       <NuxtLink to="/" class="mr-2 flex shrink-0 items-center">
         <img class="size-9" src="~/assets/images/icon.png" />
