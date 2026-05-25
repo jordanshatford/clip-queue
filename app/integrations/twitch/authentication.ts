@@ -48,8 +48,9 @@ export class TwitchAuthentication implements IntegrationAuthentication {
     return this.user
   }
 
-  public async login(hash: string): Promise<UserDetails> {
-    const authInfo = auth.login(hash, state.value)
+  public async login(fullPath: string): Promise<UserDetails> {
+    const url = new URL(fullPath, window.location.origin)
+    const authInfo = auth.login(url.hash, state.value)
     state.value = undefined
     if (authInfo === null) {
       throw new Error('Failed to parse authentication information from URL hash.')

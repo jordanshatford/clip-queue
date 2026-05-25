@@ -8,8 +8,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const user = useUser()
 
   // Handle integration login flow with callback and hash.
-  if (to.name === 'integrations-id' && to.hash && !user.isLoggedIn) {
-    await user.login(to.hash)
+  if (to.name === 'integrations-id' && !user.isLoggedIn) {
+    await user.login(to.fullPath)
     logger.debug(`[Router]: User logged in via Twitch ${user.details?.name}.`)
     return navigateTo('/queue')
   }
