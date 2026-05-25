@@ -181,12 +181,3 @@ async function deleteClips(): Promise<void> {
   }
 }
 </script>
-
-<style scoped>
-:deep(.p-datatable-header),
-:deep(.p-datatable-header-cell),
-:deep(.p-datatable-tbody > tr),
-:deep(.p-paginator) {
-  background: transparent !important;
-}
-</style>
