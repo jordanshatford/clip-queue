@@ -73,7 +73,10 @@ describe('integrations/core/utils', () => {
   ])(
     'converts a submitter uuid to a source and submitter: (uuid: %s) -> (%s, %s)',
     (uuid: string, expectedSource: IntegrationID, expectedSubmitter: string) => {
-      expect(fromSubmitterUUID(uuid)).toEqual([expectedSource, expectedSubmitter])
+      expect(fromSubmitterUUID(uuid)).toEqual({
+        source: expectedSource,
+        submitter: expectedSubmitter,
+      })
     },
   )
 })
