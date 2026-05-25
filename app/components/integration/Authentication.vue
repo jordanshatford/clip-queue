@@ -28,7 +28,6 @@ import type { IntegrationAuthentication } from '~/integrations/core'
 
 import { m } from '#paraglide/messages'
 
-const router = useRouter()
 const integrations = useIntegrations()
 const authentication = defineModel<Reactive<IntegrationAuthentication>>({ required: true })
 
@@ -37,6 +36,6 @@ async function logout(): Promise<void> {
   // In the future we can determine if a source requires the authentication to function.
   const source = integrations.integration(authentication.value.id)?.source
   await Promise.all([source?.disconnect?.(), authentication.value.logout()])
-  await router.push('/')
+  await navigateTo('/')
 }
 </script>

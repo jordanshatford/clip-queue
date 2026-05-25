@@ -24,8 +24,6 @@ import { m } from '#paraglide/messages'
 import { IntegrationID } from '~/integrations'
 import { IntegrationStatus, toColor } from '~/integrations/core'
 
-const router = useRouter()
-
 const integrations = useIntegrations()
 const user = useUser()
 
@@ -60,7 +58,7 @@ const items = computed<DropdownMenuItem[][]>(() => [
       icon: 'lucide:log-out',
       onSelect: async () => {
         await user.logout()
-        await router.push('/')
+        await navigateTo('/')
       },
     },
   ],

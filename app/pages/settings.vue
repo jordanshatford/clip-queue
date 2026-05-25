@@ -20,7 +20,6 @@ definePageMeta({
   order: 3,
 })
 
-const router = useRouter()
 const route = useRoute()
 const routes = useVisibleRoutes()
 
@@ -29,7 +28,7 @@ const active = computed<string>({
     return route.path
   },
   set(tab: string) {
-    router.push(tab)
+    navigateTo(tab)
   },
 })
 </script>
