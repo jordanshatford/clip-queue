@@ -30,14 +30,9 @@ export class TwitchAuthentication implements IntegrationAuthentication {
   }
 
   public async redirect(): Promise<void> {
-    const runtime = useRuntimeConfig()
+    const config = useRuntimeConfig().public.twitch
     state.value = Math.random().toString(36).substring(2)
-    auth.redirect(
-      runtime.public.twitchClientId,
-      runtime.public.twitchRedirectUri,
-      ['openid', 'chat:read'],
-      state.value,
-    )
+    auth.redirect(config.clientId, config.redirectUri, ['openid', 'chat:read'], state.value)
   }
 
   public async autoLogin(): Promise<UserDetails> {
@@ -85,10 +80,10 @@ export class TwitchAuthentication implements IntegrationAuthentication {
     token.value = undefined
     user.value = undefined
     this.isLoggedIn = false
-    const runtime = useRuntimeConfig()
-    if (token) {
+    if (t) {
+      const config = useRuntimeConfig().public.twitch
       try {
-        await auth.logout(runtime.public.twitchClientId, t)
+        await auth.logout(config.clientId, t)
       } catch (e) {
         throw new Error(`[Twitch]: Failed to logout, ${e}`)
       }
@@ -100,8 +95,8 @@ export class TwitchAuthentication implements IntegrationAuthentication {
     // or the user may have a preferred username that is different from their Twitch username.
     // For example, if the user has simplified chinese characters in their preferred username.
     try {
-      const runtime = useRuntimeConfig()
-      const users = await getUsers(runtime.public.twitchClientId, this.token, [])
+      const config = useRuntimeConfig().public.twitch
+      const users = await getUsers(config.clientId, this.token, [])
       if (users.length > 0 && users[0]) {
         return {
           ...user.value,

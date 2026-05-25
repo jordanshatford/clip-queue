@@ -26,8 +26,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       version: pkg.version,
-      twitchClientId: '',
-      twitchRedirectUri: '',
+      twitch: {
+        clientId: '',
+        redirectUri: '',
+      },
     },
   },
   alias: {

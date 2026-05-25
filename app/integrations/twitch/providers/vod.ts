@@ -46,8 +46,8 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
       return this.cache[id]
     }
     try {
-      const runtime = useRuntimeConfig()
-      const videos = await getVideos(runtime.public.twitchClientId, this.token(), [id])
+      const config = useRuntimeConfig().public.twitch
+      const videos = await getVideos(config.clientId, this.token(), [id])
       const video = videos[0]
       if (!video) {
         throw new Error(`[${this.name}]: VOD not found for ID ${id}.`)
