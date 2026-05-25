@@ -13,7 +13,7 @@ export * from './core/types'
 export const authentication = reactive<TwitchAuthentication>(new TwitchAuthentication())
 export const clips = reactive(new TwitchClipProvider(() => authentication.token))
 export const vods = reactive(new TwitchVodProvider(() => authentication.token))
-export const chat = reactive(new TwitchChatSource())
+export const chat = reactive(new TwitchChatSource(() => authentication.user.name))
 
 export const twitch: Integration = {
   id: IntegrationID.TWITCH,

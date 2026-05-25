@@ -25,9 +25,9 @@ export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationPr
     isEnabled.value = value
   }
 
-  private token: () => string | Promise<string>
+  private token: () => string
 
-  public constructor(token: () => string | Promise<string>) {
+  public constructor(token: () => string) {
     super()
     this.token = token
   }
@@ -46,14 +46,12 @@ export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationPr
     }
     try {
       const runtime = useRuntimeConfig()
-      const clips = await getClips(runtime.public.twitchClientId, await this.token(), [id])
+      const clips = await getClips(runtime.public.twitchClientId, this.token(), [id])
       const clip = clips[0]
       if (!clip) {
         throw new Error(`[${this.name}]: Clip not found for ID ${id}.`)
       }
-      const games = await getGames(runtime.public.twitchClientId, await this.token(), [
-        clip.game_id,
-      ])
+      const games = await getGames(runtime.public.twitchClientId, this.token(), [clip.game_id])
       const response: Clip = {
         id: clip.id,
         title: clip.title,

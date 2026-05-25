@@ -50,9 +50,9 @@ export class TwitchChatSource
     // or disconnecting in a different order to ensure connecting and disconnecting
     // works as intended.
     isLoading.value = true
-    if (value && this.channel) {
+    if (value) {
       isEnabled.value = value
-      this.connect(this.channel)
+      this.connect()
     } else {
       this.disconnect()
       isEnabled.value = value
@@ -63,6 +63,9 @@ export class TwitchChatSource
     if (!this.isEnabled) {
       return IntegrationStatus.DISABLED
     }
+    if (!this.channel()) {
+      return IntegrationStatus.MISCONFIGURED
+    }
     return status.value
   }
 
@@ -70,7 +73,7 @@ export class TwitchChatSource
     return reason.value
   }
 
-  private channel?: string
+  private channel: () => string
   private chat = new Client({ token: undefined, channels: [] })
 
   private timestamp(): string {
@@ -93,17 +96,19 @@ export class TwitchChatSource
     this.handleStatusUpdate(IntegrationStatus.ERROR, reason)
   }
 
-  public constructor() {
+  public constructor(channel: () => string) {
     super()
+    this.channel = channel
 
     // Hook into chat events from tmi.js/chat that we require for our application.
     // Each event gets used and re-routed into the structure our sources use.
     this.chat.on('connect', async () => {
       // Whenever we connect to the source, automatically connect to the channel we want.
       // Until then assume connection is not fully completed.
-      if (this.channel) {
+      const channel = this.channel()
+      if (channel) {
         try {
-          await this.chat.join(this.channel)
+          await this.chat.join(channel)
         } catch (e) {
           this.handleError(e)
         }
@@ -200,10 +205,8 @@ export class TwitchChatSource
     })
   }
 
-  public async connect(channel: string): Promise<void> {
-    // When connecting always set the channel to ensure that the class has the value
-    // configured by the user. If the source is disabled, do not actually connect it.
-    this.channel = channel
+  public async connect(): Promise<void> {
+    // If the source is disabled, do not actually connect it.
     if (!this.isEnabled) {
       return
     }

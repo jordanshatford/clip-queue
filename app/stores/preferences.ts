@@ -33,6 +33,8 @@ export const primaryColors = [
 
 export type PrimaryColorName = (typeof primaryColors)[number]
 
+export const DEFAULT_PRIMARY_COLOR: PrimaryColorName = 'purple'
+
 /**
  * Neutral colors available for selection.
  */
@@ -50,8 +52,7 @@ export const neutralColors = [
 
 export type NeutralColorName = (typeof neutralColors)[number]
 
-export const DEFAULT_PRIMARY_COLOR: PrimaryColorName = primaryColors[13]! // Purple
-export const DEFAULT_SURFACE_COLOR: NeutralColorName = neutralColors[3]! // Neutral
+export const DEFAULT_SURFACE_COLOR: NeutralColorName = 'neutral'
 
 /**
  * Details for each color available for selection as a primary or neutral color.

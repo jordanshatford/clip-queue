@@ -25,9 +25,9 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
     isEnabled.value = value
   }
 
-  private token: () => string | Promise<string>
+  private token: () => string
 
-  public constructor(token: () => string | Promise<string>) {
+  public constructor(token: () => string) {
     super()
     this.token = token
   }
@@ -47,7 +47,7 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
     }
     try {
       const runtime = useRuntimeConfig()
-      const videos = await getVideos(runtime.public.twitchClientId, await this.token(), [id])
+      const videos = await getVideos(runtime.public.twitchClientId, this.token(), [id])
       const video = videos[0]
       if (!video) {
         throw new Error(`[${this.name}]: VOD not found for ID ${id}.`)

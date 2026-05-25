@@ -314,12 +314,9 @@ export const useIntegrations = defineStore('integrations', () => {
       if (!integration.isEnabled) {
         continue
       }
-      const username = integration.authentication?.user?.name
-      if (integration.source && username) {
-        logger.debug(
-          `[Integrations]: Connecting to ${integration.source.name} source as ${username}.`,
-        )
-        await integration.source.connect(username)
+      if (integration.source && integration.authentication?.isLoggedIn) {
+        logger.debug(`[Integrations]: Connecting to ${integration.source.name}.`)
+        await integration.source.connect()
       }
     }
   }

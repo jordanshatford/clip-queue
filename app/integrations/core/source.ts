@@ -153,11 +153,10 @@ export type IntegrationSource = {
    */
   readonly reason?: string
   /**
-   * Connect to a source with the provided channel.
-   * @param channel - The channel to join.
+   * Connect to the source.
    * @returns A promise that resolves when the source is connected.
    */
-  connect: (channel: string) => Awaitable<void>
+  connect: () => Awaitable<void>
   /**
    * Disconnect from the source.
    * @returns A promise that resolves when the source is disconnected.

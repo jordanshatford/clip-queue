@@ -41,14 +41,14 @@ export function getAllURLsFromText(text: string): string[] {
  * @param uuid - the UUID of the submitter.
  * @returns the source and submitter from the UUID.
  */
-export function fromSubmitterUUID(uuid: string): [IntegrationID, string] {
+export function fromSubmitterUUID(uuid: string): { source: IntegrationID; submitter: string } {
   // Format of the UUID is either `source:submitter` or just `submitter`.
   // In the latter case, the source is unknown.
   const [submitter = '', source] = uuid.split(':').reverse()
   if (!source) {
-    return [IntegrationID.UNKNOWN, submitter]
+    return { source: IntegrationID.UNKNOWN, submitter }
   }
-  return [source as IntegrationID, submitter]
+  return { source: source as IntegrationID, submitter }
 }
 
 /**
