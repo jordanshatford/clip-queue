@@ -3,12 +3,15 @@ import { clipFromKick, clipFromTwitch } from '~~/test/mocks'
 
 import type { Clip } from '~/integrations/core/provider'
 
+import { IntegrationStatus } from '~/integrations/core'
 import {
   toStorageKey,
   toClipUUID,
   fromSubmitterUUID,
   getAllURLsFromText,
   toSubmitterUUID,
+  toColor,
+  toIcon,
 } from '~/integrations/core/utils'
 import { IntegrationID } from '~/integrations/indentify'
 
@@ -76,6 +79,32 @@ describe('integrations/core/utils', () => {
         source: expectedSource,
         submitter: expectedSubmitter,
       })
+    },
+  )
+
+  it.each([
+    [IntegrationStatus.DISABLED, 'neutral'],
+    [IntegrationStatus.MISCONFIGURED, 'error'],
+    [IntegrationStatus.ERROR, 'error'],
+    [IntegrationStatus.UNKNOWN, 'warning'],
+    [IntegrationStatus.HEALTHY, 'success'],
+  ])(
+    'converts an integrations status to a color: (status: %s) -> %s',
+    (status: IntegrationStatus, expected: string) => {
+      expect(toColor(status)).toEqual(expected)
+    },
+  )
+
+  it.each([
+    [IntegrationStatus.DISABLED, 'lucide:circle-stop'],
+    [IntegrationStatus.MISCONFIGURED, 'lucide:circle-alert'],
+    [IntegrationStatus.ERROR, 'lucide:circle-alert'],
+    [IntegrationStatus.UNKNOWN, 'lucide:triangle-alert'],
+    [IntegrationStatus.HEALTHY, 'lucide:circle-check'],
+  ])(
+    'converts an integrations status to an icon: (status: %s) -> %s',
+    (status: IntegrationStatus, expected: string) => {
+      expect(toIcon(status)).toEqual(expected)
     },
   )
 })

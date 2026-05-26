@@ -8,14 +8,6 @@
             {{ source.id }}
           </UBadge>
           <UBadge
-            size="sm"
-            :icon="toIcon(source.status)"
-            :color="toColor(source.status)"
-            variant="subtle"
-          >
-            {{ statusTranslations[source.status]() }}
-          </UBadge>
-          <UBadge
             v-if="source.isExperimental"
             icon="lucide:triangle-alert"
             color="warning"
@@ -25,9 +17,19 @@
             {{ m.experimental() }}
           </UBadge>
         </div>
-        <USwitch :id="source.id" v-model="source.isEnabled" :loading="source.isLoading" />
+        <div class="flex gap-2">
+          <UBadge
+            size="sm"
+            :icon="toIcon(source.status)"
+            :color="toColor(source.status)"
+            variant="subtle"
+          >
+            {{ statusTranslations[source.status]() }}
+          </UBadge>
+          <USwitch :id="source.id" v-model="source.isEnabled" :loading="source.isLoading" />
+        </div>
       </div>
-      <div class="flex gap-2">
+      <div class="flex flex-wrap gap-2">
         <UBadge
           v-for="feature of source.features"
           :key="feature"
