@@ -1,7 +1,8 @@
 import { useStorage } from '@vueuse/core'
 
+import type { Clip, IntegrationID } from '~/integrations'
+
 import { m } from '#paraglide/messages'
-import { type Clip, toClipUUID, type IntegrationID } from '~/integrations'
 
 export const useUpcoming = defineStore('upcoming', () => {
   /**
@@ -30,7 +31,7 @@ export const useUpcoming = defineStore('upcoming', () => {
    * @returns True if the clip is present, false otherwise.
    */
   function includes(clip: Clip): boolean {
-    return items.value.some((c) => toClipUUID(c) === toClipUUID(clip))
+    return items.value.some((c) => useClip(c).equals(clip))
   }
 
   /**
@@ -40,7 +41,7 @@ export const useUpcoming = defineStore('upcoming', () => {
    */
   function add(clip: Clip): void {
     if (includes(clip)) {
-      const index = items.value.findIndex((c) => toClipUUID(c) === toClipUUID(clip))
+      const index = items.value.findIndex((c) => useClip(c).equals(clip))
       const submitters = items.value[index]?.submitters ?? []
       const submitter = clip.submitters[0]?.toLowerCase()
       const existing = items.value[index]
@@ -67,7 +68,7 @@ export const useUpcoming = defineStore('upcoming', () => {
    * @param clip - The clip to remove.
    */
   function remove(clip: Clip): void {
-    const index = items.value.findIndex((c) => toClipUUID(c) === toClipUUID(clip))
+    const index = items.value.findIndex((c) => useClip(c).equals(clip))
     const submitter = clip.submitters[0]?.toLowerCase()
     if (index > -1 && submitter) {
       removeSubmitterFromClip(submitter, index)

@@ -11,10 +11,7 @@
         </span>
       </p>
       <div class="text-xs">
-        <p v-if="data.category">{{ data.channel }} - {{ data.category }}</p>
-        <p v-else>
-          {{ data.channel }}
-        </p>
+        <p>{{ extras.subtitle }}</p>
       </div>
     </div>
   </div>
@@ -28,4 +25,6 @@ export interface Props {
 }
 
 const { data } = defineProps<Props>()
+
+const extras = useClip(data)
 </script>

@@ -3,7 +3,6 @@ import { StorageSerializers, useStorage } from '@vueuse/core'
 import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
-import { toClipUUID } from '~/integrations/core'
 
 /**
  * Settings related to queue store.
@@ -72,7 +71,7 @@ export const useQueue = defineStore('queue', () => {
     }
     // Ignore when we have previously watched it
     const hasBeenWatched =
-      (current.value && toClipUUID(current.value) === toClipUUID(clip)) || history.includes(clip)
+      (current.value && useClip(current.value).equals(clip)) || history.includes(clip)
     if (hasBeenWatched && !settings.value.duplicates) {
       return
     }

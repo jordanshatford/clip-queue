@@ -2,7 +2,7 @@
   <div class="flex flex-col">
     <ClipPlayer
       v-if="queue.current && queue.current.id"
-      :key="toClipUUID(queue.current)"
+      :key="useClip(queue.current).uuid"
       :clip="queue.current"
       :previous-disabled="queue.history.length === 0"
       @previous="queue.previous()"
@@ -23,7 +23,6 @@
 
 <script setup lang="ts">
 import { m } from '#paraglide/messages'
-import { toClipUUID } from '~/integrations'
 
 definePageMeta({
   requiresAuth: true,

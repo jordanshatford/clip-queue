@@ -1,7 +1,8 @@
 import { useStorage } from '@vueuse/core'
 
+import type { Clip } from '~/integrations'
+
 import { m } from '#paraglide/messages'
-import { toClipUUID, type Clip } from '~/integrations'
 
 /**
  * Only track this many items in the history at any given time.
@@ -35,7 +36,7 @@ export const useHistory = defineStore('history', () => {
    * @returns True if the clip is in the history, false otherwise.
    */
   function includes(clip: Clip): boolean {
-    return items.value.some((c) => toClipUUID(c) === toClipUUID(clip))
+    return items.value.some((c) => useClip(c).equals(clip))
   }
 
   /**
@@ -57,7 +58,7 @@ export const useHistory = defineStore('history', () => {
    * Remove an item from the history.
    */
   function remove(clip: Clip): void {
-    items.value = items.value.filter((c) => toClipUUID(c) !== toClipUUID(clip))
+    items.value = items.value.filter((c) => !useClip(c).equals(clip))
   }
 
   /**

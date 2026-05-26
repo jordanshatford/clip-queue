@@ -15,12 +15,12 @@
       </div>
     </template>
     <span :title="clip.title" class="line-clamp-1 font-normal">{{ clip.title }}</span>
-    <span :title="subtitle" class="line-clamp-1 text-sm">{{ subtitle }}</span>
+    <span :title="extras.subtitle" class="line-clamp-1 text-sm">{{ extras.subtitle }}</span>
     <div class="text-xs">
       <p class="line-clamp-1">
-        {{ m.submitter_name({ name: clip.submitters[0] ?? '' }) }}
-        <UBadge v-if="totalSubmitters" size="sm" color="neutral" variant="soft">
-          {{ totalSubmitters }}
+        {{ m.submitter_name({ name: extras.submitter }) }}
+        <UBadge v-if="extras.count" size="sm" color="neutral" variant="soft">
+          {{ extras.count }}
         </UBadge>
       </p>
     </div>
@@ -59,19 +59,7 @@ export interface Props {
 
 const { clip } = defineProps<Props>()
 
-const subtitle = computed(() => {
-  if (clip.category) {
-    return `${clip.channel} - ${clip.category}`
-  }
-  return clip.channel
-})
-
-const totalSubmitters = computed((): string | undefined => {
-  if (clip.submitters.length < 2) {
-    return undefined
-  }
-  return `${clip.submitters.length > 9999 ? '9999+' : clip.submitters.length}`
-})
+const extras = useClip(clip)
 
 const emit = defineEmits<{
   (e: 'play' | 'remove' | 'add'): void

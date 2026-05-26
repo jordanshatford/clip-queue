@@ -32,12 +32,12 @@
       </div>
     </div>
     <div class="flex flex-col gap-1 text-sm font-normal">
-      <span>
-        {{ clip.channel }}
-        <span v-if="clip.category"> - {{ clip.category }} </span>
-        <span v-if="clip.submitters[0]">
-          - {{ m.submitter_name({ name: clip.submitters[0] }) }}</span
-        >
+      <span class="flex gap-1 align-middle">
+        {{ extras.subtitle }}
+        <span v-if="extras.submitter"> - {{ m.submitter_name({ name: extras.submitter }) }}</span>
+        <UBadge v-if="extras.count" size="sm" color="neutral" variant="soft">
+          {{ extras.count }}
+        </UBadge>
       </span>
       <ClipProviderName :id="clip.provider" />
     </div>
@@ -67,6 +67,8 @@ onKeyDown('ArrowRight', () => {
   logger.debug('[Player]: right arrow pressed.')
   emit('next')
 })
+
+const extras = useClip(clip)
 
 const emit = defineEmits<{
   (e: 'previous' | 'next'): void

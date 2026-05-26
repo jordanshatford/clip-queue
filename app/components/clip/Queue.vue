@@ -31,7 +31,7 @@
     <div class="flex items-stretch gap-2 overflow-x-auto px-1 py-3">
       <ClipCard
         v-for="clip in clips"
-        :key="toClipUUID(clip)"
+        :key="useClip(clip).uuid"
         :clip
         @play="emit('play', clip)"
         @remove="emit('remove', clip)"
@@ -44,7 +44,6 @@
 import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
-import { toClipUUID } from '~/integrations'
 
 export interface Props {
   title?: string

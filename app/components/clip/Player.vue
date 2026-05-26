@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Clip, PlayerConfig } from '~/integrations/core'
+import type { Clip } from '~/integrations/core'
 
 export interface Props {
   clip: Clip
@@ -28,8 +28,5 @@ const emit = defineEmits<{
   (e: 'previous' | 'next'): void
 }>()
 
-const integrations = useIntegrations()
-const config = computed<PlayerConfig | undefined>(() => {
-  return integrations.provider(clip.provider)?.getPlayerConfig(clip)
-})
+const config = useClip(clip).playerConfig
 </script>
