@@ -12,6 +12,7 @@ import {
 } from '~/integrations'
 import {
   IntegrationStatus,
+  toSubmitterUUID,
   type IntegrationSource,
   type IntegrationSourceEvent,
   type IntegrationSourceMessageEvent,
@@ -229,10 +230,11 @@ export const useIntegrations = defineStore('integrations', () => {
     for (const url of event.data.urls) {
       try {
         const clip = await resolve(url)
+        const submitter = toSubmitterUUID(event.source, event.data.username)
         if (clip) {
           queue.add({
             ...clip,
-            submitters: [event.data.username],
+            submitters: [submitter],
           })
         }
       } catch (e) {
@@ -255,10 +257,11 @@ export const useIntegrations = defineStore('integrations', () => {
     for (const url of event.data.urls) {
       try {
         const clip = await resolve(url)
+        const submitter = toSubmitterUUID(event.source, event.data.username)
         if (clip) {
           queue.remove({
             ...clip,
-            submitters: [event.data.username],
+            submitters: [submitter],
           })
         }
       } catch (e) {
