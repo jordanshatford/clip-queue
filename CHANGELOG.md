@@ -1,5 +1,47 @@
 # clip-queue
 
+## 3.1.0
+
+### Minor Changes
+
+- feat: unify clip player styling ([`861ae15`](https://github.com/jordanshatford/clip-queue/commit/861ae152b9358c83a5e8687ac11c0ca2d8470790))
+
+- feat: display details when a clip is not selected for viewing ([`861ae15`](https://github.com/jordanshatford/clip-queue/commit/861ae152b9358c83a5e8687ac11c0ca2d8470790))
+
+- feat: improve unsupported clip playback message ([`861ae15`](https://github.com/jordanshatford/clip-queue/commit/861ae152b9358c83a5e8687ac11c0ca2d8470790))
+
+- feat: add composable for handling of clip extras ([`7c8ebe4`](https://github.com/jordanshatford/clip-queue/commit/7c8ebe423a786b8d103f320195d40a62aacc8ee3))
+
+- feat: show application title in header ([`85165b9`](https://github.com/jordanshatford/clip-queue/commit/85165b9c760e1aac2492e6622598e140850ab086))
+
+- feat: update twitch authentication to use full route path for login ([`20d2158`](https://github.com/jordanshatford/clip-queue/commit/20d21581bd724aad65679930acb903133ce6cf49))
+
+- feat: improve queue page layout ([`861ae15`](https://github.com/jordanshatford/clip-queue/commit/861ae152b9358c83a5e8687ac11c0ca2d8470790))
+
+- feat: twitch chat source relies on authentication ([`e426c86`](https://github.com/jordanshatford/clip-queue/commit/e426c86833a9323c85b966fa3e4bafe869280a65))
+
+- feat: link to integration in settings card ([`e1dd588`](https://github.com/jordanshatford/clip-queue/commit/e1dd588bf61933d07ef9466f56488b07c1cdfcc8))
+
+- feat: allow integration login from settings card ([`32eba9f`](https://github.com/jordanshatford/clip-queue/commit/32eba9f8a26b9658ed7545f9d83b08c0086ef5c9))
+
+- feat: simplify source details on integration card ([`b0c81f6`](https://github.com/jordanshatford/clip-queue/commit/b0c81f61a537b3585294ca508e2e0ff55594afb7))
+
+- feat: add branding details about each integration ([`861626f`](https://github.com/jordanshatford/clip-queue/commit/861626f1e0c00c036c3808e96d9313649d63f8e2))
+
+- feat: show total submitters in clip player controls ([`7c8ebe4`](https://github.com/jordanshatford/clip-queue/commit/7c8ebe423a786b8d103f320195d40a62aacc8ee3))
+
+### Patch Changes
+
+- fix: make clip player title link to clip externally ([`861ae15`](https://github.com/jordanshatford/clip-queue/commit/861ae152b9358c83a5e8687ac11c0ca2d8470790))
+
+- fix: issue with wrapping of source features on mobile ([`245cd4d`](https://github.com/jordanshatford/clip-queue/commit/245cd4d404814caa155e810fc62dc89ded8f7717))
+
+- fix: hide hamburger menu when there are no visible routes ([`6fc2588`](https://github.com/jordanshatford/clip-queue/commit/6fc2588c72156dbef4a7a0b0f001c7b380f20615))
+
+- fix: simplify authentication details on integration card ([`82db04e`](https://github.com/jordanshatford/clip-queue/commit/82db04ef0505b521408d3e430ec8de99a5838307))
+
+- fix: make submitter unique based on source ([`d7da7c1`](https://github.com/jordanshatford/clip-queue/commit/d7da7c17e25f87eca2e2734321f41b1723f205dd))
+
 ## 3.0.1
 
 ### Patch Changes
