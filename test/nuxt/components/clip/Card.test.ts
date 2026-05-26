@@ -69,23 +69,10 @@ describe('ClipCard.vue', () => {
     const wrapper = await mountSuspended(ClipCard, {
       props: { clip: clipFromTwitch },
     })
-    const buttons = wrapper.findAll('button')
-    const playButton = buttons.find((b) => b.text().toLowerCase().includes('play'))
+    const playButton = wrapper.find('button')
     expect(playButton).toBeTruthy()
     await playButton?.trigger('click')
     expect(wrapper.emitted('play')).toBeTruthy()
     expect(wrapper.emitted('play')?.length).toBe(1)
-  })
-
-  it('emits remove event when remove button is clicked', async () => {
-    const wrapper = await mountSuspended(ClipCard, {
-      props: { clip: clipFromTwitch },
-    })
-    const buttons = wrapper.findAll('button')
-    const removeButton = buttons.find((b) => b.text().toLowerCase().includes('remove'))
-    expect(removeButton).toBeTruthy()
-    await removeButton?.trigger('click')
-    expect(wrapper.emitted('remove')).toBeTruthy()
-    expect(wrapper.emitted('remove')?.length).toBe(1)
   })
 })

@@ -1,43 +1,45 @@
 <template>
-  <div class="mx-0 mt-4">
-    <USeparator size="sm" class="mb-4" />
-    <div class="float-right">
-      <UButton
-        :disabled="clips.length === 0"
-        class="ml-2"
-        variant="soft"
-        color="neutral"
-        @click="emit('clear')"
-      >
-        {{ m.clear() }}
-      </UButton>
-      <UButton
-        :variant="isOpen ? 'solid' : 'soft'"
-        :color="isOpen ? 'error' : 'neutral'"
-        class="ml-2"
-        @click="isOpen ? emit('close') : emit('open')"
-      >
-        {{ isOpen ? m.close() : m.open() }}
-      </UButton>
+  <aside class="bg-background flex min-h-0 flex-col">
+    <div class="flex items-center justify-between px-1 pb-1">
+      <div class="flex gap-2 text-sm font-semibold">
+        <span>{{ title }}</span>
+        <UBadge size="sm" variant="outline" color="neutral">{{ display }}</UBadge>
+      </div>
+      <div class="flex items-center gap-1">
+        <UButton
+          size="xs"
+          color="neutral"
+          variant="subtle"
+          :disabled="clips.length === 0"
+          @click="emit('clear')"
+        >
+          {{ m.clear() }}
+        </UButton>
+        <UButton
+          size="xs"
+          variant="subtle"
+          :color="isOpen ? 'error' : 'neutral'"
+          @click="isOpen ? emit('close') : emit('open')"
+        >
+          {{ isOpen ? m.close() : m.open() }}
+        </UButton>
+      </div>
     </div>
-    <div class="text-left">
-      <p class="text-lg font-normal">
-        {{ title }}
-      </p>
-      <span class="mt-3 text-sm font-normal">
-        {{ m.clips({ length: clips.length }) }}
-      </span>
-    </div>
-    <div class="flex items-stretch gap-2 overflow-x-auto px-1 py-3">
+    <UEmpty
+      v-if="clips.length === 0"
+      variant="naked"
+      :title="m.no_clips_upcoming()"
+      :description="m.no_clips_upcoming_description()"
+    />
+    <UScrollArea v-else v-slot="{ item }" :items="clips" class="h-screen">
       <ClipCard
-        v-for="clip in clips"
-        :key="useClip(clip).uuid"
-        :clip
-        @play="emit('play', clip)"
-        @remove="emit('remove', clip)"
+        :key="useClip(item).uuid"
+        :clip="item"
+        @play="emit('play', item)"
+        @remove="emit('remove', item)"
       />
-    </div>
-  </div>
+    </UScrollArea>
+  </aside>
 </template>
 
 <script setup lang="ts">
@@ -46,12 +48,13 @@ import type { Clip } from '~/integrations'
 import { m } from '#paraglide/messages'
 
 export interface Props {
-  title?: string
   clips: Clip[]
+  display?: string
+  title?: string
   isOpen?: boolean
 }
 
-const { title = 'Queue', isOpen = false } = defineProps<Props>()
+const { display = undefined, title = 'Queue', isOpen = false } = defineProps<Props>()
 
 const emit = defineEmits<{
   (e: 'play' | 'remove', value: Clip): void

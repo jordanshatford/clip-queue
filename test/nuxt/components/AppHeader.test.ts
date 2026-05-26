@@ -8,4 +8,10 @@ describe('AppHeader.vue', () => {
     const component = await mountSuspended(AppHeader)
     expect(component.exists()).toBe(true)
   })
+
+  it('renders logo and title', async () => {
+    const wrapper = await mountSuspended(AppHeader)
+    expect(wrapper.text()).toContain('Clip')
+    expect(wrapper.text()).toContain('Queue')
+  })
 })

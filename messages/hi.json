@@ -25,16 +25,6 @@
     }
   ],
   "clip_history_purged": "क्लिप का इतिहास हटा दिया गया।",
-  "clips": [
-    {
-      "declarations": ["input length", "local lengthPlural = length: plural"],
-      "selectors": ["lengthPlural"],
-      "match": {
-        "lengthPlural=one": "{length} क्लिप",
-        "lengthPlural=other": "{length} क्लिप्स"
-      }
-    }
-  ],
   "close": "बंद करना",
   "command_clear": "कतार में मौजूद सभी क्लिप हटा दें।",
   "command_close": "कतार बंद करें।",
@@ -112,12 +102,15 @@
   "logs_colon": "लॉग:",
   "mauve": "चमकीला गुलाबी रंग",
   "message": "संदेश",
-  "message_no_clip_providers_enabled": "कोई क्लिप प्रदाता सक्षम नहीं है। कृपया सेटिंग में जाकर एक को सक्षम करें।",
   "misconfigured": "गलत तरह से कॉन्फ़िगर",
   "mist": "कुहासा",
   "neutral": "तटस्थ",
   "next": "अगला",
+  "no_clip_selected": "कोई क्लिप चयनित नहीं है।",
+  "no_clip_selected_description": "प्लेबैक शुरू करने के लिए आगामी क्लिप का चयन करें।",
   "no_clips_previously_watched": "इससे पहले कोई क्लिप नहीं देखी गई।",
+  "no_clips_upcoming": "कोई क्लिप नहीं।",
+  "no_clips_upcoming_description": "आगामी वीडियो क्लिप में लिंक जोड़ने के लिए चैट में लिंक सबमिट करें।",
   "no_logs_captured": "कोई लॉग रिकॉर्ड नहीं हुआ।",
   "none": "कोई नहीं",
   "not_configured": "कॉन्फ़िगर नहीं किया गया",
@@ -186,7 +179,8 @@
   "theme_light": "रोशनी",
   "timestamp": "समय-चिह्न",
   "unknown": "अज्ञात",
-  "unsupported_clip": "यह क्लिप समर्थित नहीं है। आपको इस क्लिप के प्रदाता को सक्षम करने की आवश्यकता हो सकती है।",
+  "unsupported_clip": "असमर्थित क्लिप।",
+  "unsupported_clip_description": "वर्तमान क्लिप का प्लेबैक शुरू नहीं हो पा रहा है। कृपया क्लिप को दोबारा जोड़ने का प्रयास करें।",
   "upcoming_clips": "आगामी क्लिप",
   "view": "देखना",
   "violet": "बैंगनी",

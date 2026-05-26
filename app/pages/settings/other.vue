@@ -6,6 +6,7 @@
           <UButton
             class="w-full justify-center"
             color="error"
+            variant="subtle"
             :disabled="!isSettingsModified"
             @click="resetSettingsToDefault()"
             >{{ m.reset_settings() }}</UButton
@@ -16,6 +17,7 @@
           <UButton
             class="w-full justify-center"
             color="error"
+            variant="subtle"
             :disabled="queue.history.length === 0"
             @click="purgeHistory()"
             >{{ m.purge_history() }}</UButton
@@ -26,6 +28,7 @@
           <UButton
             class="w-full justify-center"
             color="error"
+            variant="subtle"
             :disabled="!integrations.hasCachedData"
             @click="resetCache()"
             >{{ m.reset_cache() }}</UButton

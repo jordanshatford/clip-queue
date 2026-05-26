@@ -25,16 +25,6 @@
     }
   ],
   "clip_history_purged": "Historial de clips borrado.",
-  "clips": [
-    {
-      "declarations": ["input length", "local lengthPlural = length: plural"],
-      "selectors": ["lengthPlural"],
-      "match": {
-        "lengthPlural=one": "{length} clip",
-        "lengthPlural=other": "{length} clips"
-      }
-    }
-  ],
   "close": "Cerca",
   "command_clear": "Eliminar todos los clips de la cola.",
   "command_close": "Cierra la cola.",
@@ -112,12 +102,15 @@
   "logs_colon": "Registros:",
   "mauve": "Color de malva",
   "message": "Mensaje",
-  "message_no_clip_providers_enabled": "No hay proveedores de clips habilitados. Habilite uno en la configuración.",
   "misconfigured": "Mal configurado",
   "mist": "Neblina",
   "neutral": "Neutral",
   "next": "Próximo",
+  "no_clip_selected": "No se ha seleccionado ningún clip.",
+  "no_clip_selected_description": "Seleccione el próximo clip para comenzar la reproducción.",
   "no_clips_previously_watched": "No se han visto vídeos previamente.",
+  "no_clips_upcoming": "Sin clips.",
+  "no_clips_upcoming_description": "Envía los enlaces en el chat para que se añadan a los próximos vídeos.",
   "no_logs_captured": "No se han capturado registros.",
   "none": "Ninguno",
   "not_configured": "No configurado",
@@ -186,7 +179,8 @@
   "theme_light": "Luz",
   "timestamp": "Marca de tiempo",
   "unknown": "Desconocido",
-  "unsupported_clip": "Clip no compatible. Es posible que deba habilitar el proveedor de este clip.",
+  "unsupported_clip": "Clip no compatible.",
+  "unsupported_clip_description": "No se pudo iniciar la reproducción del clip actual. Intente agregar el clip nuevamente.",
   "upcoming_clips": "Próximos vídeos",
   "view": "Vista",
   "violet": "Violeta",

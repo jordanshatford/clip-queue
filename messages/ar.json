@@ -25,16 +25,6 @@
     }
   ],
   "clip_history_purged": "تم حذف سجل المقاطع.",
-  "clips": [
-    {
-      "declarations": ["input length", "local lengthPlural = length: plural"],
-      "selectors": ["lengthPlural"],
-      "match": {
-        "lengthPlural=one": "{length} clip",
-        "lengthPlural=other": "{length} clips"
-      }
-    }
-  ],
   "close": "يغلق",
   "command_clear": "قم بإزالة جميع المقاطع الموجودة في قائمة الانتظار.",
   "command_close": "أغلق قائمة الانتظار.",
@@ -112,12 +102,15 @@
   "logs_colon": "السجلات:",
   "mauve": "خبازي",
   "message": "رسالة",
-  "message_no_clip_providers_enabled": "لم يتم تفعيل أي من مزودي المقاطع. يرجى تفعيل أحدهم في الإعدادات.",
   "misconfigured": "إعدادات خاطئة",
   "mist": "شَبُّورَة",
   "neutral": "حيادي",
   "next": "التالي",
+  "no_clip_selected": "لم يتم تحديد أي مقطع.",
+  "no_clip_selected_description": "اختر مقطعًا قادمًا لبدء التشغيل.",
   "no_clips_previously_watched": "لم يتم مشاهدة أي مقاطع فيديو مسبقاً.",
+  "no_clips_upcoming": "لا توجد مقاطع فيديو.",
+  "no_clips_upcoming_description": "أرسل الروابط في الدردشة لإضافتها إلى المقاطع القادمة.",
   "no_logs_captured": "لم يتم تسجيل أي سجلات.",
   "none": "لا أحد",
   "not_configured": "غير مهيأ",
@@ -154,7 +147,7 @@
   "red": "أحمر",
   "remove": "يزيل",
   "reset_cache": "إعادة ضبط ذاكرة التخزين المؤقت",
-  "reset_cache_confirm": "هل أنت متأكد من رغبتك في إعادة ضبط جميع ذاكرات التخزين المؤقت التي تم إنشاؤها بواسطة عمليات التكامل؟",
+  "reset_cache_confirm": "هل أنت متأكد من رغبتك في إعادة ضبط جميع الذاكرات المؤقتة التي تم إنشاؤها بواسطة عمليات التكامل؟",
   "reset_cache_description": "قد تقوم عمليات التكامل بتخزين العناصر مؤقتًا لمنع جلب التفاصيل بشكل مكرر. امسح جميع القيم التي قد تكون عمليات التكامل قد خزنتها مؤقتًا.",
   "reset_settings": "إعادة ضبط الإعدادات",
   "reset_settings_confirm": "هل أنت متأكد من رغبتك في إعادة ضبط جميع الإعدادات إلى القيم الافتراضية؟",
@@ -186,7 +179,8 @@
   "theme_light": "ضوء",
   "timestamp": "الطابع الزمني",
   "unknown": "مجهول",
-  "unsupported_clip": "مقطع غير مدعوم. قد تحتاج إلى تفعيل مزود هذا المقطع.",
+  "unsupported_clip": "مقطع غير مدعوم.",
+  "unsupported_clip_description": "تعذر بدء تشغيل المقطع الحالي. حاول إعادة إضافة المقطع.",
   "upcoming_clips": "مقاطع قادمة",
   "view": "منظر",
   "violet": "بنفسجي",

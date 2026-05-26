@@ -11,10 +11,11 @@ vi.mock('#paraglide/messages', () => ({
     clear: () => 'Clear',
     open: () => 'Open',
     close: () => 'Close',
-    clips: ({ length }: { length: number }) => `${length} clips`,
     submitter_name: ({ name }: { name: string }) => `Submitted by ${name}`,
     play: () => 'Play',
     remove: () => 'Remove',
+    no_clips_upcoming: () => 'No clips upcoming',
+    no_clips_upcoming_description: () => 'No clips upcoming description',
   },
 }))
 
@@ -29,7 +30,6 @@ describe('clip/Queue.vue', () => {
       })
       expect(wrapper.exists()).toBe(true)
       expect(wrapper.text()).toContain('Queue')
-      expect(wrapper.text()).toContain('0 clips')
       const buttons = wrapper.findAllComponents({ name: 'UButton' })
       expect(buttons[0]?.props('disabled')).toBe(true)
     })
@@ -45,7 +45,6 @@ describe('clip/Queue.vue', () => {
         },
       })
       expect(wrapper.text()).toContain('My Custom Queue')
-      expect(wrapper.text()).toContain('2 clips')
       const clipCards = wrapper.findAllComponents({ name: 'ClipCard' })
       expect(clipCards).toHaveLength(2)
       expect(clipCards[0]?.props('clip')).toEqual(mockClip1)

@@ -25,16 +25,6 @@
     }
   ],
   "clip_history_purged": "История видеороликов удалена.",
-  "clips": [
-    {
-      "declarations": ["input length", "local lengthPlural = length: plural"],
-      "selectors": ["lengthPlural"],
-      "match": {
-        "lengthPlural=one": "{length} clip",
-        "lengthPlural=other": "{length} clips"
-      }
-    }
-  ],
   "close": "Закрывать",
   "command_clear": "Удалить все клипы из очереди.",
   "command_close": "Закрыть очередь.",
@@ -112,12 +102,15 @@
   "logs_colon": "Журналы:",
   "mauve": "Сиреневый",
   "message": "Сообщение",
-  "message_no_clip_providers_enabled": "Поставщики клипов не включены. Пожалуйста, включите один из них в настройках.",
   "misconfigured": "Неправильная настройка",
   "mist": "Туман",
   "neutral": "Нейтральный",
   "next": "Следующий",
+  "no_clip_selected": "Видеофрагмент не выбран.",
+  "no_clip_selected_description": "Выберите следующий видеоролик, чтобы начать воспроизведение.",
   "no_clips_previously_watched": "Ранее не просматривались никакие видеоролики.",
+  "no_clips_upcoming": "Без клипов.",
+  "no_clips_upcoming_description": "Отправляйте ссылки в чате, чтобы они были добавлены в будущие видеоролики.",
   "no_logs_captured": "Журналы событий не зафиксированы.",
   "none": "Никто",
   "not_configured": "Не настроено",
@@ -186,7 +179,8 @@
   "theme_light": "Свет",
   "timestamp": "Отметка времени",
   "unknown": "Неизвестный",
-  "unsupported_clip": "Неподдерживаемый клип. Возможно, вам потребуется включить поставщика этого клипа.",
+  "unsupported_clip": "Неподдерживаемый клип.",
+  "unsupported_clip_description": "Не удаётся начать воспроизведение текущего клипа. Попробуйте добавить клип заново.",
   "upcoming_clips": "Предстоящие видеоролики",
   "view": "Вид",
   "violet": "Фиолетовый",

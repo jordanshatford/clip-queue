@@ -25,16 +25,6 @@
     }
   ],
   "clip_history_purged": "Klip geçmişi silindi.",
-  "clips": [
-    {
-      "declarations": ["input length", "local lengthPlural = length: plural"],
-      "selectors": ["lengthPlural"],
-      "match": {
-        "lengthPlural=one": "{length} clip",
-        "lengthPlural=other": "{length} klipler"
-      }
-    }
-  ],
   "close": "Kapalı",
   "command_clear": "Sıradaki tüm klipleri kaldırın.",
   "command_close": "Kuyruğu kapatın.",
@@ -112,12 +102,15 @@
   "logs_colon": "Günlükler:",
   "mauve": "Leylak",
   "message": "Mesaj",
-  "message_no_clip_providers_enabled": "Hiçbir video sağlayıcısı etkinleştirilmedi. Lütfen ayarlardan birini etkinleştirin.",
   "misconfigured": "Yanlış yapılandırılmış",
   "mist": "Sis",
   "neutral": "Doğal",
   "next": "Sonraki",
+  "no_clip_selected": "Hiçbir klip seçilmedi.",
+  "no_clip_selected_description": "Oynatmaya başlamak için yaklaşan bir klibi seçin.",
   "no_clips_previously_watched": "Daha önce hiçbir video izlenmedi.",
+  "no_clips_upcoming": "Klip yok.",
+  "no_clips_upcoming_description": "Yakında yayınlanacak videolara eklenmesini istediğiniz bağlantıları sohbete gönderin.",
   "no_logs_captured": "Hiçbir kayıt yakalanmadı.",
   "none": "Hiçbiri",
   "not_configured": "Yapılandırılmamış",
@@ -186,7 +179,8 @@
   "theme_light": "Işık",
   "timestamp": "Zaman damgası",
   "unknown": "Bilinmiyor",
-  "unsupported_clip": "Desteklenmeyen video klibi. Bu video klibin sağlayıcısını etkinleştirmeniz gerekebilir.",
+  "unsupported_clip": "Desteklenmeyen klip.",
+  "unsupported_clip_description": "Mevcut klibin oynatımı başlatılamadı. Klibi yeniden eklemeyi deneyin.",
   "upcoming_clips": "Yakında Yayınlanacak Klipler",
   "view": "Görüş",
   "violet": "Menekşe",

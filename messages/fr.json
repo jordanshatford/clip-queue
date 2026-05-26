@@ -25,16 +25,6 @@
     }
   ],
   "clip_history_purged": "Historique des clips supprimé.",
-  "clips": [
-    {
-      "declarations": ["input length", "local lengthPlural = length: plural"],
-      "selectors": ["lengthPlural"],
-      "match": {
-        "lengthPlural=one": "{length} clip",
-        "lengthPlural=other": "{length} clips"
-      }
-    }
-  ],
   "close": "Fermer",
   "command_clear": "Supprimer tous les clips en attente.",
   "command_close": "Fermez la file d'attente.",
@@ -112,12 +102,15 @@
   "logs_colon": "Journaux :",
   "mauve": "Mauve",
   "message": "Message",
-  "message_no_clip_providers_enabled": "Aucun fournisseur de clips n'est activé. Veuillez en activer un dans les paramètres.",
   "misconfigured": "Mauvaise configuration",
   "mist": "Brume",
   "neutral": "Neutre",
   "next": "Suivant",
+  "no_clip_selected": "Aucun clip sélectionné.",
+  "no_clip_selected_description": "Sélectionnez un extrait à venir pour lancer la lecture.",
   "no_clips_previously_watched": "Aucune vidéo visionnée précédemment.",
+  "no_clips_upcoming": "Pas de clips.",
+  "no_clips_upcoming_description": "N'hésitez pas à soumettre des liens dans le chat pour qu'ils soient ajoutés aux prochaines vidéos.",
   "no_logs_captured": "Aucun journal d'événements n'a été enregistré.",
   "none": "Aucun",
   "not_configured": "Non configuré",
@@ -186,7 +179,8 @@
   "theme_light": "Lumière",
   "timestamp": "Horodatage",
   "unknown": "Inconnu",
-  "unsupported_clip": "Clip non pris en charge. Vous devrez peut-être activer le fournisseur de ce clip.",
+  "unsupported_clip": "Clip non pris en charge.",
+  "unsupported_clip_description": "Impossible de lancer la lecture du clip actuel. Veuillez réessayer plus tard.",
   "upcoming_clips": "Prochains clips",
   "view": "Voir",
   "violet": "Violet",

@@ -25,16 +25,6 @@
     }
   ],
   "clip_history_purged": "已清除视频历史记录。",
-  "clips": [
-    {
-      "declarations": ["input length", "local lengthPlural = length: plural"],
-      "selectors": ["lengthPlural"],
-      "match": {
-        "lengthPlural=one": "{length}剪辑",
-        "lengthPlural=other": "{length}剪辑"
-      }
-    }
-  ],
   "close": "关闭",
   "command_clear": "移除队列中的所有剪辑片段。",
   "command_close": "关闭队列。",
@@ -112,12 +102,15 @@
   "logs_colon": "日志：",
   "mauve": "淡紫色",
   "message": "信息",
-  "message_no_clip_providers_enabled": "未启用任何视频片段提供程序。请在设置中启用一个。",
   "misconfigured": "配置错误",
   "mist": "薄雾",
   "neutral": "中性的",
   "next": "下一个",
+  "no_clip_selected": "未选择任何片段。",
+  "no_clip_selected_description": "选择即将播放的片段开始播放。",
   "no_clips_previously_watched": "之前未观看过任何片段。",
+  "no_clips_upcoming": "没有剪辑。",
+  "no_clips_upcoming_description": "在聊天中提交链接，即可将其添加到即将发布的视频片段中。",
   "no_logs_captured": "未捕获到日志。",
   "none": "没有任何",
   "not_configured": "未配置",
@@ -186,7 +179,8 @@
   "theme_light": "光",
   "timestamp": "时间戳",
   "unknown": "未知",
-  "unsupported_clip": "此片段不受支持。您可能需要启用此片段的提供者。",
+  "unsupported_clip": "不支持的剪辑。",
+  "unsupported_clip_description": "无法开始播放当前片段。请尝试重新添加该片段。",
   "upcoming_clips": "即将播放的片段",
   "view": "看法",
   "violet": "紫色",

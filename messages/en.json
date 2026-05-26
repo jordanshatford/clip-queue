@@ -25,16 +25,6 @@
     }
   ],
   "clip_history_purged": "Clip history purged.",
-  "clips": [
-    {
-      "declarations": ["input length", "local lengthPlural = length: plural"],
-      "selectors": ["lengthPlural"],
-      "match": {
-        "lengthPlural=one": "{length} clip",
-        "lengthPlural=other": "{length} clips"
-      }
-    }
-  ],
   "close": "Close",
   "command_clear": "Remove all clips in the queue.",
   "command_close": "Close the queue.",
@@ -112,12 +102,15 @@
   "logs_colon": "Logs:",
   "mauve": "Mauve",
   "message": "Message",
-  "message_no_clip_providers_enabled": "No clip providers enabled. Please enable one in the settings.",
   "misconfigured": "Misconfigured",
   "mist": "Mist",
   "neutral": "Neutral",
   "next": "Next",
+  "no_clip_selected": "No clip selected.",
+  "no_clip_selected_description": "Select an upcoming clip to begin playback.",
   "no_clips_previously_watched": "No clips previously watched.",
+  "no_clips_upcoming": "No clips.",
+  "no_clips_upcoming_description": "Submit links in the chat to have them added to the upcoming clips.",
   "no_logs_captured": "No logs captured.",
   "none": "None",
   "not_configured": "Not Configured",
@@ -186,7 +179,8 @@
   "theme_light": "Light",
   "timestamp": "Timestamp",
   "unknown": "Unknown",
-  "unsupported_clip": "Unsupported clip. You may need to enable the provider of this clip.",
+  "unsupported_clip": "Unsupported clip.",
+  "unsupported_clip_description": "Unable to start playback for the current clip. Attempt to re-add the clip.",
   "upcoming_clips": "Upcoming Clips",
   "view": "View",
   "violet": "Violet",

@@ -25,16 +25,6 @@
     }
   ],
   "clip_history_purged": "クリップ履歴が削除されました。",
-  "clips": [
-    {
-      "declarations": ["input length", "local lengthPlural = length: plural"],
-      "selectors": ["lengthPlural"],
-      "match": {
-        "lengthPlural=one": "{length} clip",
-        "lengthPlural=other": "{length}クリップ"
-      }
-    }
-  ],
   "close": "近い",
   "command_clear": "キュー内のすべてのクリップを削除します。",
   "command_close": "キューを閉じます。",
@@ -112,12 +102,15 @@
   "logs_colon": "ログ:",
   "mauve": "藤色",
   "message": "メッセージ",
-  "message_no_clip_providers_enabled": "クリッププロバイダーが有効になっていません。設定で有効にしてください。",
   "misconfigured": "設定ミス",
   "mist": "ミスト",
   "neutral": "中性",
   "next": "次",
+  "no_clip_selected": "クリップが選択されていません。",
+  "no_clip_selected_description": "再生を開始するには、次に再生するクリップを選択してください。",
   "no_clips_previously_watched": "過去に視聴した動画はありません。",
+  "no_clips_upcoming": "クリップはありません。",
+  "no_clips_upcoming_description": "チャットにリンクを投稿していただければ、今後の動画に追加させていただきます。",
   "no_logs_captured": "ログは取得されていません。",
   "none": "なし",
   "not_configured": "未設定",
@@ -186,7 +179,8 @@
   "theme_light": "ライト",
   "timestamp": "タイムスタンプ",
   "unknown": "未知",
-  "unsupported_clip": "サポートされていないクリップです。このクリップの提供元を有効にする必要があるかもしれません。",
+  "unsupported_clip": "サポートされていないクリップです。",
+  "unsupported_clip_description": "現在のクリップの再生を開始できません。クリップを再度追加してみてください。",
   "upcoming_clips": "今後のクリップ",
   "view": "ビュー",
   "violet": "バイオレット",

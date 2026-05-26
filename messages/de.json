@@ -25,16 +25,6 @@
     }
   ],
   "clip_history_purged": "Clipverlauf gelöscht.",
-  "clips": [
-    {
-      "declarations": ["input length", "local lengthPlural = length: plural"],
-      "selectors": ["lengthPlural"],
-      "match": {
-        "lengthPlural=one": "{length} clip",
-        "lengthPlural=other": "{length} clips"
-      }
-    }
-  ],
   "close": "Schließen",
   "command_clear": "Entferne alle Clips in der Warteschlange.",
   "command_close": "Schließe die Warteschlange.",
@@ -112,12 +102,15 @@
   "logs_colon": "Protokolle:",
   "mauve": "Mauve",
   "message": "Nachricht",
-  "message_no_clip_providers_enabled": "Es sind keine Clip-Anbieter aktiviert. Bitte aktivieren Sie einen in den Einstellungen.",
   "misconfigured": "Fehlkonfiguriert",
   "mist": "Nebel",
   "neutral": "Neutral",
   "next": "Nächste",
+  "no_clip_selected": "Kein Clip ausgewählt.",
+  "no_clip_selected_description": "Wählen Sie einen bevorstehenden Clip aus, um die Wiedergabe zu starten.",
   "no_clips_previously_watched": "Es wurden noch keine Clips angesehen.",
+  "no_clips_upcoming": "Keine Clips.",
+  "no_clips_upcoming_description": "Schickt uns Links im Chat, damit wir sie zu den kommenden Clips hinzufügen können.",
   "no_logs_captured": "Es wurden keine Protokolle erfasst.",
   "none": "Keiner",
   "not_configured": "Nicht konfiguriert",
@@ -176,7 +169,7 @@
   "success": "Erfolg",
   "surface_color": "Oberflächenfarbe:",
   "surface_color_description": "Oberflächenfarbe, die in der gesamten Benutzeroberfläche verwendet wird.",
-  "tagline": "Ein verbessertes Clip-Anschauungserlebnis.",
+  "tagline": "Ein verbessertes Videoerlebnis.",
   "taupe": "Taupe",
   "teal": "Türkis",
   "theme": "Thema",
@@ -186,7 +179,8 @@
   "theme_light": "Licht",
   "timestamp": "Zeitstempel",
   "unknown": "Unbekannt",
-  "unsupported_clip": "Nicht unterstützter Clip. Möglicherweise müssen Sie den Anbieter dieses Clips aktivieren.",
+  "unsupported_clip": "Nicht unterstützter Clip.",
+  "unsupported_clip_description": "Die Wiedergabe des aktuellen Clips konnte nicht gestartet werden. Versuchen Sie, den Clip erneut hinzuzufügen.",
   "upcoming_clips": "Kommende Clips",
   "view": "Sicht",
   "violet": "Violett",

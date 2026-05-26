@@ -1,54 +1,47 @@
 <template>
-  <UCard
-    variant="subtle"
-    class="max-w-2xs shrink-0 overflow-hidden text-left"
-    :ui="{ header: 'p-0!' }"
-  >
-    <template #header>
-      <div class="relative">
+  <div class="flex w-full items-center justify-between rounded-md p-2 text-left transition">
+    <UButton
+      class="group flex min-w-0 items-center gap-3 text-left"
+      color="neutral"
+      variant="ghost"
+      @click="emit('play')"
+    >
+      <div class="relative h-14 w-24">
         <ClipThumbnail :src="clip.thumbnailUrl" :alt="clip.title" class="w-full object-cover" />
         <div
-          class="absolute top-2 right-2 flex h-9 w-9 items-center justify-center rounded bg-black/50 p-2"
+          class="absolute inset-0 flex items-center justify-center rounded-md bg-black/40 opacity-0 transition-opacity group-hover:opacity-100"
         >
-          <IntegrationIcon :id="clip.provider" class="size-5 text-white" />
+          <UIcon name="lucide:play" class="text-white" />
         </div>
       </div>
-    </template>
-    <span :title="clip.title" class="line-clamp-1 font-normal">{{ clip.title }}</span>
-    <span :title="extras.subtitle" class="line-clamp-1 text-sm">{{ extras.subtitle }}</span>
-    <div class="text-xs">
-      <p class="line-clamp-1">
-        {{ m.submitter_name({ name: extras.submitter }) }}
-        <UBadge v-if="extras.count" size="sm" color="neutral" variant="soft">
-          {{ extras.count }}
-        </UBadge>
-      </p>
-    </div>
-    <template #footer>
-      <div class="flex justify-between gap-2 pt-1">
-        <UButton
-          class="grow justify-center"
-          icon="lucide:play"
-          color="neutral"
-          variant="subtle"
-          size="sm"
-          @click="emit('play')"
-          >{{ m.play() }}</UButton
-        >
-        <UButton
-          class="grow justify-center"
-          icon="lucide:trash"
-          color="error"
-          size="sm"
-          @click="emit('remove')"
-          >{{ m.remove() }}</UButton
-        >
+      <div class="min-w-0 flex-1">
+        <p class="truncate text-sm font-medium">
+          {{ clip.title }}
+        </p>
+        <p class="truncate text-xs text-muted">{{ extras.subtitle }}</p>
+        <p class="truncate text-xs text-muted">
+          {{ m.submitter_name({ name: extras.submitter }) }}
+          <UBadge v-if="extras.count" size="xs" color="neutral" variant="soft">
+            {{ extras.count }}
+          </UBadge>
+        </p>
       </div>
-    </template>
-  </UCard>
+    </UButton>
+    <UDropdownMenu :items="items" size="sm">
+      <UButton
+        class="shrink-0"
+        color="neutral"
+        variant="ghost"
+        size="sm"
+        icon="lucide:ellipsis-vertical"
+      />
+    </UDropdownMenu>
+  </div>
 </template>
 
 <script setup lang="ts">
+import type { DropdownMenuItem } from '@nuxt/ui'
+
 import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
@@ -62,6 +55,26 @@ const { clip } = defineProps<Props>()
 const extras = useClip(clip)
 
 const emit = defineEmits<{
-  (e: 'play' | 'remove' | 'add'): void
+  (e: 'play' | 'remove'): void
 }>()
+
+const items = ref<DropdownMenuItem[][]>([
+  [
+    {
+      label: m.play(),
+      icon: 'lucide:play',
+      onSelect: () => {
+        emit('play')
+      },
+    },
+    {
+      label: m.remove(),
+      color: 'error',
+      icon: 'lucide:trash',
+      onSelect: () => {
+        emit('remove')
+      },
+    },
+  ],
+])
 </script>

@@ -1,6 +1,13 @@
 <template>
   <div>
-    <div class="aspect-video max-h-[calc(100vh-11rem)] w-full bg-black [grid-area:player]">
+    <div class="aspect-video w-full overflow-hidden rounded-md bg-muted">
+      <UEmpty
+        v-if="!clip"
+        class="h-full w-full"
+        variant="naked"
+        :title="m.no_clip_selected()"
+        :description="m.no_clip_selected_description()"
+      />
       <ClipPlayerIFrame v-if="config?.type === 'iframe'" v-bind="config" />
       <ClipPlayerVideo v-else-if="config?.type === 'video'" v-bind="config" />
       <ClipPlayerUnsupported v-else />
@@ -17,8 +24,10 @@
 <script setup lang="ts">
 import type { Clip } from '~/integrations/core'
 
+import { m } from '#paraglide/messages'
+
 export interface Props {
-  clip: Clip
+  clip: Clip | null
   previousDisabled?: boolean
 }
 
@@ -28,5 +37,5 @@ const emit = defineEmits<{
   (e: 'previous' | 'next'): void
 }>()
 
-const config = useClip(clip).playerConfig
+const config = clip ? useClip(clip).playerConfig : undefined
 </script>

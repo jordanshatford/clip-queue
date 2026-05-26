@@ -1,37 +1,35 @@
 <template>
   <div class="mt-2 text-left">
     <div class="flex items-center justify-between">
-      <div class="flex items-center gap-2 text-2xl font-bold">
-        <span>{{ clip.title }}</span>
-        <a
-          v-if="clip.url"
-          :href="clip.url"
-          target="_blank"
-          rel="noreferrer"
-          class="inline-flex items-center justify-center text-base no-underline"
-        >
-          <UIcon name="lucide:external-link" />
-        </a>
-      </div>
-      <div class="flex gap-2">
+      <NuxtLink
+        v-if="clip"
+        :to="clip.url"
+        target="_blank"
+        class="flex items-center gap-2 text-base no-underline"
+      >
+        <span class="text-xl font-bold">{{ clip.title }}</span>
+        <UIcon name="lucide:external-link" />
+      </NuxtLink>
+      <span v-else></span>
+      <UFieldGroup>
         <UButton
-          icon="lucide:rewind"
+          icon="lucide:chevrons-left"
           color="neutral"
-          variant="soft"
+          variant="subtle"
           :disabled="previousDisabled"
           @click="emit('previous')"
           >{{ m.previous() }}</UButton
         >
         <UButton
-          trailing-icon="lucide:fast-forward"
+          trailing-icon="lucide:chevrons-right"
           color="neutral"
-          variant="soft"
+          variant="subtle"
           @click="emit('next')"
           >{{ m.next() }}</UButton
         >
-      </div>
+      </UFieldGroup>
     </div>
-    <div class="flex flex-col gap-1 text-sm font-normal">
+    <div v-if="clip && extras" class="flex flex-col gap-1 text-sm font-normal">
       <span class="flex gap-1 align-middle">
         {{ extras.subtitle }}
         <span v-if="extras.submitter"> - {{ m.submitter_name({ name: extras.submitter }) }}</span>
@@ -50,7 +48,7 @@ import type { Clip } from '~/integrations'
 import { m } from '#paraglide/messages'
 
 export interface Props {
-  clip: Clip
+  clip: Clip | null
   previousDisabled?: boolean
 }
 
@@ -68,7 +66,7 @@ onKeyDown('ArrowRight', () => {
   emit('next')
 })
 
-const extras = useClip(clip)
+const extras = clip ? useClip(clip) : undefined
 
 const emit = defineEmits<{
   (e: 'previous' | 'next'): void

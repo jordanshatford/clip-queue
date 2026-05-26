@@ -25,16 +25,6 @@
     }
   ],
   "clip_history_purged": "Cronologia delle clip eliminata.",
-  "clips": [
-    {
-      "declarations": ["input length", "local lengthPlural = length: plural"],
-      "selectors": ["lengthPlural"],
-      "match": {
-        "lengthPlural=one": "{length} clip",
-        "lengthPlural=other": "{length} clip"
-      }
-    }
-  ],
   "close": "Vicino",
   "command_clear": "Rimuovi tutte le clip dalla coda.",
   "command_close": "Chiudi la coda.",
@@ -112,12 +102,15 @@
   "logs_colon": "Registri:",
   "mauve": "Malva",
   "message": "Messaggio",
-  "message_no_clip_providers_enabled": "Nessun fornitore di clip abilitato. Abilitane uno nelle impostazioni.",
   "misconfigured": "Configurazione errata",
   "mist": "Nebbia",
   "neutral": "Neutro",
   "next": "Prossimo",
+  "no_clip_selected": "Nessun clip selezionato.",
+  "no_clip_selected_description": "Seleziona una clip in arrivo per avviarne la riproduzione.",
   "no_clips_previously_watched": "Nessun video visualizzato in precedenza.",
+  "no_clips_upcoming": "Nessuna clip.",
+  "no_clips_upcoming_description": "Inviate i link nella chat per farli aggiungere ai prossimi video.",
   "no_logs_captured": "Nessun registro acquisito.",
   "none": "Nessuno",
   "not_configured": "Non configurato",
@@ -186,7 +179,8 @@
   "theme_light": "Leggero",
   "timestamp": "Timestamp",
   "unknown": "Sconosciuto",
-  "unsupported_clip": "Clip non supportata. Potrebbe essere necessario abilitare il fornitore di questa clip.",
+  "unsupported_clip": "Clip non supportata.",
+  "unsupported_clip_description": "Impossibile avviare la riproduzione del clip corrente. Prova ad aggiungere nuovamente il clip.",
   "upcoming_clips": "Prossimi video",
   "view": "Visualizzazione",
   "violet": "Viola",

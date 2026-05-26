@@ -1,7 +1,10 @@
 <template>
-  <div class="flex h-full items-center justify-center font-normal">
-    {{ m.unsupported_clip() }}
-  </div>
+  <UEmpty
+    class="h-full w-full"
+    variant="naked"
+    :title="m.unsupported_clip()"
+    :description="m.unsupported_clip_description()"
+  />
 </template>
 
 <script setup lang="ts">

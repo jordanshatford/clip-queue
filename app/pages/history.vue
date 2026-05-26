@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div class="mx-auto flex max-w-7xl flex-col">
     <div class="flex flex-wrap items-center justify-between gap-1.5">
       <UInput v-model="filter" class="max-w-sm" icon="lucide:search" :placeholder="m.search()" />
       <div class="flex flex-wrap items-center gap-1.5">
