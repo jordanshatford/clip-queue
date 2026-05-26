@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { mockTwitchClip, mockTwitchGame, mockTwitchUser, mockTwitchVod } from '~~/test/mocks'
 
 import {
   getClips,
@@ -7,8 +8,6 @@ import {
   getVideos,
   toCommonHeaders,
 } from '~/integrations/twitch/core/api'
-
-import { mockTwitchClip, mockTwitchGame, mockTwitchUser, mockTwitchVod } from '../../../mocks'
 
 describe('integrations/twitch/core/api', () => {
   beforeEach(() => {

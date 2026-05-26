@@ -1,16 +1,22 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import PlayerUnsupported from '~/components/clip/PlayerUnsupported.vue'
 
+vi.mock('#paraglide/messages', () => ({
+  m: {
+    unsupported_clip: () => 'Unsupported clip',
+  },
+}))
+
 describe('clip/PlayerUnsupported.vue', () => {
-  it('mounts successfully', async () => {
-    const component = await mountSuspended(PlayerUnsupported, {
-      props: {
-        src: '',
-        title: '',
-      },
-    })
-    expect(component.exists()).toBe(true)
+  it('renders successfully', async () => {
+    const wrapper = await mountSuspended(PlayerUnsupported)
+    expect(wrapper.exists()).toBe(true)
+  })
+
+  it('renders unsupported clip message', async () => {
+    const wrapper = await mountSuspended(PlayerUnsupported)
+    expect(wrapper.text()).toBe('Unsupported clip')
   })
 })

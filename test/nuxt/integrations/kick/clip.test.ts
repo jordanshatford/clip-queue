@@ -1,10 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { mockKickClip, mockTwitchClip } from '~~/test/mocks'
 
 import type { KickClip } from '~/integrations/kick/core/types'
 
 import { KickClipsProvider } from '~/integrations/kick/providers/clip'
-
-import { mockKickClip, mockTwitchClip } from '../../../mocks'
 
 vi.mock('~/integrations/kick/core/api', async (importOriginal) => {
   return {

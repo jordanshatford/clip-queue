@@ -1,10 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { mockKickClip, mockTwitchClip, mockTwitchVod, mockRumbleOEmbed } from '~~/test/mocks'
 
 import type { OEmbedResponse } from '@/integrations/misc'
 
 import { RumbleVideoProvider } from '~/integrations/rumble/providers/video'
-
-import { mockKickClip, mockTwitchClip, mockTwitchVod, mockRumbleOEmbed } from '../../../mocks'
 
 vi.mock('~/integrations/rumble/core/api.ts', async (importOriginal) => {
   return {

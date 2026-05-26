@@ -1,16 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { mockKickClip, mockKickVod, mockOEmbed, mockTwitchClip, mockTwitchVod } from '~~/test/mocks'
 
 import type { OEmbedResponse } from '~/integrations/misc/core/types'
 
 import { VimeoProvider } from '~/integrations/misc/providers/vimeo'
-
-import {
-  mockKickClip,
-  mockKickVod,
-  mockOEmbed,
-  mockTwitchClip,
-  mockTwitchVod,
-} from '../../../mocks'
 
 vi.mock('~/integrations/misc/core/api.ts', async (importOriginal) => {
   return {

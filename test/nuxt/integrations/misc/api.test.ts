@@ -1,8 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { mockOEmbed } from '~~/test/mocks'
 
 import { getOEmbed, getOEmbedProxied } from '~/integrations/misc/core/api'
-
-import { mockOEmbed } from '../../../mocks'
 
 describe('integrations/misc/core/api', () => {
   beforeEach(() => {

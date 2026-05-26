@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { clipFromKick, clipFromTwitch } from '~~/test/mocks'
 
 import type { Clip } from '~/integrations/core/provider'
 
@@ -10,8 +11,6 @@ import {
   toSubmitterUUID,
 } from '~/integrations/core/utils'
 import { IntegrationID } from '~/integrations/indentify'
-
-import { clipFromKick, clipFromTwitch } from '../../../mocks'
 
 describe('integrations/core/utils', () => {
   it.each([

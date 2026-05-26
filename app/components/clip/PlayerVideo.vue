@@ -37,7 +37,7 @@ onMounted(async () => {
     controls: true,
     responsive: true,
     fluid: true,
-    fill: true, // IMPORTANT for container layouts
+    fill: true,
     poster,
     sources: [{ src }],
   })

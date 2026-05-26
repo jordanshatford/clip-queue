@@ -1,11 +1,10 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { mockKickClip, mockTwitchClip, mockTwitchGame } from '~~/test/mocks'
 
 import type { Clip } from '~/integrations'
 import type { KickClip } from '~/integrations/kick'
 import type { TwitchClip, TwitchGame } from '~/integrations/twitch/core/types'
-
-import { mockKickClip, mockTwitchClip, mockTwitchGame } from '../../mocks'
 
 vi.mock('~/integrations/kick/core/api', async (importOriginal) => {
   return {

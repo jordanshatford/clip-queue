@@ -1,8 +1,7 @@
 import { describe, expect, it } from 'vitest'
+import { mockOEmbed } from '~~/test/mocks'
 
 import { getRumbleUrlDetails, toEmbedUrl } from '~/integrations/rumble/core/utils'
-
-import { mockOEmbed } from '../../../mocks'
 
 type Details = ReturnType<typeof getRumbleUrlDetails>
 
