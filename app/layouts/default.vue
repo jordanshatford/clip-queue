@@ -1,5 +1,5 @@
 <template>
-  <UApp :key="preferences.locale" :locale="preferences.uilocale">
+  <UApp :key="preferences.locale" :locale="preferences.uilocale" :toaster="app.toaster">
     <AppHeader />
     <UMain>
       <UContainer class="py-4">
@@ -11,5 +11,6 @@
 </template>
 
 <script setup lang="ts">
+const app = useAppConfig()
 const preferences = usePreferences()
 </script>
