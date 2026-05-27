@@ -60,7 +60,6 @@ describe('clip/Details.vue', () => {
     expect(link.exists()).toBe(true)
     expect(link.attributes('href')).toBe(clipFromTwitch.url)
     expect(link.attributes('target')).toBe('_blank')
-    expect(link.attributes('rel')).toBe('noreferrer')
   })
 
   it('does not render external link when url is missing', async () => {

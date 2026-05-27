@@ -37,7 +37,7 @@
       </div>
     </UCard>
     <UCard variant="subtle">
-      <p class="text-sm">
+      <p class="text-center text-sm">
         {{ m.application_version({ version }) }}
       </p>
     </UCard>
