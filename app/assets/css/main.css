@@ -3,6 +3,7 @@
 
 :root {
   --ui-radius: 0.375rem;
+  --ui-container: 90rem;
 }
 
 @theme {
