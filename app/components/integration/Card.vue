@@ -3,18 +3,17 @@
     <div class="flex w-full items-center justify-between gap-2">
       <div class="flex items-center gap-2 align-middle">
         <IntegrationIcon :id="integration.id" class="size-5" />
-        <a
+        <NuxtLink
           v-if="integration.url"
-          :href="integration.url"
+          :to="integration.url"
           target="_blank"
-          rel="noreferrer"
-          class="flex items-center gap-2 no-underline"
+          class="flex items-center gap-1 no-underline"
         >
           <span class="font-medium">
             {{ integration.name }}
           </span>
           <UIcon name="lucide:external-link" class="size-3" />
-        </a>
+        </NuxtLink>
         <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
           {{ integration.id }}
         </UBadge>

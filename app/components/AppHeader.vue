@@ -1,7 +1,7 @@
 <template>
   <UHeader :toggle="routes.all.value.length > 0">
     <template #left>
-      <NuxtLink to="/" class="mr-2 flex shrink-0 items-center gap-2">
+      <NuxtLink to="/" class="flex shrink-0 items-center gap-2">
         <img class="size-9" src="~/assets/images/icon.png" />
         <span class="text-2xl font-extrabold tracking-tight"
           >Clip <span class="text-primary">Queue</span></span

@@ -2,9 +2,9 @@
   <UApp :key="preferences.locale" :locale="preferences.uilocale">
     <AppHeader />
     <UMain>
-      <main class="mx-auto h-full px-4 py-4 text-center sm:px-6 lg:px-8">
+      <UContainer class="py-4">
         <slot />
-      </main>
+      </UContainer>
     </UMain>
     <AppFooter />
   </UApp>
