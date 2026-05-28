@@ -27,21 +27,11 @@
         </p>
       </div>
     </UButton>
-    <UDropdownMenu :items="items">
-      <UButton
-        class="shrink-0"
-        color="neutral"
-        variant="ghost"
-        size="sm"
-        icon="lucide:ellipsis-vertical"
-      />
-    </UDropdownMenu>
+    <ClipDropdownMenu :clip="clip" @play="emit('play')" @remove="emit('remove')" />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { DropdownMenuItem } from '@nuxt/ui'
-
 import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
@@ -52,53 +42,9 @@ export interface Props {
 
 const { clip } = defineProps<Props>()
 
-const integrations = useIntegrations()
 const extras = useClip(clip)
 
 const emit = defineEmits<{
   (e: 'play' | 'remove'): void
 }>()
-
-const items = computed<DropdownMenuItem[][]>(() => [
-  [
-    {
-      label: m.play(),
-      icon: 'lucide:play',
-      onSelect: () => {
-        emit('play')
-      },
-    },
-    {
-      label: m.remove(),
-      color: 'error',
-      icon: 'lucide:trash',
-      onSelect: () => {
-        emit('remove')
-      },
-    },
-  ],
-  [
-    {
-      type: 'label',
-      label: clip.title,
-      icon: 'lucide:captions',
-    },
-    {
-      type: 'label',
-      label: clip.channel,
-      icon: integrations.integration(clip.provider)?.branding.icon ?? 'lucide:user',
-    },
-    {
-      type: 'label',
-      label: clip.category ?? 'Unknown',
-      icon: 'lucide:tag',
-    },
-    {
-      label: m.submitters(),
-      icon: 'lucide:users',
-      filter: true,
-      children: extras.value.submitters,
-    },
-  ],
-])
 </script>
