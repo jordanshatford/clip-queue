@@ -11,25 +11,30 @@
         <UIcon name="lucide:external-link" />
       </NuxtLink>
       <span v-else></span>
-      <UFieldGroup>
-        <UButton
-          icon="lucide:chevrons-left"
-          color="neutral"
-          variant="subtle"
-          :disabled="previousDisabled"
-          @click="emit('previous')"
-          >{{ m.previous() }}</UButton
-        >
-        <UButton
-          trailing-icon="lucide:chevrons-right"
-          color="neutral"
-          variant="subtle"
-          @click="emit('next')"
-          >{{ m.next() }}</UButton
-        >
-      </UFieldGroup>
+      <div class="flex items-center gap-2">
+        <ClipDropdownMenu v-if="clip" :clip :actions="false" variant="subtle" />
+        <UFieldGroup>
+          <UButton
+            icon="lucide:chevrons-left"
+            color="neutral"
+            variant="subtle"
+            size="sm"
+            :disabled="previousDisabled"
+            @click="emit('previous')"
+            >{{ m.previous() }}</UButton
+          >
+          <UButton
+            trailing-icon="lucide:chevrons-right"
+            color="neutral"
+            variant="subtle"
+            size="sm"
+            @click="emit('next')"
+            >{{ m.next() }}</UButton
+          >
+        </UFieldGroup>
+      </div>
     </div>
-    <div v-if="clip && extras" class="flex flex-col gap-1 text-sm font-normal">
+    <div v-if="clip && extras" class="mt-1 flex flex-col gap-1 text-sm font-normal">
       <span class="flex gap-1 align-middle">
         {{ extras.subtitle }}
         <span v-if="extras.submitter"> - {{ m.submitter_name({ name: extras.submitter }) }}</span>
@@ -37,7 +42,6 @@
           {{ extras.count }}
         </UBadge>
       </span>
-      <ClipProviderName :id="clip.provider" />
     </div>
   </div>
 </template>

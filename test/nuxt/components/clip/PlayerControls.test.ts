@@ -18,6 +18,7 @@ vi.mock('#paraglide/messages', () => ({
   m: {
     previous: () => 'Previous',
     next: () => 'Next',
+    submitters: () => 'Submitters',
     submitter_name: ({ name }: { name: string }) => `Submitted by ${name}`,
   },
 }))
