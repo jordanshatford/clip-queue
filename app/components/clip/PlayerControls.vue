@@ -57,12 +57,12 @@ const { clip, previousDisabled = false } = defineProps<Props>()
 const logger = useLogger()
 
 onKeyDown('ArrowLeft', () => {
-  logger.debug('[Player]: left arrow pressed.')
+  logger.debug('[Player]: Left arrow pressed.')
   emit('previous')
 })
 
 onKeyDown('ArrowRight', () => {
-  logger.debug('[Player]: right arrow pressed.')
+  logger.debug('[Player]: Right arrow pressed.')
   emit('next')
 })
 

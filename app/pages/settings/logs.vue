@@ -65,6 +65,7 @@ const { copy, copied } = useClipboard()
 const logger = useLogger()
 
 async function copyLogs(): Promise<void> {
+  logger.debug('[Logs]: Copying all logs to clipboard.')
   return await copy(logger.text)
 }
 </script>

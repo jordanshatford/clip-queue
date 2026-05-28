@@ -153,7 +153,7 @@ function queueClips() {
   if (!clips.length) {
     return
   }
-  logger.debug(`[History]: queuing ${clips.length} clip(s).`)
+  logger.debug(`[History]: Queuing ${clips.length} clip(s).`)
   for (const clip of clips) {
     queue.add(clip, true)
   }
@@ -165,19 +165,19 @@ async function deleteClips(): Promise<void> {
   if (!clips.length) {
     return
   }
-  logger.debug(`[History]: attempting to delete ${clips.length} clip(s).`)
+  logger.debug(`[History]: Attempting to delete ${clips.length} clip(s).`)
   const confirmed = await confirm({
     title: m.delete_history(),
     description: m.delete_history_confirm({ length: clips.length }),
   })
   if (confirmed) {
-    logger.debug(`[History]: deleting ${clips.length} clip(s).`)
+    logger.debug(`[History]: Deleting ${clips.length} clip(s).`)
     for (const clip of clips) {
       queue.history.remove(clip)
     }
     rowSelection.value = {}
   } else {
-    logger.debug(`[History]: deletion of ${clips.length} clip(s) was cancelled.`)
+    logger.debug(`[History]: Deletion of ${clips.length} clip(s) was cancelled.`)
   }
 }
 </script>

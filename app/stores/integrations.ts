@@ -125,7 +125,7 @@ export const useIntegrations = defineStore('integrations', () => {
    */
   function clearCache(): void {
     for (const integration of integrations) {
-      logger.info(`[Integrations]: clearing cache for ${integration.name}.`)
+      logger.info(`[Integrations]: Clearing cache for ${integration.name}.`)
       for (const provider of integration.providers) {
         provider.clearCache()
       }

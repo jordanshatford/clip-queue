@@ -77,11 +77,13 @@ const isSettingsModified = computed<boolean>(() => {
 })
 
 async function resetSettingsToDefault(): Promise<void> {
+  logger.debug('[Settings]: Attempting to reset settings to default.')
   const confirmed = await confirm({
     title: m.reset_settings(),
     description: m.reset_settings_confirm(),
   })
   if (confirmed) {
+    logger.debug('[Settings]: Resetting settings to default confirmed.')
     commands.resetSettings()
     queue.resetSettings()
     integrations.resetSettings()
@@ -93,15 +95,19 @@ async function resetSettingsToDefault(): Promise<void> {
       title: m.success(),
       description: m.settings_reset(),
     })
+  } else {
+    logger.debug('[Settings]: Resetting settings to default cancelled.')
   }
 }
 
 async function purgeHistory(): Promise<void> {
+  logger.debug('[Settings]: Attempting to purge all history.')
   const confirmed = await confirm({
     title: m.purge_history(),
     description: m.purge_history_confirm(),
   })
   if (confirmed) {
+    logger.debug('[Settings]: Purging all history confirmed.')
     queue.purge()
     toast.add({
       icon: 'lucide:circle-check',
@@ -109,15 +115,19 @@ async function purgeHistory(): Promise<void> {
       title: m.success(),
       description: m.clip_history_purged(),
     })
+  } else {
+    logger.debug('[Settings]: Purging all history cancelled.')
   }
 }
 
 async function resetCache(): Promise<void> {
+  logger.debug('[Settings]: Attempting to reset all integrations cache.')
   const confirmed = await confirm({
     title: m.reset_cache(),
     description: m.reset_cache_confirm(),
   })
   if (confirmed) {
+    logger.debug('[Settings]: Resetting all integrations cache confirmed.')
     integrations.clearCache()
     toast.add({
       icon: 'lucide:circle-check',
@@ -125,6 +135,8 @@ async function resetCache(): Promise<void> {
       title: m.success(),
       description: m.integrations_cache_reset(),
     })
+  } else {
+    logger.debug('[Settings]: Resetting all integrations cache cancelled.')
   }
 }
 </script>
