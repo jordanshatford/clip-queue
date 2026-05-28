@@ -1,11 +1,6 @@
 <template>
   <div class="flex items-center gap-2">
-    <UButton
-      v-if="!user.isLoggedIn"
-      size="lg"
-      icon="simple-icons:twitch"
-      @click="() => user.redirect()"
-    >
+    <UButton v-if="!user.isLoggedIn" icon="simple-icons:twitch" @click="() => user.redirect()">
       {{ m.login() }}
     </UButton>
     <UDropdownMenu v-else v-model:open="open" :items="items">

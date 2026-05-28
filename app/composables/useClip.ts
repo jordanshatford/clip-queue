@@ -50,7 +50,6 @@ export function useClip(clip: MaybeRef<Clip>) {
     const submitters = c.submitters.map((s) => {
       const { source, submitter: sub } = fromSubmitterUUID(s)
       return {
-        type: 'label' as const,
         icon: integrations.integration(source)?.branding.icon,
         label: sub,
       }
