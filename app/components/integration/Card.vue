@@ -29,9 +29,8 @@
           {{ m.experimental() }}
         </UBadge>
       </div>
-      <!-- TODO(jordan): currently you cannot disable twitch -->
       <USwitch
-        v-if="integration.id !== IntegrationID.TWITCH"
+        v-if="!undisabledable.includes(integration.id)"
         v-model="integration.isEnabled"
         class="ml-auto"
       />
@@ -61,4 +60,9 @@ import { m } from '#paraglide/messages'
 import { IntegrationID, type Integration } from '~/integrations'
 
 const integration = defineModel<Integration>({ required: true })
+
+// These more complex integrations cannot be disabled currently, as they provide
+// potential authentication, source, and providers. Sources and providers can still
+// be disabled singularly.
+const undisabledable: IntegrationID[] = [IntegrationID.TWITCH]
 </script>
