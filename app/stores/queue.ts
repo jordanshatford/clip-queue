@@ -71,7 +71,7 @@ export const useQueue = defineStore('queue', () => {
     }
     // Ignore when we have previously watched it
     const hasBeenWatched =
-      (current.value && useClip(current.value).equals(clip)) || history.includes(clip)
+      (current.value && useClip(current.value).value.equals(clip)) || history.includes(clip)
     if (hasBeenWatched && !settings.value.duplicates) {
       return
     }

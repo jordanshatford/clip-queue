@@ -14,7 +14,7 @@
       :is-open="queue.settings.open"
       @open="queue.open()"
       @close="queue.close()"
-      @remove="queue.remove"
+      @remove="(c) => queue.remove(c, true)"
       @play="queue.play"
       @clear="queue.clear()"
     />

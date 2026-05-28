@@ -6,11 +6,12 @@ import { clipFromTwitch } from '~~/test/mocks'
 import PlayerControls from '~/components/clip/PlayerControls.vue'
 
 vi.mock('~/composables/useClip', () => ({
-  useClip: () => ({
-    subtitle: 'Test Subtitle',
-    submitter: 'Test Submitter',
-    count: '5',
-  }),
+  useClip: () =>
+    computed(() => ({
+      subtitle: 'Test Subtitle',
+      submitter: 'Test Submitter',
+      count: '5',
+    })),
 }))
 
 vi.mock('#paraglide/messages', () => ({

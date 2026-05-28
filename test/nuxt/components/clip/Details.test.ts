@@ -5,9 +5,10 @@ import { clipFromTwitch } from '~~/test/mocks'
 import ClipDetails from '~/components/clip/Details.vue'
 
 vi.mock('~/composables/useClip', () => ({
-  useClip: () => ({
-    subtitle: 'Some Subtitle',
-  }),
+  useClip: () =>
+    computed(() => ({
+      subtitle: 'Some Subtitle',
+    })),
 }))
 
 describe('clip/Details.vue', () => {

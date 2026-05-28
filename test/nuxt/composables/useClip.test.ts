@@ -37,7 +37,7 @@ describe('useClip', () => {
 
   it('returns uuid from toClipUUID', () => {
     const clip = createClip({ id: 'someclipid', provider: IntegrationID.TWITCH_CLIPS })
-    const { uuid } = useClip(clip)
+    const { uuid } = useClip(clip).value
     expect(uuid).toBe('ttv-clips:someclipid')
   })
 
@@ -46,7 +46,7 @@ describe('useClip', () => {
       channel: 'Test Channel',
       category: 'Test Category',
     })
-    const { subtitle } = useClip(clip)
+    const { subtitle } = useClip(clip).value
     expect(subtitle).toBe('Test Channel - Test Category')
   })
 
@@ -55,7 +55,7 @@ describe('useClip', () => {
       channel: 'Test Channel',
       category: undefined,
     })
-    const { subtitle } = useClip(clip)
+    const { subtitle } = useClip(clip).value
     expect(subtitle).toBe('Test Channel')
   })
 
@@ -63,7 +63,7 @@ describe('useClip', () => {
     const clip = createClip({
       submitters: ['only-one'],
     })
-    const { count } = useClip(clip)
+    const { count } = useClip(clip).value
     expect(count).toBeUndefined()
   })
 
@@ -71,7 +71,7 @@ describe('useClip', () => {
     const clip = createClip({
       submitters: ['a', 'b', 'c'],
     })
-    const { count } = useClip(clip)
+    const { count } = useClip(clip).value
     expect(count).toBe('3')
   })
 
@@ -79,7 +79,7 @@ describe('useClip', () => {
     const clip = createClip({
       submitters: Array.from({ length: 10000 }, (_, i) => `s${i}`),
     })
-    const { count } = useClip(clip)
+    const { count } = useClip(clip).value
     expect(count).toBe('9999+')
   })
 
@@ -87,7 +87,7 @@ describe('useClip', () => {
     const clip = createClip({
       submitters: ['ttv-chat:123'],
     })
-    const { source } = useClip(clip)
+    const { source } = useClip(clip).value
     expect(source?.id).toEqual('ttv-chat')
   })
 
@@ -95,13 +95,13 @@ describe('useClip', () => {
     const clip = createClip({
       submitters: ['unknown'],
     })
-    const { source } = useClip(clip)
+    const { source } = useClip(clip).value
     expect(source).toBeUndefined()
   })
 
   it('returns provider and player config', () => {
     const clip = createClip({ embedUrl: 'test-url' })
-    const { provider, playerConfig } = useClip(clip)
+    const { provider, playerConfig } = useClip(clip).value
     expect(provider).toBeDefined()
     expect(playerConfig).toEqual({
       src: 'test-url&autoplay=true&parent=localhost',
@@ -112,21 +112,21 @@ describe('useClip', () => {
 
   it('equals returns true for same clip UUID', () => {
     const clip = createClip({ channel: 'A' })
-    const result = useClip(clip)
+    const result = useClip(clip).value
     expect(result.equals(clip)).toBe(true)
   })
 
   it('equals returns false for different clip ID', () => {
     const clipA = createClip({ id: 'A' })
     const clipB = createClip({ id: 'B' })
-    const result = useClip(clipA)
+    const result = useClip(clipA).value
     expect(result.equals(clipB)).toBe(false)
   })
 
   it('equals returns false for different clip provider', () => {
     const clipA = createClip({ provider: IntegrationID.TWITCH_CLIPS })
     const clipB = createClip({ provider: IntegrationID.KICK_CLIPS })
-    const result = useClip(clipA)
+    const result = useClip(clipA).value
     expect(result.equals(clipB)).toBe(false)
   })
 })

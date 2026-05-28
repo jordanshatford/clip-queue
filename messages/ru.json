@@ -18,7 +18,7 @@
       "declarations": ["input length", "local lengthPlural = length: plural"],
       "selectors": ["lengthPlural"],
       "match": {
-        "lengthPlural=one": "Вы уверены, что хотите очистить лог {length} ?",
+        "lengthPlural=one": "Вы уверены, что хотите очистить журнал {length} ?",
         "lengthPlural=other": "Вы уверены, что хотите очистить журналы {length} ?"
       }
     }
@@ -162,6 +162,7 @@
   "source_for_integration": "Источник контента",
   "stone": "Камень",
   "submitter": "Отправитель",
+  "submitters": "Авторы",
   "submitter_name": "Отправитель: {name}",
   "success": "Успех",
   "surface_color": "Цвет поверхности",

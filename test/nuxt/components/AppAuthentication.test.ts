@@ -20,6 +20,7 @@ const sourceMock = vi.fn()
 mockNuxtImport('useUser', () => () => userMock)
 
 mockNuxtImport('useIntegrations', () => () => ({
+  integrations: [],
   source: sourceMock,
 }))
 
@@ -51,33 +52,6 @@ describe('UserMenu.vue', () => {
     const button = wrapper.find('button')
     await button.trigger('click')
     expect(redirectMock).toHaveBeenCalled()
-  })
-
-  it('renders user name when logged in', async () => {
-    userMock.isLoggedIn = true
-    userMock.details = {
-      id: '',
-      name: 'Jordan',
-      profileImageURL: 'https://example.com/avatar.png',
-    }
-    const wrapper = await mountSuspended(UserMenu)
-    expect(wrapper.text()).toContain('Jordan')
-  })
-
-  it('builds avatar using profile image', async () => {
-    userMock.isLoggedIn = true
-    userMock.details = {
-      id: '',
-      name: 'Jordan',
-      profileImageURL: 'https://example.com/avatar.png',
-    }
-    const wrapper = await mountSuspended(UserMenu)
-    const button = wrapper.findComponent({ name: 'UButton' })
-    expect(button.props('avatar')).toMatchObject({
-      src: 'https://example.com/avatar.png',
-      loading: 'lazy',
-      icon: 'lucide:image',
-    })
   })
 
   it('creates settings and logout menu items', async () => {

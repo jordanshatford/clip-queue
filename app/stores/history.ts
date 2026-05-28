@@ -36,7 +36,7 @@ export const useHistory = defineStore('history', () => {
    * @returns True if the clip is in the history, false otherwise.
    */
   function includes(clip: Clip): boolean {
-    return items.value.some((c) => useClip(c).equals(clip))
+    return items.value.some((c) => useClip(c).value.equals(clip))
   }
 
   /**
@@ -58,7 +58,7 @@ export const useHistory = defineStore('history', () => {
    * Remove an item from the history.
    */
   function remove(clip: Clip): void {
-    items.value = items.value.filter((c) => !useClip(c).equals(clip))
+    items.value = items.value.filter((c) => !useClip(c).value.equals(clip))
   }
 
   /**

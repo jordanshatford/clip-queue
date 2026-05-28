@@ -11,6 +11,7 @@ vi.mock('#paraglide/messages', () => ({
     clear: () => 'Clear',
     open: () => 'Open',
     close: () => 'Close',
+    submitters: () => 'Submitters',
     submitter_name: ({ name }: { name: string }) => `Submitted by ${name}`,
     play: () => 'Play',
     remove: () => 'Remove',

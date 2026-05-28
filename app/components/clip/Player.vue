@@ -37,5 +37,5 @@ const emit = defineEmits<{
   (e: 'previous' | 'next'): void
 }>()
 
-const config = clip ? useClip(clip).playerConfig : undefined
+const config = clip ? useClip(clip).value.playerConfig : undefined
 </script>

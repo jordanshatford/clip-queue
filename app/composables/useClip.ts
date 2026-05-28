@@ -36,53 +36,73 @@ function toCount(original: Clip): string | undefined {
  * Composable for additional functionality with clip handling.
  * @param original - The original clip.
  */
-export function useClip(original: Clip) {
+export function useClip(clip: MaybeRef<Clip>) {
   const integrations = useIntegrations()
-  /**
-   * UUID of the clip.
-   */
-  const uuid = toClipUUID(original)
-  /**
-   * The subtitle of the clip.
-   */
-  const subtitle = toSubtitle(original)
-  /**
-   * The submitter and source of the clip.
-   */
-  const { source: sourceId, submitter } = fromSubmitterUUID(original.submitters[0] ?? 'Unknown')
-  /**
-   * The count of submitters for the clip.
-   */
-  const count = toCount(original)
-  /**
-   * Source of the clip.
-   */
-  const source = sourceId ? integrations.source(sourceId) : undefined
-  /**
-   * Provider of the clip.
-   */
-  const provider = integrations.provider(original.provider)
-  /**
-   * Player configuration of the clip.
-   */
-  const playerConfig = provider?.getPlayerConfig(original)
-  /**
-   * Check if this clip equals another clip.
-   * @param other - The other clip.
-   * @returns True if they are equal, false otherwise.
-   */
-  function equals(other: Clip): boolean {
-    return uuid === toClipUUID(other)
-  }
-  return {
-    original,
-    uuid,
-    subtitle,
-    source,
-    submitter,
-    count,
-    provider,
-    playerConfig,
-    equals,
-  }
+  const original = toRef(clip)
+
+  const value = computed(() => {
+    const c: Clip = original.value
+    const uuid = toClipUUID(c)
+    const subtitle = toSubtitle(c)
+    const first = fromSubmitterUUID(c.submitters[0] ?? 'Unknown')
+    const submitter = first.submitter
+    const count = toCount(c)
+    const submitters = c.submitters.map((s) => {
+      const { source, submitter: sub } = fromSubmitterUUID(s)
+      return {
+        icon: integrations.integration(source)?.branding.icon,
+        label: sub,
+      }
+    })
+    const source = first.source ? integrations.source(first.source) : undefined
+    const provider = integrations.provider(c.provider)
+    const playerConfig = provider?.getPlayerConfig(c)
+
+    return {
+      /**
+       * The original clip.
+       */
+      original: c,
+      /**
+       * UUID of the clip.
+       */
+      uuid,
+      /**
+       * The subtitle of the clip.
+       */
+      subtitle,
+      /**
+       * The first submitter of the clip.
+       */
+      submitter,
+      /**
+       * The count of submitters for the clip.
+       */
+      count,
+      /**
+       * The submitters of the clips as a list of names and icons for the source.
+       */
+      submitters,
+      /**
+       * The first source of the clip.
+       */
+      source,
+      /**
+       * The provider of the clip.
+       */
+      provider,
+      /**
+       * The player configuration of the clip.
+       */
+      playerConfig,
+      /**
+       * Check if this clip equals the other clip.
+       * @param other - The other clip.
+       * @returns True if they are equal, false otherwise.
+       */
+      equals: (other: Clip) => uuid === toClipUUID(other),
+    }
+  })
+
+  return value
 }

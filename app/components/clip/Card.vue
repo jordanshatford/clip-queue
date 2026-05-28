@@ -58,7 +58,7 @@ const emit = defineEmits<{
   (e: 'play' | 'remove'): void
 }>()
 
-const items = ref<DropdownMenuItem[][]>([
+const items = computed<DropdownMenuItem[][]>(() => [
   [
     {
       label: m.play(),
@@ -74,6 +74,14 @@ const items = ref<DropdownMenuItem[][]>([
       onSelect: () => {
         emit('remove')
       },
+    },
+  ],
+  [
+    {
+      label: m.submitters(),
+      icon: 'lucide:users',
+      filter: true,
+      children: extras.value.submitters,
     },
   ],
 ])

@@ -33,7 +33,7 @@
     />
     <UScrollArea v-else v-slot="{ item }" :items="clips" class="h-screen">
       <ClipCard
-        :key="useClip(item).uuid"
+        :key="useClip(item).value.uuid"
         :clip="item"
         @play="emit('play', item)"
         @remove="emit('remove', item)"

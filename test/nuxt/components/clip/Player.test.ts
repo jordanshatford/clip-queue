@@ -34,9 +34,11 @@ vi.mock('~/components/clip/PlayerControls.vue', () => ({
 
 describe('clip/Player.vue', () => {
   it('renders iframe player when config type is iframe', async () => {
-    useClipMock.mockReturnValue({
-      playerConfig: { type: 'iframe' },
-    })
+    useClipMock.mockReturnValue(
+      computed(() => ({
+        playerConfig: { type: 'iframe' },
+      })),
+    )
     const wrapper = await mountSuspended(Player, {
       props: { clip: clipFromTwitch },
     })
@@ -44,9 +46,11 @@ describe('clip/Player.vue', () => {
   })
 
   it('renders video player when config type is video', async () => {
-    useClipMock.mockReturnValue({
-      playerConfig: { type: 'video' },
-    })
+    useClipMock.mockReturnValue(
+      computed(() => ({
+        playerConfig: { type: 'video' },
+      })),
+    )
     const wrapper = await mountSuspended(Player, {
       props: { clip: clipFromKick },
     })
@@ -54,9 +58,11 @@ describe('clip/Player.vue', () => {
   })
 
   it('renders fallback when config is unknown', async () => {
-    useClipMock.mockReturnValue({
-      playerConfig: { type: 'unknown' },
-    })
+    useClipMock.mockReturnValue(
+      computed(() => ({
+        playerConfig: { type: 'unknown' },
+      })),
+    )
     const wrapper = await mountSuspended(Player, {
       props: { clip: clipFromTwitch },
     })
@@ -64,9 +70,11 @@ describe('clip/Player.vue', () => {
   })
 
   it('emits previous and next events from controls', async () => {
-    useClipMock.mockReturnValue({
-      playerConfig: { type: 'video' },
-    })
+    useClipMock.mockReturnValue(
+      computed(() => ({
+        playerConfig: { type: 'video' },
+      })),
+    )
     const wrapper = await mountSuspended(Player, {
       props: {
         clip: clipFromTwitch,

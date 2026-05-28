@@ -6,19 +6,21 @@ import ClipCard from '~/components/clip/Card.vue'
 import { IntegrationID } from '~/integrations'
 
 vi.mock('~/composables/useClip', () => ({
-  useClip: () => ({
-    subtitle: 'Some Clip Subtitle - Test',
-    submitter: 'Test Submitter',
-    count: '5',
-    source: undefined,
-    provider: { id: IntegrationID.TWITCH_CLIPS },
-    playerConfig: {},
-    equals: () => false,
-  }),
+  useClip: () =>
+    computed(() => ({
+      subtitle: 'Some Clip Subtitle - Test',
+      submitter: 'Test Submitter',
+      count: '5',
+      source: undefined,
+      provider: { id: IntegrationID.TWITCH_CLIPS },
+      playerConfig: {},
+      equals: () => false,
+    })),
 }))
 
 vi.mock('#paraglide/messages', () => ({
   m: {
+    submitters: () => 'Submitters',
     submitter_name: ({ name }: { name: string }) => `Submitted by ${name}`,
     play: () => 'Play',
     remove: () => 'Remove',

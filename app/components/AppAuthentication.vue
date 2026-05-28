@@ -21,31 +21,13 @@
 </template>
 
 <script setup lang="ts">
-import type { DropdownMenuItem, AvatarProps } from '@nuxt/ui'
+import type { DropdownMenuItem } from '@nuxt/ui'
 
 import { m } from '#paraglide/messages'
-import { IntegrationID } from '~/integrations'
-import { IntegrationStatus, toColor } from '~/integrations/core'
 
-const integrations = useIntegrations()
 const user = useUser()
 
 const open = ref<boolean>(false)
-
-const avatar = computed<AvatarProps>(() => {
-  const color = toColor(
-    integrations.source(IntegrationID.TWITCH)?.status ?? IntegrationStatus.UNKNOWN,
-  )
-  return {
-    src: user.details?.profileImageURL,
-    loading: 'lazy',
-    icon: 'lucide:image',
-    chip: {
-      inset: true,
-      color: color,
-    },
-  }
-})
 
 const items = computed<DropdownMenuItem[][]>(() => [
   [

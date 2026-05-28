@@ -140,7 +140,7 @@ const columns: TableColumn<Clip>[] = [
     id: 'submitter',
     header: m.submitter(),
     accessorFn: (row) => row.submitters?.join(' ') ?? '',
-    cell: ({ row }) => useClip(row.original).submitter,
+    cell: ({ row }) => useClip(row.original).value.submitter,
   },
 ]
 

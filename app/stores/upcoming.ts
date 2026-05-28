@@ -31,7 +31,7 @@ export const useUpcoming = defineStore('upcoming', () => {
    * @returns True if the clip is present, false otherwise.
    */
   function includes(clip: Clip): boolean {
-    return items.value.some((c) => useClip(c).equals(clip))
+    return items.value.some((c) => useClip(c).value.equals(clip))
   }
 
   /**
@@ -41,7 +41,7 @@ export const useUpcoming = defineStore('upcoming', () => {
    */
   function add(clip: Clip): void {
     if (includes(clip)) {
-      const index = items.value.findIndex((c) => useClip(c).equals(clip))
+      const index = items.value.findIndex((c) => useClip(c).value.equals(clip))
       const submitters = items.value[index]?.submitters ?? []
       const submitter = clip.submitters[0]?.toLowerCase()
       const existing = items.value[index]
