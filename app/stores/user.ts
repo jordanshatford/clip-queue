@@ -9,10 +9,35 @@ export const useUser = defineStore('user', () => {
   const integrations = useIntegrations()
   const logger = useLogger()
 
-  const hasAttemptedAutoLogin = ref<boolean>(false)
   const isLoggedIn = computed(() => auth.isLoggedIn)
   const details = computed(() => auth.user)
   const token = computed(() => auth.token)
+
+  const isInitialized = ref<boolean>(false)
+  const isLoading = ref<boolean>(false)
+
+  async function init(): Promise<void> {
+    if (isInitialized.value) {
+      return
+    }
+
+    isLoading.value = true
+    logger.debug('[Auth]: Attempting auto-login initialization.')
+
+    try {
+      await autoLoginIfPossible()
+      if (isLoggedIn.value) {
+        logger.debug(`[Auth]: Logged in as ${details.value?.name ?? 'unknown'}.`)
+      } else {
+        logger.debug('[Auth]: No existing session found.')
+      }
+    } catch (error) {
+      logger.error(`[Auth]: Auto-login failed. ${error}`)
+    } finally {
+      isInitialized.value = true
+      isLoading.value = false
+    }
+  }
 
   function redirect(): void {
     auth.redirect()
@@ -25,7 +50,6 @@ export const useUser = defineStore('user', () => {
       await integrations.connectSources()
     } catch {
       logger.debug('[User]: failed auto-login attempt.')
-      hasAttemptedAutoLogin.value = true
     }
   }
 
@@ -41,10 +65,10 @@ export const useUser = defineStore('user', () => {
   }
 
   return {
-    hasAttemptedAutoLogin,
     isLoggedIn,
     details,
     token,
+    init,
     autoLoginIfPossible,
     redirect,
     login,
