@@ -182,9 +182,9 @@ export const useIntegrations = defineStore('integrations', () => {
     event: IntegrationSourceEvent<string | undefined>,
   ): void {
     if (event.data) {
-      logger.warn(`[${event.source}]: Disconnected due to ${event.data}.`)
+      logger.info(`[${event.source}]: Disconnected due to ${event.data}.`)
     } else {
-      logger.warn(`[${event.source}]: Disconnected.`)
+      logger.info(`[${event.source}]: Disconnected.`)
     }
     toast.add({
       icon: 'lucide:circle-alert',

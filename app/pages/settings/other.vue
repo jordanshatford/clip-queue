@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto flex max-w-2xl flex-col gap-2">
     <UCard class="text-left" variant="subtle">
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-4">
         <UFormField :help="m.reset_settings_description()">
           <UButton
             class="w-full justify-center"

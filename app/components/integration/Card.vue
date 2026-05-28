@@ -1,6 +1,6 @@
 <template>
   <UCard class="mx-auto max-w-2xl" variant="subtle">
-    <div class="flex w-full items-center justify-between gap-2">
+    <div class="flex w-full items-center justify-between gap-4">
       <div class="flex items-center gap-2 align-middle">
         <IntegrationIcon :id="integration.id" class="size-5" />
         <NuxtLink
@@ -38,7 +38,7 @@
     </div>
     <UCollapsible :open="integration.isEnabled">
       <template #content>
-        <div class="mt-4 flex flex-col gap-2 text-left">
+        <div class="mt-4 flex flex-col gap-4 text-left">
           <IntegrationAuthentication
             v-if="integration.authentication"
             v-model="integration.authentication"

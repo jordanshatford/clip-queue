@@ -1,7 +1,7 @@
 <template>
   <UCard class="mx-auto max-w-2xl" variant="subtle">
-    <div class="flex flex-col gap-2 text-left">
-      <UFormField :label="m.logs_colon()">
+    <div class="flex flex-col gap-4 text-left">
+      <UFormField :label="m.logs()">
         <UFieldGroup class="w-full">
           <UButton
             icon="lucide:book-text"
@@ -21,7 +21,7 @@
         </UFieldGroup>
       </UFormField>
       <USeparator />
-      <UFormField :label="m.level_colon()" :help="m.logger_level_description()">
+      <UFormField :label="m.level()" :help="m.logger_level_description()">
         <USelect
           id="logger-level"
           v-model="logger.settings.level"

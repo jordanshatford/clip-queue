@@ -1,6 +1,6 @@
 <template>
   <UCard class="mx-auto w-full max-w-2xl" variant="subtle">
-    <div class="flex flex-col gap-2 text-left">
+    <div class="flex flex-col gap-4 text-left">
       <UFormField :label="m.locale()" :help="m.locale_description()">
         <USelect
           id="locale"
