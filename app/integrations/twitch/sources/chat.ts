@@ -207,7 +207,7 @@ export class TwitchChatSource
 
   public async connect(): Promise<void> {
     // If the source is disabled, do not actually connect it.
-    if (!this.isEnabled) {
+    if (!this.isEnabled || this.status === IntegrationStatus.MISCONFIGURED) {
       return
     }
     isLoading.value = true
