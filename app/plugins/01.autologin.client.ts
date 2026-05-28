@@ -4,5 +4,5 @@
  * state early in the app lifecycle.
  */
 export default defineNuxtPlugin(async () => {
-  useUser().init()
+  await useUser().init()
 })

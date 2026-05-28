@@ -66,9 +66,14 @@ export const useUpcoming = defineStore('upcoming', () => {
   /**
    * Remove a clip from the upcoming list.
    * @param clip - The clip to remove.
+   * @param force - If the clip should be forcefully removed.
    */
-  function remove(clip: Clip): void {
-    const index = items.value.findIndex((c) => useClip(c).equals(clip))
+  function remove(clip: Clip, force: boolean = false): void {
+    if (force) {
+      items.value = items.value.filter((c) => !useClip(c).value.equals(clip))
+      return
+    }
+    const index = items.value.findIndex((c) => useClip(c).value.equals(clip))
     const submitter = clip.submitters[0]?.toLowerCase()
     if (index > -1 && submitter) {
       removeSubmitterFromClip(submitter, index)

@@ -85,8 +85,8 @@ export const useQueue = defineStore('queue', () => {
     upcoming.add(clip)
   }
 
-  function remove(clip: Clip) {
-    upcoming.remove(clip)
+  function remove(clip: Clip, force: boolean = false) {
+    upcoming.remove(clip, force)
   }
 
   function play(clip: Clip) {
