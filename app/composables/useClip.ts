@@ -44,12 +44,13 @@ export function useClip(clip: MaybeRef<Clip>) {
     const c: Clip = original.value
     const uuid = toClipUUID(c)
     const subtitle = toSubtitle(c)
-    const first = fromSubmitterUUID(c.submitters[0] ?? 'Unknown')
+    const first = fromSubmitterUUID(c.submitters[0] ?? 'unknown')
     const submitter = first.submitter
     const count = toCount(c)
     const submitters = c.submitters.map((s) => {
       const { source, submitter: sub } = fromSubmitterUUID(s)
       return {
+        type: 'label' as const,
         icon: integrations.integration(source)?.branding.icon,
         label: sub,
       }

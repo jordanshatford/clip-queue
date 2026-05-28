@@ -27,7 +27,7 @@
         </p>
       </div>
     </UButton>
-    <UDropdownMenu :items="items" size="sm">
+    <UDropdownMenu :items="items">
       <UButton
         class="shrink-0"
         color="neutral"
@@ -52,6 +52,7 @@ export interface Props {
 
 const { clip } = defineProps<Props>()
 
+const integrations = useIntegrations()
 const extras = useClip(clip)
 
 const emit = defineEmits<{
@@ -77,6 +78,21 @@ const items = computed<DropdownMenuItem[][]>(() => [
     },
   ],
   [
+    {
+      type: 'label',
+      label: clip.title,
+      icon: 'lucide:captions',
+    },
+    {
+      type: 'label',
+      label: clip.channel,
+      icon: integrations.integration(clip.provider)?.branding.icon ?? 'lucide:user',
+    },
+    {
+      type: 'label',
+      label: clip.category ?? 'Unknown',
+      icon: 'lucide:tag',
+    },
     {
       label: m.submitters(),
       icon: 'lucide:users',
