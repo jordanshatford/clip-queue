@@ -9,9 +9,12 @@
       {{ m.login() }}
     </UButton>
     <UDropdownMenu v-else v-model:open="open" :items="items">
-      <UButton size="xl" variant="ghost" color="neutral" :avatar="avatar">
-        <span class="hidden sm:block">{{ user.details?.name }}</span>
-        <UIcon :name="open ? 'lucide:chevron-up' : 'lucide:chevron-down'" class="hidden sm:block" />
+      <UButton
+        variant="ghost"
+        color="neutral"
+        :trailing-icon="open ? 'lucide:chevron-up' : 'lucide:chevron-down'"
+      >
+        <IntegrationAvatars />
       </UButton>
     </UDropdownMenu>
   </div>

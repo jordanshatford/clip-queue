@@ -3,7 +3,7 @@
     <div class="flex flex-col gap-2">
       <div v-for="provider of providers" :key="provider.id" class="flex justify-between">
         <div class="flex items-center gap-2">
-          <label :for="provider.id">{{ provider.name }}</label>
+          <label :for="provider.id" class="text-muted">{{ provider.name }}</label>
           <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
             {{ provider.id }}
           </UBadge>

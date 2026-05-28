@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full items-center justify-between rounded-md p-2 text-left transition">
+  <div class="flex w-full items-center justify-between rounded-md py-1 text-left transition">
     <UButton
       class="group flex min-w-0 items-center gap-3 text-left"
       color="neutral"

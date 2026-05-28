@@ -9,7 +9,7 @@
         <UButton
           size="xs"
           color="neutral"
-          variant="subtle"
+          variant="outline"
           :disabled="clips.length === 0"
           @click="emit('clear')"
         >

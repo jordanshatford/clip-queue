@@ -1,5 +1,5 @@
 <template>
-  <div class="grid h-full grid-cols-1 gap-4 lg:grid-cols-[1fr_300px]">
+  <div class="grid h-full grid-cols-1 gap-2 lg:grid-cols-[1fr_300px]">
     <ClipPlayer
       :key="queue.current?.id"
       :clip="queue.current"

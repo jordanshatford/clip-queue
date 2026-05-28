@@ -447,6 +447,7 @@ export const useIntegrations = defineStore('integrations', () => {
   )
 
   return {
+    integrations,
     isLoading,
     integration,
     source,
