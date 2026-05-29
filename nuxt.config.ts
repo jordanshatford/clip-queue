@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   ssr: false,
   app: {
     head: {
-      title: 'Clip Queue',
+      title: 'ClipQueue',
       htmlAttrs: {
         lang: 'en',
         dir: 'ltr',

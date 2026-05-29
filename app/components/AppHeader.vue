@@ -4,7 +4,7 @@
       <NuxtLink to="/" class="flex shrink-0 items-center gap-2">
         <img class="size-9" src="~/assets/images/icon.png" />
         <span class="text-xl font-extrabold tracking-tight"
-          >Clip <span class="text-primary">Queue</span></span
+          >Clip<span class="text-primary">Queue</span></span
         >
       </NuxtLink>
     </template>

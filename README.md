@@ -1,7 +1,7 @@
 <p align="center">
   <br />
   <img width="150" height="150" src="./public/icon.png" alt="Logo">
-  <h1 align="center"><b>Clip Queue</b></h1>
+  <h1 align="center"><b>ClipQueue</b></h1>
   <p align="center">
     An enhanced clip viewing experience.
     <br />
@@ -11,7 +11,7 @@
   </p>
 </p>
 
-Clip Queue integrates into a users chat and queues clips submitted by their viewers. Clips can be easily viewed through the applications interface.
+ClipQueue integrates into a users chat and queues clips submitted by their viewers. Clips can be easily viewed through the applications interface.
 
 ## Features
 
