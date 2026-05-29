@@ -1,5 +1,47 @@
 # clip-queue
 
+## 3.2.0
+
+### Minor Changes
+
+- feat: show list of submitters in clip card dropdown menu ([`c27b6f2`](https://github.com/jordanshatford/clip-queue/commit/c27b6f2b5a93b2d937461a936512b6202fa53a7b))
+
+- feat: disable youtube integration by default ([`4862232`](https://github.com/jordanshatford/clip-queue/commit/4862232d9081e92be4a4abd45d2e47f23da6dabb))
+
+- feat: disable rumble integration by default ([`4862232`](https://github.com/jordanshatford/clip-queue/commit/4862232d9081e92be4a4abd45d2e47f23da6dabb))
+
+- feat: only mark integrations as experimental ([`7d51820`](https://github.com/jordanshatford/clip-queue/commit/7d51820a7c500c507b0216727be92167beb97604))
+
+- feat: improve application command settings ([`49bd2e0`](https://github.com/jordanshatford/clip-queue/commit/49bd2e076bc1a54bb01b5ff5ddf8bf443811d899))
+
+- feat: add additional details to clip dropdown menu ([`75b1183`](https://github.com/jordanshatford/clip-queue/commit/75b1183ceb2367054145b40ca529fa3420f587db))
+
+- feat: add clip dropdown menu to player controls ([`9eea7e9`](https://github.com/jordanshatford/clip-queue/commit/9eea7e965a59d135f9573a821bdff0e854657b87))
+
+- feat: add nuxt loading indicator to application ([`f4edf1d`](https://github.com/jordanshatford/clip-queue/commit/f4edf1d2051ed2ebfd15f1348aa04a677bb0bd3e))
+
+- feat: do not expand toasts unless hovering ([`197667e`](https://github.com/jordanshatford/clip-queue/commit/197667e7fff88a10f7ae8c217a0585aef36fa0d4))
+
+- feat: make container sizing 90 rem ([`98e2e62`](https://github.com/jordanshatford/clip-queue/commit/98e2e625feb148b91d73255375a0c15052dad4e6))
+
+- feat: display all authenticated integrations in app header ([`40be782`](https://github.com/jordanshatford/clip-queue/commit/40be7824059d3f1870d4a1b4eab04dde1f23735d))
+
+### Patch Changes
+
+- fix: unify all labeling without colons ([`2517947`](https://github.com/jordanshatford/clip-queue/commit/2517947e96225a511ec5e5d3638511d221643e56))
+
+- fix: do not attempt to connect twitch chat if it is misconfigured ([`b040fca`](https://github.com/jordanshatford/clip-queue/commit/b040fcaeb129631b76505cb175309d42dcc130a3))
+
+- fix: simplify auto login handling in nuxt plugin ([`03122d5`](https://github.com/jordanshatford/clip-queue/commit/03122d516c604dffc2369d0b4a346bc498b91d7c))
+
+- fix: submitters display on upcoming list ([`c27b6f2`](https://github.com/jordanshatford/clip-queue/commit/c27b6f2b5a93b2d937461a936512b6202fa53a7b))
+
+- fix: issue causing filtering clip submitters to fail ([`7b37d3f`](https://github.com/jordanshatford/clip-queue/commit/7b37d3f8f6383b3d22682c029429a378d755b92e))
+
+- fix: removal of clips is forcefully done when using ui ([`89d957a`](https://github.com/jordanshatford/clip-queue/commit/89d957add8c6f32c78ba6275cf487ba4ecea11cd))
+
+- fix: only connect sources that are authenticated and configured ([`e0ef504`](https://github.com/jordanshatford/clip-queue/commit/e0ef504434b7cc36e20cb0d7b107dc8568a6b8ff))
+
 ## 3.1.0
 
 ### Minor Changes
