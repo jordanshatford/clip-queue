@@ -12,7 +12,7 @@
             icon="lucide:triangle-alert"
             color="warning"
             size="sm"
-            variant="soft"
+            variant="subtle"
           >
             {{ m.experimental() }}
           </UBadge>

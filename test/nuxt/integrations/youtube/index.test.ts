@@ -27,7 +27,7 @@ describe('integrations/youtube', () => {
   })
 
   it('returns default enabled state', () => {
-    expect(integration.isEnabled).toBe(true)
+    expect(integration.isEnabled).toBe(false)
   })
 
   it('updates enabled state via setter', () => {

@@ -17,14 +17,12 @@
         <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
           {{ integration.id }}
         </UBadge>
-      </div>
-      <div class="flex items-center gap-1">
         <UBadge
           v-if="integration.isExperimental"
           icon="lucide:triangle-alert"
           color="warning"
           size="sm"
-          variant="soft"
+          variant="subtle"
         >
           {{ m.experimental() }}
         </UBadge>
@@ -64,5 +62,5 @@ const integration = defineModel<Integration>({ required: true })
 // These more complex integrations cannot be disabled currently, as they provide
 // potential authentication, source, and providers. Sources and providers can still
 // be disabled singularly.
-const undisabledable: IntegrationID[] = [IntegrationID.TWITCH]
+const undisabledable: IntegrationID[] = [IntegrationID.KICK, IntegrationID.TWITCH]
 </script>

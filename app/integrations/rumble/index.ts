@@ -6,7 +6,7 @@ import { IntegrationID } from '../indentify'
 import { RumbleShortProvider } from './providers/short'
 import { RumbleVideoProvider } from './providers/video'
 
-const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.RUMBLE, 'enabled'), true)
+const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.RUMBLE, 'enabled'), false)
 
 export const shorts = reactive(new RumbleShortProvider())
 export const videos = reactive(new RumbleVideoProvider())
