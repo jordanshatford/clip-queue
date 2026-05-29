@@ -15,7 +15,6 @@ const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.MEDAL, 'enabled
 export class MedalProvider extends Cacheable<Clip> implements IntegrationProvider {
   public readonly id: IntegrationID = IntegrationID.MEDAL
   public readonly name: string = 'Medal'
-  public readonly isExperimental: boolean = false
 
   public get isEnabled() {
     return isEnabled.value

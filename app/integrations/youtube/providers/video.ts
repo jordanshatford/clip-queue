@@ -15,7 +15,6 @@ const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.YOUTUBE_VIDEOS,
 export class YouTubeVideoProvider extends Cacheable<Clip> implements IntegrationProvider {
   public readonly id: IntegrationID = IntegrationID.YOUTUBE_VIDEOS
   public readonly name: string = 'YouTube Videos'
-  public readonly isExperimental: boolean = false
 
   public get isEnabled(): boolean {
     return isEnabled.value

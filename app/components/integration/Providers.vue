@@ -7,15 +7,6 @@
           <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
             {{ provider.id }}
           </UBadge>
-          <UBadge
-            v-if="provider.isExperimental"
-            icon="lucide:triangle-alert"
-            color="warning"
-            size="sm"
-            variant="subtle"
-          >
-            {{ m.experimental() }}
-          </UBadge>
         </div>
         <USwitch v-model="provider.isEnabled" :input-id="provider.id" />
       </div>

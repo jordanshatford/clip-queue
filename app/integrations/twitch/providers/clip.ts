@@ -15,7 +15,6 @@ const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.TWITCH_CLIPS, '
 export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationProvider {
   public readonly id: IntegrationID = IntegrationID.TWITCH_CLIPS
   public readonly name: string = 'Twitch Clips'
-  public readonly isExperimental: boolean = false
 
   public get isEnabled(): boolean {
     return isEnabled.value

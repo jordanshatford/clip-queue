@@ -132,11 +132,6 @@ export type IntegrationSource = {
    */
   readonly features: IntegrationSourceFeature[]
   /**
-   * Whether the source is experimental.
-   * Experimental sources are sources that are not fully tested and may be unstable.
-   */
-  readonly isExperimental: boolean
-  /**
    * Whether the source is actively busy loading.
    */
   readonly isLoading?: boolean

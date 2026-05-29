@@ -14,7 +14,6 @@ const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.STREAMABLE, 'en
 export class StreamableProvider extends Cacheable<Clip> implements IntegrationProvider {
   public readonly id: IntegrationID = IntegrationID.STREAMABLE
   public readonly name: string = 'Streamable'
-  public readonly isExperimental: boolean = false
 
   public get isEnabled() {
     return isEnabled.value

@@ -34,8 +34,6 @@ export class TwitchChatSource
     IntegrationSourceFeature.LINK_DETECTION,
   ]
 
-  public readonly isExperimental: boolean = false
-
   public get isLoading(): boolean {
     return isLoading.value
   }

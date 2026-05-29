@@ -14,7 +14,6 @@ const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.VIMEO, 'enabled
 export class VimeoProvider extends Cacheable<Clip> implements IntegrationProvider {
   public readonly id: IntegrationID = IntegrationID.VIMEO
   public readonly name: string = 'Vimeo'
-  public readonly isExperimental: boolean = false
 
   public get isEnabled() {
     return isEnabled.value

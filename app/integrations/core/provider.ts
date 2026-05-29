@@ -72,11 +72,6 @@ export interface IntegrationProvider extends Cacheable<Clip> {
    */
   readonly name: string
   /**
-   * Whether the provider is experimental.
-   * Experimental providers are providers that are not fully tested and may be unstable.
-   */
-  readonly isExperimental: boolean
-  /**
    * Whether the provider is enabled.
    */
   isEnabled: boolean

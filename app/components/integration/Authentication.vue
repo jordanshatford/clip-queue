@@ -3,7 +3,7 @@
     <UBadge
       v-if="authentication.isLoggedIn"
       color="neutral"
-      variant="soft"
+      variant="subtle"
       class="flex w-full justify-between rounded-full"
     >
       <UUser
@@ -18,21 +18,20 @@
         :disabled="!authentication.isLoggedIn"
         class="rounded-full"
         color="neutral"
-        variant="subtle"
+        variant="soft"
         @click="logout()"
         >{{ m.logout() }}</UButton
       >
     </UBadge>
-    <UBadge v-else color="neutral" variant="soft" class="flex w-full justify-between rounded-full">
-      <UButton
-        :disabled="authentication.isLoggedIn"
-        class="w-full justify-center rounded-full"
-        color="neutral"
-        variant="subtle"
-        @click="authentication.redirect()"
-        >{{ m.login() }}</UButton
-      >
-    </UBadge>
+    <UButton
+      v-else
+      :disabled="authentication.isLoggedIn"
+      class="w-full justify-center rounded-full"
+      color="neutral"
+      variant="subtle"
+      @click="authentication.redirect()"
+      >{{ m.login() }}</UButton
+    >
   </div>
 </template>
 

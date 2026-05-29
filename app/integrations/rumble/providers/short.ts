@@ -15,7 +15,6 @@ const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.RUMBLE_SHORTS, 
 export class RumbleShortProvider extends Cacheable<Clip> implements IntegrationProvider {
   public readonly id: IntegrationID = IntegrationID.RUMBLE_SHORTS
   public readonly name: string = 'Rumble Shorts'
-  public readonly isExperimental: boolean = false
 
   public get isEnabled(): boolean {
     return isEnabled.value

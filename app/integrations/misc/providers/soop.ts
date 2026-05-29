@@ -14,7 +14,6 @@ const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.SOOP, 'enabled'
 export class SoopProvider extends Cacheable<Clip> implements IntegrationProvider {
   public readonly id: IntegrationID = IntegrationID.SOOP
   public readonly name: string = 'Soop'
-  public readonly isExperimental: boolean = false
 
   public get isEnabled() {
     return isEnabled.value

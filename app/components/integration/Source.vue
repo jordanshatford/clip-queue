@@ -7,15 +7,6 @@
           <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
             {{ source.id }}
           </UBadge>
-          <UBadge
-            v-if="source.isExperimental"
-            icon="lucide:triangle-alert"
-            color="warning"
-            size="sm"
-            variant="subtle"
-          >
-            {{ m.experimental() }}
-          </UBadge>
         </div>
         <div class="flex gap-2">
           <UBadge

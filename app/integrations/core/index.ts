@@ -45,8 +45,8 @@ export interface Integration {
     readonly secondary?: string
   }
   /**
-   * If the integration is experimental. In most cases this will be true if one of the sub
-   * integrations it has it also experimental.
+   * If the integration is experimental. An integration should be marked experimental if
+   * any of it or any of its features (authentication, source, providers) are experimental.
    */
   readonly isExperimental: boolean
   /**

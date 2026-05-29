@@ -14,7 +14,6 @@ const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.DAILYMOTION, 'e
 export class DailyMotionProvider extends Cacheable<Clip> implements IntegrationProvider {
   public readonly id: IntegrationID = IntegrationID.DAILYMOTION
   public readonly name: string = 'Dailymotion'
-  public readonly isExperimental: boolean = false
 
   public get isEnabled() {
     return isEnabled.value

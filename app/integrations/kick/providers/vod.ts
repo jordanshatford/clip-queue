@@ -15,7 +15,6 @@ const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.KICK_VODS, 'ena
 export class KickVodProvider extends Cacheable<Clip> implements IntegrationProvider {
   public readonly id: IntegrationID = IntegrationID.KICK_VODS
   public readonly name: string = 'Kick Videos'
-  public readonly isExperimental: boolean = false
 
   public get isEnabled(): boolean {
     return isEnabled.value

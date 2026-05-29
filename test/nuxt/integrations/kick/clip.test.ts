@@ -20,10 +20,6 @@ describe('integrations/kick/providers/clip', () => {
     provider.clearCache()
   })
 
-  it('knows if it is an experimental provider', () => {
-    expect(provider.isExperimental).toEqual(false)
-  })
-
   it('knows its initial enabled state', () => {
     expect(provider.isEnabled).toEqual(true)
   })
