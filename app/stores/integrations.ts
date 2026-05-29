@@ -317,7 +317,12 @@ export const useIntegrations = defineStore('integrations', () => {
       if (!integration.isEnabled) {
         continue
       }
-      if (integration.source && integration.authentication?.isLoggedIn) {
+      if (
+        integration.source &&
+        integration.source.isEnabled &&
+        integration.authentication?.isLoggedIn &&
+        integration.source.status !== IntegrationStatus.MISCONFIGURED
+      ) {
         logger.debug(`[Integrations]: Connecting to ${integration.source.name}.`)
         await integration.source.connect()
       }
