@@ -17,7 +17,7 @@ export enum IntegrationID {
   /**
    * Kick VODs provider.
    */
-  KICK_VODS = 'kick-vods',
+  KICK_VODS = 'kick-videos',
   /**
    * Medal tv clips provider.
    */
@@ -37,7 +37,7 @@ export enum IntegrationID {
   /**
    * Rumble videos provider.
    */
-  RUMBLE_VIDEOS = 'rumble-vids',
+  RUMBLE_VIDEOS = 'rumble-videos',
   /**
    * Soop videos provider.
    */
@@ -65,7 +65,7 @@ export enum IntegrationID {
   /**
    * Twitch VODs provider.
    */
-  TWITCH_VODS = 'ttv-vods',
+  TWITCH_VODS = 'ttv-videos',
   /**
    * YouTube integration.
    */
@@ -77,7 +77,7 @@ export enum IntegrationID {
   /**
    * YouTube videos provider.
    */
-  YOUTUBE_VIDEOS = 'yt-vids',
+  YOUTUBE_VIDEOS = 'yt-videos',
   /**
    * Unknown. This should never be used on purpose.
    */
