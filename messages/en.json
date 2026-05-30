@@ -159,7 +159,6 @@
   "size_limit_description": "The number of clips allowed in the queue. Leave empty for no limit.",
   "sky": "Sky",
   "slate": "Slate",
-  "source_for_integration": "Content source",
   "stone": "Stone",
   "submitter": "Submitter",
   "submitters": "Submitters",

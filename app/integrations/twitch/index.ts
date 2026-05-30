@@ -25,11 +25,6 @@ export const twitch: Integration = {
     secondary: '#FFFFFF',
   },
   isExperimental: false,
-  // NOTE: Currently cannot be disabled as it is a more complex integration.
-  get isEnabled(): boolean {
-    return true
-  },
-  set isEnabled(_: boolean) {},
   authentication,
   providers: [clips, vods],
   source,

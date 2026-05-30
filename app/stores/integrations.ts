@@ -139,7 +139,7 @@ export const useIntegrations = defineStore('integrations', () => {
    */
   async function resolve(url: string): Promise<Clip | undefined> {
     for (const integration of integrations) {
-      if (!integration.isEnabled) {
+      if (!(integration?.isEnabled ?? true)) {
         continue
       }
       for (const provider of integration.providers) {
@@ -314,7 +314,7 @@ export const useIntegrations = defineStore('integrations', () => {
   async function connectSources(): Promise<void> {
     logger.debug(`[Integrations]: Connecting to integration sources.`)
     for (const integration of integrations) {
-      if (!integration.isEnabled) {
+      if (!(integration?.isEnabled ?? true)) {
         continue
       }
       if (
@@ -335,7 +335,7 @@ export const useIntegrations = defineStore('integrations', () => {
   async function disconnectSources(): Promise<void> {
     logger.debug(`[Integrations]: Disconnecting from integration sources.`)
     for (const integration of integrations) {
-      if (!integration.isEnabled) {
+      if (!(integration.isEnabled ?? true)) {
         continue
       }
       if (integration.source) {
@@ -376,7 +376,7 @@ export const useIntegrations = defineStore('integrations', () => {
     // Find the integration, source, or provider that matches the ID and set
     // its enabled state appropriately.
     for (const integration of integrations) {
-      if (integration.id === id) {
+      if (integration.id === id && integration.isEnabled !== undefined) {
         integration.isEnabled = enabled
         return
       }

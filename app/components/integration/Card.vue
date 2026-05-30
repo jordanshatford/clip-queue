@@ -28,19 +28,18 @@
         </UBadge>
       </div>
       <USwitch
-        v-if="!undisabledable.includes(integration.id)"
+        v-if="integration.isEnabled !== undefined"
         v-model="integration.isEnabled"
         class="ml-auto"
       />
     </div>
-    <UCollapsible :open="integration.isEnabled">
+    <UCollapsible :open="integration?.isEnabled ?? true">
       <template #content>
         <div class="mt-4 flex flex-col gap-4 text-left">
           <IntegrationAuthentication
             v-if="integration.authentication"
             v-model="integration.authentication"
           />
-          <USeparator v-if="integration.authentication" />
           <IntegrationSource v-if="integration.source" v-model="integration.source" />
           <USeparator v-if="integration.source" />
           <IntegrationProviders
@@ -54,13 +53,9 @@
 </template>
 
 <script setup lang="ts">
+import type { Integration } from '~/integrations'
+
 import { m } from '#paraglide/messages'
-import { IntegrationID, type Integration } from '~/integrations'
 
 const integration = defineModel<Integration>({ required: true })
-
-// These more complex integrations cannot be disabled currently, as they provide
-// potential authentication, source, and providers. Sources and providers can still
-// be disabled singularly.
-const undisabledable: IntegrationID[] = [IntegrationID.KICK, IntegrationID.TWITCH]
 </script>

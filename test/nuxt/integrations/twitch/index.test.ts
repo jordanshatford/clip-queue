@@ -27,14 +27,7 @@ describe('integrations/twitch', () => {
   })
 
   it('returns default enabled state', () => {
-    expect(integration.isEnabled).toBe(true)
-  })
-
-  it('cannot update enabled state via setter', () => {
-    integration.isEnabled = false
-    expect(integration.isEnabled).toBe(true)
-    integration.isEnabled = true
-    expect(integration.isEnabled).toBe(true)
+    expect(integration.isEnabled).toBe(undefined)
   })
 
   it('matches Integration contract shape', () => {
@@ -46,6 +39,6 @@ describe('integrations/twitch', () => {
       isExperimental: false,
       providers: expect.any(Array),
     })
-    expect(typeof integration.isEnabled).toBe('boolean')
+    expect(typeof integration.isEnabled).toBe('undefined')
   })
 })
