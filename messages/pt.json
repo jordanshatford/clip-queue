@@ -7,6 +7,7 @@
   "amber": "Âmbar",
   "application": "Aplicativo",
   "application_version": "Versão do aplicativo: v {version}",
+  "auto_connect": "Conexão automática",
   "auto_mod": "Moderação automática",
   "auto_mod_description": "Quando uma mensagem de bate-papo de um usuário é excluída, ele recebe uma notificação de tempo limite ou é banido, os vídeos que ele enviou serão removidos.",
   "blue": "Azul",

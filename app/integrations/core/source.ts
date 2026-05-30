@@ -7,9 +7,13 @@ import type { IntegrationStatus } from './types'
  */
 export enum IntegrationSourceFeature {
   /**
+   * Has support for automatically connecting to the source when authenticated.
+   */
+  AUTO_CONNECT = 'AutoConnect',
+  /**
    * Has support for detecting moderation at the source and actioning it to the queue.
    */
-  AUTOMOD = 'AutoModeration',
+  AUTO_MODERATION = 'AutoModeration',
   /**
    * Has support for triggering commands.
    */

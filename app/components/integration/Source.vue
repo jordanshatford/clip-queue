@@ -15,7 +15,7 @@
       </div>
       <div class="flex flex-wrap gap-2">
         <UBadge
-          v-for="feature of source.features"
+          v-for="feature of source.features.sort()"
           :key="feature"
           icon="lucide:check"
           color="neutral"
@@ -39,7 +39,8 @@ import { IntegrationSourceFeature } from '~/integrations/core'
 const source = defineModel<Reactive<IntegrationSource>>({ required: true })
 
 const featureTranslations: Record<IntegrationSourceFeature, () => string> = {
-  [IntegrationSourceFeature.AUTOMOD]: m.auto_mod,
+  [IntegrationSourceFeature.AUTO_CONNECT]: m.auto_connect,
+  [IntegrationSourceFeature.AUTO_MODERATION]: m.auto_mod,
   [IntegrationSourceFeature.COMMANDS]: m.commands,
   [IntegrationSourceFeature.LINK_DETECTION]: m.link_detection,
 }

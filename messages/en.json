@@ -7,6 +7,7 @@
   "amber": "Amber",
   "application": "Application",
   "application_version": "Application version: v{version}",
+  "auto_connect": "Auto Connect",
   "auto_mod": "Auto Moderation",
   "auto_mod_description": "When a user has their chat message deleted, is timed out, or banned, the clips they submitted will be removed.",
   "blue": "Blue",

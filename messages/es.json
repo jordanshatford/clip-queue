@@ -7,6 +7,7 @@
   "amber": "Ámbar",
   "application": "Solicitud",
   "application_version": "Versión de la aplicación: v {version}",
+  "auto_connect": "Conexión automática",
   "auto_mod": "Automoderación",
   "auto_mod_description": "Cuando se elimina el mensaje de chat de un usuario, se le suspende el servicio temporalmente o se le bloquea, los vídeos que haya enviado serán eliminados.",
   "blue": "Azul",

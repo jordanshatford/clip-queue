@@ -7,6 +7,7 @@
   "amber": "Amber",
   "application": "Başvuru",
   "application_version": "Uygulama sürümü: v {version}",
+  "auto_connect": "Otomatik Bağlantı",
   "auto_mod": "Otomatik Moderasyon",
   "auto_mod_description": "Bir kullanıcının sohbet mesajı silindiğinde, zaman aşımına uğradığında veya yasaklandığında, gönderdiği videolar da kaldırılacaktır.",
   "blue": "Mavi",

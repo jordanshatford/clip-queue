@@ -29,7 +29,8 @@ export class TwitchChatSource
   public readonly name: string = 'Twitch Chat'
 
   public readonly features: IntegrationSourceFeature[] = [
-    IntegrationSourceFeature.AUTOMOD,
+    IntegrationSourceFeature.AUTO_CONNECT,
+    IntegrationSourceFeature.AUTO_MODERATION,
     IntegrationSourceFeature.COMMANDS,
     IntegrationSourceFeature.LINK_DETECTION,
   ]
