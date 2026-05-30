@@ -47,10 +47,6 @@ const authentication = defineModel<Reactive<IntegrationAuthentication>>({ requir
 const integrations = useIntegrations()
 
 async function logout(): Promise<void> {
-  // Disconnect the integrations source as current we rely on the authenticatino to use the source.
-  // In the future we can determine if a source requires the authentication to function.
-  const source = integrations.integration(authentication.value.id)?.source
-  await Promise.all([source?.disconnect?.(), authentication.value.logout()])
-  await navigateTo('/')
+  return await integrations.logout(authentication.value.id)
 }
 </script>

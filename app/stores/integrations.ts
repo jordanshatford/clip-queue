@@ -42,6 +42,9 @@ export const useIntegrations = defineStore('integrations', () => {
   const toast = useToast()
   const logger = useLogger()
 
+  const _isInitialized = ref<boolean>(false)
+  const _isLoading = ref<boolean>(false)
+
   /**
    * Settings related to integrations.
    */
@@ -56,8 +59,11 @@ export const useIntegrations = defineStore('integrations', () => {
    * Determine if the integrations are currently loading.
    */
   const isLoading = computed<boolean>(() => {
+    if (_isLoading.value) {
+      return _isLoading.value
+    }
     return integrations.some((integration) => {
-      if (!integration.isEnabled) {
+      if (!(integration?.isEnabled ?? true)) {
         return false
       }
       if (integration.source && integration.source.isEnabled) {
@@ -108,6 +114,111 @@ export const useIntegrations = defineStore('integrations', () => {
         return integration.source
       }
     }
+  }
+
+  /**
+   * Initialize all integrations. In most cases this is attempting to auto login them in
+   * and then connect to any source they may provide.
+   */
+  async function initialize(): Promise<void> {
+    if (_isInitialized.value) {
+      return
+    }
+
+    _isLoading.value = true
+    logger.debug('[Auth]: Attempting auto-login initialization.')
+
+    try {
+      await autoLogin()
+      if (isLoggedIn.value) {
+        logger.debug(`[Auth]: Logged in to existing session(s).`)
+      } else {
+        logger.debug('[Auth]: No existing session(s) found.')
+      }
+    } catch (error) {
+      logger.error(`[Auth]: Auto-login failed. ${error}`)
+    } finally {
+      _isInitialized.value = true
+      _isLoading.value = false
+    }
+  }
+
+  /**
+   * If the user is currently logged in to any integration.
+   * @returns true if some integration is logged in, false otherwise.
+   */
+  const isLoggedIn = computed<boolean>(() => {
+    return integrations.some((integration) => integration.authentication?.isLoggedIn)
+  })
+
+  /**
+   * If the user is logged in to a specific integration.
+   * @param id - The ID of the integration.
+   *
+   * @returns true if the integration is logged in, false otherwise.
+   */
+  const isLoggedInTo = computed<(id: IntegrationID) => boolean>(() => {
+    return (id: IntegrationID): boolean => {
+      return integration(id)?.authentication?.isLoggedIn ?? false
+    }
+  })
+
+  /**
+   * Redirect to a given integration login.
+   * @param id - The ID of the integration.
+   */
+  async function redirect(id: IntegrationID): Promise<void> {
+    return integration(id)?.authentication?.redirect()
+  }
+
+  /**
+   * Login callback for an integration.
+   * @param id - The ID of the integration.
+   * @param fullPath - The path of the callback to provide the integration.
+   */
+  async function login(id: IntegrationID, fullPath: string): Promise<void> {
+    await integration(id)?.authentication?.login(fullPath)
+    await integration(id)?.source?.connect()
+  }
+
+  /**
+   * Logout of a given integration.
+   * @param id - The ID of the integration.
+   */
+  async function logout(id: IntegrationID): Promise<void> {
+    await integration(id)?.source?.disconnect()
+    await integration(id)?.authentication?.logout()
+    if (!isLoggedIn.value) {
+      navigateTo('/')
+    }
+  }
+
+  /**
+   * Logout of all integrations.
+   */
+  async function logoutAll(): Promise<void> {
+    for (const integration of integrations) {
+      if (integration.authentication && integration.authentication.isLoggedIn) {
+        await integration.authentication.logout()
+      }
+    }
+  }
+
+  /**
+   * Auto login to all integrations.
+   */
+  async function autoLogin(): Promise<void> {
+    for (const integration of integrations) {
+      if (integration.authentication) {
+        try {
+          await integration.authentication.autoLogin()
+        } catch {
+          // Ignore any errors, assume it failed and ignore.
+        }
+      }
+    }
+    await configureSources()
+    await connectSources()
   }
 
   /**
@@ -457,6 +568,14 @@ export const useIntegrations = defineStore('integrations', () => {
     integration,
     source,
     provider,
+    initialize,
+    isLoggedIn,
+    isLoggedInTo,
+    autoLogin,
+    redirect,
+    login,
+    logout,
+    logoutAll,
     configureSources,
     connectSources,
     disconnectSources,

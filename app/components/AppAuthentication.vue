@@ -1,6 +1,10 @@
 <template>
   <div class="flex items-center gap-2">
-    <UButton v-if="!user.isLoggedIn" icon="simple-icons:twitch" @click="() => user.redirect()">
+    <UButton
+      v-if="!integrations.isLoggedIn"
+      icon="simple-icons:twitch"
+      @click="() => integrations.redirect(IntegrationID.TWITCH_AUTH)"
+    >
       {{ m.login() }}
     </UButton>
     <UDropdownMenu v-else v-model:open="open" :items="items">
@@ -19,8 +23,9 @@
 import type { DropdownMenuItem } from '@nuxt/ui'
 
 import { m } from '#paraglide/messages'
+import { IntegrationID } from '~/integrations'
 
-const user = useUser()
+const integrations = useIntegrations()
 
 const open = ref<boolean>(false)
 
@@ -37,7 +42,7 @@ const items = computed<DropdownMenuItem[][]>(() => [
       label: m.logout(),
       icon: 'lucide:log-out',
       onSelect: async () => {
-        await user.logout()
+        await integrations.logoutAll()
         await navigateTo('/')
       },
     },

@@ -1,28 +1,21 @@
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime'
 import { describe, expect, it, vi, beforeEach } from 'vitest'
 
-import type { UserDetails } from '~/integrations/core'
-
 import UserMenu from '~/components/AppAuthentication.vue'
 
 const redirectMock = vi.fn()
 const logoutMock = vi.fn()
-
-const userMock = {
-  isLoggedIn: false,
-  details: undefined as UserDetails | undefined,
-  redirect: redirectMock,
-  logout: logoutMock,
-}
-
 const sourceMock = vi.fn()
 
-mockNuxtImport('useUser', () => () => userMock)
-
-mockNuxtImport('useIntegrations', () => () => ({
+const integrationsMock = {
   integrations: [],
+  isLoggedIn: false,
+  redirect: redirectMock,
+  logoutAll: logoutMock,
   source: sourceMock,
-}))
+}
+
+mockNuxtImport('useIntegrations', () => () => integrationsMock)
 
 vi.mock('#paraglide/messages', () => ({
   m: {
@@ -35,8 +28,7 @@ vi.mock('#paraglide/messages', () => ({
 describe('UserMenu.vue', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    userMock.isLoggedIn = false
-    userMock.details = undefined
+    integrationsMock.isLoggedIn = false
     sourceMock.mockReturnValue({
       status: 'connected',
     })
@@ -55,12 +47,7 @@ describe('UserMenu.vue', () => {
   })
 
   it('creates settings and logout menu items', async () => {
-    userMock.isLoggedIn = true
-    userMock.details = {
-      id: '',
-      name: 'Jordan',
-      profileImageURL: 'avatar.png',
-    }
+    integrationsMock.isLoggedIn = true
     const wrapper = await mountSuspended(UserMenu)
     const dropdown = wrapper.findComponent({ name: 'UDropdownMenu' })
     const items = dropdown.props('items')
@@ -69,12 +56,7 @@ describe('UserMenu.vue', () => {
   })
 
   it('logout menu item calls logout handler', async () => {
-    userMock.isLoggedIn = true
-    userMock.details = {
-      id: '',
-      name: 'Jordan',
-      profileImageURL: 'avatar.png',
-    }
+    integrationsMock.isLoggedIn = true
     const wrapper = await mountSuspended(UserMenu)
     const dropdown = wrapper.findComponent({ name: 'UDropdownMenu' })
     const items = dropdown.props('items')

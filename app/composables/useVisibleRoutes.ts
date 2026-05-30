@@ -29,11 +29,11 @@ function getRouteLabel(route: RouteRecordRaw): string {
 export function useVisibleRoutes() {
   const router = useRouter()
   const route = useRoute()
-  const user = useUser()
+  const integrations = useIntegrations()
   const queue = useQueue()
 
   const visible = computed<RouteRecordRaw[]>(() => {
-    return processRoutes([...router.options.routes], user.isLoggedIn)
+    return processRoutes([...router.options.routes], integrations.isLoggedIn)
   })
 
   const all = computed<NavigationMenuItem[]>(() => {
