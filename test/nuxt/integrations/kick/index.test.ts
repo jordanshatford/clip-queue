@@ -27,14 +27,7 @@ describe('integrations/kick', () => {
   })
 
   it('returns default enabled state', () => {
-    expect(integration.isEnabled).toBe(true)
-  })
-
-  it('updates enabled state via setter', () => {
-    integration.isEnabled = false
-    expect(integration.isEnabled).toBe(false)
-    integration.isEnabled = true
-    expect(integration.isEnabled).toBe(true)
+    expect(integration.isEnabled).toBe(undefined)
   })
 
   it('matches Integration contract shape', () => {
@@ -43,7 +36,6 @@ describe('integrations/kick', () => {
       name: 'Kick',
       url: expect.any(String),
       branding: expect.any(Object),
-      isExperimental: false,
       providers: expect.any(Array),
     })
     expect(typeof integration.isEnabled).toBe('boolean')

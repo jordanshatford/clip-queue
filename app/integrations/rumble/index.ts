@@ -20,7 +20,6 @@ export const rumble: Integration = {
     primary: '#85C742',
     secondary: '#A9B8C3',
   },
-  isExperimental: false,
   get isEnabled(): boolean {
     return isEnabled.value
   },

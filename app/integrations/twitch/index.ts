@@ -24,7 +24,6 @@ export const twitch: Integration = {
     primary: '#8956FB',
     secondary: '#FFFFFF',
   },
-  isExperimental: false,
   authentication,
   providers: [clips, vods],
   source,

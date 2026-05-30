@@ -43,7 +43,6 @@ describe('integrations/youtube', () => {
       name: 'YouTube',
       url: expect.any(String),
       branding: expect.any(Object),
-      isExperimental: false,
       providers: expect.any(Array),
     })
     expect(typeof integration.isEnabled).toBe('boolean')

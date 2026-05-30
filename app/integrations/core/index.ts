@@ -48,7 +48,7 @@ export interface Integration {
    * If the integration is experimental. An integration should be marked experimental if
    * any of it or any of its features (authentication, source, providers) are experimental.
    */
-  readonly isExperimental: boolean
+  readonly isExperimental?: boolean
   /**
    * If the integration is enabled. If it is not enabled no parts of the integration will be
    * used. If it is not defined then it is assumed the integration is enabled and cannot be

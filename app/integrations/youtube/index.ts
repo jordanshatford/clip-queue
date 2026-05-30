@@ -20,7 +20,6 @@ export const youtube: Integration = {
     primary: '#FF0000',
     secondary: '#FFFFFF',
   },
-  isExperimental: false,
   get isEnabled(): boolean {
     return isEnabled.value
   },
