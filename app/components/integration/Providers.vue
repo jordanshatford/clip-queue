@@ -8,7 +8,10 @@
             {{ provider.id }}
           </UBadge>
         </div>
-        <USwitch v-model="provider.isEnabled" :input-id="provider.id" />
+        <div class="flex gap-2">
+          <IntegrationStatusBadge v-if="provider.status" :status="provider.status" />
+          <USwitch v-model="provider.isEnabled" :input-id="provider.id" />
+        </div>
       </div>
     </div>
   </UFormField>

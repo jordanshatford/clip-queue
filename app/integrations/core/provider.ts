@@ -1,5 +1,6 @@
 import type { IntegrationID } from '../indentify'
 import type { Cacheable } from './cacheable'
+import type { IntegrationStatus } from './types'
 
 /**
  * The configuration of the player.
@@ -75,6 +76,11 @@ export interface IntegrationProvider extends Cacheable<Clip> {
    * Whether the provider is enabled.
    */
   isEnabled: boolean
+  /**
+   * The current status of the provider. Should only be used for error states and undefined otherwise, as
+   * we cannot for certain determine that a provider is functioning.
+   */
+  readonly status?: IntegrationStatus
   /**
    * Check if this providers supports a given URL.
    * @param url - The URL of the clip.

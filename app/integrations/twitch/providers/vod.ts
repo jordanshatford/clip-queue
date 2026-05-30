@@ -2,7 +2,7 @@ import { useStorage } from '@vueuse/core'
 
 import type { Clip, IntegrationProvider, PlayerConfig } from '../../core'
 
-import { toStorageKey, Cacheable } from '../../core'
+import { toStorageKey, Cacheable, IntegrationStatus } from '../../core'
 import { IntegrationID } from '../../indentify'
 import { getVideos } from '../core/api'
 import { isTwitchURL } from '../core/utils'
@@ -22,6 +22,12 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
 
   public set isEnabled(value: boolean) {
     isEnabled.value = value
+  }
+
+  public get status(): IntegrationStatus | undefined {
+    if (!this.token()) {
+      return IntegrationStatus.MISCONFIGURED
+    }
   }
 
   private token: () => string

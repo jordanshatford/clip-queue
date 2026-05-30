@@ -9,14 +9,7 @@
           </UBadge>
         </div>
         <div class="flex gap-2">
-          <UBadge
-            size="sm"
-            :icon="toIcon(source.status)"
-            :color="toColor(source.status)"
-            variant="subtle"
-          >
-            {{ statusTranslations[source.status]() }}
-          </UBadge>
+          <IntegrationStatusBadge :status="source.status" />
           <USwitch :id="source.id" v-model="source.isEnabled" :loading="source.isLoading" />
         </div>
       </div>
@@ -41,7 +34,7 @@ import type { Reactive } from 'vue'
 import type { IntegrationSource } from '~/integrations/core'
 
 import { m } from '#paraglide/messages'
-import { IntegrationStatus, IntegrationSourceFeature, toColor, toIcon } from '~/integrations/core'
+import { IntegrationSourceFeature } from '~/integrations/core'
 
 const source = defineModel<Reactive<IntegrationSource>>({ required: true })
 
@@ -49,13 +42,5 @@ const featureTranslations: Record<IntegrationSourceFeature, () => string> = {
   [IntegrationSourceFeature.AUTOMOD]: m.auto_mod,
   [IntegrationSourceFeature.COMMANDS]: m.commands,
   [IntegrationSourceFeature.LINK_DETECTION]: m.link_detection,
-}
-
-const statusTranslations: Record<IntegrationStatus, () => string> = {
-  [IntegrationStatus.HEALTHY]: m.healthy,
-  [IntegrationStatus.UNKNOWN]: m.unknown,
-  [IntegrationStatus.MISCONFIGURED]: m.misconfigured,
-  [IntegrationStatus.ERROR]: m.error,
-  [IntegrationStatus.DISABLED]: m.disabled,
 }
 </script>

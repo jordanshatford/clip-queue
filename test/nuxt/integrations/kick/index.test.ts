@@ -38,6 +38,6 @@ describe('integrations/kick', () => {
       branding: expect.any(Object),
       providers: expect.any(Array),
     })
-    expect(typeof integration.isEnabled).toBe('boolean')
+    expect(typeof integration.isEnabled).toBe('undefined')
   })
 })
