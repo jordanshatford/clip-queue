@@ -10,7 +10,12 @@
         </div>
         <div class="flex gap-2">
           <IntegrationStatusBadge :status="source.status" />
-          <USwitch :id="source.id" v-model="source.isEnabled" :loading="source.isLoading" />
+          <USwitch
+            :id="source.id"
+            v-model="source.isEnabled"
+            :disabled="source.status === IntegrationStatus.MISCONFIGURED"
+            :loading="source.isLoading"
+          />
         </div>
       </div>
       <div class="flex flex-wrap gap-2">
@@ -34,7 +39,7 @@ import type { Reactive } from 'vue'
 import type { IntegrationSource } from '~/integrations/core'
 
 import { m } from '#paraglide/messages'
-import { IntegrationSourceFeature } from '~/integrations/core'
+import { IntegrationSourceFeature, IntegrationStatus } from '~/integrations/core'
 
 const source = defineModel<Reactive<IntegrationSource>>({ required: true })
 
