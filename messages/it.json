@@ -68,7 +68,7 @@
   "experimental": "Sperimentale",
   "feature_commands_description": "I moderatori del canale possono utilizzare i comandi di chat per interagire direttamente con la coda.",
   "feature_commands_title": "Comandi della chat",
-  "feature_connect_description": "Effettua l'accesso per connetterti automaticamente alla chat di Twitch. Le clip inviate dagli utenti in chat verranno messe in coda.",
+  "feature_connect_description": "Effettua il login per connetterti automaticamente alla chat. I video inviati dagli utenti in chat verranno messi in coda.",
   "feature_connect_title": "Connettiti alla chat",
   "feature_duplicate_prevent_description": "I video duplicati non verranno inseriti nella coda di riproduzione. Questo include anche i video già visti durante le sessioni precedenti.",
   "feature_duplicate_prevent_title": "Prevenzione dei duplicati",

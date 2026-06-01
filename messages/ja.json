@@ -68,7 +68,7 @@
   "experimental": "実験的",
   "feature_commands_description": "チャンネルのモデレーターは、チャットコマンドを使用してキューと直接やり取りできます。",
   "feature_commands_title": "チャットコマンド",
-  "feature_connect_description": "ログインすると、Twitchチャットに自動的に接続されます。チャットでユーザーが投稿したクリップはキューに追加されます。",
+  "feature_connect_description": "ログインするとチャットに自動的に接続されます。チャットでユーザーが投稿したクリップはキューに追加されます。",
   "feature_connect_title": "チャットに接続",
   "feature_duplicate_prevent_description": "重複したクリップはキューに追加されません。これには、以前のセッションで視聴したクリップも含まれます。",
   "feature_duplicate_prevent_title": "重複防止",

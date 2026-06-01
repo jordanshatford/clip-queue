@@ -68,7 +68,7 @@
   "experimental": "Deneysel",
   "feature_commands_description": "Kanal moderatörleri, sohbet komutlarını kullanarak doğrudan sıradakilerle etkileşim kurabilirler.",
   "feature_commands_title": "Sohbet Komutları",
-  "feature_connect_description": "Twitch sohbetinize otomatik olarak bağlanmak için giriş yapın. Sohbetteki kullanıcılar tarafından gönderilen klipler sıraya alınacaktır.",
+  "feature_connect_description": "Sohbetinize otomatik olarak bağlanmak için giriş yapın. Sohbetteki kullanıcılar tarafından gönderilen videolar sıraya alınacaktır.",
   "feature_connect_title": "Sohbete bağlan",
   "feature_duplicate_prevent_description": "Yinelenen klipler sıraya alınmayacaktır. Bu, önceki oturumlarda izlenen klipleri de içerir.",
   "feature_duplicate_prevent_title": "Yinelenen Kopyaların Önlenmesi",

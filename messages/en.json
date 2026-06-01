@@ -68,7 +68,7 @@
   "experimental": "Experimental",
   "feature_commands_description": "Moderators of the channel can use chat commands to interact directly with the queue.",
   "feature_commands_title": "Chat Commands",
-  "feature_connect_description": "Log in to automatically connect to your Twitch chat. Clips submitted by users in chat will be queued.",
+  "feature_connect_description": "Log in to automatically connect to your chat. Clips submitted by users in chat will be queued.",
   "feature_connect_title": "Connect to Chat",
   "feature_duplicate_prevent_description": "Duplicate clips will not make it into the queue. This includes clips watched during previous sessions.",
   "feature_duplicate_prevent_title": "Duplicate Prevention",

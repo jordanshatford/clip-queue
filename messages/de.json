@@ -68,7 +68,7 @@
   "experimental": "Experimental",
   "feature_commands_description": "Die Moderatoren des Kanals können Chatbefehle verwenden, um direkt mit der Warteschlange zu interagieren.",
   "feature_commands_title": "Chat-Befehle",
-  "feature_connect_description": "Melde dich an, um automatisch mit deinem Twitch-Chat verbunden zu werden. Von Nutzern im Chat eingereichte Clips werden in die Warteschlange gestellt.",
+  "feature_connect_description": "Melde dich an, um automatisch mit deinem Chat verbunden zu werden. Von Nutzern im Chat eingereichte Clips werden in eine Warteschlange gestellt.",
   "feature_connect_title": "Mit dem Chat verbinden",
   "feature_duplicate_prevent_description": "Doppelte Clips werden nicht in die Warteschlange aufgenommen. Dies gilt auch für Clips, die bereits in früheren Sitzungen angesehen wurden.",
   "feature_duplicate_prevent_title": "Duplikatvermeidung",

@@ -68,7 +68,7 @@
   "experimental": "Expérimental",
   "feature_commands_description": "Les modérateurs du canal peuvent utiliser les commandes de chat pour interagir directement avec la file d'attente.",
   "feature_commands_title": "Commandes de chat",
-  "feature_connect_description": "Connectez-vous pour accéder automatiquement au chat Twitch. Les clips envoyés par les utilisateurs seront mis en file d'attente.",
+  "feature_connect_description": "Connectez-vous pour accéder automatiquement à votre chat. Les clips envoyés par les utilisateurs seront mis en file d'attente.",
   "feature_connect_title": "Se connecter au chat",
   "feature_duplicate_prevent_description": "Les clips en double ne seront pas ajoutés à la file d'attente. Cela inclut les clips visionnés lors de sessions précédentes.",
   "feature_duplicate_prevent_title": "Prévention des doublons",

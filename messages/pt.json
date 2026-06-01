@@ -68,7 +68,7 @@
   "experimental": "Experimental",
   "feature_commands_description": "Os moderadores do canal podem usar comandos de chat para interagir diretamente com a fila.",
   "feature_commands_title": "Comandos de bate-papo",
-  "feature_connect_description": "Faça login para se conectar automaticamente ao chat da Twitch. Os clipes enviados pelos usuários no chat serão adicionados à fila.",
+  "feature_connect_description": "Faça login para se conectar automaticamente ao seu chat. Os vídeos enviados pelos usuários no chat serão adicionados à fila.",
   "feature_connect_title": "Conecte-se ao chat",
   "feature_duplicate_prevent_description": "Vídeos duplicados não serão adicionados à fila. Isso inclui vídeos assistidos em sessões anteriores.",
   "feature_duplicate_prevent_title": "Prevenção de Duplicatas",
