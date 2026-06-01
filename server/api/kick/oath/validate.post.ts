@@ -37,7 +37,8 @@ export default defineEventHandler(async (event): Promise<OathResponse> => {
     })
   }
 
-  if (!introspect.data?.scope.split(' ').includes(config.kick.scope)) {
+  const scopes = introspect.data?.scope.split(' ')
+  if (!config.kick.scopes.every((scope) => scopes.includes(scope))) {
     throw createError({
       statusCode: 400,
       statusMessage: 'Token does not have the required scope.',

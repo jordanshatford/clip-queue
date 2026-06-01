@@ -76,7 +76,7 @@ export default defineEventHandler(async (event): Promise<OathResponse> => {
   }
   return {
     user: {
-      id: String(user.id),
+      id: user.id,
       name: user.login,
       profileImageURL: user.profile_image_url,
     },

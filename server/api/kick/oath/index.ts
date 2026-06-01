@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
     url.searchParams.set('response_type', 'code')
     url.searchParams.set('client_id', config.kick.clientId)
     url.searchParams.set('redirect_uri', config.kick.redirectUri)
-    url.searchParams.set('scope', config.kick.scope)
+    url.searchParams.set('scope', config.kick.scopes.join(' '))
     url.searchParams.set('state', pkce.state)
     url.searchParams.set('code_challenge', pkce.challenge)
     url.searchParams.set('code_challenge_method', pkce.method)

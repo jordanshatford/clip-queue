@@ -26,15 +26,12 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       version: pkg.version,
-      twitch: {
-        clientId: '',
-      },
     },
     kick: {
       clientId: '',
       clientSecret: '',
       redirectUri: '',
-      scope: 'user:read',
+      scopes: ['user:read'],
     },
     twitch: {
       clientId: '',
