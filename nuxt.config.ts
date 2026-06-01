@@ -28,7 +28,6 @@ export default defineNuxtConfig({
       version: pkg.version,
       twitch: {
         clientId: '',
-        redirectUri: '',
       },
     },
     kick: {
@@ -36,6 +35,12 @@ export default defineNuxtConfig({
       clientSecret: '',
       redirectUri: '',
       scope: 'user:read',
+    },
+    twitch: {
+      clientId: '',
+      clientSecret: '',
+      redirectUri: '',
+      scopes: ['chat:read', 'openid'],
     },
   },
   alias: {

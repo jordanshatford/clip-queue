@@ -1,13 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockTwitchClip, mockTwitchGame, mockTwitchUser, mockTwitchVod } from '~~/test/mocks'
+import { mockTwitchClip, mockTwitchGame, mockTwitchVod } from '~~/test/mocks'
 
-import {
-  getClips,
-  getGames,
-  getUsers,
-  getVideos,
-  toCommonHeaders,
-} from '~/integrations/twitch/core/api'
+import { getClips, getGames, getVideos, toCommonHeaders } from '~/integrations/twitch/core/api'
 
 describe('integrations/twitch/core/api', () => {
   beforeEach(() => {
@@ -21,8 +15,6 @@ describe('integrations/twitch/core/api', () => {
             data = [mockTwitchClip]
           } else if (url.toString().includes('games')) {
             data = [mockTwitchGame]
-          } else if (url.toString().includes('users')) {
-            data = [mockTwitchUser]
           } else if (url.toString().includes('videos')) {
             data = [mockTwitchVod]
           }
@@ -105,29 +97,8 @@ describe('integrations/twitch/core/api', () => {
     )
   })
 
-  it('gets a twitch user from twitch api', async () => {
-    const users = await getUsers('', '', ['testuser'])
-    const userInfo = users[0]
-    expect(userInfo).toBeDefined()
-    expect(userInfo?.id).toEqual('testuser')
-    expect(userInfo?.login).toEqual('testuser')
-    expect(userInfo?.display_name).toEqual('Test User')
-    expect(fetch).toHaveBeenCalledTimes(1)
-  })
-
   it('gets authorization headers based on a twitch users context', () => {
     const headers = toCommonHeaders('', 'testToken')
     expect(headers['Authorization']).toEqual('Bearer testToken')
-  })
-
-  it('throws when the user fetch fails', async () => {
-    vi.spyOn(global, 'fetch').mockResolvedValue({
-      ok: false,
-      statusText: 'Bad Request',
-    } as Response)
-
-    await expect(getUsers('client-id', 'token-123', ['user-1'])).rejects.toThrow(
-      'Failed to users with IDs user-1: Bad Request',
-    )
   })
 })

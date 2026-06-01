@@ -4,18 +4,14 @@ import type { UserDetails, IntegrationAuthentication } from '../core'
 
 import { toStorageKey } from '../core'
 import { IntegrationID } from '../indentify'
-import { getUsers } from './core/api'
-import auth from './core/auth'
 
-const state = useStorage<string>(toStorageKey(IntegrationID.TWITCH_AUTH, 'redirect-state'), '')
+const SESSION_COOKIE = 'twitch_session'
 
 const user = useStorage<UserDetails>(toStorageKey(IntegrationID.TWITCH_AUTH, 'user'), {
   id: '',
   name: '',
   profileImageURL: '',
 })
-
-const token = useStorage<string>(toStorageKey(IntegrationID.TWITCH_AUTH, 'token'), '')
 
 export class TwitchAuthentication implements IntegrationAuthentication {
   public readonly id: IntegrationID = IntegrationID.TWITCH_AUTH
@@ -26,88 +22,42 @@ export class TwitchAuthentication implements IntegrationAuthentication {
   }
 
   public get token(): string {
-    return token.value
+    const cookie = useCookie<{ access_token: string }>(SESSION_COOKIE)
+    if (cookie.value) {
+      return cookie.value.access_token
+    }
+    return ''
   }
 
   public async redirect(): Promise<void> {
-    const config = useRuntimeConfig().public.twitch
-    state.value = Math.random().toString(36).substring(2)
-    auth.redirect(config.clientId, config.redirectUri, ['openid', 'chat:read'], state.value)
+    await navigateTo('/api/twitch/oath', { external: true })
   }
 
   public async autoLogin(): Promise<UserDetails> {
-    if (await auth.isLoginValid(this.token)) {
-      const details = await this.getUserDetails()
-      if (details) {
-        user.value = details
-      }
-      this.isLoggedIn = true
-    } else {
-      throw new Error('Failed to auto-login user.')
+    const current = await $fetch('/api/twitch/oath/validate', {
+      method: 'POST',
+    })
+
+    if (!current) {
+      throw new Error('No valid session found.')
     }
-    return this.user
+
+    user.value = {
+      id: current.id,
+      name: current.display_name,
+      profileImageURL: current.profile_image_url,
+    }
+    this.isLoggedIn = true
+    return user.value
   }
 
-  public async login(fullPath: string): Promise<UserDetails> {
-    const url = new URL(fullPath, window.location.origin)
-    const authInfo = auth.login(url.hash, state.value)
-    state.value = undefined
-    if (authInfo === null) {
-      throw new Error('Failed to parse authentication information from URL hash.')
-    }
-    const { access_token, decodedIdToken } = authInfo
-
-    if (this.user?.name !== decodedIdToken.preferred_username || this.token !== access_token) {
-      user.value = {
-        id: decodedIdToken.sub,
-        name: decodedIdToken.preferred_username,
-        profileImageURL: undefined, // Will be populated after fetching user data from Twitch API
-      }
-      token.value = access_token
-
-      const details = await this.getUserDetails()
-      if (details) {
-        user.value = details
-      }
-
-      this.isLoggedIn = true
-      return this.user
-    }
-    throw new Error('User is already logged in with the same credentials.')
+  public async login(_: string): Promise<UserDetails> {
+    return user.value
   }
 
   public async logout(): Promise<void> {
-    const t = token.value
-    token.value = undefined
-    user.value = undefined
     this.isLoggedIn = false
-    if (t) {
-      const config = useRuntimeConfig().public.twitch
-      try {
-        await auth.logout(config.clientId, t)
-      } catch (e) {
-        throw new Error(`[Twitch]: Failed to logout, ${e}`)
-      }
-    }
-  }
-
-  private async getUserDetails(): Promise<UserDetails | undefined> {
-    // Attempt to get the username from Twitch API as the preferred username may not be set
-    // or the user may have a preferred username that is different from their Twitch username.
-    // For example, if the user has simplified chinese characters in their preferred username.
-    try {
-      const config = useRuntimeConfig().public.twitch
-      const users = await getUsers(config.clientId, this.token, [])
-      if (users.length > 0 && users[0]) {
-        return {
-          ...user.value,
-          id: users[0].id,
-          name: users[0].login,
-          profileImageURL: users[0].profile_image_url,
-        }
-      }
-    } catch {
-      return undefined
-    }
+    user.value = undefined
+    return await $fetch('/api/twitch/oath/revoke', { method: 'POST' })
   }
 }

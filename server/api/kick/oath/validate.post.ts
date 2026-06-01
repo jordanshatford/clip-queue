@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
     },
   })
 
-  if (introspect.data?.client_id !== useRuntimeConfig().kick.clientId) {
+  if (introspect.data?.client_id !== config.kick.clientId) {
     throw createError({
       statusCode: 400,
       statusMessage: 'Token is not for this applications client ID.',
@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  if (!introspect.data?.scope.split(' ').includes('user:read')) {
+  if (!introspect.data?.scope.split(' ').includes(config.kick.scope)) {
     throw createError({
       statusCode: 400,
       statusMessage: 'Token does not have the required scope.',

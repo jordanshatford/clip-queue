@@ -3,7 +3,6 @@ import type {
   TwitchGame,
   TwitchPagedResponse,
   TwitchResponse,
-  TwitchUser,
   TwitchVideo,
 } from './types'
 
@@ -98,27 +97,5 @@ export async function getGames(
     throw new Error(`Failed to fetch games with IDs ${ids.join(' ')}: ${response.statusText}`)
   }
   const data: TwitchResponse<TwitchGame[]> = await response.json()
-  return data.data
-}
-
-/**
- * Get users from Twitch.
- * @param clientID - The client ID to use.
- * @param token - The users Twitch token.
- * @param ids - The user IDs to fetch.
- * @returns The users.
- */
-export async function getUsers(
-  clientID: string,
-  token: string,
-  ids: string[],
-): Promise<TwitchUser[]> {
-  const response = await fetch(`${BASE_URL}/users?${toURLParams('id', ids)}`, {
-    headers: toCommonHeaders(clientID, token),
-  })
-  if (!response.ok) {
-    throw new Error(`Failed to users with IDs ${ids.join(' ')}: ${response.statusText}`)
-  }
-  const data: TwitchResponse<TwitchUser[]> = await response.json()
   return data.data
 }

@@ -19,15 +19,6 @@ export const KICK_OATH_BASE = 'https://id.kick.com/oauth'
 export const KICK_PUBLIC_API_BASE = 'https://api.kick.com/public/v1'
 
 /**
- * Generic response type for Kick API responses, where the data field is optional and the
- * message field indicates the status of the response.
- */
-export type GenericKickResponse<T> = {
-  data?: T
-  message: 'OK' | (string & {})
-}
-
-/**
  * Response type for Kick token endpoint, which includes the access token, its expiration
  * time, the refresh token, the scope of the token, and the token type.
  */
@@ -37,6 +28,15 @@ export type KickTokenResponse = {
   refresh_token: string
   scope: string
   token_type: 'Bearer'
+}
+
+/**
+ * Generic response type for Kick API responses, where the data field is optional and the
+ * message field indicates the status of the response.
+ */
+export type GenericKickResponse<T> = {
+  data?: T
+  message: 'OK' | 'Unauthorized' | (string & {})
 }
 
 /**
@@ -53,14 +53,17 @@ export type KickTokenIntrospect = GenericKickResponse<{
 }>
 
 /**
+ * Response type for Kick user.
+ */
+export type KickUser = {
+  user_id: number
+  name: string
+  email: string
+  profile_picture: string
+}
+
+/**
  * Response type for Kick users endpoint, which includes an array of user objects, where each
  * user object contains the user's ID, name, email, and profile picture URL.
  */
-export type KickUsersResponse = GenericKickResponse<
-  {
-    user_id: number
-    name: string
-    email: string
-    profile_picture: string
-  }[]
->
+export type KickUsersResponse = GenericKickResponse<KickUser[]>
