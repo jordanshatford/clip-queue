@@ -460,3 +460,82 @@ export interface KickVideoVerified {
    */
   updated_at: string
 }
+
+/**
+ * Partial Kick channel details from channels endpoint.
+ */
+export interface KickChannelPartial {
+  /**
+   * The ID of the channel.
+   */
+  id: number
+  /**
+   * The user ID of the channel.
+   */
+  user_id: number
+  /**
+   * The slug of the channel.
+   */
+  slug: string
+  /**
+   * The user the for the channel
+   */
+  user: KickChannel
+  /**
+   * Chatroom details for the channel
+   */
+  chatroom: {
+    /**
+     * The ID of the chatroom.
+     */
+    id: number
+    /**
+     * The chatable ID of the chatroom.
+     */
+    chatable_id: number
+    /**
+     * The chatable type of the chatroom.
+     */
+    chatable_type: string
+    /**
+     * The channel ID of the chatroom.
+     */
+    channel_id: number
+    /**
+     * Timestamp when the chatroom was created at.
+     */
+    created_at: string
+    /**
+     * Timestamp when the chatroom was updated at.
+     */
+    updated_at: string
+    /**
+     * The chat mode of the chatroom.
+     */
+    chat_mode: string
+    /**
+     * If the chatroom is in slow mode.
+     */
+    slow_mode: boolean
+    /**
+     * If the chatroom is in followers only mode.
+     */
+    followers_mode: boolean
+    /**
+     * If the chatroom is in subscribers only mode.
+     */
+    subscribers_mode: boolean
+    /**
+     * If the chatroom is in emotes only mode.
+     */
+    emotes_mode: boolean
+    /**
+     * The message interval of the chatroom.
+     */
+    message_interval: number
+    /**
+     * The duration you need to be following to use the chatroom.
+     */
+    following_min_duration: number
+  }
+}

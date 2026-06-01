@@ -26,6 +26,7 @@ ClipQueue integrates into a users chat and queues clips submitted by their viewe
   - [Kick](https://kick.com/)
     - Authentication: `Kick Authentication`.
     - Providers: `Kick Clips`, `Kick Videos`.
+    - Sources: `Kick Chat`.
   - [YouTube](https://www.youtube.com/)
     - Providers: `YouTube Shorts`, `YouTube Videos`.
   - [Rumble](https://rumble.com/)

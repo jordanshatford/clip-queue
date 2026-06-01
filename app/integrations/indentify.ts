@@ -15,6 +15,10 @@ export enum IntegrationID {
    */
   KICK_AUTH = 'kick-auth',
   /**
+   * Kick chat source.
+   */
+  KICK_CHAT = 'kick-chat',
+  /**
    * Kick clips provider.
    */
   KICK_CLIPS = 'kick-clips',
