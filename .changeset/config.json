@@ -1,8 +1,8 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@2.3.1/schema.json",
+  "$schema": "https://unpkg.com/@changesets/config@3.1.4/schema.json",
   "changelog": [
-    "@svitejs/changesets-changelog-github-compact",
-    { "repo": "jordanshatford/clip-queue" }
+    "@changesets/changelog-github",
+    { "repo": "jordanshatford/clip-queue", "disableThanks": true }
   ],
   "commit": false,
   "fixed": [],
@@ -10,6 +10,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": [],
   "privatePackages": { "version": true, "tag": true }
 }

@@ -23,7 +23,7 @@
     "changeset": "changeset"
   },
   "dependencies": {
-    "@nuxt/ui": "^4.8.0",
+    "@nuxt/ui": "^4.8.1",
     "@pinia/nuxt": "0.11.3",
     "@tanstack/vue-table": "^8.21.3",
     "@tmi.js/chat": "^0.8.0",
@@ -32,37 +32,37 @@
     "nuxt": "^4.4.6",
     "pinia": "^3.0.4",
     "video.js": "^8.23.7",
-    "vue": "^3.5.34",
-    "vue-router": "^5.0.7"
+    "vue": "^3.5.35",
+    "vue-router": "^5.1.0"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.7.0",
     "@changesets/cli": "^2.31.0",
-    "@commitlint/cli": "^21.0.1",
-    "@commitlint/config-conventional": "^21.0.1",
+    "@commitlint/cli": "^21.0.2",
+    "@commitlint/config-conventional": "^21.0.2",
     "@commitlint/types": "^21.0.1",
-    "@iconify-json/lucide": "^1.2.109",
-    "@iconify-json/simple-icons": "^1.2.83",
+    "@iconify-json/lucide": "^1.2.111",
+    "@iconify-json/simple-icons": "^1.2.84",
     "@inlang/paraglide-js": "2.18.1",
     "@nuxt/eslint": "^1.15.2",
     "@nuxt/test-utils": "4.0.3",
     "@pinia/testing": "^1.0.3",
-    "@svitejs/changesets-changelog-github-compact": "^1.2.0",
     "@types/node": "^25.9.1",
     "@vitest/coverage-v8": "^4.1.7",
     "@vue/test-utils": "^2.4.10",
-    "eslint": "^10.4.0",
+    "eslint": "^10.4.1",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
-    "oxfmt": "^0.51.0",
+    "oxfmt": "^0.52.0",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.7",
-    "vue-tsc": "^3.3.1"
+    "vue-tsc": "^3.3.3"
   },
   "engines": {
     "node": ">=22",
     "pnpm": ">=11"
   },
-  "packageManager": "pnpm@11.3.0"
+  "packageManager": "pnpm@11.5.0"
 }
