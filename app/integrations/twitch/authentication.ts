@@ -1,16 +1,11 @@
-import { useStorage } from '@vueuse/core'
+import type { UserDetails, IntegrationAuthentication, AuthenticationDetails } from '../core'
 
-import type { UserDetails, IntegrationAuthentication } from '../core'
-
-import { toStorageKey } from '../core'
 import { IntegrationID } from '../indentify'
 
-const SESSION_COOKIE = 'twitch_session'
-
-const user = useStorage<UserDetails>(toStorageKey(IntegrationID.TWITCH_AUTH, 'user'), {
-  id: '',
-  name: '',
-  profileImageURL: '',
+const user = ref<UserDetails | undefined>(undefined)
+const authentication = ref<AuthenticationDetails>({
+  clientId: '',
+  accessToken: '',
 })
 
 export class TwitchAuthentication implements IntegrationAuthentication {
@@ -18,15 +13,11 @@ export class TwitchAuthentication implements IntegrationAuthentication {
   public isLoggedIn = false
 
   public get user(): UserDetails {
-    return user.value
+    return user.value ?? { id: '', name: '', profileImageURL: '' }
   }
 
-  public get token(): string {
-    const cookie = useCookie<{ access_token: string }>(SESSION_COOKIE)
-    if (cookie.value) {
-      return cookie.value.access_token
-    }
-    return ''
+  public get details(): AuthenticationDetails {
+    return authentication.value
   }
 
   public async redirect(): Promise<void> {
@@ -42,22 +33,20 @@ export class TwitchAuthentication implements IntegrationAuthentication {
       throw new Error('No valid session found.')
     }
 
-    user.value = {
-      id: current.id,
-      name: current.display_name,
-      profileImageURL: current.profile_image_url,
-    }
+    user.value = current.user
+    authentication.value = current.authentication
     this.isLoggedIn = true
     return user.value
   }
 
   public async login(_: string): Promise<UserDetails> {
-    return user.value
+    return this.user
   }
 
   public async logout(): Promise<void> {
     this.isLoggedIn = false
     user.value = undefined
+    authentication.value = { clientId: '', accessToken: '' }
     return await $fetch('/api/twitch/oath/revoke', { method: 'POST' })
   }
 }

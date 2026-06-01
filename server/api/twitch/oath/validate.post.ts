@@ -5,7 +5,7 @@
  * @see https://dev.twitch.tv/docs/authentication/refresh-tokens/
  * @see https://dev.twitch.tv/docs/api/reference#get-users
  */
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<OathResponse> => {
   const config = useRuntimeConfig()
   const session = getObjectCookie<TwitchTokenResponse>(event, TWITCH_SESSION_COOKIE)
 
@@ -74,5 +74,15 @@ export default defineEventHandler(async (event) => {
       statusMessage: 'Failed to fetch user with provided token.',
     })
   }
-  return user
+  return {
+    user: {
+      id: String(user.id),
+      name: user.login,
+      profileImageURL: user.profile_image_url,
+    },
+    authentication: {
+      clientId: config.twitch.clientId,
+      accessToken: session.access_token,
+    },
+  }
 })

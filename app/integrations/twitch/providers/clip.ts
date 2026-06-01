@@ -2,6 +2,7 @@ import { useStorage } from '@vueuse/core'
 
 import {
   IntegrationStatus,
+  type AuthenticationDetails,
   type Clip,
   type IntegrationProvider,
   type PlayerConfig,
@@ -29,16 +30,17 @@ export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationPr
   }
 
   public get status(): IntegrationStatus | undefined {
-    if (!this.token()) {
+    const auth = this.authentication()
+    if (!auth.clientId || !auth.accessToken) {
       return IntegrationStatus.MISCONFIGURED
     }
   }
 
-  private token: () => string
+  private authentication: () => AuthenticationDetails
 
-  public constructor(token: () => string) {
+  public constructor(authentication: () => AuthenticationDetails) {
     super()
-    this.token = token
+    this.authentication = authentication
   }
 
   public hasClipSupport(url: string): boolean {
@@ -54,13 +56,13 @@ export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationPr
       return this.cache[id]
     }
     try {
-      const config = useRuntimeConfig().public.twitch
-      const clips = await getClips(config.clientId, this.token(), [id])
+      const auth = this.authentication()
+      const clips = await getClips(auth.clientId, auth.accessToken, [id])
       const clip = clips[0]
       if (!clip) {
         throw new Error(`[${this.name}]: Clip not found for ID ${id}.`)
       }
-      const games = await getGames(config.clientId, this.token(), [clip.game_id])
+      const games = await getGames(auth.clientId, auth.accessToken, [clip.game_id])
       const response: Clip = {
         id: clip.id,
         title: clip.title,

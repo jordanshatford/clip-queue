@@ -1,26 +1,15 @@
-import { useStorage } from '@vueuse/core'
-
 import type { UserDetails, IntegrationAuthentication } from '../core'
 
-import { toStorageKey } from '../core'
 import { IntegrationID } from '../indentify'
 
-const user = useStorage<UserDetails>(toStorageKey(IntegrationID.KICK_AUTH, 'user'), {
-  id: '',
-  name: '',
-  profileImageURL: '',
-})
+const user = ref<UserDetails | undefined>(undefined)
 
 export class KickAuthentication implements IntegrationAuthentication {
   public readonly id = IntegrationID.KICK_AUTH
   public isLoggedIn = false
 
   public get user(): UserDetails {
-    return user.value
-  }
-
-  public get token(): string {
-    return user.value.id
+    return user.value ?? { id: '', name: '', profileImageURL: '' }
   }
 
   public async redirect(): Promise<void> {
@@ -29,7 +18,7 @@ export class KickAuthentication implements IntegrationAuthentication {
 
   public async login(_: string): Promise<UserDetails> {
     // TODO(jordan): clean this up after reworking integrations authentication.
-    return user.value
+    return this.user
   }
 
   public async autoLogin(): Promise<UserDetails> {
@@ -41,11 +30,7 @@ export class KickAuthentication implements IntegrationAuthentication {
       throw new Error('No valid session found.')
     }
 
-    user.value = {
-      id: current.user_id.toString(),
-      name: current.name,
-      profileImageURL: current.profile_picture,
-    }
+    user.value = current.user
     this.isLoggedIn = true
     return user.value
   }

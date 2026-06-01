@@ -5,7 +5,7 @@
  * @see https://docs.kick.com/getting-started/generating-tokens-oauth2-flow#refresh-token-endpoint
  * @see https://docs.kick.com/apis/users#get-public-v1-users
  */
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<OathResponse> => {
   const config = useRuntimeConfig()
   const session = getObjectCookie<KickTokenResponse>(event, KICK_SESSION_COOKIE)
 
@@ -79,5 +79,15 @@ export default defineEventHandler(async (event) => {
       statusMessage: 'Failed to fetch user with provided token.',
     })
   }
-  return user
+  return {
+    user: {
+      id: String(user.user_id),
+      name: user.name,
+      profileImageURL: user.profile_picture,
+    },
+    authentication: {
+      clientId: config.kick.clientId,
+      accessToken: session.access_token,
+    },
+  }
 })

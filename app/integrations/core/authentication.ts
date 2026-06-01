@@ -19,6 +19,21 @@ export interface UserDetails {
 }
 
 /**
+ * Authentication details provided by an authentication integration. This can include any additional information
+ * needed to authenticate with the provider's API, such as access tokens or client IDs.
+ */
+export interface AuthenticationDetails {
+  /**
+   * The client ID for this application for the integration.
+   */
+  clientId: string
+  /**
+   * The access token for the user authenticated with the integration.
+   */
+  accessToken: string
+}
+
+/**
  * Interface representing an authentication integration. Each authentication integration must implement
  * this interface to provide a consistent way to handle authentication across different providers.
  */
@@ -36,9 +51,9 @@ export interface IntegrationAuthentication {
    */
   readonly user?: UserDetails
   /**
-   * The users authentication token for the integration.
+   * The users authentication details for the integration.
    */
-  readonly token?: string
+  readonly details?: AuthenticationDetails
   /**
    * Redirects the user to the authentication page of the provider. This is typically called when the user initiates a login action.
    */

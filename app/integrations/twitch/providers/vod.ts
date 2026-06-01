@@ -1,6 +1,6 @@
 import { useStorage } from '@vueuse/core'
 
-import type { Clip, IntegrationProvider, PlayerConfig } from '../../core'
+import type { AuthenticationDetails, Clip, IntegrationProvider, PlayerConfig } from '../../core'
 
 import { toStorageKey, Cacheable, IntegrationStatus } from '../../core'
 import { IntegrationID } from '../../indentify'
@@ -25,16 +25,17 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
   }
 
   public get status(): IntegrationStatus | undefined {
-    if (!this.token()) {
+    const auth = this.authentication()
+    if (!auth.clientId || !auth.accessToken) {
       return IntegrationStatus.MISCONFIGURED
     }
   }
 
-  private token: () => string
+  private authentication: () => AuthenticationDetails
 
-  public constructor(token: () => string) {
+  public constructor(authentication: () => AuthenticationDetails) {
     super()
-    this.token = token
+    this.authentication = authentication
   }
 
   public hasClipSupport(url: string): boolean {
@@ -51,8 +52,8 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
       return this.cache[id]
     }
     try {
-      const config = useRuntimeConfig().public.twitch
-      const videos = await getVideos(config.clientId, this.token(), [id])
+      const auth = this.authentication()
+      const videos = await getVideos(auth.clientId, auth.accessToken, [id])
       const video = videos[0]
       if (!video) {
         throw new Error(`[${this.name}]: VOD not found for ID ${id}.`)
