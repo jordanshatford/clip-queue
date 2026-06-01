@@ -6,10 +6,14 @@
 
 <script setup lang="ts">
 const app = useAppConfig()
+const integrations = useIntegrations()
 const queue = useQueue()
 
 useHead({
   title: computed(() => {
+    if (!integrations.isLoggedIn) {
+      return app.cq.title
+    }
     let queueState = queue.settings.open ? 'Open' : 'Closed'
     if (queue.settings.open) {
       queueState = `${queueState} (${queue.upcoming.length})`
