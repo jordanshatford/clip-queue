@@ -29,7 +29,7 @@
       class="w-full justify-center rounded-full"
       color="neutral"
       variant="subtle"
-      @click="authentication.redirect()"
+      @click="authentication.login()"
       >{{ m.login() }}</UButton
     >
   </div>

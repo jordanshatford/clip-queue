@@ -3,7 +3,7 @@
     <UButton
       v-if="!integrations.isLoggedIn"
       icon="simple-icons:twitch"
-      @click="() => integrations.redirect(IntegrationID.TWITCH_AUTH)"
+      @click="() => integrations.login(IntegrationID.TWITCH_AUTH)"
     >
       {{ m.login() }}
     </UButton>

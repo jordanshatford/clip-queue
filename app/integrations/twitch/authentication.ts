@@ -20,27 +20,22 @@ export class TwitchAuthentication implements IntegrationAuthentication {
     return authentication.value
   }
 
-  public async redirect(): Promise<void> {
-    await navigateTo('/api/twitch/oath', { external: true })
-  }
-
-  public async autoLogin(): Promise<UserDetails> {
+  public async autoLogin(): Promise<void> {
     const current = await $fetch('/api/twitch/oath/validate', {
       method: 'POST',
     })
 
     if (!current) {
-      throw new Error('No valid session found.')
+      throw new Error(`[${this.id}]: No valid session found.`)
     }
 
     user.value = current.user
     authentication.value = current.authentication
     this.isLoggedIn = true
-    return user.value
   }
 
-  public async login(_: string): Promise<UserDetails> {
-    return this.user
+  public async login(): Promise<void> {
+    await navigateTo('/api/twitch/oath', { external: true })
   }
 
   public async logout(): Promise<void> {

@@ -55,26 +55,15 @@ export interface IntegrationAuthentication {
    */
   readonly details?: AuthenticationDetails
   /**
-   * Redirects the user to the authentication page of the provider. This is typically called when the user initiates a login action.
-   */
-  redirect: () => Promise<void>
-  /**
    * Attempts to automatically log in the user if possible. This can be used on application startup to check if the user has a
    * valid session with the provider. If auto-login is successful, it returns the user details. If auto login fails it throws
    * an error to be handled by the caller.
-   *
-   * @returns A promise of UserDetails.
    */
-  autoLogin: () => Promise<UserDetails>
+  autoLogin: () => Promise<void>
   /**
-   * Logs in the user using the provided hash from the authentication redirect. This is typically called after the user is redirected
-   * back to the application from the provider's authentication page. The hash parameter contains the authentication information
-   * returned by the provider, which can be used to retrieve user details and establish a session.
-   *
-   * @param fullPath - The current full path (i.e /some/path) including hash and search parameters.
-   * @returns A promise of UserDetails.
+   * Redirects the user to the authentication page of the integration to allow logging in to our application.
    */
-  login: (fullPath: string) => Promise<UserDetails>
+  login: () => Promise<void>
   /**
    * Logs out the user from the provider. This should clear any stored tokens or session information related to the provider.
    */

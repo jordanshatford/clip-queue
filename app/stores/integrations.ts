@@ -164,21 +164,12 @@ export const useIntegrations = defineStore('integrations', () => {
   })
 
   /**
-   * Redirect to a given integration login.
-   * @param id - The ID of the integration.
-   */
-  async function redirect(id: IntegrationID): Promise<void> {
-    return integration(id)?.authentication?.redirect()
-  }
-
-  /**
-   * Login callback for an integration.
+   *  Redirect to a given integration login.
    * @param id - The ID of the integration.
    * @param fullPath - The path of the callback to provide the integration.
    */
-  async function login(id: IntegrationID, fullPath: string): Promise<void> {
-    await integration(id)?.authentication?.login(fullPath)
-    await integration(id)?.source?.connect()
+  async function login(id: IntegrationID): Promise<void> {
+    await integration(id)?.authentication?.login()
   }
 
   /**
@@ -572,7 +563,6 @@ export const useIntegrations = defineStore('integrations', () => {
     isLoggedIn,
     isLoggedInTo,
     autoLogin,
-    redirect,
     login,
     logout,
     logoutAll,

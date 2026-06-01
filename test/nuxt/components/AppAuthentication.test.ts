@@ -3,14 +3,14 @@ import { describe, expect, it, vi, beforeEach } from 'vitest'
 
 import UserMenu from '~/components/AppAuthentication.vue'
 
-const redirectMock = vi.fn()
+const loginMock = vi.fn()
 const logoutMock = vi.fn()
 const sourceMock = vi.fn()
 
 const integrationsMock = {
   integrations: [],
   isLoggedIn: false,
-  redirect: redirectMock,
+  login: loginMock,
   logoutAll: logoutMock,
   source: sourceMock,
 }
@@ -43,7 +43,7 @@ describe('UserMenu.vue', () => {
     const wrapper = await mountSuspended(UserMenu)
     const button = wrapper.find('button')
     await button.trigger('click')
-    expect(redirectMock).toHaveBeenCalled()
+    expect(loginMock).toHaveBeenCalled()
   })
 
   it('creates settings and logout menu items', async () => {
