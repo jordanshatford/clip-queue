@@ -11,6 +11,10 @@ export enum IntegrationID {
    */
   KICK = 'kick',
   /**
+   * Kick authentication.
+   */
+  KICK_AUTH = 'kick-auth',
+  /**
    * Kick clips provider.
    */
   KICK_CLIPS = 'kick-clips',

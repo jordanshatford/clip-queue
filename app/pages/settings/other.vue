@@ -54,8 +54,7 @@ definePageMeta({
   order: 5,
 })
 
-const runtime = useRuntimeConfig()
-const version = runtime.public.version
+const version = useRuntimeConfig().public.version
 
 const toast = useToast()
 const confirm = useConfirmDialog()

@@ -31,6 +31,12 @@ export default defineNuxtConfig({
         redirectUri: '',
       },
     },
+    kick: {
+      clientId: '',
+      clientSecret: '',
+      redirectUri: '',
+      scope: 'user:read',
+    },
   },
   alias: {
     '#paraglide': fileURLToPath(new URL('./paraglide', import.meta.url)),
