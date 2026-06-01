@@ -148,10 +148,6 @@ export type IntegrationSource = {
    */
   readonly status: IntegrationStatus
   /**
-   * Optional reason for the current status.
-   */
-  readonly reason?: string
-  /**
    * Connect to the source.
    * @returns A promise that resolves when the source is connected.
    */

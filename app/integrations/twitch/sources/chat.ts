@@ -16,7 +16,6 @@ import { IntegrationID } from '../../indentify'
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.TWITCH_CHAT, 'enabled'), true)
 const isLoading = ref<boolean>(false)
 const status = ref<IntegrationStatus>(IntegrationStatus.DISABLED)
-const reason = ref<string | undefined>(undefined)
 
 /**
  * Twitch Chat Source.
@@ -68,10 +67,6 @@ export class TwitchChatSource
     return status.value
   }
 
-  public get reason(): string | undefined {
-    return reason.value
-  }
-
   private channel: () => string
   private chat = new Client({ token: undefined, channels: [] })
 
@@ -79,9 +74,8 @@ export class TwitchChatSource
     return new Date().toISOString()
   }
 
-  private handleStatusUpdate(s: IntegrationStatus, r?: string): void {
+  private handleStatusUpdate(s: IntegrationStatus, _?: string): void {
     status.value = s
-    reason.value = r
   }
 
   private handleError(error: unknown): void {
