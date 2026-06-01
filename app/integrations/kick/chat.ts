@@ -1,7 +1,11 @@
 import { useStorage } from '@vueuse/core'
 import { ref } from 'vue'
 
-import type { IntegrationSource, IntegrationSourceEvents } from '../core'
+import type {
+  IntegrationSource,
+  IntegrationSourceEvents,
+  IntegrationSourceMessageEvent,
+} from '../core'
 
 import {
   IntegrationSourceFeature,
@@ -17,6 +21,47 @@ import { isSenderBot, isSenderModerator } from './core/utils'
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.KICK_CHAT, 'enabled'), false)
 const isLoading = ref<boolean>(false)
 const status = ref<IntegrationStatus>(IntegrationStatus.DISABLED)
+
+/**
+ * A message cache for Kick deleted message handling.
+ */
+export class MessageCache<T> {
+  private values: Map<string, T> = new Map<string, T>()
+  private size: number
+
+  public constructor(size: number = 1000) {
+    this.size = size
+  }
+
+  /**
+   * Get item from the cache. This assumes that once you get the value once it will
+   * no longer be needed and can be removed completely.
+   * @param key - The key in the cache.
+   * @returns T if it exists, and removes T from the map.
+   */
+  public get(key: string): T | undefined {
+    const entry = this.values.get(key)
+    if (entry) {
+      this.values.delete(key)
+    }
+    return entry
+  }
+
+  /**
+   * Set a value in the cache. When the cache is full the oldest will be removed.
+   * @param key - The key to use in the cache.
+   * @param value - The value to set it to.
+   */
+  public set(key: string, value: T): void {
+    if (this.values.size >= this.size) {
+      const oldest = this.values.keys().next().value
+      if (oldest) {
+        this.values.delete(oldest)
+      }
+    }
+    this.values.set(key, value)
+  }
+}
 
 /**
  * Kick Chat Source.
@@ -68,6 +113,7 @@ export class KickChatSource
     return status.value
   }
 
+  private messageCache = new MessageCache<IntegrationSourceMessageEvent>()
   private channel: () => string
   private chat = new Client()
 
@@ -128,7 +174,7 @@ export class KickChatSource
       // Emit the message in a unified format that we use for out sources.
       // This includes all details that are required for the application to
       // handle commands, URLs, etc.
-      this.emit('message', {
+      const message: IntegrationSourceMessageEvent = {
         timestamp: this.timestamp(),
         source: this.id,
         data: {
@@ -138,13 +184,17 @@ export class KickChatSource
           isAllowedCommands: isSenderModerator(event.data.sender),
           urls: getAllURLsFromText(event.data.content),
         },
-      })
+      }
+      this.messageCache.set(event.data.id, message)
+      this.emit('message', message)
       this.handleStatusUpdate(IntegrationStatus.HEALTHY)
     })
 
-    this.chat.on('message-deleted', (_event) => {
-      // TODO(jordan): kick does not provide the original message. We may need to fetch it.
-      //.              or cache it during runtime.
+    this.chat.on('message-deleted', (event) => {
+      const message = this.messageCache.get(event.data.message.id)
+      if (message) {
+        this.emit('message-deleted', message)
+      }
       this.handleStatusUpdate(IntegrationStatus.HEALTHY)
     })
     this.chat.on('user-banned', (event) => {
