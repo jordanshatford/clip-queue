@@ -1,5 +1,59 @@
 # clip-queue
 
+## 3.3.0
+
+### Minor Changes
+
+- feat: cannot disable kick integration as a whole ([`65771b0`](https://github.com/jordanshatford/clip-queue/commit/65771b07704ba9121ee48c5c0a40044702819b0e))
+
+- feat: make is experimental optional, assume false ([`65771b0`](https://github.com/jordanshatford/clip-queue/commit/65771b07704ba9121ee48c5c0a40044702819b0e))
+
+- feat: unify authentication and source on integration card ([`6d06587`](https://github.com/jordanshatford/clip-queue/commit/6d0658761c340d5fb9c59afdd8a15f55b0c90311))
+
+- feat: improve integration auto login by doing it parallel ([`9c4a2a8`](https://github.com/jordanshatford/clip-queue/commit/9c4a2a823fa65889e219dc8ad1ad79d599352285))
+
+- feat: simplify integration authentication handling ([`99ad496`](https://github.com/jordanshatford/clip-queue/commit/99ad496d4a1c91590fde50aec3251afa19619500))
+
+- feat: refactor authentication to allow multiple authentication ([`0f06394`](https://github.com/jordanshatford/clip-queue/commit/0f0639480eee3611c9ad9f23270576927850334f))
+
+- feat: show integration icon when hovering avatar ([`72335d7`](https://github.com/jordanshatford/clip-queue/commit/72335d71ae326e3d9ab46d52670d9278dd290d9c))
+
+- feat: add integration source feature for auto connect ([`eda097f`](https://github.com/jordanshatford/clip-queue/commit/eda097f1da5e7f8575274a2691d1595a493fce2f))
+
+- feat: integration is enabled can be undefined ([`6d06587`](https://github.com/jordanshatford/clip-queue/commit/6d0658761c340d5fb9c59afdd8a15f55b0c90311))
+
+- feat: add kick authentication support to kick integration ([`37f9bfd`](https://github.com/jordanshatford/clip-queue/commit/37f9bfda379b00237a4103aaf87b2c4bfdef228a))
+
+- feat: move twitch authentication to server ([`e7bf5c4`](https://github.com/jordanshatford/clip-queue/commit/e7bf5c436ed3e9022855c128b7a8adb0053567dd))
+
+- feat: disable integration source enable when misconfigured ([`df6c5ea`](https://github.com/jordanshatford/clip-queue/commit/df6c5ea74b5387f5c108afa4f3844f6884f95dac))
+
+- feat: show twitch providers are misconfigured when not logged in ([`318e714`](https://github.com/jordanshatford/clip-queue/commit/318e7140d11040a79e30343413f3b7d7a4373a5d))
+
+- feat: show when integration provider is misconfigured ([`318e714`](https://github.com/jordanshatford/clip-queue/commit/318e7140d11040a79e30343413f3b7d7a4373a5d))
+
+- feat: update feature card to remove twitch reference ([`5567d90`](https://github.com/jordanshatford/clip-queue/commit/5567d906d4df7ac8ded9553dd2db31f66669b503))
+
+- feat: add kick chat support to kick integration ([`a708e0e`](https://github.com/jordanshatford/clip-queue/commit/a708e0e20cf39b8e594606a7591e2abdff6a95df))
+
+- feat: support logging in with only kick ([`4e29684`](https://github.com/jordanshatford/clip-queue/commit/4e296849f4b74d9f32874a71175e8c58432c27ee))
+
+### Patch Changes
+
+- fix: allow authentication to provide details for future requests ([`31a65f4`](https://github.com/jordanshatford/clip-queue/commit/31a65f4ad88d42f029d627079c4612a458bd3322))
+
+- fix: ensure twitch authentication has required scopes ([`e7bf5c4`](https://github.com/jordanshatford/clip-queue/commit/e7bf5c436ed3e9022855c128b7a8adb0053567dd))
+
+- fix: unify all vods and videos integration ids ([`523b611`](https://github.com/jordanshatford/clip-queue/commit/523b6112cd06d7c79f61e6bae9abc79209402396))
+
+- fix: cache kick chat message to support delete moderation ([`bd9abb2`](https://github.com/jordanshatford/clip-queue/commit/bd9abb2d53b62b66c60ea5b1fb31c5463f2a8853))
+
+- fix: do not show queue length in tab bar when logged out ([`00ca6e3`](https://github.com/jordanshatford/clip-queue/commit/00ca6e3420751551712019353e41a9209b3c5436))
+
+- fix: sort integration source features ([`eda097f`](https://github.com/jordanshatford/clip-queue/commit/eda097f1da5e7f8575274a2691d1595a493fce2f))
+
+- fix: make application title clipqueue without space ([`a3bd0c8`](https://github.com/jordanshatford/clip-queue/commit/a3bd0c8c76c9aec35592358120087869187a6abd))
+
 ## 3.2.0
 
 ### Minor Changes
