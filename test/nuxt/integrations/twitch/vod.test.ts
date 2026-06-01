@@ -3,7 +3,7 @@ import { mockKickClip, mockTwitchClip, mockTwitchVod } from '~~/test/mocks'
 
 import type { TwitchVideo } from '~/integrations/twitch/core/types'
 
-import { TwitchVodProvider } from '~/integrations/twitch/providers/vod'
+import { TwitchVodProvider } from '~/integrations/twitch/vod'
 
 vi.mock('~/integrations/twitch/core/api.ts', async (importOriginal) => {
   return {
@@ -16,7 +16,7 @@ vi.mock('~/integrations/twitch/core/api.ts', async (importOriginal) => {
   }
 })
 
-const provider = new TwitchVodProvider(() => '')
+const provider = new TwitchVodProvider(() => ({ clientId: '', accessToken: '' }))
 
 describe('integrations/twitch/providers/vod', () => {
   beforeEach(() => {

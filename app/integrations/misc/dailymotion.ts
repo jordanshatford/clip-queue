@@ -1,10 +1,10 @@
 import { useStorage } from '@vueuse/core'
 
-import type { Clip, IntegrationProvider, PlayerConfig } from '../../core'
+import type { Clip, IntegrationProvider, PlayerConfig } from '../core'
 
-import { toStorageKey, Cacheable } from '../../core'
-import { IntegrationID } from '../../indentify'
-import { getOEmbedProxied } from '../core/api'
+import { toStorageKey, Cacheable } from '../core'
+import { IntegrationID } from '../indentify'
+import { getOEmbedProxied } from './core/api'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.DAILYMOTION, 'enabled'), false)
 

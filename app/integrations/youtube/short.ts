@@ -1,11 +1,11 @@
 import { useStorage } from '@vueuse/core'
 
-import type { Clip, IntegrationProvider, PlayerConfig } from '../../core'
+import type { Clip, IntegrationProvider, PlayerConfig } from '../core'
 
-import { toStorageKey, Cacheable } from '../../core'
-import { IntegrationID } from '../../indentify'
-import { getYouTubeOEmbed } from '../core/api'
-import { getYouTubeUrlDetails } from '../core/utils'
+import { toStorageKey, Cacheable } from '../core'
+import { IntegrationID } from '../indentify'
+import { getYouTubeOEmbed } from './core/api'
+import { getYouTubeUrlDetails } from './core/utils'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.YOUTUBE_SHORTS, 'enabled'), false)
 

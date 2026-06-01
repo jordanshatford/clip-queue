@@ -1,11 +1,11 @@
 import { useStorage } from '@vueuse/core'
 
-import type { Clip, IntegrationProvider, PlayerConfig } from '../../core'
-import type { OEmbedResponse } from '../core/types'
+import type { Clip, IntegrationProvider, PlayerConfig } from '../core'
+import type { OEmbedResponse } from './core/types'
 
-import { toStorageKey, Cacheable } from '../../core'
-import { IntegrationID } from '../../indentify'
-import { getOEmbedProxied } from '../core/api'
+import { toStorageKey, Cacheable } from '../core'
+import { IntegrationID } from '../indentify'
+import { getOEmbedProxied } from './core/api'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.MEDAL, 'enabled'), false)
 

@@ -3,7 +3,7 @@ import { mockKickClip, mockKickVod, mockOEmbed, mockTwitchClip, mockTwitchVod } 
 
 import type { OEmbedResponse } from '~/integrations/misc/core/types'
 
-import { DailyMotionProvider } from '~/integrations/misc/providers/dailymotion'
+import { DailyMotionProvider } from '~/integrations/misc/dailymotion'
 
 vi.mock('~/integrations/misc/core/api.ts', async (importOriginal) => {
   return {

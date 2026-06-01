@@ -3,8 +3,8 @@ import { reactive } from 'vue'
 
 import { toStorageKey, type Integration } from '../core'
 import { IntegrationID } from '../indentify'
-import { YouTubeShortProvider } from './providers/short'
-import { YouTubeVideoProvider } from './providers/video'
+import { YouTubeShortProvider } from './short'
+import { YouTubeVideoProvider } from './video'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.YOUTUBE, 'enabled'), false)
 

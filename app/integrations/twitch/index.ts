@@ -4,9 +4,9 @@ import type { Integration } from '../core'
 
 import { IntegrationID } from '../indentify'
 import { TwitchAuthentication } from './authentication'
-import { TwitchClipProvider } from './providers/clip'
-import { TwitchVodProvider } from './providers/vod'
-import { TwitchChatSource } from './sources/chat'
+import { TwitchChatSource } from './chat'
+import { TwitchClipProvider } from './clip'
+import { TwitchVodProvider } from './vod'
 
 export * from './core/types'
 

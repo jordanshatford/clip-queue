@@ -3,8 +3,8 @@ import { reactive } from 'vue'
 
 import { toStorageKey, type Integration } from '../core'
 import { IntegrationID } from '../indentify'
-import { RumbleShortProvider } from './providers/short'
-import { RumbleVideoProvider } from './providers/video'
+import { RumbleShortProvider } from './short'
+import { RumbleVideoProvider } from './video'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.RUMBLE, 'enabled'), false)
 

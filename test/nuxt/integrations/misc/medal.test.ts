@@ -3,7 +3,7 @@ import { mockKickClip, mockKickVod, mockOEmbed, mockTwitchClip, mockTwitchVod } 
 
 import type { OEmbedResponse } from '~/integrations/misc/core/types'
 
-import { MedalProvider } from '~/integrations/misc/providers/medal'
+import { MedalProvider } from '~/integrations/misc/medal'
 
 vi.mock('~/integrations/misc/core/api.ts', async (importOriginal) => {
   return {

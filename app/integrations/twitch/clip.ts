@@ -6,11 +6,11 @@ import {
   type Clip,
   type IntegrationProvider,
   type PlayerConfig,
-} from '../../core'
-import { toStorageKey, Cacheable } from '../../core'
-import { IntegrationID } from '../../indentify'
-import { getClips, getGames } from '../core/api'
-import { isTwitchURL } from '../core/utils'
+} from '../core'
+import { toStorageKey, Cacheable } from '../core'
+import { IntegrationID } from '../indentify'
+import { getClips, getGames } from './core/api'
+import { isTwitchURL } from './core/utils'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.TWITCH_CLIPS, 'enabled'), true)
 

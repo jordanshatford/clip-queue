@@ -1,11 +1,11 @@
 import { useStorage } from '@vueuse/core'
 
-import type { AuthenticationDetails, Clip, IntegrationProvider, PlayerConfig } from '../../core'
+import type { AuthenticationDetails, Clip, IntegrationProvider, PlayerConfig } from '../core'
 
-import { toStorageKey, Cacheable, IntegrationStatus } from '../../core'
-import { IntegrationID } from '../../indentify'
-import { getVideos } from '../core/api'
-import { isTwitchURL } from '../core/utils'
+import { toStorageKey, Cacheable, IntegrationStatus } from '../core'
+import { IntegrationID } from '../indentify'
+import { getVideos } from './core/api'
+import { isTwitchURL } from './core/utils'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.TWITCH_VODS, 'enabled'), false)
 

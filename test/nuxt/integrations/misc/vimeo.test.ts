@@ -3,7 +3,7 @@ import { mockKickClip, mockKickVod, mockOEmbed, mockTwitchClip, mockTwitchVod } 
 
 import type { OEmbedResponse } from '~/integrations/misc/core/types'
 
-import { VimeoProvider } from '~/integrations/misc/providers/vimeo'
+import { VimeoProvider } from '~/integrations/misc/vimeo'
 
 vi.mock('~/integrations/misc/core/api.ts', async (importOriginal) => {
   return {

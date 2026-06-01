@@ -4,8 +4,8 @@ import type { Integration } from '../core'
 
 import { IntegrationID } from '../indentify'
 import { KickAuthentication } from './authentication'
-import { KickClipsProvider } from './providers/clip'
-import { KickVodProvider } from './providers/vod'
+import { KickClipsProvider } from './clip'
+import { KickVodProvider } from './vod'
 
 export * from './core/types'
 

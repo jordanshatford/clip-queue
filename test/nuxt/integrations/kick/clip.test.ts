@@ -3,7 +3,7 @@ import { mockKickClip, mockTwitchClip } from '~~/test/mocks'
 
 import type { KickClip } from '~/integrations/kick/core/types'
 
-import { KickClipsProvider } from '~/integrations/kick/providers/clip'
+import { KickClipsProvider } from '~/integrations/kick/clip'
 
 vi.mock('~/integrations/kick/core/api', async (importOriginal) => {
   return {

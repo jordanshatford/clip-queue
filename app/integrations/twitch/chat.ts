@@ -2,7 +2,7 @@ import { Client } from '@tmi.js/chat'
 import { useStorage } from '@vueuse/core'
 import { ref } from 'vue'
 
-import type { IntegrationSource, IntegrationSourceEvents } from '../../core'
+import type { IntegrationSource, IntegrationSourceEvents } from '../core'
 
 import {
   IntegrationSourceFeature,
@@ -10,8 +10,8 @@ import {
   EventEmitter,
   IntegrationStatus,
   toStorageKey,
-} from '../../core'
-import { IntegrationID } from '../../indentify'
+} from '../core'
+import { IntegrationID } from '../indentify'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.TWITCH_CHAT, 'enabled'), true)
 const isLoading = ref<boolean>(false)

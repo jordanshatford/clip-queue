@@ -3,7 +3,7 @@ import { mockKickClip, mockTwitchClip, mockTwitchGame } from '~~/test/mocks'
 
 import type { TwitchClip, TwitchGame } from '~/integrations/twitch/core/types'
 
-import { TwitchClipProvider } from '~/integrations/twitch/providers/clip'
+import { TwitchClipProvider } from '~/integrations/twitch/clip'
 
 vi.mock('~/integrations/twitch/core/api.ts', async (importOriginal) => {
   return {
@@ -21,7 +21,7 @@ vi.mock('~/integrations/twitch/core/api.ts', async (importOriginal) => {
   }
 })
 
-const provider = new TwitchClipProvider(() => '')
+const provider = new TwitchClipProvider(() => ({ clientId: '', accessToken: '' }))
 
 describe('integrations/twitch/providers/clip', () => {
   beforeEach(() => {

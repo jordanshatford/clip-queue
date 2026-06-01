@@ -1,11 +1,11 @@
 import { useStorage } from '@vueuse/core'
 
-import type { Clip, IntegrationProvider, PlayerConfig } from '../../core'
+import type { Clip, IntegrationProvider, PlayerConfig } from '../core'
 
-import { toStorageKey, Cacheable } from '../../core'
-import { IntegrationID } from '../../indentify'
-import { getClip } from '../core/api'
-import { isKickURL } from '../core/utils'
+import { toStorageKey, Cacheable } from '../core'
+import { IntegrationID } from '../indentify'
+import { getClip } from './core/api'
+import { isKickURL } from './core/utils'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.KICK_CLIPS, 'enabled'), true)
 

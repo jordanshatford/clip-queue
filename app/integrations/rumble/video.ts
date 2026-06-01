@@ -1,20 +1,20 @@
 import { useStorage } from '@vueuse/core'
 
-import type { Clip, IntegrationProvider, PlayerConfig } from '../../core'
+import type { Clip, IntegrationProvider, PlayerConfig } from '../core'
 
-import { toStorageKey, Cacheable } from '../../core'
-import { IntegrationID } from '../../indentify'
-import { getYouTubeOEmbed } from '../core/api'
-import { getYouTubeUrlDetails } from '../core/utils'
+import { toStorageKey, Cacheable } from '../core'
+import { IntegrationID } from '../indentify'
+import { getRumbleOEmbed } from './core/api'
+import { getRumbleUrlDetails, toEmbedUrl } from './core/utils'
 
-const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.YOUTUBE_VIDEOS, 'enabled'), false)
+const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.RUMBLE_VIDEOS, 'enabled'), false)
 
 /**
- * Provider for YouTube.com videos.
+ * Provider for Rumble.com videos.
  */
-export class YouTubeVideoProvider extends Cacheable<Clip> implements IntegrationProvider {
-  public readonly id: IntegrationID = IntegrationID.YOUTUBE_VIDEOS
-  public readonly name: string = 'YouTube Videos'
+export class RumbleVideoProvider extends Cacheable<Clip> implements IntegrationProvider {
+  public readonly id: IntegrationID = IntegrationID.RUMBLE_VIDEOS
+  public readonly name: string = 'Rumble Videos'
 
   public get isEnabled(): boolean {
     return isEnabled.value
@@ -25,12 +25,12 @@ export class YouTubeVideoProvider extends Cacheable<Clip> implements Integration
   }
 
   public hasClipSupport(url: string): boolean {
-    const { type, id } = getYouTubeUrlDetails(url)
+    const { type, id } = getRumbleUrlDetails(url)
     return id !== undefined && type === 'video'
   }
 
   public async getClip(url: string): Promise<Clip> {
-    const { id, timestamp } = getYouTubeUrlDetails(url)
+    const { id, timestamp } = getRumbleUrlDetails(url)
     if (!id) {
       throw new Error(`[${this.name}]: Invalid video URL (${url}).`)
     }
@@ -38,13 +38,13 @@ export class YouTubeVideoProvider extends Cacheable<Clip> implements Integration
       return this.cache[id]
     }
     try {
-      const oembed = await getYouTubeOEmbed(id)
+      const oembed = await getRumbleOEmbed(url)
       const response: Clip = {
         id: id,
         url,
         title: oembed.title,
-        channel: oembed?.author_name ?? oembed.provider_name,
-        embedUrl: 'https://www.youtube.com/embed',
+        channel: oembed?.author_name ?? this.name,
+        embedUrl: toEmbedUrl(oembed),
         thumbnailUrl: oembed.thumbnail_url,
         category: 'Video',
         provider: this.id,
@@ -61,15 +61,14 @@ export class YouTubeVideoProvider extends Cacheable<Clip> implements Integration
   }
 
   public getPlayerConfig(clip: Clip): PlayerConfig {
-    let src = `${clip.embedUrl}/${clip.id}?autoplay=true`
-    // Include timestamp in the player source if available.
+    let src = `${clip.embedUrl}?autoplay=2`
     const timestamp = clip.metadata?.['start']
     if (timestamp && typeof timestamp === 'string') {
       src = `${src}&start=${timestamp}`
     }
     return {
       type: 'iframe',
-      src: src,
+      src,
       title: clip.title,
     }
   }

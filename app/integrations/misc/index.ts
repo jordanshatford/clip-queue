@@ -3,11 +3,11 @@ import { reactive } from 'vue'
 
 import { toStorageKey, type Integration } from '../core'
 import { IntegrationID } from '../indentify'
-import { DailyMotionProvider } from './providers/dailymotion'
-import { MedalProvider } from './providers/medal'
-import { SoopProvider } from './providers/soop'
-import { StreamableProvider } from './providers/streamable'
-import { VimeoProvider } from './providers/vimeo'
+import { DailyMotionProvider } from './dailymotion'
+import { MedalProvider } from './medal'
+import { SoopProvider } from './soop'
+import { StreamableProvider } from './streamable'
+import { VimeoProvider } from './vimeo'
 
 export * from './core/types'
 
