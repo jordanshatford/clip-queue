@@ -2,22 +2,17 @@ import type { Reactive } from 'vue'
 
 import { useStorage } from '@vueuse/core'
 
-import { m } from '#paraglide/messages'
-import {
-  IntegrationID,
-  type IntegrationProvider,
-  integrations,
-  type Clip,
-  type Integration,
-} from '~/integrations'
-import {
-  IntegrationStatus,
-  toSubmitterUUID,
-  type IntegrationSource,
-  type IntegrationSourceEvent,
-  type IntegrationSourceMessageEvent,
-  type IntegrationSourceModerationEvent,
+import type { IntegrationProvider, Clip, Integration } from '~/integrations'
+import type {
+  IntegrationSource,
+  IntegrationSourceEvent,
+  IntegrationSourceMessageEvent,
+  IntegrationSourceModerationEvent,
 } from '~/integrations/core'
+
+import { m } from '#paraglide/messages'
+import { IntegrationID, integrations } from '~/integrations'
+import { toSubmitterUUID } from '~/integrations/core'
 
 /**
  * Settings related to the integrations store.
@@ -42,8 +37,7 @@ export const useIntegrations = defineStore('integrations', () => {
   const toast = useToast()
   const logger = useLogger()
 
-  const _isInitialized = ref<boolean>(false)
-  const _isLoading = ref<boolean>(false)
+  const isInitialized = ref<boolean>(false)
 
   /**
    * Settings related to integrations.
@@ -54,24 +48,6 @@ export const useIntegrations = defineStore('integrations', () => {
     undefined,
     { mergeDefaults: true },
   )
-
-  /**
-   * Determine if the integrations are currently loading.
-   */
-  const isLoading = computed<boolean>(() => {
-    if (_isLoading.value) {
-      return _isLoading.value
-    }
-    return integrations.some((integration) => {
-      if (!(integration?.isEnabled ?? true)) {
-        return false
-      }
-      if (integration.source && integration.source.isEnabled) {
-        return integration.source.status !== IntegrationStatus.HEALTHY
-      }
-      return false
-    })
-  })
 
   /**
    * Get an integration based on an integration ID. If authentication, source, or a provider in an
@@ -112,154 +88,6 @@ export const useIntegrations = defineStore('integrations', () => {
     for (const integration of integrations) {
       if (integration.source && (integration.id === id || integration.source.id === id)) {
         return integration.source
-      }
-    }
-  }
-
-  /**
-   * Initialize all integrations. In most cases this is attempting to auto login them in
-   * and then connect to any source they may provide.
-   */
-  async function initialize(): Promise<void> {
-    if (_isInitialized.value) {
-      return
-    }
-
-    _isLoading.value = true
-    logger.debug('[Auth]: Attempting auto-login initialization.')
-
-    try {
-      await autoLogin()
-      if (isLoggedIn.value) {
-        logger.debug(`[Auth]: Logged in to existing session(s).`)
-      } else {
-        logger.debug('[Auth]: No existing session(s) found.')
-      }
-    } catch (error) {
-      logger.error(`[Auth]: Auto-login failed. ${error}`)
-    } finally {
-      _isInitialized.value = true
-      _isLoading.value = false
-    }
-  }
-
-  /**
-   * If the user is currently logged in to any integration.
-   * @returns true if some integration is logged in, false otherwise.
-   */
-  const isLoggedIn = computed<boolean>(() => {
-    return integrations.some((integration) => integration.authentication?.isLoggedIn)
-  })
-
-  /**
-   * If the user is logged in to a specific integration.
-   * @param id - The ID of the integration.
-   *
-   * @returns true if the integration is logged in, false otherwise.
-   */
-  const isLoggedInTo = computed<(id: IntegrationID) => boolean>(() => {
-    return (id: IntegrationID): boolean => {
-      return integration(id)?.authentication?.isLoggedIn ?? false
-    }
-  })
-
-  /**
-   * Logout of a given integration.
-   * @param id - The ID of the integration.
-   */
-  async function logout(id: IntegrationID): Promise<void> {
-    const int = integration(id)
-    logger.debug(`[Integrations]: Disconnecting from ${int?.name} source.`)
-    await int?.source?.disconnect()
-    logger.debug(`[Integrations]: Logging out of ${int?.name} integration.`)
-    await int?.authentication?.logout()
-    if (!isLoggedIn.value) {
-      navigateTo('/')
-    }
-  }
-
-  /**
-   * Logout of all integrations.
-   */
-  async function logoutAll(): Promise<void> {
-    await Promise.all(
-      integrations.map(async (integration) => {
-        if (integration.authentication?.isLoggedIn) {
-          await integration.source?.disconnect?.()
-          await integration.authentication.logout()
-        }
-      }),
-    )
-  }
-
-  /**
-   * Auto login to all integrations.
-   */
-  async function autoLogin(): Promise<void> {
-    await configureSources()
-    await Promise.all(
-      integrations.map(async (integration) => {
-        try {
-          logger.debug(`[Integrations]: Auto-logging in to ${integration.name}.`)
-          await integration.authentication?.autoLogin()
-          if (
-            integration.source?.isEnabled &&
-            integration.authentication?.isLoggedIn &&
-            integration.source.status !== IntegrationStatus.MISCONFIGURED
-          ) {
-            logger.debug(`[Integrations]: Connecting to ${integration.name} source.`)
-            await integration.source?.connect()
-          }
-        } catch {
-          // ignore per-integration failure
-        }
-      }),
-    )
-  }
-
-  /**
-   * Check if any integrations have cached data.
-   * @returns true if there is cached data, false otherwise.
-   */
-  const hasCachedData = computed<boolean>(() => {
-    return integrations.some((integration) =>
-      integration.providers.some((provider) => provider.hasCachedData),
-    )
-  })
-
-  /**
-   * Clear all integrations cache.
-   */
-  function clearCache(): void {
-    for (const integration of integrations) {
-      logger.info(`[Integrations]: Clearing cache for ${integration.name}.`)
-      for (const provider of integration.providers) {
-        provider.clearCache()
-      }
-    }
-  }
-
-  /**
-   * Attempt to resolve a URL to a clip.
-   * @param url - The URL of a potential clip.
-   * @returns A Clip if one was found, undefined otherwise.
-   */
-  async function resolve(url: string): Promise<Clip | undefined> {
-    for (const integration of integrations) {
-      if (!(integration?.isEnabled ?? true)) {
-        continue
-      }
-      for (const provider of integration.providers) {
-        if (!provider.isEnabled || !provider.hasClipSupport(url)) {
-          continue
-        }
-        try {
-          const clip = await provider.getClip(url)
-          return clip
-        } catch (error) {
-          logger.error(`${error}`)
-          continue
-        }
       }
     }
   }
@@ -399,18 +227,126 @@ export const useIntegrations = defineStore('integrations', () => {
   }
 
   /**
-   * Configure all sources related to integrations.
+   * Initialize all integrations. In most cases this is attempting to auto login them in
+   * and then connect to any source they may provide.
    */
-  async function configureSources(): Promise<void> {
+  async function initialize(): Promise<void> {
+    if (isInitialized.value) {
+      return
+    }
+
+    // Configure listeners for all relevant events from each source. I.e ensure that all sources
+    // pipe into the main handling functions for messages, moderation, connection, and errors.
     for (const integration of integrations) {
       if (integration.source) {
-        // Configure listeners for all relevant events from each source.
         integration.source.on('connected', handleIntegrationSourceConnected)
         integration.source.on('disconnected', handleIntegrationSourceDisconnected)
         integration.source.on('message', handleIntegrationSourceMessage)
         integration.source.on('message-deleted', handleIntegrationSourceMessageDeleted)
         integration.source.on('moderation', handleIntegrationSourceModeration)
         integration.source.on('error', handleIntegrationSourceError)
+      }
+    }
+
+    logger.debug('[Auth]: Attempting auto-login initialization.')
+    // Attempt to auto-login to all integrations and connect to their sources if successful.
+    await Promise.all(
+      integrations.map(async (integration) => {
+        try {
+          logger.debug(`[Integrations]: Auto-logging in to ${integration.name}.`)
+          await integration.authentication?.autoLogin()
+          if (integration.authentication?.isLoggedIn) {
+            logger.debug(`[Integrations]: Connecting to ${integration.name} source.`)
+            await integration.source?.connect()
+          }
+        } catch {
+          // Ignore per-integration failure.
+        }
+      }),
+    )
+  }
+
+  /**
+   * If the user is currently logged in to any integration.
+   * @returns true if some integration is logged in, false otherwise.
+   */
+  const isLoggedIn = computed<boolean>(() => {
+    return integrations.some((integration) => integration.authentication?.isLoggedIn)
+  })
+
+  /**
+   * Logout of a given integration.
+   * @param id - The ID of the integration.
+   */
+  async function logout(id: IntegrationID): Promise<void> {
+    const int = integration(id)
+    logger.debug(`[Integrations]: Disconnecting from ${int?.name} source.`)
+    await int?.source?.disconnect()
+    logger.debug(`[Integrations]: Logging out of ${int?.name} integration.`)
+    await int?.authentication?.logout()
+    if (!isLoggedIn.value) {
+      navigateTo('/')
+    }
+  }
+
+  /**
+   * Logout of all integrations.
+   */
+  async function logoutAll(): Promise<void> {
+    await Promise.all(
+      integrations.map(async (integration) => {
+        if (integration.authentication?.isLoggedIn) {
+          await integration.source?.disconnect?.()
+          await integration.authentication.logout()
+        }
+      }),
+    )
+    await navigateTo('/')
+  }
+
+  /**
+   * Check if any integrations have cached data.
+   * @returns true if there is cached data, false otherwise.
+   */
+  const hasCachedData = computed<boolean>(() => {
+    return integrations.some((integration) =>
+      integration.providers.some((provider) => provider.hasCachedData),
+    )
+  })
+
+  /**
+   * Clear all integrations cache.
+   */
+  function clearCache(): void {
+    for (const integration of integrations) {
+      logger.info(`[Integrations]: Clearing cache for ${integration.name}.`)
+      for (const provider of integration.providers) {
+        provider.clearCache()
+      }
+    }
+  }
+
+  /**
+   * Attempt to resolve a URL to a clip.
+   * @param url - The URL of a potential clip.
+   * @returns A Clip if one was found, undefined otherwise.
+   */
+  async function resolve(url: string): Promise<Clip | undefined> {
+    for (const integration of integrations) {
+      if (!(integration?.isEnabled ?? true)) {
+        continue
+      }
+      for (const provider of integration.providers) {
+        if (!provider.isEnabled || !provider.hasClipSupport(url)) {
+          continue
+        }
+        try {
+          const clip = await provider.getClip(url)
+          return clip
+        } catch (error) {
+          logger.error(`${error}`)
+          continue
+        }
       }
     }
   }
@@ -523,17 +459,13 @@ export const useIntegrations = defineStore('integrations', () => {
 
   return {
     integrations,
-    isLoading,
     integration,
     source,
     provider,
     initialize,
     isLoggedIn,
-    isLoggedInTo,
-    autoLogin,
     logout,
     logoutAll,
-    configureSources,
     resolve,
     hasCachedData,
     clearCache,
