@@ -3,14 +3,12 @@ import { describe, expect, it, vi, beforeEach } from 'vitest'
 
 import UserMenu from '~/components/AppAuthentication.vue'
 
-const loginMock = vi.fn()
 const logoutMock = vi.fn()
 const sourceMock = vi.fn()
 
 const integrationsMock = {
   integrations: [],
   isLoggedIn: false,
-  login: loginMock,
   logoutAll: logoutMock,
   source: sourceMock,
 }
@@ -39,11 +37,10 @@ describe('UserMenu.vue', () => {
     expect(wrapper.text()).toContain('Login')
   })
 
-  it('calls redirect when login button clicked', async () => {
+  it('has a login button that links to the login page', async () => {
     const wrapper = await mountSuspended(UserMenu)
-    const button = wrapper.find('button')
-    await button.trigger('click')
-    expect(loginMock).toHaveBeenCalled()
+    const button = wrapper.findComponent({ name: 'UButton' })
+    expect(button.props('to')).toBe('/login')
   })
 
   it('creates settings and logout menu items', async () => {

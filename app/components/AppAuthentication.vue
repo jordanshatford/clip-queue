@@ -1,10 +1,6 @@
 <template>
   <div class="flex items-center gap-2">
-    <UButton
-      v-if="!integrations.isLoggedIn"
-      icon="simple-icons:twitch"
-      @click="() => integrations.login(IntegrationID.TWITCH_AUTH)"
-    >
+    <UButton v-if="!integrations.isLoggedIn" to="/login">
       {{ m.login() }}
     </UButton>
     <UDropdownMenu v-else v-model:open="open" :items="items">
@@ -23,7 +19,6 @@
 import type { DropdownMenuItem } from '@nuxt/ui'
 
 import { m } from '#paraglide/messages'
-import { IntegrationID } from '~/integrations'
 
 const integrations = useIntegrations()
 
