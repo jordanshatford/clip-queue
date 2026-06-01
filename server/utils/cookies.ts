@@ -1,4 +1,4 @@
-import type { H3Event } from '#imports'
+import type { H3Event } from 'h3'
 
 type CookieSerializeOptions = Parameters<typeof setCookie>[3]
 
