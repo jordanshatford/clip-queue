@@ -168,8 +168,11 @@ export const useIntegrations = defineStore('integrations', () => {
    * @param id - The ID of the integration.
    */
   async function logout(id: IntegrationID): Promise<void> {
-    await integration(id)?.source?.disconnect()
-    await integration(id)?.authentication?.logout()
+    const int = integration(id)
+    logger.debug(`[Integrations]: Disconnecting from ${int?.name} source.`)
+    await int?.source?.disconnect()
+    logger.debug(`[Integrations]: Logging out of ${int?.name} integration.`)
+    await int?.authentication?.logout()
     if (!isLoggedIn.value) {
       navigateTo('/')
     }
@@ -179,28 +182,39 @@ export const useIntegrations = defineStore('integrations', () => {
    * Logout of all integrations.
    */
   async function logoutAll(): Promise<void> {
-    for (const integration of integrations) {
-      if (integration.authentication && integration.authentication.isLoggedIn) {
-        await integration.authentication.logout()
-      }
-    }
+    await Promise.all(
+      integrations.map(async (integration) => {
+        if (integration.authentication?.isLoggedIn) {
+          await integration.source?.disconnect?.()
+          await integration.authentication.logout()
+        }
+      }),
+    )
   }
 
   /**
    * Auto login to all integrations.
    */
   async function autoLogin(): Promise<void> {
-    for (const integration of integrations) {
-      if (integration.authentication) {
-        try {
-          await integration.authentication.autoLogin()
-        } catch {
-          // Ignore any errors, assume it failed and ignore.
-        }
-      }
-    }
     await configureSources()
-    await connectSources()
+    await Promise.all(
+      integrations.map(async (integration) => {
+        try {
+          logger.debug(`[Integrations]: Auto-logging in to ${integration.name}.`)
+          await integration.authentication?.autoLogin()
+          if (
+            integration.source?.isEnabled &&
+            integration.authentication?.isLoggedIn &&
+            integration.source.status !== IntegrationStatus.MISCONFIGURED
+          ) {
+            logger.debug(`[Integrations]: Connecting to ${integration.name} source.`)
+            await integration.source?.connect()
+          }
+        } catch {
+          // ignore per-integration failure
+        }
+      }),
+    )
   }
 
   /**
@@ -402,43 +416,6 @@ export const useIntegrations = defineStore('integrations', () => {
   }
 
   /**
-   * Connect all sources related to integrations.
-   */
-  async function connectSources(): Promise<void> {
-    logger.debug(`[Integrations]: Connecting to integration sources.`)
-    for (const integration of integrations) {
-      if (!(integration?.isEnabled ?? true)) {
-        continue
-      }
-      if (
-        integration.source &&
-        integration.source.isEnabled &&
-        integration.authentication?.isLoggedIn &&
-        integration.source.status !== IntegrationStatus.MISCONFIGURED
-      ) {
-        logger.debug(`[Integrations]: Connecting to ${integration.source.name}.`)
-        await integration.source.connect()
-      }
-    }
-  }
-
-  /**
-   * Disconnect all sources related to integrations.
-   */
-  async function disconnectSources(): Promise<void> {
-    logger.debug(`[Integrations]: Disconnecting from integration sources.`)
-    for (const integration of integrations) {
-      if (!(integration.isEnabled ?? true)) {
-        continue
-      }
-      if (integration.source) {
-        logger.debug(`[Integrations]: Disconnecting from ${integration.source.name} source.`)
-        await integration.source.disconnect()
-      }
-    }
-  }
-
-  /**
    * Determine if the settings are modified.
    */
   const isSettingsModified = computed(() => {
@@ -557,8 +534,6 @@ export const useIntegrations = defineStore('integrations', () => {
     logout,
     logoutAll,
     configureSources,
-    connectSources,
-    disconnectSources,
     resolve,
     hasCachedData,
     clearCache,
