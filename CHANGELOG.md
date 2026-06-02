@@ -1,5 +1,13 @@
 # clip-queue
 
+## 3.4.1
+
+### Patch Changes
+
+- [`0f93dcd`](https://github.com/jordanshatford/clip-queue/commit/0f93dcdd9b6a4029755db3bf082b77f683105a2f) - fix: twitch oath validation to properly refresh sessions
+
+- [`0f93dcd`](https://github.com/jordanshatford/clip-queue/commit/0f93dcdd9b6a4029755db3bf082b77f683105a2f) - fix: kick oath validation to properly refresh sessions
+
 ## 3.4.0
 
 ### Minor Changes
