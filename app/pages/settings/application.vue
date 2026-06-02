@@ -7,11 +7,7 @@
           :description="m.auto_mod_description()"
           class="flex items-center justify-between"
         >
-          <USwitch
-            id="autoModeration"
-            v-model="integrations.settings.state.automod"
-            class="ml-auto"
-          />
+          <USwitch id="autoModeration" v-model="integrations.settings.state.automod" class="ml-3" />
         </UFormField>
         <USeparator />
         <UFormField
@@ -19,11 +15,7 @@
           :description="m.allow_duplicates_description()"
           class="flex items-center justify-between"
         >
-          <USwitch
-            id="queue-duplicates"
-            v-model="queue.settings.state.duplicates"
-            class="ml-auto"
-          />
+          <USwitch id="queue-duplicates" v-model="queue.settings.state.duplicates" class="ml-3" />
         </UFormField>
         <USeparator />
         <UFormField :label="m.size_limit()" :help="m.size_limit_description()">
@@ -50,7 +42,7 @@
             @keydown.space.prevent
           />
         </UFormField>
-        <UFormField :label="m.allowed_commands()" :help="m.allowed_commands_description()">
+        <UFormField :label="m.allowed_commands()">
           <UCheckboxGroup
             id="allowedCommands"
             v-model="commands.settings.state.enabled"
