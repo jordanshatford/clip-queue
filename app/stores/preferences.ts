@@ -52,7 +52,7 @@ export const neutralColors = [
 
 export type NeutralColorName = (typeof neutralColors)[number]
 
-export const DEFAULT_SURFACE_COLOR: NeutralColorName = 'neutral'
+export const DEFAULT_NEUTRAL_COLOR: NeutralColorName = 'neutral'
 
 /**
  * Details for each color available for selection as a primary or neutral color.
@@ -188,9 +188,9 @@ export const usePreferences = defineStore('preferences', () => {
     primary.value = DEFAULT_PRIMARY_COLOR
   }
 
-  const surface = useStorage<NeutralColorName>('__cq_preferences_scolor', DEFAULT_SURFACE_COLOR)
-  if (!neutralColors.includes(surface.value)) {
-    surface.value = DEFAULT_SURFACE_COLOR
+  const neutral = useStorage<NeutralColorName>('__cq_preferences_scolor', DEFAULT_NEUTRAL_COLOR)
+  if (!neutralColors.includes(neutral.value)) {
+    neutral.value = DEFAULT_NEUTRAL_COLOR
   }
 
   /**
@@ -205,12 +205,12 @@ export const usePreferences = defineStore('preferences', () => {
   )
 
   /**
-   * Synchronize surface palette changes.
+   * Synchronize neutral palette changes.
    */
   watch(
-    () => surface.value,
-    (surface) => {
-      config.ui.colors.neutral = surface.toLowerCase()
+    () => neutral.value,
+    (n) => {
+      config.ui.colors.neutral = n.toLowerCase()
     },
     { immediate: true },
   )
@@ -219,7 +219,7 @@ export const usePreferences = defineStore('preferences', () => {
    * Whether preferences differ from defaults.
    */
   const isModified = computed(() => {
-    return primary.value !== DEFAULT_PRIMARY_COLOR || surface.value !== DEFAULT_SURFACE_COLOR
+    return primary.value !== DEFAULT_PRIMARY_COLOR || neutral.value !== DEFAULT_NEUTRAL_COLOR
   })
 
   /**
@@ -227,7 +227,7 @@ export const usePreferences = defineStore('preferences', () => {
    */
   function reset() {
     primary.value = DEFAULT_PRIMARY_COLOR
-    surface.value = DEFAULT_SURFACE_COLOR
+    neutral.value = DEFAULT_NEUTRAL_COLOR
   }
 
   return {
@@ -235,7 +235,7 @@ export const usePreferences = defineStore('preferences', () => {
     locale,
     uilocale,
     primary,
-    surface,
+    neutral,
     isModified,
     reset,
   }

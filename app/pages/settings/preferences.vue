@@ -1,7 +1,7 @@
 <template>
   <UCard class="mx-auto w-full max-w-2xl" variant="subtle">
     <div class="flex flex-col gap-4 text-left">
-      <UFormField :label="m.locale()" :help="m.locale_description()">
+      <UFormField :label="m.locale()">
         <USelect
           id="locale"
           v-model="preferences.locale"
@@ -17,10 +17,10 @@
           </template>
         </USelect>
       </UFormField>
-      <UFormField :label="m.theme()" :help="m.theme_description()">
+      <UFormField :label="m.theme()">
         <UColorModeSelect id="theme" class="w-full" />
       </UFormField>
-      <UFormField :label="m.primary_color()" :help="m.primary_color_description()">
+      <UFormField :label="m.primary_color()">
         <USelect
           id="primary-color"
           v-model="preferences.primary"
@@ -35,10 +35,10 @@
           </template>
         </USelect>
       </UFormField>
-      <UFormField :label="m.surface_color()" :help="m.surface_color_description()">
+      <UFormField :label="m.neutral_color()">
         <USelect
-          id="surface-color"
-          v-model="preferences.surface"
+          id="neutral-color"
+          v-model="preferences.neutral"
           :items="[...neutralColors]"
           class="w-full"
         >

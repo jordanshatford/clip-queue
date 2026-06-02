@@ -7,7 +7,7 @@ import {
   primaryColors,
   neutralColors,
   DEFAULT_PRIMARY_COLOR,
-  DEFAULT_SURFACE_COLOR,
+  DEFAULT_NEUTRAL_COLOR,
 } from '~/stores/preferences'
 
 vi.mock('#paraglide/runtime', async () => {
@@ -55,7 +55,7 @@ describe('preferences store', () => {
   it('initializes with defaults', () => {
     const preferences = usePreferences()
     expect(preferences.primary).toBe(DEFAULT_PRIMARY_COLOR)
-    expect(preferences.surface).toBe(DEFAULT_SURFACE_COLOR)
+    expect(preferences.neutral).toBe(DEFAULT_NEUTRAL_COLOR)
     expect(preferences.isModified).toBe(false)
   })
 
@@ -84,7 +84,7 @@ describe('preferences store', () => {
     })
   })
 
-  it('updates the primary palette via app config', async () => {
+  it('updates the primary color via app config', async () => {
     const preferences = usePreferences()
     preferences.primary = primaryColors[0]!
     await nextTick()
@@ -92,9 +92,9 @@ describe('preferences store', () => {
     expect(config.ui.colors.primary).toBe(primaryColors[0]!.toLowerCase())
   })
 
-  it('updates the surface palette via app config', async () => {
+  it('updates the neutral color via app config', async () => {
     const preferences = usePreferences()
-    preferences.surface = neutralColors[0]!
+    preferences.neutral = neutralColors[0]!
     await nextTick()
     const config = useAppConfig()
     expect(config.ui.colors.neutral).toBe(neutralColors[0]!.toLowerCase())
@@ -103,11 +103,11 @@ describe('preferences store', () => {
   it('resets preferences', () => {
     const preferences = usePreferences()
     preferences.primary = primaryColors[0]!
-    preferences.surface = neutralColors[0]!
+    preferences.neutral = neutralColors[0]!
     expect(preferences.isModified).toBe(true)
     preferences.reset()
     expect(preferences.primary).toBe(DEFAULT_PRIMARY_COLOR)
-    expect(preferences.surface).toBe(DEFAULT_SURFACE_COLOR)
+    expect(preferences.neutral).toBe(DEFAULT_NEUTRAL_COLOR)
     expect(preferences.isModified).toBe(false)
   })
 })
