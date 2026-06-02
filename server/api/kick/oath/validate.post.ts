@@ -7,7 +7,7 @@
  */
 export default defineEventHandler(async (event): Promise<OathResponse> => {
   const config = useRuntimeConfig()
-  const session = getObjectCookie<KickTokenResponse>(event, KICK_SESSION_COOKIE)
+  let session = getObjectCookie<KickTokenResponse>(event, KICK_SESSION_COOKIE)
 
   if (!session) {
     throw createError({
@@ -64,6 +64,7 @@ export default defineEventHandler(async (event): Promise<OathResponse> => {
         refresh_token: session.refresh_token,
       }),
     })
+    session = updated
     setObjectCookie<KickTokenResponse>(event, KICK_SESSION_COOKIE, updated)
   }
 
