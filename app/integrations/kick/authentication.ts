@@ -2,14 +2,16 @@ import type { UserDetails, IntegrationAuthentication } from '../core'
 
 import { IntegrationID } from '../indentify'
 
-const user = ref<UserDetails | undefined>(undefined)
-
+/**
+ * Kick.com OAuth authentication.
+ */
 export class KickAuthentication implements IntegrationAuthentication {
   public readonly id = IntegrationID.KICK_AUTH
   public isLoggedIn = false
 
+  private _user: UserDetails | undefined = undefined
   public get user(): UserDetails {
-    return user.value ?? { id: '', name: '', profileImageURL: '' }
+    return this._user ?? { id: '', name: '', profileImageURL: '' }
   }
 
   public async autoLogin(): Promise<void> {
@@ -21,7 +23,7 @@ export class KickAuthentication implements IntegrationAuthentication {
       throw new Error(`[${this.id}]: No valid session found.`)
     }
 
-    user.value = current.user
+    this._user = current.user
     this.isLoggedIn = true
   }
 
@@ -31,7 +33,7 @@ export class KickAuthentication implements IntegrationAuthentication {
 
   public async logout(): Promise<void> {
     this.isLoggedIn = false
-    user.value = undefined
+    this._user = undefined
     return await $fetch('/api/kick/oath/revoke', { method: 'POST' })
   }
 }

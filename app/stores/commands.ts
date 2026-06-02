@@ -1,5 +1,3 @@
-import { useStorage } from '@vueuse/core'
-
 import type { IntegrationSourceMessageEvent } from '~/integrations/core'
 
 /**
@@ -77,12 +75,7 @@ export const useCommands = defineStore('commands', () => {
   /**
    * Settings related to commands.
    */
-  const settings = useStorage<CommandsSettings>(
-    '__cq_commands_settings',
-    structuredClone(DEFAULT_COMMANDS_SETTINGS),
-    undefined,
-    { mergeDefaults: true },
-  )
+  const settings = usePeristedSettings<CommandsSettings>('commands', DEFAULT_COMMANDS_SETTINGS)
   /**
    * Command details by command ID.
    */
@@ -91,6 +84,16 @@ export const useCommands = defineStore('commands', () => {
    * Command alias to command tracking.
    */
   const aliases = ref<Record<string, string>>({})
+
+  /**
+   * Filter out commands that not longer exist, i.e. commands that have been removed.
+   */
+  function initialize(): void {
+    const available = Object.keys(commands.value)
+    settings.state.value.enabled = settings.state.value.enabled.filter((command) =>
+      available.includes(command),
+    )
+  }
 
   /**
    * Resolve an "idlike" (id or alias) of a command to the command id.
@@ -165,7 +168,7 @@ export const useCommands = defineStore('commands', () => {
    * @returns true if the command exists and is enabled, false otherwise.
    */
   function isEnabled(idlike: string): boolean {
-    return settings.value.enabled.includes(resolve(idlike))
+    return settings.state.value.enabled.includes(resolve(idlike))
   }
 
   /**
@@ -209,30 +212,11 @@ export const useCommands = defineStore('commands', () => {
     aliases.value = {}
   }
 
-  /**
-   * Determine if the settings are modified.
-   */
-  const isSettingsModified = computed(() => {
-    return (
-      settings.value.prefix !== DEFAULT_COMMANDS_SETTINGS.prefix ||
-      Object.keys(commands.value).some(
-        (cmd) =>
-          settings.value.enabled.includes(cmd) !== DEFAULT_COMMANDS_SETTINGS.enabled.includes(cmd),
-      )
-    )
-  })
-
-  /**
-   * Reset settings related to this store.
-   */
-  function resetSettings(): void {
-    settings.value = structuredClone(DEFAULT_COMMANDS_SETTINGS)
-  }
-
   return {
     settings,
     commands,
     aliases,
+    initialize,
     resolve,
     register,
     unregister,
@@ -241,7 +225,5 @@ export const useCommands = defineStore('commands', () => {
     toCallHelp,
     toDescription,
     reset,
-    isSettingsModified,
-    resetSettings,
   }
 })

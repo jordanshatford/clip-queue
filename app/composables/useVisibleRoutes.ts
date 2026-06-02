@@ -46,7 +46,7 @@ export function useVisibleRoutes() {
       chip:
         r.name === 'queue'
           ? {
-              color: queue.settings.open ? 'success' : 'error',
+              color: queue.settings.state.open ? 'success' : 'error',
             }
           : undefined,
       children: r.children?.map((c) => ({

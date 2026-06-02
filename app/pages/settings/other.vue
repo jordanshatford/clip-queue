@@ -67,10 +67,10 @@ const logger = useLogger()
 
 const isSettingsModified = computed<boolean>(() => {
   return (
-    commands.isSettingsModified ||
-    queue.isSettingsModified ||
-    integrations.isSettingsModified ||
-    logger.isSettingsModified ||
+    commands.settings.isModified ||
+    queue.settings.isModified ||
+    integrations.settings.isModified ||
+    logger.settings.isModified ||
     preferences.isModified
   )
 })
@@ -83,10 +83,10 @@ async function resetSettingsToDefault(): Promise<void> {
   })
   if (confirmed) {
     logger.debug('[Settings]: Resetting settings to default confirmed.')
-    commands.resetSettings()
-    queue.resetSettings()
-    integrations.resetSettings()
-    logger.resetSettings()
+    commands.settings.reset()
+    queue.settings.reset()
+    integrations.settings.reset()
+    logger.settings.reset()
     preferences.reset()
     toast.add({
       icon: 'lucide:circle-check',

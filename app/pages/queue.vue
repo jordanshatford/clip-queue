@@ -11,7 +11,7 @@
       :title="m.upcoming_clips()"
       :clips="queue.upcoming.items"
       :display="queue.upcoming.display"
-      :is-open="queue.settings.open"
+      :is-open="queue.settings.state.open"
       @open="queue.open()"
       @close="queue.close()"
       @remove="(c) => queue.remove(c, true)"

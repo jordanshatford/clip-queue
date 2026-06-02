@@ -39,12 +39,7 @@ export const useQueue = defineStore('queue', () => {
   /**
    * Settings related to the queue.
    */
-  const settings = useStorage<QueueSettings>(
-    '__cq_queue_settings',
-    structuredClone(DEFAULT_QUEUE_SETTINGS),
-    undefined,
-    { mergeDefaults: true },
-  )
+  const settings = usePeristedSettings<QueueSettings>('queue', DEFAULT_QUEUE_SETTINGS)
   const current = useStorage<Clip | null>('__cq_queue_current', null, undefined, {
     serializer: StorageSerializers.object,
   })
@@ -66,17 +61,17 @@ export const useQueue = defineStore('queue', () => {
       return
     }
     // Ignore clip when queue isnt open
-    if (!settings.value.open) {
+    if (!settings.state.value.open) {
       return
     }
     // Ignore when we have previously watched it
     const hasBeenWatched =
       (current.value && useClip(current.value).value.equals(clip)) || history.includes(clip)
-    if (hasBeenWatched && !settings.value.duplicates) {
+    if (hasBeenWatched && !settings.state.value.duplicates) {
       return
     }
     // Queue is full based on limit
-    if (settings.value.limit && upcoming.length >= settings.value.limit) {
+    if (settings.state.value.limit && upcoming.length >= settings.state.value.limit) {
       // If the clip is already in the queue add it so submitters is updated
       if (!upcoming.includes(clip)) {
         return
@@ -101,11 +96,11 @@ export const useQueue = defineStore('queue', () => {
   }
 
   function open() {
-    settings.value.open = true
+    settings.state.value.open = true
   }
 
   function close() {
-    settings.value.open = false
+    settings.state.value.open = false
   }
 
   function previous() {
@@ -138,23 +133,6 @@ export const useQueue = defineStore('queue', () => {
    */
   function reset(): void {
     current.value = null
-  }
-
-  /**
-   * Determine if the settings are modified.
-   */
-  const isSettingsModified = computed(() => {
-    return (
-      settings.value.open !== DEFAULT_QUEUE_SETTINGS.open ||
-      settings.value.limit !== DEFAULT_QUEUE_SETTINGS.limit
-    )
-  })
-
-  /**
-   * Reset settings related to this store.
-   */
-  function resetSettings(): void {
-    settings.value = structuredClone(DEFAULT_QUEUE_SETTINGS)
   }
 
   /**
@@ -214,7 +192,7 @@ export const useQueue = defineStore('queue', () => {
           if (Number.isNaN(limit) || limit < 1) {
             return
           }
-          settings.value.limit = limit
+          settings.state.value.limit = limit
         }
       },
     },
@@ -225,7 +203,7 @@ export const useQueue = defineStore('queue', () => {
         description: m.command_remove_limit,
       },
       execute: () => {
-        settings.value.limit = null
+        settings.state.value.limit = null
       },
     },
   )
@@ -245,7 +223,5 @@ export const useQueue = defineStore('queue', () => {
     previous,
     next,
     reset,
-    isSettingsModified,
-    resetSettings,
   }
 })

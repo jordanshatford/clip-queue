@@ -2,22 +2,21 @@ import type { UserDetails, IntegrationAuthentication, AuthenticationDetails } fr
 
 import { IntegrationID } from '../indentify'
 
-const user = ref<UserDetails | undefined>(undefined)
-const authentication = ref<AuthenticationDetails>({
-  clientId: '',
-  accessToken: '',
-})
-
+/**
+ * Twitch.tv OAuth authentication.
+ */
 export class TwitchAuthentication implements IntegrationAuthentication {
   public readonly id: IntegrationID = IntegrationID.TWITCH_AUTH
   public isLoggedIn = false
 
+  private _user: UserDetails | undefined = undefined
   public get user(): UserDetails {
-    return user.value ?? { id: '', name: '', profileImageURL: '' }
+    return this._user ?? { id: '', name: '', profileImageURL: '' }
   }
 
+  private _details: AuthenticationDetails = { clientId: '', accessToken: '' }
   public get details(): AuthenticationDetails {
-    return authentication.value
+    return this._details
   }
 
   public async autoLogin(): Promise<void> {
@@ -29,8 +28,8 @@ export class TwitchAuthentication implements IntegrationAuthentication {
       throw new Error(`[${this.id}]: No valid session found.`)
     }
 
-    user.value = current.user
-    authentication.value = current.authentication
+    this._user = current.user
+    this._details = current.authentication
     this.isLoggedIn = true
   }
 
@@ -40,8 +39,8 @@ export class TwitchAuthentication implements IntegrationAuthentication {
 
   public async logout(): Promise<void> {
     this.isLoggedIn = false
-    user.value = undefined
-    authentication.value = { clientId: '', accessToken: '' }
+    this._user = undefined
+    this._details = { clientId: '', accessToken: '' }
     return await $fetch('/api/twitch/oath/revoke', { method: 'POST' })
   }
 }

@@ -13,12 +13,12 @@ describe('queue.ts', () => {
     useUpcoming().reset()
     const queue = useQueue()
     queue.reset()
-    queue.resetSettings()
+    queue.settings.reset()
   })
 
   it('initializes with the expected values', () => {
     const queue = useQueue()
-    expect(queue.settings.open).toEqual(true)
+    expect(queue.settings.state.open).toEqual(true)
     expect(queue.current).toEqual(null)
     expect(queue.upcoming.length).toEqual(0)
     expect(queue.upcoming.items).toEqual([])
@@ -118,9 +118,9 @@ describe('queue.ts', () => {
   it('opens and closes the queue properly', () => {
     const queue = useQueue()
     queue.open()
-    expect(queue.settings.open).toEqual(true)
+    expect(queue.settings.state.open).toEqual(true)
     queue.close()
-    expect(queue.settings.open).toEqual(false)
+    expect(queue.settings.state.open).toEqual(false)
   })
 
   it('can go back to playing the previous clip', () => {
@@ -169,7 +169,7 @@ describe('queue.ts', () => {
 
   it('can have a limit set to prevent additional clips from being added', () => {
     const queue = useQueue()
-    queue.settings.limit = 2
+    queue.settings.state.limit = 2
     queue.add({
       ...clipFromTwitch,
       id: 'test',
@@ -199,7 +199,7 @@ describe('queue.ts', () => {
       provider: IntegrationID.TWITCH_CLIPS,
     }
     const queue = useQueue()
-    queue.settings.limit = 1
+    queue.settings.state.limit = 1
     queue.add(clip)
     queue.add({ ...clip, submitters: ['testsubmitter2'] })
     queue.add({ ...clip, id: 'test2' })
@@ -213,13 +213,13 @@ describe('queue.ts', () => {
 
   it('can have its settings reset', () => {
     const queue = useQueue()
-    queue.resetSettings()
-    expect(queue.isSettingsModified).toEqual(false)
-    queue.settings.limit = 100
-    expect(queue.isSettingsModified).toEqual(true)
-    queue.resetSettings()
-    expect(queue.isSettingsModified).toEqual(false)
-    expect(queue.settings.limit).toEqual(null)
+    queue.settings.reset()
+    expect(queue.settings.isModified).toEqual(false)
+    queue.settings.state.limit = 100
+    expect(queue.settings.isModified).toEqual(true)
+    queue.settings.reset()
+    expect(queue.settings.isModified).toEqual(false)
+    expect(queue.settings.state.limit).toEqual(null)
   })
 
   it('registers commands for interacting with the queue', () => {

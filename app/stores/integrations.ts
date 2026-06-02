@@ -1,7 +1,5 @@
 import type { Reactive } from 'vue'
 
-import { useStorage } from '@vueuse/core'
-
 import type { IntegrationProvider, Clip, Integration } from '~/integrations'
 import type {
   IntegrationSource,
@@ -42,11 +40,9 @@ export const useIntegrations = defineStore('integrations', () => {
   /**
    * Settings related to integrations.
    */
-  const settings = useStorage<IntegrationSettings>(
-    '__cq_integrations_settings',
-    structuredClone(DEFAULT_INTEGRATION_SETTINGS),
-    undefined,
-    { mergeDefaults: true },
+  const settings = usePeristedSettings<IntegrationSettings>(
+    'integrations',
+    DEFAULT_INTEGRATION_SETTINGS,
   )
 
   /**
@@ -142,7 +138,7 @@ export const useIntegrations = defineStore('integrations', () => {
     const commands = useCommands()
 
     // Check if message is a command and perform command if proper permission to do so
-    if (event.data.text.startsWith(commands.settings.prefix)) {
+    if (event.data.text.startsWith(commands.settings.state.prefix)) {
       // Ensure the user is allowed to use commands.
       if (!event.data.isAllowedCommands) {
         logger.debug(
@@ -151,7 +147,7 @@ export const useIntegrations = defineStore('integrations', () => {
         return
       }
       const [command, ...args] = event.data.text
-        .substring(commands.settings.prefix.length)
+        .substring(commands.settings.state.prefix.length)
         .split(' ')
       if (command) {
         if (!commands.isEnabled(command)) {
@@ -186,7 +182,7 @@ export const useIntegrations = defineStore('integrations', () => {
     event: IntegrationSourceMessageEvent,
   ): Promise<void> {
     const queue = useQueue()
-    if (!settings.value.automod) {
+    if (!settings.state.value.automod) {
       return
     }
     for (const url of event.data.urls) {
@@ -210,7 +206,7 @@ export const useIntegrations = defineStore('integrations', () => {
    * @param event - The integration source moderation event.
    */
   function handleIntegrationSourceModeration(event: IntegrationSourceModerationEvent): void {
-    if (!settings.value.automod) {
+    if (!settings.state.value.automod) {
       return
     }
     const username = event.data.username
@@ -352,20 +348,6 @@ export const useIntegrations = defineStore('integrations', () => {
   }
 
   /**
-   * Determine if the settings are modified.
-   */
-  const isSettingsModified = computed(() => {
-    return settings.value.automod !== DEFAULT_INTEGRATION_SETTINGS.automod
-  })
-
-  /**
-   * Reset settings related to this store.
-   */
-  function resetSettings(): void {
-    settings.value = structuredClone(DEFAULT_INTEGRATION_SETTINGS)
-  }
-
-  /**
    * Handle updating an integration enabled state based on a command.
    * @param args - The arguments passed with the command.
    * @param enabled - The enabled state to set.
@@ -442,7 +424,7 @@ export const useIntegrations = defineStore('integrations', () => {
         description: m.command_enable_auto_mod,
       },
       execute: () => {
-        settings.value.automod = true
+        settings.state.value.automod = true
       },
     },
     {
@@ -452,7 +434,7 @@ export const useIntegrations = defineStore('integrations', () => {
         description: m.command_disable_auto_mod,
       },
       execute: () => {
-        settings.value.automod = false
+        settings.state.value.automod = false
       },
     },
   )
@@ -470,7 +452,5 @@ export const useIntegrations = defineStore('integrations', () => {
     hasCachedData,
     clearCache,
     settings,
-    isSettingsModified,
-    resetSettings,
   }
 })

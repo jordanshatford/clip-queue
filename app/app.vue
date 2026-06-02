@@ -11,11 +11,12 @@ const queue = useQueue()
 
 useHead({
   title: computed(() => {
+    const isOpen = queue.settings.state.open
     if (!integrations.isLoggedIn) {
       return app.cq.title
     }
-    let queueState = queue.settings.open ? 'Open' : 'Closed'
-    if (queue.settings.open) {
+    let queueState = isOpen ? 'Open' : 'Closed'
+    if (isOpen) {
       queueState = `${queueState} (${queue.upcoming.length})`
     }
     return `${queueState} - ${app.cq.title}`

@@ -24,7 +24,7 @@
       <UFormField :label="m.level()" :help="m.logger_level_description()">
         <USelect
           id="logger-level"
-          v-model="logger.settings.level"
+          v-model="logger.settings.state.level"
           :items="availableLogLevels"
           class="w-full"
         >
@@ -39,7 +39,7 @@
       <UFormField :label="m.size_limit()" :help="m.logger_size_limit_description()">
         <UInputNumber
           id="logger-limit"
-          v-model="logger.settings.limit"
+          v-model="logger.settings.state.limit"
           :min="1"
           :max="100000"
           :step="1"

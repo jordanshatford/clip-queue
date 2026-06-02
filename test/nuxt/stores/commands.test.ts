@@ -182,18 +182,18 @@ describe('commands', () => {
 
   it('can have its settings reset', () => {
     const commands = useCommands()
-    commands.resetSettings()
-    expect(commands.isSettingsModified).toEqual(false)
-    commands.settings.prefix = '~cq'
-    expect(commands.isSettingsModified).toEqual(true)
-    commands.resetSettings()
-    expect(commands.isSettingsModified).toEqual(false)
-    expect(commands.settings.prefix).toEqual('!cq')
+    commands.settings.reset()
+    expect(commands.settings.isModified).toEqual(false)
+    commands.settings.state.prefix = '~cq'
+    expect(commands.settings.isModified).toEqual(true)
+    commands.settings.reset()
+    expect(commands.settings.isModified).toEqual(false)
+    expect(commands.settings.state.prefix).toEqual('!cq')
     commands.register(createCommand({ id: 'test' }))
-    commands.settings.enabled = ['test']
-    expect(commands.isSettingsModified).toEqual(true)
-    commands.resetSettings()
-    expect(commands.isSettingsModified).toEqual(false)
-    expect(commands.settings.enabled).toEqual([])
+    commands.settings.state.enabled = ['test']
+    expect(commands.settings.isModified).toEqual(true)
+    commands.settings.reset()
+    expect(commands.settings.isModified).toEqual(false)
+    expect(commands.settings.state.enabled).toEqual([])
   })
 })

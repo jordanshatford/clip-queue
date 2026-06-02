@@ -1,6 +1,5 @@
 import type { IntegrationID } from '../indentify'
 import type { Cacheable } from './cacheable'
-import type { IntegrationStatus } from './types'
 
 /**
  * The configuration of the player.

@@ -102,12 +102,7 @@ export const useLogger = defineStore('logger', () => {
   /**
    * Settings related to the logger.
    */
-  const settings = useStorage<LoggerSettings>(
-    '__cq_logger_settings',
-    structuredClone(DEFAULT_LOGGER_SETTINGS),
-    undefined,
-    { mergeDefaults: true },
-  )
+  const settings = usePeristedSettings<LoggerSettings>('logger', DEFAULT_LOGGER_SETTINGS)
   /**
    * Logs current available.
    */
@@ -165,7 +160,7 @@ export const useLogger = defineStore('logger', () => {
   function handle(level: LogLevel, message: string): void {
     const log = { level, message, timestamp: new Date().toISOString() }
     const logIndex = availableLogLevels.indexOf(level)
-    const settingsIndex = availableLogLevels.indexOf(settings.value.level)
+    const settingsIndex = availableLogLevels.indexOf(settings.state.value.level)
     const warnIndex = availableLogLevels.indexOf('WARN')
     // Log the message to the console if configured to do so, or if the log level is WARN or higher.
     if (logIndex <= settingsIndex || logIndex <= warnIndex) {
@@ -175,7 +170,7 @@ export const useLogger = defineStore('logger', () => {
     if (logIndex <= settingsIndex) {
       logs.value.unshift(log)
       // Remove the oldest item if the array is too long.
-      while (logs.value.length > settings.value.limit) {
+      while (logs.value.length > settings.state.value.limit) {
         logs.value.pop()
       }
     }
@@ -188,23 +183,6 @@ export const useLogger = defineStore('logger', () => {
     logs.value = []
   }
 
-  /**
-   * Determine if the settings are modified.
-   */
-  const isSettingsModified = computed<boolean>(() => {
-    return (
-      settings.value.level !== DEFAULT_LOGGER_SETTINGS.level ||
-      settings.value.limit !== DEFAULT_LOGGER_SETTINGS.limit
-    )
-  })
-
-  /**
-   * Reset settings related to this store.
-   */
-  function resetSettings(): void {
-    settings.value = structuredClone(DEFAULT_LOGGER_SETTINGS)
-  }
-
   return {
     settings,
     logs,
@@ -215,7 +193,5 @@ export const useLogger = defineStore('logger', () => {
     error: (message: string) => handle('ERROR', message),
     formatTimestamp,
     reset,
-    isSettingsModified,
-    resetSettings,
   }
 })

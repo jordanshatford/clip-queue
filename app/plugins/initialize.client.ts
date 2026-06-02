@@ -8,9 +8,5 @@ export default defineNuxtPlugin(() => {
   useIntegrations()
   useQueue()
   useUpcoming()
-  // Filter out commands that not longer exist, i.e. commands that have been removed.
-  const available = Object.keys(commands.commands)
-  commands.settings.enabled = commands.settings.enabled.filter((command) =>
-    available.includes(command),
-  )
+  commands.initialize()
 })
