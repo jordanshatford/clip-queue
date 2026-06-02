@@ -1,5 +1,27 @@
 # clip-queue
 
+## 3.4.0
+
+### Minor Changes
+
+- [`12635c5`](https://github.com/jordanshatford/clip-queue/commit/12635c5d98b5f089d2a4b85b57b9e5971bdafbec) - feat: use dropdown for application preferences
+
+- [`111506b`](https://github.com/jordanshatford/clip-queue/commit/111506b9f72dfbef3c6d880332235eb0086437a6) - feat: add custom composable to handle persisted settings
+
+- [`a4b8ffe`](https://github.com/jordanshatford/clip-queue/commit/a4b8ffe7017d0ffbdfa22f66de8987427b6ddc41) - feat: improve settings descriptions
+
+- [`6a1b9ef`](https://github.com/jordanshatford/clip-queue/commit/6a1b9efcd2af2d3babe032dfbd706a9b2d79fe12) - feat: change max history to 1000 clips
+
+- [`a4cdc83`](https://github.com/jordanshatford/clip-queue/commit/a4cdc83a256a6193c0eb6fc2a818c5c6ca148d55) - feat: cleanup preference settings page
+
+### Patch Changes
+
+- [`256001f`](https://github.com/jordanshatford/clip-queue/commit/256001f964405bbcc57b59da66318e02b7c7d344) - fix: use updated session when refreshing oath
+
+- [`c640ed1`](https://github.com/jordanshatford/clip-queue/commit/c640ed119e18d604e6e8c382f746241165a08180) - fix: only detect if integration provider is misconfigured
+
+- [`8f22ea6`](https://github.com/jordanshatford/clip-queue/commit/8f22ea6d315d5aa407502b081608d8041cf1e603) - fix: queue heading overflow handling
+
 ## 3.3.0
 
 ### Minor Changes
