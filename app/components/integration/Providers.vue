@@ -9,7 +9,15 @@
           </UBadge>
         </div>
         <div class="flex gap-2">
-          <IntegrationStatusBadge v-if="provider.status" :status="provider.status" />
+          <UBadge
+            v-if="provider.isMisconfigured"
+            size="sm"
+            icon="lucide:circle-alert"
+            color="error"
+            variant="subtle"
+          >
+            {{ m.misconfigured() }}
+          </UBadge>
           <USwitch v-model="provider.isEnabled" :input-id="provider.id" />
         </div>
       </div>

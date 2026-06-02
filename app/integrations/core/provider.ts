@@ -77,10 +77,9 @@ export interface IntegrationProvider extends Cacheable<Clip> {
    */
   isEnabled: boolean
   /**
-   * The current status of the provider. Should only be used for error states and undefined otherwise, as
-   * we cannot for certain determine that a provider is functioning.
+   * True if the provider is misconfigured and may not function as intended.
    */
-  readonly status?: IntegrationStatus
+  readonly isMisconfigured?: boolean
   /**
    * Check if this providers supports a given URL.
    * @param url - The URL of the clip.

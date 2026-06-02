@@ -1,12 +1,7 @@
 import { useStorage } from '@vueuse/core'
 
-import {
-  IntegrationStatus,
-  type AuthenticationDetails,
-  type Clip,
-  type IntegrationProvider,
-  type PlayerConfig,
-} from '../core'
+import type { AuthenticationDetails, Clip, IntegrationProvider, PlayerConfig } from '../core'
+
 import { toStorageKey, Cacheable } from '../core'
 import { IntegrationID } from '../indentify'
 import { getClips, getGames } from './core/api'
@@ -29,11 +24,8 @@ export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationPr
     isEnabled.value = value
   }
 
-  public get status(): IntegrationStatus | undefined {
-    const auth = this.authentication()
-    if (!auth.clientId || !auth.accessToken) {
-      return IntegrationStatus.MISCONFIGURED
-    }
+  public get isMisconfigured(): boolean | undefined {
+    return !this.authentication().clientId || !this.authentication().accessToken
   }
 
   private authentication: () => AuthenticationDetails
