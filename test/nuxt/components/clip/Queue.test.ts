@@ -1,6 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { describe, expect, it, vi } from 'vitest'
 import { clipFromTwitch } from '~~/test/mocks'
+import { UTooltipStub } from '~~/test/mocks/stubs'
 
 import type { Clip } from '~/integrations'
 
@@ -28,6 +29,11 @@ describe('clip/Queue.vue', () => {
     it('mounts and renders default empty state correctly', async () => {
       const wrapper = await mountSuspended(ClipQueue, {
         props: { clips: [] },
+        global: {
+          stubs: {
+            UTooltip: UTooltipStub,
+          },
+        },
       })
       expect(wrapper.exists()).toBe(true)
       expect(wrapper.text()).toContain('Queue')
@@ -42,7 +48,7 @@ describe('clip/Queue.vue', () => {
           clips: [mockClip1, mockClip2],
         },
         global: {
-          stubs: { ClipCard: true },
+          stubs: { ClipCard: true, UTooltip: UTooltipStub },
         },
       })
       expect(wrapper.text()).toContain('My Custom Queue')
@@ -56,6 +62,11 @@ describe('clip/Queue.vue', () => {
     it('emits "clear" when the clear button is clicked', async () => {
       const wrapper = await mountSuspended(ClipQueue, {
         props: { clips: [mockClip1] },
+        global: {
+          stubs: {
+            UTooltip: UTooltipStub,
+          },
+        },
       })
       const clearButton = wrapper.findAllComponents({ name: 'UButton' })[0]
       expect(clearButton?.props('disabled')).toBe(false)
@@ -66,6 +77,11 @@ describe('clip/Queue.vue', () => {
     it('emits "open" and displays correct text when isOpen is false', async () => {
       const wrapper = await mountSuspended(ClipQueue, {
         props: { clips: [], isOpen: false },
+        global: {
+          stubs: {
+            UTooltip: UTooltipStub,
+          },
+        },
       })
       const toggleButton = wrapper.findAllComponents({ name: 'UButton' })[1]
       expect(toggleButton?.text()).toContain('Open')
@@ -77,6 +93,11 @@ describe('clip/Queue.vue', () => {
     it('emits "close" and displays correct text when isOpen is true', async () => {
       const wrapper = await mountSuspended(ClipQueue, {
         props: { clips: [], isOpen: true },
+        global: {
+          stubs: {
+            UTooltip: UTooltipStub,
+          },
+        },
       })
       const toggleButton = wrapper.findAllComponents({ name: 'UButton' })[1]
       expect(toggleButton?.text()).toContain('Close')
@@ -91,7 +112,7 @@ describe('clip/Queue.vue', () => {
       const wrapper = await mountSuspended(ClipQueue, {
         props: { clips: [mockClip1] },
         global: {
-          stubs: { ClipCard: true },
+          stubs: { ClipCard: true, UTooltip: UTooltipStub },
         },
       })
       const clipCard = wrapper.findComponent({ name: 'ClipCard' })

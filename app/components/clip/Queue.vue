@@ -1,8 +1,10 @@
 <template>
   <aside class="bg-background flex min-h-0 flex-col">
-    <div class="flex items-center justify-between px-1 pb-1">
-      <div class="flex gap-2 text-sm font-semibold">
-        <span>{{ title }}</span>
+    <div class="flex items-center justify-between gap-2 px-1 pb-1">
+      <div class="flex min-w-0 gap-1 text-sm font-semibold">
+        <UTooltip :text="title">
+          <span class="truncate">{{ title }}</span>
+        </UTooltip>
         <UBadge size="sm" variant="outline" color="neutral">{{ display }}</UBadge>
       </div>
       <div class="flex items-center gap-1">
