@@ -1,5 +1,5 @@
 <template>
-  <UFormField :label="m.providers_for_integration()">
+  <UFormField>
     <div class="flex flex-col gap-2">
       <div v-for="provider of providers" :key="provider.id" class="flex justify-between">
         <div class="flex items-center gap-2">
