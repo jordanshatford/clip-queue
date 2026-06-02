@@ -7,7 +7,7 @@ import { m } from '#paraglide/messages'
 /**
  * Only track this many items in the history at any given time.
  */
-const MAX_HISTORY_LIMIT: number = 100
+const MAX_HISTORY_LIMIT: number = 1000
 /**
  * Number of elements to remove when the max history limit is hit. This helps
  * limit the number of add and removals with quick history usage.
