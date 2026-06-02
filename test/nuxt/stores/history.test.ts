@@ -54,16 +54,20 @@ describe('history.ts', () => {
 
   it('enforces max history limit by trimming oldest items', () => {
     const history = useHistory()
-    // create more than MAX_HISTORY_LIMIT (100 + a bit extra)
-    for (let i = 0; i < 105; i++) {
-      history.add({
+    // create more than MAX_HISTORY_LIMIT (1000 + a bit extra)
+    for (let i = 0; i < 1000; i++) {
+      history.items.push({
         ...clipFromTwitch,
-        id: `clip-${i}`,
+        id: `test-${i}`,
       })
     }
-    expect(history.length).toBeLessThanOrEqual(100)
+    history.add({
+      ...clipFromTwitch,
+      id: `last-clip`,
+    })
+    expect(history.length).toBeLessThanOrEqual(1000)
     // ensures it trimmed oldest items (end of array)
-    expect(history.items.length).toBeLessThanOrEqual(100)
+    expect(history.items.length).toBeLessThanOrEqual(1000)
   })
 
   it('registers commands for interacting with the history', () => {

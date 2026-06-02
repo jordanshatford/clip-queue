@@ -10,7 +10,7 @@
     </template>
     <UNavigationMenu :items="routes.all.value" content-orientation="vertical" />
     <template #right>
-      <UColorModeButton size="sm" />
+      <AppThemePicker />
       <AppAuthentication />
     </template>
     <template #body>

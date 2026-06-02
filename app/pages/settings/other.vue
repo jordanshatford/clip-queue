@@ -60,7 +60,6 @@ const toast = useToast()
 const confirm = useConfirmDialog()
 
 const commands = useCommands()
-const preferences = usePreferences()
 const queue = useQueue()
 const integrations = useIntegrations()
 const logger = useLogger()
@@ -70,8 +69,7 @@ const isSettingsModified = computed<boolean>(() => {
     commands.settings.isModified ||
     queue.settings.isModified ||
     integrations.settings.isModified ||
-    logger.settings.isModified ||
-    preferences.isModified
+    logger.settings.isModified
   )
 })
 
@@ -87,7 +85,6 @@ async function resetSettingsToDefault(): Promise<void> {
     queue.settings.reset()
     integrations.settings.reset()
     logger.settings.reset()
-    preferences.reset()
     toast.add({
       icon: 'lucide:circle-check',
       color: 'success',
