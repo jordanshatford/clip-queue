@@ -49,47 +49,53 @@ export default defineEventHandler(async (event): Promise<OathResponse> => {
  * @param accessToken - The users access token.
  * @returns KickTokenIntrospect from the Kick API if the token is valid.
  */
-async function getValidatedIntrospection(accessToken: string): Promise<KickTokenIntrospect> {
-  const introspect = await $fetch<KickTokenIntrospect>(`${KICK_OATH_BASE}/token/introspect`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-
-  const config = useRuntimeConfig()
-
-  if (introspect.data?.client_id !== config.kick.clientId) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Kick session access token is not for this applications client ID.',
+const getValidatedIntrospection = defineCachedFunction(
+  async (accessToken: string): Promise<KickTokenIntrospect> => {
+    const introspect = await $fetch<KickTokenIntrospect>(`${KICK_OATH_BASE}/token/introspect`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     })
-  }
 
-  if (introspect.data?.token_type !== 'user') {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Kick session access token does not have the required type.',
-    })
-  }
+    const config = useRuntimeConfig()
 
-  const scopes = introspect.data?.scope?.split(' ')
-  if (!config.kick.scopes.every((scope) => scopes.includes(scope))) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Kick session access token does not have the required scopes.',
-    })
-  }
+    if (introspect.data?.client_id !== config.kick.clientId) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Kick session access token is not for this applications client ID.',
+      })
+    }
 
-  if (!introspect.data?.active) {
-    throw createError({
-      statusCode: 401,
-      statusMessage: 'Kick session access token is no longer active.',
-    })
-  }
+    if (introspect.data?.token_type !== 'user') {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Kick session access token does not have the required type.',
+      })
+    }
 
-  return introspect
-}
+    const scopes = introspect.data?.scope?.split(' ') ?? []
+    if (!config.kick.scopes.every((scope) => scopes.includes(scope))) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Kick session access token does not have the required scopes.',
+      })
+    }
+
+    if (!introspect.data?.active) {
+      throw createError({
+        statusCode: 401,
+        statusMessage: 'Kick session access token is no longer active.',
+      })
+    }
+
+    return introspect
+  },
+  {
+    maxAge: 60,
+    getKey: (accessToken) => `kick:introspect:${accessToken}`,
+  },
+)
 
 /**
  * Get refreshed access token from Kick.
@@ -125,24 +131,30 @@ async function getRefreshedSession(refreshToken: string): Promise<KickTokenRespo
  * @returns Details about the user.
  * @throws Error when the fetch request fails or does not return a user.
  */
-async function getCurrentUser(accessToken: string): Promise<OathUser> {
-  const response = await $fetch<KickUsersResponse>(`${KICK_PUBLIC_API_BASE}/users`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-
-  const user = response.data?.[0]
-  if (!user) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: 'Kick user could not be fetched for the session.',
+const getCurrentUser = defineCachedFunction(
+  async (accessToken: string): Promise<OathUser> => {
+    const response = await $fetch<KickUsersResponse>(`${KICK_PUBLIC_API_BASE}/users`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     })
-  }
 
-  return {
-    id: String(user.user_id),
-    name: user.name,
-    profileImageURL: user.profile_picture,
-  }
-}
+    const user = response.data?.[0]
+    if (!user) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'Kick user could not be fetched for the session.',
+      })
+    }
+
+    return {
+      id: String(user.user_id),
+      name: user.name,
+      profileImageURL: user.profile_picture,
+    }
+  },
+  {
+    maxAge: 60 * 5,
+    getKey: (accessToken: string) => `kick:user:${accessToken}`,
+  },
+)

@@ -49,32 +49,38 @@ export default defineEventHandler(async (event): Promise<OathResponse> => {
  * @param accessToken - The users access token.
  * @returns TwitchTokenIntrospect from the Twitch API if the token is valid.
  */
-async function getValidatedIntrospection(accessToken: string): Promise<TwitchTokenIntrospect> {
-  const introspect = await $fetch<TwitchTokenIntrospect>(`${TWITCH_OAUTH_BASE}/validate`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-
-  const config = useRuntimeConfig()
-
-  if (introspect?.client_id !== config.twitch.clientId) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Twitch session access token is not for this applications client ID.',
+const getValidatedIntrospection = defineCachedFunction(
+  async (accessToken: string): Promise<TwitchTokenIntrospect> => {
+    const introspect = await $fetch<TwitchTokenIntrospect>(`${TWITCH_OAUTH_BASE}/validate`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     })
-  }
 
-  if (!config.twitch.scopes.every((scope) => introspect.scopes.includes(scope))) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Twitch session access token does not have the required scopes.',
-    })
-  }
+    const config = useRuntimeConfig()
 
-  return introspect
-}
+    if (introspect?.client_id !== config.twitch.clientId) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Twitch session access token is not for this applications client ID.',
+      })
+    }
+
+    if (!config.twitch.scopes.every((scope) => introspect.scopes?.includes(scope))) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Twitch session access token does not have the required scopes.',
+      })
+    }
+
+    return introspect
+  },
+  {
+    maxAge: 60,
+    getKey: (accessToken) => `twitch:introspect:${accessToken}`,
+  },
+)
 
 /**
  * Get refreshed access token from Twitch.
@@ -110,26 +116,32 @@ async function getRefreshedSession(refreshToken: string): Promise<TwitchTokenRes
  * @returns Details about the user.
  * @throws Error when the fetch request fails or does not return a user.
  */
-async function getCurrentUser(accessToken: string): Promise<OathUser> {
-  const config = useRuntimeConfig()
-  const response = await $fetch<TwitchUsersResponse>(`${TWITCH_PUBLIC_API_BASE}/users`, {
-    headers: {
-      'Client-ID': config.twitch.clientId,
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-
-  const user = response.data?.[0]
-  if (!user) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: 'Twitch user could not be fetched for the session.',
+const getCurrentUser = defineCachedFunction(
+  async (accessToken: string): Promise<OathUser> => {
+    const config = useRuntimeConfig()
+    const response = await $fetch<TwitchUsersResponse>(`${TWITCH_PUBLIC_API_BASE}/users`, {
+      headers: {
+        'Client-ID': config.twitch.clientId,
+        Authorization: `Bearer ${accessToken}`,
+      },
     })
-  }
 
-  return {
-    id: user.id,
-    name: user.login,
-    profileImageURL: user.profile_image_url,
-  }
-}
+    const user = response.data?.[0]
+    if (!user) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'Twitch user could not be fetched for the session.',
+      })
+    }
+
+    return {
+      id: user.id,
+      name: user.login,
+      profileImageURL: user.profile_image_url,
+    }
+  },
+  {
+    maxAge: 60 * 5,
+    getKey: (accessToken: string) => `twitch:user:${accessToken}`,
+  },
+)
