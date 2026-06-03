@@ -1,5 +1,13 @@
 # clip-queue
 
+## 3.4.2
+
+### Patch Changes
+
+- [`f6a867a`](https://github.com/jordanshatford/clip-queue/commit/f6a867af0c30048fb0f56884f5b3583280e97d69) - fix: cache fetch introspection and user details for kick
+
+- [`f6a867a`](https://github.com/jordanshatford/clip-queue/commit/f6a867af0c30048fb0f56884f5b3583280e97d69) - fix: cache fetch introspection and user details for twitch
+
 ## 3.4.1
 
 ### Patch Changes
