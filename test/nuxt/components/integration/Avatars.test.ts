@@ -8,43 +8,45 @@ import { IntegrationStatus } from '~/integrations/core'
 const integrationsMock = vi.fn()
 
 mockNuxtImport('useIntegrations', () => {
-  return () => integrationsMock()
+  return () => ({
+    initialize: vi.fn(),
+    integrations: integrationsMock(),
+  })
 })
 
 describe('integration/Avatars.vue', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    integrationsMock.mockReset()
   })
 
   it('renders avatars for logged in integrations only', async () => {
-    integrationsMock.mockReturnValue({
-      integrations: [
-        {
-          authentication: {
-            isLoggedIn: true,
-            user: {
-              name: 'Twitch User',
-              profileImageURL: 'https://cdn.test/twitch.png',
-            },
-          },
-          source: {
-            status: IntegrationStatus.HEALTHY,
+    integrationsMock.mockReturnValue([
+      {
+        authentication: {
+          isLoggedIn: true,
+          user: {
+            name: 'Twitch User',
+            profileImageURL: 'https://cdn.test/twitch.png',
           },
         },
-        {
-          authentication: {
-            isLoggedIn: false,
-            user: {
-              name: 'YouTube User',
-              profileImageURL: 'https://cdn.test/youtube.png',
-            },
-          },
-          source: {
-            status: IntegrationStatus.HEALTHY,
+        source: {
+          status: IntegrationStatus.HEALTHY,
+        },
+      },
+      {
+        authentication: {
+          isLoggedIn: false,
+          user: {
+            name: 'YouTube User',
+            profileImageURL: 'https://cdn.test/youtube.png',
           },
         },
-      ],
-    })
+        source: {
+          status: IntegrationStatus.HEALTHY,
+        },
+      },
+    ])
 
     const wrapper = await mountSuspended(IntegrationAvatars, {
       global: {
@@ -53,6 +55,7 @@ describe('integration/Avatars.vue', () => {
         },
       },
     })
+
     const avatars = wrapper.findAllComponents({ name: 'UAvatar' })
     expect(avatars).toHaveLength(1)
     expect(avatars[0]?.props('src')).toBe('https://cdn.test/twitch.png')
@@ -60,22 +63,20 @@ describe('integration/Avatars.vue', () => {
   })
 
   it('passes chip color when integration has a source', async () => {
-    integrationsMock.mockReturnValue({
-      integrations: [
-        {
-          authentication: {
-            isLoggedIn: true,
-            user: {
-              name: 'Kick User',
-              profileImageURL: 'https://cdn.test/kick.png',
-            },
-          },
-          source: {
-            status: IntegrationStatus.HEALTHY,
+    integrationsMock.mockReturnValue([
+      {
+        authentication: {
+          isLoggedIn: true,
+          user: {
+            name: 'Kick User',
+            profileImageURL: 'https://cdn.test/kick.png',
           },
         },
-      ],
-    })
+        source: {
+          status: IntegrationStatus.HEALTHY,
+        },
+      },
+    ])
 
     const wrapper = await mountSuspended(IntegrationAvatars, {
       global: {
@@ -84,7 +85,9 @@ describe('integration/Avatars.vue', () => {
         },
       },
     })
+
     const avatar = wrapper.findComponent({ name: 'UAvatar' })
+
     expect(avatar.props('chip')).toEqual({
       inset: true,
       color: 'success',
@@ -92,20 +95,18 @@ describe('integration/Avatars.vue', () => {
   })
 
   it('does not pass chip when source is missing', async () => {
-    integrationsMock.mockReturnValue({
-      integrations: [
-        {
-          authentication: {
-            isLoggedIn: true,
-            user: {
-              name: 'User',
-              profileImageURL: 'https://cdn.test/user.png',
-            },
+    integrationsMock.mockReturnValue([
+      {
+        authentication: {
+          isLoggedIn: true,
+          user: {
+            name: 'User',
+            profileImageURL: 'https://cdn.test/user.png',
           },
-          source: undefined,
         },
-      ],
-    })
+        source: undefined,
+      },
+    ])
 
     const wrapper = await mountSuspended(IntegrationAvatars, {
       global: {
@@ -114,27 +115,26 @@ describe('integration/Avatars.vue', () => {
         },
       },
     })
+
     const avatar = wrapper.findComponent({ name: 'UAvatar' })
     expect(avatar.props('chip')).toBeUndefined()
   })
 
   it('renders tooltip text from avatar alt', async () => {
-    integrationsMock.mockReturnValue({
-      integrations: [
-        {
-          authentication: {
-            isLoggedIn: true,
-            user: {
-              name: 'Streamer',
-              profileImageURL: 'https://cdn.test/streamer.png',
-            },
-          },
-          source: {
-            status: IntegrationStatus.HEALTHY,
+    integrationsMock.mockReturnValue([
+      {
+        authentication: {
+          isLoggedIn: true,
+          user: {
+            name: 'Streamer',
+            profileImageURL: 'https://cdn.test/streamer.png',
           },
         },
-      ],
-    })
+        source: {
+          status: IntegrationStatus.HEALTHY,
+        },
+      },
+    ])
 
     const wrapper = await mountSuspended(IntegrationAvatars, {
       global: {
@@ -143,20 +143,19 @@ describe('integration/Avatars.vue', () => {
         },
       },
     })
+
     const tooltip = wrapper.findComponent({ name: 'UTooltip' })
     expect(tooltip.props('text')).toBe('Streamer')
   })
 
   it('renders no avatars when nobody is logged in', async () => {
-    integrationsMock.mockReturnValue({
-      integrations: [
-        {
-          authentication: {
-            isLoggedIn: false,
-          },
+    integrationsMock.mockReturnValue([
+      {
+        authentication: {
+          isLoggedIn: false,
         },
-      ],
-    })
+      },
+    ])
 
     const wrapper = await mountSuspended(IntegrationAvatars, {
       global: {
@@ -165,6 +164,7 @@ describe('integration/Avatars.vue', () => {
         },
       },
     })
+
     const avatars = wrapper.findAllComponents({ name: 'UAvatar' })
     expect(avatars).toHaveLength(0)
   })

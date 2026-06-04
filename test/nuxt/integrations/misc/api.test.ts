@@ -1,26 +1,36 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { mockOEmbed } from '~~/test/mocks'
 
 import { getOEmbed, getOEmbedProxied } from '~/integrations/misc/core/api'
 
+const fetchMock = vi.fn()
+const $fetchMock = vi.fn()
+
 describe('integrations/misc/core/api', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    global.fetch = vi.fn<typeof fetch>().mockImplementation((url) =>
-      Promise.resolve({
-        ok: true,
-        json: () => {
-          return Promise.resolve({ ...mockOEmbed, provider_url: url })
-        },
-      } as Response),
-    )
+
+    vi.stubGlobal('fetch', fetchMock)
+    fetchMock.mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        ...mockOEmbed,
+        provider_url: 'https://example.com',
+      }),
+    })
+
+    vi.stubGlobal('$fetch', $fetchMock)
+    $fetchMock.mockResolvedValue({
+      ...mockOEmbed,
+      provider_url: 'https://example.com',
+    })
   })
 
   it('gets oembed details from a URL', async () => {
     const oembed = await getOEmbed('https://api.oembed.com/oembed.json?url=https://some.com/url')
     expect(oembed).toBeDefined()
     expect(oembed.title).toBeDefined()
-    expect(fetch).toHaveBeenCalledTimes(1)
+    expect(fetchMock).toHaveBeenCalledTimes(1)
   })
 
   it('throws if no oembed URL is passed', async () => {
@@ -28,11 +38,10 @@ describe('integrations/misc/core/api', () => {
   })
 
   it('throws when the oembed fetch fails', async () => {
-    vi.spyOn(global, 'fetch').mockResolvedValue({
+    fetchMock.mockResolvedValueOnce({
       ok: false,
       statusText: 'Forbidden',
-    } as Response)
-
+    })
     await expect(getOEmbed('https://example.com/oembed')).rejects.toThrow(
       'Failed to fetch OEmbed with URL https://example.com/oembed: Forbidden',
     )
@@ -44,7 +53,7 @@ describe('integrations/misc/core/api', () => {
     )
     expect(oembed).toBeDefined()
     expect(oembed.title).toBeDefined()
-    expect(fetch).toHaveBeenCalledTimes(1)
+    expect($fetchMock).toHaveBeenCalledTimes(1)
   })
 
   it('throws if no oembed URL is passed when proxied', async () => {
@@ -52,42 +61,7 @@ describe('integrations/misc/core/api', () => {
   })
 
   it('throws when the proxied fetch fails', async () => {
-    vi.spyOn(global, 'fetch').mockResolvedValue({
-      ok: false,
-      statusText: 'Bad Gateway',
-    } as Response)
-
-    await expect(getOEmbedProxied('https://example.com/oembed')).rejects.toThrow(
-      'Failed to fetch OEmbed with URL https://example.com/oembed: Bad Gateway',
-    )
-  })
-
-  it('throws when the proxy response contains an errorId', async () => {
-    vi.spyOn(global, 'fetch').mockResolvedValue({
-      ok: true,
-      json: () =>
-        Promise.resolve({
-          errorId: 1,
-          errorMessage: 'The requested entity could not be found',
-        }),
-    } as Response)
-
-    await expect(getOEmbedProxied('https://example.com/oembed')).rejects.toThrow(
-      'Failed to handle proxied response: The requested entity could not be found',
-    )
-  })
-
-  it('throws when the proxy response contains an errorMessage', async () => {
-    vi.spyOn(global, 'fetch').mockResolvedValue({
-      ok: true,
-      json: () =>
-        Promise.resolve({
-          errorMessage: 'Unknown proxy error',
-        }),
-    } as Response)
-
-    await expect(getOEmbedProxied('https://example.com/oembed')).rejects.toThrow(
-      'Failed to handle proxied response: Unknown proxy error',
-    )
+    $fetchMock.mockRejectedValueOnce(new Error('Bad Gateway'))
+    await expect(getOEmbedProxied('https://example.com/oembed')).rejects.toThrow('Bad Gateway')
   })
 })

@@ -7,6 +7,7 @@ const logoutMock = vi.fn()
 const sourceMock = vi.fn()
 
 const integrationsMock = {
+  initialize: vi.fn(),
   integrations: [],
   isLoggedIn: false,
   logoutAll: logoutMock,

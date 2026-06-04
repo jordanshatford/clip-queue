@@ -1,9 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { ref } from 'vue'
 
-vi.mock('@vueuse/core', () => ({
-  useStorage: vi.fn((_key, initialValue) => ref(initialValue)),
-}))
+vi.mock('@vueuse/core', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@vueuse/core')>()
+  return {
+    ...actual,
+    useStorage: vi.fn((_key: string, initialValue: unknown) => ref(initialValue)),
+  }
+})
 
 describe('usePeristedSettings', () => {
   const defaultSettings = {

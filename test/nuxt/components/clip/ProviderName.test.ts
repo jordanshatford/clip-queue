@@ -10,6 +10,7 @@ const { providerMock } = vi.hoisted(() => ({
 
 mockNuxtImport('useIntegrations', () => {
   return () => ({
+    initialize: vi.fn(),
     provider: providerMock,
   })
 })
