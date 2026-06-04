@@ -2,6 +2,12 @@
   <div class="mx-auto flex max-w-2xl flex-col gap-2">
     <UCard class="text-left" variant="subtle">
       <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-2 align-middle">
+          <span class="font-medium">{{ m.queue() }}</span>
+          <UDropdownMenu :items="items2">
+            <UButton icon="lucide:ellipsis-vertical" size="sm" color="neutral" variant="ghost" />
+          </UDropdownMenu>
+        </div>
         <UFormField
           :label="m.auto_mod()"
           :description="m.auto_mod_description()"
@@ -31,6 +37,12 @@
     </UCard>
     <UCard class="text-left" variant="subtle">
       <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-2 align-middle">
+          <span class="font-medium">{{ m.commands() }}</span>
+          <UDropdownMenu :items="items3">
+            <UButton icon="lucide:ellipsis-vertical" size="sm" color="neutral" variant="ghost" />
+          </UDropdownMenu>
+        </div>
         <UFormField :label="m.command_prefix()" :help="m.command_prefix_description()">
           <UInput
             id="commandPrefix"
@@ -57,6 +69,8 @@
 </template>
 
 <script setup lang="ts">
+import type { DropdownMenuItem } from '@nuxt/ui'
+
 import { m } from '#paraglide/messages'
 
 definePageMeta({
@@ -76,5 +90,38 @@ const items = computed(() => {
     label: commands.toCallHelp(command),
     description: commands.toDescription(command),
   }))
+})
+
+const items2 = computed<DropdownMenuItem[][]>(() => {
+  return [
+    [
+      {
+        label: m.reset_settings(),
+        color: 'error',
+        icon: 'lucide:rotate-ccw',
+        disabled: !(queue.settings.isModified || integrations.settings.isModified),
+        onSelect: () => {
+          queue.settings.reset()
+          integrations.settings.reset()
+        },
+      },
+    ],
+  ]
+})
+
+const items3 = computed<DropdownMenuItem[][]>(() => {
+  return [
+    [
+      {
+        label: m.reset_settings(),
+        color: 'error',
+        icon: 'lucide:rotate-ccw',
+        disabled: !commands.settings.isModified,
+        onSelect: () => {
+          commands.settings.reset()
+        },
+      },
+    ],
+  ]
 })
 </script>
