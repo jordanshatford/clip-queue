@@ -12,7 +12,6 @@ const translations: Record<string | symbol, () => string> = {
   'settings-commands': m.commands,
   'settings-integrations': m.integrations,
   'settings-logs': m.logs,
-  'settings-other': m.settings_other,
 }
 
 function getRouteLabel(route: RouteRecordRaw): string {

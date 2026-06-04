@@ -7,6 +7,7 @@
       </p>
     </template>
     <template #right>
+      <UBadge color="neutral" variant="outline">v{{ useRuntimeConfig().public.version }}</UBadge>
       <UButton
         icon="simple-icons:github"
         color="neutral"
