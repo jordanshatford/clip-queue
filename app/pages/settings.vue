@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 definePageMeta({
-  redirect: '/settings/application',
+  redirect: '/settings/queue',
   requiresAuth: true,
   icon: 'lucide:settings',
   order: 3,
