@@ -29,6 +29,7 @@
         >
           {{ m.experimental() }}
         </UBadge>
+        <IntegrationDropdownMenu :integration="integration" />
       </div>
       <USwitch
         v-if="integration.isEnabled !== undefined"

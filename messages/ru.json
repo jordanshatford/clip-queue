@@ -18,7 +18,7 @@
       "declarations": ["input length", "local lengthPlural = length: plural"],
       "selectors": ["lengthPlural"],
       "match": {
-        "lengthPlural=one": "Вы уверены, что хотите очистить лог {length} ?",
+        "lengthPlural=one": "Вы уверены, что хотите очистить журнал {length} ?",
         "lengthPlural=other": "Вы уверены, что хотите очистить журналы {length} ?"
       }
     }
@@ -86,7 +86,6 @@
   "info": "Информация",
   "integration": "Интеграция",
   "integrations": "Интеграции",
-  "integrations_cache_reset": "Сброс кэша интеграций.",
   "level": "Уровень",
   "lime": "Лайм",
   "link_detection": "Обнаружение связей",
@@ -140,8 +139,6 @@
   "remove": "Удалять",
   "reset": "Перезагрузить",
   "reset_cache": "Сбросить кэш",
-  "reset_cache_confirm": "Вы уверены, что хотите сбросить все кэши, созданные интеграциями?",
-  "reset_cache_description": "Интеграции могут кэшировать элементы, чтобы предотвратить повторное получение данных. Очистите все значения, которые могли быть кэшированы интеграциями.",
   "reset_settings": "Сбросить настройки",
   "reset_settings_confirm": "Вы уверены, что хотите сбросить все настройки до значений по умолчанию?",
   "reset_settings_description": "Сбросьте настройки до исходных значений.",

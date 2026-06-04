@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto flex max-w-2xl flex-col gap-2">
+  <div class="mx-auto flex max-w-2xl min-w-2xl flex-col gap-2">
     <UCard class="text-left" variant="subtle">
       <div class="flex flex-col gap-4">
         <UFormField :help="m.reset_settings_description()">
@@ -10,17 +10,6 @@
             :disabled="!isSettingsModified"
             @click="resetSettingsToDefault()"
             >{{ m.reset_settings() }}</UButton
-          >
-        </UFormField>
-        <USeparator />
-        <UFormField :help="m.reset_cache_description()">
-          <UButton
-            class="w-full justify-center"
-            color="error"
-            variant="subtle"
-            :disabled="!integrations.hasCachedData"
-            @click="resetCache()"
-            >{{ m.reset_cache() }}</UButton
           >
         </UFormField>
       </div>
@@ -82,26 +71,6 @@ async function resetSettingsToDefault(): Promise<void> {
     })
   } else {
     logger.debug('[Settings]: Resetting settings to default cancelled.')
-  }
-}
-
-async function resetCache(): Promise<void> {
-  logger.debug('[Settings]: Attempting to reset all integrations cache.')
-  const confirmed = await confirm({
-    title: m.reset_cache(),
-    description: m.reset_cache_confirm(),
-  })
-  if (confirmed) {
-    logger.debug('[Settings]: Resetting all integrations cache confirmed.')
-    integrations.clearCache()
-    toast.add({
-      icon: 'lucide:circle-check',
-      color: 'success',
-      title: m.success(),
-      description: m.integrations_cache_reset(),
-    })
-  } else {
-    logger.debug('[Settings]: Resetting all integrations cache cancelled.')
   }
 }
 </script>
