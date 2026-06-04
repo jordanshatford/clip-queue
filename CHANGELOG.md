@@ -1,5 +1,51 @@
 # clip-queue
 
+## 3.5.0
+
+### Minor Changes
+
+- [`48e358c`](https://github.com/jordanshatford/clip-queue/commit/48e358c3c9ad445b30fbd74a3bc4575bf2e4d8ad) - feat: move command settings to own settings page
+
+- [`083cfa2`](https://github.com/jordanshatford/clip-queue/commit/083cfa2861a72c1f0fa99e55da6b10548be73c6d) - feat: proxy our own oembed requests when required
+
+- [`3f2c458`](https://github.com/jordanshatford/clip-queue/commit/3f2c458f76d31a57451605a4f79c4b385e5d5fe7) - feat: move application settings to queue settings page
+
+- [`ea67f25`](https://github.com/jordanshatford/clip-queue/commit/ea67f25bf0dc0a02706debb189a4e7ed4bc5fbf8) - feat: move application version to footer and remove other settings
+
+- [`b8fd05e`](https://github.com/jordanshatford/clip-queue/commit/b8fd05e04d49a7e473bd83c22b3367c9da61b462) - feat: allow resetting cache per integration
+
+- [`fc8ed23`](https://github.com/jordanshatford/clip-queue/commit/fc8ed2353496763c79e400bb85e14512d347f5c4) - feat: remove purge history from other settings, use history page
+
+- [`1c8f466`](https://github.com/jordanshatford/clip-queue/commit/1c8f4667ddd8587bbc6d803777a7577b50b32458) - feat: display log count in logger settings page
+
+- [`1c8f466`](https://github.com/jordanshatford/clip-queue/commit/1c8f4667ddd8587bbc6d803777a7577b50b32458) - feat: provide actions dropdown in log settings card
+
+- [`448f3a2`](https://github.com/jordanshatford/clip-queue/commit/448f3a2efcb220a44b45d477409cef80677c4a79) - feat: move application settings reset to card action menu
+
+### Patch Changes
+
+- [`8392185`](https://github.com/jordanshatford/clip-queue/commit/8392185cde0e5c5fc99ecceffb1ae4bcdf81c10f) - fix: set swr to false for twitch introspect api call
+
+- [`e24656d`](https://github.com/jordanshatford/clip-queue/commit/e24656db1551093c50ae7fbc768db078d479a9ac) - fix: remove extra padding on the top of commands settings card
+
+- [`07ab26d`](https://github.com/jordanshatford/clip-queue/commit/07ab26de3472f1ae53a7a61501b9e15b8225ec82) - fix: disable copy logs button in settings when no logs exist
+
+- [`d617914`](https://github.com/jordanshatford/clip-queue/commit/d617914e4a230ebdb8800fb121c20f69448c0d53) - fix: clip thumbnail styling when thumbnail cannot load
+
+- [`56cdd9b`](https://github.com/jordanshatford/clip-queue/commit/56cdd9b4316829eee9168507a04cb9a275d08445) - fix: issue causing medal tv clip embed failure
+
+- [`7374d41`](https://github.com/jordanshatford/clip-queue/commit/7374d41618c44bbca64230786637b435754cc987) - fix: always show queue and delete button on history page, just disable
+
+- [`63c19f6`](https://github.com/jordanshatford/clip-queue/commit/63c19f67623739ab4e37281035b2be5c481e48f3) - fix: truncate clip title in player when too long
+
+- [`e675b71`](https://github.com/jordanshatford/clip-queue/commit/e675b7195d12cf0609f465e2f66fa6f5a5d045c8) - fix: only allow specific hostnames for oembed proxy endpoint
+
+- [`2e6a478`](https://github.com/jordanshatford/clip-queue/commit/2e6a478a5f421f2689310c3d9dd6c7c3bd1db845) - fix: disable logs table clear button when no logs exist
+
+- [`8392185`](https://github.com/jordanshatford/clip-queue/commit/8392185cde0e5c5fc99ecceffb1ae4bcdf81c10f) - fix: set swr to false for kick introspect api call
+
+- [`0727c4c`](https://github.com/jordanshatford/clip-queue/commit/0727c4ce885773a59a778c3bb227b04b13f8068e) - fix: integration card title when the integration has no url
+
 ## 3.4.2
 
 ### Patch Changes
