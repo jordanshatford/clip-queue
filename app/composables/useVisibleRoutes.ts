@@ -8,11 +8,11 @@ const translations: Record<string | symbol, () => string> = {
   history: m.history,
   settings: m.settings,
   logs: m.logs,
-  'settings-logs': m.logs,
-  'settings-preferences': m.settings_preferences,
   'settings-application': m.application,
-  'settings-other': m.settings_other,
+  'settings-commands': m.commands,
   'settings-integrations': m.integrations,
+  'settings-logs': m.logs,
+  'settings-other': m.settings_other,
 }
 
 function getRouteLabel(route: RouteRecordRaw): string {

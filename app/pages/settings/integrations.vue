@@ -14,7 +14,7 @@
 definePageMeta({
   requiresAuth: true,
   icon: 'lucide:share-2',
-  order: 2,
+  order: 3,
 })
 
 const integrations = useIntegrations()
