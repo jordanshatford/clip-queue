@@ -1,14 +1,14 @@
 <template>
   <div class="mt-2 text-left">
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between gap-2">
       <NuxtLink
         v-if="clip"
         :to="clip.url"
         target="_blank"
-        class="flex items-center gap-2 text-base no-underline"
+        class="flex min-w-0 items-center gap-2 text-base no-underline"
       >
-        <span class="text-xl font-bold">{{ clip.title }}</span>
-        <UIcon name="lucide:external-link" />
+        <span class="truncate text-xl font-bold">{{ clip.title }}</span>
+        <UIcon name="lucide:external-link shrink-0" />
       </NuxtLink>
       <span v-else></span>
       <div class="flex items-center gap-2">

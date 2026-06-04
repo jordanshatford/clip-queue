@@ -56,20 +56,18 @@
           </USelectMenu>
         </UFormField>
         <UFormField size="sm" :label="m.color_mode()">
-          <UColorModeSelect id="theme" class="w-full" />
+          <UColorModeSelect id="color-mode" class="w-full" />
         </UFormField>
         <div class="ml-auto flex items-center justify-between gap-1">
-          <UTooltip text="Reset theme">
-            <UButton
-              color="neutral"
-              variant="outline"
-              size="sm"
-              icon="lucide:rotate-ccw"
-              :disabled="!preferences.isModified"
-              @click="preferences.reset()"
-              >{{ m.reset() }}</UButton
-            >
-          </UTooltip>
+          <UButton
+            color="neutral"
+            variant="outline"
+            size="sm"
+            icon="lucide:rotate-ccw"
+            :disabled="!preferences.isModified"
+            @click="preferences.reset()"
+            >{{ m.reset() }}</UButton
+          >
         </div>
       </div>
     </template>
