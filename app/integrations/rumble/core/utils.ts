@@ -1,5 +1,3 @@
-import type { OEmbedResponse } from '@/integrations/misc'
-
 const SHORT_PATH_SUFFIX = '/shorts/'
 const EMBED_PATH_SUFFIX = '/embed/'
 const TIMESTAMP_PARAM = 'start'

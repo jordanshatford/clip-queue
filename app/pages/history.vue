@@ -1,13 +1,13 @@
 <template>
-  <div class="mx-auto flex max-w-7xl flex-col">
+  <div class="mx-auto flex max-w-7xl flex-col gap-2">
     <div class="flex flex-wrap items-center justify-between gap-1.5">
       <UInput v-model="filter" class="max-w-sm" icon="lucide:search" :placeholder="m.search()" />
-      <div class="flex flex-wrap items-center gap-1.5">
+      <div class="flex flex-wrap items-center gap-2">
         <UButton
-          v-if="table?.tableApi?.getFilteredSelectedRowModel().rows.length"
           color="neutral"
           variant="subtle"
           icon="lucide:plus"
+          :disabled="!table?.tableApi?.getFilteredSelectedRowModel().rows.length"
           @click="queueClips()"
         >
           {{ m.queue() }}
@@ -18,10 +18,10 @@
           </template>
         </UButton>
         <UButton
-          v-if="table?.tableApi?.getFilteredSelectedRowModel().rows.length"
           color="error"
           variant="subtle"
           icon="lucide:trash"
+          :disabled="!table?.tableApi?.getFilteredSelectedRowModel().rows.length"
           @click="deleteClips()"
         >
           {{ m.delete_label() }}
