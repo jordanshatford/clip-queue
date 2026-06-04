@@ -177,6 +177,9 @@ export const useLogger = defineStore('logger', () => {
       while (logs.value.length > settings.state.value.limit) {
         logs.value.pop()
       }
+      logs.value.sort((a, b) => {
+        return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+      })
     }
   }
 

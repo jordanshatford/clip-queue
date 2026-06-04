@@ -15,7 +15,7 @@
       ref="table"
       v-model:pagination="pagination"
       sticky="header"
-      :data="logs"
+      :data="logger.logs"
       :columns="columns"
       :empty="m.no_logs_captured()"
       :pagination-options="{
@@ -60,12 +60,6 @@ const pagination = ref<PaginationState>({
   pageSize: 6,
 })
 
-const logs = computed(() => {
-  return [...logger.logs].sort((a, b) => {
-    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-  })
-})
-
 const UBadge = resolveComponent('UBadge')
 
 const columns: TableColumn<Log>[] = [
@@ -93,7 +87,7 @@ async function deleteAllLogs(): Promise<void> {
   logger.debug('[Logs]: attempting to delete all logs.')
   const confirmed = await confirm({
     title: m.clear_logs(),
-    description: m.clear_logs_confirm({ length: logs.value.length }),
+    description: m.clear_logs_confirm({ length: logger.logs.length }),
   })
   if (confirmed) {
     logger.debug('[Logs]: deleting all logs.')
