@@ -1,7 +1,7 @@
 <template>
   <UCard class="mx-auto max-w-2xl" variant="subtle">
     <div class="flex w-full items-center justify-between gap-4">
-      <div class="flex items-center gap-2 align-middle">
+      <div class="flex min-w-0 items-center gap-2 align-middle">
         <IntegrationIcon :id="integration.id" class="size-5" />
         <NuxtLink
           v-if="integration.url"
@@ -9,12 +9,12 @@
           target="_blank"
           class="flex items-center gap-1 no-underline"
         >
-          <span class="font-medium">
+          <span class="truncate font-medium">
             {{ integration.name }}
           </span>
           <UIcon name="lucide:external-link" class="size-3" />
         </NuxtLink>
-        <span v-else class="font-medium">
+        <span v-else class="truncate font-medium">
           {{ integration.name }}
         </span>
         <UBadge size="sm" color="neutral" variant="soft" class="font-mono">

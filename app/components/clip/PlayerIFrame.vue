@@ -1,11 +1,10 @@
 <template>
   <iframe
-    :src="src"
-    :title="title"
+    :src
+    :title
     class="h-full w-full"
     allowfullscreen
     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-    frameborder="0"
   ></iframe>
 </template>
 

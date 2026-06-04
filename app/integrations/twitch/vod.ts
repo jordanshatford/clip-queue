@@ -90,7 +90,7 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
     }
     return {
       type: 'iframe',
-      src: src,
+      src,
       title: clip.title,
     }
   }
