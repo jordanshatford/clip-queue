@@ -25,6 +25,7 @@
         <UButton
           color="neutral"
           variant="outline"
+          :disabled="!(logger.logs.length > 0)"
           :icon="copied ? 'lucide:check' : 'lucide:copy'"
           @click="copyLogs()"
         />
