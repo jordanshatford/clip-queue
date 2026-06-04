@@ -3,7 +3,7 @@
     <div class="flex flex-col gap-4 text-left">
       <div class="flex items-center gap-2 align-middle">
         <span class="font-medium">{{ m.logs() }}</span>
-        <UDropdownMenu :items="items">
+        <UDropdownMenu :items="actions">
           <UButton icon="lucide:ellipsis-vertical" size="sm" color="neutral" variant="ghost" />
         </UDropdownMenu>
       </div>
@@ -75,7 +75,7 @@ async function copyLogs(): Promise<void> {
   return await copy(logger.text)
 }
 
-const items = computed<DropdownMenuItem[][]>(() => {
+const actions = computed<DropdownMenuItem[][]>(() => {
   return [
     [
       {

@@ -3,7 +3,7 @@
     <div class="flex flex-col gap-2">
       <div class="flex justify-between">
         <div class="flex items-center gap-2">
-          <label :for="source.id" class="text-muted">{{ source.name }}</label>
+          <label :for="source.id">{{ source.name }}</label>
           <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
             {{ source.id }}
           </UBadge>

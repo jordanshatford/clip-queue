@@ -1,41 +1,39 @@
 <template>
-  <div class="mx-auto flex max-w-2xl flex-col gap-2">
-    <UCard class="text-left" variant="subtle">
-      <div class="flex flex-col gap-4">
-        <div class="flex items-center gap-2 align-middle">
-          <span class="font-medium">{{ m.queue() }}</span>
-          <UDropdownMenu :items="items2">
-            <UButton icon="lucide:ellipsis-vertical" size="sm" color="neutral" variant="ghost" />
-          </UDropdownMenu>
-        </div>
-        <UFormField
-          :label="m.auto_mod()"
-          :description="m.auto_mod_description()"
-          class="flex items-center justify-between"
-        >
-          <USwitch id="autoModeration" v-model="integrations.settings.state.automod" class="ml-2" />
-        </UFormField>
-        <USeparator />
-        <UFormField
-          :label="m.allow_duplicates()"
-          :description="m.allow_duplicates_description()"
-          class="flex items-center justify-between"
-        >
-          <USwitch id="queue-duplicates" v-model="queue.settings.state.duplicates" class="ml-2" />
-        </UFormField>
-        <USeparator />
-        <UFormField :label="m.size_limit()" :help="m.size_limit_description()">
-          <UInputNumber
-            id="queue-limit"
-            v-model="queue.settings.state.limit"
-            :min="1"
-            :step="1"
-            class="w-full"
-          />
-        </UFormField>
+  <UCard class="mx-auto max-w-2xl" variant="subtle">
+    <div class="flex flex-col gap-4 text-left">
+      <div class="flex items-center gap-2 align-middle">
+        <span class="font-medium">{{ m.queue() }}</span>
+        <UDropdownMenu :items="actions">
+          <UButton icon="lucide:ellipsis-vertical" size="sm" color="neutral" variant="ghost" />
+        </UDropdownMenu>
       </div>
-    </UCard>
-  </div>
+      <UFormField
+        :label="m.auto_mod()"
+        :description="m.auto_mod_description()"
+        class="flex items-center justify-between"
+      >
+        <USwitch id="autoModeration" v-model="integrations.settings.state.automod" class="ml-2" />
+      </UFormField>
+      <USeparator />
+      <UFormField
+        :label="m.allow_duplicates()"
+        :description="m.allow_duplicates_description()"
+        class="flex items-center justify-between"
+      >
+        <USwitch id="queue-duplicates" v-model="queue.settings.state.duplicates" class="ml-2" />
+      </UFormField>
+      <USeparator />
+      <UFormField :label="m.size_limit()" :help="m.size_limit_description()">
+        <UInputNumber
+          id="queue-limit"
+          v-model="queue.settings.state.limit"
+          :min="1"
+          :step="1"
+          class="w-full"
+        />
+      </UFormField>
+    </div>
+  </UCard>
 </template>
 
 <script setup lang="ts">
@@ -52,7 +50,7 @@ definePageMeta({
 const integrations = useIntegrations()
 const queue = useQueue()
 
-const items2 = computed<DropdownMenuItem[][]>(() => {
+const actions = computed<DropdownMenuItem[][]>(() => {
   return [
     [
       {
