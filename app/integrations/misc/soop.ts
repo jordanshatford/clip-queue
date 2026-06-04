@@ -44,7 +44,6 @@ export class SoopProvider extends Cacheable<Clip> implements IntegrationProvider
         url,
         title: oembed.title,
         channel: oembed.author_name ?? oembed.provider_name,
-        category: oembed.provider_name,
         embedUrl: `https://vod.sooplive.com/player/${id}/embed`,
         thumbnailUrl: oembed.thumbnail_url ?? '',
         provider: this.id,

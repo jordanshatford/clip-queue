@@ -46,7 +46,6 @@ export class YouTubeShortProvider extends Cacheable<Clip> implements Integration
         channel: oembed?.author_name ?? oembed.provider_name,
         embedUrl: 'https://www.youtube.com/embed',
         thumbnailUrl: oembed.thumbnail_url,
-        category: 'Short',
         provider: this.id,
         submitters: [],
       }

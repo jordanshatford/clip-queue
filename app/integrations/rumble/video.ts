@@ -47,7 +47,6 @@ export class RumbleVideoProvider extends Cacheable<Clip> implements IntegrationP
         channel: oembed?.author_name ?? this.name,
         embedUrl: toEmbedUrl(oembed),
         thumbnailUrl: oembed.thumbnail_url,
-        category: 'Video',
         provider: this.id,
         submitters: [],
         metadata: {

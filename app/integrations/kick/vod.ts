@@ -42,9 +42,9 @@ export class KickVodProvider extends Cacheable<Clip> implements IntegrationProvi
       const duration = formatMilliseconds(video.livestream.duration)
       // When possible display the category provided by the API, otherwise just display that
       // it is a video.
-      const c = video.livestream.categories[0]?.category.name ?? 'Video'
-      let category = `${c} (${duration})`
-      if (timestamp) {
+      const c = video.livestream.categories[0]?.category.name
+      let category = c ? `${c} (${duration})` : undefined
+      if (category && timestamp) {
         // Start timestamp is in seconds format.
         const start = formatMilliseconds(parseInt(timestamp) * 1000)
         category = `${c} (${duration} at ${start})`

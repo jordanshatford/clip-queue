@@ -45,7 +45,6 @@ export class RumbleShortProvider extends Cacheable<Clip> implements IntegrationP
         url,
         title: oembed.title,
         channel: oembed?.author_name ?? this.name,
-        category: 'Short',
         embedUrl: toEmbedUrl(oembed),
         thumbnailUrl: oembed.thumbnail_url,
         provider: this.id,

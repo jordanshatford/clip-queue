@@ -43,7 +43,6 @@ export class DailyMotionProvider extends Cacheable<Clip> implements IntegrationP
         url,
         title: oembed.title,
         channel: oembed.author_name ?? oembed.provider_name,
-        category: oembed.provider_name,
         embedUrl: `https://geo.dailymotion.com/player.html?video=${id}&`,
         thumbnailUrl: oembed.thumbnail_url,
         provider: this.id,

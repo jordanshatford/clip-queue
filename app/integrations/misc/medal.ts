@@ -45,7 +45,6 @@ export class MedalProvider extends Cacheable<Clip> implements IntegrationProvide
         url,
         title: oembed.title,
         channel: oembed.author_name ?? this.name,
-        category: this.name,
         embedUrl: toEmbedUrl(oembed),
         thumbnailUrl: oembed.thumbnail_url,
         provider: this.id,
