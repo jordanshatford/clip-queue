@@ -28,13 +28,6 @@ const items = computed<DropdownMenuItem[][]>(() => {
   return [
     [
       {
-        type: 'label',
-        label: integration.name,
-        icon: integration.branding.icon,
-      },
-    ],
-    [
-      {
         label: m.reset_cache(),
         color: 'error',
         icon: 'lucide:rotate-ccw',
