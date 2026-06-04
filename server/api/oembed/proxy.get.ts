@@ -64,6 +64,8 @@ export interface OEmbedResponse {
   upload_date?: string
 }
 
+const ALLOWED_HOSTNAMES: string[] = ['medal.tv', 'www.dailymotion.com', 'rumble.com']
+
 export default defineCachedEventHandler(
   async (event): Promise<OEmbedResponse> => {
     const query = getQuery<{ url?: string }>(event)
@@ -76,7 +78,10 @@ export default defineCachedEventHandler(
     }
 
     try {
-      new URL(query.url)
+      const uri = new URL(query.url)
+      if (!ALLOWED_HOSTNAMES.includes(uri.hostname)) {
+        throw new Error('Invalid url hostname for OEmbed')
+      }
     } catch {
       throw createError({
         statusCode: 400,
