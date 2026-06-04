@@ -1,7 +1,10 @@
 <template>
   <div>
     <img v-if="!isLoading && !error" class="aspect-video rounded-md" :src :alt />
-    <div v-else class="align-center flex aspect-video items-center justify-center rounded-md">
+    <div
+      v-else
+      class="align-center flex aspect-video items-center justify-center rounded-md bg-muted"
+    >
       <UIcon name="lucide:image" class="size-6" />
     </div>
   </div>
