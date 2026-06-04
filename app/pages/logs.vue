@@ -2,7 +2,13 @@
   <div class="mx-auto w-full max-w-7xl space-y-4 pb-4">
     <div class="flex justify-between border-b border-accented px-4 py-3.5">
       <span class="text-lg font-medium">{{ m.logs() }}</span>
-      <UButton color="error" variant="subtle" @click="deleteAllLogs()">{{ m.clear() }}</UButton>
+      <UButton
+        color="error"
+        variant="subtle"
+        :disabled="!(logger.logs.length > 0)"
+        @click="deleteAllLogs()"
+        >{{ m.clear() }}</UButton
+      >
     </div>
     <UTable
       ref="table"
