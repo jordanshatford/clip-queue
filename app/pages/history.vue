@@ -81,6 +81,7 @@ import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
 import ClipDetails from '~/components/clip/Details.vue'
+import ClipDropdownMenu from '~/components/clip/DropdownMenu.vue'
 import ClipProviderName from '~/components/clip/ProviderName.vue'
 import { useConfirmDialog } from '~/composables/useConfirmDialog'
 
@@ -141,6 +142,10 @@ const columns: TableColumn<Clip>[] = [
     header: m.submitter(),
     accessorFn: (row) => row.submitters?.join(' ') ?? '',
     cell: ({ row }) => useClip(row.original).value.submitter,
+  },
+  {
+    id: 'dropdown',
+    cell: ({ row }) => h(ClipDropdownMenu, { clip: row.original, actions: false }),
   },
 ]
 

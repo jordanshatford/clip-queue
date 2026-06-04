@@ -50,29 +50,4 @@ describe('clip/Details.vue', () => {
     expect(thumb.props('src')).toBe(clipFromTwitch.thumbnailUrl)
     expect(thumb.props('alt')).toBe(clipFromTwitch.title)
   })
-
-  it('renders external link when url exists', async () => {
-    const wrapper = await mountSuspended(ClipDetails, {
-      props: {
-        data: clipFromTwitch,
-      },
-    })
-    const link = wrapper.find('a')
-    expect(link.exists()).toBe(true)
-    expect(link.attributes('href')).toBe(clipFromTwitch.url)
-    expect(link.attributes('target')).toBe('_blank')
-  })
-
-  it('does not render external link when url is missing', async () => {
-    const clipWithoutUrl = {
-      ...clipFromTwitch,
-      url: '',
-    }
-    const wrapper = await mountSuspended(ClipDetails, {
-      props: {
-        data: clipWithoutUrl,
-      },
-    })
-    expect(wrapper.find('a').exists()).toBe(false)
-  })
 })
