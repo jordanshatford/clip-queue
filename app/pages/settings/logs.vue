@@ -93,7 +93,8 @@ const items = computed<DropdownMenuItem[][]>(() => {
         },
       },
       {
-        label: m.clear_logs(),
+        label: m.clear(),
+        color: 'error',
         icon: 'lucide:trash',
         disabled: !(logger.logs.length > 0),
         onSelect: () => {
