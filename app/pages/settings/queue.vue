@@ -13,7 +13,7 @@
           :description="m.auto_mod_description()"
           class="flex items-center justify-between"
         >
-          <USwitch id="autoModeration" v-model="integrations.settings.state.automod" class="ml-3" />
+          <USwitch id="autoModeration" v-model="integrations.settings.state.automod" class="ml-2" />
         </UFormField>
         <USeparator />
         <UFormField
@@ -21,7 +21,7 @@
           :description="m.allow_duplicates_description()"
           class="flex items-center justify-between"
         >
-          <USwitch id="queue-duplicates" v-model="queue.settings.state.duplicates" class="ml-3" />
+          <USwitch id="queue-duplicates" v-model="queue.settings.state.duplicates" class="ml-2" />
         </UFormField>
         <USeparator />
         <UFormField :label="m.size_limit()" :help="m.size_limit_description()">

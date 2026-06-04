@@ -25,20 +25,30 @@ const {
 } = defineProps<Props>()
 
 const items = computed<DropdownMenuItem[][]>(() => {
-  return [
-    [
+  const items: DropdownMenuItem[][] = []
+  if (integration.url) {
+    items.push([
       {
-        label: m.reset_cache(),
-        color: 'error',
-        icon: 'lucide:rotate-ccw',
-        disabled: !integration.providers.some((provider) => provider.hasCachedData),
-        onSelect: () => {
-          for (const provider of integration.providers) {
-            provider.clearCache()
-          }
-        },
+        label: integration.name,
+        icon: integration.branding.icon,
+        to: integration.url,
+        target: '_blank',
       },
-    ],
-  ]
+    ])
+  }
+  items.push([
+    {
+      label: m.reset_cache(),
+      color: 'error',
+      icon: 'lucide:rotate-ccw',
+      disabled: !integration.providers.some((provider) => provider.hasCachedData),
+      onSelect: () => {
+        for (const provider of integration.providers) {
+          provider.clearCache()
+        }
+      },
+    },
+  ])
+  return items
 })
 </script>
