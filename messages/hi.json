@@ -4,7 +4,6 @@
   "allow_duplicates_description": "पहले देखे गए क्लिप को दोबारा सबमिट करने पर उन्हें फिर से कतार में शामिल कर लिया जाएगा।",
   "allowed_commands": "अनुमत कमांड",
   "amber": "अंबर",
-  "application": "आवेदन",
   "application_version": "एप्लिकेशन संस्करण: v {version}",
   "auto_connect": "ऑटो कनेक्ट",
   "auto_mod": "स्वचालित मॉडरेशन",

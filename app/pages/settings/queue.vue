@@ -45,7 +45,7 @@ import { m } from '#paraglide/messages'
 
 definePageMeta({
   requiresAuth: true,
-  icon: 'lucide:settings-2',
+  icon: 'lucide:list',
   order: 1,
 })
 

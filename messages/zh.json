@@ -4,7 +4,6 @@
   "allow_duplicates_description": "之前观看过的视频片段在重新提交时可以重新加入队列。",
   "allowed_commands": "允许的命令",
   "amber": "琥珀色",
-  "application": "应用",
   "application_version": "应用程序版本：v {version}",
   "auto_connect": "自动连接",
   "auto_mod": "自动审核",

@@ -4,7 +4,6 @@
   "allow_duplicates_description": "Ранее просмотренные видеоролики будут добавлены в очередь при повторной отправке.",
   "allowed_commands": "Разрешенные команды",
   "amber": "Янтарь",
-  "application": "Приложение",
   "application_version": "Версия приложения: v {version}",
   "auto_connect": "Автоматическое подключение",
   "auto_mod": "Автоматическая модерация",

@@ -4,7 +4,6 @@
   "allow_duplicates_description": "Daha önce izlenen videolar, yeniden gönderildiklerinde sıraya geri alınabilecektir.",
   "allowed_commands": "İzin Verilen Komutlar",
   "amber": "Amber",
-  "application": "Başvuru",
   "application_version": "Uygulama sürümü: v {version}",
   "auto_connect": "Otomatik Bağlantı",
   "auto_mod": "Otomatik Moderasyon",

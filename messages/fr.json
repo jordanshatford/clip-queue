@@ -4,7 +4,6 @@
   "allow_duplicates_description": "Les clips déjà visionnés pourront être remis dans la file d'attente lors de leur nouvelle soumission.",
   "allowed_commands": "Commandes autorisées",
   "amber": "Ambre",
-  "application": "Application",
   "application_version": "Version de l'application : v {version}",
   "auto_connect": "Connexion automatique",
   "auto_mod": "Modération automatique",

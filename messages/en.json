@@ -4,7 +4,6 @@
   "allow_duplicates_description": "Previously viewed clips will be allowed back into the queue when resubmitted.",
   "allowed_commands": "Allowed Commands",
   "amber": "Amber",
-  "application": "Application",
   "application_version": "Application version: v{version}",
   "auto_connect": "Auto Connect",
   "auto_mod": "Auto Moderation",

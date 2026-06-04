@@ -8,7 +8,7 @@ const translations: Record<string | symbol, () => string> = {
   history: m.history,
   settings: m.settings,
   logs: m.logs,
-  'settings-application': m.application,
+  'settings-queue': m.queue,
   'settings-commands': m.commands,
   'settings-integrations': m.integrations,
   'settings-logs': m.logs,

@@ -1,11 +1,11 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { describe, expect, it } from 'vitest'
 
-import ApplicationSettings from '~/pages/settings/application.vue'
+import IntegrationsSettings from '~/pages/settings/integrations.vue'
 
-describe('settings/application.vue', () => {
+describe('settings/integrations.vue', () => {
   it('mounts successfully', async () => {
-    const component = await mountSuspended(ApplicationSettings)
+    const component = await mountSuspended(IntegrationsSettings)
     expect(component.exists()).toBe(true)
   })
 })
