@@ -45,6 +45,7 @@
   "commands": "Commandes",
   "confirm": "Confirmer",
   "connected_to_source_name": "Connecté à {source} comme {name} .",
+  "copy_logs": "Copier les journaux",
   "cyan": "Cyan",
   "debug": "Déboguer",
   "delete_history": "Supprimer l'historique",

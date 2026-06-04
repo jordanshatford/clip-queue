@@ -45,6 +45,7 @@
   "commands": "Commands",
   "confirm": "Confirm",
   "connected_to_source_name": "Connected to {source} as {name}.",
+  "copy_logs": "Copy Logs",
   "cyan": "Cyan",
   "debug": "Debug",
   "delete_history": "Delete History",
