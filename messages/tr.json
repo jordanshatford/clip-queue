@@ -23,7 +23,6 @@
       }
     }
   ],
-  "clip_history_purged": "Klip geçmişi silindi.",
   "close": "Kapalı",
   "color_mode": "Renk Modu",
   "command_clear": "Sıradaki tüm klipleri kaldırın.",
@@ -135,9 +134,6 @@
   "play": "Oynamak",
   "previous": "Öncesi",
   "primary_color": "Ana Renk",
-  "purge_history": "Tarihi Temizleme",
-  "purge_history_confirm": "Geçmişteki tüm videoları silmek istediğinizden emin misiniz?",
-  "purge_history_description": "Daha önce izlenen tüm videoları silerek yeniden gönderilmelerine olanak tanıyın.",
   "purple": "Mor",
   "queue": "Sıra",
   "red": "Kırmızı",

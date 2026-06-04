@@ -23,7 +23,6 @@
       }
     }
   ],
-  "clip_history_purged": "已清除视频历史记录。",
   "close": "关闭",
   "color_mode": "颜色模式",
   "command_clear": "移除队列中的所有剪辑片段。",
@@ -135,9 +134,6 @@
   "play": "玩",
   "previous": "以前的",
   "primary_color": "原色",
-  "purge_history": "清除历史记录",
-  "purge_history_confirm": "您确定要清除历史记录中的所有剪辑吗？",
-  "purge_history_description": "清除所有之前观看过的视频片段，允许重新提交。",
   "purple": "紫色的",
   "queue": "队列",
   "red": "红色的",

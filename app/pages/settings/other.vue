@@ -13,17 +13,6 @@
           >
         </UFormField>
         <USeparator />
-        <UFormField :help="m.purge_history_description()">
-          <UButton
-            class="w-full justify-center"
-            color="error"
-            variant="subtle"
-            :disabled="queue.history.length === 0"
-            @click="purgeHistory()"
-            >{{ m.purge_history() }}</UButton
-          >
-        </UFormField>
-        <USeparator />
         <UFormField :help="m.reset_cache_description()">
           <UButton
             class="w-full justify-center"
@@ -93,26 +82,6 @@ async function resetSettingsToDefault(): Promise<void> {
     })
   } else {
     logger.debug('[Settings]: Resetting settings to default cancelled.')
-  }
-}
-
-async function purgeHistory(): Promise<void> {
-  logger.debug('[Settings]: Attempting to purge all history.')
-  const confirmed = await confirm({
-    title: m.purge_history(),
-    description: m.purge_history_confirm(),
-  })
-  if (confirmed) {
-    logger.debug('[Settings]: Purging all history confirmed.')
-    queue.purge()
-    toast.add({
-      icon: 'lucide:circle-check',
-      color: 'success',
-      title: m.success(),
-      description: m.clip_history_purged(),
-    })
-  } else {
-    logger.debug('[Settings]: Purging all history cancelled.')
   }
 }
 

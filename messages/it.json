@@ -23,7 +23,6 @@
       }
     }
   ],
-  "clip_history_purged": "Cronologia delle clip eliminata.",
   "close": "Vicino",
   "color_mode": "Modalità colore",
   "command_clear": "Rimuovi tutte le clip dalla coda.",
@@ -135,9 +134,6 @@
   "play": "Giocare",
   "previous": "Precedente",
   "primary_color": "Colore primario",
-  "purge_history": "Storia della Purga",
-  "purge_history_confirm": "Sei sicuro di voler eliminare tutti i clip dalla cronologia?",
-  "purge_history_description": "Elimina tutti i video visualizzati in precedenza, consentendone il reinvio.",
   "purple": "Viola",
   "queue": "Coda",
   "red": "Rosso",

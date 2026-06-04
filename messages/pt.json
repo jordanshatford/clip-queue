@@ -23,7 +23,6 @@
       }
     }
   ],
-  "clip_history_purged": "Histórico de clipes apagado.",
   "close": "Fechar",
   "color_mode": "Modo de cor",
   "command_clear": "Remova todos os clipes da fila.",
@@ -135,9 +134,6 @@
   "play": "Jogar",
   "previous": "Anterior",
   "primary_color": "Cor primária",
-  "purge_history": "Histórico de expurgos",
-  "purge_history_confirm": "Tem certeza de que deseja apagar todos os vídeos do histórico?",
-  "purge_history_description": "Exclua todos os vídeos visualizados anteriormente, permitindo que sejam reenviados.",
   "purple": "Roxo",
   "queue": "Fila",
   "red": "Vermelho",

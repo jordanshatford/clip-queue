@@ -23,7 +23,6 @@
       }
     }
   ],
-  "clip_history_purged": "Historial de clips borrado.",
   "close": "Cerca",
   "color_mode": "Modo de color",
   "command_clear": "Eliminar todos los clips de la cola.",
@@ -93,7 +92,7 @@
   "link_detection": "Detección de enlaces",
   "locale": "Lugar",
   "logger_level_description": "Nivel mínimo de registro a capturar. Los registros de nivel superior también se capturarán. Los niveles de registro inferiores podrían ralentizar la aplicación debido a la cantidad de registros.",
-  "logger_size_limit_description": "Número máximo de registros a almacenar. Cuando se alcance el límite, se eliminarán primero los registros más antiguos.",
+  "logger_size_limit_description": "Número máximo de registros que se almacenarán. Cuando se alcance el límite, se eliminarán primero los registros más antiguos.",
   "login": "Acceso",
   "logout": "Cerrar sesión",
   "logs": "Registros",
@@ -135,9 +134,6 @@
   "play": "Jugar",
   "previous": "Anterior",
   "primary_color": "Color primario",
-  "purge_history": "Historial de purgas",
-  "purge_history_confirm": "¿Estás seguro de que quieres eliminar todos los clips del historial?",
-  "purge_history_description": "Eliminar todos los clips vistos previamente para que puedan volver a enviarse.",
   "purple": "Púrpura",
   "queue": "Cola",
   "red": "Rojo",

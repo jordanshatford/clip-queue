@@ -23,7 +23,6 @@
       }
     }
   ],
-  "clip_history_purged": "Historique des clips supprimé.",
   "close": "Fermer",
   "color_mode": "Mode couleur",
   "command_clear": "Supprimer tous les clips en attente.",
@@ -135,9 +134,6 @@
   "play": "Jouer",
   "previous": "Précédent",
   "primary_color": "Couleur primaire",
-  "purge_history": "Histoire de la purge",
-  "purge_history_confirm": "Êtes-vous sûr de vouloir supprimer tous les clips de l'historique ?",
-  "purge_history_description": "Supprimer tous les clips précédemment visionnés afin de permettre leur soumission à nouveau.",
   "purple": "Violet",
   "queue": "File d'attente",
   "red": "Rouge",

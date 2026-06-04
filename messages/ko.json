@@ -23,7 +23,6 @@
       }
     }
   ],
-  "clip_history_purged": "클립 기록이 삭제되었습니다.",
   "close": "닫다",
   "color_mode": "색상 모드",
   "command_clear": "대기열에 있는 모든 클립을 제거합니다.",
@@ -93,7 +92,7 @@
   "link_detection": "링크 감지",
   "locale": "장소",
   "logger_level_description": "최소 로그 레벨입니다. 더 높은 레벨의 로그도 캡처됩니다. 로그 레벨이 낮으면 로그 양이 많아져 애플리케이션 속도가 저하될 수 있습니다.",
-  "logger_size_limit_description": "저장할 최대 로그 개수입니다. 이 한도에 도달하면 가장 오래된 로그부터 먼저 삭제됩니다.",
+  "logger_size_limit_description": "저장할 최대 로그 개수입니다. 이 한도에 도달하면 가장 오래된 로그부터 삭제됩니다.",
   "login": "로그인",
   "logout": "로그아웃",
   "logs": "로그",
@@ -135,9 +134,6 @@
   "play": "놀다",
   "previous": "이전의",
   "primary_color": "원색",
-  "purge_history": "삭제 기록",
-  "purge_history_confirm": "모든 영상 클립을 기록에서 삭제하시겠습니까?",
-  "purge_history_description": "이전에 시청한 모든 클립을 삭제하여 다시 제출할 수 있도록 합니다.",
   "purple": "보라",
   "queue": "대기줄",
   "red": "빨간색",

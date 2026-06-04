@@ -18,12 +18,11 @@
       "declarations": ["input length", "local lengthPlural = length: plural"],
       "selectors": ["lengthPlural"],
       "match": {
-        "lengthPlural=one": "Вы уверены, что хотите очистить журнал {length} ?",
+        "lengthPlural=one": "Вы уверены, что хотите очистить лог {length} ?",
         "lengthPlural=other": "Вы уверены, что хотите очистить журналы {length} ?"
       }
     }
   ],
-  "clip_history_purged": "История видеороликов удалена.",
   "close": "Закрывать",
   "color_mode": "Цветовой режим",
   "command_clear": "Удалить все клипы из очереди.",
@@ -135,9 +134,6 @@
   "play": "Играть",
   "previous": "Предыдущий",
   "primary_color": "Основной цвет",
-  "purge_history": "История чисток",
-  "purge_history_confirm": "Вы уверены, что хотите удалить все видеоролики из истории?",
-  "purge_history_description": "Удалите все ранее просмотренные видеоролики, чтобы их можно было загрузить повторно.",
   "purple": "Фиолетовый",
   "queue": "Очередь",
   "red": "Красный",
