@@ -77,6 +77,7 @@ const getValidatedIntrospection = defineCachedFunction(
     return introspect
   },
   {
+    swr: false,
     maxAge: 60,
     getKey: (accessToken) => `twitch:introspect:${accessToken}`,
   },

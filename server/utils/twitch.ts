@@ -52,7 +52,7 @@ export type GenericTwitchResponse<T> = {
 }
 
 /**
- * Response type for Kick user.
+ * Response type for Twitch user.
  */
 export type TwitchUser = {
   id: string
