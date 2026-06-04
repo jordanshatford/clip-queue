@@ -4,7 +4,7 @@
       v-if="authentication.isLoggedIn"
       color="neutral"
       variant="subtle"
-      class="flex w-full justify-between rounded-full"
+      class="flex w-full justify-between"
     >
       <UUser
         :name="authentication.user?.name"
@@ -16,7 +16,6 @@
       />
       <UButton
         :disabled="!authentication.isLoggedIn"
-        class="rounded-full"
         color="neutral"
         variant="soft"
         @click="logout()"
@@ -26,7 +25,7 @@
     <UButton
       v-else
       :disabled="authentication.isLoggedIn"
-      class="w-full justify-center rounded-full"
+      class="w-full justify-center"
       color="neutral"
       variant="subtle"
       @click="authentication.login()"
