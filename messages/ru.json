@@ -41,7 +41,7 @@
   "commands": "Команды",
   "confirm": "Подтверждать",
   "connected_to_source_name": "Подключено к {source} как {name} .",
-  "copy_logs": "Копирование журналов",
+  "copy": "Копия",
   "cyan": "Голубой",
   "debug": "Отлаживать",
   "delete_history": "Удалить историю",

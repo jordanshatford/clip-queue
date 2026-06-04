@@ -25,7 +25,7 @@
         <UButton
           color="neutral"
           variant="outline"
-          :disabled="!(logger.logs.length > 0)"
+          :disabled="logger.empty"
           :icon="copied ? 'lucide:check' : 'lucide:copy'"
           @click="copyLogs()"
         />
@@ -85,9 +85,9 @@ const items = computed<DropdownMenuItem[][]>(() => {
   return [
     [
       {
-        label: m.copy_logs(),
+        label: m.copy(),
         icon: 'lucide:copy',
-        disabled: !(logger.logs.length > 0),
+        disabled: logger.empty,
         onSelect: async () => {
           await copyLogs()
         },
@@ -96,7 +96,7 @@ const items = computed<DropdownMenuItem[][]>(() => {
         label: m.clear(),
         color: 'error',
         icon: 'lucide:trash',
-        disabled: !(logger.logs.length > 0),
+        disabled: logger.empty,
         onSelect: () => {
           logger.reset()
         },

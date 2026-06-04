@@ -41,7 +41,7 @@
   "commands": "命令",
   "confirm": "确认",
   "connected_to_source_name": "连接到{source}作为{name} 。",
-  "copy_logs": "复制日志",
+  "copy": "复制",
   "cyan": "青色",
   "debug": "调试",
   "delete_history": "删除历史记录",

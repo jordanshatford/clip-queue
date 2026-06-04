@@ -41,7 +41,7 @@
   "commands": "Comandos",
   "confirm": "Confirmar",
   "connected_to_source_name": "Conectado a {source} como {name} .",
-  "copy_logs": "Copiar registros",
+  "copy": "Cópia",
   "cyan": "Ciano",
   "debug": "Depurar",
   "delete_history": "Excluir histórico",

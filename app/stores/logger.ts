@@ -108,6 +108,10 @@ export const useLogger = defineStore('logger', () => {
    */
   const logs = useStorage<Log[]>('__cq_logger_logs', [])
   /**
+   * If the logger is empty of any logs.
+   */
+  const empty = computed<boolean>(() => logs.value.length === 0)
+  /**
    * Logs as a text string available for copying.
    */
   const text = computed<string>(() => {
@@ -186,6 +190,7 @@ export const useLogger = defineStore('logger', () => {
   return {
     settings,
     logs,
+    empty,
     text,
     debug: (message: string) => handle('DEBUG', message),
     info: (message: string) => handle('INFO', message),

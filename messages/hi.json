@@ -41,7 +41,7 @@
   "commands": "आदेश",
   "confirm": "पुष्टि करना",
   "connected_to_source_name": "{source} से {name} के रूप में जुड़ा हुआ है।",
-  "copy_logs": "लॉग कॉपी करें",
+  "copy": "प्रतिलिपि",
   "cyan": "सियान",
   "debug": "डिबग",
   "delete_history": "हिस्ट्री हटाएं",

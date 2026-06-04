@@ -41,7 +41,7 @@
   "commands": "الأوامر",
   "confirm": "يتأكد",
   "connected_to_source_name": "متصل بـ {source} كـ {name} .",
-  "copy_logs": "نسخ السجلات",
+  "copy": "ينسخ",
   "cyan": "سماوي",
   "debug": "تصحيح الأخطاء",
   "delete_history": "حذف السجل",

@@ -41,7 +41,7 @@
   "commands": "Komutlar",
   "confirm": "Onaylamak",
   "connected_to_source_name": "{source} ile {name} olarak bağlantılı.",
-  "copy_logs": "Kopyala Günlükler",
+  "copy": "Kopyala",
   "cyan": "Camgöbeği",
   "debug": "Hata ayıklama",
   "delete_history": "Geçmişi Sil",

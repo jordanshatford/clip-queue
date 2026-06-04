@@ -5,7 +5,8 @@
       <UButton
         color="error"
         variant="subtle"
-        :disabled="!(logger.logs.length > 0)"
+        icon="lucide:trash"
+        :disabled="logger.empty"
         @click="deleteAllLogs()"
         >{{ m.clear() }}</UButton
       >
