@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { mockOEmbed } from '~~/test/mocks'
 
-import { getRumbleUrlDetails, toEmbedUrl } from '~/integrations/rumble/core/utils'
+import { getRumbleUrlDetails } from '~/integrations/rumble/core/utils'
 
 type Details = ReturnType<typeof getRumbleUrlDetails>
 
@@ -23,9 +22,5 @@ describe('integrations/rumble/core/utils', () => {
     ],
   ])('can get rumble url details: (url: %s)', (input: string, expected: Details) => {
     expect(getRumbleUrlDetails(input)).toEqual(expected)
-  })
-
-  it('parses the embed url from the oembed details', () => {
-    expect(toEmbedUrl(mockOEmbed)).toEqual('https://test-src-iframe.com')
   })
 })

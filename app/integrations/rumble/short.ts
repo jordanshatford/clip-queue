@@ -4,8 +4,9 @@ import type { Clip, IntegrationProvider, PlayerConfig } from '../core'
 
 import { toStorageKey, Cacheable } from '../core'
 import { IntegrationID } from '../indentify'
+import { toEmbedUrl } from '../misc/core/utils'
 import { getRumbleOEmbed } from './core/api'
-import { getRumbleUrlDetails, toEmbedUrl } from './core/utils'
+import { getRumbleUrlDetails } from './core/utils'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.RUMBLE_SHORTS, 'enabled'), false)
 

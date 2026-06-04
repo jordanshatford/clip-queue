@@ -6,6 +6,7 @@ import type { OEmbedResponse } from './core/types'
 import { toStorageKey, Cacheable } from '../core'
 import { IntegrationID } from '../indentify'
 import { getOEmbedProxied } from './core/api'
+import { toEmbedUrl } from './core/utils'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.MEDAL, 'enabled'), false)
 
@@ -45,7 +46,7 @@ export class MedalProvider extends Cacheable<Clip> implements IntegrationProvide
         title: oembed.title,
         channel: oembed.author_name ?? this.name,
         category: this.name,
-        embedUrl: `https://medal.tv/clips/${id}`,
+        embedUrl: toEmbedUrl(oembed),
         thumbnailUrl: oembed.thumbnail_url,
         provider: this.id,
         submitters: [],
