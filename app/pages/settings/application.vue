@@ -30,7 +30,7 @@
       </div>
     </UCard>
     <UCard class="text-left" variant="subtle">
-      <div class="mt-4 flex flex-col gap-4">
+      <div class="flex flex-col gap-4">
         <UFormField :label="m.command_prefix()" :help="m.command_prefix_description()">
           <UInput
             id="commandPrefix"
