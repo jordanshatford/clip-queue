@@ -14,6 +14,9 @@
           </span>
           <UIcon name="lucide:external-link" class="size-3" />
         </NuxtLink>
+        <span v-else class="font-medium">
+          {{ integration.name }}
+        </span>
         <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
           {{ integration.id }}
         </UBadge>
