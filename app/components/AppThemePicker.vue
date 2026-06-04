@@ -1,7 +1,7 @@
 <template>
   <UPopover
     v-model:open="open"
-    :ui="{ content: 'w-72 px-4 py-4 flex flex-col gap-4 overflow-y-auto max-h-[calc(100vh-5rem)]' }"
+    :ui="{ content: 'w-80 px-4 py-4 flex flex-col gap-4 overflow-y-auto max-h-[calc(100vh-5rem)]' }"
   >
     <template #default>
       <UButton

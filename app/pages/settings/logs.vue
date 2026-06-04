@@ -8,13 +8,7 @@
         </UDropdownMenu>
       </div>
       <UFieldGroup class="w-full">
-        <UButton
-          icon="lucide:book-text"
-          to="/logs"
-          color="neutral"
-          variant="outline"
-          class="w-full justify-center"
-        >
+        <UButton to="/logs" color="neutral" variant="outline" class="w-full justify-center">
           {{ m.view() }}
           <template #trailing>
             <UKbd>
