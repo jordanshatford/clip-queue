@@ -33,6 +33,8 @@ const emit = defineEmits<{
 const integrations = useIntegrations()
 const extras = useClip(clip)
 
+const integration = integrations.integration(clip.provider)
+
 const controls = computed<DropdownMenuItem[]>(() => [
   {
     label: m.play(),
@@ -51,34 +53,44 @@ const controls = computed<DropdownMenuItem[]>(() => [
   },
 ])
 
-const details = computed<DropdownMenuItem[]>(() => [
-  {
-    type: 'label',
-    label: extras.value.provider?.name,
-    icon: integrations.integration(clip.provider)?.branding.icon,
-  },
-  {
-    type: 'label',
-    label: clip.title,
-    icon: 'lucide:captions',
-  },
-  {
-    type: 'label',
-    label: clip.channel,
-    icon: 'lucide:tv',
-  },
-  {
-    type: 'label',
-    label: clip.category ?? 'Unknown',
-    icon: 'lucide:tag',
-  },
-  {
-    label: m.submitters(),
-    icon: 'lucide:users',
-    filter: true,
-    children: extras.value.submitters,
-  },
-])
+const details = computed<DropdownMenuItem[]>(() => {
+  return [
+    integration?.url
+      ? {
+          label: extras.value.provider?.name,
+          icon: integration?.branding.icon,
+          to: integration.url,
+          target: '_blank',
+        }
+      : {
+          type: 'label',
+          label: extras.value.provider?.name,
+          icon: integration?.branding.icon,
+        },
+    {
+      label: clip.title,
+      icon: 'lucide:captions',
+      to: clip.url,
+      target: '_blank',
+    },
+    {
+      type: 'label',
+      label: clip.channel,
+      icon: 'lucide:tv',
+    },
+    {
+      type: 'label',
+      label: clip.category ?? 'Unknown',
+      icon: 'lucide:tag',
+    },
+    {
+      label: m.submitters(),
+      icon: 'lucide:users',
+      filter: true,
+      children: extras.value.submitters,
+    },
+  ]
+})
 
 const items = computed<DropdownMenuItem[][]>(() => {
   if (actions) {

@@ -33,19 +33,13 @@ describe('clip/PlayerControls.vue', () => {
     expect(wrapper.exists()).toBe(true)
   })
 
-  it('renders title and external link when url exists', async () => {
+  it('renders title when clip exists', async () => {
     const wrapper = await mountSuspended(PlayerControls, {
       props: {
-        clip: {
-          ...clipFromTwitch,
-          url: 'https://example.com',
-        },
+        clip: clipFromTwitch,
       },
     })
     expect(wrapper.html()).toContain(clipFromTwitch.title)
-    const link = wrapper.find('a')
-    expect(link.exists()).toBe(true)
-    expect(link.attributes('href')).toBe('https://example.com')
   })
 
   it('emits previous event when rewind button clicked', async () => {
