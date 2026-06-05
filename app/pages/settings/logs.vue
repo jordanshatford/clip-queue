@@ -1,57 +1,49 @@
 <template>
-  <UCard class="mx-auto max-w-2xl" variant="subtle">
-    <div class="flex flex-col gap-4 text-left">
-      <div class="flex items-center gap-2 align-middle">
-        <span class="font-medium">{{ m.logs() }}</span>
-        <UDropdownMenu :items="actions">
-          <UButton icon="lucide:ellipsis-vertical" size="sm" color="neutral" variant="ghost" />
-        </UDropdownMenu>
-      </div>
-      <UFieldGroup class="w-full">
-        <UButton to="/logs" color="neutral" variant="outline" class="w-full justify-center">
-          {{ m.view() }}
-          <template #trailing>
-            <UKbd>
-              {{ logger.logs.length }}
-            </UKbd>
-          </template>
-        </UButton>
-        <UButton
-          color="neutral"
-          variant="outline"
-          :disabled="logger.empty"
-          :icon="copied ? 'lucide:check' : 'lucide:copy'"
-          @click="copyLogs()"
-        />
-      </UFieldGroup>
-      <USeparator />
-      <UFormField :label="m.level()" :help="m.logger_level_description()">
-        <USelect
-          id="logger-level"
-          v-model="logger.settings.state.level"
-          :items="availableLogLevels"
-          class="w-full"
-        >
-          <template #default="{ modelValue }: { modelValue: LogLevel }">
-            {{ logLevelTranslations[modelValue]() }}
-          </template>
-          <template #item-label="{ item }: { item: LogLevel }">
-            {{ logLevelTranslations[item]() }}
-          </template>
-        </USelect>
-      </UFormField>
-      <UFormField :label="m.size_limit()" :help="m.logger_size_limit_description()">
-        <UInputNumber
-          id="logger-limit"
-          v-model="logger.settings.state.limit"
-          :min="1"
-          :max="100000"
-          :step="1"
-          class="w-full"
-        />
-      </UFormField>
-    </div>
-  </UCard>
+  <AppSettingsCard :title="m.logs()" :actions>
+    <UFieldGroup class="w-full">
+      <UButton to="/logs" color="neutral" variant="outline" class="w-full justify-center">
+        {{ m.view() }}
+        <template #trailing>
+          <UKbd>
+            {{ logger.logs.length }}
+          </UKbd>
+        </template>
+      </UButton>
+      <UButton
+        color="neutral"
+        variant="outline"
+        :disabled="logger.empty"
+        :icon="copied ? 'lucide:check' : 'lucide:copy'"
+        @click="copyLogs()"
+      />
+    </UFieldGroup>
+    <USeparator />
+    <UFormField :label="m.level()" :help="m.logger_level_description()">
+      <USelect
+        id="logger-level"
+        v-model="logger.settings.state.level"
+        :items="availableLogLevels"
+        class="w-full"
+      >
+        <template #default="{ modelValue }: { modelValue: LogLevel }">
+          {{ logLevelTranslations[modelValue]() }}
+        </template>
+        <template #item-label="{ item }: { item: LogLevel }">
+          {{ logLevelTranslations[item]() }}
+        </template>
+      </USelect>
+    </UFormField>
+    <UFormField :label="m.size_limit()" :help="m.logger_size_limit_description()">
+      <UInputNumber
+        id="logger-limit"
+        v-model="logger.settings.state.limit"
+        :min="1"
+        :max="100000"
+        :step="1"
+        class="w-full"
+      />
+    </UFormField>
+  </AppSettingsCard>
 </template>
 
 <script setup lang="ts">

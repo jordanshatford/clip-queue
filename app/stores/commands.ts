@@ -163,7 +163,7 @@ export const useCommands = defineStore('commands', () => {
   }
 
   /**
-   * Check if a command or alias is valid and enabled.
+   * Check if a command is enabled by its ID or one of its aliases.
    * @param idlike - The command ID or alias.
    * @returns true if the command exists and is enabled, false otherwise.
    */
@@ -172,36 +172,18 @@ export const useCommands = defineStore('commands', () => {
   }
 
   /**
-   * Get a string to represent what calling the command could look like (without prefix).
-   * @param idlike - The command id or alias.
-   * @returns String representing the command call.
+   * Set if a command is enabled using its ID or one of its aliases.
+   * @param idlike - The command ID or alias.
+   * @param enabled - If the command should be enabled.
    */
-  function toCallHelp(idlike: string): string {
-    const cmd = commands.value[resolve(idlike)]
-    if (!cmd) {
-      return ''
+  function setEnabled(idlike: string, enabled: boolean): void {
+    const command = resolve(idlike)
+    const current = settings.state.value.enabled
+    if (enabled) {
+      settings.state.value.enabled = [...new Set([...current, command])]
+    } else {
+      settings.state.value.enabled = current.filter((c) => c !== command)
     }
-
-    // Display any arguments the command should be supplied.
-    let result = cmd.id
-    if (cmd.help.args && cmd.help.args.length > 0) {
-      result += ' '
-      result += cmd.help.args.map((arg) => `<${arg().toLocaleLowerCase()}>`).join(' ')
-    }
-    return result
-  }
-
-  /**
-   * Get a string with the description of a command.
-   * @param idlike - The command id or alias.
-   * @returns String representing the command description.
-   */
-  function toDescription(idlike: string): string {
-    const cmd = commands.value[resolve(idlike)]
-    if (!cmd) {
-      return ''
-    }
-    return cmd.help.description()
   }
 
   /**
@@ -222,8 +204,7 @@ export const useCommands = defineStore('commands', () => {
     unregister,
     execute,
     isEnabled,
-    toCallHelp,
-    toDescription,
+    setEnabled,
     reset,
   }
 })

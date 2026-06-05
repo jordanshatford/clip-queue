@@ -135,41 +135,6 @@ describe('commands', () => {
     ).not.toThrow()
   })
 
-  it('creates command call help', () => {
-    const commands = useCommands()
-    commands.register(createCommand())
-    expect(commands.toCallHelp('test')).toEqual('test <user>')
-  })
-
-  it('creates command call help without args', () => {
-    const commands = useCommands()
-    commands.register(
-      createCommand({
-        help: {
-          args: [],
-          description: () => 'No args',
-        },
-      }),
-    )
-    expect(commands.toCallHelp('test')).toEqual('test')
-  })
-
-  it('returns empty call help for unknown commands', () => {
-    const commands = useCommands()
-    expect(commands.toCallHelp('missing')).toEqual('')
-  })
-
-  it('gets command descriptions', () => {
-    const commands = useCommands()
-    commands.register(createCommand())
-    expect(commands.toDescription('test')).toEqual('Test command')
-  })
-
-  it('returns empty description for unknown commands', () => {
-    const commands = useCommands()
-    expect(commands.toDescription('missing')).toEqual('')
-  })
-
   it('can be reset to its initial values', () => {
     const commands = useCommands()
     commands.register(createCommand())

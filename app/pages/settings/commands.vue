@@ -1,34 +1,56 @@
 <template>
-  <UCard class="mx-auto max-w-2xl" variant="subtle">
-    <div class="flex flex-col gap-4 text-left">
-      <div class="flex items-center gap-2 align-middle">
-        <span class="font-medium">{{ m.commands() }}</span>
-        <UDropdownMenu :items="actions">
-          <UButton icon="lucide:ellipsis-vertical" size="sm" color="neutral" variant="ghost" />
-        </UDropdownMenu>
-      </div>
-      <UFormField :label="m.prefix()" :help="m.prefix_description()">
-        <UInput
-          id="commandPrefix"
-          v-model="commands.settings.state.prefix"
-          type="text"
-          required
-          maxlength="8"
-          class="w-full"
-          @keydown.space.prevent
+  <AppSettingsCard :title="m.commands()" :actions>
+    <UFormField :label="m.prefix()" :help="m.prefix_description()">
+      <UInput
+        id="commandPrefix"
+        v-model="commands.settings.state.prefix"
+        type="text"
+        required
+        maxlength="8"
+        class="w-full"
+        @keydown.space.prevent
+      />
+    </UFormField>
+    <UFormField>
+      <template #label>
+        <div class="flex items-center gap-2">
+          <span>{{ m.enabled() }}</span>
+          <UKbd>{{ commands.settings.state.enabled.length }} / {{ items.length }}</UKbd>
+        </div>
+      </template>
+      <UFormField
+        v-for="item of items"
+        :key="item.id"
+        :label="item.label"
+        :description="item.description"
+        size="sm"
+        class="flex items-center justify-between py-2"
+      >
+        <template #label>
+          <div class="mb-1 flex items-center gap-2">
+            <span class="font-mono">{{ item.label }}</span>
+            <div v-if="item.args" class="flex gap-1">
+              <UBadge
+                v-for="arg in item.args"
+                :key="arg"
+                size="sm"
+                class="font-mono"
+                color="neutral"
+                variant="outline"
+                >{{ `<${arg.toLocaleLowerCase()}>` }}</UBadge
+              >
+            </div>
+          </div>
+        </template>
+        <USwitch
+          :id="`command-${item.id}`"
+          class="ml-2"
+          :model-value="commands.isEnabled(item.value)"
+          @update:model-value="(value) => commands.setEnabled(item.value, value)"
         />
       </UFormField>
-      <UFormField :label="m.allowed_commands()">
-        <UCheckboxGroup
-          id="allowedCommands"
-          v-model="commands.settings.state.enabled"
-          color="primary"
-          variant="table"
-          :items="items"
-        />
-      </UFormField>
-    </div>
-  </UCard>
+    </UFormField>
+  </AppSettingsCard>
 </template>
 
 <script setup lang="ts">
@@ -45,12 +67,16 @@ definePageMeta({
 const commands = useCommands()
 
 const items = computed(() => {
-  return Object.keys(commands.commands).map((command) => ({
-    id: command,
-    value: command,
-    label: commands.toCallHelp(command),
-    description: commands.toDescription(command),
-  }))
+  return Object.keys(commands.commands).map((command) => {
+    const cmd = commands.commands[command]
+    return {
+      id: command,
+      value: command,
+      label: cmd?.id,
+      description: cmd?.help.description(),
+      args: cmd?.help.args?.map((arg) => arg()),
+    }
+  })
 })
 
 const actions = computed<DropdownMenuItem[][]>(() => {
