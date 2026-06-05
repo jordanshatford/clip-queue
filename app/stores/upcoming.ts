@@ -3,6 +3,7 @@ import { useStorage } from '@vueuse/core'
 import type { Clip, IntegrationID } from '~/integrations'
 
 import { m } from '#paraglide/messages'
+import { toSubmitterUUID } from '~/integrations/core'
 
 export const useUpcoming = defineStore('upcoming', () => {
   /**
@@ -160,9 +161,10 @@ export const useUpcoming = defineStore('upcoming', () => {
         args: [m.submitter],
         description: m.command_remove_by_submitter,
       },
-      execute: ({ args }) => {
-        if (args[0]) {
-          removeBySubmitter(args[0])
+      execute: ({ origin, args }) => {
+        const username = args[0]
+        if (origin && username) {
+          removeBySubmitter(toSubmitterUUID(origin.source, username))
         }
       },
     },
