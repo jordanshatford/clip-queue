@@ -222,26 +222,20 @@ describe('queue.ts', () => {
     expect(queue.settings.state.limit).toEqual(null)
   })
 
-  it('registers commands for interacting with the queue', () => {
+  it.each([
+    ['open', undefined],
+    ['close', undefined],
+    ['previous', undefined],
+    ['next', undefined],
+    ['allowduplicates', 1],
+    ['setlimit', 1],
+    ['removelimit', undefined],
+  ])('registers command %s for interacting with the queue', (id: string, args?: number) => {
     const commands = useCommands()
     useQueue()
-    const cmd = commands.commands['open']
+    const cmd = commands.commands[id]
     expect(cmd).toBeDefined()
-    expect(cmd?.id).toEqual('open')
-    const cmd2 = commands.commands['close']
-    expect(cmd2).toBeDefined()
-    expect(cmd2?.id).toEqual('close')
-    const cmd3 = commands.commands['previous']
-    expect(cmd3).toBeDefined()
-    expect(cmd3?.id).toEqual('previous')
-    const cmd4 = commands.commands['next']
-    expect(cmd4).toBeDefined()
-    expect(cmd4?.id).toEqual('next')
-    const cmd5 = commands.commands['setlimit']
-    expect(cmd5).toBeDefined()
-    expect(cmd5?.id).toEqual('setlimit')
-    const cmd6 = commands.commands['removelimit']
-    expect(cmd6).toBeDefined()
-    expect(cmd6?.id).toEqual('removelimit')
+    expect(cmd?.id).toEqual(id)
+    expect(cmd?.help?.args?.length).toEqual(args)
   })
 })

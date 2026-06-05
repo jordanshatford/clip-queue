@@ -70,11 +70,15 @@ describe('history.ts', () => {
     expect(history.items.length).toBeLessThanOrEqual(1000)
   })
 
-  it('registers commands for interacting with the history', () => {
-    const commands = useCommands()
-    useHistory()
-    const cmd = commands.commands['clearhistory']
-    expect(cmd).toBeDefined()
-    expect(cmd?.id).toEqual('clearhistory')
-  })
+  it.each([['clearhistory', undefined]])(
+    'registers command %s for interacting with the history',
+    (id: string, args?: number) => {
+      const commands = useCommands()
+      useHistory()
+      const cmd = commands.commands[id]
+      expect(cmd).toBeDefined()
+      expect(cmd?.id).toEqual(id)
+      expect(cmd?.help?.args?.length).toEqual(args)
+    },
+  )
 })

@@ -176,6 +176,19 @@ export const useQueue = defineStore('queue', () => {
       },
     },
     {
+      id: 'allowduplicates',
+      help: {
+        args: [booleanish_arg],
+        description: m.allow_duplicates_description,
+      },
+      execute: ({ args }) => {
+        const value = booleanish(args[0])
+        if (value !== undefined) {
+          settings.state.value.duplicates = value
+        }
+      },
+    },
+    {
       id: 'setlimit',
       help: {
         args: [m.number],

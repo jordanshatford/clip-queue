@@ -187,17 +187,19 @@ describe('upcoming.ts', () => {
     expect(queuedClip?.submitters).toContain('testsubmitter2')
   })
 
-  it('registers commands for interacting with the upcoming items', () => {
-    const commands = useCommands()
-    useUpcoming()
-    const cmd = commands.commands['clearupcoming']
-    expect(cmd).toBeDefined()
-    expect(cmd?.id).toEqual('clearupcoming')
-    const cmd2 = commands.commands['removebysubmitter']
-    expect(cmd2).toBeDefined()
-    expect(cmd2?.id).toEqual('removebysubmitter')
-    const cmd3 = commands.commands['removebyintegration']
-    expect(cmd3).toBeDefined()
-    expect(cmd3?.id).toEqual('removebyintegration')
-  })
+  it.each([
+    ['clearupcoming', undefined],
+    ['removebysubmitter', 1],
+    ['removebyintegration', 1],
+  ])(
+    'registers command %s for interacting with the upcoming items',
+    (id: string, args?: number) => {
+      const commands = useCommands()
+      useUpcoming()
+      const cmd = commands.commands[id]
+      expect(cmd).toBeDefined()
+      expect(cmd?.id).toEqual(id)
+      expect(cmd?.help?.args?.length).toEqual(args)
+    },
+  )
 })
