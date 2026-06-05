@@ -10,12 +10,7 @@ export async function getOEmbed(url: string): Promise<OEmbedResponse> {
   if (url.length <= 0) {
     throw new Error('URL was not provided.')
   }
-  const response = await fetch(url)
-  if (!response.ok) {
-    throw new Error(`Failed to fetch OEmbed with URL ${url}: ${response.statusText}`)
-  }
-  const data: OEmbedResponse = await response.json()
-  return data
+  return await $fetch<OEmbedResponse>(url)
 }
 
 /**

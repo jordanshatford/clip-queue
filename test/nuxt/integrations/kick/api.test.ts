@@ -3,32 +3,23 @@ import { mockKickClip, mockKickVod } from '~~/test/mocks'
 
 import { getClip, getVideo } from '~/integrations/kick/core/api'
 
+const $fetchMock = vi.fn()
+
 describe('integrations/kick/core/api', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    global.fetch = vi.fn<typeof fetch>().mockImplementation((url) =>
-      Promise.resolve({
-        ok: true,
-        json: () => {
-          let data = {}
-          if (url.toString().includes('clips')) {
-            data = { clip: { ...mockKickClip, clip_url: url } }
-          } else if (url.toString().includes('video')) {
-            data = mockKickVod
-          }
-          return Promise.resolve(data)
-        },
-      } as Response),
-    )
+    vi.stubGlobal('$fetch', $fetchMock)
+    $fetchMock.mockResolvedValue({ clip: mockKickClip })
   })
 
   it('gets a kick clip from kick api', async () => {
+    $fetchMock.mockResolvedValueOnce({ clip: mockKickClip })
     const clip = await getClip('testclip')
     expect(clip).toBeDefined()
     expect(clip?.id).toEqual('testclip')
     expect(clip?.title).toEqual('testtitle')
     expect(clip?.channel.username).toEqual('testchannel')
-    expect(fetch).toHaveBeenCalledTimes(1)
+    expect($fetchMock).toHaveBeenCalledTimes(1)
   })
 
   it('throws if no clip ID is passed', async () => {
@@ -36,21 +27,16 @@ describe('integrations/kick/core/api', () => {
   })
 
   it('throws when the clip fetch fails', async () => {
-    vi.spyOn(global, 'fetch').mockResolvedValue({
-      ok: false,
-      statusText: 'Not Found',
-    } as Response)
-
-    await expect(getClip('missing-clip')).rejects.toThrow(
-      'Failed to fetch clip with ID missing-clip: Not Found.',
-    )
+    $fetchMock.mockRejectedValueOnce(new Error('Unknown Error'))
+    await expect(getClip('missing-clip')).rejects.toThrow('Unknown Error')
   })
 
   it('gets a kick videos from kick api', async () => {
+    $fetchMock.mockResolvedValueOnce(mockKickVod)
     const clip = await getVideo('testvod')
     expect(clip).toBeDefined()
     expect(clip?.uuid).toEqual('testkickvod')
-    expect(fetch).toHaveBeenCalledTimes(1)
+    expect($fetchMock).toHaveBeenCalledTimes(1)
   })
 
   it('throws if no video ID is passed', async () => {
@@ -58,13 +44,7 @@ describe('integrations/kick/core/api', () => {
   })
 
   it('throws when the video fetch fails', async () => {
-    vi.spyOn(global, 'fetch').mockResolvedValue({
-      ok: false,
-      statusText: 'Forbidden',
-    } as Response)
-
-    await expect(getVideo('missing-video')).rejects.toThrow(
-      'Failed to fetch video with ID missing-video: Forbidden.',
-    )
+    $fetchMock.mockRejectedValueOnce(new Error('Unknown Error'))
+    await expect(getVideo('missing-video')).rejects.toThrow('Unknown Error')
   })
 })

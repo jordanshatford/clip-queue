@@ -12,12 +12,8 @@ export async function getClip(id: string): Promise<KickClip> {
   if (id.length <= 0) {
     throw new Error('Clip ID was not provided.')
   }
-  const response = await fetch(`${BASE_URL}/v2/clips/${id}`)
-  if (!response.ok) {
-    throw new Error(`Failed to fetch clip with ID ${id}: ${response.statusText}.`)
-  }
-  const data: { clip: KickClip } = await response.json()
-  return data.clip
+  const result = await $fetch<{ clip: KickClip }>(`${BASE_URL}/v2/clips/${id}`)
+  return result.clip
 }
 
 /**
@@ -30,12 +26,7 @@ export async function getVideo(id: string): Promise<KickVideo> {
   if (id.length <= 0) {
     throw new Error('Video ID was not provided.')
   }
-  const response = await fetch(`${BASE_URL}/v1/video/${id}`)
-  if (!response.ok) {
-    throw new Error(`Failed to fetch video with ID ${id}: ${response.statusText}.`)
-  }
-  const data: KickVideo = await response.json()
-  return data
+  return await $fetch<KickVideo>(`${BASE_URL}/v1/video/${id}`)
 }
 
 /**
@@ -51,10 +42,5 @@ export async function getChannel(channel: string): Promise<KickChannelPartial> {
   if (channel.length <= 0) {
     throw new Error('Channel name was not provided.')
   }
-  const response = await fetch(`${BASE_URL}/v2/channels/${channel}`)
-  if (!response.ok) {
-    throw new Error(`Failed to fetch channel ${channel}: ${response.statusText}.`)
-  }
-  const data: KickChannelPartial = await response.json()
-  return data
+  return await $fetch<KickChannelPartial>(`${BASE_URL}/v2/channels/${channel}`)
 }

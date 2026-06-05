@@ -12,10 +12,7 @@ export async function getYouTubeOEmbed(id: string): Promise<OEmbedResponse> {
   if (id.length <= 0) {
     throw new Error('ID was not provided.')
   }
-  const response = await fetch(`${BASE_URL}?format=json&url=https://www.youtube.com/watch?v=${id}`)
-  if (!response.ok) {
-    throw new Error(`Failed to fetch OEmbed with ID ${id}: ${response.statusText}`)
-  }
-  const data: OEmbedResponse = await response.json()
-  return data
+  return await $fetch<OEmbedResponse>(
+    `${BASE_URL}?format=json&url=https://www.youtube.com/watch?v=${id}`,
+  )
 }

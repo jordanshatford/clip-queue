@@ -3,24 +3,20 @@ import { mockYouTubeOEmbed } from '~~/test/mocks'
 
 import { getYouTubeOEmbed } from '~/integrations/youtube/core/api'
 
+const $fetchMock = vi.fn()
+
 describe('integrations/youtube/core/api', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    global.fetch = vi.fn<typeof fetch>().mockImplementation((url) =>
-      Promise.resolve({
-        ok: true,
-        json: () => {
-          return Promise.resolve({ ...mockYouTubeOEmbed, author_url: url })
-        },
-      } as Response),
-    )
+    vi.stubGlobal('$fetch', $fetchMock)
+    $fetchMock.mockResolvedValue({ ...mockYouTubeOEmbed, author_url: 'https://youtube.com' })
   })
 
   it('gets youtube oembed information', async () => {
     const oembed = await getYouTubeOEmbed('testclip')
     expect(oembed).toBeDefined()
     expect(oembed.provider_name).toEqual('YouTube')
-    expect(fetch).toHaveBeenCalledTimes(1)
+    expect($fetchMock).toHaveBeenCalledTimes(1)
   })
 
   it('throws if no video ID is passed', async () => {
@@ -28,13 +24,7 @@ describe('integrations/youtube/core/api', () => {
   })
 
   it('throws when the oembed fetch fails', async () => {
-    vi.spyOn(global, 'fetch').mockResolvedValue({
-      ok: false,
-      statusText: 'Not Found',
-    } as Response)
-
-    await expect(getYouTubeOEmbed('missing-video')).rejects.toThrow(
-      'Failed to fetch OEmbed with ID missing-video: Not Found',
-    )
+    $fetchMock.mockRejectedValueOnce(new Error('Unknown Error'))
+    await expect(getYouTubeOEmbed('missing-video')).rejects.toThrow('Unknown Error')
   })
 })

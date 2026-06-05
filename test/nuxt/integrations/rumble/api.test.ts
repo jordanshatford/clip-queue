@@ -4,12 +4,12 @@ import { mockRumbleOEmbed } from '~~/test/mocks'
 import { getRumbleOEmbed } from '~/integrations/rumble/core/api'
 
 describe('integrations/rumble/core/api (Nuxt 4)', () => {
-  const fetchMock = vi.fn()
+  const $fetchMock = vi.fn()
 
   beforeEach(() => {
     vi.clearAllMocks()
-    vi.stubGlobal('$fetch', fetchMock)
-    fetchMock.mockResolvedValue({
+    vi.stubGlobal('$fetch', $fetchMock)
+    $fetchMock.mockResolvedValue({
       ...mockRumbleOEmbed,
       author_url: 'https://rumble.com/testclip',
     })
@@ -19,12 +19,12 @@ describe('integrations/rumble/core/api (Nuxt 4)', () => {
     const result = await getRumbleOEmbed('testclip')
     expect(result).toBeDefined()
     expect(result.provider_name).toBe('Rumble')
-    expect(fetchMock).toHaveBeenCalledTimes(1)
+    expect($fetchMock).toHaveBeenCalledTimes(1)
   })
 
   it('passes correct oembed URL to proxy', async () => {
     await getRumbleOEmbed('testclip')
-    expect(fetchMock).toHaveBeenCalledWith(
+    expect($fetchMock).toHaveBeenCalledWith(
       '/api/oembed/proxy',
       expect.objectContaining({
         query: {
@@ -39,7 +39,7 @@ describe('integrations/rumble/core/api (Nuxt 4)', () => {
   })
 
   it('handles fetch failure', async () => {
-    fetchMock.mockRejectedValueOnce(new Error('Failed to fetch OEmbed'))
+    $fetchMock.mockRejectedValueOnce(new Error('Failed to fetch OEmbed'))
     await expect(getRumbleOEmbed('missing-video')).rejects.toThrow('Failed to fetch OEmbed')
   })
 })

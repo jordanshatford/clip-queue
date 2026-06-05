@@ -3,22 +3,11 @@ import { mockOEmbed } from '~~/test/mocks'
 
 import { getOEmbed, getOEmbedProxied } from '~/integrations/misc/core/api'
 
-const fetchMock = vi.fn()
 const $fetchMock = vi.fn()
 
 describe('integrations/misc/core/api', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-
-    vi.stubGlobal('fetch', fetchMock)
-    fetchMock.mockResolvedValue({
-      ok: true,
-      json: async () => ({
-        ...mockOEmbed,
-        provider_url: 'https://example.com',
-      }),
-    })
-
     vi.stubGlobal('$fetch', $fetchMock)
     $fetchMock.mockResolvedValue({
       ...mockOEmbed,
@@ -30,7 +19,7 @@ describe('integrations/misc/core/api', () => {
     const oembed = await getOEmbed('https://api.oembed.com/oembed.json?url=https://some.com/url')
     expect(oembed).toBeDefined()
     expect(oembed.title).toBeDefined()
-    expect(fetchMock).toHaveBeenCalledTimes(1)
+    expect($fetchMock).toHaveBeenCalledTimes(1)
   })
 
   it('throws if no oembed URL is passed', async () => {
@@ -38,13 +27,8 @@ describe('integrations/misc/core/api', () => {
   })
 
   it('throws when the oembed fetch fails', async () => {
-    fetchMock.mockResolvedValueOnce({
-      ok: false,
-      statusText: 'Forbidden',
-    })
-    await expect(getOEmbed('https://example.com/oembed')).rejects.toThrow(
-      'Failed to fetch OEmbed with URL https://example.com/oembed: Forbidden',
-    )
+    $fetchMock.mockRejectedValueOnce(new Error('Forbidden'))
+    await expect(getOEmbed('https://example.com/oembed')).rejects.toThrow('Forbidden')
   })
 
   it('gets oembed details from a URL but proxied', async () => {

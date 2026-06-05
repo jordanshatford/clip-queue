@@ -39,14 +39,11 @@ export async function getVideos(
   if (ids.length <= 0) {
     throw new Error('Video IDs were not provided.')
   }
-  const response = await fetch(`${BASE_URL}/videos?${toURLParams('id', ids)}`, {
+  const result = await $fetch<TwitchPagedResponse<TwitchVideo[]>>(`${BASE_URL}/videos`, {
+    query: toURLParams('id', ids),
     headers: toCommonHeaders(clientID, token),
   })
-  if (!response.ok) {
-    throw new Error(`Failed to fetch videos with IDs ${ids.join(' ')}: ${response.statusText}`)
-  }
-  const data: TwitchPagedResponse<TwitchVideo[]> = await response.json()
-  return data.data
+  return result.data
 }
 
 /**
@@ -65,14 +62,11 @@ export async function getClips(
   if (ids.length <= 0) {
     throw new Error('Clip IDs were not provided.')
   }
-  const response = await fetch(`${BASE_URL}/clips?${toURLParams('id', ids)}`, {
+  const result = await $fetch<TwitchPagedResponse<TwitchClip[]>>(`${BASE_URL}/clips`, {
+    query: toURLParams('id', ids),
     headers: toCommonHeaders(clientID, token),
   })
-  if (!response.ok) {
-    throw new Error(`Failed to fetch clips with IDs ${ids.join(' ')}: ${response.statusText}`)
-  }
-  const data: TwitchPagedResponse<TwitchClip[]> = await response.json()
-  return data.data
+  return result.data
 }
 
 /**
@@ -90,12 +84,9 @@ export async function getGames(
   if (ids.length <= 0) {
     throw new Error('Game IDs were not provided.')
   }
-  const response = await fetch(`${BASE_URL}/games?${toURLParams('id', ids)}`, {
+  const result = await $fetch<TwitchResponse<TwitchGame[]>>(`${BASE_URL}/games`, {
+    query: toURLParams('id', ids),
     headers: toCommonHeaders(clientID, token),
   })
-  if (!response.ok) {
-    throw new Error(`Failed to fetch games with IDs ${ids.join(' ')}: ${response.statusText}`)
-  }
-  const data: TwitchResponse<TwitchGame[]> = await response.json()
-  return data.data
+  return result.data
 }
