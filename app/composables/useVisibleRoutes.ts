@@ -1,4 +1,4 @@
-import type { NavigationMenuItem, TabsItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from '@nuxt/ui'
 import type { RouteRecordRaw } from 'vue-router'
 
 import { m } from '#paraglide/messages'
@@ -48,6 +48,7 @@ export function useVisibleRoutes() {
               color: queue.settings.state.open ? 'success' : 'error',
             }
           : undefined,
+      defaultOpen: true,
       children: r.children?.map((c) => ({
         label: getRouteLabel(c),
         icon: c.meta?.icon,
@@ -56,13 +57,17 @@ export function useVisibleRoutes() {
     }))
   })
 
-  const settings = computed<TabsItem[]>(() => {
+  const settings = computed<NavigationMenuItem[]>(() => {
     const settingsRoutes = visible.value.find((r) => r.name === 'settings')?.children ?? []
-    return settingsRoutes.map((r) => ({
-      label: getRouteLabel(r),
-      value: r.path ? `/settings/${r.path}` : '',
-      icon: r.meta?.icon ?? '',
-    }))
+    return settingsRoutes.map((r) => {
+      const to = r.path ? `/settings/${r.path}` : ''
+      return {
+        label: getRouteLabel(r),
+        to,
+        icon: r.meta?.icon ?? '',
+        active: route.path.startsWith(to),
+      }
+    })
   })
 
   return {

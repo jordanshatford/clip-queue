@@ -16,9 +16,22 @@
     <template #body>
       <UNavigationMenu :items="routes.all.value" orientation="vertical" class="-mx-2.5" />
     </template>
+    <template v-if="route.path.startsWith('/settings/')" #bottom>
+      <UContainer
+        class="hidden items-center justify-center border-y border-default bg-default/75 backdrop-blur lg:flex"
+      >
+        <UNavigationMenu
+          :items="routes.settings.value"
+          variant="pill"
+          highlight
+          class="-mx-2.5 -mb-px"
+        />
+      </UContainer>
+    </template>
   </UHeader>
 </template>
 
 <script setup lang="ts">
+const route = useRoute()
 const routes = useVisibleRoutes()
 </script>
