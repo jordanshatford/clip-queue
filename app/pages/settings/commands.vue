@@ -11,11 +11,19 @@
         @keydown.space.prevent
       />
     </UFormField>
-    <UFormField>
+    <UFormField :ui="{ label: 'w-full' }">
       <template #label>
-        <div class="flex items-center gap-2">
-          <span>{{ m.enabled() }}</span>
-          <UKbd>{{ commands.settings.state.enabled.length }} / {{ commands.list.length }}</UKbd>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span>{{ m.enabled() }}</span>
+            <UKbd>{{ commands.settings.state.enabled.length }} / {{ commands.list.length }}</UKbd>
+          </div>
+          <USwitch
+            id="commands-all"
+            class="ml-2"
+            :model-value="commands.isAllEnabled"
+            @update:model-value="(value) => commands.setAllEnabled(value)"
+          />
         </div>
       </template>
       <UFormField

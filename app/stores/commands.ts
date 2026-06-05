@@ -143,6 +143,23 @@ export const useCommands = defineStore('commands', () => {
   }
 
   /**
+   * Boolean representing if all commands are enabled.
+   */
+  const isAllEnabled = computed<boolean>(() => {
+    return Object.keys(commands.value).every((command) => isEnabled(command))
+  })
+
+  /**
+   * Set all commands to the enabled value.
+   * @param enabled - If the commands should be enabled.
+   */
+  function setAllEnabled(enabled: boolean): void {
+    for (const command of Object.keys(commands.value)) {
+      setEnabled(command, enabled)
+    }
+  }
+
+  /**
    * Check if a command is enabled by its ID.
    * @param command - The command ID.
    * @returns true if the command exists and is enabled, false otherwise.
@@ -180,6 +197,8 @@ export const useCommands = defineStore('commands', () => {
     register,
     unregister,
     execute,
+    isAllEnabled,
+    setAllEnabled,
     isEnabled,
     setEnabled,
     reset,
