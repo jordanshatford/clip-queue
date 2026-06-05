@@ -30,8 +30,6 @@
   "command_purge_history": "删除所有之前观看过的视频片段。它们将来可能会再次被提交。",
   "command_remove_by_integration": "从通过指定集成提交的即将播放队列中移除所有剪辑片段。",
   "command_remove_by_submitter": "从触发该命令的源中，删除指定用户提交的即将播放队列中的所有剪辑。",
-  "command_remove_limit": "移除即将到来的队列大小限制。",
-  "command_set_limit": "设置即将上传的视频队列大小上限。一旦达到上限，系统将不再接受任何新的视频片段。",
   "commands": "命令",
   "confirm": "确认",
   "connected_to_source_name": "连接到{source}作为{name} 。",

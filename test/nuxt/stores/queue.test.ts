@@ -228,8 +228,7 @@ describe('queue.ts', () => {
     ['previous', undefined],
     ['next', undefined],
     ['allowduplicates', 1],
-    ['setlimit', 1],
-    ['removelimit', undefined],
+    ['sizelimit', 1],
   ])('registers command %s for interacting with the queue', (id: string, args?: number) => {
     const commands = useCommands()
     useQueue()

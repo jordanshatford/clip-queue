@@ -30,8 +30,6 @@
   "command_purge_history": "Daha önce izlenen tüm videoları silin. Bunlar ileride tekrar gönderilebilir.",
   "command_remove_by_integration": "Belirtilen entegrasyon aracılığıyla gönderilen tüm klipleri yaklaşan sıradaki içeriklerden kaldırın.",
   "command_remove_by_submitter": "Komutun tetiklendiği kaynakta belirtilen kullanıcı tarafından gönderilen, yakında yayınlanacaklar sırasındaki tüm klipleri kaldırın.",
-  "command_remove_limit": "Yaklaşan kuyruk boyutu sınırını kaldırın.",
-  "command_set_limit": "Yaklaşan kuyruk boyutu sınırını belirleyin. Sınıra ulaşıldığında, ek klipler kabul edilmeyecektir.",
   "commands": "Komutlar",
   "confirm": "Onaylamak",
   "connected_to_source_name": "{source} ile {name} olarak bağlantılı.",

@@ -30,8 +30,6 @@
   "command_purge_history": "Exclua todos os vídeos assistidos anteriormente. Eles poderão ser enviados novamente no futuro.",
   "command_remove_by_integration": "Remova todos os clipes da fila de próximos envios feitos através da integração especificada.",
   "command_remove_by_submitter": "Remover todos os clipes da fila de próximos envios feitos pelo usuário especificado na origem em que o comando foi acionado.",
-  "command_remove_limit": "Remova o limite de tamanho da fila que será implementado em breve.",
-  "command_set_limit": "Defina o limite de tamanho da fila. Assim que o limite for atingido, nenhum clipe adicional será aceito.",
   "commands": "Comandos",
   "confirm": "Confirmar",
   "connected_to_source_name": "Conectado a {source} como {name} .",

@@ -30,8 +30,6 @@
   "command_purge_history": "Elimina todos los vídeos que hayas visto anteriormente. Podrían volver a subirse en el futuro.",
   "command_remove_by_integration": "Eliminar todos los clips de la cola de próximos vídeos enviados a través de la integración especificada.",
   "command_remove_by_submitter": "Eliminar todos los clips de la cola de próximos vídeos enviados por el usuario especificado en la fuente donde se activó el comando.",
-  "command_remove_limit": "Eliminar el límite de tamaño de cola próximo.",
-  "command_set_limit": "Establezca el límite de tamaño de la cola de espera. Una vez alcanzado el límite, no se aceptarán más clips.",
   "commands": "Comandos",
   "confirm": "Confirmar",
   "connected_to_source_name": "Conectado a {source} como {name} .",

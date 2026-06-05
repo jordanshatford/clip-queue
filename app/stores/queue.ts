@@ -189,28 +189,25 @@ export const useQueue = defineStore('queue', () => {
       },
     },
     {
-      id: 'setlimit',
+      id: 'sizelimit',
       help: {
-        args: [m.number],
-        description: m.command_set_limit,
+        args: [optional_arg(m.number)],
+        description: m.size_limit_description,
       },
       execute: ({ args }) => {
-        if (args[0]) {
-          const limit = Number.parseInt(args[0])
+        const value = args[0]?.toLowerCase()
+        if (value !== undefined) {
+          const v = booleanish(value)
+          if (v !== undefined && v === false) {
+            settings.state.value.limit = null
+            return
+          }
+          const limit = Number.parseInt(value)
           if (Number.isNaN(limit) || limit < 1) {
             return
           }
           settings.state.value.limit = limit
         }
-      },
-    },
-    {
-      id: 'removelimit',
-      help: {
-        description: m.command_remove_limit,
-      },
-      execute: () => {
-        settings.state.value.limit = null
       },
     },
   )

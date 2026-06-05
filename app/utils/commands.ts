@@ -1,8 +1,16 @@
 import { m } from '#paraglide/messages'
 
 /**
+ * Function that looks like a Inlang ParaglideJS translation for a optional argument.
+ * @returns string
+ */
+export function optional_arg(arg: () => string): () => string {
+  return () => `${arg()}|${m.off()}`
+}
+
+/**
  * Function that looks like a Inlang ParaglideJS translation for a booleanish argument.
- * @returns () => string
+ * @returns string
  */
 export function booleanish_arg(): string {
   return `${m.on()}|${m.off()}`
