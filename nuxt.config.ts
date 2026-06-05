@@ -23,6 +23,11 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: 'page', mode: 'out-in' },
   },
+  icon: {
+    clientBundle: {
+      scan: true
+    }
+  },
   runtimeConfig: {
     public: {
       version: pkg.version,
