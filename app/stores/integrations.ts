@@ -209,9 +209,9 @@ export const useIntegrations = defineStore('integrations', () => {
     if (!settings.state.value.automod) {
       return
     }
-    const username = event.data.username
+    const submitter = toSubmitterUUID(event.source, event.data.username)
     const queue = useQueue()
-    queue.upcoming.removeBySubmitter(username)
+    queue.upcoming.removeBySubmitter(submitter)
   }
 
   /**
@@ -365,7 +365,6 @@ export const useIntegrations = defineStore('integrations', () => {
   useCommands().register(
     {
       id: 'enableintegration',
-      aliases: ['enableint'],
       help: {
         args: [m.integration],
         description: m.command_enable_integration,
@@ -376,7 +375,6 @@ export const useIntegrations = defineStore('integrations', () => {
     },
     {
       id: 'disableintegration',
-      aliases: ['disableint'],
       help: {
         args: [m.integration],
         description: m.command_disable_integration,
@@ -387,7 +385,6 @@ export const useIntegrations = defineStore('integrations', () => {
     },
     {
       id: 'enableautomod',
-      aliases: ['enableautomoderation', 'automod'],
       help: {
         description: m.command_enable_auto_mod,
       },
@@ -397,7 +394,6 @@ export const useIntegrations = defineStore('integrations', () => {
     },
     {
       id: 'disableautomod',
-      aliases: ['disableautomoderation', 'dautomod'],
       help: {
         description: m.command_disable_auto_mod,
       },

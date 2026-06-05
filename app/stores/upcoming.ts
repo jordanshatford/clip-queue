@@ -146,7 +146,6 @@ export const useUpcoming = defineStore('upcoming', () => {
   useCommands().register(
     {
       id: 'clear',
-      aliases: ['clr'],
       help: {
         description: m.command_clear,
       },
@@ -156,7 +155,6 @@ export const useUpcoming = defineStore('upcoming', () => {
     },
     {
       id: 'removebysubmitter',
-      aliases: ['rmsubmitter', 'rmsub'],
       help: {
         args: [m.submitter],
         description: m.command_remove_by_submitter,
@@ -170,7 +168,6 @@ export const useUpcoming = defineStore('upcoming', () => {
     },
     {
       id: 'removebyintegration',
-      aliases: ['rmbyint'],
       help: {
         args: [m.integration],
         description: m.command_remove_by_integration,

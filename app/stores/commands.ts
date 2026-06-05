@@ -27,10 +27,6 @@ export interface Command {
    */
   id: string
   /**
-   * Aliases for the command. These can be used in place of the ID.
-   */
-  aliases?: string[]
-  /**
    * Details used to provider help information to the user via the website.
    */
   help: {
@@ -80,10 +76,6 @@ export const useCommands = defineStore('commands', () => {
    * Command details by command ID.
    */
   const commands = ref<Record<string, Command>>({})
-  /**
-   * Command alias to command tracking.
-   */
-  const aliases = ref<Record<string, string>>({})
 
   /**
    * Filter out commands that not longer exist, i.e. commands that have been removed.
@@ -96,20 +88,11 @@ export const useCommands = defineStore('commands', () => {
   }
 
   /**
-   * Resolve an "idlike" (id or alias) of a command to the command id.
-   * @param idlike - The id or alias.
-   * @returns The id mapped from the alias, or the id.
-   */
-  function resolve(idlike: string): string {
-    return aliases.value[idlike] ?? idlike
-  }
-
-  /**
    * Register commands in the command system.
    * @param cmds - The commands to register.
-   * @throws When a duplicate command or alias is attempting to be registered.
-   *         This should not happen at runtime as commands are not dynamic, and
-   *         should only be registered once. This is for errors in development.
+   * @throws When a duplicate command attempting to be registered. This should not happen at
+   *         runtime as commands are not dynamic, and should only be registered once. This
+   *         is for errors in development.
    */
   function register(...cmds: Command[]): void {
     for (const command of cmds) {
@@ -119,19 +102,6 @@ export const useCommands = defineStore('commands', () => {
       }
       // Register the command in the system.
       commands.value[command.id] = command
-      // Register any aliases for the command.
-      if (command.aliases) {
-        for (const alias of command.aliases) {
-          // Prevent duplicate alias registration aswell.
-          if (aliases.value[alias]) {
-            const existing = aliases.value[alias]
-            throw new Error(
-              `Duplicate command alias registration "${alias}", already used for "${existing}".`,
-            )
-          }
-          aliases.value[alias] = command.id
-        }
-      }
     }
   }
 
@@ -141,13 +111,8 @@ export const useCommands = defineStore('commands', () => {
    */
   function unregister(...ids: string[]): void {
     const idSet = new Set(ids)
-    const aliasesToRemove = ids.flatMap((id) => commands.value[id]?.aliases ?? [])
-
     commands.value = Object.fromEntries(
       Object.entries(commands.value).filter(([id]) => !idSet.has(id)),
-    )
-    aliases.value = Object.fromEntries(
-      Object.entries(aliases.value).filter(([alias]) => !aliasesToRemove.includes(alias)),
     )
   }
 
@@ -156,28 +121,27 @@ export const useCommands = defineStore('commands', () => {
    * @param event - The event that triggered the command.
    */
   function execute(event: CommandExecuteEvent): void {
-    const cmd = commands.value[resolve(event.command)]
+    const cmd = commands.value[event.command]
     if (cmd) {
       cmd.execute(event)
     }
   }
 
   /**
-   * Check if a command is enabled by its ID or one of its aliases.
-   * @param idlike - The command ID or alias.
+   * Check if a command is enabled by its ID.
+   * @param command - The command ID.
    * @returns true if the command exists and is enabled, false otherwise.
    */
-  function isEnabled(idlike: string): boolean {
-    return settings.state.value.enabled.includes(resolve(idlike))
+  function isEnabled(command: string): boolean {
+    return settings.state.value.enabled.includes(command)
   }
 
   /**
-   * Set if a command is enabled using its ID or one of its aliases.
-   * @param idlike - The command ID or alias.
+   * Set if a command is enabled using its ID.
+   * @param command - The command ID.
    * @param enabled - If the command should be enabled.
    */
-  function setEnabled(idlike: string, enabled: boolean): void {
-    const command = resolve(idlike)
+  function setEnabled(command: string, enabled: boolean): void {
     const current = settings.state.value.enabled
     if (enabled) {
       settings.state.value.enabled = [...new Set([...current, command])]
@@ -191,15 +155,12 @@ export const useCommands = defineStore('commands', () => {
    */
   function reset(): void {
     commands.value = {}
-    aliases.value = {}
   }
 
   return {
     settings,
     commands,
-    aliases,
     initialize,
-    resolve,
     register,
     unregister,
     execute,

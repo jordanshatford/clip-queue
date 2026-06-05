@@ -86,18 +86,14 @@ describe('integrations.ts', () => {
     const cmd = commands.commands['enableintegration']
     expect(cmd).toBeDefined()
     expect(cmd?.id).toEqual('enableintegration')
-    expect(cmd?.aliases).toEqual(['enableint'])
     const cmd2 = commands.commands['disableintegration']
     expect(cmd2).toBeDefined()
     expect(cmd2?.id).toEqual('disableintegration')
-    expect(cmd2?.aliases).toEqual(['disableint'])
     const cmd3 = commands.commands['enableautomod']
     expect(cmd3).toBeDefined()
     expect(cmd3?.id).toEqual('enableautomod')
-    expect(cmd3?.aliases).toEqual(['enableautomoderation', 'automod'])
     const cmd4 = commands.commands['disableautomod']
     expect(cmd4).toBeDefined()
     expect(cmd4?.id).toEqual('disableautomod')
-    expect(cmd4?.aliases).toEqual(['disableautomoderation', 'dautomod'])
   })
 })

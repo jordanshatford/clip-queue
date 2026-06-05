@@ -33,7 +33,7 @@
   "command_previous": "Return to the previously watched clip.",
   "command_purge_history": "Delete all previously watched clips. They may be submitted again in the future.",
   "command_remove_by_integration": "Remove all clips from the upcoming queue submitted through the specified integration.",
-  "command_remove_by_submitter": "Remove all clips from the upcoming queue submitted by the specified user from the specified source.",
+  "command_remove_by_submitter": "Remove all clips from the upcoming queue submitted by the specified user in the source the command was triggered.",
   "command_remove_limit": "Remove the upcoming queue size limit.",
   "command_set_limit": "Set the upcoming queue size limit. Once the limit is reached, no additional clips will be accepted.",
   "commands": "Commands",

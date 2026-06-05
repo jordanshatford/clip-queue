@@ -228,26 +228,20 @@ describe('queue.ts', () => {
     const cmd = commands.commands['open']
     expect(cmd).toBeDefined()
     expect(cmd?.id).toEqual('open')
-    expect(cmd?.aliases).toEqual(['o'])
     const cmd2 = commands.commands['close']
     expect(cmd2).toBeDefined()
     expect(cmd2?.id).toEqual('close')
-    expect(cmd2?.aliases).toEqual(['c'])
     const cmd3 = commands.commands['previous']
     expect(cmd3).toBeDefined()
     expect(cmd3?.id).toEqual('previous')
-    expect(cmd3?.aliases).toEqual(['back', 'prev', 'last'])
     const cmd4 = commands.commands['next']
     expect(cmd4).toBeDefined()
     expect(cmd4?.id).toEqual('next')
-    expect(cmd4?.aliases).toEqual(['forward'])
     const cmd5 = commands.commands['setlimit']
     expect(cmd5).toBeDefined()
     expect(cmd5?.id).toEqual('setlimit')
-    expect(cmd5?.aliases).toEqual(['limit'])
     const cmd6 = commands.commands['removelimit']
     expect(cmd6).toBeDefined()
     expect(cmd6?.id).toEqual('removelimit')
-    expect(cmd6?.aliases).toEqual(['rmlimit'])
   })
 })

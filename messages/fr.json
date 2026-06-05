@@ -33,7 +33,7 @@
   "command_previous": "Retournez à l'extrait précédemment visionné.",
   "command_purge_history": "Supprimez tous les clips déjà visionnés. Ils pourront être soumis à nouveau ultérieurement.",
   "command_remove_by_integration": "Supprimer tous les clips de la file d'attente à venir soumis via l'intégration spécifiée.",
-  "command_remove_by_submitter": "Supprimer tous les clips de la file d'attente à venir soumis par l'utilisateur spécifié et provenant de la source spécifiée.",
+  "command_remove_by_submitter": "Supprimer tous les clips de la file d'attente à venir soumis par l'utilisateur spécifié dans la source où la commande a été déclenchée.",
   "command_remove_limit": "Supprimer la limite de taille de la file d'attente à venir.",
   "command_set_limit": "Définissez la limite de taille de la file d'attente. Une fois cette limite atteinte, aucun clip supplémentaire ne sera accepté.",
   "commands": "Commandes",

@@ -141,7 +141,6 @@ export const useQueue = defineStore('queue', () => {
   useCommands().register(
     {
       id: 'open',
-      aliases: ['o'],
       help: {
         description: m.command_open,
       },
@@ -151,7 +150,6 @@ export const useQueue = defineStore('queue', () => {
     },
     {
       id: 'close',
-      aliases: ['c'],
       help: {
         description: m.command_close,
       },
@@ -161,7 +159,6 @@ export const useQueue = defineStore('queue', () => {
     },
     {
       id: 'previous',
-      aliases: ['back', 'prev', 'last'],
       help: {
         description: m.command_previous,
       },
@@ -171,7 +168,6 @@ export const useQueue = defineStore('queue', () => {
     },
     {
       id: 'next',
-      aliases: ['forward'],
       help: {
         description: m.command_next,
       },
@@ -181,7 +177,6 @@ export const useQueue = defineStore('queue', () => {
     },
     {
       id: 'setlimit',
-      aliases: ['limit'],
       help: {
         args: [m.number],
         description: m.command_set_limit,
@@ -198,7 +193,6 @@ export const useQueue = defineStore('queue', () => {
     },
     {
       id: 'removelimit',
-      aliases: ['rmlimit'],
       help: {
         description: m.command_remove_limit,
       },

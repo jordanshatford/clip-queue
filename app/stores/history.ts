@@ -81,7 +81,6 @@ export const useHistory = defineStore('history', () => {
    */
   useCommands().register({
     id: 'purgehistory',
-    aliases: ['rmhistory'],
     help: {
       description: m.command_purge_history,
     },

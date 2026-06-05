@@ -33,7 +33,7 @@
   "command_previous": "Torna al video visualizzato in precedenza.",
   "command_purge_history": "Elimina tutti i video visualizzati in precedenza. Potresti inviarli nuovamente in futuro.",
   "command_remove_by_integration": "Rimuovi tutti i clip dalla coda dei prossimi inviati tramite l'integrazione specificata.",
-  "command_remove_by_submitter": "Rimuovi tutte le clip dalla coda successiva inviate dall'utente specificato dalla sorgente specificata.",
+  "command_remove_by_submitter": "Rimuovi tutte le clip dalla coda successiva inviate dall'utente specificato nella sorgente da cui è stato attivato il comando.",
   "command_remove_limit": "Rimuovi il limite di dimensione della coda in arrivo.",
   "command_set_limit": "Imposta il limite di dimensione della coda per i clip successivi. Una volta raggiunto il limite, non verranno accettati altri clip.",
   "commands": "Comandi",

@@ -76,6 +76,5 @@ describe('history.ts', () => {
     const cmd = commands.commands['purgehistory']
     expect(cmd).toBeDefined()
     expect(cmd?.id).toEqual('purgehistory')
-    expect(cmd?.aliases).toEqual(['rmhistory'])
   })
 })

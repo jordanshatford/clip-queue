@@ -193,14 +193,11 @@ describe('upcoming.ts', () => {
     const cmd = commands.commands['clear']
     expect(cmd).toBeDefined()
     expect(cmd?.id).toEqual('clear')
-    expect(cmd?.aliases).toEqual(['clr'])
     const cmd2 = commands.commands['removebysubmitter']
     expect(cmd2).toBeDefined()
     expect(cmd2?.id).toEqual('removebysubmitter')
-    expect(cmd2?.aliases).toEqual(['rmsubmitter', 'rmsub'])
     const cmd3 = commands.commands['removebyintegration']
     expect(cmd3).toBeDefined()
     expect(cmd3?.id).toEqual('removebyintegration')
-    expect(cmd3?.aliases).toEqual(['rmbyint'])
   })
 })
