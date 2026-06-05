@@ -145,13 +145,11 @@ export const useUpcoming = defineStore('upcoming', () => {
    */
   useCommands().register(
     {
-      id: 'clear',
+      id: 'clearupcoming',
       help: {
         description: m.command_clear,
       },
-      execute: () => {
-        reset()
-      },
+      execute: () => reset(),
     },
     {
       id: 'removebysubmitter',

@@ -80,13 +80,11 @@ export const useHistory = defineStore('history', () => {
    * Register commands for the history.
    */
   useCommands().register({
-    id: 'purgehistory',
+    id: 'clearhistory',
     help: {
       description: m.command_purge_history,
     },
-    execute: () => {
-      reset()
-    },
+    execute: () => reset(),
   })
 
   return {

@@ -190,9 +190,9 @@ describe('upcoming.ts', () => {
   it('registers commands for interacting with the upcoming items', () => {
     const commands = useCommands()
     useUpcoming()
-    const cmd = commands.commands['clear']
+    const cmd = commands.commands['clearupcoming']
     expect(cmd).toBeDefined()
-    expect(cmd?.id).toEqual('clear')
+    expect(cmd?.id).toEqual('clearupcoming')
     const cmd2 = commands.commands['removebysubmitter']
     expect(cmd2).toBeDefined()
     expect(cmd2?.id).toEqual('removebysubmitter')

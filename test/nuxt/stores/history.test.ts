@@ -73,8 +73,8 @@ describe('history.ts', () => {
   it('registers commands for interacting with the history', () => {
     const commands = useCommands()
     useHistory()
-    const cmd = commands.commands['purgehistory']
+    const cmd = commands.commands['clearhistory']
     expect(cmd).toBeDefined()
-    expect(cmd?.id).toEqual('purgehistory')
+    expect(cmd?.id).toEqual('clearhistory')
   })
 })
