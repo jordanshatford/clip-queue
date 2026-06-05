@@ -80,16 +80,15 @@ describe('integrations.ts', () => {
     },
   )
 
-  it.each([
-    ['enableintegration', 1],
-    ['disableintegration', 1],
-    ['automod', 1],
-  ])('registers command %s for interacting with the providers', (id: string, args?: number) => {
-    const commands = useCommands()
-    useIntegrations()
-    const cmd = commands.commands[id]
-    expect(cmd).toBeDefined()
-    expect(cmd?.id).toEqual(id)
-    expect(cmd?.help?.args?.length).toEqual(args)
-  })
+  it.each([['automod', 1]])(
+    'registers command %s for interacting with the providers',
+    (id: string, args?: number) => {
+      const commands = useCommands()
+      useIntegrations()
+      const cmd = commands.commands[id]
+      expect(cmd).toBeDefined()
+      expect(cmd?.id).toEqual(id)
+      expect(cmd?.help?.args?.length).toEqual(args)
+    },
+  )
 })

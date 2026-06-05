@@ -24,8 +24,6 @@
   "color_mode": "颜色模式",
   "command_clear": "从即将播放的队列中移除所有片段。",
   "command_close": "关闭队列，阻止提交新的视频片段。",
-  "command_disable_integration": "禁用指定的集成。这可以是主集成，也可以是其某个数据源或提供程序。",
-  "command_enable_integration": "启用指定的集成。这可以是主集成，也可以是其某个数据源或提供程序。",
   "command_next": "跳至即将播放队列中的下一个片段。",
   "command_open": "打开队列，允许从已连接的源提交片段。",
   "command_previous": "返回到之前观看的片段。",

@@ -24,8 +24,6 @@
   "color_mode": "Modo de cor",
   "command_clear": "Remova todos os clipes da fila de próximos vídeos.",
   "command_close": "Feche a fila e impeça o envio de novos vídeos.",
-  "command_disable_integration": "Desative a integração especificada. Pode ser a integração principal ou uma de suas fontes ou provedores.",
-  "command_enable_integration": "Habilite a integração especificada. Pode ser uma integração principal ou uma de suas fontes ou provedores.",
   "command_next": "Pule para o próximo vídeo na fila.",
   "command_open": "Abra a fila e permita o envio de vídeos a partir de fontes conectadas.",
   "command_previous": "Voltar ao vídeo assistido anteriormente.",

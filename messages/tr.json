@@ -24,8 +24,6 @@
   "color_mode": "Renk Modu",
   "command_clear": "Yaklaşan videolardan tüm klipleri kaldırın.",
   "command_close": "Sırayı kapatın ve yeni kliplerin gönderilmesini engelleyin.",
-  "command_disable_integration": "Belirtilen entegrasyonu devre dışı bırakın. Bu, ana entegrasyon veya kaynaklarından ya da sağlayıcılarından biri olabilir.",
-  "command_enable_integration": "Belirtilen entegrasyonu etkinleştirin. Bu, ana entegrasyon veya kaynaklarından ya da sağlayıcılarından biri olabilir.",
   "command_next": "Sıradaki videolara geçmek için bir sonraki videoya atlayın.",
   "command_open": "Sırayı açın ve bağlı kaynaklardan video kliplerin gönderilmesine izin verin.",
   "command_previous": "Daha önce izlenen videoya geri dön.",

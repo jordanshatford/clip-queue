@@ -1,6 +1,6 @@
 import type { Reactive } from 'vue'
 
-import type { IntegrationProvider, Clip, Integration } from '~/integrations'
+import type { IntegrationID, IntegrationProvider, Clip, Integration } from '~/integrations'
 import type {
   IntegrationSource,
   IntegrationSourceEvent,
@@ -9,7 +9,7 @@ import type {
 } from '~/integrations/core'
 
 import { m } from '#paraglide/messages'
-import { IntegrationID, integrations } from '~/integrations'
+import { integrations } from '~/integrations'
 import { toSubmitterUUID } from '~/integrations/core'
 
 /**
@@ -326,77 +326,21 @@ export const useIntegrations = defineStore('integrations', () => {
   }
 
   /**
-   * Handle updating an integration enabled state based on a command.
-   * @param args - The arguments passed with the command.
-   * @param enabled - The enabled state to set.
-   */
-  function handleEnableCommand(args: string[], enabled: boolean): void {
-    // Ensure the ID passed to the command is a valid integration ID.
-    const id = Object.values(IntegrationID).find(
-      (int) => int.toLowerCase() === args[0]?.toLowerCase(),
-    )
-    if (!id) {
-      return
-    }
-
-    // Find the integration, source, or provider that matches the ID and set
-    // its enabled state appropriately.
-    for (const integration of integrations) {
-      if (integration.id === id && integration.isEnabled !== undefined) {
-        integration.isEnabled = enabled
-        return
-      }
-      if (integration.source?.id === id) {
-        integration.source.isEnabled = enabled
-        return
-      }
-      for (const provider of integration.providers) {
-        if (provider.id === id) {
-          provider.isEnabled = enabled
-          return
-        }
-      }
-    }
-  }
-
-  /**
    * Register commands for handling integrations.
    */
-  useCommands().register(
-    {
-      id: 'enableintegration',
-      help: {
-        args: [m.integration],
-        description: m.command_enable_integration,
-      },
-      execute: ({ args }) => {
-        handleEnableCommand(args, true)
-      },
+  useCommands().register({
+    id: 'automod',
+    help: {
+      description: m.auto_mod_description,
+      args: [booleanish_arg],
     },
-    {
-      id: 'disableintegration',
-      help: {
-        args: [m.integration],
-        description: m.command_disable_integration,
-      },
-      execute: ({ args }) => {
-        handleEnableCommand(args, false)
-      },
+    execute: ({ args }) => {
+      const value = booleanish(args[0])
+      if (value !== undefined) {
+        settings.state.value.automod = value
+      }
     },
-    {
-      id: 'automod',
-      help: {
-        description: m.auto_mod_description,
-        args: [booleanish_arg],
-      },
-      execute: ({ args }) => {
-        const value = booleanish(args[0])
-        if (value !== undefined) {
-          settings.state.value.automod = value
-        }
-      },
-    },
-  )
+  })
 
   return {
     integrations,

@@ -24,8 +24,6 @@
   "color_mode": "Color Mode",
   "command_clear": "Remove all clips from the upcoming queue.",
   "command_close": "Close the queue and prevent new clips from being submitted.",
-  "command_disable_integration": "Disable the specified integration. This can be a main integration or one of its sources or providers.",
-  "command_enable_integration": "Enable the specified integration. This can be a main integration or one of its sources or providers.",
   "command_next": "Skip to the next clip in the upcoming queue.",
   "command_open": "Open the queue and allow clips to be submitted from connected sources.",
   "command_previous": "Return to the previously watched clip.",

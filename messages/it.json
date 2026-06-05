@@ -24,8 +24,6 @@
   "color_mode": "Modalità colore",
   "command_clear": "Rimuovi tutte le clip dalla coda successiva.",
   "command_close": "Chiudi la coda e impedisci l'invio di nuove clip.",
-  "command_disable_integration": "Disabilita l'integrazione specificata. Può trattarsi dell'integrazione principale o di una delle sue fonti o fornitori.",
-  "command_enable_integration": "Abilita l'integrazione specificata. Può trattarsi dell'integrazione principale o di una delle sue fonti o fornitori.",
   "command_next": "Passa al video successivo nella coda.",
   "command_open": "Apri la coda e consenti l'invio di clip dalle sorgenti connesse.",
   "command_previous": "Torna al video visualizzato in precedenza.",
