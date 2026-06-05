@@ -37,23 +37,15 @@
           </div>
         </UFormField>
         <UFormField size="sm" :label="m.locale()">
-          <USelectMenu
-            id="locale"
+          <ULocaleSelect
             v-model="preferences.locale"
-            :items="[...locales]"
-            color="neutral"
-            variant="outline"
+            value-key="code"
+            :locales="preferences.supportedUiLocales"
+            :ui="{
+              leading: '[&>span]:size-4',
+            }"
             class="w-full"
-            :search-input="false"
-            icon="lucide:languages"
-          >
-            <template #default="{ modelValue }: { modelValue: Locale }">
-              {{ localeLabels[modelValue] }}
-            </template>
-            <template #item-label="{ item }: { item: Locale }">
-              {{ localeLabels[item] }}
-            </template>
-          </USelectMenu>
+          />
         </UFormField>
         <UFormField size="sm" :label="m.color_mode()">
           <UColorModeSelect id="color-mode" class="w-full" />
@@ -75,10 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Locale } from '#paraglide/runtime'
-
 import { m } from '#paraglide/messages'
-import { locales } from '#paraglide/runtime'
 
 const preferences = usePreferences()
 const open = ref<boolean>(false)

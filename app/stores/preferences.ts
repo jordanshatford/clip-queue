@@ -1,6 +1,6 @@
 import type { Messages, Locale as UILocale } from '@nuxt/ui'
 
-import * as locales from '@nuxt/ui/locale'
+import * as uilocales from '@nuxt/ui/locale'
 import { useStorage } from '@vueuse/core'
 
 import type { Locale } from '#paraglide/runtime'
@@ -113,25 +113,6 @@ export function getInferredDefaultLanguage(fallback: Locale = baseLocale): Local
 }
 
 /**
- * Labels used for each of the available locales.
- */
-export const localeLabels: Record<Locale, string> = {
-  ar: 'عربي (Arabic)',
-  de: 'Deutsch (German)',
-  en: 'English',
-  es: 'Español (Spanish)',
-  fr: 'Français (French)',
-  hi: 'हिंदी (Hindi)',
-  it: 'Italiano (Italian)',
-  ja: '日本語 (Japanese)',
-  ko: '한국인 (Korean)',
-  pt: 'Português (Portuguese)',
-  ru: 'русский (Russian)',
-  tr: 'Türkçe (Turkish)',
-  zh: '中文 (Chinese)',
-}
-
-/**
  * Store used to track and manage user preferences.
  */
 export const usePreferences = defineStore('preferences', () => {
@@ -150,9 +131,20 @@ export const usePreferences = defineStore('preferences', () => {
   const uilocale = computed<UILocale<Messages>>(() => {
     // Special case for Chinese since the locale code is different between paraglide and nuxt/ui.
     const key = locale.value === 'zh' ? 'zh_cn' : locale.value
-    return locales[key]
+    return uilocales[key]
   })
-
+  /**
+   * Available locales in the format nuxt/ui expects based on the ones we support with paraglide.
+   */
+  const supportedUiLocales = computed<UILocale<Messages>[]>(() => {
+    return Object.values(uilocales).filter((l) => {
+      // Special case for Chinese since the locale code is different between paraglide and nuxt/ui.
+      if (l.code === 'zh-CN') {
+        return isLocale('zh')
+      }
+      return isLocale(l.code)
+    })
+  })
   /**
    * Computed property for the lang HTML attribute based on the current locale.
    */
@@ -231,6 +223,7 @@ export const usePreferences = defineStore('preferences', () => {
   }
 
   return {
+    supportedUiLocales,
     mode,
     locale,
     uilocale,
