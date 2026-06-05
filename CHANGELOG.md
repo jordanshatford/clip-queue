@@ -1,5 +1,71 @@
 # clip-queue
 
+## 3.6.0
+
+### Minor Changes
+
+- [`3314ce6`](https://github.com/jordanshatford/clip-queue/commit/3314ce6cb9e42af645fcd56f38c4dc479a93c9f7) - feat: move integration external url to dropdown menu
+
+- [`bb031e3`](https://github.com/jordanshatford/clip-queue/commit/bb031e3f84c6dd743e960ea8b9b4ac7f9cb5cac6) - feat: use navigation menu for settings routes
+
+- [`3981b5c`](https://github.com/jordanshatford/clip-queue/commit/3981b5c08067ae0fe703422802b126a9f9d95f18) - feat: combine enable and disable automod commands into single boolean command
+
+- [`3fd2ee6`](https://github.com/jordanshatford/clip-queue/commit/3fd2ee675e56d232ee43fd005fd3f7df41378ded) - feat: remove command alias support, too complicated
+
+- [`4076285`](https://github.com/jordanshatford/clip-queue/commit/4076285b2678d58b22362e1ac2694babbb9d3a87) - feat: replace all fetch calls with ofetch from nuxt
+
+- [`d7721c5`](https://github.com/jordanshatford/clip-queue/commit/d7721c5cb7cf4dd66380ed46dfe559214282adce) - feat: add clip dropdown menu to history table
+
+- [`3fac200`](https://github.com/jordanshatford/clip-queue/commit/3fac200b539914bc09571315fbad00e267baaa0e) - feat: remove commands to enable and disable integrations, not relevant
+
+- [`256242c`](https://github.com/jordanshatford/clip-queue/commit/256242cfb9d0c37f7e508ffdb6ce2c624120e124) - feat: display number of commands enabled in command settings
+
+- [`8c67a53`](https://github.com/jordanshatford/clip-queue/commit/8c67a53088077c7d5ee1cb5eb82b62d6a4f32d01) - feat: add ability to enable and disable all commands with one button
+
+- [`256242c`](https://github.com/jordanshatford/clip-queue/commit/256242cfb9d0c37f7e508ffdb6ce2c624120e124) - feat: redesign command settings to better match application style
+
+- [`c159a4a`](https://github.com/jordanshatford/clip-queue/commit/c159a4a7a41127f4a5e4ba129725f2a4c8580af9) - feat: add command to enable and disable allow duplicates
+
+- [`9f3da79`](https://github.com/jordanshatford/clip-queue/commit/9f3da796e8f4d751a2f756559a4e60ce20cbfb05) - feat: remove command to clear integrations cache
+
+- [`5967578`](https://github.com/jordanshatford/clip-queue/commit/5967578635f3fbad6c247547d8461c2a4f8dcbf1) - feat: move clip link to dropdown menu
+
+- [`a5dd398`](https://github.com/jordanshatford/clip-queue/commit/a5dd39860b9d04d71f1d3852b65648a1d0278af6) - feat: use nuxt/ui locale select in theme picker
+
+- [`0af4595`](https://github.com/jordanshatford/clip-queue/commit/0af4595cdbddc02cd5df976ef2f52d6380346384) - feat: combine set and remove limit commands to sizelimit command
+
+### Patch Changes
+
+- [`bb031e3`](https://github.com/jordanshatford/clip-queue/commit/bb031e3f84c6dd743e960ea8b9b4ac7f9cb5cac6) - fix: only display settings tabs on larger screens
+
+- [`a009498`](https://github.com/jordanshatford/clip-queue/commit/a0094983c9961cd157e5fd4eea0f503e6ccd2424) - fix: clear logs color on settings dropdown
+
+- [`20a7f63`](https://github.com/jordanshatford/clip-queue/commit/20a7f63029629f974d9f12fac9ed2d552f404b38) - fix: match rounding on integration cards to application
+
+- [`74c3c2a`](https://github.com/jordanshatford/clip-queue/commit/74c3c2af50a6797799849bc0cf5708e64bb2bcd0) - fix: move log sorting to store add method
+
+- [`9ea1405`](https://github.com/jordanshatford/clip-queue/commit/9ea1405d08d014198d3448aef9836ff1e0ba74b1) - fix: do not set categories for providers that do not know them
+
+- [`8f70e80`](https://github.com/jordanshatford/clip-queue/commit/8f70e80f09dac30b08b340c8335c5df0cb9e57c3) - fix: sort commands in settings list
+
+- [`f016295`](https://github.com/jordanshatford/clip-queue/commit/f0162955e2e8ba6139ae0959a4c49537bdbd27ed) - fix: ensure remove by submitter command uses command origin
+
+- [`042d9e9`](https://github.com/jordanshatford/clip-queue/commit/042d9e9c6f39cdd2c873eba370be9a319b7cc602) - fix: increase width of application theme picker
+
+- [`85fee39`](https://github.com/jordanshatford/clip-queue/commit/85fee39a171f79959fe4bc64771c0e6850264efe) - fix: truncate integration name on settings card on mobile
+
+- [`1c648f2`](https://github.com/jordanshatford/clip-queue/commit/1c648f2a7a365e79af3cfbb3c3cfb35f75b1533c) - fix: default redirect for settings route
+
+- [`6a6ab56`](https://github.com/jordanshatford/clip-queue/commit/6a6ab56ecc4042e07396b7aeae9bb33b37306fb8) - fix: unify styling on integrations cards
+
+- [`bb031e3`](https://github.com/jordanshatford/clip-queue/commit/bb031e3f84c6dd743e960ea8b9b4ac7f9cb5cac6) - fix: expand settings routes in mobile navigation menu
+
+- [`6c625a2`](https://github.com/jordanshatford/clip-queue/commit/6c625a2c1341cbd22c0983fd9d7f41ca7abaa690) - fix: use clearhistory and clearupcoming commands for queue
+
+- [`2603c62`](https://github.com/jordanshatford/clip-queue/commit/2603c620c344aff173da0dc6e24fa6c79d6e4201) - fix: unify logger settings and page
+
+- [`efa398e`](https://github.com/jordanshatford/clip-queue/commit/efa398eab5c6fc891a65ba0df541a64716d2d966) - fix: client bundle nuxt icons using experimental scan
+
 ## 3.5.0
 
 ### Minor Changes
