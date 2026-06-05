@@ -35,7 +35,6 @@
   "command_remove_by_integration": "Eliminar todos los clips de la cola de próximos vídeos enviados a través de la integración especificada.",
   "command_remove_by_submitter": "Eliminar todos los clips de la cola de próximos vídeos enviados por el usuario especificado desde la fuente especificada.",
   "command_remove_limit": "Eliminar el límite de tamaño de cola próximo.",
-  "command_reset_cache": "Borra todos los datos almacenados en caché por cualquiera de las integraciones.",
   "command_set_limit": "Establezca el límite de tamaño de la cola de espera. Una vez alcanzado el límite, no se aceptarán más clips.",
   "commands": "Comandos",
   "confirm": "Confirmar",

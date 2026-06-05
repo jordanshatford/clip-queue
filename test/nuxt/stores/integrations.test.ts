@@ -53,7 +53,6 @@ describe('integrations.ts', () => {
     localStorage?.clear()
     vi.clearAllMocks()
     setActivePinia(createPinia())
-    useIntegrations().clearCache()
   })
 
   it.each([
@@ -81,24 +80,6 @@ describe('integrations.ts', () => {
     },
   )
 
-  it('caches clip data that it fetchs', async () => {
-    const integrations = useIntegrations()
-    expect(integrations.hasCachedData).toEqual(false)
-    expect(await integrations.resolve(mockTwitchClip.url)).toBeDefined()
-    expect(integrations.hasCachedData).toEqual(true)
-  })
-
-  it('can have the cached data purged', async () => {
-    const integrations = useIntegrations()
-    expect(integrations.hasCachedData).toEqual(false)
-    expect(await integrations.resolve(mockTwitchClip.url)).toBeDefined()
-    expect(integrations.hasCachedData).toEqual(true)
-    integrations.clearCache()
-    expect(integrations.hasCachedData).toEqual(false)
-    expect(await integrations.resolve(mockKickClip.clip_url)).toBeDefined()
-    expect(integrations.hasCachedData).toEqual(true)
-  })
-
   it('registers commands for interacting with the providers', () => {
     const commands = useCommands()
     useIntegrations()
@@ -110,17 +91,13 @@ describe('integrations.ts', () => {
     expect(cmd2).toBeDefined()
     expect(cmd2?.id).toEqual('disableintegration')
     expect(cmd2?.aliases).toEqual(['disableint'])
-    const cmd3 = commands.commands['resetcache']
+    const cmd3 = commands.commands['enableautomod']
     expect(cmd3).toBeDefined()
-    expect(cmd3?.id).toEqual('resetcache')
-    expect(cmd3?.aliases).toEqual(['rmcache'])
-    const cmd4 = commands.commands['enableautomod']
+    expect(cmd3?.id).toEqual('enableautomod')
+    expect(cmd3?.aliases).toEqual(['enableautomoderation', 'automod'])
+    const cmd4 = commands.commands['disableautomod']
     expect(cmd4).toBeDefined()
-    expect(cmd4?.id).toEqual('enableautomod')
-    expect(cmd4?.aliases).toEqual(['enableautomoderation', 'automod'])
-    const cmd5 = commands.commands['disableautomod']
-    expect(cmd5).toBeDefined()
-    expect(cmd5?.id).toEqual('disableautomod')
-    expect(cmd5?.aliases).toEqual(['disableautomoderation', 'dautomod'])
+    expect(cmd4?.id).toEqual('disableautomod')
+    expect(cmd4?.aliases).toEqual(['disableautomoderation', 'dautomod'])
   })
 })

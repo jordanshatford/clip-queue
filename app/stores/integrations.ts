@@ -301,28 +301,6 @@ export const useIntegrations = defineStore('integrations', () => {
   }
 
   /**
-   * Check if any integrations have cached data.
-   * @returns true if there is cached data, false otherwise.
-   */
-  const hasCachedData = computed<boolean>(() => {
-    return integrations.some((integration) =>
-      integration.providers.some((provider) => provider.hasCachedData),
-    )
-  })
-
-  /**
-   * Clear all integrations cache.
-   */
-  function clearCache(): void {
-    for (const integration of integrations) {
-      logger.info(`[Integrations]: Clearing cache for ${integration.name}.`)
-      for (const provider of integration.providers) {
-        provider.clearCache()
-      }
-    }
-  }
-
-  /**
    * Attempt to resolve a URL to a clip.
    * @param url - The URL of a potential clip.
    * @returns A Clip if one was found, undefined otherwise.
@@ -408,16 +386,6 @@ export const useIntegrations = defineStore('integrations', () => {
       },
     },
     {
-      id: 'resetcache',
-      aliases: ['rmcache'],
-      help: {
-        description: m.command_reset_cache,
-      },
-      execute: () => {
-        clearCache()
-      },
-    },
-    {
       id: 'enableautomod',
       aliases: ['enableautomoderation', 'automod'],
       help: {
@@ -449,8 +417,6 @@ export const useIntegrations = defineStore('integrations', () => {
     logout,
     logoutAll,
     resolve,
-    hasCachedData,
-    clearCache,
     settings,
   }
 })

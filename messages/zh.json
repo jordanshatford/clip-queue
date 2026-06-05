@@ -35,7 +35,6 @@
   "command_remove_by_integration": "从通过指定集成提交的即将播放队列中移除所有剪辑片段。",
   "command_remove_by_submitter": "从指定来源中移除指定用户提交的即将播放队列中的所有片段。",
   "command_remove_limit": "移除即将到来的队列大小限制。",
-  "command_reset_cache": "清除所有集成缓存的数据。",
   "command_set_limit": "设置即将上传的视频队列大小上限。一旦达到上限，系统将不再接受任何新的视频片段。",
   "commands": "命令",
   "confirm": "确认",

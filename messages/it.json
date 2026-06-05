@@ -35,7 +35,6 @@
   "command_remove_by_integration": "Rimuovi tutti i clip dalla coda dei prossimi inviati tramite l'integrazione specificata.",
   "command_remove_by_submitter": "Rimuovi tutte le clip dalla coda successiva inviate dall'utente specificato dalla sorgente specificata.",
   "command_remove_limit": "Rimuovi il limite di dimensione della coda in arrivo.",
-  "command_reset_cache": "Elimina tutti i dati memorizzati nella cache da ciascuna delle integrazioni.",
   "command_set_limit": "Imposta il limite di dimensione della coda per i clip successivi. Una volta raggiunto il limite, non verranno accettati altri clip.",
   "commands": "Comandi",
   "confirm": "Confermare",

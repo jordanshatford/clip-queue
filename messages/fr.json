@@ -35,7 +35,6 @@
   "command_remove_by_integration": "Supprimer tous les clips de la file d'attente à venir soumis via l'intégration spécifiée.",
   "command_remove_by_submitter": "Supprimer tous les clips de la file d'attente à venir soumis par l'utilisateur spécifié et provenant de la source spécifiée.",
   "command_remove_limit": "Supprimer la limite de taille de la file d'attente à venir.",
-  "command_reset_cache": "Effacer toutes les données mises en cache par l'une des intégrations.",
   "command_set_limit": "Définissez la limite de taille de la file d'attente. Une fois cette limite atteinte, aucun clip supplémentaire ne sera accepté.",
   "commands": "Commandes",
   "confirm": "Confirmer",

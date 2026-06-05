@@ -35,7 +35,6 @@
   "command_remove_by_integration": "Entferne alle Clips aus der anstehenden Warteschlange, die über die angegebene Integration übermittelt wurden.",
   "command_remove_by_submitter": "Entferne alle Clips aus der anstehenden Warteschlange, die vom angegebenen Benutzer aus der angegebenen Quelle hochgeladen wurden.",
   "command_remove_limit": "Die bevorstehende Begrenzung der Warteschlangengröße wird aufgehoben.",
-  "command_reset_cache": "Löschen Sie alle von den Integrationen zwischengespeicherten Daten.",
   "command_set_limit": "Legen Sie die maximale Größe der Warteschlange fest. Sobald diese Grenze erreicht ist, werden keine weiteren Clips mehr angenommen.",
   "commands": "Befehle",
   "confirm": "Bestätigen",
