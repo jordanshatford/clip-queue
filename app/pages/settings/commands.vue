@@ -20,7 +20,7 @@
       </template>
       <UFormField
         v-for="item of items"
-        :key="item.id"
+        :key="item.value"
         :label="item.label"
         :description="item.description"
         size="sm"
@@ -37,13 +37,13 @@
                 class="font-mono"
                 color="neutral"
                 variant="outline"
-                >{{ `<${arg.toLocaleLowerCase()}>` }}</UBadge
+                >{{ arg.toLocaleLowerCase() }}</UBadge
               >
             </div>
           </div>
         </template>
         <USwitch
-          :id="`command-${item.id}`"
+          :id="`command-${item.value}`"
           class="ml-2"
           :model-value="commands.isEnabled(item.value)"
           @update:model-value="(value) => commands.setEnabled(item.value, value)"
@@ -67,16 +67,17 @@ definePageMeta({
 const commands = useCommands()
 
 const items = computed(() => {
-  return Object.keys(commands.commands).map((command) => {
-    const cmd = commands.commands[command]
-    return {
-      id: command,
-      value: command,
-      label: cmd?.id,
-      description: cmd?.help.description(),
-      args: cmd?.help.args?.map((arg) => arg()),
-    }
-  })
+  return Object.keys(commands.commands)
+    .sort()
+    .map((command) => {
+      const cmd = commands.commands[command]
+      return {
+        value: command,
+        label: cmd?.id,
+        description: cmd?.help.description(),
+        args: cmd?.help.args?.map((arg) => arg()),
+      }
+    })
 })
 
 const actions = computed<DropdownMenuItem[][]>(() => {
