@@ -1,7 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allow_duplicates": "Permitir duplicados",
-  "allow_duplicates_description": "Los vídeos que ya se hayan visto podrán volver a añadirse a la cola cuando se vuelvan a enviar.",
+  "allow_duplicates_description": "Los clips vistos anteriormente podrán volver a la cola de reproducción al enviarlos de nuevo. Si esta opción está desactivada, los clips del historial no podrán volver a añadirse a la cola de reproducción.",
   "amber": "Ámbar",
   "auto_connect": "Conexión automática",
   "auto_mod": "Automoderación",
@@ -24,9 +24,7 @@
   "color_mode": "Modo de color",
   "command_clear": "Eliminar todos los clips de la cola de reproducción.",
   "command_close": "Cierra la cola e impide que se envíen nuevos clips.",
-  "command_disable_auto_mod": "Desactive la moderación automática. Las acciones de moderación de una integración ya no afectarán a la cola de mensajes entrantes.",
   "command_disable_integration": "Desactive la integración especificada. Puede tratarse de una integración principal o de una de sus fuentes o proveedores.",
-  "command_enable_auto_mod": "Habilitar la moderación automática. Las acciones de moderación de una integración pueden afectar la cola de mensajes.",
   "command_enable_integration": "Habilite la integración especificada. Puede tratarse de una integración principal o de una de sus fuentes o proveedores.",
   "command_next": "Salta al siguiente vídeo de la cola.",
   "command_open": "Abre la cola y permite que se envíen clips desde fuentes conectadas.",
@@ -109,6 +107,7 @@
   "number": "Número",
   "off": "Apagado",
   "olive": "Aceituna",
+  "on": "En",
   "open": "Abierto",
   "orange": "Naranja",
   "pagination_selected": [

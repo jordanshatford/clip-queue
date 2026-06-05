@@ -1,7 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allow_duplicates": "중복 허용",
-  "allow_duplicates_description": "이전에 시청했던 영상도 다시 제출하면 대기열에 다시 포함될 수 있습니다.",
+  "allow_duplicates_description": "이전에 시청한 클립은 다시 제출하면 다음 재생 목록에 다시 추가될 수 있습니다. 이 기능을 비활성화하면 시청 기록에 있는 클립은 다음 재생 목록에 다시 추가되지 않습니다.",
   "amber": "호박색",
   "auto_connect": "자동 연결",
   "auto_mod": "자동 검열",
@@ -24,9 +24,7 @@
   "color_mode": "색상 모드",
   "command_clear": "예정된 영상 목록에서 모든 클립을 제거합니다.",
   "command_close": "대기열을 닫고 새로운 클립이 제출되지 않도록 합니다.",
-  "command_disable_auto_mod": "자동 검토 기능을 비활성화합니다. 연동 기능의 검토 조치가 향후 대기열에 더 이상 영향을 미치지 않습니다.",
   "command_disable_integration": "지정된 통합 기능을 비활성화합니다. 이는 기본 통합 기능일 수도 있고, 해당 통합 기능의 소스 또는 공급자 중 하나일 수도 있습니다.",
-  "command_enable_auto_mod": "자동 검토 기능을 활성화하세요. 연동 기능의 검토 조치는 향후 대기열에 영향을 줄 수 있습니다.",
   "command_enable_integration": "지정된 통합 기능을 활성화합니다. 이는 기본 통합 기능일 수도 있고, 해당 통합 기능의 소스 또는 공급자 중 하나일 수도 있습니다.",
   "command_next": "다음 영상으로 바로 이동하세요.",
   "command_open": "대기열을 열고 연결된 소스에서 클립을 제출할 수 있도록 허용하세요.",
@@ -109,6 +107,7 @@
   "number": "숫자",
   "off": "끄다",
   "olive": "올리브",
+  "on": "~에",
   "open": "열려 있는",
   "orange": "주황색",
   "pagination_selected": [

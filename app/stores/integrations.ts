@@ -384,21 +384,16 @@ export const useIntegrations = defineStore('integrations', () => {
       },
     },
     {
-      id: 'enableautomod',
+      id: 'automod',
       help: {
-        description: m.command_enable_auto_mod,
+        description: m.auto_mod_description,
+        args: [booleanish_arg],
       },
-      execute: () => {
-        settings.state.value.automod = true
-      },
-    },
-    {
-      id: 'disableautomod',
-      help: {
-        description: m.command_disable_auto_mod,
-      },
-      execute: () => {
-        settings.state.value.automod = false
+      execute: ({ args }) => {
+        const value = booleanish(args[0])
+        if (value !== undefined) {
+          settings.state.value.automod = value
+        }
       },
     },
   )

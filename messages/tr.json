@@ -1,7 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allow_duplicates": "Yinelenenlere izin ver",
-  "allow_duplicates_description": "Daha önce izlenen videolar, yeniden gönderildiklerinde sıraya geri alınabilecektir.",
+  "allow_duplicates_description": "Daha önce izlenen klipler, yeniden gönderildiğinde gelecek sıraya tekrar eklenecektir. Devre dışı bırakıldığında, geçmişteki kliplerin gelecek sıraya tekrar eklenmesi engellenecektir.",
   "amber": "Amber",
   "auto_connect": "Otomatik Bağlantı",
   "auto_mod": "Otomatik Moderasyon",
@@ -24,9 +24,7 @@
   "color_mode": "Renk Modu",
   "command_clear": "Yaklaşan videolardan tüm klipleri kaldırın.",
   "command_close": "Sırayı kapatın ve yeni kliplerin gönderilmesini engelleyin.",
-  "command_disable_auto_mod": "Otomatik moderasyonu devre dışı bırakın. Bir entegrasyondan kaynaklanan moderasyon işlemleri artık yaklaşan sırayı etkilemeyecektir.",
   "command_disable_integration": "Belirtilen entegrasyonu devre dışı bırakın. Bu, ana entegrasyon veya kaynaklarından ya da sağlayıcılarından biri olabilir.",
-  "command_enable_auto_mod": "Otomatik moderasyonu etkinleştirin. Bir entegrasyondan kaynaklanan moderasyon işlemleri, yaklaşan sırayı etkileyebilir.",
   "command_enable_integration": "Belirtilen entegrasyonu etkinleştirin. Bu, ana entegrasyon veya kaynaklarından ya da sağlayıcılarından biri olabilir.",
   "command_next": "Sıradaki videolara geçmek için bir sonraki videoya atlayın.",
   "command_open": "Sırayı açın ve bağlı kaynaklardan video kliplerin gönderilmesine izin verin.",
@@ -109,6 +107,7 @@
   "number": "Sayı",
   "off": "Kapalı",
   "olive": "Zeytin",
+  "on": "Açık",
   "open": "Açık",
   "orange": "Turuncu",
   "pagination_selected": [

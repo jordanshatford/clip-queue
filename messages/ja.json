@@ -1,7 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allow_duplicates": "重複を許可する",
-  "allow_duplicates_description": "以前に視聴された動画クリップは、再提出された場合、再び視聴待ちリストに追加されます。",
+  "allow_duplicates_description": "以前に視聴したクリップは、再送信時に次の再生キューに追加されます。この機能を無効にすると、履歴にあるクリップは次の再生キューに追加されなくなります。",
   "amber": "アンバー",
   "auto_connect": "自動接続",
   "auto_mod": "自動モデレーション",
@@ -24,9 +24,7 @@
   "color_mode": "カラーモード",
   "command_clear": "再生予定リストからすべてのクリップを削除します。",
   "command_close": "キューを閉じて、新しいクリップの送信を阻止します。",
-  "command_disable_auto_mod": "自動モデレーションを無効にします。統合機能によるモデレーション操作は、今後の処理キューに影響を与えなくなります。",
   "command_disable_integration": "指定された統合を無効にします。これは、メインの統合、またはそのソースやプロバイダーのいずれかです。",
-  "command_enable_auto_mod": "自動モデレーションを有効にしてください。連携機能によるモデレーション操作は、今後の処理キューに影響を与える可能性があります。",
   "command_enable_integration": "指定された統合を有効にします。これは、メインの統合、またはそのソースやプロバイダーのいずれかです。",
   "command_next": "次のクリップへスキップします。",
   "command_open": "キューを開き、接続されているソースからクリップを送信できるようにします。",
@@ -109,6 +107,7 @@
   "number": "番号",
   "off": "オフ",
   "olive": "オリーブ",
+  "on": "の上",
   "open": "開ける",
   "orange": "オレンジ",
   "pagination_selected": [

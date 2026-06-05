@@ -1,7 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allow_duplicates": "Permitir duplicados",
-  "allow_duplicates_description": "Os vídeos visualizados anteriormente poderão retornar à fila quando forem reenviados.",
+  "allow_duplicates_description": "Os vídeos visualizados anteriormente poderão retornar à fila de reprodução ao serem reenviados. Quando desativada, essa opção impede que os vídeos no histórico sejam adicionados novamente à fila de reprodução.",
   "amber": "Âmbar",
   "auto_connect": "Conexão automática",
   "auto_mod": "Moderação automática",
@@ -24,9 +24,7 @@
   "color_mode": "Modo de cor",
   "command_clear": "Remova todos os clipes da fila de próximos vídeos.",
   "command_close": "Feche a fila e impeça o envio de novos vídeos.",
-  "command_disable_auto_mod": "Desative a moderação automática. As ações de moderação de uma integração não afetarão mais a fila de solicitações.",
   "command_disable_integration": "Desative a integração especificada. Pode ser a integração principal ou uma de suas fontes ou provedores.",
-  "command_enable_auto_mod": "Ative a moderação automática. As ações de moderação de uma integração podem afetar a fila de solicitações.",
   "command_enable_integration": "Habilite a integração especificada. Pode ser uma integração principal ou uma de suas fontes ou provedores.",
   "command_next": "Pule para o próximo vídeo na fila.",
   "command_open": "Abra a fila e permita o envio de vídeos a partir de fontes conectadas.",
@@ -109,6 +107,7 @@
   "number": "Número",
   "off": "Desligado",
   "olive": "Azeitona",
+  "on": "Sobre",
   "open": "Abrir",
   "orange": "Laranja",
   "pagination_selected": [

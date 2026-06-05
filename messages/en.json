@@ -1,7 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allow_duplicates": "Allow Duplicates",
-  "allow_duplicates_description": "Previously viewed clips will be allowed back into the queue when resubmitted.",
+  "allow_duplicates_description": "Previously viewed clips will be allowed back into the upcoming queue when resubmitted. When disabled, clips in the history will be prevented from being added back into the upcoming queue.",
   "amber": "Amber",
   "auto_connect": "Auto Connect",
   "auto_mod": "Auto Moderation",
@@ -24,9 +24,7 @@
   "color_mode": "Color Mode",
   "command_clear": "Remove all clips from the upcoming queue.",
   "command_close": "Close the queue and prevent new clips from being submitted.",
-  "command_disable_auto_mod": "Disable automatic moderation. Moderation actions from an integration will no longer affect the upcoming queue.",
   "command_disable_integration": "Disable the specified integration. This can be a main integration or one of its sources or providers.",
-  "command_enable_auto_mod": "Enable automatic moderation. Moderation actions from an integration may affect the upcoming queue.",
   "command_enable_integration": "Enable the specified integration. This can be a main integration or one of its sources or providers.",
   "command_next": "Skip to the next clip in the upcoming queue.",
   "command_open": "Open the queue and allow clips to be submitted from connected sources.",
@@ -109,6 +107,7 @@
   "number": "Number",
   "off": "Off",
   "olive": "Olive",
+  "on": "On",
   "open": "Open",
   "orange": "Orange",
   "pagination_selected": [

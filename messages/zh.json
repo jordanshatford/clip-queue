@@ -1,7 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "allow_duplicates": "允许重复项",
-  "allow_duplicates_description": "之前观看过的视频片段在重新提交时可以重新加入队列。",
+  "allow_duplicates_description": "之前观看过的片段在重新提交后可以重新加入待播放队列。如果禁用此功能，历史记录中的片段将无法重新加入待播放队列。",
   "amber": "琥珀色",
   "auto_connect": "自动连接",
   "auto_mod": "自动审核",
@@ -24,9 +24,7 @@
   "color_mode": "颜色模式",
   "command_clear": "从即将播放的队列中移除所有片段。",
   "command_close": "关闭队列，阻止提交新的视频片段。",
-  "command_disable_auto_mod": "禁用自动审核。集成中的审核操作将不再影响即将到来的队列。",
   "command_disable_integration": "禁用指定的集成。这可以是主集成，也可以是其某个数据源或提供程序。",
-  "command_enable_auto_mod": "启用自动审核。集成中的审核操作可能会影响即将进入队列的内容。",
   "command_enable_integration": "启用指定的集成。这可以是主集成，也可以是其某个数据源或提供程序。",
   "command_next": "跳至即将播放队列中的下一个片段。",
   "command_open": "打开队列，允许从已连接的源提交片段。",
@@ -109,6 +107,7 @@
   "number": "数字",
   "off": "离开",
   "olive": "橄榄",
+  "on": "在",
   "open": "打开",
   "orange": "橙子",
   "pagination_selected": [

@@ -15,11 +15,11 @@
       <template #label>
         <div class="flex items-center gap-2">
           <span>{{ m.enabled() }}</span>
-          <UKbd>{{ commands.settings.state.enabled.length }} / {{ items.length }}</UKbd>
+          <UKbd>{{ commands.settings.state.enabled.length }} / {{ commands.list.length }}</UKbd>
         </div>
       </template>
       <UFormField
-        v-for="item of items"
+        v-for="item of commands.list"
         :key="item.value"
         :label="item.label"
         :description="item.description"
@@ -65,20 +65,6 @@ definePageMeta({
 })
 
 const commands = useCommands()
-
-const items = computed(() => {
-  return Object.keys(commands.commands)
-    .sort()
-    .map((command) => {
-      const cmd = commands.commands[command]
-      return {
-        value: command,
-        label: cmd?.id,
-        description: cmd?.help.description(),
-        args: cmd?.help.args?.map((arg) => arg()),
-      }
-    })
-})
 
 const actions = computed<DropdownMenuItem[][]>(() => {
   return [

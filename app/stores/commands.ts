@@ -76,6 +76,21 @@ export const useCommands = defineStore('commands', () => {
    * Command details by command ID.
    */
   const commands = ref<Record<string, Command>>({})
+  /**
+   * Commands as a computed list of details.
+   */
+  const list = computed<{ value: string; label: string; description: string; args?: string[] }[]>(
+    () => {
+      return Object.values(commands.value)
+        .sort((a, b) => a.id.localeCompare(b.id))
+        .map((command) => ({
+          value: command.id,
+          label: command.id,
+          description: command.help.description(),
+          args: command.help?.args?.map((arg) => arg()),
+        }))
+    },
+  )
 
   /**
    * Filter out commands that not longer exist, i.e. commands that have been removed.
@@ -160,6 +175,7 @@ export const useCommands = defineStore('commands', () => {
   return {
     settings,
     commands,
+    list,
     initialize,
     register,
     unregister,
