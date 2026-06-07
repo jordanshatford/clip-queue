@@ -21,4 +21,20 @@ export class Cacheable<T> {
   public clearCache(): void {
     this.cache = {}
   }
+
+  /**
+   * A cached function response promise.
+   * @param key - The cache key.
+   * @param factory - The factory function that generates the value to cache.
+   * @returns The existing cached value if it exists, or the factory result.
+   */
+  protected async cached(key: string, factory: () => Promise<T>): Promise<T> {
+    const existing = this.cache[key]
+    if (existing) {
+      return existing
+    }
+    const value = await factory()
+    this.cache[key] = value
+    return value
+  }
 }

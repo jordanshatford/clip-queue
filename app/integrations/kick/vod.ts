@@ -32,12 +32,9 @@ export class KickVodProvider extends Cacheable<Clip> implements IntegrationProvi
   public async getClip(url: string): Promise<Clip> {
     const { id, timestamp } = getVodIdAndTimestampFromUrl(url)
     if (!id) {
-      throw new Error(`[${this.name}]: Invalid VOD URL (${url}).`)
+      throw new Error(`Invalid URL: ${url}.`)
     }
-    if (this.cache[id]) {
-      return this.cache[id]
-    }
-    try {
+    return this.cached(id, async (): Promise<Clip> => {
       const video = await getVideo(id)
       const duration = formatMilliseconds(video.livestream.duration)
       // When possible display the category provided by the API, otherwise just display that
@@ -53,7 +50,7 @@ export class KickVodProvider extends Cacheable<Clip> implements IntegrationProvi
       // when a URL is not provided by the API.
       const thumbnailUrl =
         video.livestream.thumbnail ?? video.livestream.channel.user.profilepic ?? ''
-      const response: Clip = {
+      return {
         id: video.uuid,
         title: video.livestream.session_title,
         channel: video.livestream.channel.user.username,
@@ -68,11 +65,7 @@ export class KickVodProvider extends Cacheable<Clip> implements IntegrationProvi
           start: timestamp,
         },
       }
-      this.cache[id] = response
-      return response
-    } catch (error) {
-      throw new Error(`[${this.name}]: ${error}`)
-    }
+    })
   }
 
   public getPlayerConfig(clip: Clip): PlayerConfig {

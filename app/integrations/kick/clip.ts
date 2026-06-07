@@ -31,14 +31,11 @@ export class KickClipsProvider extends Cacheable<Clip> implements IntegrationPro
   public async getClip(url: string): Promise<Clip> {
     const id = getClipIdFromUrl(url)
     if (!id) {
-      throw new Error(`[${this.name}]: Invalid clip URL (${url}).`)
+      throw new Error(`Invalid URL: ${url}.`)
     }
-    if (this.cache[id]) {
-      return this.cache[id]
-    }
-    try {
+    return this.cached(id, async (): Promise<Clip> => {
       const clip = await getClip(id)
-      const response: Clip = {
+      return {
         id: clip.id,
         title: clip.title,
         channel: clip.channel.username,
@@ -50,11 +47,7 @@ export class KickClipsProvider extends Cacheable<Clip> implements IntegrationPro
         provider: this.id,
         submitters: [],
       }
-      this.cache[id] = response
-      return response
-    } catch (error) {
-      throw new Error(`[${this.name}]: ${error}`)
-    }
+    })
   }
 
   public getPlayerConfig(clip: Clip): PlayerConfig {
@@ -74,7 +67,7 @@ const CLIP_PATH_SUFFIXS = ['/clip/', '/clips']
  * @param url - The URL of the clip.
  * @returns The clip ID or undefined if the URL is not valid.
  */
-export function getClipIdFromUrl(url: string): string | undefined {
+function getClipIdFromUrl(url: string): string | undefined {
   try {
     const uri = new URL(url)
 

@@ -69,7 +69,7 @@ describe('integrations/kick/providers/clip', () => {
     [''],
     [mockTwitchClip.url],
   ])('throws an error for unknown clip urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow('I')
+    await expect(provider.getClip(url)).rejects.toThrow(`Invalid URL: ${url}.`)
   })
 
   it('caches clip data that it fetchs', async () => {

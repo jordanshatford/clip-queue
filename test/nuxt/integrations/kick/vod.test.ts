@@ -92,7 +92,7 @@ describe('integrations/kick/providers/vod', () => {
     [mockTwitchClip.url],
     [mockKickClip.clip_url],
   ])('throws an error for unknown video urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow(`[Kick Videos]: Invalid VOD URL (${url}).`)
+    await expect(provider.getClip(url)).rejects.toThrow(`Invalid URL: ${url}.`)
   })
 
   it('caches clip data that it fetchs', async () => {

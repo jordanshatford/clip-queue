@@ -31,15 +31,12 @@ export class SoopProvider extends Cacheable<Clip> implements IntegrationProvider
   public async getClip(url: string): Promise<Clip> {
     const { id, timestamp } = getDetailsFromURL(url)
     if (!id) {
-      throw new Error(`[${this.name}]: Invalid video URL (${url}).`)
+      throw new Error(`Invalid URL: ${url}.`)
     }
-    if (this.cache[id]) {
-      return this.cache[id]
-    }
-    try {
+    return this.cached(id, async (): Promise<Clip> => {
       const endpoint = `https://openapi.sooplive.com/oembed/embedinfo?url=https://vod.sooplive.com/player/${id}`
       const oembed = await getOEmbed(endpoint)
-      const response: Clip = {
+      return {
         id: id,
         url,
         title: oembed.title,
@@ -52,11 +49,7 @@ export class SoopProvider extends Cacheable<Clip> implements IntegrationProvider
           start: timestamp,
         },
       }
-      this.cache[id] = response
-      return response
-    } catch (error) {
-      throw new Error(`[${this.name}]: ${error}`)
-    }
+    })
   }
 
   public getPlayerConfig(clip: Clip): PlayerConfig {

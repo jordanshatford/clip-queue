@@ -102,7 +102,7 @@ describe('integrations/misc/providers/vimeo', () => {
     [mockTwitchClip.url],
     [mockKickClip.clip_url],
   ])('throws an error for unknown video urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow(`[Vimeo]: Invalid video URL (${url}).`)
+    await expect(provider.getClip(url)).rejects.toThrow(`Invalid URL: ${url}.`)
   })
 
   it('caches clip data that it fetchs', async () => {

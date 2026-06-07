@@ -33,14 +33,11 @@ export class RumbleVideoProvider extends Cacheable<Clip> implements IntegrationP
   public async getClip(url: string): Promise<Clip> {
     const { id, timestamp } = getRumbleUrlDetails(url)
     if (!id) {
-      throw new Error(`[${this.name}]: Invalid video URL (${url}).`)
+      throw new Error(`Invalid URL: ${url}.`)
     }
-    if (this.cache[id]) {
-      return this.cache[id]
-    }
-    try {
+    return this.cached(id, async (): Promise<Clip> => {
       const oembed = await getRumbleOEmbed(url)
-      const response: Clip = {
+      return {
         id: id,
         url,
         title: oembed.title,
@@ -53,11 +50,7 @@ export class RumbleVideoProvider extends Cacheable<Clip> implements IntegrationP
           start: timestamp,
         },
       }
-      this.cache[id] = response
-      return response
-    } catch (error) {
-      throw new Error(`[${this.name}]: ${error}`)
-    }
+    })
   }
 
   public getPlayerConfig(clip: Clip): PlayerConfig {

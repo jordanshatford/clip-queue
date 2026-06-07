@@ -82,9 +82,7 @@ describe('integrations/rumble/providers/short', () => {
     [mockTwitchClip.url],
     [mockKickClip.clip_url],
   ])('throws an error for unknown short urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow(
-      `[Rumble Shorts]: Invalid short URL (${url}).`,
-    )
+    await expect(provider.getClip(url)).rejects.toThrow(`Invalid URL: ${url}.`)
   })
 
   it('caches clip data that it fetchs', async () => {

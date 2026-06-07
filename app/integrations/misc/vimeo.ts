@@ -31,15 +31,12 @@ export class VimeoProvider extends Cacheable<Clip> implements IntegrationProvide
   public async getClip(url: string): Promise<Clip> {
     const { id, timestamp, end } = getDetailsFromURL(url)
     if (!id) {
-      throw new Error(`[${this.name}]: Invalid video URL (${url}).`)
+      throw new Error(`Invalid URL: ${url}.`)
     }
-    if (this.cache[id]) {
-      return this.cache[id]
-    }
-    try {
+    return this.cached(id, async (): Promise<Clip> => {
       const endpoint = `https://vimeo.com/api/oembed.json?url=https://vimeo.com/${id}`
       const oembed = await getOEmbed(endpoint)
-      const response: Clip = {
+      return {
         id: id,
         url,
         title: oembed.title,
@@ -53,11 +50,7 @@ export class VimeoProvider extends Cacheable<Clip> implements IntegrationProvide
           end,
         },
       }
-      this.cache[id] = response
-      return response
-    } catch (error) {
-      throw new Error(`[${this.name}]: ${error}`)
-    }
+    })
   }
 
   public getPlayerConfig(clip: Clip): PlayerConfig {

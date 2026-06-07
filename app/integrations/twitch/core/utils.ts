@@ -20,15 +20,3 @@ const TWITCH_HOSTNAMES: string[] = [
 export function isTwitchURL(url: URL): boolean {
   return TWITCH_HOSTNAMES.includes(url.hostname)
 }
-
-/**
- * Convert a key and values to URLSearchParams.
- * @param key - The key to use in the URLSearchParams.
- * @param values - The values to append to the URLSearchParams.
- * @returns The URLSearchParams.
- */
-export function toURLParams(key: string, values: string[]): URLSearchParams {
-  const params = new URLSearchParams()
-  values.forEach((v) => params.append(key, v))
-  return params
-}

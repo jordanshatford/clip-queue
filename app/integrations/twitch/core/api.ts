@@ -6,8 +6,6 @@ import type {
   TwitchVideo,
 } from './types'
 
-import { toURLParams } from './utils'
-
 const BASE_URL = 'https://api.twitch.tv/helix'
 
 /**
@@ -40,7 +38,7 @@ export async function getVideos(
     throw new Error('Video IDs were not provided.')
   }
   const result = await $fetch<TwitchPagedResponse<TwitchVideo[]>>(`${BASE_URL}/videos`, {
-    query: toURLParams('id', ids),
+    query: { id: ids },
     headers: toCommonHeaders(clientID, token),
   })
   return result.data
@@ -63,7 +61,7 @@ export async function getClips(
     throw new Error('Clip IDs were not provided.')
   }
   const result = await $fetch<TwitchPagedResponse<TwitchClip[]>>(`${BASE_URL}/clips`, {
-    query: toURLParams('id', ids),
+    query: { id: ids },
     headers: toCommonHeaders(clientID, token),
   })
   return result.data
@@ -85,7 +83,7 @@ export async function getGames(
     throw new Error('Game IDs were not provided.')
   }
   const result = await $fetch<TwitchResponse<TwitchGame[]>>(`${BASE_URL}/games`, {
-    query: toURLParams('id', ids),
+    query: { id: ids },
     headers: toCommonHeaders(clientID, token),
   })
   return result.data

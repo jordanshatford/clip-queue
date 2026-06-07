@@ -43,23 +43,20 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
   public async getClip(url: string): Promise<Clip> {
     const { id, timestamp } = getVodIdAndTimestampFromUrl(url)
     if (!id) {
-      throw new Error(`[${this.name}]: Invalid VOD URL (${url}).`)
+      throw new Error(`Invalid URL: ${url}.`)
     }
-    if (this.cache[id]) {
-      return this.cache[id]
-    }
-    try {
+    return this.cached(id, async (): Promise<Clip> => {
       const auth = this.authentication()
       const videos = await getVideos(auth.clientId, auth.accessToken, [id])
       const video = videos[0]
       if (!video) {
-        throw new Error(`[${this.name}]: VOD not found for ID ${id}.`)
+        throw new Error(`VOD not found for ID ${id}.`)
       }
       let category = `Video (${video.duration})`
       if (timestamp) {
         category = `Video (${video.duration} at ${timestamp})`
       }
-      const response: Clip = {
+      return {
         id: video.id,
         title: video.title,
         channel: video.user_name,
@@ -74,11 +71,7 @@ export class TwitchVodProvider extends Cacheable<Clip> implements IntegrationPro
           start: timestamp,
         },
       }
-      this.cache[id] = response
-      return response
-    } catch (error) {
-      throw new Error(`[${this.name}]: ${error}`)
-    }
+    })
   }
 
   public getPlayerConfig(clip: Clip): PlayerConfig {

@@ -42,20 +42,17 @@ export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationPr
   public async getClip(url: string): Promise<Clip> {
     const id = getClipIdFromUrl(url)
     if (!id) {
-      throw new Error(`[${this.name}]: Invalid clip URL (${url}).`)
+      throw new Error(`Invalid URL: ${url}.`)
     }
-    if (this.cache[id]) {
-      return this.cache[id]
-    }
-    try {
+    return this.cached(id, async (): Promise<Clip> => {
       const auth = this.authentication()
       const clips = await getClips(auth.clientId, auth.accessToken, [id])
       const clip = clips[0]
       if (!clip) {
-        throw new Error(`[${this.name}]: Clip not found for ID ${id}.`)
+        throw new Error(`Clip not found for ID ${id}.`)
       }
       const games = await getGames(auth.clientId, auth.accessToken, [clip.game_id])
-      const response: Clip = {
+      return {
         id: clip.id,
         title: clip.title,
         channel: clip.broadcaster_name,
@@ -67,11 +64,7 @@ export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationPr
         provider: this.id,
         submitters: [],
       }
-      this.cache[id] = response
-      return response
-    } catch (error) {
-      throw new Error(`[${this.name}]: ${error}`)
-    }
+    })
   }
 
   public getPlayerConfig(clip: Clip): PlayerConfig {

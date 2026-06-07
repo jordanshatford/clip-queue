@@ -91,9 +91,7 @@ describe('integrations/youtube/providers/video', () => {
     [mockTwitchClip.url],
     [mockKickClip.clip_url],
   ])('throws an error for unknown video urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow(
-      `[YouTube Videos]: Invalid video URL (${url}).`,
-    )
+    await expect(provider.getClip(url)).rejects.toThrow(`Invalid URL: ${url}.`)
   })
 
   it('caches clip data that it fetchs', async () => {
