@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip, mockYouTubeOEmbed } from '~~/test/mocks'
+import { mockYouTubeOEmbed } from '~~/test/mocks'
+import { mockKickClip } from '~~/test/unit/kick/mocks'
 import { mockTwitchClip, mockTwitchVod } from '~~/test/unit/twitch/mocks'
 
 import type { OEmbedResponse } from '~/integrations/misc'
@@ -42,7 +43,7 @@ describe('integrations/youtube/providers/short', () => {
     expect(clip).toBeDefined()
     expect(provider.getPlayerConfigForClip(clip)).toEqual({
       type: 'iframe',
-      src: `${clip.embedUrl}/${clip.id}?autoplay=true`,
+      src: `${clip.embedUrl}?autoplay=1`,
       title: clip.title,
     })
   })

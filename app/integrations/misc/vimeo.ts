@@ -43,18 +43,22 @@ export class VimeoProvider extends AbstractIntegrationProvider {
   }
 
   public getPlayerConfigForClip(clip: Clip): PlayerConfig {
-    let src = `${clip.embedUrl}#autoplay=true`
+    const url = new URL(clip.embedUrl)
+    url.searchParams.append('autoplay', '1')
+    url.searchParams.append('muted', '0')
+    const hash = new URLSearchParams()
     const timestamp = clip.metadata?.['start']
     if (timestamp && typeof timestamp === 'string') {
-      src = `${src}&t=${timestamp}`
+      hash.append('t', timestamp)
     }
     const end = clip.metadata?.['end']
     if (end && typeof end === 'string') {
-      src = `${src}&end=${end}`
+      hash.append('end', end)
     }
+    url.hash = hash.toString()
     return {
       type: 'iframe',
-      src,
+      src: url.toString(),
       title: clip.title,
     }
   }

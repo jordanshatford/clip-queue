@@ -43,14 +43,15 @@ export class RumbleVideoProvider extends AbstractIntegrationProvider {
   }
 
   public getPlayerConfigForClip(clip: Clip): PlayerConfig {
-    let src = `${clip.embedUrl}?autoplay=2`
+    const url = new URL(clip.embedUrl)
+    url.searchParams.append('autoplay', '2')
     const timestamp = clip.metadata?.['start']
     if (timestamp && typeof timestamp === 'string') {
-      src = `${src}&start=${timestamp}`
+      url.searchParams.append('start', timestamp)
     }
     return {
       type: 'iframe',
-      src,
+      src: url.toString(),
       title: clip.title,
     }
   }

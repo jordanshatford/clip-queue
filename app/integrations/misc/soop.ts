@@ -42,14 +42,15 @@ export class SoopProvider extends AbstractIntegrationProvider {
   }
 
   public getPlayerConfigForClip(clip: Clip): PlayerConfig {
-    let src = `${clip.embedUrl}?autoPlay=true`
+    const url = new URL(clip.embedUrl)
+    url.searchParams.append('autoPlay', 'true')
     const timestamp = clip.metadata?.['start']
     if (timestamp && typeof timestamp === 'string') {
-      src = `${src}&change_second=${timestamp}`
+      url.searchParams.append('change_second', timestamp)
     }
     return {
       type: 'iframe',
-      src,
+      src: url.toString(),
       title: clip.title,
     }
   }

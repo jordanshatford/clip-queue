@@ -21,8 +21,8 @@ function createClip(overrides: Partial<Clip> = {}): Clip {
     title: 'Test Clip',
     category: 'Test Category',
     channel: 'Test Channel',
-    url: '',
-    embedUrl: '',
+    url: 'http://test.com/clip/test',
+    embedUrl: 'http://test.com/clip/embed',
     thumbnailUrl: '',
     submitters: ['ttv-chat:test-submitter'],
     provider: IntegrationID.TWITCH_CLIPS,
@@ -100,11 +100,11 @@ describe('useClip', () => {
   })
 
   it('returns provider and player config', () => {
-    const clip = createClip({ embedUrl: 'test-url' })
+    const clip = createClip({ embedUrl: 'http://test-url.com/embed' })
     const { provider, playerConfig } = useClip(clip).value
     expect(provider).toBeDefined()
     expect(playerConfig).toEqual({
-      src: 'test-url&autoplay=true&parent=localhost',
+      src: 'http://test-url.com/embed?parent=localhost&autoplay=true&muted=false',
       title: 'Test Clip',
       type: 'iframe',
     })

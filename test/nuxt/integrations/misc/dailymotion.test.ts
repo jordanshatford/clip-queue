@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip, mockKickVod, mockOEmbed } from '~~/test/mocks'
+import { mockOEmbed } from '~~/test/mocks'
+import { mockKickClip, mockKickVod } from '~~/test/unit/kick/mocks'
 import { mockTwitchClip, mockTwitchVod } from '~~/test/unit/twitch/mocks'
 
 import type { OEmbedResponse } from '~/integrations/misc/core/types'
@@ -42,7 +43,7 @@ describe('integrations/misc/providers/dailymotion', () => {
     expect(video).toBeDefined()
     expect(provider.getPlayerConfigForClip(video)).toEqual({
       type: 'iframe',
-      src: `${video.embedUrl}?autoplay=true`,
+      src: `${video.embedUrl}&autoplay=true`,
       title: video.title,
     })
   })

@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip, mockKickVod, mockOEmbed } from '~~/test/mocks'
+import { mockOEmbed } from '~~/test/mocks'
+import { mockKickClip, mockKickVod } from '~~/test/unit/kick/mocks'
 import { mockTwitchClip, mockTwitchVod } from '~~/test/unit/twitch/mocks'
 
 import type { OEmbedResponse } from '~/integrations/misc/core/types'
@@ -42,7 +43,7 @@ describe('integrations/misc/providers/vimeo', () => {
     expect(video).toBeDefined()
     expect(provider.getPlayerConfigForClip(video)).toEqual({
       type: 'iframe',
-      src: `${video.embedUrl}#autoplay=true`,
+      src: `${video.embedUrl}?autoplay=1&muted=0`,
       title: video.title,
     })
   })
@@ -53,7 +54,7 @@ describe('integrations/misc/providers/vimeo', () => {
     expect(video).toBeDefined()
     expect(provider.getPlayerConfigForClip(video)).toEqual({
       type: 'iframe',
-      src: `${video.embedUrl}#autoplay=true&t=1m21s`,
+      src: `${video.embedUrl}?autoplay=1&muted=0#t=1m21s`,
       title: video.title,
     })
   })
@@ -64,7 +65,7 @@ describe('integrations/misc/providers/vimeo', () => {
     expect(video).toBeDefined()
     expect(provider.getPlayerConfigForClip(video)).toEqual({
       type: 'iframe',
-      src: `${video.embedUrl}#autoplay=true&t=1m21s&end=2m0s`,
+      src: `${video.embedUrl}?autoplay=1&muted=0#t=1m21s&end=2m0s`,
       title: video.title,
     })
   })

@@ -40,9 +40,11 @@ export class MedalProvider extends AbstractIntegrationProvider {
   }
 
   public getPlayerConfigForClip(clip: Clip): PlayerConfig {
+    const url = new URL(clip.embedUrl)
+    url.searchParams.append('autoplay', '1')
     return {
       type: 'iframe',
-      src: `${clip.embedUrl}?autoplay=1`,
+      src: url.toString(),
       title: clip.title,
     }
   }

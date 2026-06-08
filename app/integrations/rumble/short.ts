@@ -40,9 +40,11 @@ export class RumbleShortProvider extends AbstractIntegrationProvider {
   }
 
   public getPlayerConfigForClip(clip: Clip): PlayerConfig {
+    const url = new URL(clip.embedUrl)
+    url.searchParams.append('autoplay', '2')
     return {
       type: 'iframe',
-      src: `${clip.embedUrl}?autoplay=2`,
+      src: url.toString(),
       title: clip.title,
     }
   }

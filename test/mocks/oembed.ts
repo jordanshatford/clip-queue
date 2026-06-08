@@ -45,5 +45,5 @@ export const mockOEmbed: OEmbedResponse = {
   thumbnail_height: '',
   thumbnail_width: '',
   thumbnail_url: 'https://oembed.com/test/thumbnail',
-  html: '<iframe src="https://test-src-iframe.com">',
+  html: '<iframe src="https://test-src-iframe.com/">',
 }

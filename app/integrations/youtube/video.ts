@@ -30,7 +30,7 @@ export class YouTubeVideoProvider extends AbstractIntegrationProvider {
         url,
         title: oembed.title,
         channel: oembed?.author_name ?? oembed.provider_name,
-        embedUrl: 'https://www.youtube.com/embed',
+        embedUrl: `https://www.youtube.com/embed/${id}`,
         thumbnailUrl: oembed.thumbnail_url,
         provider: this.id,
         submitters: [],
@@ -42,15 +42,16 @@ export class YouTubeVideoProvider extends AbstractIntegrationProvider {
   }
 
   public getPlayerConfigForClip(clip: Clip): PlayerConfig {
-    let src = `${clip.embedUrl}/${clip.id}?autoplay=true`
+    const url = new URL(clip.embedUrl)
+    url.searchParams.append('autoplay', '1')
     // Include timestamp in the player source if available.
     const timestamp = clip.metadata?.['start']
     if (timestamp && typeof timestamp === 'string') {
-      src = `${src}&start=${timestamp}`
+      url.searchParams.append('start', timestamp)
     }
     return {
       type: 'iframe',
-      src: src,
+      src: url.toString(),
       title: clip.title,
     }
   }

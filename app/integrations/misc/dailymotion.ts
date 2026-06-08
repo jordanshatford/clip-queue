@@ -29,7 +29,7 @@ export class DailyMotionProvider extends AbstractIntegrationProvider {
         url,
         title: oembed.title,
         channel: oembed.author_name ?? oembed.provider_name,
-        embedUrl: `https://geo.dailymotion.com/player.html?video=${id}&`,
+        embedUrl: `https://geo.dailymotion.com/player.html?video=${id}`,
         thumbnailUrl: oembed.thumbnail_url,
         provider: this.id,
         submitters: [],
@@ -38,9 +38,11 @@ export class DailyMotionProvider extends AbstractIntegrationProvider {
   }
 
   public getPlayerConfigForClip(clip: Clip): PlayerConfig {
+    const url = new URL(clip.embedUrl)
+    url.searchParams.append('autoplay', 'true')
     return {
       type: 'iframe',
-      src: `${clip.embedUrl}?autoplay=true`,
+      src: url.toString(),
       title: clip.title,
     }
   }

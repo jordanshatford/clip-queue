@@ -53,15 +53,18 @@ export class TwitchVodProvider extends AbstractIntegrationProvider {
   }
 
   public getPlayerConfigForClip(clip: Clip): PlayerConfig {
-    let src = `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`
+    const url = new URL(clip.embedUrl)
+    url.searchParams.append('parent', window.location.hostname)
+    url.searchParams.append('autoplay', 'true')
+    url.searchParams.append('muted', 'false')
     // Include timestamp in the player source if available.
     const timestamp = clip.metadata?.['start']
     if (timestamp && typeof timestamp === 'string') {
-      src = `${src}&time=${timestamp}`
+      url.searchParams.append('time', timestamp)
     }
     return {
       type: 'iframe',
-      src,
+      src: url.toString(),
       title: clip.title,
     }
   }

@@ -38,9 +38,11 @@ export class StreamableProvider extends AbstractIntegrationProvider {
   }
 
   public getPlayerConfigForClip(clip: Clip): PlayerConfig {
+    const url = new URL(clip.embedUrl)
+    url.searchParams.append('autoplay', 'true')
     return {
       type: 'iframe',
-      src: `${clip.embedUrl}?autoplay=true`,
+      src: url.toString(),
       title: clip.title,
     }
   }

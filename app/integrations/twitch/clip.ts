@@ -46,9 +46,13 @@ export class TwitchClipProvider extends AbstractIntegrationProvider {
   }
 
   public getPlayerConfigForClip(clip: Clip): PlayerConfig {
+    const url = new URL(clip.embedUrl)
+    url.searchParams.append('parent', window.location.hostname)
+    url.searchParams.append('autoplay', 'true')
+    url.searchParams.append('muted', 'false')
     return {
       type: 'iframe',
-      src: `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`,
+      src: url.toString(),
       title: clip.title,
     }
   }

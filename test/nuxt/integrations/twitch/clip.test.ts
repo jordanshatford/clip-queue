@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip } from '~~/test/mocks'
+import { mockKickClip } from '~~/test/unit/kick/mocks'
 import { mockTwitchClip, mockTwitchGame } from '~~/test/unit/twitch/mocks'
 
 import { TwitchAPI } from '#shared/twitch'
@@ -38,7 +38,7 @@ describe('integrations/twitch/providers/clip', () => {
     expect(clip).toBeDefined()
     expect(provider.getPlayerConfigForClip(clip)).toEqual({
       type: 'iframe',
-      src: `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`,
+      src: `${clip.embedUrl}?parent=${window.location.hostname}&autoplay=true&muted=false`,
       title: clip.title,
     })
   })

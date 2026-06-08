@@ -30,7 +30,7 @@ export class YouTubeShortProvider extends AbstractIntegrationProvider {
         url,
         title: oembed.title,
         channel: oembed?.author_name ?? oembed.provider_name,
-        embedUrl: 'https://www.youtube.com/embed',
+        embedUrl: `https://www.youtube.com/embed/${id}`,
         thumbnailUrl: oembed.thumbnail_url,
         provider: this.id,
         submitters: [],
@@ -39,9 +39,11 @@ export class YouTubeShortProvider extends AbstractIntegrationProvider {
   }
 
   public getPlayerConfigForClip(clip: Clip): PlayerConfig {
+    const url = new URL(clip.embedUrl)
+    url.searchParams.append('autoplay', '1')
     return {
       type: 'iframe',
-      src: `${clip.embedUrl}/${clip.id}?autoplay=true`,
+      src: url.toString(),
       title: clip.title,
     }
   }
