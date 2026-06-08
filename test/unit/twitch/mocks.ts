@@ -1,4 +1,4 @@
-import type { TwitchClip, TwitchGame, TwitchVideo } from '@/integrations/twitch'
+import type { TwitchClip, TwitchGame, TwitchVideo } from '../../../shared/twitch'
 
 export const mockTwitchGame: TwitchGame = {
   id: 'testgame',

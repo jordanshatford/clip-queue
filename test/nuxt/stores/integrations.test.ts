@@ -1,10 +1,12 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip, mockTwitchClip, mockTwitchGame } from '~~/test/mocks'
+import { mockKickClip } from '~~/test/mocks'
+import { mockTwitchClip, mockTwitchVod, mockTwitchGame } from '~~/test/unit/twitch/mocks'
 
 import type { Clip } from '~/integrations'
 import type { KickClip } from '~/integrations/kick'
-import type { TwitchClip, TwitchGame } from '~/integrations/twitch/core/types'
+
+import { TwitchAPI } from '#shared/twitch'
 
 vi.mock('~/integrations/kick/core/api', async (importOriginal) => {
   return {
@@ -13,40 +15,9 @@ vi.mock('~/integrations/kick/core/api', async (importOriginal) => {
   }
 })
 
-vi.mock('~/integrations/twitch/core/api', async (importOriginal) => {
-  return {
-    ...(await importOriginal<typeof import('~/integrations/twitch/core/api')>()),
-    getClips: vi.fn<(_cId: string, _token: string, ids: string[]) => TwitchClip[]>(
-      (_cId: string, _token: string, ids: string[]) => {
-        return ids.map((id) => ({ ...mockTwitchClip, id }))
-      },
-    ),
-    getGames: vi.fn<(_cId: string, _token: string, ids: string[]) => TwitchGame[]>(
-      (_cId: string, _token: string, ids: string[]) => {
-        return ids.map((id) => ({ ...mockTwitchGame, id }))
-      },
-    ),
-  }
-})
-
-vi.mock('~/integrations/twitch/core/utils', async (importOriginal) => {
-  return {
-    ...(await importOriginal<typeof import('~/integrations/twitch/core/utils')>()),
-    getClipIdFromUrl: vi.fn<(url: string) => string | undefined>((url: string) => {
-      if (!url.includes('twitch')) {
-        return
-      }
-      try {
-        const uri = new URL(url)
-        const segments = uri.pathname.split('/').filter(Boolean)
-        const id = segments.pop()
-        return id
-      } catch {
-        return
-      }
-    }),
-  }
-})
+vi.spyOn(TwitchAPI.prototype, 'getClip').mockResolvedValue(mockTwitchClip)
+vi.spyOn(TwitchAPI.prototype, 'getGame').mockResolvedValue(mockTwitchGame)
+vi.spyOn(TwitchAPI.prototype, 'getVideo').mockResolvedValue(mockTwitchVod)
 
 describe('integrations.ts', () => {
   beforeEach(() => {

@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { TwitchAPI } from '#shared/twitch'
 
 import type { Integration } from '../core'
 
@@ -8,12 +8,11 @@ import { TwitchChatSource } from './chat'
 import { TwitchClipProvider } from './clip'
 import { TwitchVodProvider } from './vod'
 
-export * from './core/types'
-
-export const authentication = reactive<TwitchAuthentication>(new TwitchAuthentication())
+export const authentication = reactive(new TwitchAuthentication())
+export const api = new TwitchAPI(() => authentication.details)
 export const source = reactive(new TwitchChatSource(() => authentication.user.name))
-export const clips = new TwitchClipProvider(() => authentication.details)
-export const vods = new TwitchVodProvider(() => authentication.details)
+export const clips = reactive(new TwitchClipProvider(api))
+export const vods = reactive(new TwitchVodProvider(api))
 
 export const twitch: Integration = {
   id: IntegrationID.TWITCH,
@@ -25,6 +24,6 @@ export const twitch: Integration = {
     secondary: '#FFFFFF',
   },
   authentication,
-  providers: [clips, vods],
   source,
+  providers: [clips, vods],
 }

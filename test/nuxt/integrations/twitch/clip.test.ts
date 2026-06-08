@@ -1,27 +1,18 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip, mockTwitchClip, mockTwitchGame } from '~~/test/mocks'
+import { mockKickClip } from '~~/test/mocks'
+import { mockTwitchClip, mockTwitchGame } from '~~/test/unit/twitch/mocks'
 
-import type { TwitchClip, TwitchGame } from '~/integrations/twitch/core/types'
-
+import { TwitchAPI } from '#shared/twitch'
 import { TwitchClipProvider } from '~/integrations/twitch/clip'
 
-vi.mock('~/integrations/twitch/core/api.ts', async (importOriginal) => {
-  return {
-    ...(await importOriginal<typeof import('~/integrations/twitch/core/api')>()),
-    getClips: vi.fn<(_cId: string, _token: string, ids: string[]) => TwitchClip[]>(
-      (_cId: string, _token: string, ids: string[]) => {
-        return ids.map((id) => ({ ...mockTwitchClip, id }))
-      },
-    ),
-    getGames: vi.fn<(_cId: string, _token: string, ids: string[]) => TwitchGame[]>(
-      (_cId: string, _token: string, ids: string[]) => {
-        return ids.map((id) => ({ ...mockTwitchGame, id }))
-      },
-    ),
-  }
+const api = new TwitchAPI(() => ({ clientId: '', accessToken: '' }))
+api.getClip = vi.fn().mockResolvedValue({
+  ...mockTwitchClip,
 })
-
-const provider = new TwitchClipProvider(() => ({ clientId: '', accessToken: '' }))
+api.getGame = vi.fn().mockResolvedValue({
+  ...mockTwitchGame,
+})
+const provider = new TwitchClipProvider(api)
 
 describe('integrations/twitch/providers/clip', () => {
   beforeEach(() => {

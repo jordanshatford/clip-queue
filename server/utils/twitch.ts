@@ -1,3 +1,5 @@
+import type { TwitchResponse } from '#shared/twitch'
+
 /**
  * Cookies used to store state for validating Twitch oath flow.
  */
@@ -44,14 +46,6 @@ export type TwitchTokenIntrospect = {
 }
 
 /**
- * Generic response type for Twitch API responses, where the data field is optional and the
- * message field indicates the status of the response.
- */
-export type GenericTwitchResponse<T> = {
-  data?: T
-}
-
-/**
  * Response type for Twitch user.
  */
 export type TwitchUser = {
@@ -73,4 +67,4 @@ export type TwitchUser = {
  * user object contains the user's ID, login, display name, type, broadcaster type, description,
  * profile image URL, offline image URL, view count, email (if available), and account creation date.
  */
-export type TwitchUsersResponse = GenericTwitchResponse<TwitchUser[]>
+export type TwitchUsersResponse = TwitchResponse<TwitchUser[]>

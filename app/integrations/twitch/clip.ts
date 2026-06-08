@@ -1,20 +1,21 @@
-import type { AuthenticationDetails, Clip, PlayerConfig } from '../core'
+import type { TwitchAPI } from '#shared/twitch'
+
+import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
-import { getClips, getGames } from './core/api'
 import { isTwitchURL } from './core/utils'
 
 /**
  * Provider for Twitch.tv clips.
  */
 export class TwitchClipProvider extends AbstractIntegrationProvider {
-  public constructor(private readonly authentication: () => AuthenticationDetails) {
+  public constructor(private readonly api: TwitchAPI) {
     super(IntegrationID.TWITCH_CLIPS, 'Twitch Clips', true)
   }
 
   public override get isMisconfigured(): boolean {
-    return !this.authentication().clientId || !this.authentication().accessToken
+    return this.api.isMisconfigued
   }
 
   public hasSupportForUrl(url: string): boolean {
@@ -27,18 +28,13 @@ export class TwitchClipProvider extends AbstractIntegrationProvider {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cached(id, async (): Promise<Clip> => {
-      const auth = this.authentication()
-      const clips = await getClips(auth.clientId, auth.accessToken, [id])
-      const clip = clips[0]
-      if (!clip) {
-        throw new Error(`Clip not found for ID ${id}.`)
-      }
-      const games = await getGames(auth.clientId, auth.accessToken, [clip.game_id])
+      const clip = await this.api.getClip(id)
+      const game = await this.api.getGame(clip.game_id)
       return {
         id: clip.id,
         title: clip.title,
         channel: clip.broadcaster_name,
-        category: games[0]?.name,
+        category: game.name,
         createdAt: clip.created_at,
         url,
         embedUrl: clip.embed_url,

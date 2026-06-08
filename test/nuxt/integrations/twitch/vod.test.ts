@@ -1,22 +1,15 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip, mockTwitchClip, mockTwitchVod } from '~~/test/mocks'
+import { mockKickClip } from '~~/test/mocks'
+import { mockTwitchClip, mockTwitchVod } from '~~/test/unit/twitch/mocks'
 
-import type { TwitchVideo } from '~/integrations/twitch/core/types'
-
+import { TwitchAPI } from '#shared/twitch'
 import { TwitchVodProvider } from '~/integrations/twitch/vod'
 
-vi.mock('~/integrations/twitch/core/api.ts', async (importOriginal) => {
-  return {
-    ...(await importOriginal<typeof import('~/integrations/twitch/core/api')>()),
-    getVideos: vi.fn<(_cId: string, _token: string, ids: string[]) => TwitchVideo[]>(
-      (_cId: string, _token: string, ids: string[]) => {
-        return ids.map((id) => ({ ...mockTwitchVod, id }))
-      },
-    ),
-  }
+const api = new TwitchAPI(() => ({ clientId: '', accessToken: '' }))
+api.getVideo = vi.fn().mockResolvedValue({
+  ...mockTwitchVod,
 })
-
-const provider = new TwitchVodProvider(() => ({ clientId: '', accessToken: '' }))
+const provider = new TwitchVodProvider(api)
 
 describe('integrations/twitch/providers/vod', () => {
   beforeEach(() => {

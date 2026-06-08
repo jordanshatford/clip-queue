@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip, mockKickVod, mockOEmbed, mockTwitchClip, mockTwitchVod } from '~~/test/mocks'
+import { mockKickClip, mockKickVod, mockOEmbed } from '~~/test/mocks'
+import { mockTwitchClip, mockTwitchVod } from '~~/test/unit/twitch/mocks'
 
 import type { OEmbedResponse } from '~/integrations/misc/core/types'
 

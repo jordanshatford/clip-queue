@@ -4,7 +4,6 @@ import { IntegrationID } from '@/integrations'
 
 export * from './kick'
 export * from './oembed'
-export * from './twitch'
 
 export const clipFromKick: Clip = {
   provider: IntegrationID.KICK_CLIPS,

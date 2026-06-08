@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip, mockKickVod, mockTwitchClip, mockTwitchVod } from '~~/test/mocks'
+import { mockKickClip, mockKickVod } from '~~/test/mocks'
+import { mockTwitchClip, mockTwitchVod } from '~~/test/unit/twitch/mocks'
 
 import type { KickVideo } from '~/integrations/kick/core/types'
 
@@ -7,7 +8,7 @@ import { KickVodProvider } from '~/integrations/kick/vod'
 
 vi.mock('~/integrations/kick/core/api.ts', async (importOriginal) => {
   return {
-    ...(await importOriginal<typeof import('~/integrations/twitch/core/api')>()),
+    ...(await importOriginal<typeof import('~/integrations/kick/core/api')>()),
     getVideo: vi.fn<(uuid: string) => KickVideo>((uuid: string): KickVideo => {
       return { ...mockKickVod, uuid }
     }),

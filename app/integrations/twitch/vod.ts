@@ -1,20 +1,21 @@
-import type { AuthenticationDetails, Clip, PlayerConfig } from '../core'
+import type { TwitchAPI } from '#shared/twitch'
+
+import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
-import { getVideos } from './core/api'
 import { isTwitchURL } from './core/utils'
 
 /**
  * Provider for Twitch.tv videos.
  */
 export class TwitchVodProvider extends AbstractIntegrationProvider {
-  public constructor(private readonly authentication: () => AuthenticationDetails) {
+  public constructor(private readonly api: TwitchAPI) {
     super(IntegrationID.TWITCH_VODS, 'Twitch Videos', false)
   }
 
   public override get isMisconfigured(): boolean {
-    return !this.authentication().clientId || !this.authentication().accessToken
+    return this.api.isMisconfigued
   }
 
   public hasSupportForUrl(url: string): boolean {
@@ -28,12 +29,7 @@ export class TwitchVodProvider extends AbstractIntegrationProvider {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cached(id, async (): Promise<Clip> => {
-      const auth = this.authentication()
-      const videos = await getVideos(auth.clientId, auth.accessToken, [id])
-      const video = videos[0]
-      if (!video) {
-        throw new Error(`VOD not found for ID ${id}.`)
-      }
+      const video = await this.api.getVideo(id)
       let category = `Video (${video.duration})`
       if (timestamp) {
         category = `Video (${video.duration} at ${timestamp})`

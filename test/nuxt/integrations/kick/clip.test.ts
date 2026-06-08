@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip, mockTwitchClip } from '~~/test/mocks'
+import { mockKickClip } from '~~/test/mocks'
+import { mockTwitchClip } from '~~/test/unit/twitch/mocks'
 
 import type { KickClip } from '~/integrations/kick/core/types'
 
