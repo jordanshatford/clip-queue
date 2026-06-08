@@ -1,27 +1,16 @@
-import { useStorage } from '@vueuse/core'
+import type { Clip, PlayerConfig } from '../core'
 
-import type { Clip, IntegrationProvider, PlayerConfig } from '../core'
-
-import { toStorageKey, Cacheable } from '../core'
+import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
 import { getVideo } from './core/api'
 import { isKickURL } from './core/utils'
 
-const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.KICK_VODS, 'enabled'), false)
-
 /**
  * Provider for Kick.com videos.
  */
-export class KickVodProvider extends Cacheable<Clip> implements IntegrationProvider {
-  public readonly id: IntegrationID = IntegrationID.KICK_VODS
-  public readonly name: string = 'Kick Videos'
-
-  public get isEnabled(): boolean {
-    return isEnabled.value
-  }
-
-  public set isEnabled(value: boolean) {
-    isEnabled.value = value
+export class KickVodProvider extends AbstractIntegrationProvider {
+  public constructor() {
+    super(IntegrationID.KICK_VODS, 'Kick Videos', false)
   }
 
   public hasClipSupport(url: string): boolean {

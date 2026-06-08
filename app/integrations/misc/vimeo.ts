@@ -1,26 +1,15 @@
-import { useStorage } from '@vueuse/core'
+import type { Clip, PlayerConfig } from '../core'
 
-import type { Clip, IntegrationProvider, PlayerConfig } from '../core'
-
-import { toStorageKey, Cacheable } from '../core'
+import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
 import { getOEmbed } from './core/api'
-
-const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.VIMEO, 'enabled'), false)
 
 /**
  * Provider for Vimeo.com content.
  */
-export class VimeoProvider extends Cacheable<Clip> implements IntegrationProvider {
-  public readonly id: IntegrationID = IntegrationID.VIMEO
-  public readonly name: string = 'Vimeo'
-
-  public get isEnabled() {
-    return isEnabled.value
-  }
-
-  public set isEnabled(value: boolean) {
-    isEnabled.value = value
+export class VimeoProvider extends AbstractIntegrationProvider {
+  public constructor() {
+    super(IntegrationID.VIMEO, 'Vimeo', false)
   }
 
   public hasClipSupport(url: string): boolean {

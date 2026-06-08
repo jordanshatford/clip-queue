@@ -1,38 +1,20 @@
-import { useStorage } from '@vueuse/core'
+import type { AuthenticationDetails, Clip, PlayerConfig } from '../core'
 
-import type { AuthenticationDetails, Clip, IntegrationProvider, PlayerConfig } from '../core'
-
-import { toStorageKey, Cacheable } from '../core'
+import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
 import { getClips, getGames } from './core/api'
 import { isTwitchURL } from './core/utils'
 
-const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.TWITCH_CLIPS, 'enabled'), true)
-
 /**
  * Provider for Twitch.tv clips.
  */
-export class TwitchClipProvider extends Cacheable<Clip> implements IntegrationProvider {
-  public readonly id: IntegrationID = IntegrationID.TWITCH_CLIPS
-  public readonly name: string = 'Twitch Clips'
-
-  public get isEnabled(): boolean {
-    return isEnabled.value
+export class TwitchClipProvider extends AbstractIntegrationProvider {
+  public constructor(private readonly authentication: () => AuthenticationDetails) {
+    super(IntegrationID.TWITCH_CLIPS, 'Twitch Clips', true)
   }
 
-  public set isEnabled(value: boolean) {
-    isEnabled.value = value
-  }
-
-  public get isMisconfigured(): boolean | undefined {
+  public override get isMisconfigured(): boolean {
     return !this.authentication().clientId || !this.authentication().accessToken
-  }
-
-  private authentication: () => AuthenticationDetails
-
-  public constructor(authentication: () => AuthenticationDetails) {
-    super()
-    this.authentication = authentication
   }
 
   public hasClipSupport(url: string): boolean {

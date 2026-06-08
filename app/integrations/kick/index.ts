@@ -11,8 +11,8 @@ import { KickVodProvider } from './vod'
 export * from './core/types'
 
 export const authentication = reactive<KickAuthentication>(new KickAuthentication())
-export const clips = reactive(new KickClipsProvider())
-export const vods = reactive(new KickVodProvider())
+export const clips = new KickClipsProvider()
+export const vods = new KickVodProvider()
 export const source = reactive(new KickChatSource(() => authentication.user?.name))
 
 export const kick: Integration = {

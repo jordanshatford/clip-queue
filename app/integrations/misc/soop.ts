@@ -1,26 +1,15 @@
-import { useStorage } from '@vueuse/core'
+import type { Clip, PlayerConfig } from '../core'
 
-import type { Clip, IntegrationProvider, PlayerConfig } from '../core'
-
-import { toStorageKey, Cacheable } from '../core'
+import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
 import { getOEmbed } from './core/api'
-
-const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.SOOP, 'enabled'), false)
 
 /**
  * Provider for Sooplive.com content.
  */
-export class SoopProvider extends Cacheable<Clip> implements IntegrationProvider {
-  public readonly id: IntegrationID = IntegrationID.SOOP
-  public readonly name: string = 'Soop'
-
-  public get isEnabled() {
-    return isEnabled.value
-  }
-
-  public set isEnabled(value: boolean) {
-    isEnabled.value = value
+export class SoopProvider extends AbstractIntegrationProvider {
+  public constructor() {
+    super(IntegrationID.SOOP, 'Soop', false)
   }
 
   public hasClipSupport(url: string): boolean {

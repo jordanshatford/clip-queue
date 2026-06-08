@@ -26,11 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Reactive } from 'vue'
-
-import type { IntegrationProvider } from '~/integrations'
+import type { AbstractIntegrationProvider } from '~/integrations'
 
 import { m } from '#paraglide/messages'
 
-const providers = defineModel<Reactive<IntegrationProvider>[]>({ required: true })
+const providers = defineModel<AbstractIntegrationProvider[]>({ required: true })
 </script>

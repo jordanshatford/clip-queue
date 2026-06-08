@@ -1,26 +1,15 @@
-import { useStorage } from '@vueuse/core'
+import type { Clip, PlayerConfig } from '../core'
 
-import type { Clip, IntegrationProvider, PlayerConfig } from '../core'
-
-import { toStorageKey, Cacheable } from '../core'
+import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
 import { getOEmbed } from './core/api'
-
-const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.STREAMABLE, 'enabled'), false)
 
 /**
  * Provider for Streamable.com content.
  */
-export class StreamableProvider extends Cacheable<Clip> implements IntegrationProvider {
-  public readonly id: IntegrationID = IntegrationID.STREAMABLE
-  public readonly name: string = 'Streamable'
-
-  public get isEnabled() {
-    return isEnabled.value
-  }
-
-  public set isEnabled(value: boolean) {
-    isEnabled.value = value
+export class StreamableProvider extends AbstractIntegrationProvider {
+  public constructor() {
+    super(IntegrationID.STREAMABLE, 'Streamable', false)
   }
 
   public hasClipSupport(url: string): boolean {

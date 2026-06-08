@@ -1,26 +1,15 @@
-import { useStorage } from '@vueuse/core'
+import type { Clip, PlayerConfig } from '../core'
 
-import type { Clip, IntegrationProvider, PlayerConfig } from '../core'
-
-import { toStorageKey, Cacheable } from '../core'
+import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
 import { getOEmbedProxied } from './core/api'
-
-const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.DAILYMOTION, 'enabled'), false)
 
 /**
  * Provider for Dailymotion.com content.
  */
-export class DailyMotionProvider extends Cacheable<Clip> implements IntegrationProvider {
-  public readonly id: IntegrationID = IntegrationID.DAILYMOTION
-  public readonly name: string = 'Dailymotion'
-
-  public get isEnabled() {
-    return isEnabled.value
-  }
-
-  public set isEnabled(value: boolean) {
-    isEnabled.value = value
+export class DailyMotionProvider extends AbstractIntegrationProvider {
+  public constructor() {
+    super(IntegrationID.DAILYMOTION, 'Dailymotion', false)
   }
 
   public hasClipSupport(url: string): boolean {

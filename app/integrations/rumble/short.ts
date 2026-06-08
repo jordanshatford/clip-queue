@@ -1,28 +1,17 @@
-import { useStorage } from '@vueuse/core'
+import type { Clip, PlayerConfig } from '../core'
 
-import type { Clip, IntegrationProvider, PlayerConfig } from '../core'
-
-import { toStorageKey, Cacheable } from '../core'
+import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
 import { toEmbedUrl } from '../misc/core/utils'
 import { getRumbleOEmbed } from './core/api'
 import { getRumbleUrlDetails } from './core/utils'
 
-const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.RUMBLE_SHORTS, 'enabled'), false)
-
 /**
  * Provider for Rumble.com shorts.
  */
-export class RumbleShortProvider extends Cacheable<Clip> implements IntegrationProvider {
-  public readonly id: IntegrationID = IntegrationID.RUMBLE_SHORTS
-  public readonly name: string = 'Rumble Shorts'
-
-  public get isEnabled(): boolean {
-    return isEnabled.value
-  }
-
-  public set isEnabled(value: boolean) {
-    isEnabled.value = value
+export class RumbleShortProvider extends AbstractIntegrationProvider {
+  public constructor() {
+    super(IntegrationID.RUMBLE_SHORTS, 'Rumble Shorts', false)
   }
 
   public hasClipSupport(url: string): boolean {

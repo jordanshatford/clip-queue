@@ -21,16 +21,16 @@ describe('integrations/kick/providers/clip', () => {
   })
 
   it('knows its initial enabled state', () => {
-    expect(provider.isEnabled).toEqual(true)
+    expect(provider.isEnabled.value).toEqual(true)
   })
 
   it('can be enabled and disabled', () => {
-    provider.isEnabled = true
-    expect(provider.isEnabled).toEqual(true)
-    provider.isEnabled = false
-    expect(provider.isEnabled).toEqual(false)
-    provider.isEnabled = true
-    expect(provider.isEnabled).toEqual(true)
+    provider.isEnabled.value = true
+    expect(provider.isEnabled.value).toEqual(true)
+    provider.isEnabled.value = false
+    expect(provider.isEnabled.value).toEqual(false)
+    provider.isEnabled.value = true
+    expect(provider.isEnabled.value).toEqual(true)
   })
 
   it('gets the player config of the clip', async () => {

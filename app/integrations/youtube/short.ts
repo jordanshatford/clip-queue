@@ -1,27 +1,16 @@
-import { useStorage } from '@vueuse/core'
+import type { Clip, PlayerConfig } from '../core'
 
-import type { Clip, IntegrationProvider, PlayerConfig } from '../core'
-
-import { toStorageKey, Cacheable } from '../core'
+import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
 import { getYouTubeOEmbed } from './core/api'
 import { getYouTubeUrlDetails } from './core/utils'
 
-const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.YOUTUBE_SHORTS, 'enabled'), false)
-
 /**
  * Provider for YouTube.com shorts.
  */
-export class YouTubeShortProvider extends Cacheable<Clip> implements IntegrationProvider {
-  public readonly id: IntegrationID = IntegrationID.YOUTUBE_SHORTS
-  public readonly name: string = 'YouTube Shorts'
-
-  public get isEnabled(): boolean {
-    return isEnabled.value
-  }
-
-  public set isEnabled(value: boolean) {
-    isEnabled.value = value
+export class YouTubeShortProvider extends AbstractIntegrationProvider {
+  public constructor() {
+    super(IntegrationID.YOUTUBE_SHORTS, 'YouTube Shorts', false)
   }
 
   public hasClipSupport(url: string): boolean {

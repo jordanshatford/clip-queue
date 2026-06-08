@@ -1,5 +1,4 @@
 import { useStorage } from '@vueuse/core'
-import { reactive } from 'vue'
 
 import { toStorageKey, type Integration } from '../core'
 import { IntegrationID } from '../indentify'
@@ -13,11 +12,11 @@ export * from './core/types'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.MISCELLANEOUS, 'enabled'), false)
 
-export const dailymotion = reactive(new DailyMotionProvider())
-export const medal = reactive(new MedalProvider())
-export const soop = reactive(new SoopProvider())
-export const streamable = reactive(new StreamableProvider())
-export const vimeo = reactive(new VimeoProvider())
+export const dailymotion = new DailyMotionProvider()
+export const medal = new MedalProvider()
+export const soop = new SoopProvider()
+export const streamable = new StreamableProvider()
+export const vimeo = new VimeoProvider()
 
 export const misc: Integration = {
   id: IntegrationID.MISCELLANEOUS,

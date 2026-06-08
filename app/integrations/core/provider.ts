@@ -1,5 +1,11 @@
+import type { RemovableRef } from '@vueuse/core'
+
+import { useStorage } from '@vueuse/core'
+
 import type { IntegrationID } from '../indentify'
-import type { Cacheable } from './cacheable'
+
+import { Cacheable } from './cacheable'
+import { toStorageKey } from './utils'
 
 /**
  * The configuration of the player.
@@ -59,44 +65,56 @@ export interface Clip {
 }
 
 /**
- * The interface of an integration that provides clips. These integrations handle taking a URL and
- * determining if there is content we know how to handle based on it.
+ * Abstract class for an integration provider. These take a URL and determine if they can provide
+ * clip details and playback configuration for it. They can be enabled and disabled as the user pleases.
  */
-export interface IntegrationProvider extends Cacheable<Clip> {
+export abstract class AbstractIntegrationProvider extends Cacheable<Clip> {
+  protected constructor(
+    /**
+     * The ID of the integration provider.
+     */
+    public readonly id: IntegrationID,
+    /**
+     * The display name used by the application for the integration provider.
+     */
+    public readonly name: string,
+    /**
+     * The default value for if the integration provider isEnabled.
+     */
+    defaultIsEnabled: boolean,
+  ) {
+    super()
+    this.isEnabled = useStorage<boolean>(toStorageKey(id, 'enabled'), defaultIsEnabled)
+  }
+
   /**
-   * Unique integration ID.
+   * If the integration provider is enabled.
    */
-  readonly id: IntegrationID
+  public isEnabled: RemovableRef<boolean>
   /**
-   * The display name of the authentication integration. This is used in the UI to represent the integration.
+   * If the integration provider is misconfigured.
    */
-  readonly name: string
+  public get isMisconfigured(): boolean {
+    return false
+  }
   /**
-   * Whether the provider is enabled.
+   * Check if the integration provider supports a given URL.
+   * @param url - The URL.
+   * @returns true if the integration provider supports the URL, false otherwise.
    */
-  isEnabled: boolean
-  /**
-   * True if the provider is misconfigured and may not function as intended.
-   */
-  readonly isMisconfigured?: boolean
-  /**
-   * Check if this providers supports a given URL.
-   * @param url - The URL of the clip.
-   * @returns true if the provider supports the clip URL, false otherwise.
-   */
-  hasClipSupport(url: string): boolean
+  public abstract hasClipSupport(url: string): boolean
   /**
    * Get a clip from a URL.
-   * @param url - The URL of the clip.
-   * @returns The clip.
+   * @param url - The URL.
+   * @returns The clip for the URL.
    * @throws An error if the URL is invalid or the clip cannot be retrieved.
    */
-  getClip(url: string): Promise<Clip>
+  public abstract getClip(url: string): Promise<Clip>
   /**
    * Get the player configuration for a clip.
    * @param clip - The clip to get the player config for.
    * @returns The player config.
    * @throws An error if the player config cannot be retrieved.
    */
-  getPlayerConfig(clip: Clip): PlayerConfig
+  public abstract getPlayerConfig(clip: Clip): PlayerConfig
 }
