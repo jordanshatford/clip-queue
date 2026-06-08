@@ -4,11 +4,11 @@ import { Cacheable } from '~/integrations/core/cacheable'
 
 class TestCacheable extends Cacheable<string> {
   public get(key: string): string | undefined {
-    return this.cache[key]
+    return this.cache.get(key)
   }
 
   public put(key: string, value: string): void {
-    this.cache[key] = value
+    this.cache.set(key, value)
   }
 }
 

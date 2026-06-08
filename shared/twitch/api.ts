@@ -10,8 +10,6 @@ import type {
   TwitchVideo,
 } from './types'
 
-type Cache<T> = Record<string, T>
-
 /**
  * Class used for interacting with Twitch API. It internally handles caching results
  * in memory.
@@ -19,17 +17,21 @@ type Cache<T> = Record<string, T>
 export class TwitchAPI {
   private readonly helix: $Fetch
 
-  private readonly clips: Cache<TwitchClip> = {}
-  private readonly games: Cache<TwitchGame> = {}
-  private readonly videos: Cache<TwitchVideo> = {}
+  private readonly clips: Map<string, TwitchClip> = new Map()
+  private readonly games: Map<string, TwitchGame> = new Map()
+  private readonly videos: Map<string, TwitchVideo> = new Map()
 
-  private async cached<T>(cache: Cache<T>, key: string, factory: () => Promise<T>): Promise<T> {
-    const existing = cache[key]
+  private async cached<T>(
+    cache: Map<string, T>,
+    key: string,
+    factory: () => Promise<T>,
+  ): Promise<T> {
+    const existing = cache.get(key)
     if (existing) {
       return existing
     }
     const value = await factory()
-    cache[key] = value
+    cache.set(key, value)
     return value
   }
 
@@ -63,6 +65,8 @@ export class TwitchAPI {
    * @param id - The ID of the clip.
    * @returns The clip.
    * @throws Will throw an error if no clip ID is provided, the fetch fails, or the clip does not exist.
+   *
+   * @see https://dev.twitch.tv/docs/api/reference#get-clips
    */
   public async getClip(id: string): Promise<TwitchClip> {
     if (!id) {
@@ -85,6 +89,8 @@ export class TwitchAPI {
    * @param id - The ID of the game.
    * @returns The game.
    * @throws Will throw an error if no game ID is provided, the fetch fails, or the game does not exist.
+   *
+   * @see https://dev.twitch.tv/docs/api/reference#get-games
    */
   public async getGame(id: string): Promise<TwitchGame> {
     if (!id) {
@@ -103,10 +109,12 @@ export class TwitchAPI {
   }
 
   /**
-   * Get a video (VOD) from Twitch.
+   * Get a video from Twitch.
    * @param id - The ID of the video.
    * @returns The video.
    * @throws Will throw an error if no video ID is provided, the fetch fails, or the video does not exist.
+   *
+   * @see https://dev.twitch.tv/docs/api/reference#get-videos
    */
   public async getVideo(id: string): Promise<TwitchVideo> {
     if (!id) {
