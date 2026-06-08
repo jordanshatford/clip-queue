@@ -7,9 +7,9 @@
       class="flex w-full justify-between"
     >
       <UUser
-        :name="authentication.user?.name"
+        :name="authentication.user.name"
         :avatar="{
-          src: authentication.user?.profileImageURL,
+          src: authentication.user.profileImageURL,
           loading: 'lazy',
           icon: 'lucide:image',
         }"
@@ -37,11 +37,11 @@
 <script setup lang="ts">
 import type { Reactive } from 'vue'
 
-import type { IntegrationAuthentication } from '~/integrations/core'
+import type { AbstractIntegrationAuthentication } from '~/integrations'
 
 import { m } from '#paraglide/messages'
 
-const authentication = defineModel<Reactive<IntegrationAuthentication>>({ required: true })
+const authentication = defineModel<Reactive<AbstractIntegrationAuthentication>>({ required: true })
 
 const integrations = useIntegrations()
 

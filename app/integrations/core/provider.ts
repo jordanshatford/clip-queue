@@ -86,7 +86,6 @@ export abstract class AbstractIntegrationProvider extends Cacheable<Clip> {
     super()
     this.isEnabled = useStorage<boolean>(toStorageKey(id, 'enabled'), defaultIsEnabled)
   }
-
   /**
    * If the integration provider is enabled.
    */

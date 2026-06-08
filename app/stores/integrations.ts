@@ -66,7 +66,7 @@ export const useIntegrations = defineStore('integrations', () => {
    * @param id - The integration ID of the provider.
    * @returns A provider if one exists with that ID, undefined otherwise.
    */
-  function provider(id: IntegrationID): AbstractIntegrationProvider | undefined {
+  function provider(id: IntegrationID): Reactive<AbstractIntegrationProvider> | undefined {
     for (const integration of integrations) {
       const provider = integration.providers.find((p) => p.id === id)
       if (provider) {

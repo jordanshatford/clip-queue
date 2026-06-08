@@ -34,38 +34,58 @@ export interface AuthenticationDetails {
 }
 
 /**
- * Interface representing an authentication integration. Each authentication integration must implement
- * this interface to provide a consistent way to handle authentication across different providers.
+ * Abstract class for authentication through an integration. Each authentication integration must implement
+ * this interface to provide a consistent way to handle authentication across different integrations. The user
+ * will be able to authentication with one (or many) of the available integration authentications.
  */
-export interface IntegrationAuthentication {
-  /**
-   * Unique integration ID.
-   */
-  readonly id: IntegrationID
+export abstract class AbstractIntegrationAuthentication {
+  protected constructor(
+    /**
+     * The ID of the integration provider.
+     */
+    public readonly id: IntegrationID,
+  ) {}
+  protected _isLoggedIn: boolean = false
   /**
    * If the user is currently logged in to the integration.
    */
-  readonly isLoggedIn?: boolean
+  public get isLoggedIn(): boolean {
+    return this._isLoggedIn
+  }
+  protected _user: UserDetails = { id: '', name: '', profileImageURL: '' }
   /**
    * The user details.
    */
-  readonly user?: UserDetails
+  public get user(): UserDetails {
+    return this._user
+  }
+  protected _details: AuthenticationDetails = { clientId: '', accessToken: '' }
   /**
    * The users authentication details for the integration.
    */
-  readonly details?: AuthenticationDetails
+  public get details(): AuthenticationDetails {
+    return this._details
+  }
+  /**
+   * Reset details back to the original values.
+   */
+  protected reset(): void {
+    this._isLoggedIn = false
+    this._user = { id: '', name: '', profileImageURL: '' }
+    this._details = { clientId: '', accessToken: '' }
+  }
   /**
    * Attempts to automatically log in the user if possible. This can be used on application startup to check if the user has a
    * valid session with the provider. If auto-login is successful, it returns the user details. If auto login fails it throws
    * an error to be handled by the caller.
    */
-  autoLogin: () => Promise<void>
+  public abstract autoLogin(): Promise<void>
   /**
    * Redirects the user to the authentication page of the integration to allow logging in to our application.
    */
-  login: () => Promise<void>
+  public abstract login(): Promise<void>
   /**
    * Logs out the user from the provider. This should clear any stored tokens or session information related to the provider.
    */
-  logout: () => Promise<void>
+  public abstract logout(): Promise<void>
 }

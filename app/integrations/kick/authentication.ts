@@ -1,17 +1,12 @@
-import type { UserDetails, IntegrationAuthentication } from '../core'
-
+import { AbstractIntegrationAuthentication } from '../core'
 import { IntegrationID } from '../indentify'
 
 /**
  * Kick.com OAuth authentication.
  */
-export class KickAuthentication implements IntegrationAuthentication {
-  public readonly id = IntegrationID.KICK_AUTH
-  public isLoggedIn = false
-
-  private _user: UserDetails | undefined = undefined
-  public get user(): UserDetails {
-    return this._user ?? { id: '', name: '', profileImageURL: '' }
+export class KickAuthentication extends AbstractIntegrationAuthentication {
+  public constructor() {
+    super(IntegrationID.KICK_AUTH)
   }
 
   public async autoLogin(): Promise<void> {
@@ -24,7 +19,7 @@ export class KickAuthentication implements IntegrationAuthentication {
     }
 
     this._user = current.user
-    this.isLoggedIn = true
+    this._isLoggedIn = true
   }
 
   public async login(): Promise<void> {
@@ -32,8 +27,7 @@ export class KickAuthentication implements IntegrationAuthentication {
   }
 
   public async logout(): Promise<void> {
-    this.isLoggedIn = false
-    this._user = undefined
+    super.reset()
     return await $fetch('/api/kick/oath/revoke', { method: 'POST' })
   }
 }

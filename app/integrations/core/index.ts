@@ -1,7 +1,7 @@
 import type { Reactive } from 'vue'
 
 import type { IntegrationID } from '../indentify'
-import type { IntegrationAuthentication } from './authentication'
+import type { AbstractIntegrationAuthentication } from './authentication'
 import type { AbstractIntegrationProvider } from './provider'
 import type { IntegrationSource } from './source'
 
@@ -60,14 +60,14 @@ export interface Integration {
    * be used to get authentication details required for other parts of the integration to
    * function.
    */
-  readonly authentication?: Reactive<IntegrationAuthentication>
-  /**
-   * Clip providers for the integration. Many can be defined, for example, if you wanted
-   * to have a separate provider for Twitch clips and Twitch VODs.
-   */
-  readonly providers: AbstractIntegrationProvider[]
+  readonly authentication?: Reactive<AbstractIntegrationAuthentication>
   /**
    * Clip source for the integration. URLs from this source will be detected.
    */
   readonly source?: Reactive<IntegrationSource>
+  /**
+   * Clip providers for the integration. Many can be defined, for example, if you wanted
+   * to have a separate provider for Twitch clips and Twitch VODs.
+   */
+  readonly providers: Reactive<AbstractIntegrationProvider>[]
 }
