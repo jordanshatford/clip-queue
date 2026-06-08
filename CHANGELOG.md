@@ -1,5 +1,23 @@
 # clip-queue
 
+## 3.7.0
+
+### Minor Changes
+
+- [`51413af`](https://github.com/jordanshatford/clip-queue/commit/51413af25f65c88121a0ffa185fdaca37f6d263e) - feat: move twitch api interaction to shared code
+
+### Patch Changes
+
+- [`e9b303b`](https://github.com/jordanshatford/clip-queue/commit/e9b303be757760561fbb96ce55ac24929065801d) - fix: use map for provider caches
+
+- [`e3ea726`](https://github.com/jordanshatford/clip-queue/commit/e3ea726abbb6c8c315793c164b85f8c63e78fa5b) - fix: implement abstract integration authentication class
+
+- [`0eb3ca7`](https://github.com/jordanshatford/clip-queue/commit/0eb3ca71272f1f929d3d533312eeba603f1215f9) - fix: rework underlying providers cache handling
+
+- [`27d0e74`](https://github.com/jordanshatford/clip-queue/commit/27d0e7439c0ef9af438b7d9d3d042e8184c8a371) - fix: issue causing twitch clips and vods to not work
+
+- [`ecb135f`](https://github.com/jordanshatford/clip-queue/commit/ecb135f6f4e2dd912f12f50ec77eac04e733ae1e) - fix: implement abstract integration provider class
+
 ## 3.6.0
 
 ### Minor Changes
