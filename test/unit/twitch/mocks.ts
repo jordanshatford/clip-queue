@@ -1,9 +1,10 @@
-import type { TwitchClip, TwitchGame, TwitchVideo } from '../../../shared/twitch'
+import type { TwitchClip, TwitchGame, TwitchVideo, TwitchUser } from '../../../shared/twitch'
 
 export const mockTwitchGame: TwitchGame = {
   id: 'testgame',
   name: 'testgame',
   box_art_url: 'https://twitch.tv/testgame/boxart',
+  igdb_id: '',
 }
 
 export const mockTwitchClip: TwitchClip = {
@@ -22,10 +23,13 @@ export const mockTwitchClip: TwitchClip = {
   created_at: '2024-02-22T08:47:27.000Z',
   thumbnail_url: 'https://twitch.tv/testclip/thumbnail',
   duration: 50,
+  vod_offset: 0,
+  is_featured: false,
 }
 
 export const mockTwitchVod: TwitchVideo = {
   id: 'testvod',
+  stream_id: null,
   user_id: 'testuser',
   user_login: 'testuser',
   user_name: 'testuser',
@@ -40,4 +44,17 @@ export const mockTwitchVod: TwitchVideo = {
   language: 'english',
   type: 'archive',
   duration: '1h20m',
+}
+
+export const mockTwitchUser: TwitchUser = {
+  id: 'testuser',
+  login: 'testuser',
+  display_name: 'testuser',
+  type: '',
+  broadcaster_type: '',
+  description: '',
+  profile_image_url: '',
+  offline_image_url: '',
+  email: '',
+  created_at: '2024-02-22T08:47:27.000Z',
 }

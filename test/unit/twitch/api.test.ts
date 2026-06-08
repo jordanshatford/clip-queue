@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { TwitchAPI } from '../../../shared/twitch'
-import { mockTwitchClip, mockTwitchGame, mockTwitchVod } from './mocks'
+import { mockTwitchClip, mockTwitchGame, mockTwitchUser, mockTwitchVod } from './mocks'
 
 const mockAuth = () => ({ clientId: 'client-id', accessToken: 'token' })
 
@@ -136,6 +136,48 @@ describe('TwitchAPI', () => {
       })
       const api = new TwitchAPI(mockAuth)
       await expect(api.getVideo('missing')).rejects.toThrow('Video with ID missing does not exist.')
+    })
+  })
+
+  describe('getUser', () => {
+    it('fetches a user', async () => {
+      helix.mockResolvedValueOnce({
+        data: [mockTwitchUser],
+      })
+      const api = new TwitchAPI(mockAuth)
+      await expect(api.getUser(mockTwitchUser.id)).resolves.toEqual(mockTwitchUser)
+      expect(helix).toHaveBeenCalledWith('/users', {
+        query: { id: mockTwitchUser.id },
+      })
+    })
+
+    it('fetches the current user', async () => {
+      helix.mockResolvedValueOnce({
+        data: [mockTwitchUser],
+      })
+      const api = new TwitchAPI(mockAuth)
+      await expect(api.getUser()).resolves.toEqual(mockTwitchUser)
+      expect(helix).toHaveBeenCalledWith('/users', {
+        query: { id: undefined },
+      })
+    })
+
+    it('caches users', async () => {
+      helix.mockResolvedValue({
+        data: [mockTwitchUser],
+      })
+      const api = new TwitchAPI(mockAuth)
+      await api.getUser(mockTwitchUser.id)
+      await api.getUser(mockTwitchUser.id)
+      expect(helix).toHaveBeenCalledTimes(1)
+    })
+
+    it('throws if user does not exist', async () => {
+      helix.mockResolvedValueOnce({
+        data: [],
+      })
+      const api = new TwitchAPI(mockAuth)
+      await expect(api.getUser('missing')).rejects.toThrow('User with ID missing does not exist.')
     })
   })
 })

@@ -3,21 +3,23 @@
  */
 export interface TwitchGame {
   /**
-   * The ID of the game.
+   * An ID that identifies the category or game.
    */
   id: string
   /**
-   * The name of the game.
+   * The category’s or game’s name.
    */
   name: string
   /**
-   * The URL of the box art of the game.
+   * A URL to the category’s or game’s box art. You must replace the {width}x{height} placeholder with
+   * the size of image you want.
    */
   box_art_url: string
   /**
-   * The IGDB ID of the game, or null if the game doesn't have an IGDB ID assigned at Twitch.
+   * The ID that IGDB uses to identify this game. If the IGDB ID is not available to Twitch, this field
+   * is set to an empty string.
    */
-  igdb_id?: string
+  igdb_id: string | ''
 }
 
 /**
@@ -25,43 +27,46 @@ export interface TwitchGame {
  */
 export interface TwitchClip {
   /**
-   * The clip ID.
+   * An ID that uniquely identifies the clip.
    */
   id: string
   /**
-   * The URL of the clip.
+   * A URL to the clip.
    */
   url: string
   /**
-   * The embed URL of the clip.
+   * A URL that you can use in an iframe to embed the clip (see Embedding Video and Clips).
    */
   embed_url: string
   /**
-   * The user ID of the broadcaster of the stream where the clip was created.
+   * An ID that identifies the broadcaster that the video was clipped from.
    */
   broadcaster_id: string
   /**
-   * The display name of the broadcaster of the stream where the clip was created.
+   * The broadcaster’s display name.
    */
   broadcaster_name: string
   /**
-   * The user ID of the creator of the clip.
+   * An ID that identifies the user that created the clip.
    */
   creator_id: string
   /**
-   * The display name of the creator of the clip.
+   * The user’s display name.
    */
   creator_name: string
   /**
-   * The ID of the video the clip is taken from.
+   * An ID that identifies the video that the clip came from. This field contains an empty
+   * string if the video is not available.
    */
-  video_id: string
+  video_id: string | ''
   /**
    * The ID of the game that was being played when the clip was created.
    */
   game_id: string
   /**
-   * The language of the stream where the clip was created.
+   * The ISO 639-1 two-letter language code that the broadcaster broadcasts in. For example,
+   * en for English. The value is other if the broadcaster uses a language that Twitch
+   * doesn’t support.
    */
   language: string
   /**
@@ -69,91 +74,165 @@ export interface TwitchClip {
    */
   title: string
   /**
-   * The number of views of the clip.
+   * The number of times the clip has been viewed.
    */
   view_count: number
   /**
-   * The date when the clip was created.
+   * The date and time of when the clip was created. The date and time is in RFC3339 format.
    */
   created_at: string
   /**
-   *  The URL of the thumbnail of the clip.
+   * A URL to a thumbnail image of the clip.
    */
   thumbnail_url: string
   /**
-   * The duration of the clip in seconds (up to 0.1 precision).
+   * The length of the clip, in seconds. Precision is 0.1.
    */
   duration: number
+  /**
+   * The zero-based offset, in seconds, to where the clip starts in the video (VOD). Is
+   * null if the video is not available or hasn’t been created yet from the live stream
+   * (see video_id).
+   *
+   * Note that there’s a delay between when a clip is created during a broadcast and when
+   * the offset is set. During the delay period, vod_offset is null. The delay is
+   * indeterminant but is typically minutes long.
+   */
+  vod_offset: number | null
+  /**
+   * A Boolean value that indicates if the clip is featured or not.
+   */
+  is_featured: boolean
 }
 
 /**
- * A Twitch video (VOD).
+ * A Twitch video.
  */
 export interface TwitchVideo {
   /**
-   * The ID of the video.
+   * An ID that identifies the video.
    */
   id: string
   /**
-   * The ID of the user who created the video.
+   * The ID of the stream that the video originated from if the video's type is "archive;"
+   * otherwise, null.
+   */
+  stream_id: string | null
+  /**
+   * The ID of the broadcaster that owns the video.
    */
   user_id: string
   /**
-   * The name of the user who created the video.
+   * The broadcaster's login name.
    */
   user_login: string
   /**
-   * The display name of the user who created the video.
+   * The broadcaster's display name.
    */
   user_name: string
   /**
-   * The title of the video.
+   * The video's title.
    */
   title: string
   /**
-   * The description of the video.
+   * The video's description.
    */
   description: string
   /**
-   * The date when the video was created.
+   * The date and time, in UTC, of when the video was created. The timestamp is in RFC3339
+   * format.
    */
   created_at: string
   /**
-   * The date when the video was published.
+   * The date and time, in UTC, of when the video was published. The timestamp is in RFC3339
+   * format.
    */
   published_at: string
   /**
-   * The URL of the video.
+   * The video's URL.
    */
   url: string
   /**
-   * The URL of the thumbnail of the video.
+   * A URL to a thumbnail image of the video. Before using the URL, you must replace the
+   * %{width} and %{height} placeholders with the width and height of the thumbnail you want
+   * returned. Due to current limitations, ${width} must be 320 and ${height} must be 180.
    */
   thumbnail_url: string
   /**
-   * Whether the video is public or not.
+   * The video's viewable state. Always set to public.
    */
-  viewable: 'public' | 'private'
+  viewable: string
   /**
-   * The number of views of the video.
+   * The number of times that users have watched the video.
    */
   view_count: number
   /**
-   * The language of the video.
+   * The ISO 639-1 two-letter language code that the video was broadcast in. For example, the
+   * language code is DE if the video was broadcast in German. For a list of supported languages,
+   * see Supported Stream Language. The language value is "other" if the video was broadcast in
+   * a language not in the list of supported languages.
    */
   language: string
   /**
-   * The type of the video.
+   * The video's type.
    */
-  type: 'upload' | 'archive' | 'highlight'
+  type: 'archive' | 'highlight' | 'upload'
   /**
-   * The duration of the video, as formatted by Twitch.
+   * The video's length in ISO 8601 duration format. For example, 3m21s represents 3 minutes,
+   * 21 seconds.
    */
   duration: string
+}
+
+/**
+ * A Twitch user.
+ */
+export type TwitchUser = {
   /**
-   * The ID of the stream this video belongs to.
+   * An ID that identifies the user.
    */
-  stream_id?: string
+  id: string
+  /**
+   * The user’s login name.
+   */
+  login: string
+  /**
+   * The user’s display name.
+   */
+  display_name: string
+  /**
+   * The type of user.
+   */
+  type: 'admin' | 'global_mod' | 'staff' | ''
+  /**
+   * The type of broadcaster.
+   */
+  broadcaster_type: 'affiliate' | 'partner' | ''
+  /**
+   * The user’s description of their channel.
+   */
+  description: string
+  /**
+   * A URL to the user’s profile image.
+   */
+  profile_image_url: string
+  /**
+   * A URL to the user’s offline image.
+   */
+  offline_image_url: string
+  /**
+   * The user’s verified email address. The object includes this field only if the user access
+   * token includes the user:read:email scope.
+   *
+   * If the request contains more than one user, only the user associated with the access token
+   * that provided consent will include an email address — the email address for all other users
+   * will be empty.
+   */
+  email?: string
+  /**
+   * The UTC date and time that the user’s account was created. The timestamp is in RFC3339 format.
+   */
+  created_at: string
 }
 
 /**

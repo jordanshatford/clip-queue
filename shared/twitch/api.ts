@@ -8,7 +8,10 @@ import type {
   TwitchPagedResponse,
   TwitchResponse,
   TwitchVideo,
+  TwitchUser,
 } from './types'
+
+import { CacheMap } from '../utils/cache'
 
 /**
  * Class used for interacting with Twitch API. It internally handles caching results
@@ -17,23 +20,10 @@ import type {
 export class TwitchAPI {
   private readonly helix: $Fetch
 
-  private readonly clips: Map<string, TwitchClip> = new Map()
-  private readonly games: Map<string, TwitchGame> = new Map()
-  private readonly videos: Map<string, TwitchVideo> = new Map()
-
-  private async cached<T>(
-    cache: Map<string, T>,
-    key: string,
-    factory: () => Promise<T>,
-  ): Promise<T> {
-    const existing = cache.get(key)
-    if (existing) {
-      return existing
-    }
-    const value = await factory()
-    cache.set(key, value)
-    return value
-  }
+  private readonly clips: CacheMap<TwitchClip> = new CacheMap()
+  private readonly games: CacheMap<TwitchGame> = new CacheMap()
+  private readonly videos: CacheMap<TwitchVideo> = new CacheMap()
+  private readonly users: CacheMap<TwitchUser> = new CacheMap()
 
   public constructor(
     private readonly authentication: () => { clientId: string; accessToken: string },
@@ -72,7 +62,7 @@ export class TwitchAPI {
     if (!id) {
       throw new Error('Clip ID was not provided.')
     }
-    return this.cached<TwitchClip>(this.clips, id, async (): Promise<TwitchClip> => {
+    return this.clips.cached(id, async (): Promise<TwitchClip> => {
       const response = await this.helix<TwitchPagedResponse<TwitchClip[]>>('/clips', {
         query: { id },
       })
@@ -96,7 +86,7 @@ export class TwitchAPI {
     if (!id) {
       throw new Error('Game ID was not provided.')
     }
-    return this.cached(this.games, id, async (): Promise<TwitchGame> => {
+    return this.games.cached(id, async (): Promise<TwitchGame> => {
       const response = await this.helix<TwitchResponse<TwitchGame[]>>('/games', {
         query: { id },
       })
@@ -120,7 +110,7 @@ export class TwitchAPI {
     if (!id) {
       throw new Error('Video ID was not provided.')
     }
-    return this.cached(this.videos, id, async (): Promise<TwitchVideo> => {
+    return this.videos.cached(id, async (): Promise<TwitchVideo> => {
       const response = await this.helix<TwitchPagedResponse<TwitchVideo[]>>('/videos', {
         query: { id },
       })
@@ -129,6 +119,28 @@ export class TwitchAPI {
         throw new Error(`Video with ID ${id} does not exist.`)
       }
       return video
+    })
+  }
+
+  /**
+   * Get a user from Twitch.
+   * @param id - The ID of the user. When not defined it is the user based on the current access token.
+   * @returns The user.
+   * @throws Will throw an error if the fetch fails, or the user does not exist.
+   *
+   * @see https://dev.twitch.tv/docs/api/reference#get-users
+   */
+  public async getUser(id?: string): Promise<TwitchUser> {
+    const key = id ?? this.authentication().accessToken
+    return this.users.cached(key, async (): Promise<TwitchUser> => {
+      const response = await this.helix<TwitchResponse<TwitchUser[]>>('/users', {
+        query: { id },
+      })
+      const user = response.data[0]
+      if (!user) {
+        throw new Error(`User with ID ${id} does not exist.`)
+      }
+      return user
     })
   }
 }
