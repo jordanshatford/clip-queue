@@ -1,15 +1,16 @@
+import type { KickAPI } from '#shared/kick'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
-import { getVideo } from './core/api'
 import { isKickURL } from './core/utils'
 
 /**
  * Provider for Kick.com videos.
  */
 export class KickVodProvider extends AbstractIntegrationProvider {
-  public constructor() {
+  public constructor(private readonly api: KickAPI) {
     super(IntegrationID.KICK_VODS, 'Kick Videos', false)
   }
 
@@ -24,7 +25,7 @@ export class KickVodProvider extends AbstractIntegrationProvider {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cached(id, async (): Promise<Clip> => {
-      const video = await getVideo(id)
+      const video = await this.api.getVideo(id)
       const duration = formatMilliseconds(video.livestream.duration)
       // When possible display the category provided by the API, otherwise just display that
       // it is a video.
@@ -64,7 +65,7 @@ export class KickVodProvider extends AbstractIntegrationProvider {
       src: clip.embedUrl,
       poster: clip.thumbnailUrl,
       title: clip.title,
-      start: start ? parseInt(start as string) : undefined,
+      start: start && typeof start === 'string' ? parseInt(start) : undefined,
     }
   }
 }

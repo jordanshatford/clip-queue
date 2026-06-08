@@ -1,4 +1,4 @@
-import type { KickCategory, KickChannel, KickClip, KickVideo } from '@/integrations/kick'
+import type { KickCategory, KickChannel, KickClip, KickVideo } from '../../../shared/kick'
 
 export const mockKickCategory: KickCategory = {
   id: 123,

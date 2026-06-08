@@ -1,23 +1,18 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip } from '~~/test/mocks'
+import { mockKickClip } from '~~/test/unit/kick/mocks'
 import { mockTwitchClip, mockTwitchVod, mockTwitchGame } from '~~/test/unit/twitch/mocks'
 
 import type { Clip } from '~/integrations'
-import type { KickClip } from '~/integrations/kick'
 
+import { KickAPI } from '#shared/kick'
 import { TwitchAPI } from '#shared/twitch'
-
-vi.mock('~/integrations/kick/core/api', async (importOriginal) => {
-  return {
-    ...(await importOriginal<typeof import('~/integrations/kick/core/api')>()),
-    getClip: vi.fn<(id: string) => KickClip>((id: string) => ({ ...mockKickClip, id })),
-  }
-})
 
 vi.spyOn(TwitchAPI.prototype, 'getClip').mockResolvedValue(mockTwitchClip)
 vi.spyOn(TwitchAPI.prototype, 'getGame').mockResolvedValue(mockTwitchGame)
 vi.spyOn(TwitchAPI.prototype, 'getVideo').mockResolvedValue(mockTwitchVod)
+
+vi.spyOn(KickAPI.prototype, 'getClip').mockResolvedValue(mockKickClip)
 
 describe('integrations.ts', () => {
   beforeEach(() => {

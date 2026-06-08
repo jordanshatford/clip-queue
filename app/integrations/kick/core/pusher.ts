@@ -1,6 +1,6 @@
+import { KickAPI } from '#shared/kick'
 import { EventEmitter } from '@/integrations/core'
 
-import { getChannel } from './api'
 import { sleep } from './utils'
 
 /**
@@ -272,10 +272,7 @@ export interface ClientOptions {
  * Kick chat client using internal pusher API.
  */
 export class Client extends EventEmitter<ClientEvents> {
-  /**
-   * Cache of channel names to channel chatroom ID.
-   */
-  private cache: Record<string, number> = {}
+  private readonly api: KickAPI = new KickAPI()
   /**
    * WebSocket used to interact with the Pusher endpoint.
    */
@@ -321,12 +318,8 @@ export class Client extends EventEmitter<ClientEvents> {
    * @param channel - The name of the Kick channel.
    */
   public async join(channel: string): Promise<void> {
-    // Get the chatroom ID details from the channel name. If we have already cached
-    // it, use that value as we do not expect this value to change often.
-    if (!this.cache[channel]) {
-      this.cache[channel] = (await getChannel(channel)).chatroom.id
-    }
-    const id = this.cache[channel]
+    const chnl = await this.api.getChannel(channel)
+    const id = chnl.chatroom.id
 
     // Prevent duplicate joining of chatrooms.
     if (this.channels.has(id)) {

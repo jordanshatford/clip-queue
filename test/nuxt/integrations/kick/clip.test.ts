@@ -1,19 +1,15 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip } from '~~/test/mocks'
+import { mockKickClip } from '~~/test/unit/kick/mocks'
 import { mockTwitchClip } from '~~/test/unit/twitch/mocks'
 
-import type { KickClip } from '~/integrations/kick/core/types'
-
+import { KickAPI } from '#shared/kick'
 import { KickClipsProvider } from '~/integrations/kick/clip'
 
-vi.mock('~/integrations/kick/core/api', async (importOriginal) => {
-  return {
-    ...(await importOriginal<typeof import('~/integrations/kick/core/api')>()),
-    getClip: vi.fn<(id: string) => KickClip>((id: string) => ({ ...mockKickClip, id })),
-  }
+const api = new KickAPI()
+api.getClip = vi.fn().mockResolvedValue({
+  ...mockKickClip,
 })
-
-const provider = new KickClipsProvider()
+const provider = new KickClipsProvider(api)
 
 describe('integrations/kick/providers/clip', () => {
   beforeEach(() => {

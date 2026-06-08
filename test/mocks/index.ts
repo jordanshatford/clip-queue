@@ -2,7 +2,6 @@ import type { Clip } from '@/integrations'
 
 import { IntegrationID } from '@/integrations'
 
-export * from './kick'
 export * from './oembed'
 
 export const clipFromKick: Clip = {

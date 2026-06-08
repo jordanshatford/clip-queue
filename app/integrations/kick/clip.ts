@@ -1,15 +1,16 @@
+import type { KickAPI } from '#shared/kick'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
-import { getClip } from './core/api'
 import { isKickURL } from './core/utils'
 
 /**
  * Provider for Kick.com clips.
  */
 export class KickClipsProvider extends AbstractIntegrationProvider {
-  public constructor() {
+  public constructor(private readonly api: KickAPI) {
     super(IntegrationID.KICK_CLIPS, 'Kick Clips', true)
   }
 
@@ -23,7 +24,7 @@ export class KickClipsProvider extends AbstractIntegrationProvider {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cached(id, async (): Promise<Clip> => {
-      const clip = await getClip(id)
+      const clip = await this.api.getClip(id)
       return {
         id: clip.id,
         title: clip.title,

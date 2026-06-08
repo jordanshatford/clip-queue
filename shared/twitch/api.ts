@@ -14,8 +14,9 @@ import type {
 import { CacheMap } from '../utils/cache'
 
 /**
- * Class used for interacting with Twitch API. It internally handles caching results
- * in memory.
+ * Class used for interacting with Twitch API.
+ *
+ * It internally handles caching results in memory.
  */
 export class TwitchAPI {
   private readonly helix: $Fetch

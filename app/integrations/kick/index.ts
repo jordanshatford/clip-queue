@@ -1,3 +1,5 @@
+import { KickAPI } from '#shared/kick'
+
 import type { Integration } from '../core'
 
 import { IntegrationID } from '../indentify'
@@ -6,12 +8,11 @@ import { KickChatSource } from './chat'
 import { KickClipsProvider } from './clip'
 import { KickVodProvider } from './vod'
 
-export * from './core/types'
-
 export const authentication = reactive(new KickAuthentication())
+export const api = new KickAPI()
 export const source = reactive(new KickChatSource(() => authentication.user.name))
-export const clips = reactive(new KickClipsProvider())
-export const vods = reactive(new KickVodProvider())
+export const clips = reactive(new KickClipsProvider(api))
+export const vods = reactive(new KickVodProvider(api))
 
 export const kick: Integration = {
   id: IntegrationID.KICK,
