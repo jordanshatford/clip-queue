@@ -37,9 +37,9 @@ describe('integrations/rumble/providers/video', () => {
 
   it('gets the player config of the video', async () => {
     const url = 'https://www.rumble.com/test-video.html'
-    const clip = await provider.getClip(url)
+    const clip = await provider.resolveUrl(url)
     expect(clip).toBeDefined()
-    expect(provider.getPlayerConfig(clip)).toEqual({
+    expect(provider.getPlayerConfigForClip(clip)).toEqual({
       type: 'iframe',
       src: `https://rumble.com/embed/url?autoplay=2`,
       title: clip.title,
@@ -48,9 +48,9 @@ describe('integrations/rumble/providers/video', () => {
 
   it('gets the player config of the video with a timestamp', async () => {
     const url = 'https://www.rumble.com/test-video.html?start=123'
-    const clip = await provider.getClip(url)
+    const clip = await provider.resolveUrl(url)
     expect(clip).toBeDefined()
-    expect(provider.getPlayerConfig(clip)).toEqual({
+    expect(provider.getPlayerConfigForClip(clip)).toEqual({
       type: 'iframe',
       src: `https://rumble.com/embed/url?autoplay=2&start=123`,
       title: clip.title,
@@ -59,7 +59,7 @@ describe('integrations/rumble/providers/video', () => {
 
   it('can get a video from a youtube url', async () => {
     const url = 'https://www.rumble.com/test-video.html?start=123'
-    const video = await provider.getClip(url)
+    const video = await provider.resolveUrl(url)
     expect(video).toBeDefined()
     expect(video.id).toEqual('test-video.html')
   })
@@ -86,7 +86,7 @@ describe('integrations/rumble/providers/video', () => {
     ['https://rumble.com/<ID>-<NAME>.html', true],
     ['https://rumble.com/<ID>-<NAME>.html?start=<TIMESTAMP>', true],
   ])('can detect video urls it supports: (url: %s)', async (url: string, expected: boolean) => {
-    expect(provider.hasClipSupport(url)).toEqual(expected)
+    expect(provider.hasSupportForUrl(url)).toEqual(expected)
   })
 
   it.each([
@@ -95,21 +95,21 @@ describe('integrations/rumble/providers/video', () => {
     [mockTwitchClip.url],
     [mockKickClip.clip_url],
   ])('throws an error for unknown video urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow(`Invalid URL: ${url}.`)
+    await expect(provider.resolveUrl(url)).rejects.toThrow(`Invalid URL: ${url}.`)
   })
 
   it('caches clip data that it fetchs', async () => {
     const url = 'https://www.rumble.com/test-video.html'
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
   })
 
   it('can have the cached data cleared', async () => {
     const url = 'https://www.rumble.com/test-video.html'
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
     provider.clearCache()
     expect(provider.hasCachedData).toEqual(false)

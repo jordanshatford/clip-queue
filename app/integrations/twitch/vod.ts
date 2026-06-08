@@ -17,12 +17,12 @@ export class TwitchVodProvider extends AbstractIntegrationProvider {
     return !this.authentication().clientId || !this.authentication().accessToken
   }
 
-  public hasClipSupport(url: string): boolean {
+  public hasSupportForUrl(url: string): boolean {
     const { id } = getVodIdAndTimestampFromUrl(url)
     return id !== undefined
   }
 
-  public async getClip(url: string): Promise<Clip> {
+  public async resolveUrl(url: string): Promise<Clip> {
     const { id, timestamp } = getVodIdAndTimestampFromUrl(url)
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
@@ -56,7 +56,7 @@ export class TwitchVodProvider extends AbstractIntegrationProvider {
     })
   }
 
-  public getPlayerConfig(clip: Clip): PlayerConfig {
+  public getPlayerConfigForClip(clip: Clip): PlayerConfig {
     let src = `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`
     // Include timestamp in the player source if available.
     const timestamp = clip.metadata?.['start']

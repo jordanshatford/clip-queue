@@ -13,12 +13,12 @@ export class KickVodProvider extends AbstractIntegrationProvider {
     super(IntegrationID.KICK_VODS, 'Kick Videos', false)
   }
 
-  public hasClipSupport(url: string): boolean {
+  public hasSupportForUrl(url: string): boolean {
     const { id } = getVodIdAndTimestampFromUrl(url)
     return id !== undefined
   }
 
-  public async getClip(url: string): Promise<Clip> {
+  public async resolveUrl(url: string): Promise<Clip> {
     const { id, timestamp } = getVodIdAndTimestampFromUrl(url)
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
@@ -57,7 +57,7 @@ export class KickVodProvider extends AbstractIntegrationProvider {
     })
   }
 
-  public getPlayerConfig(clip: Clip): PlayerConfig {
+  public getPlayerConfigForClip(clip: Clip): PlayerConfig {
     const start = clip.metadata?.['start']
     return {
       type: 'video',

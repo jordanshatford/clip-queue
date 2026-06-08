@@ -13,12 +13,12 @@ export class YouTubeShortProvider extends AbstractIntegrationProvider {
     super(IntegrationID.YOUTUBE_SHORTS, 'YouTube Shorts', false)
   }
 
-  public hasClipSupport(url: string): boolean {
+  public hasSupportForUrl(url: string): boolean {
     const { type, id } = getYouTubeUrlDetails(url)
     return id !== undefined && type === 'short'
   }
 
-  public async getClip(url: string): Promise<Clip> {
+  public async resolveUrl(url: string): Promise<Clip> {
     const { id } = getYouTubeUrlDetails(url)
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
@@ -38,7 +38,7 @@ export class YouTubeShortProvider extends AbstractIntegrationProvider {
     })
   }
 
-  public getPlayerConfig(clip: Clip): PlayerConfig {
+  public getPlayerConfigForClip(clip: Clip): PlayerConfig {
     return {
       type: 'iframe',
       src: `${clip.embedUrl}/${clip.id}?autoplay=true`,

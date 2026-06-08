@@ -56,7 +56,7 @@ export function useClip(clip: MaybeRef<Clip>) {
     })
     const source = first.source ? integrations.source(first.source) : undefined
     const provider = integrations.provider(c.provider)
-    const playerConfig = provider?.getPlayerConfig(c)
+    const playerConfig = provider?.getPlayerConfigForClip(c)
 
     return {
       /**

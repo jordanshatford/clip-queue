@@ -14,12 +14,12 @@ export class RumbleVideoProvider extends AbstractIntegrationProvider {
     super(IntegrationID.RUMBLE_VIDEOS, 'Rumble Videos', false)
   }
 
-  public hasClipSupport(url: string): boolean {
+  public hasSupportForUrl(url: string): boolean {
     const { type, id } = getRumbleUrlDetails(url)
     return id !== undefined && type === 'video'
   }
 
-  public async getClip(url: string): Promise<Clip> {
+  public async resolveUrl(url: string): Promise<Clip> {
     const { id, timestamp } = getRumbleUrlDetails(url)
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
@@ -42,7 +42,7 @@ export class RumbleVideoProvider extends AbstractIntegrationProvider {
     })
   }
 
-  public getPlayerConfig(clip: Clip): PlayerConfig {
+  public getPlayerConfigForClip(clip: Clip): PlayerConfig {
     let src = `${clip.embedUrl}?autoplay=2`
     const timestamp = clip.metadata?.['start']
     if (timestamp && typeof timestamp === 'string') {

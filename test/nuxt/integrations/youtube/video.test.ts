@@ -37,9 +37,9 @@ describe('integrations/youtube/providers/video', () => {
 
   it('gets the player config of the video', async () => {
     const url = 'https://www.youtube.com/watch?v=id'
-    const clip = await provider.getClip(url)
+    const clip = await provider.resolveUrl(url)
     expect(clip).toBeDefined()
-    expect(provider.getPlayerConfig(clip)).toEqual({
+    expect(provider.getPlayerConfigForClip(clip)).toEqual({
       type: 'iframe',
       src: `${clip.embedUrl}/${clip.id}?autoplay=true`,
       title: clip.title,
@@ -48,9 +48,9 @@ describe('integrations/youtube/providers/video', () => {
 
   it('gets the player config of the video with a timestamp', async () => {
     const url = 'https://www.youtube.com/watch?v=id&t=123'
-    const clip = await provider.getClip(url)
+    const clip = await provider.resolveUrl(url)
     expect(clip).toBeDefined()
-    expect(provider.getPlayerConfig(clip)).toEqual({
+    expect(provider.getPlayerConfigForClip(clip)).toEqual({
       type: 'iframe',
       src: `${clip.embedUrl}/${clip.id}?autoplay=true&start=123`,
       title: clip.title,
@@ -59,7 +59,7 @@ describe('integrations/youtube/providers/video', () => {
 
   it('can get a video from a youtube url', async () => {
     const url = 'https://www.youtube.com/watch?v=id&t=123'
-    const video = await provider.getClip(url)
+    const video = await provider.resolveUrl(url)
     expect(video).toBeDefined()
     expect(video.id).toEqual('id')
   })
@@ -82,7 +82,7 @@ describe('integrations/youtube/providers/video', () => {
     ['https://youtu.be/<ID>', true],
     ['https://youtu.be/<ID>?t=<TIMESTAMP>', true],
   ])('can detect video urls it supports: (url: %s)', async (url: string, expected: boolean) => {
-    expect(provider.hasClipSupport(url)).toEqual(expected)
+    expect(provider.hasSupportForUrl(url)).toEqual(expected)
   })
 
   it.each([
@@ -91,21 +91,21 @@ describe('integrations/youtube/providers/video', () => {
     [mockTwitchClip.url],
     [mockKickClip.clip_url],
   ])('throws an error for unknown video urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow(`Invalid URL: ${url}.`)
+    await expect(provider.resolveUrl(url)).rejects.toThrow(`Invalid URL: ${url}.`)
   })
 
   it('caches clip data that it fetchs', async () => {
     const url = 'https://www.youtube.com/watch?v=id?t=123'
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
   })
 
   it('can have the cached data cleared', async () => {
     const url = 'https://www.youtube.com/watch?v=id?t=123'
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
     provider.clearCache()
     expect(provider.hasCachedData).toEqual(false)

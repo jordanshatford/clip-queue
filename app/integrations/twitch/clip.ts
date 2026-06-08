@@ -17,11 +17,11 @@ export class TwitchClipProvider extends AbstractIntegrationProvider {
     return !this.authentication().clientId || !this.authentication().accessToken
   }
 
-  public hasClipSupport(url: string): boolean {
+  public hasSupportForUrl(url: string): boolean {
     return getClipIdFromUrl(url) !== undefined
   }
 
-  public async getClip(url: string): Promise<Clip> {
+  public async resolveUrl(url: string): Promise<Clip> {
     const id = getClipIdFromUrl(url)
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
@@ -49,7 +49,7 @@ export class TwitchClipProvider extends AbstractIntegrationProvider {
     })
   }
 
-  public getPlayerConfig(clip: Clip): PlayerConfig {
+  public getPlayerConfigForClip(clip: Clip): PlayerConfig {
     return {
       type: 'iframe',
       src: `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`,

@@ -102,19 +102,19 @@ export abstract class AbstractIntegrationProvider extends Cacheable<Clip> {
    * @param url - The URL.
    * @returns true if the integration provider supports the URL, false otherwise.
    */
-  public abstract hasClipSupport(url: string): boolean
+  public abstract hasSupportForUrl(url: string): boolean
   /**
-   * Get a clip from a URL.
+   * Resolve a URL into details for a clip.
    * @param url - The URL.
    * @returns The clip for the URL.
    * @throws An error if the URL is invalid or the clip cannot be retrieved.
    */
-  public abstract getClip(url: string): Promise<Clip>
+  public abstract resolveUrl(url: string): Promise<Clip>
   /**
    * Get the player configuration for a clip.
    * @param clip - The clip to get the player config for.
    * @returns The player config.
    * @throws An error if the player config cannot be retrieved.
    */
-  public abstract getPlayerConfig(clip: Clip): PlayerConfig
+  public abstract getPlayerConfigForClip(clip: Clip): PlayerConfig
 }

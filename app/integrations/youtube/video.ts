@@ -13,12 +13,12 @@ export class YouTubeVideoProvider extends AbstractIntegrationProvider {
     super(IntegrationID.YOUTUBE_VIDEOS, 'YouTube Videos', false)
   }
 
-  public hasClipSupport(url: string): boolean {
+  public hasSupportForUrl(url: string): boolean {
     const { type, id } = getYouTubeUrlDetails(url)
     return id !== undefined && type === 'video'
   }
 
-  public async getClip(url: string): Promise<Clip> {
+  public async resolveUrl(url: string): Promise<Clip> {
     const { id, timestamp } = getYouTubeUrlDetails(url)
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
@@ -41,7 +41,7 @@ export class YouTubeVideoProvider extends AbstractIntegrationProvider {
     })
   }
 
-  public getPlayerConfig(clip: Clip): PlayerConfig {
+  public getPlayerConfigForClip(clip: Clip): PlayerConfig {
     let src = `${clip.embedUrl}/${clip.id}?autoplay=true`
     // Include timestamp in the player source if available.
     const timestamp = clip.metadata?.['start']

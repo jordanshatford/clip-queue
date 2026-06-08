@@ -37,9 +37,9 @@ describe('integrations/misc/providers/medal', () => {
 
   it('gets the player config of the video', async () => {
     const url = 'https://medal.tv/games/test-game/clips/test-id'
-    const video = await provider.getClip(url)
+    const video = await provider.resolveUrl(url)
     expect(video).toBeDefined()
-    expect(provider.getPlayerConfig(video)).toEqual({
+    expect(provider.getPlayerConfigForClip(video)).toEqual({
       type: 'iframe',
       src: `${video.embedUrl}?autoplay=1`,
       title: video.title,
@@ -48,7 +48,7 @@ describe('integrations/misc/providers/medal', () => {
 
   it('can get a video from a medal url', async () => {
     const url = 'https://medal.tv/games/test-game/clips/test-id'
-    const video = await provider.getClip(url)
+    const video = await provider.resolveUrl(url)
     expect(video).toBeDefined()
     expect(video.id).toEqual('test-id')
   })
@@ -72,7 +72,7 @@ describe('integrations/misc/providers/medal', () => {
     ['https://vimeo.com/test#t=1m0s&end=2m1s', false],
     ['https://medal.tv/games/test-game/clips/test-id', true],
   ])('can detect clip urls it supports: (url: %s)', async (url: string, expected: boolean) => {
-    expect(provider.hasClipSupport(url)).toEqual(expected)
+    expect(provider.hasSupportForUrl(url)).toEqual(expected)
   })
 
   it.each([
@@ -81,21 +81,21 @@ describe('integrations/misc/providers/medal', () => {
     [mockTwitchClip.url],
     [mockKickClip.clip_url],
   ])('throws an error for unknown video urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow(`Invalid URL: ${url}.`)
+    await expect(provider.resolveUrl(url)).rejects.toThrow(`Invalid URL: ${url}.`)
   })
 
   it('caches clip data that it fetchs', async () => {
     const url = 'https://medal.tv/games/test-game/clips/test-id'
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
   })
 
   it('can have the cached data cleared', async () => {
     const url = 'https://medal.tv/games/test-game/clips/test-id'
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
     provider.clearCache()
     expect(provider.hasCachedData).toEqual(false)

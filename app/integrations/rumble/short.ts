@@ -14,12 +14,12 @@ export class RumbleShortProvider extends AbstractIntegrationProvider {
     super(IntegrationID.RUMBLE_SHORTS, 'Rumble Shorts', false)
   }
 
-  public hasClipSupport(url: string): boolean {
+  public hasSupportForUrl(url: string): boolean {
     const { type, id } = getRumbleUrlDetails(url)
     return id !== undefined && type === 'short'
   }
 
-  public async getClip(url: string): Promise<Clip> {
+  public async resolveUrl(url: string): Promise<Clip> {
     const { id } = getRumbleUrlDetails(url)
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
@@ -39,7 +39,7 @@ export class RumbleShortProvider extends AbstractIntegrationProvider {
     })
   }
 
-  public getPlayerConfig(clip: Clip): PlayerConfig {
+  public getPlayerConfigForClip(clip: Clip): PlayerConfig {
     return {
       type: 'iframe',
       src: `${clip.embedUrl}?autoplay=2`,

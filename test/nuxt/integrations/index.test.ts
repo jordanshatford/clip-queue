@@ -6,7 +6,7 @@ const providers = integrations.flatMap((i) => i.providers)
 
 // Helper to get integration ID of provider than handles a URL.
 function getIntegrationId(url: string): IntegrationID | undefined {
-  const matches = providers.filter((p) => p.hasClipSupport(url))
+  const matches = providers.filter((p) => p.hasSupportForUrl(url))
 
   // We should never have overlapping providers.
   if (matches.length > 1) {

@@ -311,11 +311,11 @@ export const useIntegrations = defineStore('integrations', () => {
         continue
       }
       for (const provider of integration.providers) {
-        if (!provider.isEnabled || !provider.hasClipSupport(url)) {
+        if (!provider.isEnabled || !provider.hasSupportForUrl(url)) {
           continue
         }
         try {
-          const clip = await provider.getClip(url)
+          const clip = await provider.resolveUrl(url)
           return clip
         } catch (error) {
           logger.error(`${error}`)

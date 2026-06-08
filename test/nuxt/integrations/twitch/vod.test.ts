@@ -38,9 +38,9 @@ describe('integrations/twitch/providers/vod', () => {
   })
 
   it('gets the player config of the vod', async () => {
-    const clip = await provider.getClip(mockTwitchVod.url)
+    const clip = await provider.resolveUrl(mockTwitchVod.url)
     expect(clip).toBeDefined()
-    expect(provider.getPlayerConfig(clip)).toEqual({
+    expect(provider.getPlayerConfigForClip(clip)).toEqual({
       type: 'iframe',
       src: `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`,
       title: clip.title,
@@ -50,9 +50,9 @@ describe('integrations/twitch/providers/vod', () => {
   it('gets the player config of the vod with a timestamp', async () => {
     const time = '1h20m5s'
     const url = `${mockTwitchVod.url}?t=${time}`
-    const clip = await provider.getClip(url)
+    const clip = await provider.resolveUrl(url)
     expect(clip).toBeDefined()
-    expect(provider.getPlayerConfig(clip)).toEqual({
+    expect(provider.getPlayerConfigForClip(clip)).toEqual({
       type: 'iframe',
       src: `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}&time=${time}`,
       title: clip.title,
@@ -60,7 +60,7 @@ describe('integrations/twitch/providers/vod', () => {
   })
 
   it('can get a video from a twitch url', async () => {
-    const video = await provider.getClip(mockTwitchVod.url)
+    const video = await provider.resolveUrl(mockTwitchVod.url)
     expect(video).toBeDefined()
     expect(video.id).toEqual(mockTwitchVod.id)
   })
@@ -78,7 +78,7 @@ describe('integrations/twitch/providers/vod', () => {
     ['https://clips.twitch.tv/channel/testclip', false],
     ['https://www.twitch.tv/channel/clip/testclip', false],
   ])('can detect clip urls it supports: (url: %s)', async (url: string, expected: boolean) => {
-    expect(provider.hasClipSupport(url)).toEqual(expected)
+    expect(provider.hasSupportForUrl(url)).toEqual(expected)
   })
 
   it.each([
@@ -87,19 +87,19 @@ describe('integrations/twitch/providers/vod', () => {
     [mockTwitchClip.url],
     [mockKickClip.clip_url],
   ])('throws an error for unknown video urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow(`Invalid URL: ${url}.`)
+    await expect(provider.resolveUrl(url)).rejects.toThrow(`Invalid URL: ${url}.`)
   })
 
   it('caches clip data that it fetchs', async () => {
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(mockTwitchVod.url)).toBeDefined()
+    expect(await provider.resolveUrl(mockTwitchVod.url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
-    expect(await provider.getClip(mockTwitchVod.url)).toBeDefined()
+    expect(await provider.resolveUrl(mockTwitchVod.url)).toBeDefined()
   })
 
   it('can have the cached data cleared', async () => {
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(mockTwitchVod.url)).toBeDefined()
+    expect(await provider.resolveUrl(mockTwitchVod.url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
     provider.clearCache()
     expect(provider.hasCachedData).toEqual(false)

@@ -43,9 +43,9 @@ describe('integrations/twitch/providers/clip', () => {
   })
 
   it('gets the player config of the clip', async () => {
-    const clip = await provider.getClip(mockTwitchClip.url)
+    const clip = await provider.resolveUrl(mockTwitchClip.url)
     expect(clip).toBeDefined()
-    expect(provider.getPlayerConfig(clip)).toEqual({
+    expect(provider.getPlayerConfigForClip(clip)).toEqual({
       type: 'iframe',
       src: `${clip.embedUrl}&autoplay=true&parent=${window.location.hostname}`,
       title: clip.title,
@@ -53,7 +53,7 @@ describe('integrations/twitch/providers/clip', () => {
   })
 
   it('can get a clip from a twitch url', async () => {
-    const clip = await provider.getClip(mockTwitchClip.url)
+    const clip = await provider.resolveUrl(mockTwitchClip.url)
     expect(clip).toBeDefined()
     expect(clip.id).toEqual(mockTwitchClip.id)
   })
@@ -70,7 +70,7 @@ describe('integrations/twitch/providers/clip', () => {
     ['https://clips.twitch.tv/channel/testclip', true],
     ['https://www.twitch.tv/channel/clip/testclip', true],
   ])('can detect clip urls it supports: (url: %s)', async (url: string, expected: boolean) => {
-    expect(provider.hasClipSupport(url)).toEqual(expected)
+    expect(provider.hasSupportForUrl(url)).toEqual(expected)
   })
 
   it.each([
@@ -78,19 +78,19 @@ describe('integrations/twitch/providers/clip', () => {
     [''],
     [mockKickClip.clip_url],
   ])('throws an error for unknown clip urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow(`Invalid URL: ${url}.`)
+    await expect(provider.resolveUrl(url)).rejects.toThrow(`Invalid URL: ${url}.`)
   })
 
   it('caches clip data that it fetchs', async () => {
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(mockTwitchClip.url)).toBeDefined()
+    expect(await provider.resolveUrl(mockTwitchClip.url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
-    expect(await provider.getClip(mockTwitchClip.url)).toBeDefined()
+    expect(await provider.resolveUrl(mockTwitchClip.url)).toBeDefined()
   })
 
   it('can have the cached data cleared', async () => {
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(mockTwitchClip.url)).toBeDefined()
+    expect(await provider.resolveUrl(mockTwitchClip.url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
     provider.clearCache()
     expect(provider.hasCachedData).toEqual(false)

@@ -5,7 +5,7 @@ import { IntegrationID, type Clip } from '~/integrations'
 
 const sourceMock = vi.fn((id: string) => ({ id }))
 const providerMock = vi.fn(() => ({
-  getPlayerConfig: vi.fn((clip: Clip) => ({ provider: clip.provider })),
+  getPlayerConfigForClip: vi.fn((clip: Clip) => ({ provider: clip.provider })),
 }))
 
 vi.mock('~/composables/useIntegrations', () => ({

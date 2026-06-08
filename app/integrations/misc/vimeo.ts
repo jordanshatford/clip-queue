@@ -12,12 +12,12 @@ export class VimeoProvider extends AbstractIntegrationProvider {
     super(IntegrationID.VIMEO, 'Vimeo', false)
   }
 
-  public hasClipSupport(url: string): boolean {
+  public hasSupportForUrl(url: string): boolean {
     const { id } = getDetailsFromURL(url)
     return id !== undefined
   }
 
-  public async getClip(url: string): Promise<Clip> {
+  public async resolveUrl(url: string): Promise<Clip> {
     const { id, timestamp, end } = getDetailsFromURL(url)
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
@@ -42,7 +42,7 @@ export class VimeoProvider extends AbstractIntegrationProvider {
     })
   }
 
-  public getPlayerConfig(clip: Clip): PlayerConfig {
+  public getPlayerConfigForClip(clip: Clip): PlayerConfig {
     let src = `${clip.embedUrl}#autoplay=true`
     const timestamp = clip.metadata?.['start']
     if (timestamp && typeof timestamp === 'string') {

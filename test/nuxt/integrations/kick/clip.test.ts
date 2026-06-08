@@ -34,9 +34,9 @@ describe('integrations/kick/providers/clip', () => {
   })
 
   it('gets the player config of the clip', async () => {
-    const clip = await provider.getClip(mockKickClip.clip_url)
+    const clip = await provider.resolveUrl(mockKickClip.clip_url)
     expect(clip).toBeDefined()
-    expect(provider.getPlayerConfig(clip)).toEqual({
+    expect(provider.getPlayerConfigForClip(clip)).toEqual({
       type: 'video',
       src: clip.embedUrl,
       title: clip.title,
@@ -45,7 +45,7 @@ describe('integrations/kick/providers/clip', () => {
   })
 
   it('can get a clip from a kick url', async () => {
-    const clip = await provider.getClip(mockKickClip.clip_url)
+    const clip = await provider.resolveUrl(mockKickClip.clip_url)
     expect(clip).toBeDefined()
     expect(clip.id).toEqual(mockKickClip.id)
   })
@@ -61,7 +61,7 @@ describe('integrations/kick/providers/clip', () => {
     ['https://kick.com/test?clip=clip_01HQ7ZWTEKKJP16Y34SDFF2SBC', true],
     ['https://kick.com/test?somenonclipparam=123', false],
   ])('can detect clip urls it supports: (url: %s)', async (url: string, expected: boolean) => {
-    expect(provider.hasClipSupport(url)).toEqual(expected)
+    expect(provider.hasSupportForUrl(url)).toEqual(expected)
   })
 
   it.each([
@@ -69,19 +69,19 @@ describe('integrations/kick/providers/clip', () => {
     [''],
     [mockTwitchClip.url],
   ])('throws an error for unknown clip urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow(`Invalid URL: ${url}.`)
+    await expect(provider.resolveUrl(url)).rejects.toThrow(`Invalid URL: ${url}.`)
   })
 
   it('caches clip data that it fetchs', async () => {
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(mockKickClip.clip_url)).toBeDefined()
+    expect(await provider.resolveUrl(mockKickClip.clip_url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
-    expect(await provider.getClip(mockKickClip.clip_url)).toBeDefined()
+    expect(await provider.resolveUrl(mockKickClip.clip_url)).toBeDefined()
   })
 
   it('can have the cached data cleared', async () => {
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(mockKickClip.clip_url)).toBeDefined()
+    expect(await provider.resolveUrl(mockKickClip.clip_url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
     provider.clearCache()
     expect(provider.hasCachedData).toEqual(false)

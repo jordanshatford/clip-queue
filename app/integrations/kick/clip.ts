@@ -13,11 +13,11 @@ export class KickClipsProvider extends AbstractIntegrationProvider {
     super(IntegrationID.KICK_CLIPS, 'Kick Clips', true)
   }
 
-  public hasClipSupport(url: string): boolean {
+  public hasSupportForUrl(url: string): boolean {
     return getClipIdFromUrl(url) !== undefined
   }
 
-  public async getClip(url: string): Promise<Clip> {
+  public async resolveUrl(url: string): Promise<Clip> {
     const id = getClipIdFromUrl(url)
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
@@ -39,7 +39,7 @@ export class KickClipsProvider extends AbstractIntegrationProvider {
     })
   }
 
-  public getPlayerConfig(clip: Clip): PlayerConfig {
+  public getPlayerConfigForClip(clip: Clip): PlayerConfig {
     return {
       type: 'video',
       src: clip.embedUrl,

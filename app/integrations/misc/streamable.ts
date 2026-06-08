@@ -12,11 +12,11 @@ export class StreamableProvider extends AbstractIntegrationProvider {
     super(IntegrationID.STREAMABLE, 'Streamable', false)
   }
 
-  public hasClipSupport(url: string): boolean {
+  public hasSupportForUrl(url: string): boolean {
     return getIdFromURL(url) !== undefined
   }
 
-  public async getClip(url: string): Promise<Clip> {
+  public async resolveUrl(url: string): Promise<Clip> {
     const id = getIdFromURL(url)
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
@@ -37,7 +37,7 @@ export class StreamableProvider extends AbstractIntegrationProvider {
     })
   }
 
-  public getPlayerConfig(clip: Clip): PlayerConfig {
+  public getPlayerConfigForClip(clip: Clip): PlayerConfig {
     return {
       type: 'iframe',
       src: `${clip.embedUrl}?autoplay=true`,

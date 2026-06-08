@@ -37,9 +37,9 @@ describe('integrations/kick/providers/vod', () => {
 
   it('gets the player config of the vod', async () => {
     const url = `https://www.kick.com/channel/videos/${mockKickVod.uuid}`
-    const video = await provider.getClip(url)
+    const video = await provider.resolveUrl(url)
     expect(video).toBeDefined()
-    expect(provider.getPlayerConfig(video)).toEqual({
+    expect(provider.getPlayerConfigForClip(video)).toEqual({
       type: 'video',
       src: video.embedUrl,
       title: video.title,
@@ -50,9 +50,9 @@ describe('integrations/kick/providers/vod', () => {
 
   it('gets the player config of the vod with a timestamp', async () => {
     const url = `https://www.kick.com/channel/videos/${mockKickVod.uuid}?t=1000`
-    const video = await provider.getClip(url)
+    const video = await provider.resolveUrl(url)
     expect(video).toBeDefined()
-    expect(provider.getPlayerConfig(video)).toEqual({
+    expect(provider.getPlayerConfigForClip(video)).toEqual({
       type: 'video',
       src: video.embedUrl,
       title: video.title,
@@ -63,7 +63,7 @@ describe('integrations/kick/providers/vod', () => {
 
   it('can get a video from a kick url', async () => {
     const url = `https://www.kick.com/channel/videos/${mockKickVod.uuid}`
-    const video = await provider.getClip(url)
+    const video = await provider.resolveUrl(url)
     expect(video).toBeDefined()
     expect(video.id).toEqual(mockKickVod.uuid)
   })
@@ -83,7 +83,7 @@ describe('integrations/kick/providers/vod', () => {
     [`https://www.kick.com/channel/videos/${mockKickVod.uuid}`, true],
     [`https://www.kick.com/channel/videos/${mockKickVod.uuid}?t=123`, true],
   ])('can detect clip urls it supports: (url: %s)', async (url: string, expected: boolean) => {
-    expect(provider.hasClipSupport(url)).toEqual(expected)
+    expect(provider.hasSupportForUrl(url)).toEqual(expected)
   })
 
   it.each([
@@ -92,21 +92,21 @@ describe('integrations/kick/providers/vod', () => {
     [mockTwitchClip.url],
     [mockKickClip.clip_url],
   ])('throws an error for unknown video urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow(`Invalid URL: ${url}.`)
+    await expect(provider.resolveUrl(url)).rejects.toThrow(`Invalid URL: ${url}.`)
   })
 
   it('caches clip data that it fetchs', async () => {
     const url = `https://www.kick.com/channel/videos/${mockKickVod.uuid}`
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
   })
 
   it('can have the cached data cleared', async () => {
     const url = `https://www.kick.com/channel/videos/${mockKickVod.uuid}`
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
     provider.clearCache()
     expect(provider.hasCachedData).toEqual(false)

@@ -37,9 +37,9 @@ describe('integrations/rumble/providers/short', () => {
 
   it('gets the player config of the short', async () => {
     const url = 'https://www.rumble.com/shorts/testshort'
-    const clip = await provider.getClip(url)
+    const clip = await provider.resolveUrl(url)
     expect(clip).toBeDefined()
-    expect(provider.getPlayerConfig(clip)).toEqual({
+    expect(provider.getPlayerConfigForClip(clip)).toEqual({
       type: 'iframe',
       src: `https://rumble.com/embed/url?autoplay=2`,
       title: clip.title,
@@ -48,7 +48,7 @@ describe('integrations/rumble/providers/short', () => {
 
   it('can get a short from a rumble url', async () => {
     const url = 'https://www.rumble.com/shorts/testshort'
-    const video = await provider.getClip(url)
+    const video = await provider.resolveUrl(url)
     expect(video).toBeDefined()
     expect(video.id).toEqual('testshort')
   })
@@ -73,7 +73,7 @@ describe('integrations/rumble/providers/short', () => {
     ['https://www.rumble.com/shorts/<ID>', true],
     ['https://www.rumble.com/<ID>-test.html', false],
   ])('can detect short urls it supports: (url: %s)', async (url: string, expected: boolean) => {
-    expect(provider.hasClipSupport(url)).toEqual(expected)
+    expect(provider.hasSupportForUrl(url)).toEqual(expected)
   })
 
   it.each([
@@ -82,21 +82,21 @@ describe('integrations/rumble/providers/short', () => {
     [mockTwitchClip.url],
     [mockKickClip.clip_url],
   ])('throws an error for unknown short urls: (url: %s)', async (url: string) => {
-    await expect(provider.getClip(url)).rejects.toThrow(`Invalid URL: ${url}.`)
+    await expect(provider.resolveUrl(url)).rejects.toThrow(`Invalid URL: ${url}.`)
   })
 
   it('caches clip data that it fetchs', async () => {
     const url = 'https://www.rumble.com/shorts/testshort'
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
   })
 
   it('can have the cached data cleared', async () => {
     const url = 'https://www.rumble.com/shorts/testshort'
     expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.getClip(url)).toBeDefined()
+    expect(await provider.resolveUrl(url)).toBeDefined()
     expect(provider.hasCachedData).toEqual(true)
     provider.clearCache()
     expect(provider.hasCachedData).toEqual(false)
