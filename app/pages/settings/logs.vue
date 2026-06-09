@@ -84,6 +84,7 @@ const actions = computed<DropdownMenuItem[][]>(() => {
         icon: 'lucide:trash',
         disabled: logger.empty,
         onSelect: () => {
+          logger.debug('[Logs]: Clearing all logs.')
           logger.reset()
         },
       },
@@ -95,6 +96,7 @@ const actions = computed<DropdownMenuItem[][]>(() => {
         icon: 'lucide:rotate-ccw',
         disabled: !logger.settings.isModified,
         onSelect: () => {
+          logger.debug('[Logs]: Resetting logger settings.')
           logger.settings.reset()
         },
       },

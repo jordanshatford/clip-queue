@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { clipFromKick, clipFromTwitch } from '~~/test/mocks'
 
-import type { Clip } from '~/integrations/core/provider'
+import type { Clip } from '~/integrations/core'
 
 import { IntegrationStatus } from '~/integrations/core'
 import {

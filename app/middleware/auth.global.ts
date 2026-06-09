@@ -8,9 +8,9 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   // Prevent access to routes that require authentication if the user is not logged in.
   if (!integrations.isLoggedIn && to.meta.requiresAuth) {
-    logger.debug(`[Router]: Not logged in, redirecting from ${to.fullPath}.`)
+    logger.debug(`[Middleware]: Unauthenticated user attempted to access ${to.fullPath}.`)
     return navigateTo('/')
   }
 
-  logger.debug(`[Router]: Navigating to ${to.fullPath}.`)
+  logger.debug(`[Middleware]: Navigating to ${to.fullPath}.`)
 })

@@ -545,7 +545,13 @@ export interface KickChannelPartial {
  * message field indicates the status of the response.
  */
 export type GenericKickResponse<T> = {
+  /**
+   * The data.
+   */
   data?: T
+  /**
+   * The message of the response.
+   */
   message: 'OK' | 'Unauthorized' | (string & {})
 }
 
@@ -553,14 +559,20 @@ export type GenericKickResponse<T> = {
  * Response type for Kick user.
  */
 export type KickUser = {
+  /**
+   * The ID of the user.
+   */
   user_id: number
+  /**
+   * The name of the user.
+   */
   name: string
+  /**
+   * The email of the user.
+   */
   email: string
+  /**
+   * A URL to the profile picture of the user.
+   */
   profile_picture: string
 }
-
-/**
- * Response type for Kick users endpoint, which includes an array of user objects, where each
- * user object contains the user's ID, name, email, and profile picture URL.
- */
-export type KickUsersResponse = GenericKickResponse<KickUser[]>

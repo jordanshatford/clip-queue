@@ -72,6 +72,7 @@ definePageMeta({
   order: 2,
 })
 
+const logger = useLogger()
 const commands = useCommands()
 
 const actions = computed<DropdownMenuItem[][]>(() => {
@@ -83,6 +84,7 @@ const actions = computed<DropdownMenuItem[][]>(() => {
         icon: 'lucide:rotate-ccw',
         disabled: !commands.settings.isModified,
         onSelect: () => {
+          logger.debug('[Logs]: Resetting commands settings.')
           commands.settings.reset()
         },
       },

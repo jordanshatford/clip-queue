@@ -39,6 +39,7 @@ definePageMeta({
   order: 1,
 })
 
+const logger = useLogger()
 const integrations = useIntegrations()
 const queue = useQueue()
 
@@ -51,6 +52,7 @@ const actions = computed<DropdownMenuItem[][]>(() => {
         icon: 'lucide:rotate-ccw',
         disabled: !(queue.settings.isModified || integrations.settings.isModified),
         onSelect: () => {
+          logger.debug('[Queue]: Resetting queue settings.')
           queue.settings.reset()
           integrations.settings.reset()
         },
