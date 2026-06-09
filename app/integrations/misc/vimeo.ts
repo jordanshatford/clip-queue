@@ -1,14 +1,15 @@
+import type { OEmbedAPI } from '#shared/oembed'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
-import { getOEmbed } from './core/api'
 
 /**
  * Provider for Vimeo.com content.
  */
 export class VimeoProvider extends AbstractIntegrationProvider {
-  public constructor() {
+  public constructor(private readonly api: OEmbedAPI) {
     super(IntegrationID.VIMEO, 'Vimeo', false)
   }
 
@@ -23,15 +24,14 @@ export class VimeoProvider extends AbstractIntegrationProvider {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cached(id, async (): Promise<Clip> => {
-      const endpoint = `https://vimeo.com/api/oembed.json?url=https://vimeo.com/${id}`
-      const oembed = await getOEmbed(endpoint)
+      const oembed = await this.api.getOEmbed(`https://vimeo.com/${id}`)
       return {
         id: id,
         url,
-        title: oembed.title,
-        channel: oembed.author_name ?? oembed.provider_name,
+        title: oembed.title ?? '',
+        channel: oembed.author_name ?? this.name,
         embedUrl: `https://player.vimeo.com/video/${id}`,
-        thumbnailUrl: oembed.thumbnail_url,
+        thumbnailUrl: oembed.thumbnail_url ?? '',
         provider: this.id,
         submitters: [],
         metadata: {

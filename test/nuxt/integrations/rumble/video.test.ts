@@ -1,22 +1,16 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockRumbleOEmbed } from '~~/test/mocks'
 import { mockKickClip } from '~~/test/unit/kick/mocks'
+import { mockRumbleOEmbed } from '~~/test/unit/oembed/mocks'
 import { mockTwitchClip, mockTwitchVod } from '~~/test/unit/twitch/mocks'
 
-import type { OEmbedResponse } from '@/integrations/misc'
-
+import { OEmbedAPI } from '#shared/oembed'
 import { RumbleVideoProvider } from '~/integrations/rumble/video'
 
-vi.mock('~/integrations/rumble/core/api.ts', async (importOriginal) => {
-  return {
-    ...(await importOriginal<typeof import('~/integrations/rumble/core/api')>()),
-    getRumbleOEmbed: vi.fn<(id: string) => OEmbedResponse>((id: string) => {
-      return { ...mockRumbleOEmbed, version: id }
-    }),
-  }
+const api = new OEmbedAPI()
+api.getOEmbed = vi.fn().mockResolvedValue({
+  ...mockRumbleOEmbed,
 })
-
-const provider = new RumbleVideoProvider()
+const provider = new RumbleVideoProvider(api)
 
 describe('integrations/rumble/providers/video', () => {
   beforeEach(() => {

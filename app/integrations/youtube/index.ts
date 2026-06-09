@@ -2,13 +2,14 @@ import { useStorage } from '@vueuse/core'
 
 import { toStorageKey, type Integration } from '../core'
 import { IntegrationID } from '../indentify'
+import { api } from '../misc/index'
 import { YouTubeShortProvider } from './short'
 import { YouTubeVideoProvider } from './video'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.YOUTUBE, 'enabled'), false)
 
-export const shorts = reactive(new YouTubeShortProvider())
-export const videos = reactive(new YouTubeVideoProvider())
+export const shorts = reactive(new YouTubeShortProvider(api))
+export const videos = reactive(new YouTubeVideoProvider(api))
 
 export const youtube: Integration = {
   id: IntegrationID.YOUTUBE,

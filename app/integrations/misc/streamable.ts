@@ -1,14 +1,15 @@
+import type { OEmbedAPI } from '#shared/oembed'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
-import { getOEmbed } from './core/api'
 
 /**
  * Provider for Streamable.com content.
  */
 export class StreamableProvider extends AbstractIntegrationProvider {
-  public constructor() {
+  public constructor(private readonly api: OEmbedAPI) {
     super(IntegrationID.STREAMABLE, 'Streamable', false)
   }
 
@@ -22,15 +23,14 @@ export class StreamableProvider extends AbstractIntegrationProvider {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cached(id, async (): Promise<Clip> => {
-      const endpoint = `https://api.streamable.com/oembed.json?url=https://streamable.com/${id}`
-      const oembed = await getOEmbed(endpoint)
+      const oembed = await this.api.getOEmbed(`https://streamable.com/${id}`)
       return {
         id: id,
         url,
-        title: oembed.title,
-        channel: oembed.author_name ?? oembed.provider_name,
+        title: oembed.title ?? '',
+        channel: oembed.author_name ?? this.name,
         embedUrl: `https://streamable.com/e/${id}`,
-        thumbnailUrl: oembed.thumbnail_url,
+        thumbnailUrl: oembed.thumbnail_url ?? '',
         provider: this.id,
         submitters: [],
       }

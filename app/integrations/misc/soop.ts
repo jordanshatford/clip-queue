@@ -1,14 +1,15 @@
+import type { OEmbedAPI } from '#shared/oembed'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
-import { getOEmbed } from './core/api'
 
 /**
  * Provider for Sooplive.com content.
  */
 export class SoopProvider extends AbstractIntegrationProvider {
-  public constructor() {
+  public constructor(private readonly api: OEmbedAPI) {
     super(IntegrationID.SOOP, 'Soop', false)
   }
 
@@ -23,13 +24,12 @@ export class SoopProvider extends AbstractIntegrationProvider {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cached(id, async (): Promise<Clip> => {
-      const endpoint = `https://openapi.sooplive.com/oembed/embedinfo?url=https://vod.sooplive.com/player/${id}`
-      const oembed = await getOEmbed(endpoint)
+      const oembed = await this.api.getOEmbed(`https://vod.sooplive.com/player/${id}`)
       return {
         id: id,
         url,
-        title: oembed.title,
-        channel: oembed.author_name ?? oembed.provider_name,
+        title: oembed.title ?? '',
+        channel: oembed.author_name ?? this.name,
         embedUrl: `https://vod.sooplive.com/player/${id}/embed`,
         thumbnailUrl: oembed.thumbnail_url ?? '',
         provider: this.id,

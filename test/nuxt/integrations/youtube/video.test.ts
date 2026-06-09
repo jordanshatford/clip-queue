@@ -1,22 +1,16 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockYouTubeOEmbed } from '~~/test/mocks'
 import { mockKickClip } from '~~/test/unit/kick/mocks'
+import { mockYouTubeOEmbed } from '~~/test/unit/oembed/mocks'
 import { mockTwitchClip, mockTwitchVod } from '~~/test/unit/twitch/mocks'
 
-import type { OEmbedResponse } from '@/integrations/misc'
-
+import { OEmbedAPI } from '#shared/oembed'
 import { YouTubeVideoProvider } from '~/integrations/youtube/video'
 
-vi.mock('~/integrations/youtube/core/api.ts', async (importOriginal) => {
-  return {
-    ...(await importOriginal<typeof import('~/integrations/youtube/core/api')>()),
-    getYouTubeOEmbed: vi.fn<(id: string) => OEmbedResponse>((id: string) => {
-      return { ...mockYouTubeOEmbed, version: id }
-    }),
-  }
+const api = new OEmbedAPI()
+api.getOEmbed = vi.fn().mockResolvedValue({
+  ...mockYouTubeOEmbed,
 })
-
-const provider = new YouTubeVideoProvider()
+const provider = new YouTubeVideoProvider(api)
 
 describe('integrations/youtube/providers/video', () => {
   beforeEach(() => {

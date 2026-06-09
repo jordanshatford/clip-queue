@@ -1,15 +1,16 @@
+import type { OEmbedAPI } from '#shared/oembed'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
-import { getYouTubeOEmbed } from './core/api'
 import { getYouTubeUrlDetails } from './core/utils'
 
 /**
  * Provider for YouTube.com videos.
  */
 export class YouTubeVideoProvider extends AbstractIntegrationProvider {
-  public constructor() {
+  public constructor(private readonly api: OEmbedAPI) {
     super(IntegrationID.YOUTUBE_VIDEOS, 'YouTube Videos', false)
   }
 
@@ -24,14 +25,14 @@ export class YouTubeVideoProvider extends AbstractIntegrationProvider {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cached(id, async (): Promise<Clip> => {
-      const oembed = await getYouTubeOEmbed(id)
+      const oembed = await this.api.getOEmbed(`https://www.youtube.com/watch?v=${id}`)
       return {
         id: id,
         url,
-        title: oembed.title,
-        channel: oembed?.author_name ?? oembed.provider_name,
+        title: oembed.title ?? '',
+        channel: oembed?.author_name ?? this.name,
         embedUrl: `https://www.youtube.com/embed/${id}`,
-        thumbnailUrl: oembed.thumbnail_url,
+        thumbnailUrl: oembed.thumbnail_url ?? '',
         provider: this.id,
         submitters: [],
         metadata: {

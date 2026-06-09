@@ -1,22 +1,16 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockOEmbed } from '~~/test/mocks'
 import { mockKickClip, mockKickVod } from '~~/test/unit/kick/mocks'
+import { mockOEmbed } from '~~/test/unit/oembed/mocks'
 import { mockTwitchClip, mockTwitchVod } from '~~/test/unit/twitch/mocks'
 
-import type { OEmbedResponse } from '~/integrations/misc/core/types'
-
+import { OEmbedAPI } from '#shared/oembed'
 import { DailyMotionProvider } from '~/integrations/misc/dailymotion'
 
-vi.mock('~/integrations/misc/core/api.ts', async (importOriginal) => {
-  return {
-    ...(await importOriginal<typeof import('~/integrations/misc/core/api')>()),
-    getOEmbedProxied: vi.fn<(url: string) => OEmbedResponse>((url: string): OEmbedResponse => {
-      return { ...mockOEmbed, provider_url: url }
-    }),
-  }
+const api = new OEmbedAPI()
+api.getOEmbed = vi.fn().mockResolvedValue({
+  ...mockOEmbed,
 })
-
-const provider = new DailyMotionProvider()
+const provider = new DailyMotionProvider(api)
 
 describe('integrations/misc/providers/dailymotion', () => {
   beforeEach(() => {

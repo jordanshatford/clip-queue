@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { mockOEmbed } from '~~/test/mocks'
+import { mockOEmbed } from '~~/test/unit/oembed/mocks'
 
 import { toEmbedUrl } from '~/integrations/misc/core/utils'
 

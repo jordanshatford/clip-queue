@@ -1,16 +1,17 @@
+import type { OEmbedAPI } from '#shared/oembed'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
 import { toEmbedUrl } from '../misc/core/utils'
-import { getRumbleOEmbed } from './core/api'
 import { getRumbleUrlDetails } from './core/utils'
 
 /**
  * Provider for Rumble.com videos.
  */
 export class RumbleVideoProvider extends AbstractIntegrationProvider {
-  public constructor() {
+  public constructor(private readonly api: OEmbedAPI) {
     super(IntegrationID.RUMBLE_VIDEOS, 'Rumble Videos', false)
   }
 
@@ -25,14 +26,14 @@ export class RumbleVideoProvider extends AbstractIntegrationProvider {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cached(id, async (): Promise<Clip> => {
-      const oembed = await getRumbleOEmbed(url)
+      const oembed = await this.api.getOEmbed(url)
       return {
         id: id,
         url,
-        title: oembed.title,
+        title: oembed.title ?? '',
         channel: oembed?.author_name ?? this.name,
         embedUrl: toEmbedUrl(oembed),
-        thumbnailUrl: oembed.thumbnail_url,
+        thumbnailUrl: oembed.thumbnail_url ?? '',
         provider: this.id,
         submitters: [],
         metadata: {

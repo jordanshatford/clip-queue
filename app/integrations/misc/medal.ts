@@ -1,16 +1,16 @@
+import type { OEmbedAPI } from '#shared/oembed'
+
 import type { Clip, PlayerConfig } from '../core'
-import type { OEmbedResponse } from './core/types'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
-import { getOEmbedProxied } from './core/api'
 import { toEmbedUrl } from './core/utils'
 
 /**
  * Provider for Medal.tv content.
  */
 export class MedalProvider extends AbstractIntegrationProvider {
-  public constructor() {
+  public constructor(private readonly api: OEmbedAPI) {
     super(IntegrationID.MEDAL, 'Medal', false)
   }
 
@@ -24,15 +24,14 @@ export class MedalProvider extends AbstractIntegrationProvider {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cached(id, async (): Promise<Clip> => {
-      const endpoint = `https://medal.tv/api/oembed?url=https://medal.tv/clips/${id}`
-      const oembed: OEmbedResponse = await getOEmbedProxied(endpoint)
+      const oembed = await this.api.getOEmbed(`https://medal.tv/clips/${id}`)
       return {
         id: id,
         url,
-        title: oembed.title,
+        title: oembed.title ?? '',
         channel: oembed.author_name ?? this.name,
         embedUrl: toEmbedUrl(oembed),
-        thumbnailUrl: oembed.thumbnail_url,
+        thumbnailUrl: oembed.thumbnail_url ?? '',
         provider: this.id,
         submitters: [],
       }

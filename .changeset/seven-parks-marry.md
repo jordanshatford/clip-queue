@@ -2,4 +2,4 @@
 "clip-queue": minor
 ---
 
-feat: move getting kick user to shared api code
+feat: move getting kick user to shared code

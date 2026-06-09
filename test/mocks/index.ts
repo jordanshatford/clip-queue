@@ -2,8 +2,6 @@ import type { Clip } from '@/integrations'
 
 import { IntegrationID } from '@/integrations'
 
-export * from './oembed'
-
 export const clipFromKick: Clip = {
   provider: IntegrationID.KICK_CLIPS,
   submitters: ['testsubmitterkick'],

@@ -1,14 +1,15 @@
+import type { OEmbedAPI } from '#shared/oembed'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
-import { getOEmbedProxied } from './core/api'
 
 /**
  * Provider for Dailymotion.com content.
  */
 export class DailyMotionProvider extends AbstractIntegrationProvider {
-  public constructor() {
+  public constructor(private readonly api: OEmbedAPI) {
     super(IntegrationID.DAILYMOTION, 'Dailymotion', false)
   }
 
@@ -22,15 +23,14 @@ export class DailyMotionProvider extends AbstractIntegrationProvider {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cached(id, async (): Promise<Clip> => {
-      const endpoint = `https://www.dailymotion.com/services/oembed?url=https://www.dailymotion.com/video/${id}`
-      const oembed = await getOEmbedProxied(endpoint)
+      const oembed = await this.api.getOEmbed(`https://www.dailymotion.com/video/${id}`)
       return {
         id: id,
         url,
-        title: oembed.title,
-        channel: oembed.author_name ?? oembed.provider_name,
+        title: oembed.title ?? '',
+        channel: oembed.author_name ?? this.name,
         embedUrl: `https://geo.dailymotion.com/player.html?video=${id}`,
-        thumbnailUrl: oembed.thumbnail_url,
+        thumbnailUrl: oembed.thumbnail_url ?? '',
         provider: this.id,
         submitters: [],
       }
