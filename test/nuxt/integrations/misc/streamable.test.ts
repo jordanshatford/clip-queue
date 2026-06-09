@@ -43,7 +43,7 @@ describe('integrations/misc/providers/streamable', () => {
     expect(video).toBeDefined()
     expect(provider.getPlayerConfigForClip(video)).toEqual({
       type: 'iframe',
-      src: `${video.embedUrl}?autoplay=true`,
+      src: `${video.embedUrl}?autoplay=1`,
       title: video.title,
     })
   })

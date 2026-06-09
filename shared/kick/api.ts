@@ -98,12 +98,12 @@ export class KickAPI {
    *
    * @see https://docs.kick.com/apis/users
    */
-  public async getUser(id?: string): Promise<any> {
+  public async getUser(id?: string): Promise<KickUser> {
     const key = id ?? this.accessToken?.()
     if (!key) {
       throw new Error('User ID or access token was not provided.')
     }
-    return this.users.cached(key, async (): Promise<any> => {
+    return this.users.cached(key, async (): Promise<KickUser> => {
       const response = await this.publicApi<GenericKickResponse<KickUser[]>>('/v1/users', {
         query: { id },
       })
