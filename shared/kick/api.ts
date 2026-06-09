@@ -2,7 +2,13 @@ import type { $Fetch } from 'ofetch'
 
 import { ofetch } from 'ofetch'
 
-import type { KickChannelPartial, KickClip, KickVideo } from './types'
+import type {
+  GenericKickResponse,
+  KickChannelPartial,
+  KickClip,
+  KickUser,
+  KickVideo,
+} from './types'
 
 import { CacheMap } from '../utils/cache'
 
@@ -13,13 +19,26 @@ import { CacheMap } from '../utils/cache'
  */
 export class KickAPI {
   private readonly privateApi: $Fetch
+  private readonly publicApi: $Fetch
 
   private readonly clips: CacheMap<KickClip> = new CacheMap()
   private readonly videos: CacheMap<KickVideo> = new CacheMap()
   private readonly channels: CacheMap<KickChannelPartial> = new CacheMap()
+  private readonly users: CacheMap<KickUser> = new CacheMap()
 
-  public constructor() {
+  public constructor(private readonly accessToken?: () => string) {
     this.privateApi = ofetch.create({ baseURL: 'https://kick.com/api' })
+    this.publicApi = ofetch.create({
+      baseURL: 'https://api.kick.com/public',
+      onRequest: async ({ options }) => {
+        const headers = options.headers
+        // Ensure access token are added to headers based on the currently logged in user.
+        const bearer = accessToken?.()
+        if (bearer) {
+          headers.set('Authorization', `Bearer ${bearer}`)
+        }
+      },
+    })
   }
 
   /**
@@ -68,6 +87,31 @@ export class KickAPI {
     }
     return this.channels.cached(channel, async (): Promise<KickChannelPartial> => {
       return this.privateApi<KickChannelPartial>(`/v2/channels/${channel}`)
+    })
+  }
+
+  /**
+   * Get a user from Kick.
+   * @param id - The ID of the user. When not defined it is the user based on the current access token.
+   * @returns The user.
+   * @throws Will throw an error if the fetch fails, or the user does not exist.
+   *
+   * @see https://docs.kick.com/apis/users
+   */
+  public async getUser(id?: string): Promise<any> {
+    const key = id ?? this.accessToken?.()
+    if (!key) {
+      throw new Error('User ID or access token was not provided.')
+    }
+    return this.users.cached(key, async (): Promise<any> => {
+      const response = await this.publicApi<GenericKickResponse<KickUser[]>>('/v1/users', {
+        query: { id },
+      })
+      const user = response.data?.[0]
+      if (!user) {
+        throw new Error(`User with ID ${id} does not exist.`)
+      }
+      return user
     })
   }
 }

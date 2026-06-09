@@ -539,3 +539,28 @@ export interface KickChannelPartial {
     following_min_duration: number
   }
 }
+
+/**
+ * Generic response type for Kick API responses, where the data field is optional and the
+ * message field indicates the status of the response.
+ */
+export type GenericKickResponse<T> = {
+  data?: T
+  message: 'OK' | 'Unauthorized' | (string & {})
+}
+
+/**
+ * Response type for Kick user.
+ */
+export type KickUser = {
+  user_id: number
+  name: string
+  email: string
+  profile_picture: string
+}
+
+/**
+ * Response type for Kick users endpoint, which includes an array of user objects, where each
+ * user object contains the user's ID, name, email, and profile picture URL.
+ */
+export type KickUsersResponse = GenericKickResponse<KickUser[]>

@@ -1,4 +1,4 @@
-import type { KickCategory, KickChannel, KickClip, KickVideo } from '../../../shared/kick'
+import type { KickCategory, KickChannel, KickClip, KickVideo, KickUser } from '../../../shared/kick'
 
 export const mockKickCategory: KickCategory = {
   id: 123,
@@ -119,4 +119,11 @@ export const mockKickVod: KickVideo = {
       },
     ],
   },
+}
+
+export const mockKickUser: KickUser = {
+  user_id: 1,
+  name: 'testuser',
+  email: 'test@kick.com',
+  profile_picture: '',
 }

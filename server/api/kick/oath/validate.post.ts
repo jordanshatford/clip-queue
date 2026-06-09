@@ -1,5 +1,7 @@
 import { FetchError } from 'ofetch'
 
+import { KickAPI } from '#shared/kick'
+
 /**
  * Validate the current Kick.com session by introspecting the access token. If the token is inactive but a refresh token is
  * available, it will attempt to refresh the session and update the cookie.
@@ -134,20 +136,8 @@ async function getRefreshedSession(refreshToken: string): Promise<KickTokenRespo
  */
 const getCurrentUser = defineCachedFunction(
   async (accessToken: string): Promise<OathUser> => {
-    const response = await $fetch<KickUsersResponse>(`${KICK_PUBLIC_API_BASE}/users`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-
-    const user = response.data?.[0]
-    if (!user) {
-      throw createError({
-        statusCode: 404,
-        statusMessage: 'Kick user could not be fetched for the session.',
-      })
-    }
-
+    const api = new KickAPI(() => accessToken)
+    const user = await api.getUser()
     return {
       id: String(user.user_id),
       name: user.name,
