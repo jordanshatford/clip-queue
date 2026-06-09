@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 
-import { isTwitchURL } from '~/integrations/twitch/core/utils'
+import { isTwitchURL } from '../../../shared/twitch/utils'
 
-describe('integrations/twitch/core/utils', () => {
+describe('shared/twitch/utils', () => {
   it.each([
     [new URL('https://clips.twitch.tv/testclip'), true],
     [new URL('https://twitch.tv/testchannel/clip/testclip'), true],

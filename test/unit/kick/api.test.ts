@@ -19,7 +19,7 @@ vi.mock('ofetch', () => ({
 
 const mockAccessToken = () => 'token'
 
-describe('KickAPI', () => {
+describe('shared/kick/api', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })

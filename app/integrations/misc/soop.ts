@@ -44,9 +44,9 @@ export class SoopProvider extends AbstractIntegrationProvider {
   public getPlayerConfigForClip(clip: Clip): PlayerConfig {
     const url = new URL(clip.embedUrl)
     url.searchParams.append('autoPlay', 'true')
-    const timestamp = clip.metadata?.['start']
-    if (timestamp && typeof timestamp === 'string') {
-      url.searchParams.append('change_second', timestamp)
+    const start = clip.metadata?.['start']
+    if (start) {
+      url.searchParams.append(VIDEO_TIMESTAMP_PARAM, start)
     }
     return {
       type: 'iframe',

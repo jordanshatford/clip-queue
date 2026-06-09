@@ -136,13 +136,13 @@ export type IntegrationSource = {
    */
   readonly features: IntegrationSourceFeature[]
   /**
-   * Whether the source is actively busy loading.
-   */
-  readonly isLoading?: boolean
-  /**
    * Whether the source is enabled.
    */
   isEnabled: boolean
+  /**
+   * Whether the source is actively busy loading.
+   */
+  readonly isLoading: boolean
   /**
    * The current status of the source.
    */

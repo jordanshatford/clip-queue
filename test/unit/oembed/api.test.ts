@@ -11,7 +11,7 @@ const $fetchMock = vi.fn()
 
 vi.stubGlobal('$fetch', $fetchMock)
 
-describe('OEmbedAPI', () => {
+describe('shared/oembed/api', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })

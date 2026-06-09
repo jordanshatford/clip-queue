@@ -1,10 +1,11 @@
 import type { OEmbedAPI } from '#shared/oembed'
 
+import { parseEmbedURLFromHTML } from '#shared/oembed'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
-import { toEmbedUrl } from './core/utils'
 
 /**
  * Provider for Medal.tv content.
@@ -30,7 +31,7 @@ export class MedalProvider extends AbstractIntegrationProvider {
         url,
         title: oembed.title ?? '',
         channel: oembed.author_name ?? this.name,
-        embedUrl: toEmbedUrl(oembed),
+        embedUrl: parseEmbedURLFromHTML(oembed),
         thumbnailUrl: oembed.thumbnail_url ?? '',
         provider: this.id,
         submitters: [],

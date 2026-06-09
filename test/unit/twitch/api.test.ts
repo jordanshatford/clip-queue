@@ -13,7 +13,7 @@ vi.mock('ofetch', () => ({
   },
 }))
 
-describe('TwitchAPI', () => {
+describe('shared/twitch/api', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })

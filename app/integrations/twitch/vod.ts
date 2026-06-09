@@ -1,10 +1,11 @@
 import type { TwitchAPI } from '#shared/twitch'
 
+import { isTwitchURL } from '#shared/twitch'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
-import { isTwitchURL } from './core/utils'
 
 /**
  * Provider for Twitch.tv videos.
