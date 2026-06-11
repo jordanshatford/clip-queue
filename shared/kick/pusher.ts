@@ -1,6 +1,5 @@
-import { KickAPI } from '#shared/kick'
-import { EventEmitter } from '#shared/utils'
-
+import { EventEmitter } from '../utils/event-emitter'
+import { KickAPI } from './api'
 import { sleep } from './utils'
 
 /**

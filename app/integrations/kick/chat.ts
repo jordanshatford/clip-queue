@@ -1,6 +1,7 @@
 import { useStorage } from '@vueuse/core'
 import { ref } from 'vue'
 
+import { Client, isSenderBot, isSenderModerator } from '#shared/kick'
 import { EventEmitter } from '#shared/utils'
 
 import type {
@@ -16,8 +17,6 @@ import {
   toStorageKey,
 } from '../core'
 import { IntegrationID } from '../indentify'
-import { Client } from './core/pusher'
-import { isSenderBot, isSenderModerator } from './core/utils'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.KICK_CHAT, 'enabled'), false)
 const isLoading = ref<boolean>(false)

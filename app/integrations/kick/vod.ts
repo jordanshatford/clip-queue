@@ -1,10 +1,11 @@
 import type { KickAPI } from '#shared/kick'
 
+import { isKickURL } from '#shared/kick'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
 import { IntegrationID } from '../indentify'
-import { isKickURL } from './core/utils'
 
 /**
  * Provider for Kick.com videos.

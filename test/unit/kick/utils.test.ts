@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import type { KickChatBadge, KickChatSender } from '~/integrations/kick/core/pusher'
+import type { KickChatBadge, KickChatSender } from '../../../shared/kick/utils'
 
-import { isKickURL, isSenderBot, isSenderModerator, sleep } from '~/integrations/kick/core/utils'
+import { isKickURL, isSenderBot, isSenderModerator, sleep } from '../../../shared/kick/utils'
 
-describe('integrations/kick/core/utils', () => {
+describe('shared/kick/utils', () => {
   it.each([
     [new URL('https://kick.com/test'), true],
     [new URL('https://kick.com/testchannel/clip/testclip'), true],
