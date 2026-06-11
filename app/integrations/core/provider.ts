@@ -2,9 +2,10 @@ import type { RemovableRef } from '@vueuse/core'
 
 import { useStorage } from '@vueuse/core'
 
+import { Cacheable } from '#shared/utils/cache'
+
 import type { IntegrationID } from '../indentify'
 
-import { Cacheable } from './cacheable'
 import { toStorageKey } from './utils'
 
 /**
