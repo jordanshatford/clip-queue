@@ -80,7 +80,7 @@ export const useIntegrations = defineStore('integrations', () => {
    * @param id - The integration ID of the source or parent integration.
    * @returns A source if one exists with that ID, undefined otherwise.
    */
-  function source(id: IntegrationID): Reactive<IntegrationSource> | undefined {
+  function source(id: IntegrationID): IntegrationSource | undefined {
     for (const integration of integrations) {
       if (integration.source && (integration.id === id || integration.source.id === id)) {
         return integration.source
@@ -168,8 +168,9 @@ export const useIntegrations = defineStore('integrations', () => {
             submitters: [submitter],
           })
         }
-      } catch (e) {
-        logger.error(`[${event.source}]: Failed to get clip: ${e}.`)
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error)
+        logger.error(`[${event.source}]: Failed to get clip: ${message}.`)
       }
     }
   }
@@ -195,8 +196,9 @@ export const useIntegrations = defineStore('integrations', () => {
             submitters: [submitter],
           })
         }
-      } catch (e) {
-        logger.error(`[${event.source}]: Failed to get clip: ${e}.`)
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error)
+        logger.error(`[${event.source}]: Failed to get clip: ${message}.`)
       }
     }
   }
@@ -318,7 +320,8 @@ export const useIntegrations = defineStore('integrations', () => {
           const clip = await provider.resolveUrl(url)
           return clip
         } catch (error) {
-          logger.error(`${error}`)
+          const message = error instanceof Error ? error.message : String(error)
+          logger.error(`[${provider.id}]: ${message}`)
           continue
         }
       }

@@ -34,14 +34,12 @@
 </template>
 
 <script setup lang="ts">
-import type { Reactive } from 'vue'
-
 import type { IntegrationSource } from '~/integrations/core'
 
 import { m } from '#paraglide/messages'
 import { IntegrationSourceFeature, IntegrationStatus } from '~/integrations/core'
 
-const source = defineModel<Reactive<IntegrationSource>>({ required: true })
+const source = defineModel<IntegrationSource>({ required: true })
 
 const featureTranslations: Record<IntegrationSourceFeature, () => string> = {
   [IntegrationSourceFeature.AUTO_CONNECT]: m.auto_connect,

@@ -62,7 +62,7 @@ export interface Integration {
   /**
    * Clip source for the integration. URLs from this source will be detected.
    */
-  readonly source?: Reactive<IntegrationSource>
+  readonly source?: IntegrationSource
   /**
    * Clip providers for the integration. Many can be defined, for example, if you wanted
    * to have a separate provider for Twitch clips and Twitch VODs.

@@ -10,7 +10,7 @@ import { KickVodProvider } from './vod'
 
 export const authentication = new KickAuthentication()
 export const api = new KickAPI()
-export const source = reactive(new KickChatSource(() => authentication.user.name))
+export const source = new KickChatSource(() => authentication.user.name)
 export const clips = reactive(new KickClipsProvider(api))
 export const vods = reactive(new KickVodProvider(api))
 

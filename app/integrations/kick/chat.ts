@@ -20,7 +20,7 @@ import { IntegrationID } from '../indentify'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.KICK_CHAT, 'enabled'), false)
 const isLoading = ref<boolean>(false)
-const status = ref<IntegrationStatus>(IntegrationStatus.DISABLED)
+const status = ref<IntegrationStatus>(IntegrationStatus.UNKNOWN)
 
 /**
  * A message cache for Kick deleted message handling.
@@ -126,7 +126,7 @@ export class KickChatSource
   }
 
   private handleError(error: unknown): void {
-    const reason = error as string
+    const reason = error instanceof Error ? error.message : String(error)
     isLoading.value = false
     this.emit('error', {
       timestamp: this.timestamp(),
@@ -149,8 +149,8 @@ export class KickChatSource
       if (channel) {
         try {
           await this.chat.join(channel)
-        } catch (e) {
-          this.handleError(e)
+        } catch (error) {
+          this.handleError(error)
         }
       }
     })
@@ -243,8 +243,8 @@ export class KickChatSource
     this.handleStatusUpdate(IntegrationStatus.UNKNOWN, `Connecting to ${this.name}.`)
     try {
       this.chat.connect()
-    } catch (e) {
-      this.handleError(e)
+    } catch (error) {
+      this.handleError(error)
     }
   }
 
@@ -258,8 +258,8 @@ export class KickChatSource
     this.handleStatusUpdate(IntegrationStatus.UNKNOWN, `Disconnected from ${this.name}.`)
     try {
       this.chat.close()
-    } catch (e) {
-      this.handleError(e)
+    } catch (error) {
+      this.handleError(error)
     }
   }
 }
