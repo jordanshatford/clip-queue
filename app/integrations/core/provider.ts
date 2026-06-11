@@ -66,10 +66,55 @@ export interface Clip {
 }
 
 /**
+ * Interface for an integrations provider.
+ */
+export interface IntegrationProvider extends Cacheable<Clip> {
+  /**
+   * The ID of the integration provider.
+   */
+  readonly id: IntegrationID
+  /**
+   * The display name used by the application for the integration provider.
+   */
+  readonly name: string
+  /**
+   * If the integration provider is enabled.
+   */
+  isEnabled: RemovableRef<boolean>
+  /**
+   * If the integration provider is misconfigured.
+   */
+  readonly isMisconfigured: boolean
+  /**
+   * Check if the integration provider supports a given URL.
+   * @param url - The URL.
+   * @returns true if the integration provider supports the URL, false otherwise.
+   */
+  hasSupportForUrl(url: string): boolean
+  /**
+   * Resolve a URL into details for a clip.
+   * @param url - The URL.
+   * @returns The clip for the URL.
+   * @throws An error if the URL is invalid or the clip cannot be retrieved.
+   */
+  resolveUrl(url: string): Promise<Clip>
+  /**
+   * Get the player configuration for a clip.
+   * @param clip - The clip to get the player config for.
+   * @returns The player config.
+   * @throws An error if the player config cannot be retrieved.
+   */
+  getPlayerConfigForClip(clip: Clip): PlayerConfig
+}
+
+/**
  * Abstract class for an integration provider. These take a URL and determine if they can provide
  * clip details and playback configuration for it. They can be enabled and disabled as the user pleases.
  */
-export abstract class AbstractIntegrationProvider extends Cacheable<Clip> {
+export abstract class AbstractIntegrationProvider
+  extends Cacheable<Clip>
+  implements IntegrationProvider
+{
   protected constructor(
     /**
      * The ID of the integration provider.
@@ -87,34 +132,14 @@ export abstract class AbstractIntegrationProvider extends Cacheable<Clip> {
     super()
     this.isEnabled = useStorage<boolean>(toStorageKey(id, 'enabled'), defaultIsEnabled)
   }
-  /**
-   * If the integration provider is enabled.
-   */
+
   public isEnabled: RemovableRef<boolean>
-  /**
-   * If the integration provider is misconfigured.
-   */
+
   public get isMisconfigured(): boolean {
     return false
   }
-  /**
-   * Check if the integration provider supports a given URL.
-   * @param url - The URL.
-   * @returns true if the integration provider supports the URL, false otherwise.
-   */
+
   public abstract hasSupportForUrl(url: string): boolean
-  /**
-   * Resolve a URL into details for a clip.
-   * @param url - The URL.
-   * @returns The clip for the URL.
-   * @throws An error if the URL is invalid or the clip cannot be retrieved.
-   */
   public abstract resolveUrl(url: string): Promise<Clip>
-  /**
-   * Get the player configuration for a clip.
-   * @param clip - The clip to get the player config for.
-   * @returns The player config.
-   * @throws An error if the player config cannot be retrieved.
-   */
   public abstract getPlayerConfigForClip(clip: Clip): PlayerConfig
 }

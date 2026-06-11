@@ -6,12 +6,7 @@ import { rumble } from './rumble'
 import { twitch } from './twitch'
 import { youtube } from './youtube'
 
-export type {
-  Clip,
-  AbstractIntegrationProvider,
-  IntegrationAuthentication,
-  Integration,
-} from './core'
+export type { Clip, IntegrationProvider, IntegrationAuthentication, Integration } from './core'
 export { IntegrationID } from './indentify'
 export { toClipUUID } from './core'
 

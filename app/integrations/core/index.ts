@@ -2,7 +2,7 @@ import type { Reactive } from 'vue'
 
 import type { IntegrationID } from '../indentify'
 import type { IntegrationAuthentication } from './authentication'
-import type { AbstractIntegrationProvider } from './provider'
+import type { IntegrationProvider } from './provider'
 import type { IntegrationSource } from './source'
 
 export * from './authentication'
@@ -67,5 +67,5 @@ export interface Integration {
    * Clip providers for the integration. Many can be defined, for example, if you wanted
    * to have a separate provider for Twitch clips and Twitch VODs.
    */
-  readonly providers: Reactive<AbstractIntegrationProvider>[]
+  readonly providers: Reactive<IntegrationProvider>[]
 }

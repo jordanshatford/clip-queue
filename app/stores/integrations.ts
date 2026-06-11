@@ -1,6 +1,6 @@
 import type { Reactive } from 'vue'
 
-import type { IntegrationID, AbstractIntegrationProvider, Clip, Integration } from '~/integrations'
+import type { IntegrationID, IntegrationProvider, Clip, Integration } from '~/integrations'
 import type {
   IntegrationSource,
   IntegrationSourceEvent,
@@ -66,7 +66,7 @@ export const useIntegrations = defineStore('integrations', () => {
    * @param id - The integration ID of the provider.
    * @returns A provider if one exists with that ID, undefined otherwise.
    */
-  function provider(id: IntegrationID): Reactive<AbstractIntegrationProvider> | undefined {
+  function provider(id: IntegrationID): Reactive<IntegrationProvider> | undefined {
     for (const integration of integrations) {
       const provider = integration.providers.find((p) => p.id === id)
       if (provider) {

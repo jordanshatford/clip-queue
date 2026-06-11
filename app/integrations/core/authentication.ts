@@ -49,6 +49,9 @@ export interface OAuthDetails {
   authentication: AuthenticationDetails
 }
 
+/**
+ * Interface for an integrations authentication.
+ */
 export interface IntegrationAuthentication {
   /**
    * The ID of the integration authentication.
@@ -71,16 +74,16 @@ export interface IntegrationAuthentication {
    * valid session with the integration. If auto-login is successful, it returns the user details. If auto login fails it throws
    * an error to be handled by the caller.
    */
-  autoLogin: () => Promise<void>
+  autoLogin(): Promise<void>
   /**
    * Redirects the user to the authentication page of the integration to allow logging in to our application.
    */
-  login: () => Promise<void>
+  login(): Promise<void>
   /**
    * Logs out the user from the integration. This should clear any stored tokens or session information
    * related to the integration.
    */
-  logout: () => Promise<void>
+  logout(): Promise<void>
 }
 
 /**
