@@ -1,5 +1,7 @@
 import type { OEmbedAPI } from '#shared/oembed'
 
+import { isSupportedProviderURL, OEmbedProviderName } from '#shared/oembed'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
@@ -76,7 +78,7 @@ function getDetailsFromURL(url: string): { id?: string; timestamp?: string; end?
     const uri = new URL(url)
 
     // Only accept valid Vimeo URLs.
-    if (!['vimeo.com', 'www.vimeo.com'].includes(uri.hostname)) {
+    if (!isSupportedProviderURL(OEmbedProviderName.VIMEO, uri)) {
       return {}
     }
 

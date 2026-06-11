@@ -1,3 +1,5 @@
+import { isSupportedProviderURL, OEmbedProviderName } from '#shared/oembed'
+
 const SHORT_PATH_SUFFIX = '/shorts/'
 const EMBED_PATH_SUFFIX = '/embed/'
 const TIMESTAMP_PARAM = 'start'
@@ -15,7 +17,7 @@ export function getRumbleUrlDetails(url: string): {
     const uri = new URL(url)
 
     // Only accept valid Rumble URLs.
-    if (!['rumble.com', 'www.rumble.com'].includes(uri.hostname)) {
+    if (!isSupportedProviderURL(OEmbedProviderName.RUMBLE, uri)) {
       return {}
     }
 

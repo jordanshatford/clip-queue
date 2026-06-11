@@ -1,5 +1,7 @@
 import type { OEmbedAPI } from '#shared/oembed'
 
+import { isSupportedProviderURL, OEmbedProviderName } from '#shared/oembed'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
@@ -49,7 +51,6 @@ export class DailyMotionProvider extends AbstractIntegrationProvider {
 }
 
 const SHORT_HOSTNAME = 'dai.ly'
-const HOSTNAMES = ['dailymotion.com', 'www.dailymotion.com', SHORT_HOSTNAME]
 /**
  * Get the ID from a provided URL.
  * @param url - The URL of the video.
@@ -60,7 +61,7 @@ function getIdFromURL(url: string): string | undefined {
     const uri = new URL(url)
 
     // Only accept valid Dailymotion URLs.
-    if (!HOSTNAMES.some((h) => uri.hostname.endsWith(h))) {
+    if (!isSupportedProviderURL(OEmbedProviderName.DAILYMOTION, uri)) {
       return
     }
 

@@ -1,21 +1,6 @@
-const YOUTUBE_HOSTNAME = 'youtube.com'
-const YOUTUBE_HOSTNAME2 = 'www.youtube.com'
+import { isSupportedProviderURL, OEmbedProviderName } from '#shared/oembed'
+
 const VIDEO_ALT_HOSTNAME = 'youtu.be'
-
-/**
- * List of known YouTube hostnames that these integrations support.
- */
-const YOUTUBE_HOSTNAMES: string[] = [YOUTUBE_HOSTNAME, YOUTUBE_HOSTNAME2, VIDEO_ALT_HOSTNAME]
-
-/**
- * Check if a URL is a supported YouTube.com URL.
- * @param url - The URL to check.
- * @returns true if it is a YouTube URL, false otherwise.
- */
-export function isYouTubeURL(url: URL): boolean {
-  return YOUTUBE_HOSTNAMES.includes(url.hostname)
-}
-
 const SHORT_PATH_SUFFIX = '/shorts/'
 const VIDEO_TIMESTAMP_PARAM = 't'
 /**
@@ -32,7 +17,7 @@ export function getYouTubeUrlDetails(url: string): {
     const uri = new URL(url)
 
     // Only accept valid YouTube URLs.
-    if (!isYouTubeURL(uri)) {
+    if (!isSupportedProviderURL(OEmbedProviderName.YOUTUBE, uri)) {
       return {}
     }
 

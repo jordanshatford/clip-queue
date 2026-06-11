@@ -1,5 +1,7 @@
 import type { OEmbedAPI } from '#shared/oembed'
 
+import { isSupportedProviderURL, OEmbedProviderName } from '#shared/oembed'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
@@ -67,7 +69,7 @@ function getDetailsFromURL(url: string): { id?: string; timestamp?: string } {
     const uri = new URL(url)
 
     // Only accept valid Soop URLs.
-    if (!(uri.hostname === 'vod.sooplive.com')) {
+    if (!isSupportedProviderURL(OEmbedProviderName.SOOP, uri)) {
       return {}
     }
 

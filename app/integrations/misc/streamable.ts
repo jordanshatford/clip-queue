@@ -1,5 +1,7 @@
 import type { OEmbedAPI } from '#shared/oembed'
 
+import { isSupportedProviderURL, OEmbedProviderName } from '#shared/oembed'
+
 import type { Clip, PlayerConfig } from '../core'
 
 import { AbstractIntegrationProvider } from '../core'
@@ -58,7 +60,7 @@ function getIdFromURL(url: string): string | undefined {
     const uri = new URL(url)
 
     // Only accept valid Streamable URLs.
-    if (!['streamable.com', 'www.streamable.com'].includes(uri.hostname)) {
+    if (!isSupportedProviderURL(OEmbedProviderName.STREAMABLE, uri)) {
       return
     }
 

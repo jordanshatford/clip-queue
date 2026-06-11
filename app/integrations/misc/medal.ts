@@ -1,6 +1,6 @@
 import type { OEmbedAPI } from '#shared/oembed'
 
-import { parseEmbedURLFromHTML } from '#shared/oembed'
+import { parseEmbedURLFromHTML, isSupportedProviderURL, OEmbedProviderName } from '#shared/oembed'
 
 import type { Clip, PlayerConfig } from '../core'
 
@@ -62,7 +62,7 @@ function getIdFromURL(url: string): string | undefined {
     const uri = new URL(url)
 
     // Only accept valid Medal URLs.
-    if (!['medal.tv', 'www.medal.tv'].includes(uri.hostname)) {
+    if (!isSupportedProviderURL(OEmbedProviderName.MEDAL, uri)) {
       return
     }
 
