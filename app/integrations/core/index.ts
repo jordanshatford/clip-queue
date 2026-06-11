@@ -60,7 +60,7 @@ export interface Integration {
    * be used to get authentication details required for other parts of the integration to
    * function.
    */
-  readonly authentication?: Reactive<AbstractIntegrationAuthentication>
+  readonly authentication?: AbstractIntegrationAuthentication
   /**
    * Clip source for the integration. URLs from this source will be detected.
    */

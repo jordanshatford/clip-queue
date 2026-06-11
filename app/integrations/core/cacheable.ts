@@ -1,11 +1,13 @@
+import { CacheMap } from '#shared/utils/cache'
+
 /**
- * Cacheable class that provider key value caching functionality.
+ * Cacheable class that provides key value caching functionality.
  */
 export class Cacheable<T> {
   /**
    * The cache map used to store cached data.
    */
-  protected cache: Map<string, T> = new Map()
+  protected cache: CacheMap<T> = new CacheMap()
 
   /**
    * Whether the cache has any data.
@@ -29,12 +31,6 @@ export class Cacheable<T> {
    * @returns The existing cached value if it exists, or the factory result.
    */
   protected async cached(key: string, factory: () => Promise<T>): Promise<T> {
-    const existing = this.cache.get(key)
-    if (existing) {
-      return existing
-    }
-    const value = await factory()
-    this.cache.set(key, value)
-    return value
+    return this.cache.cached(key, factory)
   }
 }

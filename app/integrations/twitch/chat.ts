@@ -1,6 +1,7 @@
-import { Client } from '@tmi.js/chat'
 import { useStorage } from '@vueuse/core'
 import { ref } from 'vue'
+
+import { Client } from '#shared/twitch'
 
 import type { IntegrationSource, IntegrationSourceEvents } from '../core'
 

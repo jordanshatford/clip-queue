@@ -35,13 +35,11 @@
 </template>
 
 <script setup lang="ts">
-import type { Reactive } from 'vue'
-
 import type { AbstractIntegrationAuthentication } from '~/integrations'
 
 import { m } from '#paraglide/messages'
 
-const authentication = defineModel<Reactive<AbstractIntegrationAuthentication>>({ required: true })
+const authentication = defineModel<AbstractIntegrationAuthentication>({ required: true })
 
 const integrations = useIntegrations()
 

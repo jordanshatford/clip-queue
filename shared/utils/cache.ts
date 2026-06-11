@@ -1,5 +1,5 @@
 /**
- * Cacheable class that provider key value caching functionality.
+ * Cacheable map that provider key value caching functionality.
  */
 export class CacheMap<T> extends Map<string, T> {
   /**

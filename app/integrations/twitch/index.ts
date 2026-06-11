@@ -8,7 +8,7 @@ import { TwitchChatSource } from './chat'
 import { TwitchClipProvider } from './clip'
 import { TwitchVodProvider } from './vod'
 
-export const authentication = reactive(new TwitchAuthentication())
+export const authentication = new TwitchAuthentication()
 export const api = new TwitchAPI(() => authentication.details)
 export const source = reactive(new TwitchChatSource(() => authentication.user.name))
 export const clips = reactive(new TwitchClipProvider(api))

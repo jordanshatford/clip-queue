@@ -1,3 +1,5 @@
+import type { Reactive } from 'vue'
+
 import type { IntegrationID } from '../indentify'
 
 /**
@@ -71,26 +73,35 @@ export abstract class AbstractIntegrationAuthentication {
      */
     public readonly revokeUrl: string,
   ) {}
-  protected _isLoggedIn: boolean = false
+  /**
+   * Reactive internally tracked state.
+   */
+  protected state: Reactive<{
+    isLoggedIn: boolean
+    user: UserDetails
+    details: AuthenticationDetails
+  }> = reactive({
+    isLoggedIn: false,
+    user: { id: '', name: '', profileImageURL: '' },
+    details: { clientId: '', accessToken: '' },
+  })
   /**
    * If the user is currently logged in to the integration.
    */
   public get isLoggedIn(): boolean {
-    return this._isLoggedIn
+    return this.state.isLoggedIn
   }
-  protected _user: UserDetails = { id: '', name: '', profileImageURL: '' }
   /**
    * The user details.
    */
   public get user(): UserDetails {
-    return this._user
+    return this.state.user
   }
-  protected _details: AuthenticationDetails = { clientId: '', accessToken: '' }
   /**
    * The users authentication details for the integration.
    */
   public get details(): AuthenticationDetails {
-    return this._details
+    return this.state.details
   }
   /**
    * Attempts to automatically log in the user if possible. This can be used on application startup to check if the user has a
@@ -101,14 +112,12 @@ export abstract class AbstractIntegrationAuthentication {
     const current = await $fetch<OAuthDetails>(this.validateUrl, {
       method: 'POST',
     })
-
     if (!current) {
       throw new Error(`[${this.id}]: No valid session found.`)
     }
-
-    this._user = current.user
-    this._details = current.authentication
-    this._isLoggedIn = true
+    this.state.user = current.user
+    this.state.details = current.authentication
+    this.state.isLoggedIn = true
   }
   /**
    * Redirects the user to the authentication page of the integration to allow logging in to our application.
@@ -120,9 +129,9 @@ export abstract class AbstractIntegrationAuthentication {
    * Logs out the user from the provider. This should clear any stored tokens or session information related to the provider.
    */
   public async logout(): Promise<void> {
-    this._isLoggedIn = false
-    this._user = { id: '', name: '', profileImageURL: '' }
-    this._details = { clientId: '', accessToken: '' }
+    this.state.isLoggedIn = false
+    this.state.user = { id: '', name: '', profileImageURL: '' }
+    this.state.details = { clientId: '', accessToken: '' }
     return await $fetch(this.revokeUrl, { method: 'POST' })
   }
 }

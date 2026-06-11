@@ -23,13 +23,13 @@
     "changeset": "changeset"
   },
   "dependencies": {
-    "@nuxt/ui": "^4.8.1",
+    "@nuxt/ui": "^4.8.2",
     "@pinia/nuxt": "0.11.3",
     "@tanstack/vue-table": "^8.21.3",
     "@tmi.js/chat": "^0.8.0",
     "@vueuse/core": "^14.3.0",
     "@vueuse/nuxt": "^14.3.0",
-    "nuxt": "^4.4.7",
+    "nuxt": "^4.4.8",
     "pinia": "^3.0.4",
     "video.js": "^8.23.7",
     "vue": "^3.5.35",
@@ -42,27 +42,27 @@
     "@commitlint/config-conventional": "^21.0.2",
     "@commitlint/types": "^21.0.1",
     "@iconify-json/lucide": "^1.2.111",
-    "@iconify-json/simple-icons": "^1.2.85",
+    "@iconify-json/simple-icons": "^1.2.86",
     "@inlang/paraglide-js": "2.18.2",
-    "@nuxt/eslint": "^1.15.2",
+    "@nuxt/eslint": "^1.16.0",
     "@nuxt/test-utils": "4.0.3",
     "@pinia/testing": "^1.0.3",
-    "@types/node": "^25.9.1",
+    "@types/node": "^25.9.2",
     "@vitest/coverage-v8": "^4.1.8",
-    "@vue/test-utils": "^2.4.10",
+    "@vue/test-utils": "^2.4.11",
     "eslint": "^10.4.1",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
-    "oxfmt": "^0.53.0",
+    "oxfmt": "^0.54.0",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.8",
-    "vue-tsc": "^3.3.3"
+    "vue-tsc": "^3.3.4"
   },
   "engines": {
     "node": ">=22",
     "pnpm": ">=11"
   },
-  "packageManager": "pnpm@11.5.0"
+  "packageManager": "pnpm@11.5.2"
 }
