@@ -46,32 +46,23 @@ export interface Command {
   execute: (event: CommandExecuteEvent) => Awaited<void>
 }
 
-/**
- * Settings related to commands store.
- */
-export interface CommandsSettings {
-  /**
-   * The prefix for commands.
-   *
-   * @example !cq
-   */
-  prefix: string
-  /**
-   * The commands that are able to be triggered.
-   */
-  enabled: string[]
-}
-
-export const DEFAULT_COMMANDS_SETTINGS: CommandsSettings = {
-  prefix: '!cq',
-  enabled: [],
-}
-
 export const useCommands = defineStore('commands', () => {
   /**
    * Settings related to commands.
    */
-  const settings = usePeristedSettings<CommandsSettings>('commands', DEFAULT_COMMANDS_SETTINGS)
+  const settings = usePeristedSettings<{
+    /**
+     * The prefix for commands. All command calls require being prefixed by this value to
+     * be properly detected by the application.
+     *
+     * @example !cq
+     */
+    prefix: string
+    /**
+     * The commands that are able to be triggered.
+     */
+    enabled: string[]
+  }>('commands', { prefix: '!cq', enabled: [] })
   /**
    * Command details by command ID.
    */

@@ -30,7 +30,7 @@ describe('queue.ts', () => {
     queue.add(clipFromTwitch)
     expect(queue.upcoming.length).toEqual(queueLength + 1)
     expect(queue.upcoming.includes(clipFromTwitch)).toEqual(true)
-    queue.clear()
+    queue.upcoming.reset()
     expect(queue.upcoming.length).toEqual(0)
   })
 
@@ -74,24 +74,6 @@ describe('queue.ts', () => {
     expect(queue.upcoming.items).toContainEqual(clipFromTwitch)
     expect(queue.upcoming.items).toContainEqual(clipFromKick)
     expect(queue.current).toEqual(null)
-  })
-
-  it('can remove clips when they are in the queue', () => {
-    const queue = useQueue()
-    queue.add(clipFromTwitch)
-    queue.add(clipFromKick)
-    const queueLength = queue.upcoming.length
-    expect(queueLength).toEqual(2)
-    queue.remove(clipFromTwitch)
-    expect(queue.upcoming.items).not.toContainEqual(clipFromTwitch)
-    expect(queue.upcoming.length).toEqual(queueLength - 1)
-    queue.remove({
-      ...clipFromTwitch,
-      id: 'not-valid',
-      provider: IntegrationID.TWITCH_CLIPS,
-      submitters: [],
-    })
-    expect(queue.upcoming.length).toEqual(queueLength - 1)
   })
 
   it('removes user clips from the queue', () => {
@@ -152,18 +134,6 @@ describe('queue.ts', () => {
     const queue = useQueue()
     queue.add(clipFromTwitch)
     queue.next()
-    expect(queue.history.length).toEqual(0)
-  })
-
-  it('can purge all clips from the history', () => {
-    const queue = useQueue()
-    queue.add(clipFromTwitch)
-    queue.add(clipFromKick)
-    queue.next()
-    queue.next()
-    queue.next()
-    expect(queue.history.length).toEqual(2)
-    queue.purge()
     expect(queue.history.length).toEqual(0)
   })
 

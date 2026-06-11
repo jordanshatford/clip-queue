@@ -14,9 +14,9 @@
       :is-open="queue.settings.state.open"
       @open="queue.open()"
       @close="queue.close()"
-      @remove="(c) => queue.remove(c, true)"
+      @remove="(c) => queue.upcoming.remove(c, true)"
       @play="queue.play"
-      @clear="queue.clear()"
+      @clear="queue.upcoming.reset()"
     />
   </div>
 </template>

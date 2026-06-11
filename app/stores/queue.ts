@@ -4,55 +4,33 @@ import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
 
-/**
- * Settings related to queue store.
- */
-export interface QueueSettings {
-  /**
-   * If the queue is open.
-   */
-  open: boolean
-  /**
-   * The limit of clips in the queue.
-   *
-   * @example 10
-   * @note null means no limit.
-   */
-  limit: number | null
-  /**
-   * If the queue should block duplicate clips from being added to the queue.
-   */
-  duplicates: boolean
-}
-
-export const DEFAULT_QUEUE_SETTINGS: QueueSettings = {
-  open: true,
-  limit: null,
-  duplicates: false,
-}
-
 export const useQueue = defineStore('queue', () => {
-  const logger = useLogger()
   const history = useHistory()
   const upcoming = useUpcoming()
 
   /**
    * Settings related to the queue.
    */
-  const settings = usePeristedSettings<QueueSettings>('queue', DEFAULT_QUEUE_SETTINGS)
+  const settings = usePeristedSettings<{
+    /**
+     * If the queue is open.
+     */
+    open: boolean
+    /**
+     * The limit of clips in the queue.
+     *
+     * @example 10
+     * @note null means no limit.
+     */
+    limit: number | null
+    /**
+     * If the queue should block duplicate clips from being added to the queue.
+     */
+    duplicates: boolean
+  }>('queue', { open: true, limit: null, duplicates: false })
   const current = useStorage<Clip | null>('__cq_queue_current', null, undefined, {
     serializer: StorageSerializers.object,
   })
-
-  function clear() {
-    logger.info('[Queue]: Clearing upcoming queue.')
-    upcoming.reset()
-  }
-
-  function purge() {
-    logger.info('[Queue]: Purging queue history.')
-    history.reset()
-  }
 
   function add(clip: Clip, force = false) {
     // Force add the clip
@@ -78,10 +56,6 @@ export const useQueue = defineStore('queue', () => {
       }
     }
     upcoming.add(clip)
-  }
-
-  function remove(clip: Clip, force: boolean = false) {
-    upcoming.remove(clip, force)
   }
 
   function play(clip: Clip) {
@@ -217,10 +191,7 @@ export const useQueue = defineStore('queue', () => {
     history,
     current,
     upcoming,
-    clear,
-    purge,
     add,
-    remove,
     play,
     open,
     close,

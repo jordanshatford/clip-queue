@@ -11,22 +11,6 @@ import { integrations } from '~/integrations'
 import { toSubmitterUUID } from '~/integrations/core'
 
 /**
- * Settings related to the integrations store.
- */
-export interface IntegrationSettings {
-  /**
-   * Whether auto moderation is enabled.
-   *
-   * @note This will remove clips when the submitter has their message deleted, or is timed out / banned.
-   */
-  automod: boolean
-}
-
-export const DEFAULT_INTEGRATION_SETTINGS: IntegrationSettings = {
-  automod: true,
-}
-
-/**
  * Composable for unifying all interactions with integrations.
  */
 export const useIntegrations = defineStore('integrations', () => {
@@ -38,10 +22,16 @@ export const useIntegrations = defineStore('integrations', () => {
   /**
    * Settings related to integrations.
    */
-  const settings = usePeristedSettings<IntegrationSettings>(
-    'integrations',
-    DEFAULT_INTEGRATION_SETTINGS,
-  )
+  const settings = usePeristedSettings<{
+    /**
+     * Whether auto moderation is enabled.
+     *
+     * @note This will remove clips when the submitter has their message deleted,
+     *       or is timed out / banned. Integration sources will denote if they support
+     *       auto moderation.
+     */
+    automod: boolean
+  }>('integrations', { automod: true })
 
   /**
    * Get an integration based on an integration ID. If authentication, source, or a provider in an
@@ -189,7 +179,7 @@ export const useIntegrations = defineStore('integrations', () => {
         const clip = await resolve(url)
         const submitter = toSubmitterUUID(event.source, event.data.username)
         if (clip) {
-          queue.remove({
+          queue.upcoming.remove({
             ...clip,
             submitters: [submitter],
           })

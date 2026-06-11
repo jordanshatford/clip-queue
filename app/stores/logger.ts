@@ -78,31 +78,21 @@ export interface Log {
   message: string
 }
 
-/**
- * Settings related to logger store.
- */
-export interface LoggerSettings {
-  /**
-   * The minimum log level to log.
-   */
-  level: LogLevel
-  /**
-   * The number of logs stored.
-   */
-  limit: number
-}
-
-export const DEFAULT_LOGGER_SETTINGS: LoggerSettings = {
-  level: 'WARN',
-  limit: 100,
-}
-
 export const useLogger = defineStore('logger', () => {
   const preferences = usePreferences()
   /**
    * Settings related to the logger.
    */
-  const settings = usePeristedSettings<LoggerSettings>('logger', DEFAULT_LOGGER_SETTINGS)
+  const settings = usePeristedSettings<{
+    /**
+     * The minimum log level to log.
+     */
+    level: LogLevel
+    /**
+     * The number of logs stored.
+     */
+    limit: number
+  }>('logger', { level: 'WARN', limit: 100 })
   /**
    * Logs current available.
    */
