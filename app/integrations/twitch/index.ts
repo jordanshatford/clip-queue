@@ -11,8 +11,8 @@ import { TwitchVodProvider } from './vod'
 export const authentication = new TwitchAuthentication()
 export const api = new TwitchAPI(() => authentication.details)
 export const source = new TwitchChatSource(() => authentication.user.name)
-export const clips = reactive(new TwitchClipProvider(api))
-export const vods = reactive(new TwitchVodProvider(api))
+export const clips = new TwitchClipProvider(api)
+export const vods = new TwitchVodProvider(api)
 
 export const twitch: Integration = {
   id: IntegrationID.TWITCH,

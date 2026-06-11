@@ -13,11 +13,11 @@ import { VimeoProvider } from './vimeo'
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.MISCELLANEOUS, 'enabled'), false)
 
 export const api = new OEmbedAPI()
-export const dailymotion = reactive(new DailyMotionProvider(api))
-export const medal = reactive(new MedalProvider(api))
-export const soop = reactive(new SoopProvider(api))
-export const streamable = reactive(new StreamableProvider(api))
-export const vimeo = reactive(new VimeoProvider(api))
+export const dailymotion = new DailyMotionProvider(api)
+export const medal = new MedalProvider(api)
+export const soop = new SoopProvider(api)
+export const streamable = new StreamableProvider(api)
+export const vimeo = new VimeoProvider(api)
 
 export const misc: Integration = {
   id: IntegrationID.MISCELLANEOUS,

@@ -8,8 +8,8 @@ import { RumbleVideoProvider } from './video'
 
 const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.RUMBLE, 'enabled'), false)
 
-export const shorts = reactive(new RumbleShortProvider(api))
-export const videos = reactive(new RumbleVideoProvider(api))
+export const shorts = new RumbleShortProvider(api)
+export const videos = new RumbleVideoProvider(api)
 
 export const rumble: Integration = {
   id: IntegrationID.RUMBLE,
