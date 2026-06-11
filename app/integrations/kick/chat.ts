@@ -1,6 +1,8 @@
 import { useStorage } from '@vueuse/core'
 import { ref } from 'vue'
 
+import { EventEmitter } from '#shared/utils'
+
 import type {
   IntegrationSource,
   IntegrationSourceEvents,
@@ -10,7 +12,6 @@ import type {
 import {
   IntegrationSourceFeature,
   getAllURLsFromText,
-  EventEmitter,
   IntegrationStatus,
   toStorageKey,
 } from '../core'

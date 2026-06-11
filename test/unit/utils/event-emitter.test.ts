@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { EventEmitter } from '~/integrations/core/event-emitter'
+import { EventEmitter } from '../../../shared/utils/event-emitter'
 
 type TestEvents = {
   connected: [id: string]
@@ -8,7 +8,7 @@ type TestEvents = {
   empty: []
 }
 
-describe('EventEmitter', () => {
+describe('shared/utils/event-emitter', () => {
   it('registers and emits events', () => {
     const emitter = new EventEmitter<TestEvents>()
     const listener = vi.fn<(...args: TestEvents['connected']) => void>()

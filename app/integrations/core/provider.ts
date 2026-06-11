@@ -2,7 +2,7 @@ import type { RemovableRef } from '@vueuse/core'
 
 import { useStorage } from '@vueuse/core'
 
-import { Cacheable } from '#shared/utils/cache'
+import { Cacheable } from '#shared/utils'
 
 import type { IntegrationID } from '../indentify'
 

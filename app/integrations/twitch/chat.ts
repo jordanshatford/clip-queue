@@ -2,13 +2,13 @@ import { useStorage } from '@vueuse/core'
 import { ref } from 'vue'
 
 import { Client } from '#shared/twitch'
+import { EventEmitter } from '#shared/utils'
 
 import type { IntegrationSource, IntegrationSourceEvents } from '../core'
 
 import {
   IntegrationSourceFeature,
   getAllURLsFromText,
-  EventEmitter,
   IntegrationStatus,
   toStorageKey,
 } from '../core'

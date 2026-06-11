@@ -1,5 +1,6 @@
+import type { Awaitable, EventEmitter } from '#shared/utils'
+
 import type { IntegrationID } from '../indentify'
-import type { Awaitable, EventEmitter } from './event-emitter'
 import type { IntegrationStatus } from './types'
 
 /**
