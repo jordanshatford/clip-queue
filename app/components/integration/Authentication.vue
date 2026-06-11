@@ -35,11 +35,11 @@
 </template>
 
 <script setup lang="ts">
-import type { AbstractIntegrationAuthentication } from '~/integrations'
+import type { IntegrationAuthentication } from '~/integrations'
 
 import { m } from '#paraglide/messages'
 
-const authentication = defineModel<AbstractIntegrationAuthentication>({ required: true })
+const authentication = defineModel<IntegrationAuthentication>({ required: true })
 
 const integrations = useIntegrations()
 

@@ -9,7 +9,7 @@ import { youtube } from './youtube'
 export type {
   Clip,
   AbstractIntegrationProvider,
-  AbstractIntegrationAuthentication,
+  IntegrationAuthentication,
   Integration,
 } from './core'
 export { IntegrationID } from './indentify'

@@ -1,7 +1,7 @@
 import type { Reactive } from 'vue'
 
 import type { IntegrationID } from '../indentify'
-import type { AbstractIntegrationAuthentication } from './authentication'
+import type { IntegrationAuthentication } from './authentication'
 import type { AbstractIntegrationProvider } from './provider'
 import type { IntegrationSource } from './source'
 
@@ -58,7 +58,7 @@ export interface Integration {
    * be used to get authentication details required for other parts of the integration to
    * function.
    */
-  readonly authentication?: AbstractIntegrationAuthentication
+  readonly authentication?: IntegrationAuthentication
   /**
    * Clip source for the integration. URLs from this source will be detected.
    */
