@@ -24,7 +24,7 @@ export class YouTubeVideoProvider extends AbstractIntegrationProvider {
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
     }
-    return this.cached(id, async (): Promise<Clip> => {
+    return this.cache.cached(id, async (): Promise<Clip> => {
       const oembed = await this.api.getOEmbed(`https://www.youtube.com/watch?v=${id}`)
       return {
         id: id,

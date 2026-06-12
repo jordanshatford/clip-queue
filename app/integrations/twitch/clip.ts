@@ -28,7 +28,7 @@ export class TwitchClipProvider extends AbstractIntegrationProvider {
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
     }
-    return this.cached(id, async (): Promise<Clip> => {
+    return this.cache.cached(id, async (): Promise<Clip> => {
       const clip = await this.api.getClip(id)
       const game = await this.api.getGame(clip.game_id)
       return {

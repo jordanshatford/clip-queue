@@ -109,17 +109,19 @@ export abstract class AbstractIntegrationAuthentication implements IntegrationAu
      * The endpoint used to revoke authentication.
      */
     private readonly revokeUrl: string,
-  ) {}
+  ) {
+    this.state = reactive({
+      isLoggedIn: false,
+      user: { id: '', name: '', profileImageURL: '' },
+      details: { clientId: '', accessToken: '' },
+    })
+  }
 
   private state: Reactive<{
     isLoggedIn: boolean
     user: UserDetails
     details: AuthenticationDetails
-  }> = reactive({
-    isLoggedIn: false,
-    user: { id: '', name: '', profileImageURL: '' },
-    details: { clientId: '', accessToken: '' },
-  })
+  }>
 
   public get isLoggedIn(): boolean {
     return this.state.isLoggedIn

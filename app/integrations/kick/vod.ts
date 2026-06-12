@@ -25,7 +25,7 @@ export class KickVodProvider extends AbstractIntegrationProvider {
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
     }
-    return this.cached(id, async (): Promise<Clip> => {
+    return this.cache.cached(id, async (): Promise<Clip> => {
       const video = await this.api.getVideo(id)
       const duration = formatMilliseconds(video.livestream.duration)
       // When possible display the category provided by the API, otherwise just display that

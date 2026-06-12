@@ -29,7 +29,7 @@ export class TwitchVodProvider extends AbstractIntegrationProvider {
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
     }
-    return this.cached(id, async (): Promise<Clip> => {
+    return this.cache.cached(id, async (): Promise<Clip> => {
       const video = await this.api.getVideo(id)
       let category = `Video (${video.duration})`
       if (timestamp) {

@@ -1,16 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { CacheMap, Cacheable } from '../../../shared/utils/cache'
-
-class TestCacheable extends Cacheable<string> {
-  public get(key: string): string | undefined {
-    return this.cache.get(key)
-  }
-
-  public put(key: string, value: string): void {
-    this.cache.set(key, value)
-  }
-}
+import { CacheMap } from '../../../shared/utils/cache'
 
 describe('shared/utils/cache', () => {
   describe('CacheMap', () => {
@@ -63,31 +53,6 @@ describe('shared/utils/cache', () => {
       expect(secondFactory).toHaveBeenCalledTimes(1)
       expect(cache.get('one')).toBe(1)
       expect(cache.get('two')).toBe(2)
-    })
-  })
-
-  describe('Cacheable', () => {
-    it('can be defined', () => {
-      const cache = new TestCacheable()
-      expect(cache).toBeDefined()
-    })
-
-    it('can store values', () => {
-      const cache = new TestCacheable()
-      expect(cache.hasCachedData).toBeFalsy()
-      cache.put('test', 'test')
-      expect(cache.hasCachedData).toBeTruthy()
-      expect(cache.get('test')).toBeDefined()
-      expect(cache.get('test')).toEqual('test')
-    })
-
-    it('can have its values cleared', () => {
-      const cache = new TestCacheable()
-      expect(cache.hasCachedData).toBeFalsy()
-      cache.put('test', 'test')
-      expect(cache.hasCachedData).toBeTruthy()
-      cache.clearCache()
-      expect(cache.hasCachedData).toBeFalsy()
     })
   })
 })

@@ -24,7 +24,7 @@ export class StreamableProvider extends AbstractIntegrationProvider {
     if (!id) {
       throw new Error(`Invalid URL: ${url}.`)
     }
-    return this.cached(id, async (): Promise<Clip> => {
+    return this.cache.cached(id, async (): Promise<Clip> => {
       const oembed = await this.api.getOEmbed(`https://streamable.com/${id}`)
       return {
         id: id,
