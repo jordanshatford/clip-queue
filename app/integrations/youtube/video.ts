@@ -20,8 +20,8 @@ export class YouTubeVideoProvider extends AbstractIntegrationProvider {
   }
 
   public async resolveUrl(url: string): Promise<Clip> {
-    const { id, timestamp } = getYouTubeUrlDetails(url)
-    if (!id) {
+    const { id, type, timestamp } = getYouTubeUrlDetails(url)
+    if (!id || type !== 'video') {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cache.cached(id, async (): Promise<Clip> => {

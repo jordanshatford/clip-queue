@@ -20,8 +20,8 @@ export class YouTubeShortProvider extends AbstractIntegrationProvider {
   }
 
   public async resolveUrl(url: string): Promise<Clip> {
-    const { id } = getYouTubeUrlDetails(url)
-    if (!id) {
+    const { id, type } = getYouTubeUrlDetails(url)
+    if (!id || type !== 'short') {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cache.cached(id, async (): Promise<Clip> => {

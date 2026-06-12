@@ -1,109 +1,39 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip, mockKickVod } from '~~/test/unit/kick/mocks'
-import { mockTwitchClip, mockTwitchVod } from '~~/test/unit/twitch/mocks'
+import { expect, it, vi } from 'vitest'
+import { mockKickVod } from '~~/test/unit/kick/mocks'
 
-import { KickAPI } from '#shared/kick'
+import { KickAPI, type KickVideo } from '#shared/kick'
 import { KickVodProvider } from '~/integrations/kick/vod'
 
+import { createProviderTestHarness } from '../harness'
+
 const api = new KickAPI()
-api.getVideo = vi.fn().mockResolvedValue({
+api.getVideo = vi.fn<(id: string) => Promise<KickVideo>>(async (id) => ({
   ...mockKickVod,
-})
+  uuid: id,
+}))
 const provider = new KickVodProvider(api)
 
-describe('integrations/kick/providers/vod', () => {
-  beforeEach(() => {
-    vi.clearAllMocks()
-    provider.clearCache()
-  })
-
-  it('knows its initial enabled state', () => {
-    expect(provider.isEnabled).toEqual(false)
-  })
-
-  it('can be enabled and disabled', () => {
-    provider.isEnabled = true
-    expect(provider.isEnabled).toEqual(true)
-    provider.isEnabled = false
-    expect(provider.isEnabled).toEqual(false)
-    provider.isEnabled = true
-    expect(provider.isEnabled).toEqual(true)
-  })
-
-  it('gets the player config of the vod', async () => {
-    const url = `https://www.kick.com/channel/videos/${mockKickVod.uuid}`
-    const video = await provider.resolveUrl(url)
-    expect(video).toBeDefined()
-    expect(provider.getPlayerConfigForClip(video)).toEqual({
-      type: 'video',
-      src: video.embedUrl,
-      title: video.title,
-      poster: video.thumbnailUrl,
-      start: undefined,
+createProviderTestHarness(provider, {
+  isDefaultEnabled: false,
+  toPlayerConfig: (clip) => ({
+    type: 'video',
+    src: clip.embedUrl,
+    title: clip.title,
+    poster: clip.thumbnailUrl,
+    start: undefined,
+  }),
+  tests: (provider) => {
+    it('gets the player config of the vod with a timestamp', async () => {
+      const url = `https://www.kick.com/channel/videos/${mockKickVod.uuid}?t=1000`
+      const video = await provider.resolveUrl(url)
+      expect(video).toBeDefined()
+      expect(provider.getPlayerConfigForClip(video)).toEqual({
+        type: 'video',
+        src: video.embedUrl,
+        title: video.title,
+        poster: video.thumbnailUrl,
+        start: 1000,
+      })
     })
-  })
-
-  it('gets the player config of the vod with a timestamp', async () => {
-    const url = `https://www.kick.com/channel/videos/${mockKickVod.uuid}?t=1000`
-    const video = await provider.resolveUrl(url)
-    expect(video).toBeDefined()
-    expect(provider.getPlayerConfigForClip(video)).toEqual({
-      type: 'video',
-      src: video.embedUrl,
-      title: video.title,
-      poster: video.thumbnailUrl,
-      start: 1000,
-    })
-  })
-
-  it('can get a video from a kick url', async () => {
-    const url = `https://www.kick.com/channel/videos/${mockKickVod.uuid}`
-    const video = await provider.resolveUrl(url)
-    expect(video).toBeDefined()
-    expect(video.id).toEqual(mockKickVod.uuid)
-  })
-
-  it.each([
-    ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', false],
-    ['', false],
-    [mockKickClip.clip_url, false],
-    [mockTwitchVod.url, false],
-    ['http://www.twitch.tv/channel/v/test?t=5m10s', false],
-    ['http://www.twitch.tv/channel/v/test', false],
-    ['https://www.twitch.tv/videos/test', false],
-    [mockTwitchClip.url, false],
-    ['https://m.twitch.tv/clip/testclip', false],
-    ['https://clips.twitch.tv/channel/testclip', false],
-    ['https://www.twitch.tv/channel/clip/testclip', false],
-    [`https://www.kick.com/channel/videos/${mockKickVod.uuid}`, true],
-    [`https://www.kick.com/channel/videos/${mockKickVod.uuid}?t=123`, true],
-  ])('can detect clip urls it supports: (url: %s)', async (url: string, expected: boolean) => {
-    expect(provider.hasSupportForUrl(url)).toEqual(expected)
-  })
-
-  it.each([
-    ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL'],
-    [''],
-    [mockTwitchClip.url],
-    [mockKickClip.clip_url],
-  ])('throws an error for unknown video urls: (url: %s)', async (url: string) => {
-    await expect(provider.resolveUrl(url)).rejects.toThrow(`Invalid URL: ${url}.`)
-  })
-
-  it('caches clip data that it fetchs', async () => {
-    const url = `https://www.kick.com/channel/videos/${mockKickVod.uuid}`
-    expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.resolveUrl(url)).toBeDefined()
-    expect(provider.hasCachedData).toEqual(true)
-    expect(await provider.resolveUrl(url)).toBeDefined()
-  })
-
-  it('can have the cached data cleared', async () => {
-    const url = `https://www.kick.com/channel/videos/${mockKickVod.uuid}`
-    expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.resolveUrl(url)).toBeDefined()
-    expect(provider.hasCachedData).toEqual(true)
-    provider.clearCache()
-    expect(provider.hasCachedData).toEqual(false)
-  })
+  },
 })

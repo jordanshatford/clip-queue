@@ -91,6 +91,11 @@ function getClipIdFromUrl(url: string): string | undefined {
     ) {
       return
     }
+
+    if (uri.hostname === MOBILE_HOSTNAME && segments.length < 2) {
+      return
+    }
+
     return segments.pop()
   } catch {
     return

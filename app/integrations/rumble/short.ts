@@ -22,8 +22,8 @@ export class RumbleShortProvider extends AbstractIntegrationProvider {
   }
 
   public async resolveUrl(url: string): Promise<Clip> {
-    const { id } = getRumbleUrlDetails(url)
-    if (!id) {
+    const { id, type } = getRumbleUrlDetails(url)
+    if (!id || type !== 'short') {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cache.cached(id, async (): Promise<Clip> => {

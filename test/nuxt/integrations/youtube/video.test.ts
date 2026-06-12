@@ -1,10 +1,10 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { mockKickClip } from '~~/test/unit/kick/mocks'
+import { expect, it, vi } from 'vitest'
 import { mockYouTubeOEmbed } from '~~/test/unit/oembed/mocks'
-import { mockTwitchClip, mockTwitchVod } from '~~/test/unit/twitch/mocks'
 
 import { OEmbedAPI } from '#shared/oembed'
 import { YouTubeVideoProvider } from '~/integrations/youtube/video'
+
+import { createProviderTestHarness } from '../harness'
 
 const api = new OEmbedAPI()
 api.getOEmbed = vi.fn().mockResolvedValue({
@@ -12,98 +12,23 @@ api.getOEmbed = vi.fn().mockResolvedValue({
 })
 const provider = new YouTubeVideoProvider(api)
 
-describe('integrations/youtube/providers/video', () => {
-  beforeEach(() => {
-    vi.clearAllMocks()
-    provider.clearCache()
-  })
-
-  it('knows its initial enabled state', () => {
-    expect(provider.isEnabled).toEqual(false)
-  })
-
-  it('can be enabled and disabled', () => {
-    provider.isEnabled = true
-    expect(provider.isEnabled).toEqual(true)
-    provider.isEnabled = false
-    expect(provider.isEnabled).toEqual(false)
-    provider.isEnabled = true
-    expect(provider.isEnabled).toEqual(true)
-  })
-
-  it('gets the player config of the video', async () => {
-    const url = 'https://www.youtube.com/watch?v=id'
-    const clip = await provider.resolveUrl(url)
-    expect(clip).toBeDefined()
-    expect(provider.getPlayerConfigForClip(clip)).toEqual({
-      type: 'iframe',
-      src: `${clip.embedUrl}?autoplay=1`,
-      title: clip.title,
+createProviderTestHarness(provider, {
+  isDefaultEnabled: false,
+  toPlayerConfig: (clip) => ({
+    type: 'iframe',
+    src: `${clip.embedUrl}?autoplay=1`,
+    title: clip.title,
+  }),
+  tests: (provider) => {
+    it('gets the player config of the video with a timestamp', async () => {
+      const url = 'https://www.youtube.com/watch?v=id&t=123'
+      const clip = await provider.resolveUrl(url)
+      expect(clip).toBeDefined()
+      expect(provider.getPlayerConfigForClip(clip)).toEqual({
+        type: 'iframe',
+        src: `${clip.embedUrl}?autoplay=1&start=123`,
+        title: clip.title,
+      })
     })
-  })
-
-  it('gets the player config of the video with a timestamp', async () => {
-    const url = 'https://www.youtube.com/watch?v=id&t=123'
-    const clip = await provider.resolveUrl(url)
-    expect(clip).toBeDefined()
-    expect(provider.getPlayerConfigForClip(clip)).toEqual({
-      type: 'iframe',
-      src: `${clip.embedUrl}?autoplay=1&start=123`,
-      title: clip.title,
-    })
-  })
-
-  it('can get a video from a youtube url', async () => {
-    const url = 'https://www.youtube.com/watch?v=id&t=123'
-    const video = await provider.resolveUrl(url)
-    expect(video).toBeDefined()
-    expect(video.id).toEqual('id')
-  })
-
-  it.each([
-    ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL', false],
-    ['', false],
-    [mockKickClip.clip_url, false],
-    [mockTwitchVod.url, false],
-    ['http://www.twitch.tv/channel/v/test?t=5m10s', false],
-    ['http://www.twitch.tv/channel/v/test', false],
-    ['https://www.twitch.tv/videos/test', false],
-    [mockTwitchClip.url, false],
-    ['https://m.twitch.tv/clip/testclip', false],
-    ['https://clips.twitch.tv/channel/testclip', false],
-    ['https://www.twitch.tv/channel/clip/testclip', false],
-    ['https://www.youtube.com/shorts/<ID>', false],
-    ['https://www.youtube.com/watch?v=<ID>', true],
-    ['https://www.youtube.com/watch?v=<ID>&t=<TIMESTAMP>', true],
-    ['https://youtu.be/<ID>', true],
-    ['https://youtu.be/<ID>?t=<TIMESTAMP>', true],
-  ])('can detect video urls it supports: (url: %s)', async (url: string, expected: boolean) => {
-    expect(provider.hasSupportForUrl(url)).toEqual(expected)
-  })
-
-  it.each([
-    ['https://developer.mozilla.org/en-US/docs/Web/API/URL/URL'],
-    [''],
-    [mockTwitchClip.url],
-    [mockKickClip.clip_url],
-  ])('throws an error for unknown video urls: (url: %s)', async (url: string) => {
-    await expect(provider.resolveUrl(url)).rejects.toThrow(`Invalid URL: ${url}.`)
-  })
-
-  it('caches clip data that it fetchs', async () => {
-    const url = 'https://www.youtube.com/watch?v=id?t=123'
-    expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.resolveUrl(url)).toBeDefined()
-    expect(provider.hasCachedData).toEqual(true)
-    expect(await provider.resolveUrl(url)).toBeDefined()
-  })
-
-  it('can have the cached data cleared', async () => {
-    const url = 'https://www.youtube.com/watch?v=id?t=123'
-    expect(provider.hasCachedData).toEqual(false)
-    expect(await provider.resolveUrl(url)).toBeDefined()
-    expect(provider.hasCachedData).toEqual(true)
-    provider.clearCache()
-    expect(provider.hasCachedData).toEqual(false)
-  })
+  },
 })

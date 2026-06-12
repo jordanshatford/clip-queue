@@ -77,6 +77,10 @@ function getDetailsFromURL(url: string): { id?: string; timestamp?: string } {
     //  1. https://vod.sooplive.com/player/<ID>.
     //  2. https://vod.sooplive.com/player/<ID>?change_second=<TIMESTAMP>
     const segments = uri.pathname.split('/').filter(Boolean)
+    if (segments.length < 2) {
+      return {}
+    }
+
     const id = segments.pop()
 
     const timestamp = uri.searchParams.get(VIDEO_TIMESTAMP_PARAM) ?? undefined

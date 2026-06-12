@@ -22,8 +22,8 @@ export class RumbleVideoProvider extends AbstractIntegrationProvider {
   }
 
   public async resolveUrl(url: string): Promise<Clip> {
-    const { id, timestamp } = getRumbleUrlDetails(url)
-    if (!id) {
+    const { id, type, timestamp } = getRumbleUrlDetails(url)
+    if (!id || type !== 'video') {
       throw new Error(`Invalid URL: ${url}.`)
     }
     return this.cache.cached(id, async (): Promise<Clip> => {
