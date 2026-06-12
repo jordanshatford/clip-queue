@@ -6,7 +6,7 @@ import { TwitchVodProvider } from '~/integrations/twitch/vod'
 
 import { createProviderTestHarness } from '../harness'
 
-const api = new TwitchAPI(() => ({ clientId: '', accessToken: '' }))
+const api = new TwitchAPI(() => ({ clientId: 'test', accessToken: 'test' }))
 api.getVideo = vi.fn<(id: string) => Promise<TwitchVideo>>(async (id) => ({
   ...mockTwitchVod,
   id,

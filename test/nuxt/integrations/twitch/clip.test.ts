@@ -6,7 +6,7 @@ import { TwitchClipProvider } from '~/integrations/twitch/clip'
 
 import { createProviderTestHarness } from '../harness'
 
-const api = new TwitchAPI(() => ({ clientId: '', accessToken: '' }))
+const api = new TwitchAPI(() => ({ clientId: 'test', accessToken: 'test' }))
 api.getClip = vi.fn<(id: string) => Promise<TwitchClip>>(async (id) => ({
   ...mockTwitchClip,
   id,

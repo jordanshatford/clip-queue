@@ -164,6 +164,10 @@ export function createProviderTestHarness(
       expect(provider.isEnabled).toEqual(true)
     })
 
+    it('knows is configured properly', () => {
+      expect(provider.isMisconfigured).toEqual(false)
+    })
+
     it(`can get a clip from a ${provider.name} URL`, async () => {
       const clip = await provider.resolveUrl(url)
       expect(clip).toBeDefined()
