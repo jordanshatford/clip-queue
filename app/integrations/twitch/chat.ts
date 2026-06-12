@@ -1,97 +1,17 @@
-import { useStorage } from '@vueuse/core'
-import { ref } from 'vue'
-
 import { Client } from '#shared/twitch'
-import { EventEmitter } from '#shared/utils'
 
-import type { IntegrationSource, IntegrationSourceEvents } from '../core'
-
-import {
-  IntegrationSourceFeature,
-  getAllURLsFromText,
-  IntegrationStatus,
-  toStorageKey,
-} from '../core'
+import { getAllURLsFromText, IntegrationStatus, AbstractIntegrationSource } from '../core'
 import { IntegrationID } from '../indentify'
-
-const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.TWITCH_CHAT, 'enabled'), true)
-const isLoading = ref<boolean>(false)
-const status = ref<IntegrationStatus>(IntegrationStatus.UNKNOWN)
 
 /**
  * Twitch Chat Source.
  */
-export class TwitchChatSource
-  extends EventEmitter<IntegrationSourceEvents>
-  implements IntegrationSource
-{
-  public readonly id: IntegrationID = IntegrationID.TWITCH_CHAT
-  public readonly name: string = 'Twitch Chat'
-
-  public readonly features: IntegrationSourceFeature[] = [
-    IntegrationSourceFeature.AUTO_CONNECT,
-    IntegrationSourceFeature.AUTO_MODERATION,
-    IntegrationSourceFeature.COMMANDS,
-    IntegrationSourceFeature.LINK_DETECTION,
-  ]
-
-  public get isLoading(): boolean {
-    return isLoading.value
-  }
-
-  public get isEnabled(): boolean {
-    return isEnabled.value
-  }
-
-  public set isEnabled(value: boolean) {
-    // Ensure we update the state of the chat connection based on the change.
-    // Specifically update the isEnabled value based on if we are connecting
-    // or disconnecting in a different order to ensure connecting and disconnecting
-    // works as intended.
-    isLoading.value = true
-    if (value) {
-      isEnabled.value = value
-      this.connect()
-    } else {
-      this.disconnect()
-      isEnabled.value = value
-    }
-  }
-
-  public get status(): IntegrationStatus {
-    if (!this.isEnabled) {
-      return IntegrationStatus.DISABLED
-    }
-    if (!this.channel()) {
-      return IntegrationStatus.MISCONFIGURED
-    }
-    return status.value
-  }
-
+export class TwitchChatSource extends AbstractIntegrationSource {
   private channel: () => string
   private chat = new Client({ token: undefined, channels: [] })
 
-  private timestamp(): string {
-    return new Date().toISOString()
-  }
-
-  private handleStatusUpdate(s: IntegrationStatus, _?: string): void {
-    status.value = s
-  }
-
-  private handleError(error: unknown): void {
-    const reason = error instanceof Error ? error.message : String(error)
-    isLoading.value = false
-    this.emit('error', {
-      timestamp: this.timestamp(),
-      source: this.id,
-      data: reason,
-    })
-    this.handleStatusUpdate(IntegrationStatus.ERROR, reason)
-  }
-
   public constructor(channel: () => string) {
-    super()
+    super(IntegrationID.TWITCH_CHAT, 'Twitch Chat', true)
     this.channel = channel
 
     // Hook into chat events from tmi.js/chat that we require for our application.
@@ -112,7 +32,7 @@ export class TwitchChatSource
       // Joined the correct channel for this integration. At this point we are
       // fully connected to the source, so emit a connected event with details
       // about the channel we connected to.
-      isLoading.value = false
+      this.state.isLoading = false
       this.emit('connected', {
         timestamp: this.timestamp(),
         source: this.id,
@@ -179,24 +99,28 @@ export class TwitchChatSource
         }
       }
     })
-    this.chat.on('part', async (event) => {
+    this.chat.on('part', async (_) => {
       // This source relys on being connected to the channel. If we are disconnected, we
       // treat that as an error, and should provide those details to the user.
       await this.disconnect()
-      this.handleStatusUpdate(IntegrationStatus.ERROR, `Left channel ${event.channel.login}.`)
+      this.handleStatusUpdate(IntegrationStatus.ERROR)
     })
     this.chat.on('close', (event) => {
       // When the source is fully disconnected, we also want to display this to the
       // user and allow them to re-enable the source, or toggle it, to attempt to get
       // the connection working again.
-      isLoading.value = false
+      this.state.isLoading = false
       this.emit('disconnected', {
         timestamp: this.timestamp(),
         source: this.id,
         data: event.reason,
       })
-      this.handleStatusUpdate(IntegrationStatus.ERROR, event.reason)
+      this.handleStatusUpdate(IntegrationStatus.ERROR)
     })
+  }
+
+  protected override get isMisconfigured(): boolean {
+    return !this.channel()
   }
 
   public async connect(): Promise<void> {
@@ -204,8 +128,8 @@ export class TwitchChatSource
     if (!this.isEnabled || this.status === IntegrationStatus.MISCONFIGURED) {
       return
     }
-    isLoading.value = true
-    this.handleStatusUpdate(IntegrationStatus.UNKNOWN, `Connecting to ${this.name}.`)
+    this.state.isLoading = true
+    this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
     try {
       this.chat.connect()
     } catch (error) {
@@ -219,8 +143,8 @@ export class TwitchChatSource
     if (!this.isEnabled) {
       return
     }
-    isLoading.value = true
-    this.handleStatusUpdate(IntegrationStatus.UNKNOWN, `Disconnected from ${this.name}.`)
+    this.state.isLoading = true
+    this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
     try {
       this.chat.close()
     } catch (error) {

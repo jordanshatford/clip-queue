@@ -1,7 +1,14 @@
-import type { Awaitable, EventEmitter } from '#shared/utils'
+import type { RemovableRef } from '@vueuse/core'
+import type { Reactive } from 'vue'
+
+import { useStorage } from '@vueuse/core'
+
+import { EventEmitter, type Awaitable } from '#shared/utils'
 
 import type { IntegrationID } from '../indentify'
-import type { IntegrationStatus } from './types'
+
+import { IntegrationStatus } from './types'
+import { toStorageKey } from './utils'
 
 /**
  * Enumeration representing the possible features a integration source can support.
@@ -159,3 +166,105 @@ export type IntegrationSource = {
    */
   disconnect: () => Awaitable<void>
 } & Pick<EventEmitter<IntegrationSourceEvents>, 'on'>
+
+/**
+ * Abstract class for an integration source.
+ */
+export abstract class AbstractIntegrationSource
+  extends EventEmitter<IntegrationSourceEvents>
+  implements IntegrationSource
+{
+  protected constructor(
+    /**
+     * The ID of the integration provider.
+     */
+    public readonly id: IntegrationID,
+    /**
+     * The display name used by the application for the integration provider.
+     */
+    public readonly name: string,
+    /**
+     * The default value for if the integration provider isEnabled.
+     */
+    defaultIsEnabled: boolean,
+  ) {
+    super()
+    this.state = reactive({
+      status: IntegrationStatus.UNKNOWN,
+      isLoading: false,
+      isEnabled: useStorage<boolean>(toStorageKey(id, 'enabled'), defaultIsEnabled),
+    })
+  }
+
+  protected state: Reactive<{
+    status: IntegrationStatus
+    isLoading: boolean
+    isEnabled: RemovableRef<boolean>
+  }>
+
+  public readonly features: IntegrationSourceFeature[] = [
+    IntegrationSourceFeature.AUTO_CONNECT,
+    IntegrationSourceFeature.AUTO_MODERATION,
+    IntegrationSourceFeature.COMMANDS,
+    IntegrationSourceFeature.LINK_DETECTION,
+  ]
+
+  public get isEnabled(): boolean {
+    return this.state.isEnabled
+  }
+
+  public set isEnabled(value: boolean) {
+    // Ensure we update the state of the chat connection based on the change.
+    // Specifically update the isEnabled value based on if we are connecting
+    // or disconnecting in a different order to ensure connecting and disconnecting
+    // works as intended.
+    this.state.isLoading = true
+    if (value) {
+      this.state.isEnabled = value
+      this.connect()
+    } else {
+      this.disconnect()
+      this.state.isEnabled = value
+    }
+  }
+
+  public get isLoading(): boolean {
+    return this.state.isLoading
+  }
+
+  protected get isMisconfigured(): boolean {
+    return false
+  }
+
+  public get status(): IntegrationStatus {
+    if (!this.isEnabled) {
+      return IntegrationStatus.DISABLED
+    }
+    if (this.isMisconfigured) {
+      return IntegrationStatus.MISCONFIGURED
+    }
+    return this.state.status
+  }
+
+  protected timestamp(): string {
+    return new Date().toISOString()
+  }
+
+  protected handleStatusUpdate(status: IntegrationStatus): void {
+    this.state.status = status
+  }
+
+  protected handleError(error: unknown): void {
+    const reason = error instanceof Error ? error.message : (error as string)
+    this.state.isLoading = false
+    this.emit('error', {
+      timestamp: this.timestamp(),
+      source: this.id,
+      data: reason,
+    })
+    this.handleStatusUpdate(IntegrationStatus.ERROR)
+  }
+
+  public abstract connect(): Promise<void>
+  public abstract disconnect(): Promise<void>
+}

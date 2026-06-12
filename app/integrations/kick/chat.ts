@@ -1,29 +1,14 @@
-import { useStorage } from '@vueuse/core'
-import { ref } from 'vue'
-
 import { Client, isSenderBot, isSenderModerator } from '#shared/kick'
-import { EventEmitter } from '#shared/utils'
 
-import type {
-  IntegrationSource,
-  IntegrationSourceEvents,
-  IntegrationSourceMessageEvent,
-} from '../core'
+import type { IntegrationSourceMessageEvent } from '../core'
 
-import {
-  IntegrationSourceFeature,
-  getAllURLsFromText,
-  IntegrationStatus,
-  toStorageKey,
-} from '../core'
+import { getAllURLsFromText, IntegrationStatus, AbstractIntegrationSource } from '../core'
 import { IntegrationID } from '../indentify'
 
-const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.KICK_CHAT, 'enabled'), false)
-const isLoading = ref<boolean>(false)
-const status = ref<IntegrationStatus>(IntegrationStatus.UNKNOWN)
-
 /**
- * A message cache for Kick deleted message handling.
+ * Message cache for tracking 1000 Kick messages for when a delete event is triggered.
+ * This is due to Kick API only providing the message ID of the deleted message rather
+ * than the content.
  */
 export class MessageCache<T> {
   private values: Map<string, T> = new Map<string, T>()
@@ -66,78 +51,13 @@ export class MessageCache<T> {
 /**
  * Kick Chat Source.
  */
-export class KickChatSource
-  extends EventEmitter<IntegrationSourceEvents>
-  implements IntegrationSource
-{
-  public readonly id: IntegrationID = IntegrationID.KICK_CHAT
-  public readonly name: string = 'Kick Chat'
-
-  public readonly features: IntegrationSourceFeature[] = [
-    IntegrationSourceFeature.AUTO_CONNECT,
-    IntegrationSourceFeature.AUTO_MODERATION,
-    IntegrationSourceFeature.COMMANDS,
-    IntegrationSourceFeature.LINK_DETECTION,
-  ]
-
-  public get isLoading(): boolean {
-    return isLoading.value
-  }
-
-  public get isEnabled(): boolean {
-    return isEnabled.value
-  }
-
-  public set isEnabled(value: boolean) {
-    // Ensure we update the state of the chat connection based on the change.
-    // Specifically update the isEnabled value based on if we are connecting
-    // or disconnecting in a different order to ensure connecting and disconnecting
-    // works as intended.
-    isLoading.value = true
-    if (value) {
-      isEnabled.value = value
-      this.connect()
-    } else {
-      this.disconnect()
-      isEnabled.value = value
-    }
-  }
-
-  public get status(): IntegrationStatus {
-    if (!this.isEnabled) {
-      return IntegrationStatus.DISABLED
-    }
-    if (!this.channel()) {
-      return IntegrationStatus.MISCONFIGURED
-    }
-    return status.value
-  }
-
+export class KickChatSource extends AbstractIntegrationSource {
   private messageCache = new MessageCache<IntegrationSourceMessageEvent>()
   private channel: () => string
   private chat = new Client()
 
-  private timestamp(): string {
-    return new Date().toISOString()
-  }
-
-  private handleStatusUpdate(s: IntegrationStatus, _?: string): void {
-    status.value = s
-  }
-
-  private handleError(error: unknown): void {
-    const reason = error instanceof Error ? error.message : String(error)
-    isLoading.value = false
-    this.emit('error', {
-      timestamp: this.timestamp(),
-      source: this.id,
-      data: reason,
-    })
-    this.handleStatusUpdate(IntegrationStatus.ERROR, reason)
-  }
-
   public constructor(channel: () => string) {
-    super()
+    super(IntegrationID.KICK_CHAT, 'Kick Chat', false)
     this.channel = channel
 
     // Hook into chat events from our Kick chat pusher implementation.
@@ -158,7 +78,7 @@ export class KickChatSource
       // Joined the correct channel for this integration. At this point we are
       // fully connected to the source, so emit a connected event with details
       // about the channel we connected to.
-      isLoading.value = false
+      this.state.isLoading = false
       this.emit('connected', {
         timestamp: this.timestamp(),
         source: this.id,
@@ -214,13 +134,13 @@ export class KickChatSource
       // When the source is fully disconnected, we also want to display this to the
       // user and allow them to re-enable the source, or toggle it, to attempt to get
       // the connection working again.
-      isLoading.value = false
+      this.state.isLoading = false
       this.emit('disconnected', {
         timestamp: this.timestamp(),
         source: this.id,
         data: event.reason,
       })
-      this.handleStatusUpdate(IntegrationStatus.ERROR, event.reason)
+      this.handleStatusUpdate(IntegrationStatus.ERROR)
     })
     this.chat.on('error', (event) => {
       // Error coming from underlying pusher or websocket.
@@ -234,13 +154,17 @@ export class KickChatSource
     })
   }
 
+  protected override get isMisconfigured(): boolean {
+    return !this.channel()
+  }
+
   public async connect(): Promise<void> {
     // If the source is disabled, do not actually connect it.
     if (!this.isEnabled || this.status === IntegrationStatus.MISCONFIGURED) {
       return
     }
-    isLoading.value = true
-    this.handleStatusUpdate(IntegrationStatus.UNKNOWN, `Connecting to ${this.name}.`)
+    this.state.isLoading = true
+    this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
     try {
       this.chat.connect()
     } catch (error) {
@@ -254,8 +178,8 @@ export class KickChatSource
     if (!this.isEnabled) {
       return
     }
-    isLoading.value = true
-    this.handleStatusUpdate(IntegrationStatus.UNKNOWN, `Disconnected from ${this.name}.`)
+    this.state.isLoading = true
+    this.handleStatusUpdate(IntegrationStatus.UNKNOWN)
     try {
       this.chat.close()
     } catch (error) {
