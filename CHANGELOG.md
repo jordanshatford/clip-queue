@@ -1,5 +1,37 @@
 # clip-queue
 
+## 3.8.0
+
+### Minor Changes
+
+- [`1ee2e7a`](https://github.com/jordanshatford/clip-queue/commit/1ee2e7a7ffdf6f6cabcacb0915ee0ab6cae52a80) - feat: simplify reactivity of integration authentication
+
+- [`a1f473a`](https://github.com/jordanshatford/clip-queue/commit/a1f473aa5b19356b2709590b3886bbbe0e09c52f) - feat: move integration source generic handling to abstract class
+
+- [`5f9147b`](https://github.com/jordanshatford/clip-queue/commit/5f9147bed2bf8b21d3fc90b99f123edc18a5b2f3) - feat: move getting kick user to shared code
+
+- [`ae1612d`](https://github.com/jordanshatford/clip-queue/commit/ae1612d6465ce1edd6e10918a6c32ea1678ff643) - feat: move all oembed handling to shared code
+
+- [`237d4bb`](https://github.com/jordanshatford/clip-queue/commit/237d4bb6e2a8393a09dca8d947b438b981fb5c36) - feat: use shared oembed code to validate url
+
+- [`81a7ab0`](https://github.com/jordanshatford/clip-queue/commit/81a7ab08158db6ff6e0d20ba1571b64bca2b841c) - feat: move kick api interaction to shared code
+
+- [`a4f77f0`](https://github.com/jordanshatford/clip-queue/commit/a4f77f01e2b3b8450c4c0fdecd77b984c36d4064) - feat: improve error handling in application
+
+### Patch Changes
+
+- [`0fc8d6d`](https://github.com/jordanshatford/clip-queue/commit/0fc8d6dce5f66b06942f98fa144dcb53c84e5bc1) - fix: improve soop integration provider id detection
+
+- [`e6581a4`](https://github.com/jordanshatford/clip-queue/commit/e6581a41bcd494898ad943dac2efa9db2ba1376d) - fix: use standard url handling for embedding videos
+
+- [`0fc8d6d`](https://github.com/jordanshatford/clip-queue/commit/0fc8d6dce5f66b06942f98fa144dcb53c84e5bc1) - fix: improve twitch clip url id detection
+
+- [`e524f53`](https://github.com/jordanshatford/clip-queue/commit/e524f53978e7a4d7eacc3b08fc65a10fa8d2a872) - fix: only display 5 history items per page
+
+- [`a4f77f0`](https://github.com/jordanshatford/clip-queue/commit/a4f77f01e2b3b8450c4c0fdecd77b984c36d4064) - fix: default integration source status as unknown
+
+- [`f01f831`](https://github.com/jordanshatford/clip-queue/commit/f01f8317eaff81ba872d09451171dfc5f1e01a4c) - fix: auto play for streamable iframe
+
 ## 3.7.0
 
 ### Minor Changes
