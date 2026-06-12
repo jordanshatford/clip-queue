@@ -18,7 +18,7 @@
     "test:unit": "vitest run --project unit",
     "test:nuxt": "vitest run --project nuxt",
     "locales:update": "pnpm dlx @inlang/cli machine translate --project ./project.inlang && pnpm format",
-    "deps:update": "pnpm dlx nuxt upgrade --dedupe && pnpm self-update && pnpm up --latest",
+    "deps:update": "pnpm self-update pnpm dlx nuxt upgrade --dedupe && pnpm up --latest",
     "commitlint": "commitlint --edit",
     "changeset": "changeset"
   },
@@ -32,7 +32,7 @@
     "nuxt": "^4.4.8",
     "pinia": "^3.0.4",
     "video.js": "^8.23.7",
-    "vue": "^3.5.35",
+    "vue": "^3.5.38",
     "vue-router": "^5.1.0"
   },
   "devDependencies": {
@@ -43,11 +43,11 @@
     "@commitlint/types": "^21.0.1",
     "@iconify-json/lucide": "^1.2.111",
     "@iconify-json/simple-icons": "^1.2.86",
-    "@inlang/paraglide-js": "2.18.2",
+    "@inlang/paraglide-js": "2.19.0",
     "@nuxt/eslint": "^1.16.0",
     "@nuxt/test-utils": "4.0.3",
     "@pinia/testing": "^1.0.3",
-    "@types/node": "^25.9.2",
+    "@types/node": "^25.9.3",
     "@vitest/coverage-v8": "^4.1.8",
     "@vue/test-utils": "^2.4.11",
     "eslint": "^10.4.1",
