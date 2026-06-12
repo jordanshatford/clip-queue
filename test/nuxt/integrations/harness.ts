@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { PlayerConfig } from '~/integrations/core'
+import type { Integration, PlayerConfig } from '~/integrations/core'
 
 import { IntegrationID, type Clip, type IntegrationProvider } from '~/integrations'
 
@@ -219,5 +219,106 @@ export function createProviderTestHarness(
     })
 
     options.tests?.(provider)
+  })
+}
+
+/**
+ * Create a test harness for a given integration. Shared handling of tests to reduce duplication
+ * and ensure that all integrations are tested equally.
+ * @param integration - The integration to test.
+ * @param options - The options to test with.
+ */
+export function createIntegrationTestHarness(
+  integration: Integration,
+  options: {
+    isEnabled?: boolean
+    isExperimental?: boolean
+    details: {
+      id: IntegrationID
+      name: string
+      url: string
+      icon: string
+      primary: string
+      secondary?: string
+    }
+    authentication?: IntegrationID
+    source?: IntegrationID
+    providers: IntegrationID[]
+  },
+): void {
+  describe(integration.name, () => {
+    it('has the expected values defined', () => {
+      expect(integration).toBeDefined()
+      expect(integration.id).toBe(options.details.id)
+      expect(integration.name).toBe(options.details.name)
+      expect(integration.url).toBe(options.details.url)
+    })
+
+    it('contains branding details', () => {
+      expect(integration.branding.icon).toEqual(options.details.icon)
+      expect(integration.branding.primary).toEqual(options.details.primary)
+      expect(integration.branding.secondary).toEqual(options.details.secondary)
+    })
+
+    it('knows its default enabled state', () => {
+      expect(integration.isEnabled).toEqual(options.isEnabled)
+    })
+
+    it('knows if it can be enabled or disabled', () => {
+      if (options.isEnabled !== undefined) {
+        integration.isEnabled = false
+        expect(integration.isEnabled).toBe(false)
+        integration.isEnabled = true
+        expect(integration.isEnabled).toBe(true)
+      }
+    })
+
+    it('knows if it is experimental', () => {
+      expect(integration.isExperimental).toEqual(options.isExperimental)
+    })
+
+    it(`has ${options.authentication} authentication associated with it`, () => {
+      if (!options.authentication) {
+        expect(integration.authentication).toBeUndefined()
+        return
+      }
+
+      expect(integration.authentication).toBeDefined()
+      expect(integration.authentication?.id).toEqual(options.authentication)
+    })
+
+    it(`has ${options.source} source associated with it`, () => {
+      if (!options.source) {
+        expect(integration.source).toBeUndefined()
+        return
+      }
+
+      expect(integration.source).toBeDefined()
+      expect(integration.source?.id).toEqual(options.source)
+    })
+
+    it('has some providers associated with it', () => {
+      expect(options.providers.length).toBeGreaterThan(0)
+    })
+
+    it.each(options.providers)(
+      'has the %s provider associated with it',
+      (provider: IntegrationID) => {
+        expect(integration.providers.some((p) => p.id === provider)).toBe(true)
+      },
+    )
+
+    it('matches the integration contract shape', () => {
+      expect(Object.values(IntegrationID)).toContain(integration.id)
+      expect(integration).toMatchObject({
+        name: expect.any(String),
+        url: expect.any(String),
+        branding: {
+          icon: expect.any(String),
+          primary: expect.any(String),
+        },
+        providers: expect.any(Array),
+      })
+    })
   })
 }

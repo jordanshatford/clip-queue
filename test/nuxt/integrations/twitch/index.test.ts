@@ -1,43 +1,20 @@
-import { describe, it, expect } from 'vitest'
-
 import { IntegrationID } from '~/integrations/indentify'
-import { twitch, clips, vods } from '~/integrations/twitch'
+import { twitch } from '~/integrations/twitch'
 
-const integration = twitch
-const providers = [clips, vods]
+import { createIntegrationTestHarness } from '../harness'
 
-describe('integrations/twitch', () => {
-  it('exports an integration object', () => {
-    expect(integration).toBeDefined()
-    expect(integration.id).toBe(IntegrationID.TWITCH)
-    expect(integration.name).toBe('Twitch')
-    expect(integration.url).toBe('https://www.twitch.tv/')
-  })
-
-  it('contains branding details', () => {
-    expect(integration.branding.icon).toBe('simple-icons:twitch')
-    expect(integration.branding.primary).toBe('#8956FB')
-    expect(integration.branding.secondary).toBe('#FFFFFF')
-  })
-
-  it('initializes providers', () => {
-    for (const p of providers) {
-      expect(integration.providers).toContain(p)
-    }
-  })
-
-  it('returns default enabled state', () => {
-    expect(integration.isEnabled).toBe(undefined)
-  })
-
-  it('matches Integration contract shape', () => {
-    expect(integration).toMatchObject({
-      id: IntegrationID.TWITCH,
-      name: 'Twitch',
-      url: expect.any(String),
-      branding: expect.any(Object),
-      providers: expect.any(Array),
-    })
-    expect(typeof integration.isEnabled).toBe('undefined')
-  })
+createIntegrationTestHarness(twitch, {
+  isEnabled: undefined,
+  isExperimental: undefined,
+  details: {
+    id: IntegrationID.TWITCH,
+    name: 'Twitch',
+    url: 'https://www.twitch.tv/',
+    icon: 'simple-icons:twitch',
+    primary: '#8956FB',
+    secondary: '#FFFFFF',
+  },
+  authentication: IntegrationID.TWITCH_AUTH,
+  source: IntegrationID.TWITCH_CHAT,
+  providers: [IntegrationID.TWITCH_CLIPS, IntegrationID.TWITCH_VODS],
 })
