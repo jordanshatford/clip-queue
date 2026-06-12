@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto flex max-w-7xl flex-col gap-2">
+  <div class="mx-auto flex flex-col gap-2">
     <div class="flex flex-wrap items-center justify-between gap-1.5">
       <UInput v-model="filter" class="max-w-sm" icon="lucide:search" :placeholder="m.search()" />
       <div class="flex flex-wrap items-center gap-2">
@@ -99,7 +99,7 @@ const rowSelection = ref<RowSelectionState>({})
 
 const pagination = ref<PaginationState>({
   pageIndex: 0,
-  pageSize: 10,
+  pageSize: 5,
 })
 
 const filter = ref<string>('')
