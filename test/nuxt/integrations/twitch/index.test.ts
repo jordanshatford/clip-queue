@@ -13,7 +13,7 @@ createIntegrationTestHarness(twitch, {
     primary: '#8956FB',
     secondary: '#FFFFFF',
   },
-  authentication: IntegrationID.TWITCH_AUTH,
-  source: IntegrationID.TWITCH_CHAT,
+  authentication: { id: IntegrationID.TWITCH_AUTH },
+  source: { id: IntegrationID.TWITCH_CHAT, isDefaultEnabled: true },
   providers: [IntegrationID.TWITCH_CLIPS, IntegrationID.TWITCH_VODS],
 })

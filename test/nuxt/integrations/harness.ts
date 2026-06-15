@@ -1,8 +1,17 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { Integration, IntegrationAuthentication, PlayerConfig } from '~/integrations/core'
-
 import { IntegrationID, type Clip, type IntegrationProvider } from '~/integrations'
+import {
+  IntegrationSourceFeature,
+  type Integration,
+  type IntegrationAuthentication,
+  type IntegrationSource,
+  type PlayerConfig,
+} from '~/integrations/core'
+
+type AuthenticationTestHarnessOptions = {
+  id: IntegrationID
+}
 
 /**
  * Create a test harness for a given authentication. Shared handling of tests to reduce duplication
@@ -12,7 +21,7 @@ import { IntegrationID, type Clip, type IntegrationProvider } from '~/integratio
  */
 function createAuthenticationTestHarness(
   authentication: IntegrationAuthentication,
-  options: { id: IntegrationID },
+  options: AuthenticationTestHarnessOptions,
 ): void {
   describe(authentication.id, () => {
     const $fetchMock = vi.fn()
@@ -98,6 +107,60 @@ function createAuthenticationTestHarness(
         clientId: '',
         accessToken: '',
       })
+    })
+  })
+}
+
+type SourceTestHarnessOptions = {
+  id: IntegrationID
+  isDefaultEnabled?: boolean
+  features?: IntegrationSourceFeature[]
+}
+
+/**
+ * Create a test harness for a given source. Shared handling of tests to reduce duplication
+ * and ensure that all source are tested equally.
+ * @param source - The source to test.
+ * @param options - The options to test with.
+ */
+function createSourceTestHarness(
+  source: IntegrationSource,
+  options: SourceTestHarnessOptions,
+): void {
+  const resolvedOptions: Required<SourceTestHarnessOptions> = {
+    isDefaultEnabled: false,
+    features: Object.values(IntegrationSourceFeature),
+    ...options,
+  }
+
+  describe(source.id, () => {
+    it('has the expected integration ID', () => {
+      expect(source.id).toEqual(resolvedOptions.id)
+    })
+
+    it('has an initial loading state of false', () => {
+      expect(source.isLoading).toEqual(false)
+    })
+
+    // it('has an initial status of unknown', () => {
+    //   expect(source.status).toEqual(IntegrationStatus.UNKNOWN)
+    // })
+
+    it('knows its default enabled state', () => {
+      expect(source.isEnabled).toEqual(resolvedOptions.isDefaultEnabled)
+    })
+
+    it('can have its enabled state changed', () => {
+      source.isEnabled = true
+      expect(source.isEnabled).toEqual(true)
+      source.isEnabled = false
+      expect(source.isEnabled).toEqual(false)
+      source.isEnabled = true
+      expect(source.isEnabled).toEqual(true)
+    })
+
+    it('has a list of supported source features', () => {
+      expect(source.features).toEqual(resolvedOptions.features)
     })
   })
 }
@@ -225,6 +288,12 @@ export function createUnsupportedURLs(provider: IntegrationID): string[] {
   return [...UNSUPPORTED_URLS, ...otherProviders, ...(PROVIDER_UNSUPPORTED_URLS?.[provider] ?? [])]
 }
 
+type ProviderTestHarnessOptions = {
+  isDefaultEnabled?: boolean
+  toPlayerConfig: (clip: Clip) => PlayerConfig
+  tests?: (provider: IntegrationProvider) => void
+}
+
 /**
  * Create a test harness for a given provider. Shared handling of tests to reduce duplication
  * and ensure that all providers are tested equally.
@@ -233,24 +302,26 @@ export function createUnsupportedURLs(provider: IntegrationID): string[] {
  */
 export function createProviderTestHarness(
   provider: IntegrationProvider,
-  options: {
-    isDefaultEnabled: boolean
-    toPlayerConfig: (clip: Clip) => PlayerConfig
-    tests?: (provider: IntegrationProvider) => void
-  },
+  options: ProviderTestHarnessOptions,
 ): void {
+  const resolvedOptions: Required<ProviderTestHarnessOptions> = {
+    isDefaultEnabled: false,
+    tests: () => {},
+    ...options,
+  }
+
   const supportedURLs = createSupportedURLs(provider.id)
   const url = supportedURLs[0] ?? ''
   const unsupportedURLs = createUnsupportedURLs(provider.id)
 
-  describe(provider.name, () => {
+  describe(provider.id, () => {
     beforeEach(() => {
       vi.clearAllMocks()
       provider.clearCache()
     })
 
     it('knows its default enabled state', () => {
-      expect(provider.isEnabled).toEqual(options.isDefaultEnabled)
+      expect(provider.isEnabled).toEqual(resolvedOptions.isDefaultEnabled)
     })
 
     it('can have its enabled state changed', () => {
@@ -298,7 +369,7 @@ export function createProviderTestHarness(
     it('can get the player config for the provider', async () => {
       const clip = await provider.resolveUrl(url)
       expect(clip).toBeDefined()
-      expect(provider.getPlayerConfigForClip(clip)).toEqual(options.toPlayerConfig(clip))
+      expect(provider.getPlayerConfigForClip(clip)).toEqual(resolvedOptions.toPlayerConfig(clip))
     })
 
     it('caches clip data that it fetches to prevent needing to refetch', async () => {
@@ -316,7 +387,7 @@ export function createProviderTestHarness(
       expect(provider.hasCachedData).toEqual(false)
     })
 
-    options.tests?.(provider)
+    resolvedOptions.tests?.(provider)
   })
 }
 
@@ -338,8 +409,8 @@ export function createIntegrationTestHarness(
       primary: string
       secondary?: string
     }
-    authentication?: IntegrationID
-    source?: IntegrationID
+    authentication?: AuthenticationTestHarnessOptions
+    source?: SourceTestHarnessOptions
     providers: IntegrationID[]
   },
 ): void {
@@ -361,31 +432,36 @@ export function createIntegrationTestHarness(
       expect(integration.isExperimental).toEqual(options.isExperimental)
     })
 
-    it(`has ${options.authentication} authentication associated with it`, () => {
+    it(`has ${options.authentication?.id} authentication associated with it`, () => {
       if (!options.authentication) {
         expect(integration.authentication).toBeUndefined()
         return
       }
 
       expect(integration.authentication).toBeDefined()
-      expect(integration.authentication?.id).toEqual(options.authentication)
+      expect(integration.authentication?.id).toEqual(options.authentication?.id)
     })
 
     if (integration.authentication) {
-      createAuthenticationTestHarness(integration.authentication, {
-        id: options.authentication ?? integration.authentication.id,
-      })
+      createAuthenticationTestHarness(
+        integration.authentication,
+        options.authentication ?? { id: IntegrationID.UNKNOWN },
+      )
     }
 
-    it(`has ${options.source} source associated with it`, () => {
+    it(`has ${options.source?.id} source associated with it`, () => {
       if (!options.source) {
         expect(integration.source).toBeUndefined()
         return
       }
 
       expect(integration.source).toBeDefined()
-      expect(integration.source?.id).toEqual(options.source)
+      expect(integration.source?.id).toEqual(options.source?.id)
     })
+
+    if (integration.source) {
+      createSourceTestHarness(integration.source, options.source ?? { id: IntegrationID.UNKNOWN })
+    }
 
     it('has some providers associated with it', () => {
       expect(options.providers.length).toBeGreaterThan(0)

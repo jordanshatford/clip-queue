@@ -1,8 +1,8 @@
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
-import type { KickChatBadge, KickChatSender } from '../../../shared/kick/utils'
+import type { KickChatBadge, KickChatSender } from '../../../shared/kick/pusher'
 
-import { isKickURL, isSenderBot, isSenderModerator, sleep } from '../../../shared/kick/utils'
+import { isKickURL, isSenderBot, isSenderModerator } from '../../../shared/kick/utils'
 
 describe('shared/kick/utils', () => {
   it.each([

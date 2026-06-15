@@ -13,7 +13,7 @@ createIntegrationTestHarness(kick, {
     primary: '#00E701',
     secondary: '#0B0E0F',
   },
-  authentication: IntegrationID.KICK_AUTH,
-  source: IntegrationID.KICK_CHAT,
+  authentication: { id: IntegrationID.KICK_AUTH },
+  source: { id: IntegrationID.KICK_CHAT },
   providers: [IntegrationID.KICK_CLIPS, IntegrationID.KICK_VODS],
 })
