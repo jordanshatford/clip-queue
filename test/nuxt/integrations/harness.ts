@@ -1,8 +1,106 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { Integration, PlayerConfig } from '~/integrations/core'
+import type { Integration, IntegrationAuthentication, PlayerConfig } from '~/integrations/core'
 
 import { IntegrationID, type Clip, type IntegrationProvider } from '~/integrations'
+
+/**
+ * Create a test harness for a given authentication. Shared handling of tests to reduce duplication
+ * and ensure that all authentications are tested equally.
+ * @param authentication - The authentication to test.
+ * @param options - The options to test with.
+ */
+function createAuthenticationTestHarness(
+  authentication: IntegrationAuthentication,
+  options: { id: IntegrationID },
+): void {
+  describe(authentication.id, () => {
+    const $fetchMock = vi.fn()
+    vi.stubGlobal('$fetch', $fetchMock)
+
+    beforeEach(() => {
+      vi.clearAllMocks()
+    })
+
+    it('constructs with correct integration config', () => {
+      expect(authentication.id).toBe(options.id)
+    })
+
+    it('constructs with default values', () => {
+      expect(authentication.isLoggedIn).toEqual(false)
+      expect(authentication.user).toEqual({ id: '', name: '', profileImageURL: '' })
+      expect(authentication.details).toEqual({ clientId: '', accessToken: '' })
+    })
+
+    it('updates the authentication state using autologin when a valid session exists', async () => {
+      $fetchMock.mockResolvedValueOnce({
+        user: {
+          id: '123',
+          name: 'Test User',
+          profileImageURL: 'https://example.com/avatar.png',
+        },
+        authentication: {
+          clientId: 'client-id',
+          accessToken: 'access-token',
+        },
+      })
+
+      await authentication.autoLogin()
+      expect(authentication.isLoggedIn).toBe(true)
+      expect(authentication.user).toEqual({
+        id: '123',
+        name: 'Test User',
+        profileImageURL: 'https://example.com/avatar.png',
+      })
+      expect(authentication.details).toEqual({
+        clientId: 'client-id',
+        accessToken: 'access-token',
+      })
+    })
+
+    it('throws an error using autologin when no valid session exists', async () => {
+      $fetchMock.mockResolvedValueOnce(null)
+      await expect(authentication.autoLogin()).rejects.toThrow(
+        `[${options.id}]: No valid session found.`,
+      )
+    })
+
+    // it('redirects to the integration login page', async () => {
+    //   await authentication.login()
+    //   expect(navigateTo).toHaveBeenCalledTimes(1)
+    // })
+
+    it('clears authentication and user state when using logout', async () => {
+      $fetchMock
+        .mockResolvedValueOnce({
+          user: {
+            id: '123',
+            name: 'Test User',
+            profileImageURL: 'https://example.com/avatar.png',
+          },
+          authentication: {
+            clientId: 'client-id',
+            accessToken: 'access-token',
+          },
+        })
+        .mockResolvedValueOnce(undefined)
+
+      await authentication.autoLogin()
+      expect(authentication.isLoggedIn).toBe(true)
+      await authentication.logout()
+      expect(authentication.isLoggedIn).toBe(false)
+      expect(authentication.user).toEqual({
+        id: '',
+        name: '',
+        profileImageURL: '',
+      })
+      expect(authentication.details).toEqual({
+        clientId: '',
+        accessToken: '',
+      })
+    })
+  })
+}
 
 /**
  * ID used for testing.
@@ -272,6 +370,12 @@ export function createIntegrationTestHarness(
       expect(integration.authentication).toBeDefined()
       expect(integration.authentication?.id).toEqual(options.authentication)
     })
+
+    if (integration.authentication) {
+      createAuthenticationTestHarness(integration.authentication, {
+        id: options.authentication ?? integration.authentication.id,
+      })
+    }
 
     it(`has ${options.source} source associated with it`, () => {
       if (!options.source) {
