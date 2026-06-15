@@ -8,6 +8,7 @@ import type { Clip } from '~/integrations'
 import { KickAPI } from '#shared/kick'
 import { TwitchAPI } from '#shared/twitch'
 
+vi.spyOn(TwitchAPI.prototype, 'isMisconfigued', 'get').mockReturnValue(false)
 vi.spyOn(TwitchAPI.prototype, 'getClip').mockResolvedValue(mockTwitchClip)
 vi.spyOn(TwitchAPI.prototype, 'getGame').mockResolvedValue(mockTwitchGame)
 vi.spyOn(TwitchAPI.prototype, 'getVideo').mockResolvedValue(mockTwitchVod)
