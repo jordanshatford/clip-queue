@@ -1,5 +1,15 @@
 # clip-queue
 
+## 3.8.1
+
+### Patch Changes
+
+- [`821b52d`](https://github.com/jordanshatford/clip-queue/commit/821b52d8a0c94d1080ad6839fed09b9637c0a2a4) - fix: remove duplicated logic for youtube and rumble providers
+
+- [`b1ef80c`](https://github.com/jordanshatford/clip-queue/commit/b1ef80cf3b2100d9d9123a57e66c265c6ab5c8f1) - fix: allow passing api to kick pusher client
+
+- [`87d1de2`](https://github.com/jordanshatford/clip-queue/commit/87d1de205206480d39ae96db6f8a23cc05f6ab52) - fix: remove ability to disable integration as a whole
+
 ## 3.8.0
 
 ### Minor Changes
