@@ -50,11 +50,11 @@ export class VimeoProvider extends AbstractIntegrationProvider {
     url.searchParams.append('muted', '0')
     const hash = new URLSearchParams()
     const timestamp = clip.metadata?.['start']
-    if (timestamp && typeof timestamp === 'string') {
+    if (timestamp) {
       hash.append('t', timestamp)
     }
     const end = clip.metadata?.['end']
-    if (end && typeof end === 'string') {
+    if (end) {
       hash.append('end', end)
     }
     url.hash = hash.toString()

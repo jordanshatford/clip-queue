@@ -60,7 +60,7 @@ export class TwitchVodProvider extends AbstractIntegrationProvider {
     url.searchParams.append('muted', 'false')
     // Include timestamp in the player source if available.
     const timestamp = clip.metadata?.['start']
-    if (timestamp && typeof timestamp === 'string') {
+    if (timestamp) {
       url.searchParams.append('time', timestamp)
     }
     return {

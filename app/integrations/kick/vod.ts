@@ -66,7 +66,7 @@ export class KickVodProvider extends AbstractIntegrationProvider {
       src: clip.embedUrl,
       poster: clip.thumbnailUrl,
       title: clip.title,
-      start: start && typeof start === 'string' ? parseInt(start) : undefined,
+      start: start ? parseInt(start) : undefined,
     }
   }
 }
