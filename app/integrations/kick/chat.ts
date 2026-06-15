@@ -1,3 +1,5 @@
+import type { KickAPI } from '#shared/kick'
+
 import { Client, isSenderBot, isSenderModerator } from '#shared/kick'
 
 import type { IntegrationSourceMessageEvent } from '../core'
@@ -54,10 +56,11 @@ export class MessageCache<T> {
 export class KickChatSource extends AbstractIntegrationSource {
   private messageCache = new MessageCache<IntegrationSourceMessageEvent>()
   private channel: () => string
-  private chat = new Client()
+  private chat: Client
 
-  public constructor(channel: () => string) {
+  public constructor(api: KickAPI, channel: () => string) {
     super(IntegrationID.KICK_CHAT, 'Kick Chat', false)
+    this.chat = new Client({ api })
     this.channel = channel
 
     // Hook into chat events from our Kick chat pusher implementation.

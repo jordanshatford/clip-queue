@@ -1,6 +1,5 @@
 import { EventEmitter } from '../utils/event-emitter'
 import { KickAPI } from './api'
-import { sleep } from './utils'
 
 /**
  * Kick chat badge details.
@@ -254,6 +253,10 @@ export type ClientEvents = {
  */
 export interface ClientOptions {
   /**
+   * The API to use for fetching channels.
+   */
+  api?: KickAPI
+  /**
    * Authentication to use when subscribing to a channel.
    */
   authentication?: string
@@ -271,7 +274,6 @@ export interface ClientOptions {
  * Kick chat client using internal pusher API.
  */
 export class Client extends EventEmitter<ClientEvents> {
-  private readonly api: KickAPI = new KickAPI()
   /**
    * WebSocket used to interact with the Pusher endpoint.
    */
@@ -286,16 +288,19 @@ export class Client extends EventEmitter<ClientEvents> {
    */
   private readonly channels: Set<number> = new Set()
 
+  private readonly api: KickAPI
   private readonly authentication: string
   private readonly debug: boolean
   private readonly reconnectDelay: number
 
   public constructor({
+    api = new KickAPI(),
     authentication = '',
     debug = false,
     reconnectDelay = 1_000,
   }: ClientOptions = {}) {
     super()
+    this.api = api
     this.authentication = authentication
     this.debug = debug
     this.reconnectDelay = reconnectDelay
@@ -472,4 +477,15 @@ export class Client extends EventEmitter<ClientEvents> {
       this.emit('log', message)
     }
   }
+}
+
+/**
+ * Sleep for a provided time. The promise resolves after that duration.
+ * @param milliseconds - The time in milliseconds to sleep.
+ * @returns A promise that resolves after the duration.
+ */
+function sleep(milliseconds: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, milliseconds)
+  })
 }

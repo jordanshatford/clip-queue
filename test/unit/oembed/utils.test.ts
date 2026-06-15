@@ -54,6 +54,7 @@ describe('shared/oembed/utils', () => {
       [OEmbedProviderName.YOUTUBE, 'https://www.youtube.com/watch?v=id&t=123', true],
       [OEmbedProviderName.YOUTUBE, 'https://youtu.be/id', true],
       [OEmbedProviderName.YOUTUBE, 'https://youtu.be/id?t=456', true],
+      ['' as OEmbedProviderName, 'https://test.com/', false],
     ])(
       'isSupportedProviderURL(%s, %s) -> %s',
       (name: OEmbedProviderName, url: string, expected: boolean) => {

@@ -15,17 +15,6 @@ export function isKickURL(url: URL): boolean {
 }
 
 /**
- * Sleep for a provided time. The promise resolves after that duration.
- * @param milliseconds - The time in milliseconds to sleep.
- * @returns A promise that resolves after the duration.
- */
-export function sleep(milliseconds: number): Promise<void> {
-  return new Promise((resolve) => {
-    setTimeout(resolve, milliseconds)
-  })
-}
-
-/**
  * Check if a Kick message sender is a moderator.
  * @param sender - The sender of the message.
  * @returns True if the user has moderation priveledges, false otherwise.

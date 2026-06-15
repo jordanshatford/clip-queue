@@ -15,32 +15,6 @@ describe('shared/kick/utils', () => {
     expect(isKickURL(input)).toEqual(expected)
   })
 
-  it('has a sleep that resolves after the provided duration', async () => {
-    vi.useFakeTimers()
-    const callback = vi.fn<() => void>()
-    sleep(1000).then(callback)
-    expect(callback).not.toHaveBeenCalled()
-    await vi.advanceTimersByTimeAsync(999)
-    expect(callback).not.toHaveBeenCalled()
-    await vi.advanceTimersByTimeAsync(1)
-    expect(callback).toHaveBeenCalledTimes(1)
-    vi.useRealTimers()
-  })
-
-  it('has a sleep that resolves immediately for 0 milliseconds', async () => {
-    vi.useFakeTimers()
-    const callback = vi.fn<() => void>()
-    sleep(0).then(callback)
-    await vi.runAllTimersAsync()
-    expect(callback).toHaveBeenCalledTimes(1)
-    vi.useRealTimers()
-  })
-
-  it('has a sleep that returns a Promise<void>', () => {
-    const result = sleep(1)
-    expect(result).toBeInstanceOf(Promise)
-  })
-
   function createSender(badges: KickChatBadge[] = []): Pick<KickChatSender, 'identity'> {
     return {
       identity: {
