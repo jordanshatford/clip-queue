@@ -1,12 +1,9 @@
-import { useStorage } from '@vueuse/core'
+import type { Integration } from '../core'
 
-import { toStorageKey, type Integration } from '../core'
 import { IntegrationID } from '../indentify'
 import { api } from '../misc/index'
 import { YouTubeShortProvider } from './short'
 import { YouTubeVideoProvider } from './video'
-
-const isEnabled = useStorage<boolean>(toStorageKey(IntegrationID.YOUTUBE, 'enabled'), false)
 
 export const shorts = new YouTubeShortProvider(api)
 export const videos = new YouTubeVideoProvider(api)
@@ -19,12 +16,6 @@ export const youtube: Integration = {
     icon: 'simple-icons:youtube',
     primary: '#FF0000',
     secondary: '#FFFFFF',
-  },
-  get isEnabled(): boolean {
-    return isEnabled.value
-  },
-  set isEnabled(value: boolean) {
-    isEnabled.value = value
   },
   providers: [shorts, videos],
 }

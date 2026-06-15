@@ -297,9 +297,6 @@ export const useIntegrations = defineStore('integrations', () => {
    */
   async function resolve(url: string): Promise<Clip | undefined> {
     for (const integration of integrations) {
-      if (!(integration?.isEnabled ?? true)) {
-        continue
-      }
       for (const provider of integration.providers) {
         if (!provider.isEnabled || !provider.hasSupportForUrl(url)) {
           continue

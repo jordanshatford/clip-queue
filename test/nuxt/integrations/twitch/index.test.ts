@@ -4,7 +4,6 @@ import { twitch } from '~/integrations/twitch'
 import { createIntegrationTestHarness } from '../harness'
 
 createIntegrationTestHarness(twitch, {
-  isEnabled: undefined,
   isExperimental: undefined,
   details: {
     id: IntegrationID.TWITCH,

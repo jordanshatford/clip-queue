@@ -231,7 +231,6 @@ export function createProviderTestHarness(
 export function createIntegrationTestHarness(
   integration: Integration,
   options: {
-    isEnabled?: boolean
     isExperimental?: boolean
     details: {
       id: IntegrationID
@@ -258,19 +257,6 @@ export function createIntegrationTestHarness(
       expect(integration.branding.icon).toEqual(options.details.icon)
       expect(integration.branding.primary).toEqual(options.details.primary)
       expect(integration.branding.secondary).toEqual(options.details.secondary)
-    })
-
-    it('knows its default enabled state', () => {
-      expect(integration.isEnabled).toEqual(options.isEnabled)
-    })
-
-    it('knows if it can be enabled or disabled', () => {
-      if (options.isEnabled !== undefined) {
-        integration.isEnabled = false
-        expect(integration.isEnabled).toBe(false)
-        integration.isEnabled = true
-        expect(integration.isEnabled).toBe(true)
-      }
     })
 
     it('knows if it is experimental', () => {

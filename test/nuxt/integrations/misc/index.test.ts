@@ -4,7 +4,6 @@ import { misc } from '~/integrations/misc'
 import { createIntegrationTestHarness } from '../harness'
 
 createIntegrationTestHarness(misc, {
-  isEnabled: false,
   isExperimental: true,
   details: {
     id: IntegrationID.MISCELLANEOUS,

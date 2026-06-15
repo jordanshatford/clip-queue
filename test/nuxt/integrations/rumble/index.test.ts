@@ -4,7 +4,6 @@ import { rumble } from '~/integrations/rumble'
 import { createIntegrationTestHarness } from '../harness'
 
 createIntegrationTestHarness(rumble, {
-  isEnabled: false,
   isExperimental: undefined,
   details: {
     id: IntegrationID.RUMBLE,

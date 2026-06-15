@@ -4,7 +4,6 @@ import { kick } from '~/integrations/kick'
 import { createIntegrationTestHarness } from '../harness'
 
 createIntegrationTestHarness(kick, {
-  isEnabled: undefined,
   isExperimental: undefined,
   details: {
     id: IntegrationID.KICK,

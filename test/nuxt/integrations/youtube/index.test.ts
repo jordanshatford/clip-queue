@@ -4,7 +4,6 @@ import { youtube } from '~/integrations/youtube'
 import { createIntegrationTestHarness } from '../harness'
 
 createIntegrationTestHarness(youtube, {
-  isEnabled: false,
   isExperimental: undefined,
   details: {
     id: IntegrationID.YOUTUBE,

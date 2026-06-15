@@ -20,28 +20,16 @@
         </UBadge>
         <IntegrationDropdownMenu :integration="integration" />
       </div>
-      <USwitch
-        v-if="integration.isEnabled !== undefined"
-        v-model="integration.isEnabled"
-        class="ml-auto"
-      />
     </div>
-    <UCollapsible :open="integration?.isEnabled ?? true">
-      <template #content>
-        <div class="mt-4 flex flex-col gap-4 text-left">
-          <IntegrationAuthentication
-            v-if="integration.authentication"
-            v-model="integration.authentication"
-          />
-          <IntegrationSource v-if="integration.source" v-model="integration.source" />
-          <USeparator v-if="integration.source" />
-          <IntegrationProviders
-            v-if="integration.providers?.length"
-            v-model="integration.providers"
-          />
-        </div>
-      </template>
-    </UCollapsible>
+    <div class="mt-4 flex flex-col gap-4 text-left">
+      <IntegrationAuthentication
+        v-if="integration.authentication"
+        v-model="integration.authentication"
+      />
+      <IntegrationSource v-if="integration.source" v-model="integration.source" />
+      <USeparator v-if="integration.source" />
+      <IntegrationProviders v-if="integration.providers?.length" v-model="integration.providers" />
+    </div>
   </UCard>
 </template>
 
