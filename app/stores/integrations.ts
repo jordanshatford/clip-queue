@@ -17,6 +17,7 @@ export const useIntegrations = defineStore('integrations', () => {
   const toast = useToast()
   const logger = useLogger()
 
+  let initializePromise: Promise<unknown> | null = null
   const isInitialized = ref<boolean>(false)
 
   /**
@@ -216,40 +217,43 @@ export const useIntegrations = defineStore('integrations', () => {
    * Initialize all integrations. In most cases this is attempting to auto login them in
    * and then connect to any source they may provide.
    */
-  async function initialize(): Promise<void> {
+  async function initialize(): Promise<unknown> {
     if (isInitialized.value) {
       return
     }
 
-    // Configure listeners for all relevant events from each source. I.e ensure that all sources
-    // pipe into the main handling functions for messages, moderation, connection, and errors.
-    for (const integration of integrations) {
-      if (integration.source) {
-        integration.source.on('connected', handleIntegrationSourceConnected)
-        integration.source.on('disconnected', handleIntegrationSourceDisconnected)
-        integration.source.on('message', handleIntegrationSourceMessage)
-        integration.source.on('message-deleted', handleIntegrationSourceMessageDeleted)
-        integration.source.on('moderation', handleIntegrationSourceModeration)
-        integration.source.on('error', handleIntegrationSourceError)
-      }
-    }
-
-    logger.debug('[Auth]: Attempting auto-login initialization.')
-    // Attempt to auto-login to all integrations and connect to their sources if successful.
-    await Promise.all(
-      integrations.map(async (integration) => {
-        try {
-          logger.debug(`[Integrations]: Auto-logging in to ${integration.name}.`)
-          await integration.authentication?.autoLogin()
-          if (integration.authentication?.isLoggedIn) {
-            logger.debug(`[Integrations]: Connecting to ${integration.name} source.`)
-            await integration.source?.connect()
-          }
-        } catch {
-          // Ignore per-integration failure.
+    if (!initializePromise) {
+      // Configure listeners for all relevant events from each source. I.e ensure that all sources
+      // pipe into the main handling functions for messages, moderation, connection, and errors.
+      for (const integration of integrations) {
+        if (integration.source) {
+          integration.source.on('connected', handleIntegrationSourceConnected)
+          integration.source.on('disconnected', handleIntegrationSourceDisconnected)
+          integration.source.on('message', handleIntegrationSourceMessage)
+          integration.source.on('message-deleted', handleIntegrationSourceMessageDeleted)
+          integration.source.on('moderation', handleIntegrationSourceModeration)
+          integration.source.on('error', handleIntegrationSourceError)
         }
-      }),
-    )
+      }
+
+      logger.debug('[Auth]: Attempting auto-login initialization.')
+      // Attempt to auto-login to all integrations and connect to their sources if successful.
+      initializePromise = Promise.all(
+        integrations.map(async (integration) => {
+          try {
+            logger.debug(`[Integrations]: Auto-logging in to ${integration.name}.`)
+            await integration.authentication?.autoLogin()
+            if (integration.authentication?.isLoggedIn) {
+              logger.debug(`[Integrations]: Connecting to ${integration.name} source.`)
+              await integration.source?.connect()
+            }
+          } catch {
+            // Ignore per-integration failure.
+          }
+        }),
+      )
+    }
+    return initializePromise
   }
 
   /**

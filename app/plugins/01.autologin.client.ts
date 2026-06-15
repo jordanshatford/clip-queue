@@ -4,5 +4,5 @@
  * early in the app lifecycle.
  */
 export default defineNuxtPlugin(async () => {
-  await useIntegrations().initialize()
+  useIntegrations().initialize()
 })
