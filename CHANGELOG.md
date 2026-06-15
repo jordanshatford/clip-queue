@@ -1,5 +1,13 @@
 # clip-queue
 
+## 3.8.2
+
+### Patch Changes
+
+- [`b3ea4b1`](https://github.com/jordanshatford/clip-queue/commit/b3ea4b198fb8a5bcb4e31b9d0f1edc79eb082204) - fix: ignore misconfigured providers when resolving url
+
+- [`b077b5b`](https://github.com/jordanshatford/clip-queue/commit/b077b5ba48754b85758e016f49c835311a42ce1c) - fix: improve loading indication on initial page load
+
 ## 3.8.1
 
 ### Patch Changes
