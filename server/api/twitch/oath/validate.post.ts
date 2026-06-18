@@ -1,5 +1,7 @@
 import { FetchError } from 'ofetch'
 
+import type { OAuthAuthentication, OAuthResponse, OAuthUser } from '#shared/utils'
+
 import { TwitchAPI } from '#shared/twitch'
 
 /**
@@ -9,7 +11,7 @@ import { TwitchAPI } from '#shared/twitch'
  * @see https://dev.twitch.tv/docs/authentication/refresh-tokens/
  * @see https://dev.twitch.tv/docs/api/reference#get-users
  */
-export default defineEventHandler(async (event): Promise<OathResponse> => {
+export default defineEventHandler(async (event): Promise<OAuthResponse> => {
   const config = useRuntimeConfig()
   let session = getObjectCookie<TwitchTokenResponse>(event, TWITCH_SESSION_COOKIE)
 
@@ -36,13 +38,14 @@ export default defineEventHandler(async (event): Promise<OathResponse> => {
   }
 
   const user = await getCurrentUser(session.access_token)
+  const authentication: OAuthAuthentication = {
+    clientId: config.twitch.clientId,
+    accessToken: session.access_token,
+  }
 
   return {
     user,
-    authentication: {
-      clientId: config.twitch.clientId,
-      accessToken: session.access_token,
-    },
+    authentication,
   }
 })
 
@@ -120,7 +123,7 @@ async function getRefreshedSession(refreshToken: string): Promise<TwitchTokenRes
  * @throws Error when the fetch request fails or does not return a user.
  */
 const getCurrentUser = defineCachedFunction(
-  async (accessToken: string): Promise<OathUser> => {
+  async (accessToken: string): Promise<OAuthUser> => {
     const config = useRuntimeConfig()
     const api = new TwitchAPI(() => ({ clientId: config.twitch.clientId, accessToken }))
     const user = await api.getUser()

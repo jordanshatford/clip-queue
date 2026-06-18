@@ -1,53 +1,8 @@
 import type { Reactive } from 'vue'
 
+import type { OAuthAuthentication, OAuthResponse, OAuthUser } from '#shared/utils'
+
 import type { IntegrationID } from '../indentify'
-
-/**
- * User details provided by an authentication integration.
- */
-export interface UserDetails {
-  /**
-   * The ID of the user.
-   */
-  readonly id: string
-  /**
-   * The display name of the user.
-   */
-  readonly name: string
-  /**
-   * The profile image URL of the user.
-   */
-  readonly profileImageURL?: string
-}
-
-/**
- * Authentication details provided by an authentication integration. This can include any additional information
- * needed to authenticate with the integration's API, such as access tokens or client IDs.
- */
-export interface AuthenticationDetails {
-  /**
-   * The client ID for this application for the integration.
-   */
-  clientId: string
-  /**
-   * The access token for the user authenticated with the integration.
-   */
-  accessToken: string
-}
-
-/**
- * Details from an integration OAuth authentication.
- */
-export interface OAuthDetails {
-  /**
-   * The user details for the integration authentication.
-   */
-  user: UserDetails
-  /**
-   * The authentication details for the integration.
-   */
-  authentication: AuthenticationDetails
-}
 
 /**
  * Interface for an integrations authentication.
@@ -64,11 +19,11 @@ export interface IntegrationAuthentication {
   /**
    * The user details.
    */
-  readonly user: UserDetails
+  readonly user: OAuthUser
   /**
    * The users authentication details for the integration.
    */
-  readonly details: AuthenticationDetails
+  readonly details: OAuthAuthentication
   /**
    * Attempts to automatically log in the user if possible. This can be used on application startup to check if the user has a
    * valid session with the integration. If auto-login is successful, it returns the user details. If auto login fails it throws
@@ -119,24 +74,24 @@ export abstract class AbstractIntegrationAuthentication implements IntegrationAu
 
   private state: Reactive<{
     isLoggedIn: boolean
-    user: UserDetails
-    details: AuthenticationDetails
+    user: OAuthUser
+    details: OAuthAuthentication
   }>
 
   public get isLoggedIn(): boolean {
     return this.state.isLoggedIn
   }
 
-  public get user(): UserDetails {
+  public get user(): OAuthUser {
     return this.state.user
   }
 
-  public get details(): AuthenticationDetails {
+  public get details(): OAuthAuthentication {
     return this.state.details
   }
 
   public async autoLogin(): Promise<void> {
-    const current = await $fetch<OAuthDetails>(this.validateUrl, {
+    const current = await $fetch<OAuthResponse>(this.validateUrl, {
       method: 'POST',
     })
     if (!current) {

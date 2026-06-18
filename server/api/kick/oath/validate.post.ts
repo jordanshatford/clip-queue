@@ -1,5 +1,7 @@
 import { FetchError } from 'ofetch'
 
+import type { OAuthAuthentication, OAuthResponse, OAuthUser } from '#shared/utils'
+
 import { KickAPI } from '#shared/kick'
 
 /**
@@ -9,7 +11,7 @@ import { KickAPI } from '#shared/kick'
  * @see https://docs.kick.com/getting-started/generating-tokens-oauth2-flow#refresh-token-endpoint
  * @see https://docs.kick.com/apis/users#get-public-v1-users
  */
-export default defineEventHandler(async (event): Promise<OathResponse> => {
+export default defineEventHandler(async (event): Promise<OAuthResponse> => {
   const config = useRuntimeConfig()
   let session = getObjectCookie<KickTokenResponse>(event, KICK_SESSION_COOKIE)
 
@@ -36,13 +38,14 @@ export default defineEventHandler(async (event): Promise<OathResponse> => {
   }
 
   const user = await getCurrentUser(session.access_token)
+  const authentication: OAuthAuthentication = {
+    clientId: config.kick.clientId,
+    accessToken: session.access_token,
+  }
 
   return {
     user,
-    authentication: {
-      clientId: config.kick.clientId,
-      accessToken: session.access_token,
-    },
+    authentication,
   }
 })
 
@@ -135,7 +138,7 @@ async function getRefreshedSession(refreshToken: string): Promise<KickTokenRespo
  * @throws Error when the fetch request fails or does not return a user.
  */
 const getCurrentUser = defineCachedFunction(
-  async (accessToken: string): Promise<OathUser> => {
+  async (accessToken: string): Promise<OAuthUser> => {
     const api = new KickAPI(() => accessToken)
     const user = await api.getUser()
     return {
