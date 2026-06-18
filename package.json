@@ -17,8 +17,8 @@
     "test:coverage": "vitest run --coverage",
     "test:unit": "vitest run --project unit",
     "test:nuxt": "vitest run --project nuxt",
-    "locales:update": "pnpm dlx @inlang/cli machine translate --project ./project.inlang && pnpm format",
-    "deps:update": "pnpm self-update pnpm dlx nuxt upgrade --dedupe && pnpm up --latest",
+    "translations:update": "pnpm dlx @inlang/cli machine translate --project ./project.inlang && pnpm format",
+    "dependencies:update": "pnpm self-update && pnpm dlx nuxt upgrade --dedupe && pnpm up --latest",
     "commitlint": "commitlint --edit",
     "changeset": "changeset"
   },
@@ -41,28 +41,28 @@
     "@commitlint/cli": "^21.0.2",
     "@commitlint/config-conventional": "^21.0.2",
     "@commitlint/types": "^21.0.1",
-    "@iconify-json/lucide": "^1.2.111",
+    "@iconify-json/lucide": "^1.2.113",
     "@iconify-json/simple-icons": "^1.2.86",
     "@inlang/paraglide-js": "2.19.0",
     "@nuxt/eslint": "^1.16.0",
     "@nuxt/test-utils": "4.0.3",
     "@pinia/testing": "^1.0.3",
     "@types/node": "^25.9.3",
-    "@vitest/coverage-v8": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.9",
     "@vue/test-utils": "^2.4.11",
-    "eslint": "^10.4.1",
+    "eslint": "^10.5.0",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
-    "oxfmt": "^0.54.0",
-    "tailwindcss": "^4.3.0",
+    "oxfmt": "^0.55.0",
+    "tailwindcss": "^4.3.1",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.8",
-    "vue-tsc": "^3.3.4"
+    "vitest": "^4.1.9",
+    "vue-tsc": "^3.3.5"
   },
   "engines": {
     "node": ">=22",
     "pnpm": ">=11"
   },
-  "packageManager": "pnpm@11.5.2"
+  "packageManager": "pnpm@11.7.0"
 }
