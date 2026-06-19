@@ -27,7 +27,7 @@
         v-model="integration.authentication"
       />
       <IntegrationSource v-if="integration.source" v-model="integration.source" />
-      <USeparator v-if="integration.source" />
+      <USeparator v-if="integration.authentication || integration.source" />
       <IntegrationProviders v-if="integration.providers?.length" v-model="integration.providers" />
     </div>
   </UCard>
