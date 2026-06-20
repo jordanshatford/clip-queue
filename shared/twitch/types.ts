@@ -1,4 +1,56 @@
 /**
+ * Twitch OAuth token.
+ */
+export type TwitchToken = {
+  /**
+   * The access token.
+   */
+  access_token: string
+  /**
+   * Time the token expires in.
+   */
+  expires_in: number
+  /**
+   * The refresh token,
+   */
+  refresh_token: string
+  /**
+   * The scopes for the token.
+   */
+  scopes: string[]
+  /**
+   * The token type.
+   */
+  token_type: 'bearer'
+}
+
+/**
+ * Twitch OAuth token information.
+ */
+export type TwitchTokenInfo = {
+  /**
+   * The client ID the token is for.
+   */
+  client_id: string
+  /**
+   * The login associated with the token.
+   */
+  login: string
+  /**
+   * The scopes for the token.
+   */
+  scopes: string[]
+  /**
+   * The user ID associated with the token.
+   */
+  user_id: string
+  /**
+   * Time the token expires in.
+   */
+  expires_in: number
+}
+
+/**
  * A Twitch game.
  */
 export interface TwitchGame {

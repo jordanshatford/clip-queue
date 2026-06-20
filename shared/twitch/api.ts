@@ -2,6 +2,7 @@ import type { $Fetch } from 'ofetch'
 
 import { ofetch } from 'ofetch'
 
+import type { OAuthAuthentication } from '../utils'
 import type {
   TwitchClip,
   TwitchGame,
@@ -26,9 +27,7 @@ export class TwitchAPI {
   private readonly videos: CacheMap<TwitchVideo> = new CacheMap()
   private readonly users: CacheMap<TwitchUser> = new CacheMap()
 
-  public constructor(
-    private readonly authentication: () => { clientId: string; accessToken: string },
-  ) {
+  public constructor(private readonly authentication: () => OAuthAuthentication) {
     this.helix = ofetch.create({
       baseURL: 'https://api.twitch.tv/helix',
       onRequest: async ({ options }) => {

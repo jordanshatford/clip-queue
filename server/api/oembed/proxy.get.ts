@@ -2,6 +2,9 @@ import type { OEmbedResponse } from '#shared/oembed'
 
 import { resolveOEmbedProvider } from '#shared/oembed'
 
+/**
+ * Proxy request to one of our supported OEmbed provider to prevent CORS issues.
+ */
 export default defineCachedEventHandler(
   async (event): Promise<OEmbedResponse> => {
     const query = getQuery<{ url?: string }>(event)
