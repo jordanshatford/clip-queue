@@ -46,3 +46,12 @@ export function createPkce(): PKCE {
     challenge,
   }
 }
+
+/**
+ * Hash a provided value to hexidecimal.
+ * @param value - The value to hash.
+ * @returns A hashed value from the provided value.
+ */
+export function hash(value: string): string {
+  return createHash('sha256').update(value).digest('hex')
+}

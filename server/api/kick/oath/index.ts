@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
 
   const client = new KickOAuthClient(event)
 
-  // No code present, assume that the user has initiated the OAuth flow, redirect to the Kick OAuth.
+  // No code present, assume that the user has initiated the OAuth flow, redirect to Kick OAuth.
   if (!query.code) {
     const url = client.generateAuthUrl()
     return sendRedirect(event, url)

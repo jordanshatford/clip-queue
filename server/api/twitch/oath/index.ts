@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  // No code present, assume that the user has initiated the OAuth flow, redirect to the Twitch OAuth.
+  // No code present, assume that the user has initiated the OAuth flow, redirect to Twitch OAuth.
   if (!query.code) {
     const url = client.generateAuthUrl()
     return sendRedirect(event, url)

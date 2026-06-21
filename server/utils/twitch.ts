@@ -230,7 +230,7 @@ const getValidatedTokenInfo = defineCachedFunction(
   {
     swr: false,
     maxAge: 60,
-    getKey: (accessToken) => `twitch:token:${accessToken}`,
+    getKey: (accessToken) => `twitch:token:${hash(accessToken)}`,
   },
 )
 
@@ -252,6 +252,7 @@ const getCurrentUser = defineCachedFunction(
   },
   {
     maxAge: 60 * 5,
-    getKey: (authentication: OAuthAuthentication) => `twitch:user:${authentication.accessToken}`,
+    getKey: (authentication: OAuthAuthentication) =>
+      `twitch:user:${hash(authentication.accessToken)}`,
   },
 )
