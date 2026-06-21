@@ -2,6 +2,7 @@ import type { $Fetch } from 'ofetch'
 
 import { ofetch } from 'ofetch'
 
+import type { OAuthAuthentication } from '../utils'
 import type {
   GenericKickResponse,
   KickChannelPartial,
@@ -26,14 +27,14 @@ export class KickAPI {
   private readonly channels: CacheMap<KickChannelPartial> = new CacheMap()
   private readonly users: CacheMap<KickUser> = new CacheMap()
 
-  public constructor(private readonly accessToken?: () => string) {
+  public constructor(private readonly authentication?: () => OAuthAuthentication) {
     this.privateApi = ofetch.create({ baseURL: 'https://kick.com/api' })
     this.publicApi = ofetch.create({
       baseURL: 'https://api.kick.com/public',
       onRequest: async ({ options }) => {
         const headers = options.headers
         // Ensure access token are added to headers based on the currently logged in user.
-        const bearer = accessToken?.()
+        const bearer = authentication?.().accessToken
         if (bearer) {
           headers.set('Authorization', `Bearer ${bearer}`)
         }
@@ -99,7 +100,7 @@ export class KickAPI {
    * @see https://docs.kick.com/apis/users
    */
   public async getUser(id?: string): Promise<KickUser> {
-    const key = id ?? this.accessToken?.()
+    const key = id ?? this.authentication?.().accessToken
     if (!key) {
       throw new Error('User ID or access token was not provided.')
     }

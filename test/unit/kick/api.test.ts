@@ -1,5 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
+import type { OAuthAuthentication } from '../../../shared/utils'
+
 import { KickAPI } from '../../../shared/kick'
 import { mockKickClip, mockKickVod, mockKickChannel, mockKickUser } from './mocks'
 
@@ -17,7 +19,7 @@ vi.mock('ofetch', () => ({
   },
 }))
 
-const mockAccessToken = () => 'token'
+const mockAuthentication = (): OAuthAuthentication => ({ clientId: '', accessToken: 'token' })
 
 describe('shared/kick/api', () => {
   beforeEach(() => {
@@ -95,7 +97,7 @@ describe('shared/kick/api', () => {
       publicApi.mockResolvedValueOnce({
         data: [mockKickUser],
       })
-      const api = new KickAPI(mockAccessToken)
+      const api = new KickAPI(mockAuthentication)
       await expect(api.getUser('test')).resolves.toEqual(mockKickUser)
       expect(publicApi).toHaveBeenCalledWith('/v1/users', {
         query: { id: 'test' },
@@ -106,7 +108,7 @@ describe('shared/kick/api', () => {
       publicApi.mockResolvedValueOnce({
         data: [mockKickUser],
       })
-      const api = new KickAPI(mockAccessToken)
+      const api = new KickAPI(mockAuthentication)
       await expect(api.getUser()).resolves.toEqual(mockKickUser)
       expect(publicApi).toHaveBeenCalledWith('/v1/users', {
         query: { id: undefined },
@@ -117,7 +119,7 @@ describe('shared/kick/api', () => {
       publicApi.mockResolvedValue({
         data: [mockKickUser],
       })
-      const api = new KickAPI(mockAccessToken)
+      const api = new KickAPI(mockAuthentication)
       await api.getUser('test')
       await api.getUser('test')
       expect(publicApi).toHaveBeenCalledTimes(1)
@@ -132,7 +134,7 @@ describe('shared/kick/api', () => {
       publicApi.mockResolvedValueOnce({
         data: [],
       })
-      const api = new KickAPI(mockAccessToken)
+      const api = new KickAPI(mockAuthentication)
       await expect(api.getUser('missing')).rejects.toThrow('User with ID missing does not exist.')
     })
   })

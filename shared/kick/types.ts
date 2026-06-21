@@ -1,4 +1,56 @@
 /**
+ * Kick OAuth token.
+ */
+export type KickToken = {
+  /**
+   * The access token.
+   */
+  access_token: string
+  /**
+   * Time the token expires in.
+   */
+  expires_in: number
+  /**
+   * The refresh token,
+   */
+  refresh_token: string
+  /**
+   * The scopes for the token.
+   */
+  scopes: string[]
+  /**
+   * The token type.
+   */
+  token_type: 'Bearer'
+}
+
+/**
+ * Kick OAuth token information.
+ */
+export type KickTokenInfo = GenericKickResponse<{
+  /**
+   * If the token is active.
+   */
+  active: boolean
+  /**
+   * The client ID the token is for.
+   */
+  client_id: string
+  /**
+   * The type of token.
+   */
+  token_type: 'app' | 'user'
+  /**
+   * The scopes for the token.
+   */
+  scope: string
+  /**
+   * Time the token expires in.
+   */
+  exp: number
+}>
+
+/**
  * Category on Kick.
  */
 export interface KickCategory {

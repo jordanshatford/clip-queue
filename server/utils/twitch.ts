@@ -24,7 +24,7 @@ export class TwitchOAuthClient {
      */
     readonly event: H3Event,
     /**
-     * The configuration values. Defaults to twitch values from our runtime config values.
+     * The configuration values. Defaults to Twitch values from our runtime config values.
      */
     private readonly config = useRuntimeConfig().twitch,
   ) {
@@ -77,38 +77,9 @@ export class TwitchOAuthClient {
     if (!stored || !state || !(state === stored)) {
       throw createError({
         statusCode: 400,
-        message: 'Unable validate state in callback.',
+        message: 'Unable to validate state in callback.',
       })
     }
-  }
-
-  /**
-   * Refresh the current users Twitch OAuth access token using the refresh token.
-   *
-   * @see https://dev.twitch.tv/docs/authentication/refresh-tokens/
-   */
-  public async refreshToken(): Promise<TwitchToken> {
-    const token = this.tokenCookie.get()
-    if (!token?.refresh_token) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: 'Twitch session refresh token is not present.',
-      })
-    }
-    const refreshed = await OAUTH<TwitchToken>('/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        client_id: this.config.clientId,
-        client_secret: this.config.clientSecret,
-        grant_type: 'refresh_token',
-        refresh_token: token?.refresh_token,
-      }),
-    })
-    this.tokenCookie.set(refreshed)
-    return refreshed
   }
 
   /**
@@ -135,12 +106,16 @@ export class TwitchOAuthClient {
     return token
   }
 
+  /**
+   * Get validated token information for the current user.
+   * @returns TwitchTokenInfo for the current user access token.
+   */
   public async getValidatedTokenInfo(): Promise<TwitchTokenInfo> {
     const token = this.tokenCookie.get()
     if (!token) {
       throw createError({
         statusCode: 401,
-        message: 'No Twitch token available to revoke.',
+        message: 'No Twitch token available to get token information.',
       })
     }
     return getValidatedTokenInfo(token.access_token)
@@ -152,13 +127,49 @@ export class TwitchOAuthClient {
    * @returns OAuthUser for the Twitch user.
    */
   public getCurrentUser(): Promise<OAuthUser> {
+    const token = this.tokenCookie.get()
+    if (!token?.access_token) {
+      throw createError({
+        statusCode: 401,
+        message: 'No Kick token available to get token information.',
+      })
+    }
     return getCurrentUser(this.authentication)
+  }
+
+  /**
+   * Refresh the current users Twitch OAuth access token using the refresh token.
+   *
+   * @see https://dev.twitch.tv/docs/authentication/refresh-tokens/
+   */
+  public async refreshToken(): Promise<TwitchToken> {
+    const token = this.tokenCookie.get()
+    if (!token?.refresh_token) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Twitch session refresh token is not present.',
+      })
+    }
+    const refreshed = await OAUTH<TwitchToken>('/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        client_id: this.config.clientId,
+        client_secret: this.config.clientSecret,
+        grant_type: 'refresh_token',
+        refresh_token: token.refresh_token,
+      }),
+    })
+    this.tokenCookie.set(refreshed)
+    return refreshed
   }
 
   /**
    * Revoke the current users Twitch OAuth access token.
    *
-   *  @see https://dev.twitch.tv/docs/authentication/revoke-tokens/
+   * @see https://dev.twitch.tv/docs/authentication/revoke-tokens/
    */
   public async revokeToken(): Promise<void> {
     const token = this.tokenCookie.get()
@@ -185,7 +196,7 @@ export class TwitchOAuthClient {
 /**
  * Get token introspection to validate the users token.
  * @param accessToken - The users access token.
- * @returns TwitchTokenInfo from the Twitch API if the token is valid.
+ * @returns TwitchTokenInfo if the token is valid.
  *
  * @see https://dev.twitch.tv/docs/authentication/validate-tokens/
  */
@@ -225,7 +236,7 @@ const getValidatedTokenInfo = defineCachedFunction(
 
 /**
  * Get the current user associated with an access token.
- * @param accessToken - The access token.
+ * @param authentication - The authentication details.
  * @returns Details about the user.
  * @throws Error when the fetch request fails or does not return a user.
  */

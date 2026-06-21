@@ -31,7 +31,6 @@ export type PKCE = {
   method: 'S256'
   verifier: string
   challenge: string
-  state: string
 }
 
 /**
@@ -41,11 +40,9 @@ export type PKCE = {
 export function createPkce(): PKCE {
   const verifier = createRandomString()
   const challenge = base64UrlEncode(createHash('sha256').update(verifier).digest())
-  const state = createRandomString()
   return {
     method: 'S256',
     verifier,
     challenge,
-    state,
   }
 }
