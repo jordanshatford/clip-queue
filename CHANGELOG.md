@@ -1,5 +1,21 @@
 # clip-queue
 
+## 3.8.3
+
+### Patch Changes
+
+- [`a542f8e`](https://github.com/jordanshatford/clip-queue/commit/a542f8edcf7deefaf880e4cbf36a90ca97688a4e) - fix: pass full authentication to kick api class
+
+- [`d74861a`](https://github.com/jordanshatford/clip-queue/commit/d74861a4cd16044ddbb080065105b581c1bf3f6b) - fix: hash keys for cached values
+
+- [`cffbca6`](https://github.com/jordanshatford/clip-queue/commit/cffbca677a9248d274ec200a28a4c20537256c77) - fix: use shared types for oath details
+
+- [`c3c1014`](https://github.com/jordanshatford/clip-queue/commit/c3c10146f657f4a3cd3275c99959a16bc07bb223) - fix: use separator on integration cards with just authentication
+
+- [`a542f8e`](https://github.com/jordanshatford/clip-queue/commit/a542f8edcf7deefaf880e4cbf36a90ca97688a4e) - fix: rework kick related oauth endpoints
+
+- [`61575ae`](https://github.com/jordanshatford/clip-queue/commit/61575ae7bbad7b896c66ec56d1f3ed6554892a5f) - fix: rework twitch related oauth endpoints
+
 ## 3.8.2
 
 ### Patch Changes
