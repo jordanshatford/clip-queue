@@ -289,6 +289,7 @@ const getCurrentUser = defineCachedFunction(
     }
   },
   {
+    swr: false,
     maxAge: 60 * 5,
     getKey: (authentication: OAuthAuthentication) =>
       `kick:user:${hash(authentication.accessToken)}`,

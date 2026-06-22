@@ -251,6 +251,7 @@ const getCurrentUser = defineCachedFunction(
     }
   },
   {
+    swr: false,
     maxAge: 60 * 5,
     getKey: (authentication: OAuthAuthentication) =>
       `twitch:user:${hash(authentication.accessToken)}`,
