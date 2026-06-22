@@ -1,5 +1,13 @@
 # clip-queue
 
+## 3.8.4
+
+### Patch Changes
+
+- [`50f650a`](https://github.com/jordanshatford/clip-queue/commit/50f650ad6905429376d9b76e46742e11d9383a84) - fix: disable swr for get user endpoints with oauth
+
+- [`ec9a100`](https://github.com/jordanshatford/clip-queue/commit/ec9a10095a94453983062b8db6e982955b7ea2d8) - fix: properly await oauth validation and token refresh
+
 ## 3.8.3
 
 ### Patch Changes
