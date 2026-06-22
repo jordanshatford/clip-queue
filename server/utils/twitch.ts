@@ -128,7 +128,7 @@ export class TwitchOAuthClient {
    */
   public getCurrentUser(): Promise<OAuthUser> {
     const token = this.tokenCookie.get()
-    if (!token?.access_token) {
+    if (!token) {
       throw createError({
         statusCode: 401,
         message: 'No Kick token available to get token information.',
@@ -144,7 +144,7 @@ export class TwitchOAuthClient {
    */
   public async refreshToken(): Promise<TwitchToken> {
     const token = this.tokenCookie.get()
-    if (!token?.refresh_token) {
+    if (!token) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Twitch session refresh token is not present.',
