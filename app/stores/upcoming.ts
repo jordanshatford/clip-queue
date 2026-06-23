@@ -1,6 +1,6 @@
 import { useStorage } from '@vueuse/core'
 
-import type { Clip, IntegrationID } from '~/integrations'
+import type { Clip } from '~/integrations'
 
 import { m } from '#paraglide/messages'
 import { toSubmitterUUID } from '~/integrations/core'
