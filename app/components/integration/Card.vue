@@ -6,9 +6,6 @@
         <span class="truncate font-medium">
           {{ integration.name }}
         </span>
-        <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
-          {{ integration.id }}
-        </UBadge>
         <UBadge
           v-if="integration.isExperimental"
           icon="lucide:triangle-alert"

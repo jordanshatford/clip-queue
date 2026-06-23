@@ -4,9 +4,6 @@
       <div class="flex justify-between">
         <div class="flex items-center gap-2">
           <label :for="source.id">{{ source.name }}</label>
-          <UBadge size="sm" color="neutral" variant="soft" class="font-mono">
-            {{ source.id }}
-          </UBadge>
         </div>
         <div class="flex gap-2">
           <IntegrationStatusBadge :status="source.status" />
