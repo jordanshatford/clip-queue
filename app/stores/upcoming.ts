@@ -94,14 +94,6 @@ export const useUpcoming = defineStore('upcoming', () => {
   }
 
   /**
-   * Remove all items in the upcoming list that are linked to a given integration.
-   * @param integration - The ID of integration to remove.
-   */
-  function removeByIntegration(provider: IntegrationID): void {
-    items.value = items.value.filter((c) => c.provider.toLowerCase() !== provider.toLowerCase())
-  }
-
-  /**
    * Internal function to sort the upcoming items. Whenever changes are made to the
    * upcoming list, this should be called. All items in the upcoming list will be
    * sorted from most submitters to least.
@@ -164,18 +156,6 @@ export const useUpcoming = defineStore('upcoming', () => {
         }
       },
     },
-    {
-      id: 'removebyintegration',
-      help: {
-        args: [m.integration],
-        description: m.command_remove_by_integration,
-      },
-      execute: ({ args }) => {
-        if (args[0]) {
-          removeByIntegration(args[0] as IntegrationID)
-        }
-      },
-    },
   )
 
   return {
@@ -187,7 +167,6 @@ export const useUpcoming = defineStore('upcoming', () => {
     shift,
     remove,
     removeBySubmitter,
-    removeByIntegration,
     reset,
   }
 })

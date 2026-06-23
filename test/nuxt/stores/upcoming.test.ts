@@ -73,17 +73,6 @@ describe('upcoming.ts', () => {
     expect(upcoming.length).toEqual(1)
   })
 
-  it('removes provider clips from the list based on provider ID', () => {
-    const upcoming = useUpcoming()
-    upcoming.add(clipFromKick)
-    upcoming.add({ ...clipFromKick, id: 'other' })
-    upcoming.add({ ...clipFromKick, id: 'other2' })
-    upcoming.add(clipFromTwitch)
-    expect(upcoming.length).toEqual(4)
-    upcoming.removeByIntegration(IntegrationID.KICK_CLIPS)
-    expect(upcoming.length).toEqual(1)
-  })
-
   it('adds multiple clips with the same id if they are from different providers', () => {
     const upcoming = useUpcoming()
     upcoming.add({ ...clipFromTwitch, id: 'test', submitters: ['s'] })
@@ -190,7 +179,6 @@ describe('upcoming.ts', () => {
   it.each([
     ['clearupcoming', undefined],
     ['removebysubmitter', 1],
-    ['removebyintegration', 1],
   ])(
     'registers command %s for interacting with the upcoming items',
     (id: string, args?: number) => {

@@ -86,17 +86,6 @@ describe('queue.ts', () => {
     expect(queue.upcoming.length).toEqual(0)
   })
 
-  it('removes provider clips from the queue', () => {
-    const queue = useQueue()
-    queue.add(clipFromKick)
-    queue.add({ ...clipFromKick, id: 'other' })
-    queue.add({ ...clipFromKick, id: 'other2' })
-    queue.add(clipFromTwitch)
-    expect(queue.upcoming.length).toEqual(4)
-    queue.upcoming.removeByIntegration(IntegrationID.KICK_CLIPS)
-    expect(queue.upcoming.length).toEqual(1)
-  })
-
   it('opens and closes the queue properly', () => {
     const queue = useQueue()
     queue.open()
