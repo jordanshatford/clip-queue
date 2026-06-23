@@ -1,5 +1,19 @@
 # clip-queue
 
+## 3.9.0
+
+### Minor Changes
+
+- [`71335bc`](https://github.com/jordanshatford/clip-queue/commit/71335bc609ae6ebc98e922bf117128766d09e835) - feat: remove command to remove clips based on integration id
+
+### Patch Changes
+
+- [`7408a79`](https://github.com/jordanshatford/clip-queue/commit/7408a79f85c721304310ff92b43c9a1b5f5ed6ad) - fix: do not display integration id in ui
+
+- [`2b8b6f9`](https://github.com/jordanshatford/clip-queue/commit/2b8b6f939af181073fe969fdc762bdff9009eae1) - fix: properly update twitch token when refreshing value
+
+- [`2b8b6f9`](https://github.com/jordanshatford/clip-queue/commit/2b8b6f939af181073fe969fdc762bdff9009eae1) - fix: properly update kick token when refreshing value
+
 ## 3.8.4
 
 ### Patch Changes
