@@ -15,6 +15,8 @@ const OAUTH = ofetch.create({ baseURL: BASE_URL })
  * managing the current users details in cookies.
  */
 export class TwitchOAuthClient {
+  private token?: TwitchToken
+
   private tokenCookie: ObjectCookie<TwitchToken>
   private stateCookie: Cookie
 
@@ -29,6 +31,7 @@ export class TwitchOAuthClient {
     private readonly config = useRuntimeConfig().twitch,
   ) {
     this.tokenCookie = new ObjectCookie<TwitchToken>(event, 'twitch_session')
+    this.token = this.tokenCookie.get()
     this.stateCookie = new Cookie(event, 'twitch_state')
   }
 
@@ -36,10 +39,9 @@ export class TwitchOAuthClient {
    * Get authentication details for Twitch.
    */
   public get authentication(): OAuthAuthentication {
-    const token = this.tokenCookie.get()
     return {
       clientId: this.config.clientId,
-      accessToken: token?.access_token ?? '',
+      accessToken: this.token?.access_token ?? '',
     }
   }
 
@@ -101,6 +103,7 @@ export class TwitchOAuthClient {
         code,
       }),
     })
+    this.token = token
     this.tokenCookie.set(token)
     this.stateCookie.delete()
     return token
@@ -111,14 +114,13 @@ export class TwitchOAuthClient {
    * @returns TwitchTokenInfo for the current user access token.
    */
   public async getValidatedTokenInfo(): Promise<TwitchTokenInfo> {
-    const token = this.tokenCookie.get()
-    if (!token) {
+    if (!this.token) {
       throw createError({
         statusCode: 401,
         message: 'No Twitch token available to get token information.',
       })
     }
-    return getValidatedTokenInfo(token.access_token)
+    return getValidatedTokenInfo(this.token.access_token)
   }
 
   /**
@@ -127,8 +129,7 @@ export class TwitchOAuthClient {
    * @returns OAuthUser for the Twitch user.
    */
   public getCurrentUser(): Promise<OAuthUser> {
-    const token = this.tokenCookie.get()
-    if (!token) {
+    if (!this.token) {
       throw createError({
         statusCode: 401,
         message: 'No Kick token available to get token information.',
@@ -143,8 +144,7 @@ export class TwitchOAuthClient {
    * @see https://dev.twitch.tv/docs/authentication/refresh-tokens/
    */
   public async refreshToken(): Promise<TwitchToken> {
-    const token = this.tokenCookie.get()
-    if (!token) {
+    if (!this.token) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Twitch session refresh token is not present.',
@@ -159,9 +159,10 @@ export class TwitchOAuthClient {
         client_id: this.config.clientId,
         client_secret: this.config.clientSecret,
         grant_type: 'refresh_token',
-        refresh_token: token.refresh_token,
+        refresh_token: this.token.refresh_token,
       }),
     })
+    this.token = refreshed
     this.tokenCookie.set(refreshed)
     return refreshed
   }
@@ -172,8 +173,7 @@ export class TwitchOAuthClient {
    * @see https://dev.twitch.tv/docs/authentication/revoke-tokens/
    */
   public async revokeToken(): Promise<void> {
-    const token = this.tokenCookie.get()
-    if (!token) {
+    if (!this.token) {
       throw createError({
         statusCode: 401,
         message: 'No Twitch token available to revoke.',
@@ -186,9 +186,10 @@ export class TwitchOAuthClient {
       },
       body: new URLSearchParams({
         client_id: this.config.clientId,
-        token: token.access_token,
+        token: this.token.access_token,
       }),
     })
+    this.token = undefined
     this.tokenCookie.delete()
   }
 }

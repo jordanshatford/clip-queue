@@ -17,6 +17,8 @@ const OAUTH = ofetch.create({ baseURL: BASE_URL })
  * managing the current users details in cookies.
  */
 export class KickOAuthClient {
+  private token?: KickToken
+
   private tokenCookie: ObjectCookie<KickToken>
   private pkceCookie: ObjectCookie<PKCE>
   private stateCookie: Cookie
@@ -32,6 +34,7 @@ export class KickOAuthClient {
     private readonly config = useRuntimeConfig().kick,
   ) {
     this.tokenCookie = new ObjectCookie<KickToken>(event, 'kick_session')
+    this.token = this.tokenCookie.get()
     this.pkceCookie = new ObjectCookie<PKCE>(event, 'kick_pkce')
     this.stateCookie = new Cookie(event, 'kick_state')
   }
@@ -40,10 +43,9 @@ export class KickOAuthClient {
    * Get authentication details for Kick.
    */
   public get authentication(): OAuthAuthentication {
-    const token = this.tokenCookie.get()
     return {
       clientId: this.config.clientId,
-      accessToken: token?.access_token ?? '',
+      accessToken: this.token?.access_token ?? '',
     }
   }
 
@@ -124,6 +126,7 @@ export class KickOAuthClient {
         code_verifier: pkce.verifier,
       }),
     })
+    this.token = token
     this.tokenCookie.set(token)
     this.pkceCookie.delete()
     this.stateCookie.delete()
@@ -135,14 +138,13 @@ export class KickOAuthClient {
    * @returns KickTokenInfo for the current user access token.
    */
   public async getValidatedTokenInfo(): Promise<KickTokenInfo> {
-    const token = this.tokenCookie.get()
-    if (!token) {
+    if (!this.token) {
       throw createError({
         statusCode: 401,
         message: 'No Kick token available to get token information.',
       })
     }
-    return getValidatedTokenInfo(token.access_token)
+    return getValidatedTokenInfo(this.token.access_token)
   }
 
   /**
@@ -151,8 +153,7 @@ export class KickOAuthClient {
    * @returns OAuthUser for the Kick user.
    */
   public getCurrentUser(): Promise<OAuthUser> {
-    const token = this.tokenCookie.get()
-    if (!token) {
+    if (!this.token) {
       throw createError({
         statusCode: 401,
         message: 'No Kick token available to get token information.',
@@ -167,8 +168,7 @@ export class KickOAuthClient {
    * @see https://docs.kick.com/getting-started/generating-tokens-oauth2-flow#refresh-token-endpoint
    */
   public async refreshToken(): Promise<KickToken> {
-    const token = this.tokenCookie.get()
-    if (!token) {
+    if (!this.token) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Kick session refresh token is not present.',
@@ -183,9 +183,10 @@ export class KickOAuthClient {
         client_id: this.config.clientId,
         client_secret: this.config.clientSecret,
         grant_type: 'refresh_token',
-        refresh_token: token.refresh_token,
+        refresh_token: this.token.refresh_token,
       }),
     })
+    this.token = refreshed
     this.tokenCookie.set(refreshed)
     return refreshed
   }
@@ -196,8 +197,7 @@ export class KickOAuthClient {
    * @see https://docs.kick.com/getting-started/generating-tokens-oauth2-flow#revoke-token-endpoint
    */
   public async revokeToken(): Promise<void> {
-    const token = this.tokenCookie.get()
-    if (!token) {
+    if (!this.token) {
       throw createError({
         statusCode: 401,
         message: 'No Kick token available to revoke.',
@@ -209,9 +209,10 @@ export class KickOAuthClient {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        token: token.access_token,
+        token: this.token.access_token,
       }),
     })
+    this.token = undefined
     this.tokenCookie.delete()
   }
 }
