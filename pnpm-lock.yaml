@@ -36,8 +36,8 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4(typescript@6.0.3)(vue@3.5.38(typescript@6.0.3))
       video.js:
-        specifier: ^8.23.8
-        version: 8.23.8
+        specifier: ^8.23.9
+        version: 8.23.9
       vue:
         specifier: ^3.5.38
         version: 3.5.38(typescript@6.0.3)
@@ -2903,8 +2903,8 @@ packages:
     engines: {node: '>=20'}
     hasBin: true
 
-  '@videojs/http-streaming@3.17.4':
-    resolution: {integrity: sha512-XAvdG2dolBuV2Fx8bu1kjmQ2D4TonGzZH68Pgv/O9xMSFWdZtITSMFismeQLEAtMmGwze8qNJp3RgV+jStrJqg==}
+  '@videojs/http-streaming@3.17.5':
+    resolution: {integrity: sha512-PRRQVu0hYW5h0XvRWpIyIpEatpMZzZtf7L1avV89Hnu+69f+0c7oLsSL9jwpg2nbvzGkdX5rQxQkz5Vc7tFR9w==}
     engines: {node: '>=8', npm: '>=5'}
     peerDependencies:
       video.js: ^8.19.0
@@ -6300,8 +6300,8 @@ packages:
       reka-ui: ^2.0.0
       vue: ^3.3.0
 
-  video.js@8.23.8:
-    resolution: {integrity: sha512-plZuWxN4clhDESSpi3QLYVs6tgnnf9qT9SA4iahHwZEmdVSuUh4+O6vQPcA5XqiEDvjeBDJvLafH1bhkAXaXKQ==}
+  video.js@8.23.9:
+    resolution: {integrity: sha512-3UCqyFW4wIusQu4TuhgRUxqtbzbj0WPT9hps0XIEXST43QBD11zb+bG7tBPrinrZztwVYdXCiOBo2pcGj9L05w==}
 
   videojs-contrib-quality-levels@4.1.0:
     resolution: {integrity: sha512-TfrXJJg1Bv4t6TOCMEVMwF/CoS8iENYsWNKip8zfhB5kTcegiFYezEA0eHAJPU64ZC8NQbxQgOwAsYU8VXbOWA==}
@@ -9458,7 +9458,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@videojs/http-streaming@3.17.4(video.js@8.23.8)':
+  '@videojs/http-streaming@3.17.5(video.js@8.23.9)':
     dependencies:
       '@babel/runtime': 7.29.7
       '@videojs/vhs-utils': 4.1.2
@@ -9467,7 +9467,7 @@ snapshots:
       m3u8-parser: 7.2.0
       mpd-parser: 1.4.0
       mux.js: 7.1.0
-      video.js: 8.23.8
+      video.js: 8.23.9
 
   '@videojs/vhs-utils@4.1.2':
     dependencies:
@@ -13225,10 +13225,10 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
 
-  video.js@8.23.8:
+  video.js@8.23.9:
     dependencies:
       '@babel/runtime': 7.29.7
-      '@videojs/http-streaming': 3.17.4(video.js@8.23.8)
+      '@videojs/http-streaming': 3.17.5(video.js@8.23.9)
       '@videojs/vhs-utils': 4.1.2
       '@videojs/xhr': 2.7.0
       aes-decrypter: 4.0.2
@@ -13236,14 +13236,14 @@ snapshots:
       m3u8-parser: 7.2.0
       mpd-parser: 1.4.0
       mux.js: 7.1.0
-      videojs-contrib-quality-levels: 4.1.0(video.js@8.23.8)
+      videojs-contrib-quality-levels: 4.1.0(video.js@8.23.9)
       videojs-font: 4.2.0
       videojs-vtt.js: 0.15.5
 
-  videojs-contrib-quality-levels@4.1.0(video.js@8.23.8):
+  videojs-contrib-quality-levels@4.1.0(video.js@8.23.9):
     dependencies:
       global: 4.4.0
-      video.js: 8.23.8
+      video.js: 8.23.9
 
   videojs-font@4.2.0: {}
 

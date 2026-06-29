@@ -32,7 +32,7 @@
     "google-auth-library": "^10.7.0",
     "nuxt": "^4.4.8",
     "pinia": "^3.0.4",
-    "video.js": "^8.23.8",
+    "video.js": "^8.23.9",
     "vue": "^3.5.38",
     "vue-router": "^5.1.0"
   },
