@@ -42,7 +42,7 @@
     "@commitlint/config-conventional": "^21.1.0",
     "@commitlint/types": "^21.1.0",
     "@iconify-json/lucide": "^1.2.114",
-    "@iconify-json/simple-icons": "^1.2.87",
+    "@iconify-json/simple-icons": "^1.2.88",
     "@inlang/paraglide-js": "2.20.2",
     "@nuxt/eslint": "^1.16.0",
     "@nuxt/test-utils": "4.0.3",
