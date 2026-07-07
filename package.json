@@ -41,14 +41,14 @@
     "@commitlint/cli": "^21.2.0",
     "@commitlint/config-conventional": "^21.2.0",
     "@commitlint/types": "^21.2.0",
-    "@iconify-json/lucide": "^1.2.115",
-    "@iconify-json/simple-icons": "^1.2.88",
+    "@iconify-json/lucide": "^1.2.116",
+    "@iconify-json/simple-icons": "^1.2.89",
     "@inlang/paraglide-js": "2.20.2",
     "@nuxt/eslint": "^1.16.0",
     "@nuxt/test-utils": "4.0.3",
     "@pinia/testing": "^1.0.3",
-    "@types/node": "^26.0.1",
-    "@vitest/coverage-v8": "^4.1.9",
+    "@types/node": "^26.1.0",
+    "@vitest/coverage-v8": "^4.1.10",
     "@vue/test-utils": "^2.4.11",
     "eslint": "^10.6.0",
     "eslint-config-prettier": "^10.1.8",
@@ -57,12 +57,12 @@
     "oxfmt": "^0.57.0",
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.9",
-    "vue-tsc": "^3.3.5"
+    "vitest": "^4.1.10",
+    "vue-tsc": "^3.3.6"
   },
   "engines": {
     "node": ">=22",
     "pnpm": ">=11"
   },
-  "packageManager": "pnpm@11.9.0"
+  "packageManager": "pnpm@11.10.0"
 }
