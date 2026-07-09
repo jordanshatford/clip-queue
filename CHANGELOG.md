@@ -1,5 +1,11 @@
 # clip-queue
 
+## 3.9.1
+
+### Patch Changes
+
+- [`65f269e`](https://github.com/jordanshatford/clip-queue/commit/65f269e6c6a8717c0c5b0bc98a276423fa4dbff6) - fix: remove disallow in robots txt
+
 ## 3.9.0
 
 ### Minor Changes
