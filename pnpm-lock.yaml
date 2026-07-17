@@ -64,8 +64,8 @@ importers:
         specifier: ^1.2.89
         version: 1.2.89
       '@inlang/paraglide-js':
-        specifier: 2.20.2
-        version: 2.20.2(typescript@6.0.3)
+        specifier: 2.21.0
+        version: 2.21.0(typescript@6.0.3)
       '@nuxt/eslint':
         specifier: ^1.16.0
         version: 1.16.0(@typescript-eslint/utils@8.63.0(eslint@10.6.0(jiti@2.7.0))(typescript@6.0.3))(@vue/compiler-sfc@3.5.39)(crossws@0.4.9(srvx@0.11.21))(esbuild@0.28.1)(eslint@10.6.0(jiti@2.7.0))(magicast@0.5.3)(oxc-parser@0.133.0)(rollup@4.62.2)(typescript@6.0.3)(vite@7.3.6(@types/node@26.1.1)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(yaml@2.9.0))
@@ -974,8 +974,8 @@ packages:
     peerDependencies:
       vue: '>=3.0.0'
 
-  '@inlang/paraglide-js@2.20.2':
-    resolution: {integrity: sha512-V8iY3uu/vQU94gEag1bdC3glMJSp4Dg3XMwfnabZLBh1Dv0F++DvDYlMeniqv2+nHbnS/twB75AM140OmpHDEg==}
+  '@inlang/paraglide-js@2.21.0':
+    resolution: {integrity: sha512-t+OOui1i5p73zQ2Dk28yFzu6rZhh7hsDOCHjkXDmSwFFsUsS5HyUD4CvPJ+wf02qgmlCMu2z1qffJ5aWwgx1CA==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6'
@@ -2282,8 +2282,8 @@ packages:
     resolution: {integrity: sha512-fCTuZK4QBa+39Oz9l4OGfJfz+GpwCp3AqO7Zch3to99xHPgstVsRFpeQ8LNd2o1Gv8raL2mCFwiaHh7bFSp5DQ==}
     engines: {node: '>=22'}
 
-  '@sinclair/typebox@0.31.28':
-    resolution: {integrity: sha512-/s55Jujywdw/Jpan+vsy6JZs1z2ZTGxTmbZTPiuSL2wz9mfzA2gN1zzaqmvfi4pq+uOt7Du85fkiwv5ymW84aQ==}
+  '@sinclair/typebox@0.31.30':
+    resolution: {integrity: sha512-MGsM7bVmHg3sUKCphlu3SGQ+T+5JTbygZWYArfKQCW5anJeACHeqLhcnf+R7XlCWZ+QR3C8JTBx3kCKJTN69ow==}
 
   '@sindresorhus/base62@1.0.0':
     resolution: {integrity: sha512-TeheYy0ILzBEI/CO55CP6zJCSdSWeRtGnHy8U8dWSUH4I68iqTsy7HkMktR4xakThc9jotkPQUXT4ITdbV7cHA==}
@@ -7497,7 +7497,7 @@ snapshots:
       '@iconify/types': 2.0.0
       vue: 3.5.39(typescript@6.0.3)
 
-  '@inlang/paraglide-js@2.20.2(typescript@6.0.3)':
+  '@inlang/paraglide-js@2.21.0(typescript@6.0.3)':
     dependencies:
       '@inlang/recommend-sherlock': 0.2.1
       '@inlang/sdk': 2.10.2
@@ -7518,7 +7518,7 @@ snapshots:
   '@inlang/sdk@2.10.2':
     dependencies:
       '@lix-js/sdk': 0.4.10
-      '@sinclair/typebox': 0.31.28
+      '@sinclair/typebox': 0.31.30
       kysely: 0.28.17
       sqlite-wasm-kysely: 0.3.0(kysely@0.28.17)
       uuid: 14.0.1
@@ -8850,7 +8850,7 @@ snapshots:
 
   '@simple-libs/stream-utils@2.0.0': {}
 
-  '@sinclair/typebox@0.31.28': {}
+  '@sinclair/typebox@0.31.30': {}
 
   '@sindresorhus/base62@1.0.0': {}
 
