@@ -23,8 +23,8 @@
     "changeset": "changeset"
   },
   "dependencies": {
-    "@nuxt/ui": "^4.9.0",
-    "@pinia/nuxt": "1.0.0",
+    "@nuxt/ui": "^4.10.0",
+    "@pinia/nuxt": "1.0.1",
     "@tanstack/vue-table": "^8.21.3",
     "@tmi.js/chat": "^0.8.0",
     "@vueuse/core": "^14.3.0",
