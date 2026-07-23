@@ -32,7 +32,7 @@
     "nuxt": "^4.4.8",
     "pinia": "^4.0.2",
     "video.js": "^8.23.9",
-    "vue": "^3.5.39",
+    "vue": "^3.5.40",
     "vue-router": "^5.2.0"
   },
   "devDependencies": {
