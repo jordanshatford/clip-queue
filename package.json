@@ -43,7 +43,7 @@
     "@commitlint/types": "^21.2.0",
     "@iconify-json/lucide": "^1.2.121",
     "@iconify-json/simple-icons": "^1.2.93",
-    "@inlang/paraglide-js": "2.23.0",
+    "@inlang/paraglide-js": "2.23.1",
     "@nuxt/eslint": "^1.16.0",
     "@nuxt/test-utils": "4.1.0",
     "@pinia/testing": "^2.0.1",
