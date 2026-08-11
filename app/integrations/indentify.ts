@@ -79,6 +79,10 @@ export enum IntegrationID {
    */
   YOUTUBE = 'youtube',
   /**
+   * YouTube (Google) authentication.
+   */
+  YOUTUBE_AUTH = 'yt-auth',
+  /**
    * YouTube shorts provider.
    */
   YOUTUBE_SHORTS = 'yt-shorts',

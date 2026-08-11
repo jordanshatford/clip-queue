@@ -32,6 +32,12 @@ export default defineNuxtConfig({
     public: {
       version: pkg.version,
     },
+    google: {
+      clientId: '',
+      clientSecret: '',
+      redirectUri: '',
+      scopes: ['https://www.googleapis.com/auth/youtube.readonly', 'openid', 'profile'],
+    },
     kick: {
       clientId: '',
       clientSecret: '',

@@ -13,7 +13,7 @@ createIntegrationTestHarness(youtube, {
     primary: '#FF0000',
     secondary: '#FFFFFF',
   },
-  authentication: undefined,
+  authentication: { id: IntegrationID.YOUTUBE_AUTH },
   source: undefined,
   providers: [IntegrationID.YOUTUBE_SHORTS, IntegrationID.YOUTUBE_VIDEOS],
 })
