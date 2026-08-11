@@ -18,9 +18,7 @@
       :data="logger.logs"
       :columns="columns"
       :empty="m.no_logs_captured()"
-      :pagination-options="{
-        getPaginationRowModel: getPaginationRowModel(),
-      }"
+      :pagination-options="paginationOptions"
       class="text-left"
     />
     <div class="flex justify-end border-t border-default px-4 pt-4">
@@ -59,6 +57,10 @@ const pagination = ref<PaginationState>({
   pageIndex: 0,
   pageSize: 6,
 })
+
+const paginationOptions = {
+  getPaginationRowModel: getPaginationRowModel(),
+}
 
 const UBadge = resolveComponent('UBadge')
 

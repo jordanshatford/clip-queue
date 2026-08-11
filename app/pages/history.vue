@@ -38,9 +38,7 @@
       v-model:global-filter="filter"
       v-model:row-selection="rowSelection"
       v-model:pagination="pagination"
-      :pagination-options="{
-        getPaginationRowModel: getPaginationRowModel(),
-      }"
+      :pagination-options="paginationOptions"
       :data="queue.history.items"
       :columns="columns"
       :empty="m.no_clips_previously_watched()"
@@ -101,6 +99,10 @@ const pagination = ref<PaginationState>({
   pageIndex: 0,
   pageSize: 5,
 })
+
+const paginationOptions = {
+  getPaginationRowModel: getPaginationRowModel(),
+}
 
 const filter = ref<string>('')
 

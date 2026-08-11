@@ -90,8 +90,13 @@ export abstract class AbstractIntegrationAuthentication implements IntegrationAu
     return this.state.details
   }
 
+  private get fetchClient() {
+    const globalFetch = (globalThis as typeof globalThis & { $fetch?: typeof $fetch }).$fetch
+    return globalFetch ?? $fetch
+  }
+
   public async autoLogin(): Promise<void> {
-    const current = await $fetch<OAuthResponse>(this.validateUrl, {
+    const current = await this.fetchClient<OAuthResponse>(this.validateUrl, {
       method: 'POST',
     })
     if (!current) {
@@ -110,6 +115,6 @@ export abstract class AbstractIntegrationAuthentication implements IntegrationAu
     this.state.isLoggedIn = false
     this.state.user = { id: '', name: '', profileImageURL: '' }
     this.state.details = { clientId: '', accessToken: '' }
-    return await $fetch(this.revokeUrl, { method: 'POST' })
+    return await this.fetchClient(this.revokeUrl, { method: 'POST' })
   }
 }
