@@ -25,7 +25,7 @@
   "dependencies": {
     "@nuxt/ui": "^4.10.0",
     "@pinia/nuxt": "1.0.1",
-    "@tanstack/vue-table": "^9.1.2",
+    "@tanstack/vue-table": "^8.21.3",
     "@tmi.js/chat": "^0.8.0",
     "@vueuse/core": "^14.4.0",
     "@vueuse/nuxt": "^14.4.0",
