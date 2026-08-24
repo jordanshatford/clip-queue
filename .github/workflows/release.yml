@@ -30,9 +30,9 @@ jobs:
         run: pnpm build
       - uses: changesets/action@198f833dd7d863100ea6e28967bc9a9fdefadb0a # v2.1.0
         with:
-          title: 'ci: release'
-          commit: 'ci: release'
-          version: pnpm changeset version
-          publish: pnpm changeset publish
+          pr-title: 'ci: release'
+          commit-message: 'ci: release'
+          version-script: pnpm changeset version
+          publish-script: pnpm changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
