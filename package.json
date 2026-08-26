@@ -48,7 +48,7 @@
     "@nuxt/test-utils": "4.1.0",
     "@pinia/testing": "^2.0.1",
     "@types/node": "^26.2.0",
-    "@vitest/coverage-v8": "^4.1.10",
+    "@vitest/coverage-v8": "^4.1.11",
     "@vue/test-utils": "^2.4.11",
     "eslint": "^10.8.1",
     "eslint-config-prettier": "^10.1.8",
@@ -57,7 +57,7 @@
     "oxfmt": "^0.63.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.10",
+    "vitest": "^4.1.11",
     "vue-tsc": "^3.3.10"
   },
   "engines": {
