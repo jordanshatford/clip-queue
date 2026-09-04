@@ -45,7 +45,7 @@
     "@iconify-json/simple-icons": "^1.2.93",
     "@inlang/paraglide-js": "2.25.0",
     "@nuxt/eslint": "^1.17.0",
-    "@nuxt/test-utils": "4.1.0",
+    "@nuxt/test-utils": "4.2.0",
     "@pinia/testing": "^2.0.1",
     "@types/node": "^26.4.0",
     "@vitest/coverage-v8": "^4.1.11",
