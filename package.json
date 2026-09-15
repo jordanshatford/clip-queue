@@ -23,7 +23,7 @@
     "changeset": "changeset"
   },
   "dependencies": {
-    "@nuxt/ui": "^4.11.0",
+    "@nuxt/ui": "^4.11.1",
     "@pinia/nuxt": "1.0.2",
     "@tanstack/vue-table": "^8.21.3",
     "@tmi.js/chat": "^0.8.0",
@@ -45,7 +45,7 @@
     "@iconify-json/simple-icons": "^1.2.94",
     "@inlang/paraglide-js": "2.25.0",
     "@nuxt/eslint": "^1.17.0",
-    "@nuxt/test-utils": "4.3.0",
+    "@nuxt/test-utils": "4.3.2",
     "@pinia/testing": "^2.0.1",
     "@types/node": "^26.4.1",
     "@vitest/coverage-v8": "^4.1.11",
