@@ -47,7 +47,7 @@
     "@nuxt/eslint": "^1.17.0",
     "@nuxt/test-utils": "4.3.2",
     "@pinia/testing": "^2.0.1",
-    "@types/node": "^26.5.1",
+    "@types/node": "^26.6.1",
     "@vitest/coverage-v8": "^4.1.11",
     "@vue/test-utils": "^2.5.1",
     "eslint": "^10.10.0",
