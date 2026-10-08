@@ -23,12 +23,12 @@
     "changeset": "changeset"
   },
   "dependencies": {
-    "@nuxt/ui": "^4.11.1",
+    "@nuxt/ui": "^4.11.2",
     "@pinia/nuxt": "1.0.2",
     "@tanstack/vue-table": "^8.21.3",
     "@tmi.js/chat": "^0.8.0",
     "@vueuse/core": "^14.4.0",
-    "@vueuse/nuxt": "^14.4.0",
+    "@vueuse/nuxt": "^15.0.0",
     "nuxt": "^4.5.2",
     "pinia": "^4.0.3",
     "video.js": "^8.24.1",
