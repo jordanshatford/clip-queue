@@ -54,7 +54,7 @@ export default defineNuxtConfig({
     },
     plugins: [
       paraglideVitePlugin({
-        project: './project.inlang',
+        project: fileURLToPath(new URL('./project.inlang', import.meta.url)),
         outdir: fileURLToPath(new URL('./paraglide', import.meta.url)),
       }),
     ],
