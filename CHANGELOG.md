@@ -1,5 +1,17 @@
 # clip-queue
 
+## 3.9.2
+
+### Patch Changes
+
+- [`110d817`](https://github.com/jordanshatford/clip-queue/commit/110d8179475ac9bd61aad337a2dd78c2640792e2) - chore: migrate clip playback to Video.js 10 custom elements with HLS adapter support.
+
+- [`0019a8b`](https://github.com/jordanshatford/clip-queue/commit/0019a8b73745172abdd284cd822ee47aa481319c) - fix: prevent failed thumbnail loads from being reported as uncaught errors
+
+- [`e175b84`](https://github.com/jordanshatford/clip-queue/commit/e175b84743da82d3af0441dd20e77069aa03d58d) - fix: issues causing kick chat to no connect
+
+- [`c71a7a3`](https://github.com/jordanshatford/clip-queue/commit/c71a7a381126699cef1b82ccec3299eded3ce40a) - chore: migrate server routes to Nuxt 4.6's portable server APIs.
+
 ## 3.9.1
 
 ### Patch Changes
