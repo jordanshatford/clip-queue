@@ -191,6 +191,7 @@ type PusherEvent<TEvent extends string, TData> = {
  */
 export enum KickPusherEventType {
   ERROR = 'pusher:error',
+  PING = 'pusher:ping',
   CONNECTED = 'pusher:connection_established',
   SUBSCRIBED = 'pusher_internal:subscription_succeeded',
   MESSAGE = 'App\\Events\\ChatMessageEvent',
@@ -207,6 +208,10 @@ export type KickPusherEvent =
       event: KickPusherEventType.ERROR
       message: string
       code?: number
+    }
+  | {
+      event: KickPusherEventType.PING
+      data: object
     }
   | Omit<
       PusherEvent<
@@ -367,6 +372,12 @@ export class Client extends EventEmitter<ClientEvents> {
         }
         // Handle each event we care about respectively.
         switch (parsed.event) {
+          case KickPusherEventType.PING: {
+            if (socket.readyState === WebSocket.OPEN) {
+              socket.send(JSON.stringify({ event: 'pusher:pong', data: {} }))
+            }
+            break
+          }
           case 'App\\Events\\ChatMessageEvent': {
             this.emit('message', parsed)
             break
