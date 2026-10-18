@@ -148,11 +148,6 @@ export class KickChatSource extends AbstractIntegrationSource {
     this.chat.on('error', (event) => {
       // Error coming from underlying pusher or websocket.
       const error = typeof event === 'string' ? event : event.message
-      this.emit('error', {
-        timestamp: this.timestamp(),
-        source: this.id,
-        data: error,
-      })
       this.handleError(error)
     })
   }
