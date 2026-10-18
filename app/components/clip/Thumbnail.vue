@@ -20,5 +20,11 @@ export interface Props {
 
 const { src, alt } = defineProps<Props>()
 
-const { isLoading, error } = useImage({ src, alt })
+const { isLoading, error } = useImage(
+  { src, alt },
+  {
+    // Failed thumbnails are expected and already render the placeholder below.
+    onError: () => {},
+  },
+)
 </script>

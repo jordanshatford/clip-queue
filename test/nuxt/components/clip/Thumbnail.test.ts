@@ -7,7 +7,7 @@ import ClipThumbnail from '~/components/clip/Thumbnail.vue'
 const mockUseImage = vi.fn()
 vi.mock('@vueuse/core', async (importOriginal) => ({
   ...(await importOriginal<typeof import('@vueuse/core')>()),
-  useImage: () => mockUseImage(),
+  useImage: (...args: Parameters<typeof import('@vueuse/core').useImage>) => mockUseImage(...args),
 }))
 
 describe('clip/Thumbnail.vue', () => {
@@ -48,6 +48,10 @@ describe('clip/Thumbnail.vue', () => {
     const wrapper = await mountSuspended(ClipThumbnail, { props })
     expect(wrapper.find('img').exists()).toBe(false)
     expect(wrapper.findComponent({ name: 'UIcon' }).exists()).toBe(true)
+    expect(mockUseImage).toHaveBeenCalledWith(
+      { src: props.src, alt: props.alt },
+      { onError: expect.any(Function) },
+    )
   })
 
   it('applies correct styling classes to the image', async () => {
