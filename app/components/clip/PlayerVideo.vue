@@ -1,16 +1,22 @@
 <template>
   <div class="video-container h-full w-full">
-    <video
-      ref="videoElement"
-      class="video-js vjs-default-skin vjs-big-play-centered"
-      :title="title"
-    ></video>
+    <video-player :poster="poster" :content-title="title">
+      <video-skin>
+        <hlsjs-video v-if="isHls" :src="src" autoplay playsinline @loadedmetadata="seekToStart" />
+        <video v-else :src="src" autoplay playsinline @loadedmetadata="seekToStart">
+          <a href="https://videojs.org/help">Video player not working?</a>
+        </video>
+      </video-skin>
+    </video-player>
   </div>
 </template>
 
 <script setup lang="ts">
-import videojs from 'video.js'
-import 'video.js/dist/video-js.css'
+import type { HlsJsVideoElement } from '@videojs/html/media/hlsjs-video'
+
+import '@videojs/html/video/player'
+import '@videojs/html/video/skin'
+import '@videojs/html/media/hlsjs-video'
 
 export interface Props {
   src: string
@@ -21,37 +27,13 @@ export interface Props {
 
 const { src, poster = undefined, title = undefined, start = undefined } = defineProps<Props>()
 
-const videoElement = useTemplateRef<HTMLVideoElement>('videoElement')
+const isHls = computed(() => src.split(/[?#]/, 1)[0]?.toLowerCase().endsWith('.m3u8'))
 
-// TODO(jordan): fix typing once video.js is updated.
-// ref: https://github.com/videojs/video.js/issues/8242
-let player: ReturnType<typeof videojs> | undefined
-
-onMounted(async () => {
-  await nextTick()
-
-  if (!videoElement.value) return
-
-  player = videojs(videoElement.value, {
-    autoplay: true,
-    controls: true,
-    responsive: true,
-    fluid: true,
-    fill: true,
-    poster,
-    sources: [{ src }],
-  })
-
-  player.ready(() => {
-    if (start) {
-      player?.currentTime(start)
-    }
-  })
-})
-
-onBeforeUnmount(() => {
-  player?.dispose()
-})
+function seekToStart(event: Event): void {
+  if (start === undefined || start <= 0) return
+  const media = event.currentTarget as HTMLVideoElement | HlsJsVideoElement
+  media.currentTime = start
+}
 </script>
 
 <style>
@@ -59,29 +41,14 @@ onBeforeUnmount(() => {
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
 }
 
-.video-js {
-  width: 100% !important;
-  height: 100% !important;
-  position: relative;
-}
-
-.video-js .vjs-tech {
+video-skin {
+  --media-border-radius: var(--ui-radius);
+  display: block;
   width: 100%;
   height: 100%;
-}
-
-.video-js .vjs-poster {
-  width: 100%;
-  height: 100%;
-}
-
-.video-js.vjs-fluid {
-  padding-top: 0 !important;
-}
-
-.video-js .vjs-control-bar {
-  box-sizing: border-box;
 }
 </style>

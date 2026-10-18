@@ -3,20 +3,9 @@ import { describe, expect, it, vi } from 'vitest'
 
 import PlayerVideo from '~/components/clip/PlayerVideo.vue'
 
-const currentTimeMock = vi.fn()
-const readyMock = vi.fn((cb: () => void) => cb())
-const disposeMock = vi.fn()
-vi.mock('video.js', () => {
-  return {
-    default: vi.fn(() => ({
-      ready: readyMock,
-      currentTime: currentTimeMock,
-      dispose: disposeMock,
-    })),
-  }
-})
-
-vi.mock('video.js/dist/video-js.css', () => ({}))
+vi.mock('@videojs/html/video/player', () => ({}))
+vi.mock('@videojs/html/video/skin', () => ({}))
+vi.mock('@videojs/html/media/hlsjs-video', () => ({}))
 
 describe('clip/PlayerVideo.vue', () => {
   it('mounts successfully', async () => {
@@ -31,36 +20,58 @@ describe('clip/PlayerVideo.vue', () => {
     expect(wrapper.exists()).toBe(true)
   })
 
-  it('renders video element', async () => {
+  it('renders a native video element for non-HLS sources', async () => {
     const wrapper = await mountSuspended(PlayerVideo, {
       props: {
         src: 'https://example.com/video.mp4',
         title: 'Test Video',
+        poster: 'https://example.com/poster.jpg',
       },
     })
     const video = wrapper.find('video')
     expect(video.exists()).toBe(true)
-    expect(video.attributes('title')).toBe('Test Video')
+    expect(video.attributes('src')).toBe('https://example.com/video.mp4')
+    expect(video.attributes('autoplay')).toBeDefined()
+    expect(wrapper.find('hlsjs-video').exists()).toBe(false)
+    expect(wrapper.find('video-player').attributes('poster')).toBe('https://example.com/poster.jpg')
+    expect(wrapper.find('video-player').attributes('content-title')).toBe('Test Video')
   })
 
-  it('calls currentTime when start is provided', async () => {
-    await mountSuspended(PlayerVideo, {
+  it('renders the HLS adapter for HLS sources with query strings', async () => {
+    const wrapper = await mountSuspended(PlayerVideo, {
+      props: {
+        src: 'https://example.com/video.m3u8?token=123',
+      },
+    })
+    expect(wrapper.find('hlsjs-video').attributes('src')).toBe(
+      'https://example.com/video.m3u8?token=123',
+    )
+    expect(wrapper.find('video').exists()).toBe(false)
+  })
+
+  it('seeks to the requested start time when media metadata loads', async () => {
+    const wrapper = await mountSuspended(PlayerVideo, {
       props: {
         src: 'https://example.com/video.mp4',
         start: 10,
       },
     })
-    expect(readyMock).toHaveBeenCalled()
-    expect(currentTimeMock).toHaveBeenCalledWith(10)
+    const video = wrapper.find('video').element as HTMLVideoElement
+    const currentTime = vi.spyOn(video, 'currentTime', 'set')
+    await wrapper.find('video').trigger('loadedmetadata')
+    expect(currentTime).toHaveBeenCalledWith(10)
   })
 
-  it('disposes player on unmount', async () => {
+  it('seeks on HLS media when metadata loads', async () => {
     const wrapper = await mountSuspended(PlayerVideo, {
       props: {
-        src: 'https://example.com/video.mp4',
+        src: 'https://example.com/video.m3u8',
+        start: 10,
       },
     })
-    wrapper.unmount()
-    expect(disposeMock).toHaveBeenCalled()
+    const media = wrapper.find('hlsjs-video').element as HTMLElement & { currentTime: number }
+    Object.defineProperty(media, 'currentTime', { configurable: true, value: 0, writable: true })
+    await wrapper.find('hlsjs-video').trigger('loadedmetadata')
+    expect(media.currentTime).toBe(10)
   })
 })

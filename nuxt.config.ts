@@ -11,6 +11,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   ssr: false,
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => ['video-player', 'video-skin', 'hlsjs-video'].includes(tag),
+    },
+  },
   app: {
     head: {
       title: 'ClipQueue',
@@ -50,7 +55,16 @@ export default defineNuxtConfig({
   },
   vite: {
     optimizeDeps: {
-      include: ['@tanstack/vue-table', '@tmi.js/chat', '@vueuse/core', 'video.js'],
+      include: [
+        '@tanstack/vue-table',
+        '@tmi.js/chat',
+        '@videojs/hlsjs-video',
+        '@videojs/html',
+        '@videojs/html/media/hlsjs-video',
+        '@videojs/html/video/player',
+        '@videojs/html/video/skin',
+        '@vueuse/core',
+      ],
     },
     plugins: [
       paraglideVitePlugin({
