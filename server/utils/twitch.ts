@@ -1,5 +1,5 @@
-import type { H3Event } from 'h3'
-
+import { defineCachedFunction } from 'nitropack/runtime'
+import { createError, useRuntimeConfig, type RequestEvent } from 'nuxt/server'
 import { ofetch } from 'ofetch'
 
 import type { TwitchToken, TwitchTokenInfo } from '#shared/twitch'
@@ -24,7 +24,7 @@ export class TwitchOAuthClient {
     /**
      * The H3Event to associated with the request.
      */
-    readonly event: H3Event,
+    readonly event: RequestEvent,
     /**
      * The configuration values. Defaults to Twitch values from our runtime config values.
      */
@@ -78,7 +78,7 @@ export class TwitchOAuthClient {
     const stored = this.stateCookie.get()
     if (!stored || !state || !(state === stored)) {
       throw createError({
-        statusCode: 400,
+        status: 400,
         message: 'Unable to validate state in callback.',
       })
     }
@@ -116,7 +116,7 @@ export class TwitchOAuthClient {
   public async getValidatedTokenInfo(): Promise<TwitchTokenInfo> {
     if (!this.token) {
       throw createError({
-        statusCode: 401,
+        status: 401,
         message: 'No Twitch token available to get token information.',
       })
     }
@@ -131,7 +131,7 @@ export class TwitchOAuthClient {
   public getCurrentUser(): Promise<OAuthUser> {
     if (!this.token) {
       throw createError({
-        statusCode: 401,
+        status: 401,
         message: 'No Kick token available to get token information.',
       })
     }
@@ -146,8 +146,8 @@ export class TwitchOAuthClient {
   public async refreshToken(): Promise<TwitchToken> {
     if (!this.token) {
       throw createError({
-        statusCode: 400,
-        statusMessage: 'Twitch session refresh token is not present.',
+        status: 400,
+        statusText: 'Twitch session refresh token is not present.',
       })
     }
     const refreshed = await OAUTH<TwitchToken>('/token', {
@@ -175,7 +175,7 @@ export class TwitchOAuthClient {
   public async revokeToken(): Promise<void> {
     if (!this.token) {
       throw createError({
-        statusCode: 401,
+        status: 401,
         message: 'No Twitch token available to revoke.',
       })
     }
@@ -214,15 +214,15 @@ const getValidatedTokenInfo = defineCachedFunction(
 
     if (introspect?.client_id !== config.twitch.clientId) {
       throw createError({
-        statusCode: 400,
-        statusMessage: 'Twitch session access token is not for this applications client ID.',
+        status: 400,
+        statusText: 'Twitch session access token is not for this applications client ID.',
       })
     }
 
     if (!config.twitch.scopes.every((scope) => introspect.scopes?.includes(scope))) {
       throw createError({
-        statusCode: 400,
-        statusMessage: 'Twitch session access token does not have the required scopes.',
+        status: 400,
+        statusText: 'Twitch session access token does not have the required scopes.',
       })
     }
 

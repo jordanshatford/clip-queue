@@ -1,5 +1,5 @@
-import type { H3Event } from 'h3'
-
+import { defineCachedFunction } from 'nitropack/runtime'
+import { createError, useRuntimeConfig, type RequestEvent } from 'nuxt/server'
 import { ofetch } from 'ofetch'
 
 import type { KickToken, KickTokenInfo } from '#shared/kick'
@@ -27,7 +27,7 @@ export class KickOAuthClient {
     /**
      * The H3Event to associated with the request.
      */
-    readonly event: H3Event,
+    readonly event: RequestEvent,
     /**
      * The configuration values. Defaults to Kick values from our runtime config values.
      */
@@ -92,7 +92,7 @@ export class KickOAuthClient {
     const stored = this.stateCookie.get()
     if (!stored || !state || !(state === stored)) {
       throw createError({
-        statusCode: 400,
+        status: 400,
         message: 'Unable to validate state in OAuth callback.',
       })
     }
@@ -107,7 +107,7 @@ export class KickOAuthClient {
     const pkce = this.pkceCookie.get()
     if (!pkce || !pkce.verifier) {
       throw createError({
-        statusCode: 400,
+        status: 400,
         message: 'Unable to get verifier to validate code.',
       })
     }
@@ -140,7 +140,7 @@ export class KickOAuthClient {
   public async getValidatedTokenInfo(): Promise<KickTokenInfo> {
     if (!this.token) {
       throw createError({
-        statusCode: 401,
+        status: 401,
         message: 'No Kick token available to get token information.',
       })
     }
@@ -155,7 +155,7 @@ export class KickOAuthClient {
   public getCurrentUser(): Promise<OAuthUser> {
     if (!this.token) {
       throw createError({
-        statusCode: 401,
+        status: 401,
         message: 'No Kick token available to get token information.',
       })
     }
@@ -170,8 +170,8 @@ export class KickOAuthClient {
   public async refreshToken(): Promise<KickToken> {
     if (!this.token) {
       throw createError({
-        statusCode: 400,
-        statusMessage: 'Kick session refresh token is not present.',
+        status: 400,
+        statusText: 'Kick session refresh token is not present.',
       })
     }
     const refreshed = await OAUTH<KickToken>('/token', {
@@ -199,7 +199,7 @@ export class KickOAuthClient {
   public async revokeToken(): Promise<void> {
     if (!this.token) {
       throw createError({
-        statusCode: 401,
+        status: 401,
         message: 'No Kick token available to revoke.',
       })
     }
@@ -237,30 +237,30 @@ const getValidatedTokenInfo = defineCachedFunction(
 
     if (introspect.data?.client_id !== config.kick.clientId) {
       throw createError({
-        statusCode: 400,
-        statusMessage: 'Kick session access token is not for this applications client ID.',
+        status: 400,
+        statusText: 'Kick session access token is not for this applications client ID.',
       })
     }
 
     if (introspect.data?.token_type !== 'user') {
       throw createError({
-        statusCode: 400,
-        statusMessage: 'Kick session access token does not have the required type.',
+        status: 400,
+        statusText: 'Kick session access token does not have the required type.',
       })
     }
 
     const scopes = introspect.data?.scope?.split(' ') ?? []
     if (!config.kick.scopes.every((scope) => scopes.includes(scope))) {
       throw createError({
-        statusCode: 400,
-        statusMessage: 'Kick session access token does not have the required scopes.',
+        status: 400,
+        statusText: 'Kick session access token does not have the required scopes.',
       })
     }
 
     if (!introspect.data?.active) {
       throw createError({
-        statusCode: 401,
-        statusMessage: 'Kick session access token is no longer active.',
+        status: 401,
+        statusText: 'Kick session access token is no longer active.',
       })
     }
 

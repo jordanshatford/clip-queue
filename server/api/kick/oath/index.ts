@@ -1,3 +1,5 @@
+import { defineEventHandler, getQuery, sendRedirect } from 'nuxt/server'
+
 /**
  * Handle Kick OAuth authorization flow.
  */

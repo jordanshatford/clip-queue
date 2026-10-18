@@ -1,4 +1,4 @@
-import type { H3Event } from 'h3'
+import { deleteCookie, getCookie, setCookie, type RequestEvent } from 'nuxt/server'
 
 type CookieSerializeOptions = Parameters<typeof setCookie>[3]
 
@@ -10,7 +10,7 @@ type CookieSerializeOptions = Parameters<typeof setCookie>[3]
  * @param serializeOptions - Options for serializing the cookie.
  */
 export function setObjectCookie<T>(
-  event: H3Event,
+  event: RequestEvent,
   name: string,
   value: T,
   serializeOptions?: CookieSerializeOptions,
@@ -24,7 +24,7 @@ export function setObjectCookie<T>(
  * @param name - Name of the cookie to get.
  * @returns Value of the cookie (T or undefined).
  */
-export function getObjectCookie<T>(event: H3Event, name: string): T | undefined {
+export function getObjectCookie<T>(event: RequestEvent, name: string): T | undefined {
   const value = getCookie(event, name)
   if (!value) {
     return
@@ -42,9 +42,9 @@ export function getObjectCookie<T>(event: H3Event, name: string): T | undefined 
 export class Cookie {
   public constructor(
     /**
-     * The H3Event with associated cookie.
+     * The request event with associated cookie.
      */
-    protected readonly event: H3Event,
+    protected readonly event: RequestEvent,
     /**
      * The name of the cookie.
      */
@@ -83,9 +83,9 @@ export class Cookie {
 export class ObjectCookie<T> {
   public constructor(
     /**
-     * The H3Event with associated cookie.
+     * The request event with associated cookie.
      */
-    protected readonly event: H3Event,
+    protected readonly event: RequestEvent,
     /**
      * The name of the cookie.
      */

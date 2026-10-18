@@ -1,3 +1,5 @@
+import { createError, defineEventHandler, getQuery, sendRedirect } from 'nuxt/server'
+
 /**
  * Handle Twitch OAuth authorization flow.
  */
@@ -15,7 +17,7 @@ export default defineEventHandler(async (event) => {
   if (query.error) {
     client.validateState(query.state)
     throw createError({
-      statusCode: 400,
+      status: 400,
       statusText: 'Twitch OAuth Error',
       message: query.error_description,
     })

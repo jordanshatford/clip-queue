@@ -1,3 +1,5 @@
+import { defineEventHandler } from 'nuxt/server'
+
 /**
  * Revoke the current users Kick OAuth access token.
  */

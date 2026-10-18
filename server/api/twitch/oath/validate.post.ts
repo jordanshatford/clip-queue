@@ -1,3 +1,4 @@
+import { defineEventHandler } from 'nuxt/server'
 import { FetchError } from 'ofetch'
 
 import type { OAuthResponse } from '#shared/utils'

@@ -1,3 +1,6 @@
+import { createError, getQuery } from 'h3'
+import { defineCachedEventHandler } from 'nitropack/runtime'
+
 import type { OEmbedResponse } from '#shared/oembed'
 
 import { resolveOEmbedProvider } from '#shared/oembed'
