@@ -54,7 +54,7 @@
     "eslint": "^10.14.0",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
-    "jsdom": "^30.1.3",
+    "jsdom": "^31.0.0",
     "oxfmt": "^0.76.0",
     "tailwindcss": "^4.3.4",
     "typescript": "^6.0.3",
