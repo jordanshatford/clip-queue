@@ -34,7 +34,7 @@
     "nuxt": "^4.6.4",
     "pinia": "^4.1.0",
     "vue": "^3.5.45",
-    "vue-router": "^5.5.0"
+    "vue-router": "^5.5.1"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",
@@ -50,7 +50,7 @@
     "@pinia/testing": "^2.0.2",
     "@types/node": "^26.6.6",
     "@vitest/coverage-v8": "^5.1.0",
-    "@vue/test-utils": "^2.5.1",
+    "@vue/test-utils": "^2.6.0",
     "eslint": "^10.15.0",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
